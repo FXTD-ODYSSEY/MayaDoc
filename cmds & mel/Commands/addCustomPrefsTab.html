@@ -1,0 +1,217 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>addCustomPrefsTab command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-addCustomPrefsTab"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>addCustomPrefsTab </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#MiscUI" target="contentFrame">Misc. UI</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("addCustomPrefsTab.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+addCustomPrefsTab (string $tabCreateFn, string $frameCreateFn, string $updateFn, string $holdStateFn, string $setOptVarToDefaultFn, string $title, string $name)
+<br>
+
+	 </code> </p>
+      
+      This proc registers a user-defined preference tab in the preferences windows of Maya.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$tabCreateFn"><b>$tabCreateFn</b></a></td><td><i>string</i></td><td>The callback function to create the tab.
+</td></tr>
+<tr><td><a name="$frameCreateFn"><b>$frameCreateFn</b></a></td><td><i>string</i></td><td>The callback function to create the frame layout of the tab.
+</td></tr>
+<tr><td><a name="$updateFn"><b>$updateFn</b></a></td><td><i>string</i></td><td>The callback function to update UI elements when option vars changed.
+</td></tr>
+<tr><td><a name="$holdStateFn"><b>$holdStateFn</b></a></td><td><i>string</i></td><td>The callback function to save or restore the preference setting of the tab.
+</td></tr>
+<tr><td><a name="$setOptVarToDefaultFn"><b>$setOptVarToDefaultFn</b></a></td><td><i>string</i></td><td>The callback function to set option vars to default values.
+</td></tr>
+<tr><td><a name="$title"><b>$title</b></a></td><td><i>string</i></td><td>The title of the tab.
+</td></tr>
+<tr><td><a name="$name"><b>$name</b></a></td><td><i>string</i></td><td>The name of the tab.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+	global proc prefsUpdateExample()
+	{
+		global string $gPreferenceWindow;
+		setParent $gPreferenceWindow;
+		string $parent = &quot;prefExample&quot;;
+		
+		if (`columnLayout -q -numberOfChildren $parent` == 0) {
+			return;
+		}
+
+		setParent $parent;
+		textField -e -text `optionVar -q exampleWords` words;
+	}
+
+	global proc exampleFieldChanged()
+	{
+		global string $gPreferenceWindow;
+		if (`window -exists $gPreferenceWindow`) {
+			setParent prefExample;
+			if (`textField -exists words`) {
+				optionVar -sv exampleWords `textField -q -text words`;
+			}
+		}
+	}
+
+	global proc prefsHoldCurrentStateExample(string $mode)
+	{
+		exampleFieldChanged();
+
+		if ($mode == &quot;save&quot;) {
+			optionVar -sv &quot;exampleWordsHold&quot; `optionVar -q exampleWords`;
+		} else if ($mode == &quot;restore&quot;) {
+			optionVar -sv &quot;exampleWords&quot; `optionVar -q exampleWordsHold`;
+		} else {<i>//	 &quot;remove&quot;
+</i>
+		<i>//	 Remove the temporary option vars so they don't get saved out
+</i>
+			optionVar -remove &quot;exampleWordsHold&quot;;
+		}
+
+		global string $gPreferenceWindow;
+		if (`window -exists $gPreferenceWindow`) {
+			setParent prefExample;
+			if (`textField -exists words`) {
+				textField -e -text `optionVar -q exampleWords` words;
+			}
+		}
+	}
+
+	global proc prefsCreateExample()
+	{
+		global string $gPreferenceWindow;
+		setParent $gPreferenceWindow;
+		string $parent = &quot;prefExample&quot;;
+
+		<i>//	 Check to see if this has been created already.
+</i>
+		<i>//	
+</i>
+		if (`columnLayout -q -numberOfChildren $parent` &gt; 0) {
+			return;
+		}
+		<i>//	  Create the UI
+</i>
+		<i>//	
+</i>
+		setParent $parent;
+		setUITemplate -pushTemplate prefsTemplate;
+
+		<i>//	 This is used to force the width to fill the window
+</i>
+		separator -style &quot;none&quot; -h 1;
+
+		string $textContent = &quot;Hello, world!&quot;;
+		if (`optionVar -exists exampleWords`) {
+			$textContent = `optionVar -q exampleWords`;
+		}
+
+		textField
+			-text $textContent
+			-changeCommand exampleFieldChanged
+			words;
+
+		setUITemplate -popTemplate;
+
+		exampleFieldChanged();
+		prefsUpdateExample();
+	}
+
+	global proc prefsFrameLayoutCreateExample()
+	{
+		frameLayout -labelVisible false -borderVisible false -marginWidth 10 -marginHeight 10;
+			columnLayout -adj true prefExample;
+	}
+
+	global proc prefsSetOptVarToDefault()
+	{
+	    optionVar -sv exampleWords &quot;Hello, world!&quot;;
+	}
+
+	<i>// register the new tab
+</i>
+	addCustomPrefsTab(&quot;prefsCreateExample&quot;,
+		&quot;prefsFrameLayoutCreateExample&quot;,
+		&quot;prefsUpdateExample&quot;,
+		&quot;prefsHoldCurrentStateExample&quot;,
+		&quot;prefsSetOptVarToDefault&quot;,
+		&quot;Example Configuration&quot;,
+		&quot;    Example&quot;);
+
+	<i>// unregister the tab
+</i>
+	deleteCustomPrefsTab(&quot;prefsCreateExample&quot;);
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

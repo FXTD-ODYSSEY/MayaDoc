@@ -1,0 +1,114 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>objectLayer command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-objectLayer"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>objectLayer </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("objectLayer.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+string objectLayer( string )
+<br>
+
+	 </code> </p>
+      
+      All eligible objects (ie. DAG objects) must be in exactly one layer.
+This script returns the layer to which the given object belongs.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      <h2><a name="hKeywords">Keywords</a></h2>DAG displayLayer layer member , 
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$object"><b>$object</b></a></td><td><i>string</i></td><td>
+The name of the object who's layer is to be found.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>      <i>// Create an object, which will automatically go into the defaultLayer
+</i>
+      createNode transform -n father;
+      objectLayer father;
+      <i>// Result : defaultLayer //
+</i>
+
+      <i>// Put the object into a layer and verify membership
+</i>
+      createDisplayLayer -e -n fatherLayer;
+      editDisplayLayerMembers fatherLayer father;
+      objectLayer father;
+      <i>// Result : fatherLayer //
+</i>
+
+      <i>// The time node is not a DAG node and so has no layer
+</i>
+      objectLayer time1;
+
+      <i>// The above blank line indicates that there was no return value
+</i>
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

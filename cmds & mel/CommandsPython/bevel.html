@@ -1,0 +1,660 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>bevel command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-bevel"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/bevel.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>bevel </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#NURBS" target="contentFrame">NURBS</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("bevel.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>bevel(
+[object]
+    , [<a href="#flagbevelShapeType">bevelShapeType</a>=<i>int</i>], [<a href="#flagcaching">caching</a>=<i>boolean</i>], [<a href="#flagconstructionHistory">constructionHistory</a>=<i>boolean</i>], [<a href="#flagcornerType">cornerType</a>=<i>int</i>], [<a href="#flagdepth">depth</a>=<i>linear</i>], [<a href="#flagextrudeDepth">extrudeDepth</a>=<i>linear</i>], [<a href="#flagjoinSurfaces">joinSurfaces</a>=<i>boolean</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagnodeState">nodeState</a>=<i>int</i>], [<a href="#flagnumberOfSides">numberOfSides</a>=<i>int</i>], [<a href="#flagobject">object</a>=<i>boolean</i>], [<a href="#flagpolygon">polygon</a>=<i>int</i>], [<a href="#flagrange">range</a>=<i>boolean</i>], [<a href="#flagtolerance">tolerance</a>=<i>linear</i>], [<a href="#flagwidth">width</a>=<i>linear</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>bevel is undoable, queryable, and editable.</p>
+      The bevel command creates a new bevel surface for the specified curve.
+The curve can be any nurbs curves.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>Object name and node name</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagbevelShapeType">bevelShapeType</a>, <a href="#flagcaching">caching</a>, <a href="#flagconstructionHistory">constructionHistory</a>, <a href="#flagcornerType">cornerType</a>, <a href="#flagdepth">depth</a>, <a href="#flagextrudeDepth">extrudeDepth</a>, <a href="#flagjoinSurfaces">joinSurfaces</a>, <a href="#flagname">name</a>, <a href="#flagnodeState">nodeState</a>, <a href="#flagnumberOfSides">numberOfSides</a>, <a href="#flagobject">object</a>, <a href="#flagpolygon">polygon</a>, <a href="#flagrange">range</a>, <a href="#flagtolerance">tolerance</a>, <a href="#flagwidth">width</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbevelShapeType">
+          <code><b>bevelShapeType</b>(<b>bst</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Shape type: 1 - straight cut, 2 - curve out, 3 - curve in
+<br><i>Default:</i> 1
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcaching">
+          <code><b>caching</b>(<b>cch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Toggle caching for all attributes so that no recomputation is needed
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcornerType">
+          <code><b>cornerType</b>(<b>ct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Corner type: 1 - linear, 2 - circular
+<br><i>Default:</i> 2
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdepth">
+          <code><b>depth</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The depth for bevel
+<br><i>Default:</i> 0.5
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagextrudeDepth">
+          <code><b>extrudeDepth</b>(<b>ed</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The extrude depth for bevel
+<br><i>Default:</i> 1.0
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeState">
+          <code><b>nodeState</b>(<b>nds</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+<p>
+Maya dependency nodes have 6 possible states.
+The <b>Normal (0)</b>, <b>HasNoEffect (1)</b>, and <b>Blocking (2)</b> states can be
+used to alter how the graph is evaluated.
+
+
+<p>
+The <b>Waiting-Normal (3)</b>, <b>Waiting-HasNoEffect (4)</b>, <b>Waiting-Blocking (5)</b>
+are for internal use only. They temporarily shut off parts of the graph during interaction
+(e.g., manipulation). The understanding is that once the operation is done,
+the state will be reset appropriately, e.g. <b>Waiting-Blocking</b> will reset
+back to <b>Blocking</b>.
+
+
+<p>
+The <b>Normal</b> and <b>Blocking</b> cases apply to all nodes, while
+<b>HasNoEffect</b> is node specific; many nodes do not support this option.
+Plug-ins store state in the <i>MPxNode::state</i> attribute. Anyone can set
+it or check this attribute.  Additional details about each of these 3 states follow.
+
+<p> 
+
+<table border="1">
+<tr>
+<th>State</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>Normal</b></td>
+<td>The normal node state. This is the default.</td>
+</tr>
+<tr>
+<td><b>HasNoEffect</b></td>
+<td>
+<p>
+The <b>HasNoEffect</b> option (a.k.a. pass-through), is used in cases where
+there is an operation on an input producing an output of the same data type.
+Nearly all deformers support this state, as do a few other nodes.
+As stated earlier, it is not supported by all nodes.
+
+<p>
+It’s typical to implement support for the <b>HasNoEffect</b> state in
+the node’s compute method and to perform appropriate operations.
+Plug-ins can also support <b>HasNoEffect</b>.
+
+<p>
+The usual implementation of this state is to copy the input directly to the
+matching output without applying the algorithm in the node. For deformers,
+applying this state leaves the input geometry undeformed on the output.
+
+</td>
+</tr>
+<tr>
+<td><b>Blocking</b></td>
+<td>
+<p>
+This is implemented in the depend node base class and applies to all nodes.
+<b>Blocking</b> is applied during the evaluation phase to connections.
+An evaluation request to a blocked connection will return as failures,
+causing the destination plug to retain its current value. Dirty propagation
+is indirectly affected by this state since blocked connections are never cleaned.
+
+<p>
+When a node is set to <b>Blocking</b> the behavior is supposed to be the same as
+if all outgoing connections were broken. As long as nobody requests evaluation
+of the blocked node directly it won’t evaluate after that. Note that a blocked
+node will still respond to <i>getAttr</i> requests but a <i>getAttr</i> on a
+downstream node will not reevaluate the blocked node.
+
+<p>
+Setting the root transform of a hierarchy to <b>Blocking</b> won’t automatically
+influence child transforms in the hierarchy. To do this, you’d need to
+explicitly set all child nodes to the <b>Blocking</b> state.
+
+<p>
+For example, to set all child transforms to <b>Blocking</b>, you could use the
+following script.
+
+<pre>
+
+import maya.cmds as cmds
+def blockTree(root):
+nodesToBlock = []
+for node in {child:1 for child in cmds.listRelatives( root, path=True, allDescendents=True )}.keys():
+nodesToBlock += cmds.listConnections(node, source=True, destination=True )
+for node in {source:1 for source in nodesToBlock}.keys():
+cmds.setAttr( '%s.nodeState' % node, 2 )
+
+</pre>
+<p>
+Applying this script would continue to draw objects but things would not be animated.
+
+</td>
+</tr>
+</table>
+<br><i>Default:</i> kdnNormal
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtolerance">
+          <code><b>tolerance</b>(<b>tol</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The tolerance for bevel offsets
+<br><i>Default:</i> 0.01
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwidth">
+          <code><b>width</b>(<b>w</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The width for bevel
+<br><i>Default:</i> 0.5
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Common flags</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconstructionHistory">
+          <code><b>constructionHistory</b>(<b>ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn the construction history on or off.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagjoinSurfaces">
+          <code><b>joinSurfaces</b>(<b>js</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Attach bevelled surfaces into one surface for each
+input curve.
+<br><i>Default:</i>true
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the name of the newly-created node. If it contains
+namespace path, the new node will be created under the
+specified namespace; if the namespace does not exist, it
+will be created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnumberOfSides">
+          <code><b>numberOfSides</b>(<b>ns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+How to apply the bevel.
+<ul>
+<li>1 - no bevels</li>
+<li>2 - bevel at start only</li>
+<li>3 - bevel at end only</li>
+<li>4 - bevel at start and end</li>
+</ul>
+<br><i>Default:</i> 4
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobject">
+          <code><b>object</b>(<b>o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create the result, or just the dependency node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpolygon">
+          <code><b>polygon</b>(<b>po</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The value of this argument controls the type of the object
+created by this operation
+<ul>
+<li> 0: nurbs surface</li>
+<li> 1: polygon (use nurbsToPolygonsPref to set the parameters for the conversion)</li>
+<li> 2: subdivision surface (use nurbsToSubdivPref to set the parameters for the conversion)</li>
+<li> 3: Bezier surface</li>
+<li> 4: subdivision surface solid (use nurbsToSubdivPref to set the
+parameters for the conversion)</li>
+</ul>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrange">
+          <code><b>range</b>(<b>rn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Force a curve range on complete input curve.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Bevel (one) active curve with a width and depth of 1.5:
+cmds.bevel( w=1.5, d=1.5 )
+
+# Create a single-sided bevel (at start) surface using the specified
+# curve (with the default dimensions):
+cmds.bevel( 'curve1', ns=2 )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

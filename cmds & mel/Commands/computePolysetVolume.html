@@ -1,0 +1,111 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>computePolysetVolume command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-computePolysetVolume"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>computePolysetVolume </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("computePolysetVolume.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+computePolysetVolume
+<br>
+
+	 </code> </p>
+      
+      Prints the total volume of all polysets on the pick list.
+For accurate results the geometry should be closed, with no
+holes or minimal gaps and no interpenetrating surfaces( such as
+as two overlapping spheres ).
+The method uses the divergence theorem:
+\int_{vol} Div(f) dV = int_{surf} Dot(f,n) dS
+To use it to compute volumes set f=(0,0,z), you then have
+Volume = \int_{vol} 1 dV = int_{surf} n_z(u,v) du dv
+Where n_z is the &quot;z&quot; component of the normal to the surface at the parameter value (u,v).
+If you only have triangles then the formula reads:
+Volume = sum_{over all triangles} (z0+z1+z2)/3*n_z*A
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name=""><b></b></a></td><td><i></i></td><td>None.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>	<i>// Create a poly cube and find its volume 
+</i>
+  polyCube;
+ <i>// Result: pCube2 polyCube1 //
+</i>
+ computePolysetVolume;
+ <i>// pCube3 faces = 6 //
+</i>
+ <i>// TOTAL VOLUME = 1 //
+</i>
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

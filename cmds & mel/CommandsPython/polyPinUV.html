@@ -1,0 +1,269 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyPinUV command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-polyPinUV"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/polyPinUV.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyPinUV </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyPinUV.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyPinUV([<a href="#flagcreateHistory">createHistory</a>=<i>boolean</i>], [<a href="#flagoperation">operation</a>=<i>uint</i>], [<a href="#flagunpinned">unpinned</a>=<i>boolean</i>], [<a href="#flaguvSetName">uvSetName</a>=<i>string</i>], [<a href="#flagvalue">value</a>=<i>float</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>polyPinUV is undoable, queryable, and editable.</p>
+      <p>
+This command is used to pin and unpin UVs. A &quot;pinned&quot; UV is one which should not be modified.
+
+<p>
+Each UV has an associated pin weight, that defaults to 0.0 meaning that the UV is not pinned. If pin weight is set to 1.0 then it becomes fully pinned and UV tools should not modify that UV.
+If the pin weight is set to a value between 0.0 and 1.0 then UV tools should weight their changes to that UV accordingly.
+
+<p>
+UV pinning is not enforced by the shape node: it is up to each tool to decide whether it will obey the pin weights.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>Success or Failure.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>uv, pin
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcreateHistory">createHistory</a>, <a href="#flagoperation">operation</a>, <a href="#flagunpinned">unpinned</a>, <a href="#flaguvSetName">uvSetName</a>, <a href="#flagvalue">value</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreateHistory">
+          <code><b>createHistory</b>(<b>ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For objects that have no construction history, this flag can be used
+to force the creation of construction history for pinning.  By default,
+history is not created if the object has no history.  Regardless of this
+flag, history is always created if the object already has history.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoperation">
+          <code><b>operation</b>(<b>op</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Operation to perform.  Valid values are:
+0: Set pin weights on the selected UVs.
+1: Set pin weights to zero for the selected UVs.
+2: Remove pin weights from the entire mesh.
+3: Invert pin weights of the entire mesh.
+Default is 0.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunpinned">
+          <code><b>unpinned</b>(<b>unp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all selected UVs which are not pinned.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvSetName">
+          <code><b>uvSetName</b>(<b>uvs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the UV set to edit UVs on. If not
+specified the current UV set will be used if it exists.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalue">
+          <code><b>value</b>(<b>v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the pin value for the selected UV components.
+When specified multiple times, the values are assigned respectively to
+the specified UVs.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# To set a pin value of 0.9 on the selected UVs.
+cmds.polyPinUV( value=0.9 )
+
+# List all selected UVs which are not pinned.
+cmds.polyPinUV( q=True, unpinned=True )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

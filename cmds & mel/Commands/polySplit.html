@@ -1,0 +1,484 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polySplit command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-polySplit"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/polySplit.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polySplit </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polySplit.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polySplit [-<a href="#flagadjustEdgeFlow">adjustEdgeFlow</a> <i>float</i>] [-<a href="#flagconstructionHistory">constructionHistory</a> <i>boolean</i>] [-<a href="#flagdetachEdges">detachEdges</a> <i>boolean</i>] [-<a href="#flagedgepoint">edgepoint</a> <i>int float</i>] [-<a href="#flagfacepoint">facepoint</a> <i>int float float float</i>] [-<a href="#flaginsertWithEdgeFlow">insertWithEdgeFlow</a> <i>boolean</i>] [-<a href="#flaginsertpoint">insertpoint</a> <i>int float [ float float ]</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagprojectedCurve">projectedCurve</a> <i>name</i>] [-<a href="#flagprojectedCurveTolerance">projectedCurveTolerance</a> <i>float</i>] [-<a href="#flagsmoothingangle">smoothingangle</a> <i>angle</i>] [-<a href="#flagsubdivision">subdivision</a> <i>int</i>]  </code> </p>
+      <p>polySplit is undoable, queryable, and editable.</p>
+      Split facets/edges of a polygonal object.
+<p>
+The first and last arguments must be edges. Intermediate points
+may lie on either a shared face or an edge which neighbors the previous point.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The node name.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="polyAppend.html">polyAppend</a>, <a href="polyAppendVertex.html">polyAppendVertex</a>, <a href="polyBevel.html">polyBevel</a>, <a href="polyChipOff.html">polyChipOff</a>, <a href="polyCreateFacet.html">polyCreateFacet</a>, <a href="polyExtrudeEdge.html">polyExtrudeEdge</a>, <a href="polyExtrudeFacet.html">polyExtrudeFacet</a>, <a href="polySmooth.html">polySmooth</a>, <a href="polySplitVertex.html">polySplitVertex</a>, <a href="polySubdivideEdge.html">polySubdivideEdge</a>, <a href="polySubdivideFacet.html">polySubdivideFacet</a>, <a href="polyTriangulate.html">polyTriangulate</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagadjustEdgeFlow">adjustEdgeFlow</a>, <a href="#flagconstructionHistory">constructionHistory</a>, <a href="#flagdetachEdges">detachEdges</a>, <a href="#flagedgepoint">edgepoint</a>, <a href="#flagfacepoint">facepoint</a>, <a href="#flaginsertWithEdgeFlow">insertWithEdgeFlow</a>, <a href="#flaginsertpoint">insertpoint</a>, <a href="#flagname">name</a>, <a href="#flagprojectedCurve">projectedCurve</a>, <a href="#flagprojectedCurveTolerance">projectedCurveTolerance</a>, <a href="#flagsmoothingangle">smoothingangle</a>, <a href="#flagsubdivision">subdivision</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Flags from nodes</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagadjustEdgeFlow">
+          <code><b>-adjustEdgeFlow</b>(<b>-aef</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The weight value of the edge vertices to be positioned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdetachEdges">
+          <code><b>-detachEdges</b>(<b>-de</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Value of the detachEdges attribute for the resulting poly split node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagedgepoint">
+          <code><b>-edgepoint</b>(<b>-ep</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The given edge is split into two new edges
+by inserting a new vertex located the given percentage
+along the edge.
+<br>
+<b>Note:</b> This flag is not recommended for use from Python.  See the
+insertpoint flag instead.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfacepoint">
+          <code><b>-facepoint</b>(<b>-fp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A new vertex is inserted,
+lying at the given coordinates inside the given face.
+Coordinates are given in the local object space.
+<br>
+<b>Note:</b> This flag is not recommended for use from Python.  See the
+insertpoint flag instead.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginsertWithEdgeFlow">
+          <code><b>-insertWithEdgeFlow</b>(<b>-ief</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+True to enable edge flow. Otherwise, the edge flow is disabled.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginsertpoint">
+          <code><b>-insertpoint</b>(<b>-ip</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int float [ float float ]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag allows the caller to insert a new vertex into an edge or a face.
+<br>
+To insert a new vertex in an edge, pass the index of the edge and a percentage
+along the edge at which to insert the new vertex.  When used to insert a
+vertex into an edge, this flag takes two arguments.
+<br>
+To insert a new vertex into a face, pass the index of the face and three values
+which define the coordinates for the insertion in local object space.  When
+used to insert a vertex into a face, this flag takes four arguments.
+<br>
+This flag replaces the edgepoint and facepoint flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprojectedCurve">
+          <code><b>-projectedCurve</b>(<b>-pc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Curves to be projected.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprojectedCurveTolerance">
+          <code><b>-projectedCurveTolerance</b>(<b>-pct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tolerance for curve projection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsmoothingangle">
+          <code><b>-smoothingangle</b>(<b>-sma</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Subdivide new edges will be soft if less then this angle.
+<br>C: Default is 0.0
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsubdivision">
+          <code><b>-subdivision</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Subdivide new edges into the given number of sections.
+Edges involving free points won't be subdivided.
+<br>C: Default is 1 (no subdivision).
+<br>Q: When queried, this flag returns an <i>int</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Common poly creation operation flags</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconstructionHistory">
+          <code><b>-constructionHistory</b>(<b>-ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn the construction history on or off (where applicable). If
+construction history is on then the corresponding node will be
+inserted into the history chain for the mesh. If construction history
+is off then the operation will be performed directly on the object.
+<br>
+<b>Note:</b> If the object already has construction history then
+this flag is ignored and the node will always be inserted into
+the history chain.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the name of the newly-created node. If it contains
+namespace path, the new node will be created under the
+specified namespace; if the namespace does not exist, it
+will be created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+polyCreateFacet -p 0 2 0 -p 0 -2 0 -p 4 -2 0 -p 4 2 0;
+polySplit -ep 2 0.1 -ep 3 0.5 -fp 0 2 -1 0.0 -ep 0 0.9;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

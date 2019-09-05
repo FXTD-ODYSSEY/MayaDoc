@@ -1,0 +1,317 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>stringArrayIntersector command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-stringArrayIntersector"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/stringArrayIntersector.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>stringArrayIntersector </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Array" target="contentFrame">Array</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("stringArrayIntersector.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>stringArrayIntersector [-<a href="#flagallowDuplicates">allowDuplicates</a> <i>boolean</i>] [-<a href="#flagdefineTemplate">defineTemplate</a> <i>string</i>] [-<a href="#flagexists">exists</a>] [-<a href="#flagintersect">intersect</a> <i>string[]</i>] [-<a href="#flagreset">reset</a>] [-<a href="#flaguseTemplate">useTemplate</a> <i>string</i>] 
+string
+     </code> </p>
+      <p>stringArrayIntersector is undoable, queryable, and editable.</p>
+      The stringArrayIntersector command creates and edits an object which is
+able to efficiently intersect large string arrays. The intersector object
+maintains a sense of &quot;the intersection so far&quot;, and updates the
+intersection when new string arrays are provided using the -i/intersect
+flag.
+<p>
+Note that the string intersector object may be deleted using the deleteUI
+command.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The name of the intersector.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallowDuplicates">allowDuplicates</a>, <a href="#flagdefineTemplate">defineTemplate</a>, <a href="#flagexists">exists</a>, <a href="#flagintersect">intersect</a>, <a href="#flagreset">reset</a>, <a href="#flaguseTemplate">useTemplate</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallowDuplicates">
+          <code><b>-allowDuplicates</b>(<b>-ad</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Should the intersector allow duplicates in the input arrays (true),
+or combine all duplicate entries into a single, unique entry (false).
+This flag must be used when initially creating the intersector.
+Default is 'false'.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefineTemplate">
+          <code><b>-defineTemplate</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Puts the command in a mode where any other flags and arguments are
+parsed and added to the command template specified in the argument.
+They will be used as default arguments in any subsequent
+invocations of the command when templateName is set as the
+current template.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>-exists</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns whether the
+specified object exists or not. Other flags are ignored.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagintersect">
+          <code><b>-intersect</b>(<b>-i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string[]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Intersect the specified string array with the current intersection
+being maintained by the intersector.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreset">
+          <code><b>-reset</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Reset the intersector to begin a new intersection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseTemplate">
+          <code><b>-useTemplate</b>(<b>-ut</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Forces the command to use a command template other than
+the current one.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Create an intersector
+//
+string $myIntersector = `stringArrayIntersector`;
+
+// Intersect some string arrays using the intersector
+//
+string $initialArray[] = {&quot;Excellent&quot;, &quot;Smithers&quot;, &quot;doh&quot;};
+stringArrayIntersector -edit -intersect $initialArray $myIntersector;
+stringArrayIntersector -edit -intersect {&quot;Smithers&quot;, &quot;Homer&quot;} $myIntersector;
+
+// Query the intersector to see what the intersection is so far
+//
+stringArrayIntersector -query $myIntersector;
+// Result: Smithers //
+
+// Reset the intersector so that you can use it again with new string
+// arrays
+//
+stringArrayIntersector -edit -reset $myIntersector;
+
+// Delete the intersector as we are now done with it
+//
+deleteUI $myIntersector;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

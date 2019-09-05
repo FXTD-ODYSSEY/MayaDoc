@@ -1,0 +1,690 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>memory command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-memory"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/memory.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>memory </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Utilities" target="contentFrame">Utilities</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("memory.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>memory [-<a href="#flagadjustedVirtualMemory">adjustedVirtualMemory</a>] [-<a href="#flagasFloat">asFloat</a>] [-<a href="#flagdebug">debug</a>] [-<a href="#flagfreeMemory">freeMemory</a>] [-<a href="#flaggigaByte">gigaByte</a>] [-<a href="#flagheapMemory">heapMemory</a>] [-<a href="#flagkiloByte">kiloByte</a>] [-<a href="#flagmegaByte">megaByte</a>] [-<a href="#flagpageFaults">pageFaults</a>] [-<a href="#flagpageReclaims">pageReclaims</a>] [-<a href="#flagphysicalMemory">physicalMemory</a>] [-<a href="#flagprocessVirtualMemory">processVirtualMemory</a>] [-<a href="#flagsummary">summary</a>] [-<a href="#flagswapFree">swapFree</a>] [-<a href="#flagswapLogical">swapLogical</a>] [-<a href="#flagswapMax">swapMax</a>] [-<a href="#flagswapPhysical">swapPhysical</a>] [-<a href="#flagswapReserved">swapReserved</a>] [-<a href="#flagswapVirtual">swapVirtual</a>] [-<a href="#flagswaps">swaps</a>]  </code> </p>
+      <p>memory is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Used to query essential statistics on memory availability and usage.
+<p>
+By default memory sizes are returned in bytes. Since Maya's command engine
+only supports 32-bit signed integers, any returned value which cannot fit
+into 31 bits will be truncated to 2,147,483,647 and a warning message displayed.
+To avoid having memory sizes truncated use one of the memory size flags to
+return the value in larger units (e.g. megabytes) or use the asFloat flag to
+return the value as a float.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagadjustedVirtualMemory">adjustedVirtualMemory</a>, <a href="#flagasFloat">asFloat</a>, <a href="#flagdebug">debug</a>, <a href="#flagfreeMemory">freeMemory</a>, <a href="#flaggigaByte">gigaByte</a>, <a href="#flagheapMemory">heapMemory</a>, <a href="#flagkiloByte">kiloByte</a>, <a href="#flagmegaByte">megaByte</a>, <a href="#flagpageFaults">pageFaults</a>, <a href="#flagpageReclaims">pageReclaims</a>, <a href="#flagphysicalMemory">physicalMemory</a>, <a href="#flagprocessVirtualMemory">processVirtualMemory</a>, <a href="#flagsummary">summary</a>, <a href="#flagswapFree">swapFree</a>, <a href="#flagswapLogical">swapLogical</a>, <a href="#flagswapMax">swapMax</a>, <a href="#flagswapPhysical">swapPhysical</a>, <a href="#flagswapReserved">swapReserved</a>, <a href="#flagswapVirtual">swapVirtual</a>, <a href="#flagswaps">swaps</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagadjustedVirtualMemory">
+          <code><b>-adjustedVirtualMemory</b>(<b>-av</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns size of adjusted virtual memory allocated by the process.
+The adjustment is done by computing an offset when the application is launched
+that will be subtracted from the process virtual memory in order to give the
+adjusted value.  The returned size is an approximation of the memory used by the
+process that can be more reliable in some cases, for instance on platforms where
+display drivers can reserve large ranges of memory addresses, therefore increasing
+the size of the process virtual memory, even though those addresses are actually
+not used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagasFloat">
+          <code><b>-asFloat</b>(<b>-af</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Causes numeric values to be returned as floats rather than ints. This can
+be useful if you wish to retain some of the significant digits lost when
+using the unit size flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdebug">
+          <code><b>-debug</b>(<b>-dbg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Print debugging statistics on arena memory (if it exists)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfreeMemory">
+          <code><b>-freeMemory</b>(<b>-fr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns size of free memory
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggigaByte">
+          <code><b>-gigaByte</b>(<b>-gb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return memory sizes in gigabytes (1024*1024*1024 bytes)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagheapMemory">
+          <code><b>-heapMemory</b>(<b>-he</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns size of memory heap
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkiloByte">
+          <code><b>-kiloByte</b>(<b>-kb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return memory sizes in kilobytes (1024 bytes)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmegaByte">
+          <code><b>-megaByte</b>(<b>-mb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return memory sizes in megabytes (1024*1024 bytes)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpageFaults">
+          <code><b>-pageFaults</b>(<b>-pf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns number of page faults
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpageReclaims">
+          <code><b>-pageReclaims</b>(<b>-pr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns number of page reclaims
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagphysicalMemory">
+          <code><b>-physicalMemory</b>(<b>-phy</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns size of physical memory
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprocessVirtualMemory">
+          <code><b>-processVirtualMemory</b>(<b>-pv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns size of virtual memory allocated by the process
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsummary">
+          <code><b>-summary</b>(<b>-sum</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns a summary of memory usage. The size flags are ignored and all
+memory sizes are given in megabytes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswapFree">
+          <code><b>-swapFree</b>(<b>-swf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns size of free swap
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswapLogical">
+          <code><b>-swapLogical</b>(<b>-swl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns size of logical swap
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswapMax">
+          <code><b>-swapMax</b>(<b>-swm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns maximum swap size
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswapPhysical">
+          <code><b>-swapPhysical</b>(<b>-swp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns size of physical swap
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswapReserved">
+          <code><b>-swapReserved</b>(<b>-swr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns size of reserved swap
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswapVirtual">
+          <code><b>-swapVirtual</b>(<b>-swv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns size of virtual swap
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswaps">
+          <code><b>-swaps</b>(<b>-sw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns number of swaps
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+memory -freeMemory;
+// Result: 548388864 //
+
+memory -freeMemory -megaByte;
+// Result: 522 //
+
+memory -freeMemory -megaByte -asFloat;
+// Result: 521.683594 //
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

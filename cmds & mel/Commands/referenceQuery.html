@@ -1,0 +1,1054 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>referenceQuery command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-referenceQuery"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/referenceQuery.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>referenceQuery </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("referenceQuery.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>referenceQuery [-<a href="#flagchild">child</a>] [-<a href="#flagdagPath">dagPath</a>] [-<a href="#flageditAttrs">editAttrs</a>] [-<a href="#flageditCommand">editCommand</a> <i>string</i>] [-<a href="#flageditNodes">editNodes</a>] [-<a href="#flageditStrings">editStrings</a>] [-<a href="#flagfailedEdits">failedEdits</a> <i>boolean</i>] [-<a href="#flagfilename">filename</a>] [-<a href="#flagisExportEdits">isExportEdits</a>] [-<a href="#flagisLoaded">isLoaded</a>] [-<a href="#flagisNodeReferenced">isNodeReferenced</a>] [-<a href="#flagisPreviewOnly">isPreviewOnly</a>] [-<a href="#flagliveEdits">liveEdits</a>] [-<a href="#flagnamespace">namespace</a>] [-<a href="#flagnodes">nodes</a>] [-<a href="#flagonReferenceNode">onReferenceNode</a> <i>string</i>] [-<a href="#flagparent">parent</a>] [-<a href="#flagparentNamespace">parentNamespace</a>] [-<a href="#flagreferenceNode">referenceNode</a>] [-<a href="#flagshortName">shortName</a>] [-<a href="#flagshowDagPath">showDagPath</a> <i>boolean</i>] [-<a href="#flagshowNamespace">showNamespace</a> <i>boolean</i>] [-<a href="#flagsuccessfulEdits">successfulEdits</a> <i>boolean</i>] [-<a href="#flagtopReference">topReference</a>] [-<a href="#flagunresolvedName">unresolvedName</a>] [-<a href="#flagwithoutCopyNumber">withoutCopyNumber</a>]  </code> </p>
+      <p>referenceQuery is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Use this command to find out information about references and referenced nodes.
+A valid target is either a reference node, a reference file, or a referenced node.
+Some flags don't require a target, see flag descriptions for more information
+on what effect this has.
+When a scene contains multiple levels of file references, those edits which
+affect a nested reference may be stored on several different reference nodes.
+For example:
+A.ma has a reference to B.ma which has a reference to C.ma which contains
+a poly sphere (pSphere1).
+If you were to open B.ma and translate the sphere, an edit would be stored
+on CRN which refers to a node named &quot;C:pSphere1&quot;.
+If you were then to open A.ma and parent the sphere, an edit would be
+stored on BRN which refers to a node named &quot;B:C:pSphere1&quot;.
+It is important to note that when querying edits which affect a nested
+reference, the edits will be returned in the same format that they were
+applied. In the above example, opening A.ma and querying all edits which affect
+C.ma, would return two edits a parent edit affecting &quot;B:C:pSphere1&quot;, and a
+setAttr edit affecting &quot;C:pSphere1&quot;. Since there is currently no node named
+C:pSphere1 (only B:C:pSphere1) care will have to be taken when interpreting the
+returned information.
+The same care should be taken when referenced DAG nodes have been parented or
+instanced. Continuing with the previous example, let's say that you were to
+open A.ma and, instead of simply parenting pSphere1, you were to instance it.
+While A.ma is open, &quot;B:C:pSphere1&quot; may now be an amibiguous name, replaced by
+&quot;|B:C:pSphere1&quot; and &quot;group1|B:C:pSphere1&quot;. However querying the edits which
+affect C.ma would still return a setAttr edit affecting &quot;C:pSphere1&quot; since it
+was applied prior to B:C:pSphere1 being instanced.
+Some tips:
+1. Use the '-topReference' flag to query only those edits which were applied
+   from the currently open file.
+2. Use the '-onReferenceNode' flag to limit the results to those edits where
+   are stored on a given reference node. You can then use various string
+   manipulation techniques to extrapolate the current name of any affected
+   nodes.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>For query execution.</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>reference, attribute, node
+      <h2><a name="hRelated">Related</a></h2><a href="file.html">file</a>, <a href="referenceEdit.html">referenceEdit</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagchild">child</a>, <a href="#flagdagPath">dagPath</a>, <a href="#flageditAttrs">editAttrs</a>, <a href="#flageditCommand">editCommand</a>, <a href="#flageditNodes">editNodes</a>, <a href="#flageditStrings">editStrings</a>, <a href="#flagfailedEdits">failedEdits</a>, <a href="#flagfilename">filename</a>, <a href="#flagisExportEdits">isExportEdits</a>, <a href="#flagisLoaded">isLoaded</a>, <a href="#flagisNodeReferenced">isNodeReferenced</a>, <a href="#flagisPreviewOnly">isPreviewOnly</a>, <a href="#flagliveEdits">liveEdits</a>, <a href="#flagnamespace">namespace</a>, <a href="#flagnodes">nodes</a>, <a href="#flagonReferenceNode">onReferenceNode</a>, <a href="#flagparent">parent</a>, <a href="#flagparentNamespace">parentNamespace</a>, <a href="#flagreferenceNode">referenceNode</a>, <a href="#flagshortName">shortName</a>, <a href="#flagshowDagPath">showDagPath</a>, <a href="#flagshowNamespace">showNamespace</a>, <a href="#flagsuccessfulEdits">successfulEdits</a>, <a href="#flagtopReference">topReference</a>, <a href="#flagunresolvedName">unresolvedName</a>, <a href="#flagwithoutCopyNumber">withoutCopyNumber</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchild">
+          <code><b>-child</b>(<b>-ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the '-rfn/-referenceNode' and '-f/-filename' flags
+to indicate the the children of the target reference will be returned.
+Returns a string array.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisExportEdits">
+          <code><b>-isExportEdits</b>(<b>-iee</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns a boolean indicating whether the specified reference node or file
+name is an edits file (created with the Export Edits feature)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisLoaded">
+          <code><b>-isLoaded</b>(<b>-il</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns a boolean indicating whether the specified reference node or
+file name refers to a loaded or unloaded reference.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagliveEdits">
+          <code><b>-liveEdits</b>(<b>-le</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that the edits should be returned based on the live edits
+database. Only valid when used in conjunction with the editStrings flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdagPath">
+          <code><b>-dagPath</b>(<b>-dp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the '-n/-nodes' flag to indicate that the names of
+any dag objects returned will include as much of the dag path as is
+necessary to make the names unique. If this flag is not present, the
+names returned will not include any dag paths.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditAttrs">
+          <code><b>-editAttrs</b>(<b>-ea</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns string array.
+A main flag used to query the edits that have
+been applied to the target. Only the names of
+the attributes involved in the reference edit will be
+returned. If an edit involves multiple attributes (e.g. &quot;connectAttr&quot;
+edits) the nodes will be returned as separate,
+consecutive entries in the string array. A valid target is either
+a reference node, a reference file, or a referenced node.
+If a referenced node is specified, only those edits which
+affect that node will be returned. If a reference file
+or reference node is specified any edit which affects
+a node in that reference will be returned. If no target is
+specified all edits are returned. This command can
+be used on both loaded and unloaded references. By default
+it will return all the edits, formatted as MEL commands,
+which apply to the target.
+This flag can be used in combination with the
+'-ea/-editAttrs' flag to indicate that the names
+of both the involved nodes and attributes will be
+returned in the format 'node.attribute'.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditNodes">
+          <code><b>-editNodes</b>(<b>-en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns string array.
+A main flag used to query the edits that have
+been applied to the target. Only the names of
+the nodes involved in the reference edit will be
+returned. If an edit involves multiple nodes (e.g. &quot;connectAttr&quot;
+edits) the nodes will be returned as separate,
+consecutive entries in the string array. A valid target is either
+a reference node, a reference file, or a referenced node.
+If a referenced node is specified, only those edits which
+affect that node will be returned. If a reference file
+or reference node is specified any edit which affects
+a node in that reference will be returned. If no target is
+specified all edits are returned. This command can
+be used on both loaded and unloaded references. By default
+it will return all the edits, formatted as MEL commands,
+which apply to the target.
+This flag can be used in combination with the
+'-ea/-editAttrs' flag to indicate that the names
+of both the involved nodes and attributes will be
+returned in the format 'node.attribute'.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditStrings">
+          <code><b>-editStrings</b>(<b>-es</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns string array.
+A main flag used to query the edits that have
+been applied to the target. The edit will be returned
+as a valid MEL command. A valid target is either
+a reference node, a reference file, or a referenced node.
+If a referenced node is specified, only those edits which
+affect that node will be returned. If a reference file
+or reference node is specified any edit which affects
+a node in that reference will be returned. If no target is
+specified all edits are returned. This command can be used
+on both loaded and unloaded references. By default it will
+return all the edits, formatted as MEL commands,
+which apply to the target.
+This flag cannot be used with either the '-en/-editNodes'
+or '-ea/-editAttrs' flags.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfailedEdits">
+          <code><b>-failedEdits</b>(<b>-fld</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a secondary flag used to indicate whether or not failed
+edits should be acted on (e.g. queried, removed, etc...). A failed
+edit is an edit which could not be successfully applied the last
+time its reference was loaded.
+An edit can fail for a variety of reasons (e.g. the referenced
+node to which it applies was removed from the referenced file).
+By default failed edits will not be acted on.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfilename">
+          <code><b>-filename</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns string.
+A main flag used to query the filename associated with the target reference.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisNodeReferenced">
+          <code><b>-isNodeReferenced</b>(<b>-inr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns boolean.
+A main flag used to determine whether or not the target node comes
+from a referenced file.
+true if the target node comes from a referenced file, false if not.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisPreviewOnly">
+          <code><b>-isPreviewOnly</b>(<b>-ipo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns boolean.
+This flag is used to determine whether or not the target reference node is
+only a preview reference node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnamespace">
+          <code><b>-namespace</b>(<b>-ns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns string.
+This flag returns the full namespace path of the target reference, starting from the root namespace &quot;:&quot;.
+It can be combined with the shortName flag to return just the base name of the namespace.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodes">
+          <code><b>-nodes</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns string array.
+A main flag used to query the contents of the target reference.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparent">
+          <code><b>-parent</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the '-rfn/-referenceNode' and '-f/-filename' flags
+to indicate the the parent of the target reference will be returned.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparentNamespace">
+          <code><b>-parentNamespace</b>(<b>-pns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A main flag used to query and return the parent namespace of the target reference.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreferenceNode">
+          <code><b>-referenceNode</b>(<b>-rfn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns string.
+A main flag used to query the reference node associated with the target
+reference.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshortName">
+          <code><b>-shortName</b>(<b>-shn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the '-f/-filename' and '-ns/-namespace' flags.
+Used with the '-f/-filename' flag indicates that the file name returned will be the short name
+(i.e. just a file name without any directory paths). If this flag is not present, the full name
+and directory path will be returned.
+Used with the '-ns/-namespace' flag indicates that the namespace returned will be the base name of the namespace.
+(i.e. the base name of the full namespace path &quot;:AAA:BBB:CCC&quot; is &quot;CCC&quot;  )
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshowDagPath">
+          <code><b>-showDagPath</b>(<b>-sdp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Shows/hides the full dag path for edits. If false only displays the
+node-name of reference edits. Must be used with the -editNodes,
+-editStrings or -editAttrs flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshowNamespace">
+          <code><b>-showNamespace</b>(<b>-sns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Shows/hides the namespaces on nodes in the reference edits.
+Must be used with the -editNodes, -editStrings or -editAttrs flag
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsuccessfulEdits">
+          <code><b>-successfulEdits</b>(<b>-scs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a secondary flag used to indicate whether or not successful
+edits should be acted on (e.g. queried, removed, etc...). A successful
+edit is any edit which was successfully applied the last time its
+reference was loaded.
+By default successful edits will be acted on.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtopReference">
+          <code><b>-topReference</b>(<b>-tr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the '-rfn/-referenceNode' flag
+to indicate the top level ancestral reference of the target reference will be
+returned.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunresolvedName">
+          <code><b>-unresolvedName</b>(<b>-un</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the '-f/-filename' flag to indicate that the file name
+returned will be unresolved (i.e. it will be the path originally
+specified when the file was loaded into Maya; this path may
+contain environment variables and may not exist on disk). If this
+flag is not present, the resolved name will     be returned.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwithoutCopyNumber">
+          <code><b>-withoutCopyNumber</b>(<b>-wcn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the '-f/-filename' flag to indicate that the file name
+returned will not have a copy number (e.g. '{1}') appended to the end. If this
+flag is not present, the file name returned may have a copy number
+appended to the end.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditCommand">
+          <code><b>-editCommand</b>(<b>-ec</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a secondary flag used to indicate which type of reference edits should
+be considered by the command.
+If this flag is not specified all edit types will be included.
+This flag requires a string parameter. Valid values are: &quot;addAttr&quot;,
+&quot;connectAttr&quot;, &quot;deleteAttr&quot;, &quot;disconnectAttr&quot;, &quot;parent&quot;, &quot;setAttr&quot;,
+&quot;lock&quot; and &quot;unlock&quot;. In some contexts, this flag may be specified
+more than once to specify multiple edit types to consider.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagonReferenceNode">
+          <code><b>-onReferenceNode</b>(<b>-orn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a secondary flag used to indicate that only those edits which are stored
+on the indicated reference node should be considered. This flag only supports
+multiple uses when specified with the &quot;exportEdits&quot; command.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Build a sample scene:
+// main scene contains a reference to mid.ma.
+// mid.ma contains a reference to bot.ma.
+
+// Create bot.ma with a poly sphere.
+//
+polySphere;
+file -rename &quot;bot.ma&quot;;
+file -f -type &quot;mayaAscii&quot; -save;
+
+// Create mid.ma with a poly cone.
+// Reference bot.ma into mid.ma and group
+// the sphere in bot.ma
+//
+file -f -new;
+file -r -ns &quot;bot&quot; &quot;bot.ma&quot;;
+polyCone;
+group bot:pSphere1;
+file -rename &quot;mid.ma&quot;;
+file -f -type &quot;mayaAscii&quot; -save;
+
+// Create a poly plane.
+// Reference mid.ma into the main scene,
+// move the cone in mid.ma, and connect
+// the plane to the sphere in bot.ma.
+//
+file -f -new;
+file -r -ns &quot;mid&quot; &quot;mid.ma&quot;;
+select -r mid:pCone1;
+move -r 5 5 5;
+polyPlane;
+connectAttr pPlane1.ty mid:bot:polySphere1.radius;
+
+// Now perform some queries:
+//
+referenceQuery -filename midRN;
+// Result: C:/Documents and Settings/user/My Documents/maya/projects/default/scenes/mid.ma
+referenceQuery -filename -shortName mid:pCone1;
+// Result: mid.ma
+referenceQuery -filename -parent mid:botRN;
+// Result: C:/Documents and Settings/user/My Documents/maya/projects/default/scenes/mid.ma
+
+referenceQuery -referenceNode mid.ma;
+// Result: midRN
+referenceQuery -referenceNode &quot;C:/Documents and Settings/user/My Documents/maya/projects/default/scenes/bot.ma&quot;;
+// Result: mid:botRN
+referenceQuery -referenceNode -parent bot.ma;
+// Result: midRN
+referenceQuery -referenceNode -topReference bot.ma;
+// Result: midRN
+
+referenceQuery -nodes mid:botRN;
+// Result: mid:bot:pSphere1 mid:bot:pSphereShape1 mid:bot:lightLinker1 mid:bot:layerManager mid:bot:defaultLayer mid:bot:renderLayerManager mid:bot:defaultRenderLayer mid:bot:polySphere1 mid:bot:uiConfigurationScriptNode mid:bot:sceneConfigurationScriptNode
+
+referenceQuery -isNodeReferenced pPlane1;
+// Result: 0
+referenceQuery -isNodeReferenced mid:pCone1;
+// Result: 1
+
+referenceQuery -parentNamespace mid:botRN;
+// Result: mid
+
+referenceQuery -parentNamespace mid:bot:pSphere1;
+// Result: mid
+
+referenceQuery -parentNamespace &quot;C:/Documents and Settings/user/My Documents/maya/projects/default/scenes/bot.ma&quot;;
+// Result: mid
+
+referenceQuery -namespace bot.ma;
+// Result: :mid:bot //
+
+referenceQuery -namespace mid:botRN;
+// Result: :mid:bot //
+
+referenceQuery -namespace -shortName bot.ma;
+// Result: bot //
+
+referenceQuery -namespace mid.ma;
+// Result: :mid //
+
+referenceQuery -namespace -shortName mid.ma;
+// Result: mid //
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

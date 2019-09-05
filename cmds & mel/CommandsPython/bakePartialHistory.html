@@ -1,0 +1,290 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>bakePartialHistory command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-bakePartialHistory"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/bakePartialHistory.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>bakePartialHistory </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("bakePartialHistory.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>bakePartialHistory([<a href="#flagallShapes">allShapes</a>=<i>boolean</i>], [<a href="#flagpostSmooth">postSmooth</a>=<i>boolean</i>], [<a href="#flagpreCache">preCache</a>=<i>boolean</i>], [<a href="#flagpreDeformers">preDeformers</a>=<i>boolean</i>], [<a href="#flagprePostDeformers">prePostDeformers</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>bakePartialHistory is undoable, queryable, and editable.</p>
+      This command is used to bake sections of the construction history of a shape node
+when possible. A typical usage would be on a shape that has both modelling operations
+and deformers in its history. Using this command with the -prePostDeformers flag will
+bake the modeling portions of the graph, so that only the deformers remain.
+<p>
+Note that not all modeling operations can be baked such that they create exactly the
+same effect after baking. For example, imagine the history contains a skinning operation
+followed by a smooth. Before baking, the smooth operation is performed each time
+the skin deforms, so it will smooth differently depending on the output of the skin.
+When the smooth operation is baked into the skinning, the skin will be reweighted
+based on the smooth points to attempt to approximate the original behavior. However,
+the skin node does not perform the smooth operation, it merely performs skinning with
+the newly calculated weights and the result will not be identical to before the bake.
+<p>
+In general, modeling operations that occur before deformers can be baked precisely.
+Those which occur after can only be approximated. The -pre and -post flags allow you
+to control whether only the operations before or after the deformers are baked.
+<p>
+When the command is used on an object with no deformers, the entire history
+will be deleted.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>name of shapes that were baked</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>deformers, history, bake
+      <h2><a name="hRelated">Related</a></h2><a href="listHistory.html">listHistory</a>, <a href="skinCluster.html">skinCluster</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallShapes">allShapes</a>, <a href="#flagpostSmooth">postSmooth</a>, <a href="#flagpreCache">preCache</a>, <a href="#flagpreDeformers">preDeformers</a>, <a href="#flagprePostDeformers">prePostDeformers</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallShapes">
+          <code><b>allShapes</b>(<b>all</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that the bake operation should be performed on all shapes in the entire scene. By default, only selected objects are baked.
+If this option is specified and there are no shapes in the scene, then this command will do nothing and end successfully.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpostSmooth">
+          <code><b>postSmooth</b>(<b>nps</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies whether or not a smoothing operation should be done on skin vertices. This
+smoothing is only done on vertices that are found to deviate largely from other
+vertex values.  The default is false.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreCache">
+          <code><b>preCache</b>(<b>pc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies baking of any history operations that occur before the caching operation, including deformers. In query mode, returns a list of the nodes that will be baked.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreDeformers">
+          <code><b>preDeformers</b>(<b>pre</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies baking of any modeling operations in the history that occur before the deformers. In query mode, returns a list of the nodes that will be baked.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprePostDeformers">
+          <code><b>prePostDeformers</b>(<b>ppt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies baking of all modeling operations in the history whether they are before or after the deformers in the history. If neither the -prePostDeformers nor the -preDeformers flag is specified, prePostDeformers will be used as the default. In query mode, returns a list of the nodes that will be baked.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# create a cylinder with history to use as an example
+#
+cyl = cmds.polyCylinder()
+cmds.polySmooth()
+cmds.cluster()
+cmds.select( cyl[0],r=True )
+cmds.polyTriangulate()
+
+# query what will be baked
+#
+cmds.bakePartialHistory( cyl[0],query=True,prePostDeformers=True )
+
+# perform the bake, baking history from before and after the
+# deformer
+#
+cmds.bakePartialHistory( cyl[0],prePostDeformers=True )
+
+# Bake the history before the geometry cache on the cylinder.
+# To actually demo, add a geometry cache before executing the command
+# below.
+#
+cmds.select( cyl[0],r=True )
+cmds.bakePartialHistory( cyl[0],preCache=True )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

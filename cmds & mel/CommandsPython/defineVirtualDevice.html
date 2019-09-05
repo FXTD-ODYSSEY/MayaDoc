@@ -1,0 +1,393 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>defineVirtualDevice command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-defineVirtualDevice"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/defineVirtualDevice.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>defineVirtualDevice </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#MoCap" target="contentFrame">MoCap</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("defineVirtualDevice.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>defineVirtualDevice([<a href="#flagaxis">axis</a>=<i>int</i>], [<a href="#flagchannel">channel</a>=<i>string</i>], [<a href="#flagclear">clear</a>=<i>boolean</i>], [<a href="#flagcreate">create</a>=<i>boolean</i>], [<a href="#flagdevice">device</a>=<i>string</i>], [<a href="#flagparent">parent</a>=<i>string</i>], [<a href="#flagundefine">undefine</a>=<i>boolean</i>], [<a href="#flagusage">usage</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>defineVirtualDevice is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command defines a virtual device. Virtual devices act like real
+devices and are useful to manipulate/playback data when an command
+device is not connected to the computer.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaxis">axis</a>, <a href="#flagchannel">channel</a>, <a href="#flagclear">clear</a>, <a href="#flagcreate">create</a>, <a href="#flagdevice">device</a>, <a href="#flagparent">parent</a>, <a href="#flagundefine">undefine</a>, <a href="#flagusage">usage</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaxis">
+          <code><b>axis</b>(<b>ax</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the axis number of the channel. All children have their
+axis number determined by their parent's axis number and the width
+of the parent channel. If this flag is not used, the order of the
+channel determines the axis number.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchannel">
+          <code><b>channel</b>(<b>c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+After a -create is started, channels may be added to the device
+definition. The channel string wil be the name of the channel
+being added to the device. The -channel flag must also be
+accompanied by the -usage flag and optionally by the -axis flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclear">
+          <code><b>clear</b>(<b>cl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The -clear option will end a device definition and throw away
+any defined channels.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreate">
+          <code><b>create</b>(<b>cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Start defining a virtual device. If a device is currently being
+defined, the -create flag will produce an error.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdevice">
+          <code><b>device</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The -device flag ends the device definition. All of the channels
+between the -create flag and the -device flag are added to
+the specified device. If that device already exists, the command
+will fail and the device should be redefined with another device
+name. To see the currently defined devices, use the listInputDevices
+command. The -device flag is also used with -undefine to undefine a
+virtual device.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparent">
+          <code><b>parent</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specified the parent channel of the channel being defined. If the
+channel does not exist, or is an incompatible type, the command
+will fail.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagundefine">
+          <code><b>undefine</b>(<b>u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Undefines the device specified with the -device flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagusage">
+          <code><b>usage</b>(<b>use</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The -usage option is required for every -channel flag. It
+describes what usage type the defined channel is. The usage
+types are:
+<table cellpadding="0" cellspacing="0" width="80%">
+<tr valign="top">
+<td>unknown</td><td>scalar</td>
+</tr><tr valign="top">
+<td>pos</td><td>rot</td>
+<td>posRot</td><td>quaternion</td><td>posQuaternion</td>
+</tr><tr valign="top">
+<td>rotXYZ</td><td>rotYZX</td><td>rotZXY</td>
+<td>rotXZY</td><td>rotYXZ</td><td>rotZYX</td>
+</tr><tr valign="top">
+<td>posRotXYZ</td><td>posRotYZX</td><td>posRotZXY</td>
+<td>posRotXZY</td><td>posRotXZY</td><td>posRotZYX</td>
+</tr><tr valign="top">
+<td>posX</td><td>posY</td><td>posZ</td><td>rotX</td>
+<td>rotY</td><td>rotZ</td>
+</tr></table>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+#    Create a virtual clock and read in some data.
+cmds.defineVirtualDevice( create=True )
+cmds.defineVirtualDevice( channel='seconds', usage='rotZ', axis=2 )
+cmds.defineVirtualDevice( channel='minutes', usage='rotZ', axis=1 )
+cmds.defineVirtualDevice( channel='hours', usage='rotZ', axis=0 )
+cmds.defineVirtualDevice( device='virtualClock' )
+cmds.readTake( device='virtualClock', take='clock.mov' )
+
+#    Undefine the virtualClock
+cmds.defineVirtualDevice( device='virtualClock', undefine=True )
+
+#    Create a body device.
+cmds.defineVirtualDevice( create=True )
+cmds.defineVirtualDevice( channel='pelvis', usage='posRot' )
+cmds.defineVirtualDevice( channel='back', usage='posRot' )
+cmds.defineVirtualDevice( channel='head', usage='posRot' )
+cmds.defineVirtualDevice( device='body' )
+
+#    Explicitly order the axis of the device. The created device is
+#    the same as the above body device.
+cmds.defineVirtualDevice( create=True )
+cmds.defineVirtualDevice( channel='head', usage='posRot', axis=12 )
+cmds.defineVirtualDevice( channel='back', usage='posRot', axis=6 )
+cmds.defineVirtualDevice( channel='pelvis', usage='posRot', axis=0 )
+cmds.defineVirtualDevice( device='body' )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

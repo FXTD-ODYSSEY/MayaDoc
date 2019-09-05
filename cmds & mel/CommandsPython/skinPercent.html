@@ -1,0 +1,489 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>skinPercent command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-skinPercent"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/skinPercent.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>skinPercent </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Skinning" target="contentFrame">Skinning</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("skinPercent.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>skinPercent(
+[object] [selectionList]
+    , [<a href="#flagignoreBelow">ignoreBelow</a>=<i>float</i>], [<a href="#flagnormalize">normalize</a>=<i>boolean</i>], [<a href="#flagpruneWeights">pruneWeights</a>=<i>float</i>], [<a href="#flagrelative">relative</a>=<i>boolean</i>], [<a href="#flagresetToDefault">resetToDefault</a>=<i>boolean</i>], [<a href="#flagtransform">transform</a>=<i>string</i>], [<a href="#flagtransformMoveWeights">transformMoveWeights</a>=<i>string</i>], [<a href="#flagtransformValue">transformValue</a>=<i>[string, float]</i>], [<a href="#flagvalue">value</a>=<i>boolean</i>], [<a href="#flagzeroRemainingInfluences">zeroRemainingInfluences</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>skinPercent is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command edits and queries the weight values on members of a
+skinCluster node, given as the first argument. If no object components
+are explicitly mentioned in the command line, the current selection
+list is used.
+<p>
+Note that setting multiple weights in a single invocation of this
+command is far more efficient than calling it once per weighted
+vertex.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="copySkinWeights.html">copySkinWeights</a>, <a href="skinCluster.html">skinCluster</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagignoreBelow">ignoreBelow</a>, <a href="#flagnormalize">normalize</a>, <a href="#flagpruneWeights">pruneWeights</a>, <a href="#flagrelative">relative</a>, <a href="#flagresetToDefault">resetToDefault</a>, <a href="#flagtransform">transform</a>, <a href="#flagtransformMoveWeights">transformMoveWeights</a>, <a href="#flagtransformValue">transformValue</a>, <a href="#flagvalue">value</a>, <a href="#flagzeroRemainingInfluences">zeroRemainingInfluences</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreBelow">
+          <code><b>ignoreBelow</b>(<b>ib</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Limits the output of the -value and -transform queries
+to the entries whose weight values are over the specified
+limit.  This flag has to be used before the -query flag.
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnormalize">
+          <code><b>normalize</b>(<b>nrm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set, the weights not assigned by the -transformValue
+flag are normalized so that the sum of the all weights
+for the selected object component add up to 1. The default
+is on. NOTE: The skinCluster has a normalizeWeights attribute
+which when set to OFF overrides this attribute! If the
+skinCluster.normalizeWeights attribute is OFF, you must
+set it to Interactive in order to normalize weights using the
+skinPercent command.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpruneWeights">
+          <code><b>pruneWeights</b>(<b>prw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets to zero any weight smaller than the given value for
+all the selected components. To use this command to set
+all the weights to zero, you must turn the -normalize flag
+&quot;off&quot; or the skinCluster node will normalize the weights
+to sum to one after pruning them. Weights for influences with
+a true value on their &quot;Hold Weights&quot; attribute will not
+be pruned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelative">
+          <code><b>relative</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with -transformValue to specify a relative setting of values.
+If -relative is true, the value passed to -tv is added to the
+previous value.  Otherwise, it replaces the previous value.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresetToDefault">
+          <code><b>resetToDefault</b>(<b>rtd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the weights of the selected components to their
+default values, overwriting any custom weights.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransform">
+          <code><b>transform</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In Mel, when used after the -query flag (without an argument)
+the command returns an array of strings corresponding to
+the names of the transforms influencing the selected object
+components.  If used before the -query flag (with a
+transform name), the command returns the weight of the
+selected object component corresponding to the given
+transform. The command will return an average weight if several
+components have been selected.
+
+In Python, when used with None instead of the name of the transform,
+the command returns an array of strings corresponding to
+the names of the transforms influencing the selected object
+components. If used with a transform name, the command returns the weight of the
+selected object. The command will return an average weight if several
+components have been selected.
+
+      <p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransformMoveWeights">
+          <code><b>transformMoveWeights</b>(<b>tmw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used to transfer weights from a source influence to one or more target influences. It acts on the selected vertices. The flag must be used at least twice to generate a valid command. The first flag usage indicates the source influence from which the weights will be copied. Subsequent flag usages indicate the target influences.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransformValue">
+          <code><b>transformValue</b>(<b>tv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Accepts a pair consisting of a transform name and a value
+and assigns that value as the weight of the selected
+object components corresponding to the given transform.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalue">
+          <code><b>value</b>(<b>v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns an array of doubles corresponding to the
+joint weights for the selected object component.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagzeroRemainingInfluences">
+          <code><b>zeroRemainingInfluences</b>(<b>zri</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set, the weights not assigned by the -transformValue
+flag are set to 0. The default is off.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Create a joint chain and a polygonal plane and bind them as skin
+cmds.select(d=True)
+cmds.joint(p=(-3.0, 0.0,-12.0))
+cmds.joint(p=(-3.0, 0.0, -5.0))
+cmds.joint(p=(1.0, 0.0, 5.5))
+cmds.joint(p=(6.0, 0.0, 10.0))
+cmds.polyPlane(w=20.0,h=20.0,sx=25,sy=25)
+cmds.skinCluster( 'joint1', 'pPlane1' )
+
+# For vtx[100], set the weight wrt joint1 to 0.2, the weight
+# wrt joint3 to 0.8 and adjust the remaining weights to keep
+# the overall weight normalized (i.e. set all other joints to zero,
+# since the weights we are setting sum to 1.0)
+#
+cmds.skinPercent( 'skinCluster1', 'pPlane1.vtx[100]', transformValue=[('joint1', 0.2), ('joint3', 0.8)])
+
+# Get the weight values corresponding to all of the influences
+#
+cmds.skinPercent( 'skinCluster1', 'pPlane1.vtx[100]', query=True, value=True )
+
+# Get the weight values that are above 0.5
+#
+cmds.skinPercent( 'skinCluster1', 'pPlane1.vtx[100]', ignoreBelow=0.5, query=True, value=True )
+
+# Get the weight of vtx[100] corresponding to joint3
+#
+cmds.skinPercent( 'skinCluster1', 'pPlane1.vtx[100]', transform='joint3', query=True )
+
+# Get the names of the joints influencing vtx[100]
+#
+cmds.skinPercent( 'skinCluster1', 'pPlane1.vtx[100]', transform=None, query=True )
+
+# Normalize the existing weights for vtx[100]
+#
+cmds.skinPercent( 'skinCluster1', 'pPlane1.vtx[100]', normalize=True )
+
+# Reset the weights for vtx[100] to their default values
+#
+cmds.skinPercent( 'skinCluster1', 'pPlane1.vtx[100]', resetToDefault=True )
+
+# Zero all the weights that are below 0.1
+#
+cmds.skinPercent( 'skinCluster1', 'pPlane1', pruneWeights=0.1 )
+
+# Zero all the weights
+#
+cmds.skinPercent( 'skinCluster1', 'pPlane1', pruneWeights=100, normalize=False )
+
+# Assign weights to a large number of vertices,
+# several at a time to reduce the number of calls
+# to the skinPercent command.
+#
+for i in range(0,675,10):
+   cmds.select('pPlane1.vtx[%i]' % i,'pPlane1.vtx[%i]' % (i+1), 'pPlane1.vtx[%i]' % (i+2), 'pPlane1.vtx[%i]' % (i+3), 'pPlane1.vtx[%i]' % (i+4), 'pPlane1.vtx[%i]' % (i+5), 'pPlane1.vtx[%i]' % (i+6), 'pPlane1.vtx[%i]' % (i+7), 'pPlane1.vtx[%i]' % (i+8), 'pPlane1.vtx[%i]' % (i+9))
+   cmds.skinPercent( 'skinCluster1',transformValue=[('joint1', 0.5),('joint2', 0.5)] )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

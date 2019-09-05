@@ -1,0 +1,535 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>displaySmoothness command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-displaySmoothness"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/displaySmoothness.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>displaySmoothness </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Display" target="contentFrame">Display</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("displaySmoothness.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>displaySmoothness [-<a href="#flagall">all</a>] [-<a href="#flagboundary">boundary</a>] [-<a href="#flagdefaultCreation">defaultCreation</a>] [-<a href="#flagdivisionsU">divisionsU</a> <i>int</i>] [-<a href="#flagdivisionsV">divisionsV</a> <i>int</i>] [-<a href="#flagfull">full</a>] [-<a href="#flaghull">hull</a>] [-<a href="#flagpointsShaded">pointsShaded</a> <i>int</i>] [-<a href="#flagpointsWire">pointsWire</a> <i>int</i>] [-<a href="#flagpolygonObject">polygonObject</a> <i>int</i>] [-<a href="#flagrenderTessellation">renderTessellation</a> <i>boolean</i>] [-<a href="#flagsimplifyU">simplifyU</a> <i>int</i>] [-<a href="#flagsimplifyV">simplifyV</a> <i>int</i>] 
+[objects]
+     </code> </p>
+      <p>displaySmoothness is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command is responsible for setting the display smoothness
+of NURBS curves and surfaces to either predefined or custom values.
+It also sets display modes for smoothness such as hulls and the
+hull simplification factors.
+At present, this command is NOT un-doable.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="currentUnit.html">currentUnit</a>, <a href="displayAffected.html">displayAffected</a>, <a href="displayColor.html">displayColor</a>, <a href="displayCull.html">displayCull</a>, <a href="displayLevelOfDetail.html">displayLevelOfDetail</a>, <a href="displayPref.html">displayPref</a>, <a href="displayRGBColor.html">displayRGBColor</a>, <a href="displayStats.html">displayStats</a>, <a href="displaySurface.html">displaySurface</a>, <a href="hide.html">hide</a>, <a href="refresh.html">refresh</a>, <a href="showHidden.html">showHidden</a>, <a href="toggle.html">toggle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagall">all</a>, <a href="#flagboundary">boundary</a>, <a href="#flagdefaultCreation">defaultCreation</a>, <a href="#flagdivisionsU">divisionsU</a>, <a href="#flagdivisionsV">divisionsV</a>, <a href="#flagfull">full</a>, <a href="#flaghull">hull</a>, <a href="#flagpointsShaded">pointsShaded</a>, <a href="#flagpointsWire">pointsWire</a>, <a href="#flagpolygonObject">polygonObject</a>, <a href="#flagrenderTessellation">renderTessellation</a>, <a href="#flagsimplifyU">simplifyU</a>, <a href="#flagsimplifyV">simplifyV</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagall">
+          <code><b>-all</b>(<b>-all</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Change smoothness for all curves and surfaces
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagboundary">
+          <code><b>-boundary</b>(<b>-bn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Display wireframe surfaces using only the boundaries of the surface
+Not fully implemented yet
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefaultCreation">
+          <code><b>-defaultCreation</b>(<b>-dc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The default values at creation (applies only -du, -dv, -pw, -ps)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdivisionsU">
+          <code><b>-divisionsU</b>(<b>-du</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Number of isoparm divisions per span in the U direction.
+The valid range of values is [0,64].
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdivisionsV">
+          <code><b>-divisionsV</b>(<b>-dv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Number of isoparm divisions per span in the V direction.
+The valid range of values is [0,64].
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfull">
+          <code><b>-full</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Display surface at full resolution - the default.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghull">
+          <code><b>-hull</b>(<b>-hl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Display surface using the hull (control points are drawn rather
+than surface knot points). This mode is a useful display performance
+improvement when modifying a surface since it doesn't require
+evaluating points on the surface.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpointsShaded">
+          <code><b>-pointsShaded</b>(<b>-ps</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Number of points per surface span in shaded mode. The
+valid range of values is [1,64].
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpointsWire">
+          <code><b>-pointsWire</b>(<b>-pw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Number of points per surface isoparm span
+or the number of points per curve span in wireframe mode.
+The valid range of values is [1,128].
+Note: This is the only flag that also applies to nurbs curves.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpolygonObject">
+          <code><b>-polygonObject</b>(<b>-po</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Display the polygon objects with the given resolution
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderTessellation">
+          <code><b>-renderTessellation</b>(<b>-rt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Display using render tesselation parameters when in shaded mode.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsimplifyU">
+          <code><b>-simplifyU</b>(<b>-su</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Number of spans to skip in the U direction when in
+hull display mode.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsimplifyV">
+          <code><b>-simplifyV</b>(<b>-sv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Number of spans to skip in the V direction when in
+hull display mode.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// create a surface
+sphere;
+
+// set rough smoothness settings
+displaySmoothness -du 0 -dv 0 -pw 4 -ps 1;
+
+// set medium smoothness settings
+displaySmoothness -du 1 -dv 1 -pw 8 -ps 2;
+
+// set fine smoothness settings
+displaySmoothness -du 2 -dv 2 -pw 16 -ps 4;
+
+// Display surface as a hull
+displaySmoothness -hull;
+
+// Display with reduced number of points
+displaySmoothness -hull -su 2 -sv 2;
+
+// Display rendering tesselation
+displaySmoothness -rt 1;
+
+// Set default value for pointsShaded.
+// Subsequent surfaces created will have pointsShaded as 2.
+displaySmoothness -dc -ps 2;
+
+// displaySmoothness queries
+displaySmoothness -q -hull;        // query hull display, returns boolean
+displaySmoothness -q -dc -ps;    // query default pointsShaded value
+displaySmoothness -q -du;        // query surface divisionsU value
+
+// Only the -pointsWire flag works on curves.
+circle;
+
+// change the number of points displayed per curve span.
+displaySmoothness -pw 3;
+// query default pointsWire value for curves.
+displaySmoothness -q -dc -pw;
+
+polyCube;
+
+// Query the display resolution
+displaySmoothness -q -polygonObject;
+// Result: 0
+
+// Change the display resolution
+displaySmoothness -polygonObject 2;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

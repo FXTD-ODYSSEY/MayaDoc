@@ -1,0 +1,389 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>dbtrace command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-dbtrace"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/dbtrace.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>dbtrace </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Utilities" target="contentFrame">Utilities</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("dbtrace.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>dbtrace [-<a href="#flagfilter">filter</a> <i>string</i>] [-<a href="#flaginfo">info</a>] [-<a href="#flagkeyword">keyword</a> <i>string</i>] [-<a href="#flagmark">mark</a>] [-<a href="#flagoff">off</a>] [-<a href="#flagoutput">output</a> <i>string</i>] [-<a href="#flagtimed">timed</a> <i>boolean</i>] [-<a href="#flagtitle">title</a> <i>string</i>] [-<a href="#flagverbose">verbose</a>]  </code> </p>
+      <p>dbtrace is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      The <b>dbtrace</b> command is used to manipulate trace objects.
+          The keyword is the only mandatory argument, indicating which trace
+          object is to be altered.
+          <ul>
+          <li>Trace Objects to affect (<b><em>keyword</em> KEY</b>)</li>
+          <li>Optional filtering criteria (<b><em>filter</em> FILTER</b>)</li>
+          <li>Function (<b><em>off</em>, <em>output</em> FILE, <em>mark</em>, <em>title</em> TITLE, <em>timed</em></b> : default operation is to enable traces)</li>
+          </ul>
+          You can use the query mode to find out which keywords are currently
+          active (query with no arguments) or inactive (query with the <em>off</em>
+          argument).
+          You can enhance that query with or without a keyword argument to find
+          out where their output is going (query with the <em>output</em>
+          argument), out what filters are currently applied (query with the
+          <em>filter</em> argument), or if their output will be
+          timestamped (query with the <em>timed</em> argument).
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>debug, trace, filter
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagfilter">filter</a>, <a href="#flaginfo">info</a>, <a href="#flagkeyword">keyword</a>, <a href="#flagmark">mark</a>, <a href="#flagoff">off</a>, <a href="#flagoutput">output</a>, <a href="#flagtimed">timed</a>, <a href="#flagtitle">title</a>, <a href="#flagverbose">verbose</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfilter">
+          <code><b>-filter</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the filter object for these trace objects (see 'dgfilter')
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginfo">
+          <code><b>-info</b>(<b>-i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In query mode return a brief description of the trace object.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeyword">
+          <code><b>-keyword</b>(<b>-k</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Keyword of the trace objects to affect
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmark">
+          <code><b>-mark</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Display a mark for all outputs of defined trace objects
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoff">
+          <code><b>-off</b>(<b>-</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Toggle the traces off.  If omitted it will turn them on.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoutput">
+          <code><b>-output</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Destination file of the affected trace objects.  Use the special names
+<i>stdout</i> and <i>stderr</i> to redirect to your command window.
+The special name <i>msdev</i> is available on Windows to direct your
+output to the debug tab in the output window of Visual Studio.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtimed">
+          <code><b>-timed</b>(<b>-tm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn on/off timing information in the output of the specified trace objects.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtitle">
+          <code><b>-title</b>(<b>-t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Display a title mark for all outputs of defined trace objects
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagverbose">
+          <code><b>-verbose</b>(<b>-v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Include all traces in output and filter queries, not just those turned on.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// The default action is to turn the trace object on.  This action can be
+// changed using one of the -off, -output, -filter, -mark, or -title.
+
+dbtrace -off;        // turns all active tracing off
+dbtrace -k &quot;key&quot;;    // turns on all tracing for keyword &quot;key&quot;
+dbtrace -o &quot;FRED&quot;;   // sends all active tracing output to the file &quot;FRED&quot;
+
+// Inserts a title line in all active trace destinations having keyword 'key'
+dbtrace -k &quot;key&quot; -t &quot;This is a Title&quot;;
+
+// Only turn on traces with keyword &quot;key&quot; in Transform nodes
+dbtrace -k &quot;key&quot; -f &quot;transform&quot;;
+
+// Show where output is going for all trace objects having keyword &quot;fooTrace&quot;
+dbtrace -q -k &quot;fooTrace&quot; -o
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

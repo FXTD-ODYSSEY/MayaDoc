@@ -1,0 +1,531 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>setDrivenKeyframe command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-setDrivenKeyframe"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/setDrivenKeyframe.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>setDrivenKeyframe </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("setDrivenKeyframe.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>setDrivenKeyframe(
+[objects]
+    , [<a href="#flagattribute">attribute</a>=<i>string</i>], [<a href="#flagcontrolPoints">controlPoints</a>=<i>boolean</i>], [<a href="#flagcurrentDriver">currentDriver</a>=<i>string</i>], [<a href="#flagdriven">driven</a>=<i>boolean</i>], [<a href="#flagdriver">driver</a>=<i>boolean</i>], [<a href="#flagdriverValue">driverValue</a>=<i>float</i>], [<a href="#flaghierarchy">hierarchy</a>=<i>string</i>], [<a href="#flaginTangentType">inTangentType</a>=<i>string</i>], [<a href="#flaginsert">insert</a>=<i>boolean</i>], [<a href="#flaginsertBlend">insertBlend</a>=<i>boolean</i>], [<a href="#flagoutTangentType">outTangentType</a>=<i>string</i>], [<a href="#flagshape">shape</a>=<i>boolean</i>], [<a href="#flagvalue">value</a>=<i>float</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>setDrivenKeyframe is undoable, queryable, and editable.</p>
+      This command sets a driven keyframe.  A driven keyframe is similar
+to a regular keyframe. However, while a standard keyframe always has
+an x-axis of time in the graph editor, for a drivenkeyframe the
+user may choose any attribute as the x-axis of the graph editor.
+<br><br>
+For example, you can keyframe the emission of a faucet so that
+so that it emits whenever the faucet handle is rotated around y.
+The faucet emission in this example is called the driven attribute.
+The handle rotation is called the driver. Once you have used
+setDrivenKeyframe to set up the relationship between the emission
+and the rotation, you can go to the graph editor and modify the
+relationship between the attributes just as you would modify the
+animation curve on any keyframed object.
+<br><br>
+In the case of an attribute driven by a single driver, the
+dependency graph is connected like this:
+<br><br>
+driver attribute ---&gt; animCurve ---&gt; driven attribute
+<br><br>
+You can set driven keyframes with more than a single driver.
+The effects of the multiple drivers are combined together by
+a blend node.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>Number of keyframes set.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="autoKeyframe.html">autoKeyframe</a>, <a href="findKeyframe.html">findKeyframe</a>, <a href="setKeyPath.html">setKeyPath</a>, <a href="setKeyframe.html">setKeyframe</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagattribute">attribute</a>, <a href="#flagcontrolPoints">controlPoints</a>, <a href="#flagcurrentDriver">currentDriver</a>, <a href="#flagdriven">driven</a>, <a href="#flagdriver">driver</a>, <a href="#flagdriverValue">driverValue</a>, <a href="#flaghierarchy">hierarchy</a>, <a href="#flaginTangentType">inTangentType</a>, <a href="#flaginsert">insert</a>, <a href="#flaginsertBlend">insertBlend</a>, <a href="#flagoutTangentType">outTangentType</a>, <a href="#flagshape">shape</a>, <a href="#flagvalue">value</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattribute">
+          <code><b>attribute</b>(<b>at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Attribute name to set keyframes on.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcontrolPoints">
+          <code><b>controlPoints</b>(<b>cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Explicitly specify whether or not to include the
+control points of a shape (see &quot;-s&quot; flag) in the list of attributes.
+Default: false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentDriver">
+          <code><b>currentDriver</b>(<b>cd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the driver to be used for the current driven keyframe to the
+attribute passed as an argument.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdriven">
+          <code><b>driven</b>(<b>dn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns list of driven attributes for the selected item.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdriver">
+          <code><b>driver</b>(<b>dr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns list of available drivers for the attribute.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdriverValue">
+          <code><b>driverValue</b>(<b>dv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Value of the driver to use for this keyframe.
+Default value is the current value.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghierarchy">
+          <code><b>hierarchy</b>(<b>hi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Controls the objects this command acts on, relative to the specified
+(or active) target objects.
+Valid values are &quot;above,&quot; &quot;below,&quot; &quot;both,&quot; and &quot;none.&quot;
+Default is &quot;hierarchy -query&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginTangentType">
+          <code><b>inTangentType</b>(<b>itt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The in tangent type for keyframes set by this command.
+Valid values are: &quot;auto&quot;, clamped&quot;, &quot;fast&quot;, &quot;flat&quot;, &quot;linear&quot;, &quot;plateau&quot;, &quot;slow&quot;, &quot;spline&quot;, and &quot;stepnext&quot;
+Default is &quot;keyTangent -q -g -inTangentType&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginsert">
+          <code><b>insert</b>(<b>i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Insert keys at the given time(s) and preserve
+the shape of the animation curve(s). Note: the tangent
+type on inserted keys will be fixed so that the
+curve shape can be preserved.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginsertBlend">
+          <code><b>insertBlend</b>(<b>ib</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, a pairBlend node will be inserted for channels that have
+nodes other than animCurves driving them, so that such channels can
+have blended animation. If false, these channels will not have keys
+inserted. If the flag is not specified, the blend will be inserted based
+on the global preference for blending animation.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoutTangentType">
+          <code><b>outTangentType</b>(<b>ott</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The out tangent type for keyframes set by this command.
+Valid values are: &quot;auto&quot;, &quot;clamped&quot;, &quot;fast&quot;, &quot;flat&quot;, &quot;linear&quot;, &quot;plateau&quot;, &quot;slow&quot;, &quot;spline&quot;, &quot;step&quot;, and &quot;stepnext&quot;.
+Default is &quot;keyTangent -q -g -outTangentType&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshape">
+          <code><b>shape</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Consider attributes of shapes below transforms as well,
+except &quot;controlPoints&quot;.  Default: true
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalue">
+          <code><b>value</b>(<b>v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Value to set the keyframe at. Default is the current value.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Create a curve and a cone
+#
+cmds.curve(d=3,p=[(-10, 0, 0),(-6, 0, 10),(-3, 0, -10),(10, 0, 0)],k=[0, 0, 0, 1, 1, 1])
+cmds.polyCone()
+
+# To set the keyframe on the selected object's translateX based on
+# curve1's rotateZ:
+cmds.setDrivenKeyframe( at='translateX', cd='curve1.rz' )
+
+# To set the keyframe on pCone1.tx based on the value of curve1.rz:
+cmds.setDrivenKeyframe( 'pCone1.tx', cd='curve1.rz' )
+
+# To query the current driver of pCone1.tx:
+cmds.setDrivenKeyframe( 'pCone1.tx', q=True, cd=True )
+
+# To query the available drivers of pCone1.tx:
+cmds.setDrivenKeyframe( 'pCone1.tx', q=True, dr=True )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,105 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>renameUI command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-renameUI"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/renameUI.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>renameUI </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("renameUI.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hNotes">Notes</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>renameUI(
+string string
+    ) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>renameUI is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command renames the UI object passed as first arument to the new
+name specified as second argument. If the
+new name is a duplicate, or not valid, then re-naming fails and the
+old name is returned.
+<p>
+	  <h2><a name="hNotes">Notes</a></h2>
+This command does not update other objects or commands that reference
+this object by name, so use this command at your own risk.
+<p>
+  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The new name, or the old name if re-naming fails.</td></tr></table>
+      
+      
+
+      
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+#    Create a window with a single button.
+#
+window = cmds.window()
+cmds.columnLayout()
+cmds.button( 'exampleButton', label='Example' )
+cmds.showWindow( window )
+
+#    Edit the button label.
+#
+cmds.button( 'exampleButton', edit=True, label='New Label' )
+
+#    Rename the button.
+#
+cmds.renameUI( 'exampleButton', 'newButton' )
+
+#    Query the button label using the new object name.
+#
+cmds.button( 'newButton', query=True, label=True )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

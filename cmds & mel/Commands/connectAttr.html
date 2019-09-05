@@ -1,0 +1,247 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>connectAttr command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-connectAttr"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/connectAttr.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>connectAttr </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("connectAttr.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>connectAttr [-<a href="#flagforce">force</a>] [-<a href="#flaglock">lock</a> <i>boolean</i>] [-<a href="#flagnextAvailable">nextAvailable</a>] [-<a href="#flagreferenceDest">referenceDest</a> <i>string</i>] 
+attribute attribute
+     </code> </p>
+      <p>connectAttr is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Connect the attributes of two dependency nodes and return the
+names of the two connected attributes. The connected
+attributes must be be of compatible types. First argument is the
+source attribute, second one is the destination.
+<p>
+Refer to dependency node documentation.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>A phrase containing the names of the connected attributes.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="connectionInfo.html">connectionInfo</a>, <a href="isConnected.html">isConnected</a>, <a href="listConnections.html">listConnections</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagforce">force</a>, <a href="#flaglock">lock</a>, <a href="#flagnextAvailable">nextAvailable</a>, <a href="#flagreferenceDest">referenceDest</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforce">
+          <code><b>-force</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Forces the connection.  If the destination is already
+connected, the old connection is broken and the new one
+made.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglock">
+          <code><b>-lock</b>(<b>-l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the argument is true, the destination attribute
+is locked after making the connection. If the argument is false,
+the connection is unlocked before making the connection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnextAvailable">
+          <code><b>-nextAvailable</b>(<b>-na</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the destination multi-attribute has set the indexMatters
+to be false with this flag specified, a connection is made to
+the next available index. No index need be specified.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreferenceDest">
+          <code><b>-referenceDest</b>(<b>-rd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used for file io only. The flag indicates that
+the connection replaces a connection made in a
+referenced file, and the flag argument indicates the original
+destination from the referenced file. This
+flag is used so that if the reference file is modified, maya
+can still attempt to make the appropriate connections in the
+main scene to the referenced object.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+createNode transform -n firstGuy;
+createNode transform -n secondGuy;
+
+// Connect the translation of two nodes together
+connectAttr firstGuy.t secondGuy.translate;
+
+// Connect the rotation of one node to the override colour
+// of a second node.
+connectAttr firstGuy.rotate secondGuy.overrideColor;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

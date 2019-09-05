@@ -1,0 +1,830 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>textureDeformer command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-textureDeformer"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/textureDeformer.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>textureDeformer </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Deformation" target="contentFrame">Deformation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("textureDeformer.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>textureDeformer [-<a href="#flagafter">after</a>] [-<a href="#flagafterReference">afterReference</a>] [-<a href="#flagbefore">before</a>] [-<a href="#flagdeformerTools">deformerTools</a>] [-<a href="#flagdirection">direction</a> <i>string</i>] [-<a href="#flagenvelope">envelope</a> <i>float</i>] [-<a href="#flagexclusive">exclusive</a> <i>string</i>] [-<a href="#flagfrontOfChain">frontOfChain</a>] [-<a href="#flaggeometry">geometry</a> <i>string</i>] [-<a href="#flaggeometryIndices">geometryIndices</a>] [-<a href="#flagignoreSelected">ignoreSelected</a>] [-<a href="#flagincludeHiddenSelections">includeHiddenSelections</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagoffset">offset</a> <i>float</i>] [-<a href="#flagparallel">parallel</a>] [-<a href="#flagpointSpace">pointSpace</a> <i>string</i>] [-<a href="#flagprune">prune</a>] [-<a href="#flagremove">remove</a>] [-<a href="#flagsplit">split</a>] [-<a href="#flagstrength">strength</a> <i>float</i>] [-<a href="#flagvectorOffset">vectorOffset</a> <i>float float float</i>] [-<a href="#flagvectorSpace">vectorSpace</a> <i>string</i>] [-<a href="#flagvectorStrength">vectorStrength</a> <i>float float float</i>] 
+selectionList
+     </code> </p>
+      <p>textureDeformer is undoable, queryable, and editable.</p>
+      This command creates a texture deformer for the object.
+The selected objects are the input geometry objects.
+The deformer node name will be returned.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Texture deformer node name</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="cluster.html">cluster</a>, <a href="deformer.html">deformer</a>, <a href="flexor.html">flexor</a>, <a href="lattice.html">lattice</a>, <a href="percent.html">percent</a>, <a href="sculpt.html">sculpt</a>, <a href="wire.html">wire</a>, <a href="wrinkle.html">wrinkle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagafter">after</a>, <a href="#flagafterReference">afterReference</a>, <a href="#flagbefore">before</a>, <a href="#flagdeformerTools">deformerTools</a>, <a href="#flagdirection">direction</a>, <a href="#flagenvelope">envelope</a>, <a href="#flagexclusive">exclusive</a>, <a href="#flagfrontOfChain">frontOfChain</a>, <a href="#flaggeometry">geometry</a>, <a href="#flaggeometryIndices">geometryIndices</a>, <a href="#flagignoreSelected">ignoreSelected</a>, <a href="#flagincludeHiddenSelections">includeHiddenSelections</a>, <a href="#flagname">name</a>, <a href="#flagoffset">offset</a>, <a href="#flagparallel">parallel</a>, <a href="#flagpointSpace">pointSpace</a>, <a href="#flagprune">prune</a>, <a href="#flagremove">remove</a>, <a href="#flagsplit">split</a>, <a href="#flagstrength">strength</a>, <a href="#flagvectorOffset">vectorOffset</a>, <a href="#flagvectorSpace">vectorSpace</a>, <a href="#flagvectorStrength">vectorStrength</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafter">
+          <code><b>-after</b>(<b>-af</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the default behavior for insertion/appending into/onto
+the existing chain is not the desired behavior then this flag
+can be used to force the command to place the deformer
+node after the selected node in the chain even if
+a new geometry shape has to be created in order to do so.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafterReference">
+          <code><b>-afterReference</b>(<b>-ar</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The -afterReference flag is used to specify deformer ordering in a hybrid way that
+choses between -before and -after automatically. If the geometry being
+deformed is referenced then the -after mode is used when adding the new deformer,
+otherwise the -before mode is used. The net effect when using -afterReference to build
+deformer chains is that internal shape nodes in the deformer chain will only
+appear at reference file boundaries, leading to lightweight deformer networks that
+may be more amicable to reference swapping.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbefore">
+          <code><b>-before</b>(<b>-bf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the default behavior for insertion/appending into/onto
+the existing chain is not the desired behavior then this flag
+can be used to force the command to place the deformer
+node before the selected node in the chain even if
+a new geometry shape has to be created in order to do so.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeformerTools">
+          <code><b>-deformerTools</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the name of the deformer tool objects (if any)
+as string string ...
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdirection">
+          <code><b>-direction</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the deformation direction of texture deformer
+It can only handle three types: &quot;Normal&quot;, &quot;Handle&quot; and &quot;Vector&quot;.
+&quot;Normal&quot;  each vertices use its own normal vector.
+&quot;Handle&quot;  all vertices use Up vector of the handle.
+&quot;Vector&quot;  each vertices use RGB color vector
+strings.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenvelope">
+          <code><b>-envelope</b>(<b>-en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the envelope of texture deformer.
+Envelope determines the percent
+of deformation. The final result is
+(color * normal * strength + offset) * envelope
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexclusive">
+          <code><b>-exclusive</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Puts the deformation set in a deform partition.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfrontOfChain">
+          <code><b>-frontOfChain</b>(<b>-foc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This command is used to specify that the new deformer
+node should be placed ahead (upstream) of existing deformer
+and skin nodes in the shape's history (but not ahead of
+existing tweak nodes). The input to the
+deformer will be the upstream shape rather than the visible
+downstream shape, so the behavior of this flag is the most
+intuitive if the downstream deformers are in their reset
+(hasNoEffect) position when the new deformer is added.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometry">
+          <code><b>-geometry</b>(<b>-g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The specified object will be added to the list of
+objects being deformed by this deformer object, unless
+the -rm flag is also specified. When queried, this flag
+returns string string string ...
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometryIndices">
+          <code><b>-geometryIndices</b>(<b>-gi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Complements the -geometry flag in query mode. Returns
+the multi index of each geometry.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreSelected">
+          <code><b>-ignoreSelected</b>(<b>-is</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tells the command to not deform objects on the
+current selection list
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeHiddenSelections">
+          <code><b>-includeHiddenSelections</b>(<b>-ihs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Apply the deformer to any visible and hidden objects in the selection list.
+Default is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to specify the name of the node being created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoffset">
+          <code><b>-offset</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the offset of texture deformer.
+Offset plus a translation on the final
+deformed vertices.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparallel">
+          <code><b>-parallel</b>(<b>-par</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Inserts the new deformer in a parallel chain to any existing deformers in
+the history of the object. A blendShape is inserted to blend the parallel
+results together.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpointSpace">
+          <code><b>-pointSpace</b>(<b>-ps</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the point space of texture deformer.
+It can only handle three strings: &quot;World&quot;, &quot;Local&quot; and &quot;UV&quot;.
+&quot;World&quot;   map world space to color space.
+&quot;Local&quot;	  map local space to color space.
+&quot;UV&quot;	  map UV space to color space.
+strings.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprune">
+          <code><b>-prune</b>(<b>-pr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Removes any points not being deformed by the deformer in
+its current configuration from the deformer set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>-remove</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that objects listed after the -g flag should
+be removed from this deformer.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsplit">
+          <code><b>-split</b>(<b>-sp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Branches off a new chain in the dependency graph instead
+of inserting/appending the deformer into/onto an
+existing chain.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstrength">
+          <code><b>-strength</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the strength of texture deformer.
+Strength determines how strong the
+object is deformed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvectorOffset">
+          <code><b>-vectorOffset</b>(<b>-vo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the vector offset of texture deformer.
+Vector offset indicates the offset of the
+deformation on the vector mode.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvectorSpace">
+          <code><b>-vectorSpace</b>(<b>-vsp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the vector space of texture deformer.
+It can only handle three strings: &quot;Object&quot;, &quot;World&quot; and &quot;Tangent&quot;.
+&quot;Object&quot;   	use color vector in object space
+&quot;World&quot;	 	use color vector in world space
+&quot;Tangent&quot;	use color vector in tangent space
+strings.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvectorStrength">
+          <code><b>-vectorStrength</b>(<b>-vs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the vector strength of texture deformer.
+Vector strength determines how strong the
+object is deformed on the vector mode.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+polySphere -constructionHistory 1 -object 1 -radius 3.0;
+
+// Deforms whatever is currently on the selection list
+// and set the attributes value for the deformer node
+textureDeformer -envelope 0.8 -strength 1.0 -offset 1.0 -direction &quot;Normal&quot; -pointSpace &quot;World&quot;;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

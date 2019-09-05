@@ -1,0 +1,124 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>fgetword command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-fgetword"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>fgetword </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("fgetword.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>fgetword 
+int [string]
+     </code> </p>
+      <p>fgetword is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Returns the next word (string of characters separated by white
+space characters) or nothing at end of file.
+<p>
+A second argument may be passed to the fgetword command to specify
+separators to use instead of the default white space sparators.
+Characters in the separator string are used to determine word
+boundaries.  The each character in the separator string is treated
+as an individual separator.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Next word</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="fclose.html">fclose</a>, <a href="feof.html">feof</a>, <a href="fflush.html">fflush</a>, <a href="fgetline.html">fgetline</a>, <a href="fopen.html">fopen</a>, <a href="fprint.html">fprint</a>, <a href="fread.html">fread</a>, <a href="frewind.html">frewind</a>, <a href="fwrite.html">fwrite</a>, <a href="pclose.html">pclose</a>, <a href="popen.html">popen</a>
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Make a sample file to use as a test example
+//
+$exampleFileName = ( `internalVar -userTmpDir` + &quot;example.tmp&quot; );
+$fileId=`fopen $exampleFileName &quot;w&quot;`;
+fprint $fileId &quot;Hello there\nMEL-Developer-+Using+fgetword\n&quot;;
+fclose $fileId;
+
+// Now read it back one word at a time
+//
+$fileId=`fopen $exampleFileName &quot;r&quot;`;
+string $nextWord = `fgetword $fileId`;
+while ( size( $nextWord ) &gt; 0 ) {
+    print ( $nextWord + &quot;\n&quot; );
+    $nextWord = `fgetword $fileId`;
+}
+fclose $fileId;
+
+// This will print:
+// Hello
+// there
+// MEL-Developer-+Using+fgetword
+
+// Read it back again using &quot;+&quot; and &quot;-&quot; as separators
+//
+$fileId=`fopen $exampleFileName &quot;r&quot;`;
+string $nextWord = `fgetword $fileId &quot;+-&quot;`;
+while ( size( $nextWord ) &gt; 0 ) {
+    print ( $nextWord + &quot;\n&quot; );
+    $nextWord = `fgetword $fileId &quot;+-&quot;`;
+}
+fclose $fileId;
+
+// This will print:
+// Hello there
+// MEL
+// Developer
+// Using
+// fgetword
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

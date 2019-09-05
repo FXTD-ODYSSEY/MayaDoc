@@ -1,0 +1,151 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>addPanelCategory command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-addPanelCategory"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>addPanelCategory </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#MiscUI" target="contentFrame">Misc. UI</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("addPanelCategory.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+int addPanelCategory( string $name, string $insertAfter, string $cmd )
+<br>
+
+	 </code> </p>
+      
+      Add a new category to the Panels pulldown menus. The Panels
+pulldowns are the menus specified per viewport which allow the user
+to switch between different camera views, or different layouts, etc.
+The new category is defined by a new button which cascades into a
+separate user-definable pulldown menu.
+For example, you've defined your own camera type called &quot;Stereo&quot;
+and you want all your stereo cameras to appear under a separate 
+category in the Panels pulldowns for convenience. What you can do from
+the plug-in where you define your cameras of this type when the plug-in
+first loads is to issue a MEL command of the form:
+<ol>
+addPanelCategory( &quot;Stereo&quot;, &quot;Perspective&quot;, &quot;buildStereoPulldown&quot; );
+</ol>
+The preceeding call adds a new button called &quot;Stereo&quot; to the Panels
+pulldown menus, with the new button situated immediately after the existing
+&quot;Perspective&quot; buttom. The Stereo button displays a cascade icon and when
+selected, a user-implemented MEL procedure &quot;buildStereoPulldown&quot; is invoked
+to allow the user to define the entries for the cascading menu. An example
+for building a Perspective list might be:
+<p>
+global proc buildPerspectivePulldown( string $parent, string $panel )<br>
+{<br>
+string $cameras[] = `listCameras -perspective`;<br>
+<br>
+// Rebuild menu<br>
+//<br>
+setParent -m $parent;<br>
+menu -e -deleteAllItems $parent;<br>
+<br>
+for ($camera in $cameras) {<br>
+menuItem -l $camera -command<br>
+(&quot;lookThroughModelPanel &quot;+$camera+&quot; &quot;+$panel);<br>
+}<br>
+}
+<p>
+For a type of camera other than perspective, the user may want
+to define some special means for identifying the camera type.
+<p>
+This apparatus is not specific to cameras. It is a general mechanism
+for adding a new cascading menu item to the Panels menu. For example,
+it could list custom model panels as well.
+<p>
+The user will most likely add the new category upon loading the
+new data from their plug-in code. To determine if a given category
+has already been added, the command listPanelCategories() is provided.
+To remove a category, the removePanelCategory() command is provided.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$name"><b>$name</b></a></td><td><i>string</i></td><td>The name of the category that appears on
+the new cascading button when added. The
+name specifies the label.
+</td></tr>
+<tr><td><a name="$insertAfter"><b>$insertAfter</b></a></td><td><i>string</i></td><td>The menu item to insert immediately after. 
+This is the label value for the button,
+and examples are &quot;Perspective&quot;, &quot;Layouts&quot;,
+etc. Since the Panels menu may not have
+been built yet, the check that the $insertAfter
+button exists is not performed until the menu
+is posted.
+</td></tr>
+<tr><td><a name="$cmd"><b>$cmd</b></a></td><td><i>string</i></td><td>A MEL command to be executed when the
+new category button is depressed. typically
+this will build an on-demand pulldown menu.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>  addPanelCategory( &quot;Stereo&quot;, &quot;Perspective&quot;, &quot;buildStereoPulldown&quot; );
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

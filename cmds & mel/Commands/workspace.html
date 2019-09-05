@@ -1,0 +1,1216 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>workspace command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-workspace"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/workspace.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>workspace </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("workspace.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>workspace [-<a href="#flagactive">active</a>] [-<a href="#flagbaseWorkspace">baseWorkspace</a> <i>string</i>] [-<a href="#flagcreate">create</a> <i>string</i>] [-<a href="#flagdirectory">directory</a> <i>string</i>] [-<a href="#flagexpandName">expandName</a> <i>string</i>] [-<a href="#flagfileRule">fileRule</a> <i>string string</i>] [-<a href="#flagfileRuleEntry">fileRuleEntry</a> <i>string</i>] [-<a href="#flagfileRuleList">fileRuleList</a>] [-<a href="#flagfilter">filter</a>] [-<a href="#flagfullName">fullName</a>] [-<a href="#flaglist">list</a>] [-<a href="#flaglistFullWorkspaces">listFullWorkspaces</a>] [-<a href="#flaglistWorkspaces">listWorkspaces</a>] [-<a href="#flagnewWorkspace">newWorkspace</a>] [-<a href="#flagobjectType">objectType</a> <i>string string</i>] [-<a href="#flagobjectTypeEntry">objectTypeEntry</a> <i>string</i>] [-<a href="#flagobjectTypeList">objectTypeList</a>] [-<a href="#flagopenWorkspace">openWorkspace</a>] [-<a href="#flagprojectPath">projectPath</a> <i>string</i>] [-<a href="#flagremoveFileRuleEntry">removeFileRuleEntry</a> <i>string</i>] [-<a href="#flagremoveVariableEntry">removeVariableEntry</a> <i>string</i>] [-<a href="#flagrenderType">renderType</a> <i>string string</i>] [-<a href="#flagrenderTypeEntry">renderTypeEntry</a> <i>string</i>] [-<a href="#flagrenderTypeList">renderTypeList</a>] [-<a href="#flagrootDirectory">rootDirectory</a>] [-<a href="#flagsaveWorkspace">saveWorkspace</a>] [-<a href="#flagshortName">shortName</a>] [-<a href="#flagupdate">update</a>] [-<a href="#flagupdateAll">updateAll</a>] [-<a href="#flagvariable">variable</a> <i>string string</i>] [-<a href="#flagvariableEntry">variableEntry</a> <i>string</i>] [-<a href="#flagvariableList">variableList</a>] 
+[string]
+     </code> </p>
+      <p>workspace is undoable, queryable, and <b>NOT editable</b>.</p>
+      Create, open, or edit a workspace associated with a given workspace
+file.
+<p>
+The string argument represents the workspace. If no workspace is
+specified then the current workspace is assumed.
+<p>
+A workspace provides the underlying definition of a Maya Project.
+Each project has an associated workspace file, named workspace.mel, which is stored in the project root directory.
+The workspace file defines a set of rules that map file types to their storage, either relative to the
+project root or as an absolute location.  These rules are used when resolving file paths at runtime.
+<p>
+The workspace command operates directly on the low-level definition of the workspace to read, change and store
+the definition to the underlying file.  Use of this command is not generally required, for most purposes
+it is recommended that project definition changes be done via the Project Window in the User Interface. Multiple
+actions go under the assumption that given paths exist.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Project short name when querying the 'shortName' flag.</td></tr><tr><td valign="top"><i>string</i></td><td>Project full name when querying the 'fullName' flag.</td></tr><tr><td valign="top"><i>string</i></td><td>Current workspace name when querying the 'openWorkspace' flag and there is a current one.</td></tr><tr><td valign="top"><i>string</i></td><td>Working space directory when querying the 'directory' flag.</td></tr><tr><td valign="top"><i>string</i></td><td>File rule on the current workspace when querying one of the 'renderTypeEntry', 'fileRuleEntry', or 'objectTypeEntry' flags.</td></tr><tr><td valign="top"><i>string</i></td><td>File rule on the current workspace when querying the 'variableEntry' flag.</td></tr><tr><td valign="top"><i>string</i></td><td>Resolved full name of the given file name, or the current root directory if no name given when querying the 'expandName' flag.</td></tr><tr><td valign="top"><i>string</i></td><td>Path to the current project workspace when querying the 'projectPath' flag.</td></tr><tr><td valign="top"><i>string</i></td><td>Current workspace's base workspace name when querying the 'baseWorkspace' flag.</td></tr><tr><td valign="top"><i>string</i></td><td>Current workspace's root directory when querying the 'rootDirectory' flag.</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of file rules when querying the 'fileRule' flag.</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of variables when querying the 'variableList' flag.</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of all workspaces when querying the 'listWorkspaces' flag.</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of full names of all workspaces when querying the 'listFullWorkspaces' flag.</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of path names for all workspace in the directory named when querying the 'list' flag or the current workspace if no directory is named.</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of alternating (file rule, rule location) strings corresponding to the current workspace's file rules.</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of alternating (variable, value) strings corresponding to the current workspace's variables.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="chdir.html">chdir</a>, <a href="pwd.html">pwd</a>, <a href="translator.html">translator</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagactive">active</a>, <a href="#flagbaseWorkspace">baseWorkspace</a>, <a href="#flagcreate">create</a>, <a href="#flagdirectory">directory</a>, <a href="#flagexpandName">expandName</a>, <a href="#flagfileRule">fileRule</a>, <a href="#flagfileRuleEntry">fileRuleEntry</a>, <a href="#flagfileRuleList">fileRuleList</a>, <a href="#flagfilter">filter</a>, <a href="#flagfullName">fullName</a>, <a href="#flaglist">list</a>, <a href="#flaglistFullWorkspaces">listFullWorkspaces</a>, <a href="#flaglistWorkspaces">listWorkspaces</a>, <a href="#flagnewWorkspace">newWorkspace</a>, <a href="#flagobjectType">objectType</a>, <a href="#flagobjectTypeEntry">objectTypeEntry</a>, <a href="#flagobjectTypeList">objectTypeList</a>, <a href="#flagopenWorkspace">openWorkspace</a>, <a href="#flagprojectPath">projectPath</a>, <a href="#flagremoveFileRuleEntry">removeFileRuleEntry</a>, <a href="#flagremoveVariableEntry">removeVariableEntry</a>, <a href="#flagrenderType">renderType</a>, <a href="#flagrenderTypeEntry">renderTypeEntry</a>, <a href="#flagrenderTypeList">renderTypeList</a>, <a href="#flagrootDirectory">rootDirectory</a>, <a href="#flagsaveWorkspace">saveWorkspace</a>, <a href="#flagshortName">shortName</a>, <a href="#flagupdate">update</a>, <a href="#flagupdateAll">updateAll</a>, <a href="#flagvariable">variable</a>, <a href="#flagvariableEntry">variableEntry</a>, <a href="#flagvariableList">variableList</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactive">
+          <code><b>-active</b>(<b>-act</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is a synonym for -o/openWorkspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbaseWorkspace">
+          <code><b>-baseWorkspace</b>(<b>-bw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A workspace may be based on another workspace.  This means
+that all the file rules and variables in the base workspace
+apply to this workspace unless they are explicitly overridden.
+By default, a new workspace has the workspace &quot;default&quot; as
+it's base workspace. Note that &quot;duplicated&quot; file rules
+containing relative paths are not verified nor created when
+creating a new workspace or when changing the base workspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreate">
+          <code><b>-create</b>(<b>-cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create a new directory.  If the directory name is not
+a full path name, it will be created as a subdirectory of
+the &quot;current&quot; directory set with the -dir flag. Note that this
+flag does not create a workspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdirectory">
+          <code><b>-directory</b>(<b>-dir</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This option will set the current workspace directory to the
+path specified. When queried it will return the current workspace
+directory. This directory is used as an initial directory for the
+<b>fileBrowser</b> and is part of the search path used for locating
+files. It should not be confused with the current <i>working</i>
+directory as used by the <b>pwd</b> and <b>chdir</b> commands.
+When the file browser is used, it will set this value to the last
+location navigated to.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexpandName">
+          <code><b>-expandName</b>(<b>-en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query for the full path location of a filename using the current workspace definition.
+The path may be a project relative file name, a full path name or a variable name.
+The return value is always a full path name.
+If the path is an empty string, the return value will be the project root directory.
+Variable expansion is supported, and will consider both variables defined in the workspace
+as well as environment variables.
+There are three formats supported for expanding variable names:
+%variableName%, $variableName, ${variableName}.
+Maya will first attempt to find matching variables defined in the current workspace,
+then search for a matching environment variable.
+The tilde character ('~') is also supported.
+If a tilde is located at the beginning of a variable, Maya
+will only consider and expand environment variables, and will leave the tilde in the
+expanded result.
+On linux and mac platforms, a tilde can be used to expand a user's home directory,
+using the form ~username, ~, or ~/.  When specified as ~username, it will be replaced
+with the corresponding user's home directory.  When specified as ~ or ~/, it will
+be replaced with the value of the HOME environment variable.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfileRule">
+          <code><b>-fileRule</b>(<b>-fr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the default location for a file. The first parameter is
+the fileRule name(scenes, images, etc) and the second is the location. When
+queried, it returns a list of strings.  The elements of the
+returned list alternate between fileRule names and the corresponding
+location.  There is typically one file rule for each available
+translator. Environment variables are supported.
+You can set multiple path for the file rule by separating them with
+semicolons (;) on Windows and colons(:) on MacOSX and Linux.
+Note that whitespace at the beginning and end of each item in the
+separated sequence is significant and will be included as part of the
+path name (which is not usually desired unless the pathname does
+actually start or end with spaces).
+A valid filerule name cannot contain multiple byte characters. Note that
+creating a filerule does not create any directories. It is the user's
+responsibility to ensure that all paths are valid.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfileRuleEntry">
+          <code><b>-fileRuleEntry</b>(<b>-fre</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the location for the given fileRule.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfileRuleList">
+          <code><b>-fileRuleList</b>(<b>-frl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns a list of the currently defined file rules.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfilter">
+          <code><b>-filter</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfullName">
+          <code><b>-fullName</b>(<b>-fn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the full name of the workspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglist">
+          <code><b>-list</b>(<b>-l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This option will list the current workspace directory. If a
+path is specified for the &quot;workspaceFile&quot; then the contents of that
+directory will be listed.  Otherwise, the contents of the directory
+set with the -dir flag will be listed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistFullWorkspaces">
+          <code><b>-listFullWorkspaces</b>(<b>-lfw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns a list of the full path names of all the currently
+defined workspaces.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistWorkspaces">
+          <code><b>-listWorkspaces</b>(<b>-lw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns a list of all the currently defined workspace
+names.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnewWorkspace">
+          <code><b>-newWorkspace</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This specifies that a new workspace is being created with a given
+path (full path or relative to &quot;current&quot; directory). If a
+workspace with this path already exists, the command will fail.
+Note that the application is creating a virtual workspace without creating
+any new directories. If given a relative path, it will map the
+new workspace to the &quot;current&quot; directory set with the -dir flag
+concatenated with the given path. If the path does not exist, it
+will default the workspace root directory -rd to the system's root
+path (e.g. C:\ or '/'). It is the user's responsibility to ensure
+that all paths exist.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobjectType">
+          <code><b>-objectType</b>(<b>-ot</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete. All default locations will be added to the
+fileRules going forward.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobjectTypeEntry">
+          <code><b>-objectTypeEntry</b>(<b>-ote</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete. This will now return the same as fileRuleEntry.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobjectTypeList">
+          <code><b>-objectTypeList</b>(<b>-otl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete. This will now return the same results as
+fileRuleList going forward.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagopenWorkspace">
+          <code><b>-openWorkspace</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Open the workspace.  The workspace becomes the current
+workspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprojectPath">
+          <code><b>-projectPath</b>(<b>-pp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Convert filePath passed as argument to a filename that is relative to the
+project root directory (if possible) and return it.  If the
+filePath is not under the project root directory, a full path
+name will be returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveFileRuleEntry">
+          <code><b>-removeFileRuleEntry</b>(<b>-rfr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the given file rule from the specified workspace. If the
+workspace name is not specified, the given file rule will be removed from
+the current workspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveVariableEntry">
+          <code><b>-removeVariableEntry</b>(<b>-rve</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the given variable from the specified workspace. If the
+workspace name is not specified, the given variable will be removed from
+the current workspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderType">
+          <code><b>-renderType</b>(<b>-rt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete. All default render types will be added to
+fileRules going forward.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderTypeEntry">
+          <code><b>-renderTypeEntry</b>(<b>-rte</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete, use fileRuleEntry going forward
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderTypeList">
+          <code><b>-renderTypeList</b>(<b>-rtl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete, use fileRuleList going forward.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrootDirectory">
+          <code><b>-rootDirectory</b>(<b>-rd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the root directory of the workspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsaveWorkspace">
+          <code><b>-saveWorkspace</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Save the workspace.  Workspaces are normally saved when
+Maya exits but this flag will make sure that the data is
+flushed to disk.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshortName">
+          <code><b>-shortName</b>(<b>-sn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the short name of the workspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupdate">
+          <code><b>-update</b>(<b>-u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag reads all the workspace definitions from the project
+directory.  It is used by Maya at startup time to find the available
+workspaces.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupdateAll">
+          <code><b>-updateAll</b>(<b>-ua</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is a synonym for -u/update.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvariable">
+          <code><b>-variable</b>(<b>-v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the value of a project variable. Project variables
+are used when expanding names. See the -en/expandName flag below.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvariableEntry">
+          <code><b>-variableEntry</b>(<b>-ve</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Given a variable name, will return its value.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvariableList">
+          <code><b>-variableList</b>(<b>-vl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return a list of all variables in the workspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Set the current workspace to &quot;alphabet&quot;
+workspace -openWorkspace alphabet;
+
+// Save the current workspace settings (for &quot;alphabet&quot;).
+workspace -saveWorkspace;
+
+// Change current directory to project directory
+workspace -directory &quot;/h/userName/maya/projects/&quot;;
+
+// Create a directory for a new workspace
+workspace -create newWorkspace;
+
+// Create a new workspace named &quot;newWorkspace&quot;.
+workspace -newWorkspace newWorkspace;
+
+// The file rules and variables of &quot;newWorkspace&quot; are based on &quot;default&quot; workspace
+workspace -baseWorkspace &quot;default&quot;;
+
+// Return the list of existing workspaces
+workspace -listWorkspaces ;
+// Result: default   newWorkspace
+
+// Add a scriptJob to run on workspaceChanged events
+global proc workspaceChangedCallback()
+{
+    print &quot;My workspaceChangedCallback was called&quot;;
+}
+
+int $workspaceChangedID = `scriptJob -event workspaceChanged workspaceChangedCallback`;
+
+// add a file rule to the current workspace
+workspace -fileRule &quot;newFileRuleName&quot; &quot;newFileRuleValue&quot;;
+My workspaceChangedCallback was called            //workspaceChangedCallback was called
+
+// look up the value of the file rule entry
+workspace -q -fileRuleEntry &quot;newFileRuleName&quot;;
+// Result: newFileRuleValue
+
+// remove specified file rule entry
+workspace -removeFileRuleEntry &quot;newFileRuleName&quot;;
+My workspaceChangedCallback was called            //workspaceChangedCallback is called
+
+// kill the scriptJob with the number
+scriptJob -kill $workspaceChangedID;
+
+// The following example shows how to expand environment and workspace variables
+
+// expand a path value to be a full path relative to the project directory
+// relative path example
+workspace -expandName &quot;relativePathName&quot;;
+// Result: /h/userName/maya/projects/newWorkspace/relativePathName
+// full path example
+workspace -expandName &quot;/h/userName/maya/projects/default/&quot;;
+// Result: /h/userName/maya/projects/default/
+
+// The following examples show various formats for expanding workspace and
+// environment variables
+
+// add a variable to the current workspace
+workspace -variable &quot;newVariableName&quot; &quot;newVariableValue&quot;;
+
+workspace -expandName &quot;%newVariableName%&quot;;
+// Result: /h/userName/maya/projects/newWorkspace/newVariableValue
+
+// add an environment variable
+putenv &quot;newEnvVariableName&quot; &quot;newEnvVariableValue&quot;;
+
+workspace -expandName &quot;%newEnvVariableName%&quot;;
+// Result: /h/userName/maya/projects/newWorkspace/newEnvVariableValue
+
+// The following example shows how conflicting names in both workspace
+// and environment variables are resolved.
+// Add an environment variable with the same as the workspace variable
+putenv &quot;newVariableName&quot; &quot;newEnvVariableValue&quot;
+
+// maya considers workspace variables first before matching environment variables
+workspace -expandName &quot;%newVariableName%&quot;;
+// Result: /h/userName/maya/projects/newWorkspace/newVariableValue
+
+// However when a tilde is used, maya will only consider the environment varible, not
+// the workspace variable.
+workspace -expandName &quot;~%newVariableName%&quot;;
+// Result: /h/userName/maya/projects/newWorkspace/~newEnvVariableValue
+
+// The following example shows how to set multiple paths into a fileRule value
+workspace -fileRule &quot;newMultiPathFileRuleName&quot; &quot;/h/userName/maya/projects/default;newFileRuleValue&quot;;
+
+string $multipath = `workspace -q -fileRuleEntry &quot;newMultiPathFileRuleName&quot;`;
+// Result : /h/userName/maya/projects/default;newFileRuleValue
+
+// Note that white space at the beginning and the end of each path is significant
+// Add a file rule that uses multiple paths with the white space at the beginning and the end
+// of each path
+workspace -fileRule &quot;newMultiPathFileRuleName&quot; &quot; /h/userName/maya/projects/default ; newFileRuleValue &quot;;
+// Querying and expanding the path value shows the white space is still included
+string $multipath = `workspace -q -fileRuleEntry &quot;newMultiPathFileRuleName&quot;`;
+// Result :  /h/userName/maya/projects/default ; newFileRuleValue
+
+// Find the current workspace area.
+workspace -q -directory;
+// Result : /h/userName/maya/projects/default
+
+// Note that the &quot;current working directory&quot; as defined by the
+// 'pwd' and 'chdir' commands is unrelated to the directories
+// used by the workspace command.
+//
+pwd;
+// Result : /usr/tmp
+
+chdir &quot;/tmp&quot;;
+pwd;
+// Result : /tmp
+workspace -q -directory;
+// Result : /h/userName/maya/projects/default
+
+workspace -directory &quot;/h/userName/maya/projects/commercial&quot;;
+pwd;
+// Result : /tmp
+
+
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

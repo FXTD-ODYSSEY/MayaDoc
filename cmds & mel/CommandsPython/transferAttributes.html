@@ -1,0 +1,1129 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>transferAttributes command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-transferAttributes"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/transferAttributes.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>transferAttributes </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("transferAttributes.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>transferAttributes(
+object object
+    , [<a href="#flagafter">after</a>=<i>boolean</i>], [<a href="#flagafterReference">afterReference</a>=<i>boolean</i>], [<a href="#flagbefore">before</a>=<i>boolean</i>], [<a href="#flagcolorBorders">colorBorders</a>=<i>uint</i>], [<a href="#flagdeformerTools">deformerTools</a>=<i>boolean</i>], [<a href="#flagexclusive">exclusive</a>=<i>string</i>], [<a href="#flagflipUVs">flipUVs</a>=<i>uint</i>], [<a href="#flagfrontOfChain">frontOfChain</a>=<i>boolean</i>], [<a href="#flaggeometry">geometry</a>=<i>string</i>], [<a href="#flaggeometryIndices">geometryIndices</a>=<i>boolean</i>], [<a href="#flagignoreSelected">ignoreSelected</a>=<i>boolean</i>], [<a href="#flagincludeHiddenSelections">includeHiddenSelections</a>=<i>boolean</i>], [<a href="#flagmatchChoice">matchChoice</a>=<i>uint</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagparallel">parallel</a>=<i>boolean</i>], [<a href="#flagprune">prune</a>=<i>boolean</i>], [<a href="#flagremove">remove</a>=<i>boolean</i>], [<a href="#flagsampleSpace">sampleSpace</a>=<i>uint</i>], [<a href="#flagsearchMethod">searchMethod</a>=<i>uint</i>], [<a href="#flagsearchScaleX">searchScaleX</a>=<i>float</i>], [<a href="#flagsearchScaleY">searchScaleY</a>=<i>float</i>], [<a href="#flagsearchScaleZ">searchScaleZ</a>=<i>float</i>], [<a href="#flagsourceColorSet">sourceColorSet</a>=<i>string</i>], [<a href="#flagsourceUvSet">sourceUvSet</a>=<i>string</i>], [<a href="#flagsourceUvSpace">sourceUvSpace</a>=<i>string</i>], [<a href="#flagsplit">split</a>=<i>boolean</i>], [<a href="#flagtargetColorSet">targetColorSet</a>=<i>string</i>], [<a href="#flagtargetUvSet">targetUvSet</a>=<i>string</i>], [<a href="#flagtargetUvSpace">targetUvSpace</a>=<i>string</i>], [<a href="#flagtransferColors">transferColors</a>=<i>uint</i>], [<a href="#flagtransferNormals">transferNormals</a>=<i>uint</i>], [<a href="#flagtransferPositions">transferPositions</a>=<i>uint</i>], [<a href="#flagtransferUVs">transferUVs</a>=<i>uint</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>transferAttributes is undoable, queryable, and editable.</p>
+      Samples the attributes of a source surface (first argument) and
+transfers them onto a target surface (second argument).
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The node name.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagafter">after</a>, <a href="#flagafterReference">afterReference</a>, <a href="#flagbefore">before</a>, <a href="#flagcolorBorders">colorBorders</a>, <a href="#flagdeformerTools">deformerTools</a>, <a href="#flagexclusive">exclusive</a>, <a href="#flagflipUVs">flipUVs</a>, <a href="#flagfrontOfChain">frontOfChain</a>, <a href="#flaggeometry">geometry</a>, <a href="#flaggeometryIndices">geometryIndices</a>, <a href="#flagignoreSelected">ignoreSelected</a>, <a href="#flagincludeHiddenSelections">includeHiddenSelections</a>, <a href="#flagmatchChoice">matchChoice</a>, <a href="#flagname">name</a>, <a href="#flagparallel">parallel</a>, <a href="#flagprune">prune</a>, <a href="#flagremove">remove</a>, <a href="#flagsampleSpace">sampleSpace</a>, <a href="#flagsearchMethod">searchMethod</a>, <a href="#flagsearchScaleX">searchScaleX</a>, <a href="#flagsearchScaleY">searchScaleY</a>, <a href="#flagsearchScaleZ">searchScaleZ</a>, <a href="#flagsourceColorSet">sourceColorSet</a>, <a href="#flagsourceUvSet">sourceUvSet</a>, <a href="#flagsourceUvSpace">sourceUvSpace</a>, <a href="#flagsplit">split</a>, <a href="#flagtargetColorSet">targetColorSet</a>, <a href="#flagtargetUvSet">targetUvSet</a>, <a href="#flagtargetUvSpace">targetUvSpace</a>, <a href="#flagtransferColors">transferColors</a>, <a href="#flagtransferNormals">transferNormals</a>, <a href="#flagtransferPositions">transferPositions</a>, <a href="#flagtransferUVs">transferUVs</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafter">
+          <code><b>after</b>(<b>af</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the default behavior for insertion/appending into/onto
+the existing chain is not the desired behavior then this flag
+can be used to force the command to place the deformer
+node after the selected node in the chain even if
+a new geometry shape has to be created in order to do so.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafterReference">
+          <code><b>afterReference</b>(<b>ar</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The -afterReference flag is used to specify deformer ordering in a hybrid way that
+choses between -before and -after automatically. If the geometry being
+deformed is referenced then the -after mode is used when adding the new deformer,
+otherwise the -before mode is used. The net effect when using -afterReference to build
+deformer chains is that internal shape nodes in the deformer chain will only
+appear at reference file boundaries, leading to lightweight deformer networks that
+may be more amicable to reference swapping.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbefore">
+          <code><b>before</b>(<b>bf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the default behavior for insertion/appending into/onto
+the existing chain is not the desired behavior then this flag
+can be used to force the command to place the deformer
+node before the selected node in the chain even if
+a new geometry shape has to be created in order to do so.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolorBorders">
+          <code><b>colorBorders</b>(<b>clb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Controls whether color borders are preserved when transferring color
+data. If this is non-zero, any color borders will be mapped onto the nearest
+edge on the target geometry. 0 means any color borders will be
+smoothly blended onto the vertices of the target geometry.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeformerTools">
+          <code><b>deformerTools</b>(<b>dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the name of the deformer tool objects (if any)
+as string string ...
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexclusive">
+          <code><b>exclusive</b>(<b>ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Puts the deformation set in a deform partition.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflipUVs">
+          <code><b>flipUVs</b>(<b>fuv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Controls how sampled UV data is flipped before being transferred
+to the target. 0 means no flipping; 1 means UV data is flipped in the
+U direction; 2 means UV data is flipped in the V direction; and 3 means
+it is flipped in both directions. In conjunction with mirroring, this
+allows the creation of symmetric UV mappings (e.g. the left hand side of the
+character on one side of the UV map, the right hand side on the other).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfrontOfChain">
+          <code><b>frontOfChain</b>(<b>foc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This command is used to specify that the new deformer
+node should be placed ahead (upstream) of existing deformer
+and skin nodes in the shape's history (but not ahead of
+existing tweak nodes). The input to the
+deformer will be the upstream shape rather than the visible
+downstream shape, so the behavior of this flag is the most
+intuitive if the downstream deformers are in their reset
+(hasNoEffect) position when the new deformer is added.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometry">
+          <code><b>geometry</b>(<b>g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The specified object will be added to the list of
+objects being deformed by this deformer object, unless
+the -rm flag is also specified. When queried, this flag
+returns string string string ...
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometryIndices">
+          <code><b>geometryIndices</b>(<b>gi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Complements the -geometry flag in query mode. Returns
+the multi index of each geometry.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreSelected">
+          <code><b>ignoreSelected</b>(<b>ignoreSelected</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tells the command to not deform objects on the
+current selection list
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeHiddenSelections">
+          <code><b>includeHiddenSelections</b>(<b>ihs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Apply the deformer to any visible and hidden objects in the selection list.
+Default is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmatchChoice">
+          <code><b>matchChoice</b>(<b>mch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When using topological component matching, selects between possible matches.
+If the meshes involved in the transfer operation have symmetries in their
+topologies, there may be more than one possible topological match.
+Maya scores the possible matches (by comparing the shapes of the meshes)
+and assigns them an index, starting at zero.
+Match zero, the default, is considered the best, but in the event that Maya
+chooses the wrong one, changing this value will allow the user to explore the
+other matches.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to specify the name of the node being created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparallel">
+          <code><b>parallel</b>(<b>par</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Inserts the new deformer in a parallel chain to any existing deformers in
+the history of the object. A blendShape is inserted to blend the parallel
+results together.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprune">
+          <code><b>prune</b>(<b>pr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Removes any points not being deformed by the deformer in
+its current configuration from the deformer set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>remove</b>(<b>rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that objects listed after the -g flag should
+be removed from this deformer.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsampleSpace">
+          <code><b>sampleSpace</b>(<b>spa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Selects which space the attribute transfer is performed in.
+0 is world space, 1 is model space, 4 is component-based, 5 is topology-based. The default is world space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsearchMethod">
+          <code><b>searchMethod</b>(<b>sm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies which search method to use when correlating points.
+0 is closest along normal, 3 is closest to point. The default is closest to point.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsearchScaleX">
+          <code><b>searchScaleX</b>(<b>ssx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies an optional scale that should be applied to the x-axis
+of the target model before transferring data. A value of 1.0 (the
+default) means no scaling; a value of -1.0 would indicate mirroring
+along the x-axis.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsearchScaleY">
+          <code><b>searchScaleY</b>(<b>ssy</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies an optional scale that should be applied to the y-axis
+of the target model before transferring data. A value of 1.0 (the
+default) means no scaling; a value of -1.0 would indicate mirroring
+along the y-axis.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsearchScaleZ">
+          <code><b>searchScaleZ</b>(<b>ssz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies an optional scale that should be applied to the z-axis
+of the target model before transferring data. A value of 1.0 (the
+default) means no scaling; a value of -1.0 would indicate mirroring
+along the z-axis.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsourceColorSet">
+          <code><b>sourceColorSet</b>(<b>scs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of a single color set on the source surface(s) that
+should be transferred to the target. This value is only used when
+the operation is configured to transfer a single color set (see the
+transferColors flag).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsourceUvSet">
+          <code><b>sourceUvSet</b>(<b>suv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of a single UV set on the source surface(s) that
+should be transferred to the target. This value is only used when
+the operation is configured to transfer a single UV set (see the
+transferUVs flag).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsourceUvSpace">
+          <code><b>sourceUvSpace</b>(<b>sus</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the UV set on the source surface(s) that
+should be used as the transfer space. This value is only used when
+the operation is configured to transfer attributes in UV space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsplit">
+          <code><b>split</b>(<b>sp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Branches off a new chain in the dependency graph instead
+of inserting/appending the deformer into/onto an
+existing chain.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtargetColorSet">
+          <code><b>targetColorSet</b>(<b>tcs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of a single color set on the target surface that
+should be receive the sampled color data. This value is only used when
+the operation is configured to transfer a single color set (see the
+transferColors flag).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtargetUvSet">
+          <code><b>targetUvSet</b>(<b>tuv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of a single UV set on the target surface that
+should be receive the sampled UV data. This value is only used when
+the operation is configured to transfer a single UV set (see the
+transferUVs flag).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtargetUvSpace">
+          <code><b>targetUvSpace</b>(<b>tus</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the UV set on the target surface( that
+should be used as the transfer space. This value is only used when
+the operation is configured to transfer attributes in UV space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransferColors">
+          <code><b>transferColors</b>(<b>col</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Controls color set transfer. 0 means no color sets are transferred,
+1 means that a single color set (specified by sourceColorSet and targetColorSet)
+is transferred, and 2 means that all color sets are transferred.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransferNormals">
+          <code><b>transferNormals</b>(<b>nml</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A non-zero value indicates vertex normals should be sampled
+and written into user normals on the target surface.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransferPositions">
+          <code><b>transferPositions</b>(<b>pos</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A non-zero value indicates vertex position should be sampled,
+causing the target surface to &quot;wrap&quot; to the source surface(s).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransferUVs">
+          <code><b>transferUVs</b>(<b>uvs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Controls UV set transfer. 0 means no UV sets are transferred,
+1 means that a single UV set (specified by sourceUVSet and targetUVSet)
+is transferred, and 2 means that all UV sets are transferred.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Transfer all UV and color sets from pCube1 onto pSphere1
+cmds.transferAttributes( 'pCube1', 'pSphere1', transferUVs=2, transferColors=2 )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

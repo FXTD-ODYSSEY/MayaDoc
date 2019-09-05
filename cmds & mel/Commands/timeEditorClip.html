@@ -1,0 +1,3334 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>timeEditorClip command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-timeEditorClip"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/timeEditorClip.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>timeEditorClip </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("timeEditorClip.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>timeEditorClip [-<a href="#flagabsolute">absolute</a>] [-<a href="#flagaddAttribute">addAttribute</a> <i>string</i>] [-<a href="#flagaddObjects">addObjects</a> <i>string</i>] [-<a href="#flagaddRelatedKG">addRelatedKG</a> <i>boolean</i>] [-<a href="#flagaddSelectedObjects">addSelectedObjects</a>] [-<a href="#flagallowShrinking">allowShrinking</a>] [-<a href="#flaganimSource">animSource</a> <i>string</i>] [-<a href="#flagattribute">attribute</a> <i>string</i>] [-<a href="#flagaudio">audio</a> <i>string</i>] [-<a href="#flagchildren">children</a> <i>int</i>] [-<a href="#flagclipAfter">clipAfter</a>] [-<a href="#flagclipBefore">clipBefore</a>] [-<a href="#flagclipDataType">clipDataType</a>] [-<a href="#flagclipId">clipId</a> <i>int</i>] [-<a href="#flagclipIdFromNodeName">clipIdFromNodeName</a> <i>int</i>] [-<a href="#flagclipIdFromPath">clipIdFromPath</a>] [-<a href="#flagclipNode">clipNode</a>] [-<a href="#flagclipPath">clipPath</a>] [-<a href="#flagcopyClip">copyClip</a>] [-<a href="#flagcrossfadeMode">crossfadeMode</a> <i>int</i>] [-<a href="#flagcrossfadePlug">crossfadePlug</a>] [-<a href="#flagcurveTime">curveTime</a> <i>time</i>] [-<a href="#flagdefaultGhostRoot">defaultGhostRoot</a> <i>boolean</i>] [-<a href="#flagdrivenAttributes">drivenAttributes</a>] [-<a href="#flagdrivenClipsBySource">drivenClipsBySource</a> <i>string</i>] [-<a href="#flagdrivenObjects">drivenObjects</a>] [-<a href="#flagdrivenRootObjects">drivenRootObjects</a>] [-<a href="#flagdrivingSources">drivingSources</a> <i>string</i>] [-<a href="#flagduplicateClip">duplicateClip</a>] [-<a href="#flagduration">duration</a> <i>time</i>] [-<a href="#flagemptySource">emptySource</a>] [-<a href="#flagendTime">endTime</a> <i>time</i>] [-<a href="#flagexclusive">exclusive</a>] [-<a href="#flagexistingOnly">existingOnly</a>] [-<a href="#flagexists">exists</a>] [-<a href="#flagexplode">explode</a> <i>int</i>] [-<a href="#flagexportAllClips">exportAllClips</a>] [-<a href="#flagexportFbx">exportFbx</a> <i>string</i>] [-<a href="#flagextend">extend</a>] [-<a href="#flagextendParent">extendParent</a>] [-<a href="#flagghost">ghost</a> <i>boolean</i>] [-<a href="#flagghostRootAdd">ghostRootAdd</a> <i>string</i>] [-<a href="#flagghostRootRemove">ghostRootRemove</a> <i>string</i>] [-<a href="#flaggroup">group</a>] [-<a href="#flagholdEnd">holdEnd</a> <i>time</i>] [-<a href="#flagholdStart">holdStart</a> <i>time</i>] [-<a href="#flagimportAllFbxTakes">importAllFbxTakes</a>] [-<a href="#flagimportFbx">importFbx</a> <i>string</i>] [-<a href="#flagimportFbxTakes">importFbxTakes</a> <i>string</i>] [-<a href="#flagimportMayaFile">importMayaFile</a> <i>string</i>] [-<a href="#flagimportOption">importOption</a> <i>string</i>] [-<a href="#flagimportPopulateOption">importPopulateOption</a> <i>string</i>] [-<a href="#flagimportTakeDestination">importTakeDestination</a> <i>int</i>] [-<a href="#flagimportedContainerNames">importedContainerNames</a> <i>string</i>] [-<a href="#flagincludeRoot">includeRoot</a>] [-<a href="#flagisContainer">isContainer</a>] [-<a href="#flaglistUserGhostRoot">listUserGhostRoot</a>] [-<a href="#flagloopEnd">loopEnd</a> <i>time</i>] [-<a href="#flagloopStart">loopStart</a> <i>time</i>] [-<a href="#flagminClipDuration">minClipDuration</a>] [-<a href="#flagmodifyAnimSource">modifyAnimSource</a> <i>boolean</i>] [-<a href="#flagmoveClip">moveClip</a> <i>time</i>] [-<a href="#flagmute">mute</a> <i>boolean</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagparent">parent</a> <i>int</i>] [-<a href="#flagparentClipId">parentClipId</a> <i>int</i>] [-<a href="#flagparentGroupId">parentGroupId</a>] [-<a href="#flagpasteClip">pasteClip</a> <i>time</i>] [-<a href="#flagpath">path</a> <i>string</i>] [-<a href="#flagpopulateImportedAnimSources">populateImportedAnimSources</a> <i>string</i>] [-<a href="#flagposeClip">poseClip</a> <i>boolean</i>] [-<a href="#flagpreserveAnimationTiming">preserveAnimationTiming</a>] [-<a href="#flagrazorClip">razorClip</a> <i>time</i>] [-<a href="#flagrecursively">recursively</a>] [-<a href="#flagremap">remap</a> <i>string string</i>] [-<a href="#flagremapSource">remapSource</a> <i>string string</i>] [-<a href="#flagremappedSourceAttrs">remappedSourceAttrs</a>] [-<a href="#flagremappedTargetAttrs">remappedTargetAttrs</a>] [-<a href="#flagremoveAttribute">removeAttribute</a> <i>string</i>] [-<a href="#flagremoveClip">removeClip</a>] [-<a href="#flagremoveCrossfade">removeCrossfade</a>] [-<a href="#flagremoveSceneAnimation">removeSceneAnimation</a> <i>boolean</i>] [-<a href="#flagremoveWeightCurve">removeWeightCurve</a>] [-<a href="#flagresetTiming">resetTiming</a>] [-<a href="#flagresetTransition">resetTransition</a>] [-<a href="#flagripple">ripple</a>] [-<a href="#flagrootClipId">rootClipId</a> <i>int</i>] [-<a href="#flagrootPath">rootPath</a> <i>string</i>] [-<a href="#flagscaleEnd">scaleEnd</a> <i>time</i>] [-<a href="#flagscalePivot">scalePivot</a> <i>time</i>] [-<a href="#flagscaleStart">scaleStart</a> <i>time</i>] [-<a href="#flagsetKeyframe">setKeyframe</a> <i>string</i>] [-<a href="#flagshowAnimSourceRemapping">showAnimSourceRemapping</a>] [-<a href="#flagspeedRamping">speedRamping</a> <i>int</i>] [-<a href="#flagstartTime">startTime</a> <i>time</i>] [-<a href="#flagtakeList">takeList</a> <i>string</i>] [-<a href="#flagtakesToImport">takesToImport</a> <i>string</i>] [-<a href="#flagtimeWarp">timeWarp</a>] [-<a href="#flagtimeWarpCurve">timeWarpCurve</a>] [-<a href="#flagtimeWarpType">timeWarpType</a> <i>int</i>] [-<a href="#flagtrack">track</a> <i>string</i>] [-<a href="#flagtracksNode">tracksNode</a>] [-<a href="#flagtransition">transition</a>] [-<a href="#flagtrimEnd">trimEnd</a> <i>time</i>] [-<a href="#flagtrimStart">trimStart</a> <i>time</i>] [-<a href="#flagtruncated">truncated</a>] [-<a href="#flagtype">type</a> <i>string</i>] [-<a href="#flaguniqueAnimSource">uniqueAnimSource</a>] [-<a href="#flaguserGhostRoot">userGhostRoot</a> <i>boolean</i>] [-<a href="#flagweightCurve">weightCurve</a>] [-<a href="#flagzeroKeying">zeroKeying</a>]  </code> </p>
+      <p>timeEditorClip is undoable, queryable, and editable.</p>
+      This command edits/queries Time Editor clips.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Return created clip's name.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>timeEditor, nle
+      <h2><a name="hRelated">Related</a></h2><a href="timeEditor.html">timeEditor</a>, <a href="timeEditorAnimSource.html">timeEditorAnimSource</a>, <a href="timeEditorComposition.html">timeEditorComposition</a>, <a href="timeEditorTracks.html">timeEditorTracks</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagabsolute">absolute</a>, <a href="#flagaddAttribute">addAttribute</a>, <a href="#flagaddObjects">addObjects</a>, <a href="#flagaddRelatedKG">addRelatedKG</a>, <a href="#flagaddSelectedObjects">addSelectedObjects</a>, <a href="#flagallowShrinking">allowShrinking</a>, <a href="#flaganimSource">animSource</a>, <a href="#flagattribute">attribute</a>, <a href="#flagaudio">audio</a>, <a href="#flagchildren">children</a>, <a href="#flagclipAfter">clipAfter</a>, <a href="#flagclipBefore">clipBefore</a>, <a href="#flagclipDataType">clipDataType</a>, <a href="#flagclipId">clipId</a>, <a href="#flagclipIdFromNodeName">clipIdFromNodeName</a>, <a href="#flagclipIdFromPath">clipIdFromPath</a>, <a href="#flagclipNode">clipNode</a>, <a href="#flagclipPath">clipPath</a>, <a href="#flagcopyClip">copyClip</a>, <a href="#flagcrossfadeMode">crossfadeMode</a>, <a href="#flagcrossfadePlug">crossfadePlug</a>, <a href="#flagcurveTime">curveTime</a>, <a href="#flagdefaultGhostRoot">defaultGhostRoot</a>, <a href="#flagdrivenAttributes">drivenAttributes</a>, <a href="#flagdrivenClipsBySource">drivenClipsBySource</a>, <a href="#flagdrivenObjects">drivenObjects</a>, <a href="#flagdrivenRootObjects">drivenRootObjects</a>, <a href="#flagdrivingSources">drivingSources</a>, <a href="#flagduplicateClip">duplicateClip</a>, <a href="#flagduration">duration</a>, <a href="#flagemptySource">emptySource</a>, <a href="#flagendTime">endTime</a>, <a href="#flagexclusive">exclusive</a>, <a href="#flagexistingOnly">existingOnly</a>, <a href="#flagexists">exists</a>, <a href="#flagexplode">explode</a>, <a href="#flagexportAllClips">exportAllClips</a>, <a href="#flagexportFbx">exportFbx</a>, <a href="#flagextend">extend</a>, <a href="#flagextendParent">extendParent</a>, <a href="#flagghost">ghost</a>, <a href="#flagghostRootAdd">ghostRootAdd</a>, <a href="#flagghostRootRemove">ghostRootRemove</a>, <a href="#flaggroup">group</a>, <a href="#flagholdEnd">holdEnd</a>, <a href="#flagholdStart">holdStart</a>, <a href="#flagimportAllFbxTakes">importAllFbxTakes</a>, <a href="#flagimportFbx">importFbx</a>, <a href="#flagimportFbxTakes">importFbxTakes</a>, <a href="#flagimportMayaFile">importMayaFile</a>, <a href="#flagimportOption">importOption</a>, <a href="#flagimportPopulateOption">importPopulateOption</a>, <a href="#flagimportTakeDestination">importTakeDestination</a>, <a href="#flagimportedContainerNames">importedContainerNames</a>, <a href="#flagincludeRoot">includeRoot</a>, <a href="#flagisContainer">isContainer</a>, <a href="#flaglistUserGhostRoot">listUserGhostRoot</a>, <a href="#flagloopEnd">loopEnd</a>, <a href="#flagloopStart">loopStart</a>, <a href="#flagminClipDuration">minClipDuration</a>, <a href="#flagmodifyAnimSource">modifyAnimSource</a>, <a href="#flagmoveClip">moveClip</a>, <a href="#flagmute">mute</a>, <a href="#flagname">name</a>, <a href="#flagparent">parent</a>, <a href="#flagparentClipId">parentClipId</a>, <a href="#flagparentGroupId">parentGroupId</a>, <a href="#flagpasteClip">pasteClip</a>, <a href="#flagpath">path</a>, <a href="#flagpopulateImportedAnimSources">populateImportedAnimSources</a>, <a href="#flagposeClip">poseClip</a>, <a href="#flagpreserveAnimationTiming">preserveAnimationTiming</a>, <a href="#flagrazorClip">razorClip</a>, <a href="#flagrecursively">recursively</a>, <a href="#flagremap">remap</a>, <a href="#flagremapSource">remapSource</a>, <a href="#flagremappedSourceAttrs">remappedSourceAttrs</a>, <a href="#flagremappedTargetAttrs">remappedTargetAttrs</a>, <a href="#flagremoveAttribute">removeAttribute</a>, <a href="#flagremoveClip">removeClip</a>, <a href="#flagremoveCrossfade">removeCrossfade</a>, <a href="#flagremoveSceneAnimation">removeSceneAnimation</a>, <a href="#flagremoveWeightCurve">removeWeightCurve</a>, <a href="#flagresetTiming">resetTiming</a>, <a href="#flagresetTransition">resetTransition</a>, <a href="#flagripple">ripple</a>, <a href="#flagrootClipId">rootClipId</a>, <a href="#flagrootPath">rootPath</a>, <a href="#flagscaleEnd">scaleEnd</a>, <a href="#flagscalePivot">scalePivot</a>, <a href="#flagscaleStart">scaleStart</a>, <a href="#flagsetKeyframe">setKeyframe</a>, <a href="#flagshowAnimSourceRemapping">showAnimSourceRemapping</a>, <a href="#flagspeedRamping">speedRamping</a>, <a href="#flagstartTime">startTime</a>, <a href="#flagtakeList">takeList</a>, <a href="#flagtakesToImport">takesToImport</a>, <a href="#flagtimeWarp">timeWarp</a>, <a href="#flagtimeWarpCurve">timeWarpCurve</a>, <a href="#flagtimeWarpType">timeWarpType</a>, <a href="#flagtrack">track</a>, <a href="#flagtracksNode">tracksNode</a>, <a href="#flagtransition">transition</a>, <a href="#flagtrimEnd">trimEnd</a>, <a href="#flagtrimStart">trimStart</a>, <a href="#flagtruncated">truncated</a>, <a href="#flagtype">type</a>, <a href="#flaguniqueAnimSource">uniqueAnimSource</a>, <a href="#flaguserGhostRoot">userGhostRoot</a>, <a href="#flagweightCurve">weightCurve</a>, <a href="#flagzeroKeying">zeroKeying</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagabsolute">
+          <code><b>-absolute</b>(<b>-abs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used in conjunction with other timing flags like <i>-s/start</i>, <i>-d/duration</i>, <i>-ed/end</i>, etc.
+to query (global) absolute time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddAttribute">
+          <code><b>-addAttribute</b>(<b>-aa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add new attribute to the clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallowShrinking">
+          <code><b>-allowShrinking</b>(<b>-eas</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When extending clip, allow shrinking.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaganimSource">
+          <code><b>-animSource</b>(<b>-asr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Populate based on animation source.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaudio">
+          <code><b>-audio</b>(<b>-au</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create a clip with audio inside.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchildren">
+          <code><b>-children</b>(<b>-chl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get children clip IDs.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipAfter">
+          <code><b>-clipAfter</b>(<b>-ca</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get the clip ID of the next clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipBefore">
+          <code><b>-clipBefore</b>(<b>-cb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get the clip ID of the previous clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipDataType">
+          <code><b>-clipDataType</b>(<b>-cdt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the type of data being driven by the given clip ID.
+Return values are:
+<ul>
+<li>0 : Animation       - Clip drives animation curves</li>
+<li>1 : Audio           - Clip drives audio</li>
+<li>3 : Group           - Clip is a group</li>
+</ul>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipId">
+          <code><b>-clipId</b>(<b>-id</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+ID of the clip to be edited.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipIdFromNodeName">
+          <code><b>-clipIdFromNodeName</b>(<b>-idn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get clip ID from clip node name.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipIdFromPath">
+          <code><b>-clipIdFromPath</b>(<b>-idp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Flag for querying the clip ID given the path. Clip path is a vertical-bar-delimited string to indicate
+a hierarchical structure of a clip. Please refer to the hierarchical path in outliner to see how it is represented.
+For example: composition1|track1|clip1
+Note: To specify the path, this flag must appear before -query flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipNode">
+          <code><b>-clipNode</b>(<b>-cln</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Flag for querying the name of the clip node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipPath">
+          <code><b>-clipPath</b>(<b>-clp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Flag for querying the path given the clip ID. Clip path is a vertical bar delimited string to indicate
+a hierarchical structure of a clip. Please refer to the hierarchical path in outliner to see how it is represented.
+For example: composition1|track1|clip1.
+Note: If the clip is not connected to any track, it will return empty string.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopyClip">
+          <code><b>-copyClip</b>(<b>-ccl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get the selected clip IDs and store them in a list that could be used for pasting.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcrossfadeMode">
+          <code><b>-crossfadeMode</b>(<b>-cfm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the crossfading mode between two clips that lie on the same track, and that are specified with the -clipId flags:
+<ul>
+<li>0 : linear          - Two clips are blended with a constant ratio</li>
+<li>1 : step            - Left clip keeps its value until the middle of the crossfading region and then right clip's value is used</li>
+<li>2 : hold left       - Use only left clip's value</li>
+<li>3 : hold right      - Use only right clip's value</li>
+<li>4 : custom          - User defined crossfade curve</li>
+<li>5 : custom (spline) - User defined crossfade curve with spline preset</li>
+</ul>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcrossfadePlug">
+          <code><b>-crossfadePlug</b>(<b>-cfp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get plug path for a custom crossfade curve between 2 clips.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurveTime">
+          <code><b>-curveTime</b>(<b>-cvt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the curve local time in relation to the given clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefaultGhostRoot">
+          <code><b>-defaultGhostRoot</b>(<b>-dgr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Edit or query default ghost root variable.
+Determine whether to use the default ghost root (object driven by clip).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdrivenAttributes">
+          <code><b>-drivenAttributes</b>(<b>-dat</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return a list of attributes driven by a clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdrivenClipsBySource">
+          <code><b>-drivenClipsBySource</b>(<b>-dcs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the clips driven by the given source. Can filter the return result by the specified type, like animCurve, expression, constraint, etc.
+This flag must come before the -query flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdrivenObjects">
+          <code><b>-drivenObjects</b>(<b>-dos</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return an array of strings consisting of the names of all objects driven by the current clip and its children clips.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdrivenRootObjects">
+          <code><b>-drivenRootObjects</b>(<b>-dro</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return an array of strings consisting of the names of all root objects driven by this clip and its children clips.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdrivingSources">
+          <code><b>-drivingSources</b>(<b>-dsc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return all sources driving the given clip. Can filter the return result by the specified type, like animCurve, expression, constraint, etc.
+If used after the -query flag (without an argument), the command returns all sources driving the given clip.
+To specify the type, this flag must appear before the -query flag.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagduplicateClip">
+          <code><b>-duplicateClip</b>(<b>-dcl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Duplicate clip into two clips with the same timing info.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagduration">
+          <code><b>-duration</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Relative duration of the new clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagemptySource">
+          <code><b>-emptySource</b>(<b>-ems</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create a clip with an empty source.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendTime">
+          <code><b>-endTime</b>(<b>-et</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the relative end time of the clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexistingOnly">
+          <code><b>-existingOnly</b>(<b>-exo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used in edit mode, in conjunction with the animSource flag. Retain the animSource flag functionality but
+only bind attributes that are already part of the clip. It does not attempt to populate unbound
+source attributes to their default destination.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>-exists</b>(<b>-exs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return true if the specified clip exists.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexplode">
+          <code><b>-explode</b>(<b>-epl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Reparent all tracks and their clips within a group out to its parent track node and remove the group.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportAllClips">
+          <code><b>-exportAllClips</b>(<b>-eac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with the <i>ef/exportFbx</i> flag, export all clips.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportFbx">
+          <code><b>-exportFbx</b>(<b>-ef</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export currently selected clips to FBX files.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagextend">
+          <code><b>-extend</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Extend the clip to encompass all children.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagextendParent">
+          <code><b>-extendParent</b>(<b>-exp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Extend parent to fit this clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagghost">
+          <code><b>-ghost</b>(<b>-gh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Enable/disable ghosting for the specified clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagghostRootAdd">
+          <code><b>-ghostRootAdd</b>(<b>-gra</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add path to specified node as a custom ghost root.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagghostRootRemove">
+          <code><b>-ghostRootRemove</b>(<b>-grr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove path to specified node as a custom ghost root.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggroup">
+          <code><b>-group</b>(<b>-grp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify if the new container should be created as a group, containing other specified clips.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagholdEnd">
+          <code><b>-holdEnd</b>(<b>-he</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Hold clip's end to time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagholdStart">
+          <code><b>-holdStart</b>(<b>-hs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Hold clip's start to time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportTakeDestination">
+          <code><b>-importTakeDestination</b>(<b>-itd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify how to organize imported FBX takes:
+0 - Import takes into a group (default)
+1 - Import takes into multiple compositions
+2 - Import takes as a sequence of clips
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisContainer">
+          <code><b>-isContainer</b>(<b>-ict</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicate if given clip ID is a container.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistUserGhostRoot">
+          <code><b>-listUserGhostRoot</b>(<b>-lug</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get user defined ghost root object for indicated clips.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagloopEnd">
+          <code><b>-loopEnd</b>(<b>-le</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Loop clip's end to time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagloopStart">
+          <code><b>-loopStart</b>(<b>-ls</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Loop clip's start to time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminClipDuration">
+          <code><b>-minClipDuration</b>(<b>-mcd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the minimum allowed clip duration.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmodifyAnimSource">
+          <code><b>-modifyAnimSource</b>(<b>-mas</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When populating, automatically modify Anim Source without asking the user.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmoveClip">
+          <code><b>-moveClip</b>(<b>-mcl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Move clip by adding delta to its start time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmute">
+          <code><b>-mute</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Mute/Unmute the clip given a clip ID. In query mode, return the muted state of the clip. Clips muted by soloing are not affected by this flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the clip. A clip will never have an empty name.
+If an empty string is provided, it will be replaced with &quot;_&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparent">
+          <code><b>-parent</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify group/object parent ID.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparentClipId">
+          <code><b>-parentClipId</b>(<b>-pid</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the parent clip ID of a clip to be created.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparentGroupId">
+          <code><b>-parentGroupId</b>(<b>-pgd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the parent group ID of the given clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpasteClip">
+          <code><b>-pasteClip</b>(<b>-pcl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Paste clip to the given time and track. Destination track is required to be specified through the track flag in the format &quot;tracksNode:trackIndex&quot;.
+A trackIndex of -1 indicates that a new track will be created.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpath">
+          <code><b>-path</b>(<b>-pt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Full path of the clip to be edited. For example: composition1|track1|clip1.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreserveAnimationTiming">
+          <code><b>-preserveAnimationTiming</b>(<b>-pat</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with the population command, it ensures the animation is offset within a clip in such way that it matches its original scene timing, regardless of the new clip's position.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrazorClip">
+          <code><b>-razorClip</b>(<b>-rcl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Razor clip into two clips at the specified time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremap">
+          <code><b>-remap</b>(<b>-rmp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Change animation source for a given clip item to a new one, specified by the target path.
+This removes all clips for the roster item and creates new clips from the Anim Source for the new target path.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremapSource">
+          <code><b>-remapSource</b>(<b>-rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set animation source to be remapped for a given clip item to new one, specified by the target path.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremappedSourceAttrs">
+          <code><b>-remappedSourceAttrs</b>(<b>-rms</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return an array of attribute indices and names of the source attributes of a remapped clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremappedTargetAttrs">
+          <code><b>-remappedTargetAttrs</b>(<b>-rmt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return an array of attribute indices and names of the target attributes of a remapped clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveAttribute">
+          <code><b>-removeAttribute</b>(<b>-ra</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove attribute from the clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveClip">
+          <code><b>-removeClip</b>(<b>-rmc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove clip of specified ID.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveCrossfade">
+          <code><b>-removeCrossfade</b>(<b>-rcf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove custom crossfade between two clips specified by -clipId flags.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveWeightCurve">
+          <code><b>-removeWeightCurve</b>(<b>-rwc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the weight curve connected to the clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresetTiming">
+          <code><b>-resetTiming</b>(<b>-rt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Reset start and duration of a clip with the given clip ID to the values stored in its Anim Source.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresetTransition">
+          <code><b>-resetTransition</b>(<b>-rtr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Reset transition intervals between specified clips.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagripple">
+          <code><b>-ripple</b>(<b>-rpl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Apply rippling to a clip operation.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrootClipId">
+          <code><b>-rootClipId</b>(<b>-rti</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+ID of the root clip. It is used together with various clip editing flags. When used, the effect of clip editing and its parameters will be affected by the given root clip.
+For example, moving a clip under the group root (usually in group tab view) will be performed in the local time space of the group root.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrootPath">
+          <code><b>-rootPath</b>(<b>-rpt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Path of the root clip. It is used together with various clip editing flags. When used, the effect of clip editing and its parameters will be affected by the given root clip.
+For example, moving a clip under the group root (usually in group tab view) will be performed in the local time space of the group root.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscaleEnd">
+          <code><b>-scaleEnd</b>(<b>-sce</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Scale the end time of the clip to the given time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscalePivot">
+          <code><b>-scalePivot</b>(<b>-scp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Scale the time of the clip based on the pivot. This should be used together with <i>-scs/scaleStart</i> or <i>-sce/scaleEnd</i>.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscaleStart">
+          <code><b>-scaleStart</b>(<b>-scs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Scale the start time of the clip to the given time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsetKeyframe">
+          <code><b>-setKeyframe</b>(<b>-k</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set keyframe on a specific clip for a specified attribute.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagspeedRamping">
+          <code><b>-speedRamping</b>(<b>-src</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+To control the playback speed of the clip by animation curve:
+<ul>
+<li>1 : create - Attach a speed curve and a time warp curve to the clip to control the playback speed</li>
+<li>2 : edit - Open the Graph editor to edit the speed curve</li>
+<li>3 : enable - Create a time warp curve from current speed curve and attach to clip</li>
+<li>4 : disable - Remove the time warp curve from clip</li>
+<li>5 : delete - Delete the attached speed curve and time warp curve</li>
+<li>6 : reset - Reset the speed curve back to the default</li>
+<li>7 : convert to speed curve from time warp</li>
+<li>8 : convert to time warp from speed curve</li>
+</ul>
+In query mode, return true if a speed curve is attached to the clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstartTime">
+          <code><b>-startTime</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Relative start time of the new clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtimeWarp">
+          <code><b>-timeWarp</b>(<b>-tw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return true if the clip is being warped by the speed curve. If no speed curve is attached to the clip, it will always return false.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtimeWarpCurve">
+          <code><b>-timeWarpCurve</b>(<b>-twc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the name of the time warp curve connected to the clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtimeWarpType">
+          <code><b>-timeWarpType</b>(<b>-twt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Time warp mode:
+<ul>
+<li>0: remapping - Connected time warp curve performs frame by frame remapping</li>
+<li>1: speed curve - Connected time warp curve acts as a speed curve</li>
+</ul>
+In query mode, return time warp mode of a clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrack">
+          <code><b>-track</b>(<b>-trk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The new clip container will be created on the track in the format &quot;trackNode:trackNumber&quot;, or on a track path, for example &quot;composition1|track1&quot;.
+In query mode, return a string containing the track number and tracks node of the given clip ID.
+In create mode, if the track number is '-1' or not given at all, then a new track will be created. For example: &quot;trackNode:-1&quot;; &quot;composition1|&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtracksNode">
+          <code><b>-tracksNode</b>(<b>-trn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get tracks node if specified clip is a group clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransition">
+          <code><b>-transition</b>(<b>-tra</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create transition intervals between specified clips.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrimEnd">
+          <code><b>-trimEnd</b>(<b>-tre</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Trim the end time of the clip to the given time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrimStart">
+          <code><b>-trimStart</b>(<b>-trs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Trim the start time of the clip to the given time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtruncated">
+          <code><b>-truncated</b>(<b>-trc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used in conjunction with other timing flags like <i>-s/start</i>, <i>-d/duration</i>, <i>-ed/end</i>, etc.
+to query (global) truncated time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguniqueAnimSource">
+          <code><b>-uniqueAnimSource</b>(<b>-uas</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If a given clip is sharing its Anim Source node with another clip, make the Anim Source of this clip unique.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguserGhostRoot">
+          <code><b>-userGhostRoot</b>(<b>-ugr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Edit or query custom ghost root variable.
+Determine whether to use user defined ghost root.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweightCurve">
+          <code><b>-weightCurve</b>(<b>-wc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In edit mode, create a weight curve and connect it to the clip.
+In query mode, return the name of the weight curve connected to the clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagzeroKeying">
+          <code><b>-zeroKeying</b>(<b>-zk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A toggle flag to use in conjunction with <i>k/setKeyframe</i>, set the value of the key frame(s) to be keyed to zero.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddObjects">
+          <code><b>-addObjects</b>(<b>-ao</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Populate the given object(s) and their attributes to anim source to Time Editor. For multiple object, pass each name separated by semicolon.
+In query mode, return the number of attributes that will be populated given the flags, along with the animation's first and last frames for the given object(s).
+Similar to <i>-addSelectedObjects</i> flag but acts on given object(s) instead.
+This flag will override the flag <i>-addSelectedObjects</i>.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddRelatedKG">
+          <code><b>-addRelatedKG</b>(<b>-akg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+During population, determine if associated keying groups should be populated
+or not. Normally used for populating HIK. By default the value is false.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddSelectedObjects">
+          <code><b>-addSelectedObjects</b>(<b>-aso</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Populate the currently selected objects and their attributes to anim source or Time Editor.
+In query mode, return the number of attributes that will be populated given the flags, along with the animation's first and last frames.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattribute">
+          <code><b>-attribute</b>(<b>-at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Populate a specific attribute on a object.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexclusive">
+          <code><b>-exclusive</b>(<b>-exc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Populate all types of animation sources which are not listed by &quot;type&quot; Flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportAllFbxTakes">
+          <code><b>-importAllFbxTakes</b>(<b>-aft</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Import all FBX takes into the new anim sources (for timeEditorAnimSource command) or new containers (for timeEditorClip command).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportFbx">
+          <code><b>-importFbx</b>(<b>-fbx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Import an animation from FBX file into the new anim source (for timeEditorAnimSource command) or new container (for timeEditorClip command).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportFbxTakes">
+          <code><b>-importFbxTakes</b>(<b>-ft</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Import multiple FBX takes (separated by semicolons) into the new anim sources (for timeEditorAnimSource command) or new containers (for timeEditorClip command).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportMayaFile">
+          <code><b>-importMayaFile</b>(<b>-mf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Import an animation from Maya file into the new anim sources (for timeEditorAnimSource command) or new containers (for timeEditorClip command).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportOption">
+          <code><b>-importOption</b>(<b>-io</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Option for importing animation source. Specify either 'connect' or 'generate'.
+connect:  Only connect with nodes already existing in the scene.
+                  Importing an animation source that does not match with any element
+                  of the current scene will not create any clip.
+                  (connect is the default mode).
+generate: Import everything and generate new nodes for items not existing in the scene.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportPopulateOption">
+          <code><b>-importPopulateOption</b>(<b>-ipo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Option for population when importing.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportedContainerNames">
+          <code><b>-importedContainerNames</b>(<b>-icn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Internal use only. To be used along with <i>populateImportedAnimSources</i> to specify names for the created containers.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeRoot">
+          <code><b>-includeRoot</b>(<b>-irt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Populate transform (Translate, Rotate, Scale) of hierarchy root nodes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpopulateImportedAnimSources">
+          <code><b>-populateImportedAnimSources</b>(<b>-pia</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Internal use only. Populate the Time Editor with clips using the Animation Sources specified (use ; as a delimiter for multiple anim sources).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagposeClip">
+          <code><b>-poseClip</b>(<b>-poc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Populate as pose clip with current attribute values.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrecursively">
+          <code><b>-recursively</b>(<b>-rec</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Populate selection recursively, adding all the children.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveSceneAnimation">
+          <code><b>-removeSceneAnimation</b>(<b>-rsa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, remove animation from scene when creating clips or anim sources. Only Time Editor will drive the removed scene animation.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshowAnimSourceRemapping">
+          <code><b>-showAnimSourceRemapping</b>(<b>-sar</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show a remapping dialog when the imported anim source attributes do not match the scene attributes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtakeList">
+          <code><b>-takeList</b>(<b>-tl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Internal use only. To be used along with <i>populateImportedAnimSources</i> to specify the imported take names.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtakesToImport">
+          <code><b>-takesToImport</b>(<b>-toi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Internal use only. To be used along with <i>populateImportedAnimSources</i> to specify the imported take indices.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>-type</b>(<b>-typ</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Only populate the specified type of animation source.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// Move clips 1 and 2
+timeEditorClip -e -moveClip 20 -clipId 1 -clipId 2;
+
+// Create new container clip on track 4 of Container_A tracks
+timeEditorClip -track &quot;Container_A_Tracks:4&quot; ClipNodeName;
+
+// Create new container clip on track path
+timeEditorClip -track &quot;composition1|track1&quot; ClipNodeName;
+
+// Populate selected objects with attributes driven by specific types of animation sources
+timeEditorClip -addSelectedObjects -type animCurveTL -type animCurveTA -track &quot;Composition1:1&quot; &quot;teClip1&quot;;
+
+// Populate selected objects and their associated keying groups (normally used for populating complete HIK rig)
+timeEditorClip -addSelectedObjects -addRelatedKG true  -track &quot;Composition1:1&quot; &quot;teClip1&quot;;
+
+// Populate selected objects into a newly created container
+timeEditorClip -track &quot;Container_A_Tracks:0&quot; -addSelectedObjects &quot;ContainerName&quot;;
+
+// Move a container(s) to a different track
+// The &quot;New_Track:2&quot; has the same format as when creating a new clip,
+// where &quot;New_Track&quot; is the TimeEditor &quot;Tracks node&quot; and &quot;2&quot; is the track index in that node.
+// A &quot;Tracks&quot; node maintains a list of tracks at a given level in the TimeEditor hierarchy
+// and is either a composition or a group clip.
+timeEditorClip -e -track &quot;New_Track:2&quot; -clipId 1 -clipId 2 -clipId 3;
+
+// Move a container(s) to a different track by clip path
+timeEditorClip -e -track &quot;composition1|track1&quot; -path &quot;composition1|track2|clip1&quot; -path &quot;composition1|track2|clip2&quot; -path &quot;composition1|track2|clip3&quot;;
+
+// Create a group from specified containers
+timeEditorClip -track &quot;New_Track:1&quot; -group -clipId 1 -clipId 2 -clipId 3 &quot;GroupName&quot;;
+
+// Import animation from selected object into the TimeEditor.
+timeEditorClip -aso -track &quot;composition1|track1&quot; &quot;container_A&quot;
+
+// Return the Anim Source for a given clip ID 1
+timeEditorClip -q -animSource 1;
+
+// Create a clip from an Anim Source starting at frame 30 into track2 of composition1
+timeEditorClip -track &quot;composition1|track2&quot; -animSource &quot;someAnimSourceName&quot; -startTime 30 &quot;Container_B&quot;;
+
+// Return the start time of the clip with clip ID 1
+timeEditorClip -q -startTime -absolute 1;
+
+// Return the duration of the clip with clip ID 1
+timeEditorClip -q -duration -absolute 1;
+
+// Remap cube 1 translate X attribute to cube 1 translate Y attribute
+timeEditorClip -e -remapSource cube1.translateY cube1.translateX -clipId 1;
+timeEditorClip -e -animSource AnimSourceName -clipId 1;
+
+// Setup the crossfading mode between 2 clips to linear
+timeEditorClip -e -crossfadeMode -1 -clipId 1 -clipId 2;
+
+// Remove clips with clip ID 1 and 2.
+timeEditorClip -e -removeClip -clipId 1 -clipId 2;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

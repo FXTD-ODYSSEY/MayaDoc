@@ -1,0 +1,540 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>dgInfo command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-dgInfo"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/dgInfo.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>dgInfo </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Utilities" target="contentFrame">Utilities</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("dgInfo.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>dgInfo [-<a href="#flagallNodes">allNodes</a>] [-<a href="#flagconnections">connections</a>] [-<a href="#flagdirty">dirty</a> <i>boolean</i>] [-<a href="#flagnodes">nodes</a>] [-<a href="#flagnonDeletable">nonDeletable</a>] [-<a href="#flagoutputFile">outputFile</a> <i>string</i>] [-<a href="#flagpropagation">propagation</a> <i>boolean</i>] [-<a href="#flagshort">short</a>] [-<a href="#flagsize">size</a>] [-<a href="#flagsubgraph">subgraph</a>] [-<a href="#flagtype">type</a> <i>string</i>]  </code> </p>
+      <p>dgInfo is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command prints information about the DG in plain text.
+The scope of the information printed is the entire graph
+if the <i>all</i> flag is used, the nodes/plugs on the command line if
+they were specified, and the selection list, in that order.
+Each plug on a connection will have two pieces of state information
+displayed together at the end of the line on which they are printed.
+There are two possible values for each of the two states displayed.
+The values are updated when the DG pulls data across them, usually
+through evaluation, or pushes a dirty message through them. There
+are some subtleties in how the data is pulled through the connection
+but for simplicity it will be referred to as &quot;evaluation&quot;.
+The values displayed will be CLEAN or DIRTY followed by PROP or BLOCK.
+The first keyword has these meanings:
+<ol>
+<li><b>CLEAN</b> means that evaluation of the plug's connection
+succeeded and no dirty messages have come through it since then.
+It also implies that the destination end of the connection has
+received the value from the source end.
+</li>
+<li><b>DIRTY</b> means that a dirty message has passed through the
+plug's connection since the last time an evaluation was made on the
+destination side of that connection.
+</li>
+</ol>
+Note: the data on the node has its own dirty state that depends
+on other factors so having a clean connection doesn't necessarily
+mean the plug's data is clean, and vice versa.
+The second keyword has these meanings:
+<ol>
+<li><b>PROP</b> means that the connection will allow dirty messages
+to pass through and forwards them to all destinations.
+</li>
+<li><b>BLOCK</b> means that a dirty message will stop at this connection
+and not continue on to any destinations. This is an optimization that
+prevents excessive dirty flag propagation when many values are changing,
+for example, a frame change in an animated sequece.
+</li>
+</ol>
+The combination <b>CLEAN BLOCK</b> should never be seen in a valid DG.
+This indicates that while the plug connection has been evaluated since
+the last dirty message it will not propagate any new dirty messages
+coming in to it. That in turn means downstream nodes will not be
+notified that the graph is changing and they will not evaluate properly.
+Recovering from this invalid state requires entering the command
+<i>dgdirty -a</i> to mark everything dirty and restart proper evaluation.
+Think of this command as the reset/reboot of the DG world.
+Both state types behave differently depending on your connection type.
+<ol>
+<li><b>Simple</b> <i>A -&gt; B</i> : Plugs at both ends of the connection
+share the same state information. The state information updates when an
+evaluation request comes to A from B, or a dirty message is sent from
+A to B.
+</li>
+<li><b>Fan-Out</b> <i>A -&gt; B</i>, <i>A -&gt; C</i> : Each of A, B, and
+C have their own unique state information. B and C behave as described above.
+A has its state information linked to B and C - it will have <b>CLEAN</b>
+only when both B and C have <b>CLEAN</b>, it will have <b>BLOCK</b> only
+when both B and C have <b>BLOCK</b>.
+</li>
+<li><b>In-Out</b> <i>A -&gt; B</i>, <i>C -&gt; A</i> : Each of A, B, and
+C have their own unique state information. B and C behave as described above.
+A has its state information linked to B and C. The <b>CLEAN|DIRTY</b> flag
+looks backwards, then forwards:
+<pre>
+if( C == CLEAN ) A = CLEAN
+else if( B == CLEAN ) A = CLEAN
+</pre>
+The <b>BLOCK</b> state is set when a dirty message passes through A, and
+the <b>PROP</b> state is set either when A is set clean or an evaluation
+passes through A.
+</li>
+</ol>
+There are some other exceptions to these rules:
+<ol>
+<li>
+All of this state change information only applies to dirty messages and
+evaluations that use the normal context. Any changes in other contexts,
+for example, through the <i>getAttr -t TIME</i> command, does not affect the
+state in the connections.
+</li>
+<li>
+Param curves and other passive inputs, for example blend nodes coming from
+param curves, will not disable propagation. Doing so would make the keyframing
+workflow impossible.
+</li>
+<li>
+Certain messages can choose to completely ignore the connection state
+information. For example when a node's state attribute changes a connection
+may change to a blocking one so the message has to be propagated at least
+one step further to all of its destinations. This way they can update their
+information.
+</li>
+<li>
+Certain operations can globally disable the use of the propagaton state
+to reduce message flow.  The simplest example is when the evaluation
+manager is building its graph. It has to visit all nodes so the propagation
+cannot be blocked.
+</li>
+<li>
+The messaging system has safeguards against cyclic messages flowing through
+connections but sometimes a message bypasses the connection completely and
+goes directly to the node. DAG parents do this to send messages to their
+children. So despite connections into a node all having the <b>BLOCK</b>
+state it could still receive dirty messages.
+</li>
+</ol>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      <h2><a name="hKeywords">Keywords</a></h2>debug, dependency, graph, node, output, connection
+      <h2><a name="hRelated">Related</a></h2><a href="dbfootprint.html">dbfootprint</a>, <a href="dgdirty.html">dgdirty</a>, <a href="dgeval.html">dgeval</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallNodes">allNodes</a>, <a href="#flagconnections">connections</a>, <a href="#flagdirty">dirty</a>, <a href="#flagnodes">nodes</a>, <a href="#flagnonDeletable">nonDeletable</a>, <a href="#flagoutputFile">outputFile</a>, <a href="#flagpropagation">propagation</a>, <a href="#flagshort">short</a>, <a href="#flagsize">size</a>, <a href="#flagsubgraph">subgraph</a>, <a href="#flagtype">type</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallNodes">
+          <code><b>-allNodes</b>(<b>-all</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use the entire graph as the context
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconnections">
+          <code><b>-connections</b>(<b>-c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Print the connection information
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdirty">
+          <code><b>-dirty</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Only print dirty/clean nodes/plugs/connections.  Default is both
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodes">
+          <code><b>-nodes</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Print the specified nodes (or the entire graph if -all is used)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnonDeletable">
+          <code><b>-nonDeletable</b>(<b>-nd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Include non-deletable nodes as well (normally not of interest)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoutputFile">
+          <code><b>-outputFile</b>(<b>-of</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Send the output to the file FILE instead of STDERR
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpropagation">
+          <code><b>-propagation</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Only print propagating/not propagating nodes/plugs/connections.
+Default is both.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshort">
+          <code><b>-short</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Print using short format instead of long
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsize">
+          <code><b>-size</b>(<b>-sz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show datablock sizes for all specified nodes. Return value is tuple of
+all selected nodes (NumberOfNodes, NumberOfDatablocks, TotalDatablockMemory)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsubgraph">
+          <code><b>-subgraph</b>(<b>-sub</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Print the subgraph affected by the node or plugs (or all nodes
+in the graph grouped in subgraphs if -all is used)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>-type</b>(<b>-nt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Filter output to only show nodes of type NODETYPE
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// create a node
+createNode -n NODE transform;
+setKeyframe NODE.translate;
+
+// Print all things connected to node NODE
+dgInfo -c NODE;
+
+// Print all connections currently in the graph
+dgInfo -c -all;
+
+// Print the datablock size of all nodes currently in the graph
+dgInfo -sz -all;
+// Return: 12 12 12314 //
+
+// Print all connections to attribute tx on node NODE
+dgInfo -c NODE.tx
+
+// Print all dirty connections in the entire graph
+dgInfo -c -all -d on;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

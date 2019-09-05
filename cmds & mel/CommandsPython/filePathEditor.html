@@ -1,0 +1,997 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>filePathEditor command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-filePathEditor"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/filePathEditor.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>filePathEditor </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("filePathEditor.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>filePathEditor([<a href="#flagattributeOnly">attributeOnly</a>=<i>boolean</i>], [<a href="#flagattributeType">attributeType</a>=<i>string</i>], [<a href="#flagbyType">byType</a>=<i>string</i>], [<a href="#flagcopyAndRepath">copyAndRepath</a>=<i>[string, string]</i>], [<a href="#flagderegisterType">deregisterType</a>=<i>string</i>], [<a href="#flagforce">force</a>=<i>boolean</i>], [<a href="#flaglistDirectories">listDirectories</a>=<i>string</i>], [<a href="#flaglistFiles">listFiles</a>=<i>string</i>], [<a href="#flaglistRegisteredTypes">listRegisteredTypes</a>=<i>boolean</i>], [<a href="#flagpreview">preview</a>=<i>boolean</i>], [<a href="#flagrecursive">recursive</a>=<i>boolean</i>], [<a href="#flagrefresh">refresh</a>=<i>boolean</i>], [<a href="#flagregisterType">registerType</a>=<i>string</i>], [<a href="#flagrelativeNames">relativeNames</a>=<i>boolean</i>], [<a href="#flagrepath">repath</a>=<i>string</i>], [<a href="#flagreplaceAll">replaceAll</a>=<i>boolean</i>], [<a href="#flagreplaceField">replaceField</a>=<i>string</i>], [<a href="#flagreplaceString">replaceString</a>=<i>[string, string]</i>], [<a href="#flagstatus">status</a>=<i>boolean</i>], [<a href="#flagtemporary">temporary</a>=<i>boolean</i>], [<a href="#flagtypeLabel">typeLabel</a>=<i>string</i>], [<a href="#flagunresolved">unresolved</a>=<i>boolean</i>], [<a href="#flagwithAttribute">withAttribute</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>filePathEditor is undoable, queryable, and <b>NOT editable</b>.</p>
+      <p>
+Maya can reference and use external files, such as textures or other Maya
+scenes. This command is used to get the information about those file paths and
+modify them in bulk.
+By default, only the most frequently used types of files are presented to the
+user:
+
+<ul>
+<li>Texture</li>
+<li>Scene reference</li>
+<li>Audio</li>
+<li>Image plane</li>
+</ul>
+<p>
+For the command to manage more file types, those must be explicitly requested by
+the caller using the &quot;registerType&quot; flag. This flag tells the command about
+attributes or nodes that are to reveal their paths when the command is used.
+
+<p>
+Currently, the attributes specified through this flag must have the
+&quot;usedAsFileName&quot; property. Supported nodes are &quot;reference&quot; and plug-in nodes.
+For example: &quot;brush.flowerImage&quot; or &quot;reference&quot; can be used as value for this
+flag.
+
+<p>
+Conversely, the &quot;deregisterType&quot; flag can be used to tell the command to stop
+handling certain attributes or nodes.
+
+<p>
+Once the set of attributes and nodes to be searched for external files is
+selected, the command can be used to obtain a list of plugs that contain file
+names. Additional information can be obtained, such as each file's name,
+directory, and report whether the file exists. Additional information about the
+associated node or plug can also be obtained, such as its name, type and label.
+
+<p>
+Finally, the command can be used to perform various manipulations such as
+editing the paths, remapping the files or verifying the presence of
+identically-named files in target directories. See the &quot;repath&quot;,
+&quot;copyAndRepath&quot; and &quot;replaceField&quot; flags for more information.
+
+<p>
+The results of these manipulations can be previewed before they are applied
+using the &quot;preview&quot; flag.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>filepath, editor, repath
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagattributeOnly">attributeOnly</a>, <a href="#flagattributeType">attributeType</a>, <a href="#flagbyType">byType</a>, <a href="#flagcopyAndRepath">copyAndRepath</a>, <a href="#flagderegisterType">deregisterType</a>, <a href="#flagforce">force</a>, <a href="#flaglistDirectories">listDirectories</a>, <a href="#flaglistFiles">listFiles</a>, <a href="#flaglistRegisteredTypes">listRegisteredTypes</a>, <a href="#flagpreview">preview</a>, <a href="#flagrecursive">recursive</a>, <a href="#flagrefresh">refresh</a>, <a href="#flagregisterType">registerType</a>, <a href="#flagrelativeNames">relativeNames</a>, <a href="#flagrepath">repath</a>, <a href="#flagreplaceAll">replaceAll</a>, <a href="#flagreplaceField">replaceField</a>, <a href="#flagreplaceString">replaceString</a>, <a href="#flagstatus">status</a>, <a href="#flagtemporary">temporary</a>, <a href="#flagtypeLabel">typeLabel</a>, <a href="#flagunresolved">unresolved</a>, <a href="#flagwithAttribute">withAttribute</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattributeOnly">
+          <code><b>attributeOnly</b>(<b>ao</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;listFiles&quot; to return the node and attribute name that
+are using the files.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattributeType">
+          <code><b>attributeType</b>(<b>at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the attribute type for the specified plug.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbyType">
+          <code><b>byType</b>(<b>bt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;listFiles&quot; to query files that are
+used by the specified node type or attribute type.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopyAndRepath">
+          <code><b>copyAndRepath</b>(<b>cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Copy a source file to the destination path and repath the plug data to the new
+file.
+The source file must have the same name as the one in the plug.
+The command will look for the file at the specified location first. If not
+found, the command will try to use the original file in the plug.
+If the file is still not found, nothing is done.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagderegisterType">
+          <code><b>deregisterType</b>(<b>dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Deregister a file type from the list of registered types so the command stops
+handling it.
+Unless the &quot;temporary&quot; flag is used, the type will be removed from the
+preferences will not reappear on application restart. When the &quot;temporary&quot; flag
+is specified, the deregistration is only effective for the current session.
+The deregistration will be rejected if the type has already been unregistered.
+However, it is valid to deregister permanently (without the &quot;temporary&quot; flag)
+a type after it has been temporarily deregistered.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforce">
+          <code><b>force</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with flag &quot;repath&quot; to repath all files to the new location, including
+the resolved files. Otherwise, &quot;repath&quot; will only deal with the missing files.
+Used with flag &quot;copyAndRepath&quot; to overwrite any colliding file at the
+destination. Otherwise, &quot;copyAndRepath&quot; will use the existing file at the
+destination instead of overwriting it.
+The default value is off.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistDirectories">
+          <code><b>listDirectories</b>(<b>ld</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all sub directories of the specified directory.  Only directories
+containing at least one file whose type is registered (see &quot;registerType&quot;) will
+be listed.
+If no directory is provided, all directories applicable to the scene will be
+returned.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistFiles">
+          <code><b>listFiles</b>(<b>lf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List files in the specified directory. No recursion in subdirectories will be
+performed.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistRegisteredTypes">
+          <code><b>listRegisteredTypes</b>(<b>lrt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the list of registered attribute types. The registered types include
+the auto-loaded types from the preference file and the types explicitly
+registered by the user, both with and without the &quot;temporary&quot; flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreview">
+          <code><b>preview</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;repath&quot;, &quot;replaceString&quot; or &quot;copyAndRepath&quot; to preview the result of
+the operation instead of excuting it.
+When it is used with &quot;repath&quot; or &quot;replaceString&quot;, the command returns the new
+file path and a status flag indicating whether the new file exists (1) or not
+(0).
+The path name and the file status are listed in pairs.
+When it is used with &quot;copyAndRepath&quot;, the command returns the files that need
+copying.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrecursive">
+          <code><b>recursive</b>(<b>rc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with flag &quot;repath&quot; to search the files in the target directory and its
+subdirectories recursively. If the flag is on, the command will repath the plug
+to a file that has the same name in the target directory or sub directories.
+If the flag is off, the command will apply the directory change without
+verifying that the resulting file exists.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrefresh">
+          <code><b>refresh</b>(<b>rf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clear and re-collect the file information in the scene.
+The command does not automatically track file path modifications in the scene.
+So it is the users responsibility to cause refreshes in order to get up-to-date
+information.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagregisterType">
+          <code><b>registerType</b>(<b>rt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Register a new file type that the command will handle and recognize from now on.
+Unless the &quot;temporary&quot; flag is used, the registered type is saved in the
+preferences and reappears on application restart.
+The new type will be rejected if it collides with an existing type or label.
+One exception to this is when registering a type without the &quot;temporary&quot; flag
+after the type has been registered with it. This is considered as modifying
+the persistent/temporary property of the existing type, rather than registering
+a new type.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelativeNames">
+          <code><b>relativeNames</b>(<b>rel</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;listDirectories&quot; or &quot;listFiles&quot; to return the relative path
+of each directory or file.  Paths are relative to the current project
+folder.
+If a file or the directory is not under the current project folder,
+the returned path will still be a full path.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrepath">
+          <code><b>repath</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Replace the directory part of a file path with a specified location.
+The file name will be preserved.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceAll">
+          <code><b>replaceAll</b>(<b>ra</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with flag &quot;replaceString&quot;, specifies how many times the matched string will
+be replaced. When the flag is false, only the first matched string will be
+replaced. Otherwise, all matched strings will be replaced.
+The default value is false.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceField">
+          <code><b>replaceField</b>(<b>rfd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the &quot;replaceString&quot; flag to control the scope of the replacement.
+Possible values are:
+&quot;pathOnly&quot; - only replace strings in the directory part.
+&quot;nameOnly&quot; - only replace strings in the file name, without the directory.
+&quot;fullPath&quot; - replace strings anywhere in the full name.
+The default argument is &quot;fullPath&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceString">
+          <code><b>replaceString</b>(<b>rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Replace the target string with the new string in the file paths.
+The flag needs two arguments: the first one is the target string and the second
+one is the new string.
+See the &quot;replaceField&quot; and &quot;replaceAll&quot; flags to control how the replacement is
+performed.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstatus">
+          <code><b>status</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;listFiles&quot;, this will cause the returned list of files to include
+one status flag per file: 0 if it cannot be resolved and 1 if it can.
+Used with &quot;listDirectories&quot;, this will cause the returned list of directories to
+include one status flag per directory: 0 if it cannot be resolved, 1 if it can
+and 2 if the resolution is partial.
+The status will be interleaved with the file/directory names, with the name
+appearing first. See the example for &quot;listFiles&quot;.  See the &quot;withAttribute&quot; flag
+for another way of getting per-file information.  When multiple per-entry items
+appear in the list (e.g.: plug name), the status is always last.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtemporary">
+          <code><b>temporary</b>(<b>tmp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Make the effect of the &quot;register&quot;/&quot;deregister&quot; flag only applicable in the
+current session.
+Normally, a type registration/deregistration is permanent and is made persistent
+via a preference file. When the &quot;temporary&quot; flag is specified, the changes will
+not be saved to the preference file. When the application restarts, any type
+that has been previously temporarily registered will not appear and any type
+that was temporarily deregistered will re-appear.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtypeLabel">
+          <code><b>typeLabel</b>(<b>tl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;registerType&quot; to set the label name for the new file type.
+Used with &quot;query&quot; to return the type label for the specified attribute type.
+For default types, the type label is the localized string.
+For other types, the type label is supplied by user.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunresolved">
+          <code><b>unresolved</b>(<b>u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;listFiles&quot; to query the unresolved files
+that are being used in the scene.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwithAttribute">
+          <code><b>withAttribute</b>(<b>wa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;listFiles&quot; to return the name of the plug using a given file.
+For example, if &quot;file.jpg&quot; is used by the plug &quot;node1.fileTextureName&quot;,
+then the returned string will become the pair
+&quot;file.jpg node1.fileTextureName&quot;.  See the &quot;status&quot; flag for another
+way to get per-file information.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+
+#Return the directories of the external files in the Maya scene.
+#
+cmds.filePathEditor(query=True, listDirectories=&quot;&quot;)
+
+#Return the directories of the external files that are saved at the target
+#location.
+#
+cmds.filePathEditor(query=True, listDirectories=&quot;c:/textures/&quot;, status=True)
+
+#Return the files present in the specified directory, but not including the
+#files in the sub directories.If no specified directory, search all external
+#files in the scene.
+#
+#Use &quot;withAttribute&quot; to return the associated plugs.
+#
+#Use &quot;status&quot; to return whether the file exists.
+#
+#Use &quot;unresolved&quot; to return the broken files only.
+#
+#Use &quot;attributeOnly&quot; to return node and attribute name only.
+#
+#Use &quot;byType&quot; to specify the node and attribute type.
+#
+#For example, if &quot;stone.jpg&quot; exists and it is used by the plug
+#&quot;node1.imageName&quot;, then the returned result will be an ordered pair:
+#&quot;stone.jpg node1.imageName 1&quot;.
+#
+cmds.filePathEditor(query=True, listFiles=&quot;c:/textures/&quot;, withAttribute=True, status=True)
+#
+#If &quot;rock.jpg&quot; does not exists and it is used by the plug
+#&quot;node1.imageName&quot;, then this broken file and its plug
+#can be found by the command.
+#
+cmds.filePathEditor(query=True, listFiles=&quot;&quot;, unresolved=True, withAttribute=True)
+#Result: [u'rock.jpg', u'node1.imageName']
+#
+#List files that are used in the specified attribute of imagePlane
+#
+cmds.filePathEditor(query=True, listFiles=&quot;&quot;, byType=&quot;imagePlane.imageName&quot;)
+#
+#List all files that are used in the imagePlane node
+#
+cmds.filePathEditor(query=True, listFiles=&quot;&quot;, byType=&quot;imagePlane&quot;)
+#
+#Get all nodes or attributes that are using broken files to repath them
+#
+cmds.filePathEditor(query=True, listFiles=&quot;&quot;, unresolved=True, attributeOnly=True)
+#
+#Get the imagePlane file attributes that are using broken files to repath them
+#
+cmds.filePathEditor(query=True, listFiles=&quot;&quot;, unresolved=True, attributeOnly=True, byType=&quot;imagePlane.imageName&quot;)
+
+#Return the label for the specified type.
+#
+#Strings are only guaranteed to be localized for the default types. For the
+#other types, the strings are user-specified.
+#
+cmds.filePathEditor(query=True, typeLabel=&quot;imagePlane&quot;)
+
+#Register and save a new file type and type label.
+#
+#These are persistent and can be used in future sessions.
+#
+cmds.filePathEditor(registerType=&quot;containerBase.iconName&quot;, typeLabel=&quot;ContainerIcon&quot;)
+
+#Deregister a file type and clean the saved information.
+#
+cmds.filePathEditor(deregisterType=&quot;containerBase.iconName&quot;)
+
+#Register a new non-persistent file type and type label.
+#
+cmds.filePathEditor(registerType=&quot;containerBase.iconName&quot;, typeLabel=&quot;ContainerIcon&quot;, temporary=True)
+
+#Deregister a file type without affecting the persistent information.
+#
+cmds.filePathEditor(deregisterType=&quot;containerBase.iconName&quot;, temporary=True)
+
+#Return all registered types, including default types.
+#
+cmds.filePathEditor(query=True, listRegisteredTypes=True)
+
+#Query the attribute type for a plug instance.
+#
+cmds.filePathEditor(&quot;node1.fileTextureName&quot;, query=True, attributeType=True)
+
+#Refresh all the file path editor's information for the current scene.
+#
+cmds.filePathEditor(refresh=True)
+
+#Recursively look for files with the same name in the target directory. Repath
+#the plugs value to those files.
+#
+#Use &quot;force&quot; to edit all the given plugs, even if the original path does not
+#exist.
+#
+#Use &quot;recursive&quot; to find files recursively and to make sure the files do exist.
+#
+cmds.filePathEditor(&quot;node1.fileTextureName&quot;, &quot;node2.fileTextureName&quot;, repath=&quot;e:/textures/&quot;,
+						force=True, recursive=True)
+
+#Preview the result of an operation without doing it.
+#
+#Returns the file name and whether the new file exists. This is returned as a
+#list of pairs.
+#
+cmds.filePathEditor(&quot;node1.fileTextureName&quot;, &quot;node2.fileTextureName&quot;, repath=&quot;e:/textures/&quot;, preview=True)
+
+#Replace strings in file paths.
+#
+#Here, the string &quot;image&quot; in the directory part will be replaced by &quot;texture&quot;.
+#
+cmds.filePathEditor(&quot;node1.fileTextureName&quot;, &quot;node2.fileTextureName&quot;, replaceField=&quot;pathOnly&quot;, replaceString=(&quot;image&quot;, &quot;texture&quot;), replaceAll=True)
+
+#Copy a file from the source to the destination and repath the plug data to the new file.
+#
+#Use &quot;force&quot; to overwrite the file at the destination if it has a name clash.
+#
+cmds.filePathEditor(&quot;node1.fileTextureName&quot;, &quot;node2.fileTextureName&quot;,  copyAndRepath=(&quot;e:/textures&quot;, &quot;g:/image&quot;), force=True)
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,790 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>pathAnimation command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-pathAnimation"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/pathAnimation.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>pathAnimation </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("pathAnimation.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>pathAnimation [-<a href="#flagbank">bank</a> <i>boolean</i>] [-<a href="#flagbankScale">bankScale</a> <i>float</i>] [-<a href="#flagbankThreshold">bankThreshold</a> <i>angle</i>] [-<a href="#flagcurve">curve</a> <i>string</i>] [-<a href="#flagendTimeU">endTimeU</a> <i>time</i>] [-<a href="#flagendU">endU</a> <i>float</i>] [-<a href="#flagfollow">follow</a> <i>boolean</i>] [-<a href="#flagfollowAxis">followAxis</a> <i>string</i>] [-<a href="#flagfractionMode">fractionMode</a> <i>boolean</i>] [-<a href="#flaginverseFront">inverseFront</a> <i>boolean</i>] [-<a href="#flaginverseUp">inverseUp</a> <i>boolean</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagstartTimeU">startTimeU</a> <i>time</i>] [-<a href="#flagstartU">startU</a> <i>float</i>] [-<a href="#flagupAxis">upAxis</a> <i>string</i>] [-<a href="#flaguseNormal">useNormal</a> <i>boolean</i>] [-<a href="#flagworldUpObject">worldUpObject</a> <i>name</i>] [-<a href="#flagworldUpType">worldUpType</a> <i>string</i>] [-<a href="#flagworldUpVector">worldUpVector</a> <i>float float float</i>] 
+[objects]
+     </code> </p>
+      <p>pathAnimation is undoable, queryable, and editable.</p>
+      The pathAnimation command constructs the necessary graph nodes
+and their interconnections for a motion path animation. Motion path
+animation requires a curve and one or more other objects.
+During the animation, the objects will be moved along the 3D curve
+or the curveOnSurface.<p>
+<p>
+There are two ways to specify the moving objects:
+<ol>
+<li> by explicitly specifying their names in the command line, or</li>
+<li> by making the objects selected (interactively, or through a
+MEL command).</li>
+</ol>
+<p>
+Likewise, there are two ways to specify a motion curve:
+<ol>
+<li> by explicitly specifying the name of the motion curve
+in the command line (i.e. using the -c curve_name option), or</li>
+<li> by selecting the moving objects first before selecting the
+motion curve. I.e. if the name of the motion curve is not
+provided in the command line, the curve will be taken to be the
+last selected object in the selection list.</li>
+</ol>
+<p>
+When the end time is not specified: only one keyframe
+will be created either at the current time, or at the specified
+start time.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>(name of the created motionPath node)</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagbank">bank</a>, <a href="#flagbankScale">bankScale</a>, <a href="#flagbankThreshold">bankThreshold</a>, <a href="#flagcurve">curve</a>, <a href="#flagendTimeU">endTimeU</a>, <a href="#flagendU">endU</a>, <a href="#flagfollow">follow</a>, <a href="#flagfollowAxis">followAxis</a>, <a href="#flagfractionMode">fractionMode</a>, <a href="#flaginverseFront">inverseFront</a>, <a href="#flaginverseUp">inverseUp</a>, <a href="#flagname">name</a>, <a href="#flagstartTimeU">startTimeU</a>, <a href="#flagstartU">startU</a>, <a href="#flagupAxis">upAxis</a>, <a href="#flaguseNormal">useNormal</a>, <a href="#flagworldUpObject">worldUpObject</a>, <a href="#flagworldUpType">worldUpType</a>, <a href="#flagworldUpVector">worldUpVector</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbank">
+          <code><b>-bank</b>(<b>-b</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If on, enable alignment of the up axis of the moving
+object(s) to the curvature of the path geometry.<br>
+Default is false.<br>
+When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbankScale">
+          <code><b>-bankScale</b>(<b>-bs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies a factor to scale the amount of
+bank angle.<br>
+Default is 1.0<br>
+When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbankThreshold">
+          <code><b>-bankThreshold</b>(<b>-bt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the limit of the bank angle.<br>
+Default is 90 degrees<br>
+When queried, this flag returns an <i>angle</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurve">
+          <code><b>-curve</b>(<b>-c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the name of the curve for the path.<br>
+Default is NONE<br>
+When queried, this flag returns a <i>string</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendTimeU">
+          <code><b>-endTimeU</b>(<b>-etu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the ending time of the animation
+for the u parameter.<br>
+Default is NONE.<br>
+When queried, this flag returns a <i>time</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendU">
+          <code><b>-endU</b>(<b>-eu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the ending value of the u
+parameterization for the animation.<br>
+Default is the end parameterization value of the curve.<br>
+When queried, this flag returns a <i>linear</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfollow">
+          <code><b>-follow</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If on, enable alignment of the front axis of the moving object(s).<br>
+Default is false.<br>
+When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfollowAxis">
+          <code><b>-followAxis</b>(<b>-fa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies which object local axis to be
+aligned to the tangent of the path curve.<br>
+Default is y<br>
+When queried, this flag returns a <i>string</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfractionMode">
+          <code><b>-fractionMode</b>(<b>-fm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If on, evaluation on the path is based on the fraction
+of length of the path curve.<br>
+Default is false.<br>
+When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginverseFront">
+          <code><b>-inverseFront</b>(<b>-if</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies whether or not to align
+the front axis of the moving object(s) to the opposite direction
+of the tangent vector of the path geometry.<br>
+Default is false.<br>
+When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginverseUp">
+          <code><b>-inverseUp</b>(<b>-iu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies whether or not to align
+the up axis of the moving object(s) to the opposite direction
+of the normal vector of the path geometry.<br>
+Default is false.<br>
+When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the name for the new motion path node.
+(instead of the default name)<br>
+When queried, this flag returns a <i>string</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstartTimeU">
+          <code><b>-startTimeU</b>(<b>-stu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the starting time of the animation
+for the u parameter.<br>
+Default is the the current time.<br>
+When queried, this flag returns a <i>time</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstartU">
+          <code><b>-startU</b>(<b>-su</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the starting value of the u
+parameterization for the animation.<br>
+Default is the start parameterization value of the curve.<br>
+When queried, this flag returns a <i>linear</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupAxis">
+          <code><b>-upAxis</b>(<b>-ua</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies which object local axis to be
+aligned a computed up direction.<br>
+Default is z<br>
+When queried, this flag returns a <i>string</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseNormal">
+          <code><b>-useNormal</b>(<b>-un</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is now obsolete. Use -wut/worldUpType instead.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldUpObject">
+          <code><b>-worldUpObject</b>(<b>-wuo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the DAG object to use for worldUpType &quot;object&quot; and
+&quot;objectrotation&quot;. See -wut/worldUpType for greater detail.
+The default value is no up object, which is interpreted
+as world space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldUpType">
+          <code><b>-worldUpType</b>(<b>-wut</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the type of the world up vector computation.
+The worldUpType can have one of 5 values: &quot;scene&quot;,
+&quot;object&quot;, &quot;objectrotation&quot;, &quot;vector&quot;, or &quot;normal&quot;.
+If the value is &quot;scene&quot;, the upVector is
+aligned with the up axis of the scene and
+worldUpVector and worldUpObject are ignored.
+If the value is &quot;object&quot;, the upVector is
+aimed as closely as possible to the
+origin of the space of the worldUpObject and
+the worldUpVector is ignored.
+If the value is &quot;objectrotation&quot; then the
+worldUpVector is interpreted as being in
+the coordinate space of the worldUpObject, transformed into
+world space and the upVector is aligned as
+closely as possible to the result.
+If the value is &quot;vector&quot;, the upVector
+is aligned with worldUpVector as closely as
+possible and worldUpObject is ignored.
+Finally, if the value is &quot;normal&quot; the upVector is aligned to
+the path geometry.
+The default worldUpType is &quot;vector&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldUpVector">
+          <code><b>-worldUpVector</b>(<b>-wu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set world up vector.  This is the vector in world
+coordinates that up vector should align with.
+See -wut/worldUpType for greater detail.
+If not given at creation time, the default
+value of (0.0, 1.0, 0.0) is used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Create a set of simple objects for the motion path animation
+
+// create a path, e,g, a curve
+string $path = `curve -d 3 -p -10 0 0 -p -6 0 10 -p -3 0 -10 -p 10 0 0 -k 0 -k 0 -k 0  -k 1 -k 1 -k 1`;
+
+// create an object, e.g. a sphere
+string $object[] = `sphere -ch off -axis 0 1 0`;
+scale 0.5 2.0 0.2;
+
+// 1. To animate the sphere along the curve, with one keyframe at
+// the current time:
+
+       pathAnimation -c $path $object[0];
+
+// or:
+
+       select $object[0] $path;
+       pathAnimation;
+
+// 2. To animate the sphere along the curve, from time 0 to time 30:
+
+       pathAnimation -stu 0 -etu 30 -c $path $object[0];
+
+// 3. To align the sphere to its path:
+
+       pathAnimation -stu 0 -etu 30 -follow on -c $path $object[0];
+
+// 4. To align the Z axis of sphere to the tangent of the curve, and
+// to align the Y axis of the sphere to the up direction of the
+// motion curve:
+
+       pathAnimation -stu 0 -etu 30 -fa z -ua y -c $path $object[0];
+
+// 5. To align the Z axis of sphere to the tangent of the motion curve,
+// to align the Y axis of sphere to the up direction of the motion
+// curve, and to bank with the curvature of the motion curve:
+
+       pathAnimation -stu 0 -etu 30 -fa z -ua y -bank on -c $path $object[0];
+
+// 6. To change the setting on the bankScale for the motionPath1
+// to negative 2.5 (i.e. bank out and multiply the computed
+// bank value by 2.5):
+
+       pathAnimation -edit -bankScale -2.5 motionPath1;
+
+// Notes:
+// If the computed bank angles are not large enough, the user can
+// specify the bankScale to amplify them. The default value is 1.
+
+// Positive bankScale produces inward bank angle,
+// negative bankScale produces outward bank angle.
+
+// The user can also change the maximum bank angle through
+// the bankThreshold option. Default value is 90 degrees.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

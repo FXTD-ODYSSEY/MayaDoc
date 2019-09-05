@@ -1,0 +1,1250 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>addAttr command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-addAttr"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/addAttr.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>addAttr </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("addAttr.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>addAttr([<a href="#flagattributeType">attributeType</a>=<i>string</i>], [<a href="#flagbinaryTag">binaryTag</a>=<i>string</i>], [<a href="#flagcachedInternally">cachedInternally</a>=<i>boolean</i>], [<a href="#flagcategory">category</a>=<i>string</i>], [<a href="#flagdataType">dataType</a>=<i>string</i>], [<a href="#flagdefaultValue">defaultValue</a>=<i>float</i>], [<a href="#flagdisconnectBehaviour">disconnectBehaviour</a>=<i>uint</i>], [<a href="#flagenumName">enumName</a>=<i>string</i>], [<a href="#flagexists">exists</a>=<i>boolean</i>], [<a href="#flagfromPlugin">fromPlugin</a>=<i>boolean</i>], [<a href="#flaghasMaxValue">hasMaxValue</a>=<i>boolean</i>], [<a href="#flaghasMinValue">hasMinValue</a>=<i>boolean</i>], [<a href="#flaghasSoftMaxValue">hasSoftMaxValue</a>=<i>boolean</i>], [<a href="#flaghasSoftMinValue">hasSoftMinValue</a>=<i>boolean</i>], [<a href="#flaghidden">hidden</a>=<i>boolean</i>], [<a href="#flagindexMatters">indexMatters</a>=<i>boolean</i>], [<a href="#flaginternalSet">internalSet</a>=<i>boolean</i>], [<a href="#flagkeyable">keyable</a>=<i>boolean</i>], [<a href="#flaglongName">longName</a>=<i>string</i>], [<a href="#flagmaxValue">maxValue</a>=<i>float</i>], [<a href="#flagminValue">minValue</a>=<i>float</i>], [<a href="#flagmulti">multi</a>=<i>boolean</i>], [<a href="#flagniceName">niceName</a>=<i>string</i>], [<a href="#flagnumberOfChildren">numberOfChildren</a>=<i>uint</i>], [<a href="#flagparent">parent</a>=<i>string</i>], [<a href="#flagproxy">proxy</a>=<i>string</i>], [<a href="#flagreadable">readable</a>=<i>boolean</i>], [<a href="#flagshortName">shortName</a>=<i>string</i>], [<a href="#flagsoftMaxValue">softMaxValue</a>=<i>float</i>], [<a href="#flagsoftMinValue">softMinValue</a>=<i>float</i>], [<a href="#flagstorable">storable</a>=<i>boolean</i>], [<a href="#flagusedAsColor">usedAsColor</a>=<i>boolean</i>], [<a href="#flagusedAsFilename">usedAsFilename</a>=<i>boolean</i>], [<a href="#flagusedAsProxy">usedAsProxy</a>=<i>boolean</i>], [<a href="#flagwritable">writable</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>addAttr is undoable, queryable, and editable.</p>
+      <p>
+This command is used to add a dynamic attribute to a node or nodes.
+Either the longName or the shortName or both must be specified.
+If neither a dataType nor an attributeType is specified, a double
+attribute will be added.  The dataType flag can be specified more than
+once indicating that any of the supplied types will be accepted (logical-or).
+
+<p>
+To add a non-double attribute the following criteria
+can be used to determine whether the dataType or the attributeType
+flag is appropriate.  Some types, such as <b>double3</b> can use either.
+In these cases the <i>-dt</i> flag should be used when you only wish to
+access the data as an atomic entity (eg. you never want to access the
+three individual values that make up a <b>double3</b>).  In general it
+is best to use the <i>-at</i> in these cases for maximum flexibility.
+In most cases the <i>-dt</i> version will not display in the attribute
+editor as it is an atomic type and you are not allowed to change
+individual parts of it.
+
+<p>
+All attributes flagged as &quot;(compound)&quot; below or the compound attribute itself
+are not actually added to the node until all of the children are defined
+(using the &quot;-p&quot; flag to set their parent to the compound being created).  See
+the EXAMPLES section for more details.
+
+<p>
+<table cellpadding="1">
+<tr><th> Type of attribute              </th><th> Flag and argument to use      </th></tr>
+<tr><td> boolean                                                </td><td> -at bool                      </td></tr>
+<tr><td> 32 bit integer                                 </td><td> -at long                      </td></tr>
+<tr><td> 16 bit integer                                 </td><td> -at short                     </td></tr>
+<tr><td> 8 bit integer                                  </td><td> -at byte                      </td></tr>
+<tr><td> char                                                   </td><td> -at char                      </td></tr>
+<tr> <td> enum                                                  </td><td> -at enum (specify the enum names using the enumName flag) </td> </tr>
+<tr><td> float                                                  </td><td> -at &quot;float&quot; (use quotes
+                                                                        since float is a mel keyword)   </td></tr>
+<tr><td> double                                                 </td><td> -at double            </td></tr>
+<tr><td> angle value                                    </td><td> -at doubleAngle       </td></tr>
+<tr><td> linear value                                   </td><td> -at doubleLinear      </td></tr>
+<tr><td> string                                                 </td><td> -dt &quot;string&quot; (use quotes
+                                                                        since string is a mel keyword)  </td></tr>
+<tr><td> array of strings                               </td><td> -dt stringArray       </td></tr>
+<tr><td> compound                                               </td><td> -at compound          </td></tr>
+<tr><td> message (no data)                              </td><td> -at message           </td></tr>
+<tr><td> time                                                   </td><td> -at time                      </td></tr>
+<tr><td> 4x4 double matrix                              </td><td> -dt &quot;matrix&quot; (use quotes
+                                                                        since matrix is a mel keyword)  </td></tr>
+<tr><td> 4x4 float matrix                               </td><td> -at fltMatrix         </td></tr>
+<tr><td> reflectance                                    </td><td> -dt reflectanceRGB</td></tr>
+<tr><td> reflectance (compound)                 </td><td> -at reflectance       </td></tr>
+<tr><td> spectrum                                               </td><td> -dt spectrumRGB       </td></tr>
+<tr><td> spectrum (compound)                    </td><td> -at spectrum          </td></tr>
+<tr><td> 2 floats                                               </td><td> -dt float2            </td></tr>
+<tr><td> 2 floats (compound)                    </td><td> -at float2            </td></tr>
+<tr><td> 3 floats                                               </td><td> -dt float3            </td></tr>
+<tr><td> 3 floats (compound)                    </td><td> -at float3            </td></tr>
+<tr><td> 2 doubles                                              </td><td> -dt double2           </td></tr>
+<tr><td> 2 doubles (compound)                   </td><td> -at double2           </td></tr>
+<tr><td> 3 doubles                                              </td><td> -dt double3           </td></tr>
+<tr><td> 3 doubles (compound)                   </td><td> -at double3           </td></tr>
+<tr><td> 2 32-bit integers                              </td><td> -dt long2                     </td></tr>
+<tr><td> 2 32-bit integers (compound)   </td><td> -at long2                     </td></tr>
+<tr><td> 3 32-bit integers                              </td><td> -dt long3                     </td></tr>
+<tr><td> 3 32-bit integers (compound)   </td><td> -at long3                     </td></tr>
+<tr><td> 2 16-bit integers                              </td><td> -dt short2            </td></tr>
+<tr><td> 2 16-bit integers (compound)   </td><td> -at short2            </td></tr>
+<tr><td> 3 16-bit integers                              </td><td> -dt short3            </td></tr>
+<tr><td> 3 16-bit integers (compound)   </td><td> -at short3            </td></tr>
+<tr><td> array of doubles                               </td><td> -dt doubleArray       </td></tr>
+<tr><td> array of floats                                </td><td> -dt floatArray        </td></tr>
+<tr><td> array of 32-bit ints                   </td><td> -dt Int32Array        </td></tr>
+<tr><td> array of vectors                               </td><td> -dt vectorArray       </td></tr>
+<tr><td> nurbs curve                                    </td><td> -dt nurbsCurve        </td></tr>
+<tr><td> nurbs surface                                  </td><td> -dt nurbsSurface      </td></tr>
+<tr><td> polygonal mesh                                 </td><td> -dt mesh                      </td></tr>
+<tr><td> lattice                                                </td><td> -dt lattice           </td></tr>
+<tr><td> array of double 4D points              </td><td> -dt pointArray        </td></tr>
+</table>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>attribute, dependency, graph, add, dynamic, create
+      <h2><a name="hRelated">Related</a></h2><a href="aliasAttr.html">aliasAttr</a>, <a href="attributeInfo.html">attributeInfo</a>, <a href="connectAttr.html">connectAttr</a>, <a href="deleteAttr.html">deleteAttr</a>, <a href="disconnectAttr.html">disconnectAttr</a>, <a href="getAttr.html">getAttr</a>, <a href="getClassification.html">getClassification</a>, <a href="nodeType.html">nodeType</a>, <a href="objExists.html">objExists</a>, <a href="objectType.html">objectType</a>, <a href="renameAttr.html">renameAttr</a>, <a href="setAttr.html">setAttr</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagattributeType">attributeType</a>, <a href="#flagbinaryTag">binaryTag</a>, <a href="#flagcachedInternally">cachedInternally</a>, <a href="#flagcategory">category</a>, <a href="#flagdataType">dataType</a>, <a href="#flagdefaultValue">defaultValue</a>, <a href="#flagdisconnectBehaviour">disconnectBehaviour</a>, <a href="#flagenumName">enumName</a>, <a href="#flagexists">exists</a>, <a href="#flagfromPlugin">fromPlugin</a>, <a href="#flaghasMaxValue">hasMaxValue</a>, <a href="#flaghasMinValue">hasMinValue</a>, <a href="#flaghasSoftMaxValue">hasSoftMaxValue</a>, <a href="#flaghasSoftMinValue">hasSoftMinValue</a>, <a href="#flaghidden">hidden</a>, <a href="#flagindexMatters">indexMatters</a>, <a href="#flaginternalSet">internalSet</a>, <a href="#flagkeyable">keyable</a>, <a href="#flaglongName">longName</a>, <a href="#flagmaxValue">maxValue</a>, <a href="#flagminValue">minValue</a>, <a href="#flagmulti">multi</a>, <a href="#flagniceName">niceName</a>, <a href="#flagnumberOfChildren">numberOfChildren</a>, <a href="#flagparent">parent</a>, <a href="#flagproxy">proxy</a>, <a href="#flagreadable">readable</a>, <a href="#flagshortName">shortName</a>, <a href="#flagsoftMaxValue">softMaxValue</a>, <a href="#flagsoftMinValue">softMinValue</a>, <a href="#flagstorable">storable</a>, <a href="#flagusedAsColor">usedAsColor</a>, <a href="#flagusedAsFilename">usedAsFilename</a>, <a href="#flagusedAsProxy">usedAsProxy</a>, <a href="#flagwritable">writable</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattributeType">
+          <code><b>attributeType</b>(<b>at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the attribute type, see above table for more details.
+Note that the attribute types &quot;float&quot;, &quot;matrix&quot; and &quot;string&quot;
+are also MEL keywords and must be enclosed in quotes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbinaryTag">
+          <code><b>binaryTag</b>(<b>bt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete and does not do anything any more
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcachedInternally">
+          <code><b>cachedInternally</b>(<b>ci</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Whether or not attribute data is cached internally in the node.
+This flag defaults to true for writable attributes and false
+for non-writable attributes. A warning will be issued if
+users attempt to force a writable attribute to be uncached as
+this will make it impossible to set keyframes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcategory">
+          <code><b>category</b>(<b>ct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+An attribute category is a string associated with the attribute to identify it.
+(e.g. the name of a plugin that created the attribute, version information, etc.)
+Any attribute can be associated with an arbitrary number of categories however
+categories can not be removed once associated.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdataType">
+          <code><b>dataType</b>(<b>dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the data type.  See &quot;setAttr&quot; for
+more information on data type names.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefaultValue">
+          <code><b>defaultValue</b>(<b>dv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the default value for the attribute
+(can only be used for numeric attributes).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisconnectBehaviour">
+          <code><b>disconnectBehaviour</b>(<b>dcb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+defines the Disconnect Behaviour 2 Nothing, 1 Reset, 0 Delete
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenumName">
+          <code><b>enumName</b>(<b>en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Flag used to specify the ui names corresponding to the enum values. The specified string should contain a colon-separated list of the names, with optional values. If values are not specified, they will treated as sequential integers starting with 0. For example: -enumName &quot;A:B:C&quot; would produce options: A,B,C with values of 0,1,2; -enumName &quot;zero:one:two:thousand=1000&quot; would produce four options with values 0,1,2,1000; and -enumName &quot;solo=1:triplet=3:quintet=5&quot; would produce three options with values 1,3,5.  (Note that there is a current limitation of the Channel Box that will sometimes incorrectly display an enumerated attribute's pull-down menu.  Extra menu items can appear that represent the numbers inbetween non-sequential option values.  To avoid this limitation, specify sequential values for the options of any enumerated attributes that will appear in the Channel Box.  For example: &quot;solo=1:triplet=2:quintet=3&quot;.)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>exists</b>(<b>ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if the attribute queried is a user-added, dynamic attribute; false if not.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfromPlugin">
+          <code><b>fromPlugin</b>(<b>fp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Was the attribute originally created by a plugin? Normally set
+automatically when the API call is made - only added here to support
+storing it in a file independently from the creating plugin.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghasMaxValue">
+          <code><b>hasMaxValue</b>(<b>hxv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Flag indicating whether an attribute has a maximum value.
+(can only be used for numeric attributes).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghasMinValue">
+          <code><b>hasMinValue</b>(<b>hnv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Flag indicating whether an attribute has a minimum value.
+(can only be used for numeric attributes).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghasSoftMaxValue">
+          <code><b>hasSoftMaxValue</b>(<b>hsx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Flag indicating whether a numeric attribute has a soft maximum.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghasSoftMinValue">
+          <code><b>hasSoftMinValue</b>(<b>hsn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Flag indicating whether a numeric attribute has a soft minimum.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghidden">
+          <code><b>hidden</b>(<b>h</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Will this attribute be hidden from the UI?
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagindexMatters">
+          <code><b>indexMatters</b>(<b>im</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets whether an index must be used when connecting
+to this multi-attribute. Setting indexMatters to false forces the
+attribute to non-readable.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginternalSet">
+          <code><b>internalSet</b>(<b>internalSet</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Whether or not the internal cached value is set when
+this attribute value is changed.  This is an internal flag
+used for updating UI elements.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeyable">
+          <code><b>keyable</b>(<b>k</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Is the attribute keyable by default?
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglongName">
+          <code><b>longName</b>(<b>ln</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the long name of the attribute.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxValue">
+          <code><b>maxValue</b>(<b>max</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the maximum value for the attribute
+(can only be used for numeric attributes).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminValue">
+          <code><b>minValue</b>(<b>min</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the minimum value for the attribute
+(can only be used for numeric attributes).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmulti">
+          <code><b>multi</b>(<b>m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Makes the new attribute a multi-attribute.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagniceName">
+          <code><b>niceName</b>(<b>nn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the nice name of the attribute for display in the UI.  Setting the
+attribute's nice name to a non-empty string overrides the default
+behaviour of looking up the nice name from Maya's
+string catalog.   (Use the MEL commands
+&quot;attributeNiceName&quot; and &quot;attributeQuery -niceName&quot; to lookup an attribute's
+nice name in the catalog.)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnumberOfChildren">
+          <code><b>numberOfChildren</b>(<b>nc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+How many children will the new attribute have?
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparent">
+          <code><b>parent</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Attribute that is to be the new attribute's parent.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagproxy">
+          <code><b>proxy</b>(<b>pxy</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Proxy another node's attribute. Proxied plug will be connected as source. The UsedAsProxy flag is automatically set in this case.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreadable">
+          <code><b>readable</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Can outgoing connections be made from this attribute?
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshortName">
+          <code><b>shortName</b>(<b>sn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the short name of the attribute.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsoftMaxValue">
+          <code><b>softMaxValue</b>(<b>smx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Soft maximum, valid for numeric attributes only.  Specifies the
+upper default limit used in sliders for this attribute.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsoftMinValue">
+          <code><b>softMinValue</b>(<b>smn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Soft minimum, valid for numeric attributes only.  Specifies the
+upper default limit used in sliders for this attribute.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstorable">
+          <code><b>storable</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Can the attribute be stored out to a file?
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagusedAsColor">
+          <code><b>usedAsColor</b>(<b>uac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Is the attribute to be used as a color definition?
+Must have 3 DOUBLE or 3 FLOAT children to use this
+flag.  The attribute type &quot;-at&quot; should be &quot;double3&quot;
+or &quot;float3&quot; as appropriate.  It can also be used to
+less effect with data types &quot;-dt&quot; as &quot;double3&quot; or
+&quot;float3&quot; as well but some parts of the code do not
+support this alternative.  The special attribute
+types/data &quot;spectrum&quot; and &quot;reflectance&quot; also support
+the color flag and on them it is set by default.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagusedAsFilename">
+          <code><b>usedAsFilename</b>(<b>uaf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Is the attribute to be treated as a filename definition?
+This flag is only supported on attributes with data type &quot;-dt&quot; of &quot;string&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagusedAsProxy">
+          <code><b>usedAsProxy</b>(<b>uap</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set if the specified attribute should be treated as a proxy to another attributes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwritable">
+          <code><b>writable</b>(<b>w</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Can incoming connections be made to this attribute?
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.sphere( name='earth' )
+# Add an attribute named ms/mass with a default value of 1 and a
+# minimum value of 0.001 and a maximum of 10000.
+#
+cmds.addAttr( shortName='ms', longName='mass', defaultValue=1.0, minValue=0.001, maxValue=10000 )
+
+# Add a multi attribute named ff/forcefield of type double3.
+#
+cmds.addAttr( shortName='ff', longName='forcefield', dataType='double3', multi=True )
+
+# Add a compound attribute named sampson with children homeboy, midge,
+# damien, elizabeth, and sweetpea of varying types
+#
+cmds.addAttr( longName='sampson', numberOfChildren=5, attributeType='compound' )
+cmds.addAttr( longName='homeboy', attributeType='matrix', parent='sampson' )
+cmds.addAttr( longName='midge', attributeType='message', parent='sampson' )
+cmds.addAttr( longName='damien', attributeType='double', parent='sampson' )
+cmds.addAttr( longName='elizabeth', attributeType='double', parent='sampson' )
+cmds.addAttr( longName='sweetpea', attributeType='double', parent='sampson' )
+
+# To add an attribute that is to be interpreted as a color the
+# following attribute group must be used.
+#
+# Note that the word &quot;float&quot; must be in quotations since it is a
+# MEL keyword.
+#
+cmds.addAttr( longName='rainbow', usedAsColor=True, attributeType='float3' )
+cmds.addAttr( longName='redBow', attributeType='float', parent='rainbow' )
+cmds.addAttr( longName='greenBow', attributeType='float', parent='rainbow' )
+cmds.addAttr( longName='blueBow', attributeType='float', parent='rainbow' )
+
+# Other legal attribute types that can be interpreted as colors need
+# not specify the &quot;-usedAsColor&quot; flag as it will be assumed.  These
+# include &quot;-attributeType spectrum&quot;, &quot;-attributeType reflectance&quot;,
+# &quot;-dataType spectrumRGB&quot;, and &quot;-dataType reflectanceRGB&quot;.
+#
+cmds.addAttr( longName='implColor', dataType='spectrumRGB' )
+cmds.addAttr( '.implColor', query=True, usedAsColor=True )
+# Result: 1 #
+
+# Add a double3 attribute named sanders with children bess, les and wes
+#
+cmds.addAttr( longName='sanders', attributeType='double3' )
+cmds.addAttr( longName='bess', attributeType='double', parent='sanders' )
+cmds.addAttr( longName='les', attributeType='double', parent='sanders' )
+cmds.addAttr( longName='wes', attributeType='double', parent='sanders' )
+
+# Create a proxy attribute
+cmds.sphere( name='moon' )
+cmds.select('earth');
+cmds.addAttr(longName=&quot;someProxyAttr&quot;, proxy=&quot;moon.tx&quot;);
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

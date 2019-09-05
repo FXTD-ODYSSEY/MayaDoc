@@ -1,0 +1,519 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>dagPose command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-dagPose"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/dagPose.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>dagPose </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Skinning" target="contentFrame">Skinning</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("dagPose.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>dagPose [-<a href="#flagaddToPose">addToPose</a>] [-<a href="#flagatPose">atPose</a>] [-<a href="#flagbindPose">bindPose</a>] [-<a href="#flagglobal">global</a>] [-<a href="#flagmembers">members</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagremove">remove</a>] [-<a href="#flagreset">reset</a>] [-<a href="#flagrestore">restore</a>] [-<a href="#flagsave">save</a>] [-<a href="#flagselection">selection</a>] [-<a href="#flagworldParent">worldParent</a>] 
+[objects]
+     </code> </p>
+      <p>dagPose is undoable, queryable, and editable.</p>
+      This command is used to save and restore the matrix information for
+a dag hierarchy. Specifically, the data stored will restore the
+translate, rotate, scale, scale pivot, rotate pivot, rotation order,
+and (for joints) joint order for all the objects on the hierarchy.
+Data for other attributes is not stored by this command.
+<p>
+This command can also be used to store a bindPose for an object.
+When you skin an object, a dagPose is automatically created for the
+skin.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Name of pose</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="bindSkin.html">bindSkin</a>, <a href="skinCluster.html">skinCluster</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaddToPose">addToPose</a>, <a href="#flagatPose">atPose</a>, <a href="#flagbindPose">bindPose</a>, <a href="#flagglobal">global</a>, <a href="#flagmembers">members</a>, <a href="#flagname">name</a>, <a href="#flagremove">remove</a>, <a href="#flagreset">reset</a>, <a href="#flagrestore">restore</a>, <a href="#flagsave">save</a>, <a href="#flagselection">selection</a>, <a href="#flagworldParent">worldParent</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddToPose">
+          <code><b>-addToPose</b>(<b>-a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Allows adding the selected items to the dagPose.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagatPose">
+          <code><b>-atPose</b>(<b>-ap</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query whether the hierarchy is at same position as the pose.
+Names of hierarchy members that are not at the pose position will
+be returned. An empty return list indicates that the hierarchy is at the
+pose.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbindPose">
+          <code><b>-bindPose</b>(<b>-bp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to specify the bindPose for the selected hierarchy.
+Each hierarchy can have only
+a single bindPose, which is saved automatically at the time of a skin
+bind. The bindPose is used when adding influence objects,
+binding new skins, or adding flexors. Take care when modifying
+the bindPose with the -rs/-reset
+or -rm/-remove flags, since if the bindPose is ill-defined it can
+cause problems with subsequent skinning operations.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagglobal">
+          <code><b>-global</b>(<b>-g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used in conjunction with the restore flag to
+signal that the members of the pose should be restored to the
+global pose. The global pose means not only is each object
+locally oriented with respect to its parents, it is also in the
+same global position that it was at when the pose was saved.
+If a hierarchy's parenting has been changed since the time that
+the pose was saved, you may have trouble reaching the global pose.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmembers">
+          <code><b>-members</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the members of the specified pose. The pose should be
+specified using the selection list, the -bp/-bindPose or the -n/-name flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the name of the pose. This can be used during create,
+restore, reset, remove, and query operations to specify the pose
+to be created or acted upon.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>-remove</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the selected joints from the specified pose.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreset">
+          <code><b>-reset</b>(<b>-rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Reset the pose on the selected joints. If
+you are resetting pose data for a bindPose, take care. It is appropriate
+to use the -rs/-reset flag if a joint has been reparented and/or appears to
+be exactly at the bindPose. However, a bindPose that is much different
+from the exact bindPose can cause problems with subsequent skinning operations.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrestore">
+          <code><b>-restore</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Restore the hierarchy to a saved pose. To specify the pose,
+select the pose node, or use the -bp/-bindPose or -n/-name flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsave">
+          <code><b>-save</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Save a dagPose for the selected dag hierarchy. The name of the
+new pose will be returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselection">
+          <code><b>-selection</b>(<b>-sl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Whether or not to store a pose for all items in the hierarchy,
+or for only the selected items.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldParent">
+          <code><b>-worldParent</b>(<b>-wp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that the selected pose member should be recalculated as if it is
+parented to the world. This is typically used when you plan to reparent
+the object to world as the next operation.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+  // To create a pose for all objects parented above and below
+  // the selected items.
+  //
+  dagPose -save;
+
+  // To create a dagPose named &quot;mypose&quot; for the selected items only and not
+  // the dag objects parented below the selected items.
+  //
+  dagPose -save -selection -name mypose;
+
+  // To restore the local (rather than global) mypose pose
+  //
+  dagPose -restore mypose;
+
+  // To restore the mypose pose in global mode.
+  //
+  dagPose -restore -global mypose;
+
+  // To query the members of the mypose pose.
+  //
+  dagPose -query -members mypose;
+
+  // To return the name (if any) of the bindPose attached to the
+  // selected items.
+  //
+  dagPose -q -bindPose;
+
+  // To reset the pose data on a joint named bigToe for &quot;mypose&quot;
+  //
+  dagPose -reset -n mypose bigToe;
+
+  // To remove a joint named pinky from &quot;mypose&quot;
+  //
+  dagPose -remove -n mypose pinky;
+
+// To restore the skeleton to its bindPose
+//
+dagPose -restore -global -bindPose;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

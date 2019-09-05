@@ -1,0 +1,115 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>getChain command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-getChain"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>getChain </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Deformation" target="contentFrame">Deformation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("getChain.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+getChain shapeNodeName
+<br>
+
+	 </code> </p>
+      
+      Returns the deformers that deform the given geometry. For example
+if we have the following deformer chain created using the &quot;before&quot; ordering
+and call getChain(&quot;pCubeShape1&quot;)
+pCubeShape1Orig-&gt;bend1-&gt;cluster1-&gt;pCubeShape1
+then this procedure will return three entries:
+string[0] = &quot;bend1&quot;<br>
+string[1] = &quot;cluster1&quot;<br>
+string[2] = &quot;tweak1&quot;<br>
+Notes:
+<ul>
+<li>The deformers which deform the shape are the &quot;upstream&quot; deformer nodes.
+If you call getChain(&quot;pCubeShape1Orig&quot;) you get an empty result because
+the shape pCubeShape1Orig has no upstream deformers.</li>
+<li>Any chains that are returned will only contain those deformers up to
+the closest upstream shape node. Using other ordering modes than &quot;before&quot;
+tends to introduce intermediate shape nodes in the chain and you will
+subsequently obtain short deformer chains in your queries.</li>
+</ul>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$shapeNodeName"><b>$shapeNodeName</b></a></td><td><i>string</i></td><td>: name of the shape node for which we wish to query the deformer chain for.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>	string $cube[] = `polyCube`;
+	nonLinear -before -type bend;
+	select $cube[0];
+	cluster -before;
+	getChain( $cube[0] );
+	<i>// Result: bend1 cluster1 tweak1
+</i>
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,119 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>gmatch command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-gmatch"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>gmatch </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Strings" target="contentFrame">Strings</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("gmatch.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>gmatch 
+string string
+     </code> </p>
+      <p>gmatch is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Returns a non-zero result if the pattern specified by the
+second argument matches the search string in the first argument.
+<p>
+gmatch provides shell-style pattern matching, also known as &quot;glob&quot;
+matching. There are three ways to specify wild cards in this type
+of matching and they are as follows:
+<p>
+<table>
+<tr><td>*</td> <td> matches any string </td></tr>
+<tr><td>?</td> <td> matches any single character </td></tr>
+<tr><td>[...]</td>
+<td> Matches any one of the enclosed characters. &quot;*&quot; and &quot;?&quot; lose their
+special meanings between the brackets and simply match themselves.
+A pair of characters separated by &quot;-&quot; matches any character lexically
+between the pair, inclusive (e.g. &quot;[0-9]&quot; matches any digit).
+If the first character following the opening &quot;[&quot; is a &quot;!&quot; any
+character not enclosed is matched (e.g. &quot;[!ab]&quot; will match any character
+except &quot;a&quot; or &quot;b&quot;). A &quot;-&quot; can be included in the character
+set as itself by putting it as the first or last character.
+</td></tr>
+</table>
+<p>
+The backslash character (&quot;\&quot;) is used as an escape to make the character
+which follows it lose any special meaning it might have and just match
+itself. MEL also uses backslash as an escape in string literals
+for its special characters. This means that for gmatch to find a backslash
+in a literal string, it has to be doubled up.
+For example, to match &quot;?&quot; as just itself, the pattern string has to be &quot;\\?&quot;,
+and to match &quot;\&quot; as itself, the pattern string has to be &quot;\\\\&quot;.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>Matching value</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="match.html">match</a>, <a href="strcmp.html">strcmp</a>
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+gmatch &quot;matches&quot; &quot;m*s&quot;;
+// Result: 1 //
+gmatch &quot;matches&quot; &quot;mat*&quot;;
+// Result: 1 //
+gmatch &quot;matches&quot; &quot;ma[a-z]ches&quot;;
+// Result: 1 //
+gmatch &quot;matches&quot; &quot;ma[!a-m]ches&quot;;
+// Result: 1 //
+gmatch &quot;matches&quot; &quot;ma?ches&quot;;
+// Result: 1 //
+gmatch &quot;no match&quot; &quot;?atch&quot;;
+// Result: 0 //
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

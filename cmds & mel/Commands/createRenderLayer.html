@@ -1,0 +1,302 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>createRenderLayer command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-createRenderLayer"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/createRenderLayer.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>createRenderLayer </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a>, <a href="cat_Rendering.html#Layers" target="contentFrame">Layers</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("createRenderLayer.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>createRenderLayer [-<a href="#flagempty">empty</a>] [-<a href="#flagglobal">global</a>] [-<a href="#flagmakeCurrent">makeCurrent</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagnoRecurse">noRecurse</a>] [-<a href="#flagnumber">number</a> <i>int</i>]  </code> </p>
+      <p>createRenderLayer is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Create a new render layer.  The render layer number will be assigned
+based on the first unassigned number not less than the base index number
+found in the render layer global parameters.  Normally all objects and
+their descendants will be added to the new render layer but if '-noRecurse'
+is specified then only the objects themselves will be added. Only transforms
+and geometry will be added to the new render layer.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Name of render layer node that was created</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>renderLayer, 2d3d, layer, color, playback, render
+      <h2><a name="hRelated">Related</a></h2><a href="editRenderLayerGlobals.html">editRenderLayerGlobals</a>, <a href="editRenderLayerMembers.html">editRenderLayerMembers</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagempty">empty</a>, <a href="#flagglobal">global</a>, <a href="#flagmakeCurrent">makeCurrent</a>, <a href="#flagname">name</a>, <a href="#flagnoRecurse">noRecurse</a>, <a href="#flagnumber">number</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagempty">
+          <code><b>-empty</b>(<b>-e</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set then create an empty render layer. The global flag or specified
+member list will take precidence over  use of this flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagglobal">
+          <code><b>-global</b>(<b>-g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set then create a layer that contains all DAG objects in the scene. Any
+future objects created will also automatically become members of this layer.
+The global flag will take precidence over use of the empty flag or specified
+member list.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmakeCurrent">
+          <code><b>-makeCurrent</b>(<b>-mc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set then make the new render layer the current one.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the new render layer being created.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoRecurse">
+          <code><b>-noRecurse</b>(<b>-nr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set then only add specified objects to the render layer.  Otherwise all
+descendants will also be added.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnumber">
+          <code><b>-number</b>(<b>-num</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Number for the new render layer being created.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Add nut and nutShape to a new render layer
+//
+select nut;
+createRenderLayer;
+// Result: renderLayer1 //
+
+// Add only bolt to a new render layer
+//
+createRenderLayer -noRecurse bolt;
+// Result: renderLayer2 //
+
+// Add washer to the new render layer 'assembly'.
+//
+createRenderLayer -noRecurse -name assembly washer;
+// Result: assembly //
+
+// Create a layer that will always contains everything
+//
+createRenderLayer -global;
+// Result: renderLayer3 //
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

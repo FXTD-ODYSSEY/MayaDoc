@@ -1,0 +1,264 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>nodeType command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-nodeType"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/nodeType.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>nodeType </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("nodeType.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>nodeType(
+string
+    , [<a href="#flagapiType">apiType</a>=<i>boolean</i>], [<a href="#flagderived">derived</a>=<i>boolean</i>], [<a href="#flaginherited">inherited</a>=<i>boolean</i>], [<a href="#flagisTypeName">isTypeName</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>nodeType is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command returns a string which identifies the given node's type.
+<p>
+When no flags are used, the unique type name is returned.  This can be
+useful for seeing if two nodes are of the same type.
+<p>
+When the <em>api</em> flag is used, the MFn::Type of the node is returned.
+This can be useful for seeing if a plug-in node belongs to a given
+class. The <em>api</em> flag cannot be used in conjunction with any other
+flags.
+<p>
+When the <em>derived</em> flag is used, the command returns a string array
+containing the names of all the currently known node types which derive
+from the node type of the given object.
+<p>
+When the <em>inherited</em> flag is used, the command returns a string array
+containing the names of all the base node types inherited by the
+the given node.
+<p>
+If the <em>isTypeName</em> flag is present then the argument provided to the
+command is taken to be the name of a node type rather than the name of a
+specific node. This makes it possible to query the hierarchy of node types
+without needing to have instances of each node type.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Single command result</td></tr><tr><td valign="top"><i>string[]</i></td><td>Multiple command result</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="addAttr.html">addAttr</a>, <a href="aliasAttr.html">aliasAttr</a>, <a href="attributeInfo.html">attributeInfo</a>, <a href="deleteAttr.html">deleteAttr</a>, <a href="getClassification.html">getClassification</a>, <a href="objExists.html">objExists</a>, <a href="objectType.html">objectType</a>, <a href="renameAttr.html">renameAttr</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagapiType">apiType</a>, <a href="#flagderived">derived</a>, <a href="#flaginherited">inherited</a>, <a href="#flagisTypeName">isTypeName</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagapiType">
+          <code><b>apiType</b>(<b>api</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the MFn::Type value (as a string) corresponding
+to the given node.  This is particularly useful when
+the given node is defined by a plug-in, since in this
+case, the MFn::Type value corresponds to the
+underlying proxy class.
+<p>
+This flag cannot be used in combination with any of the other flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagderived">
+          <code><b>derived</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return a string array containing the names of all the currently known node
+types which derive from the type of the specified node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginherited">
+          <code><b>inherited</b>(<b>i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return a string array containing the names of all the
+base node types inherited by the specified node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisTypeName">
+          <code><b>isTypeName</b>(<b>itn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this flag is present, then the argument provided to the command
+is the name of a node type rather than the name of a specific node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.sphere( n='balloon' )
+
+# Find the type of node created by the sphere command
+cmds.nodeType( 'balloon' )
+# Result: transform #
+
+# What is the API type of the balloon node?
+cmds.nodeType( 'balloon', api=True )
+# Result: kTransform #
+
+# Which node types derive from camera?
+cmds.nodeType( 'camera', derived=True, isTypeName=True )
+# Result: [u'stereoRigCamera', u'camera'] #
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

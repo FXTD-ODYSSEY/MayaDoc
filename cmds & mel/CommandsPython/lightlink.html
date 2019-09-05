@@ -1,0 +1,502 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>lightlink command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-lightlink"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/lightlink.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>lightlink </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a>, <a href="cat_Rendering.html#Lights" target="contentFrame">Lights</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("lightlink.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>lightlink(
+objects
+    , [<a href="#flagb">b</a>=<i>boolean</i>], [<a href="#flaghierarchy">hierarchy</a>=<i>boolean</i>], [<a href="#flaglight">light</a>=<i>name</i>], [<a href="#flagmake">make</a>=<i>boolean</i>], [<a href="#flagobject">object</a>=<i>name</i>], [<a href="#flagsets">sets</a>=<i>boolean</i>], [<a href="#flagshadow">shadow</a>=<i>boolean</i>], [<a href="#flagshapes">shapes</a>=<i>boolean</i>], [<a href="#flagtransforms">transforms</a>=<i>boolean</i>], [<a href="#flaguseActiveLights">useActiveLights</a>=<i>boolean</i>], [<a href="#flaguseActiveObjects">useActiveObjects</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>lightlink is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command is used to make, break and query light linking
+relationships between lights/sets of lights and objects/sets of
+objects.
+<p>
+If no make, break or query flag is specified and both lights and
+objects flags are present, the make flag is assumed to be specified.
+<p>
+If no make, break or query flag is specified and only one of the
+lights and objects flags is present, the query flag is assumed to be
+specified.
+<p>
+You can specify as many lights and objects as you like, using the
+multiuse -light and -object flags.
+<p>
+A better way to perform light linking is to make sets of lights and
+sets of geometry. If you create a set which contains lights (such as
+the ceiling lights in your scene) and a set which contains geometry
+(such as the geometry of your character), you can then link the
+<b>set</b> containing lights with the <b>set</b> containing geometry
+in order to get those lights to illuminate those pieces of geometry.
+In addition, you can add and remove lights and geometry from their
+respective sets without having to make and break light links.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Single element command result</td></tr><tr><td valign="top"><i>string[]</i></td><td>Multi element command result</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="ambientLight.html">ambientLight</a>, <a href="directionalLight.html">directionalLight</a>, <a href="exclusiveLightCheckBox.html">exclusiveLightCheckBox</a>, <a href="lightList.html">lightList</a>, <a href="pointLight.html">pointLight</a>, <a href="spotLight.html">spotLight</a>, <a href="spotLightPreviewPort.html">spotLightPreviewPort</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagb">b</a>, <a href="#flaghierarchy">hierarchy</a>, <a href="#flaglight">light</a>, <a href="#flagmake">make</a>, <a href="#flagobject">object</a>, <a href="#flagsets">sets</a>, <a href="#flagshadow">shadow</a>, <a href="#flagshapes">shapes</a>, <a href="#flagtransforms">transforms</a>, <a href="#flaguseActiveLights">useActiveLights</a>, <a href="#flaguseActiveObjects">useActiveObjects</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagb">
+          <code><b>b</b>(<b>b</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The presence of this flag on the command indicates that the
+command is being invoked to break links between lights and
+renderable objects.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghierarchy">
+          <code><b>hierarchy</b>(<b>h</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When querying, specifies whether the result should include the
+hierarchy of transforms above shapes linked to the queried
+light/object. The transforms considered part of the hierarchy do
+not include the transform immediately above the shape. Default
+is true.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglight">
+          <code><b>light</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The argument to the light flag specifies a node to be used by
+the command in performing the action as if the node is a light.
+This is a multiuse flag -- many light nodes can be specified in
+a single invocation of the lightlink command.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmake">
+          <code><b>make</b>(<b>m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The presence of this flag on the command indicates that the
+command is being invoked to make links between lights and
+renderable objects.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobject">
+          <code><b>object</b>(<b>o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The argument to the object flag specifies a node to be used by
+the command in performing the action as if the node is an object.
+This is a multiuse flag -- many object nodes can be specified in
+a single invocation of the lightlink command.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsets">
+          <code><b>sets</b>(<b>set</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When querying, specifies whether the result should include sets
+linked to the queried light/object. Default is true.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshadow">
+          <code><b>shadow</b>(<b>shd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify that shadows are to be linked.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshapes">
+          <code><b>shapes</b>(<b>shp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When querying, specifies whether the result should include shapes
+linked to the queried light/object. Default is true.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransforms">
+          <code><b>transforms</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When querying, specifies whether the result should include
+transforms immediately above shapes linked to the queried
+light/object. Default is true.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseActiveLights">
+          <code><b>useActiveLights</b>(<b>ual</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify that active lights are to be used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseActiveObjects">
+          <code><b>useActiveObjects</b>(<b>uao</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify that active objects are to be used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.lightlink( light=('spotLight1', 'pointLight2', 'ambientLight4'), object=('apple', 'orange', 'banana') )
+
+# causes a light link to be &quot;created between&quot;    each of the lights
+# spotLight1, pointLight2, ambientLight4 and each of the objects
+# apple, orange, banana. This creates 9 links. Note that no make,
+# break or query flag is specified so make is assumed since both
+# lights and objects are specified.
+
+cmds.lightlink( make=True, light='ceilingLightSet', object='apple' )
+# causes a light link to be &quot;created between&quot; the ceiling lights and
+# the apple geometry. If apple is already illuminated by
+# ceilingLightSet, then nothing changes and a warning is produced.
+
+cmds.lightlink( object='stillLifeSet', light='spotLight1' )
+# causes a light link to be &quot;created between&quot; spotLight1 and the still
+# life. If stillLifeSet is already illuminated by spotLight1, then
+# nothing changes and a warning is produced. Note: no make, break or
+# query flag is specified so the make flag is assumed since both lights
+# and objects are specified.
+
+cmds.lightlink( light=('ceilingLightSet', 'floorLightSet'), object='tableAndChairsSet' )
+# causes a light link to be &quot;created between&quot; each of the light sets
+# ceilingLightSet, floorLightSet and the object set tableAndChairsSet.
+
+cmds.lightlink( query=True, light='ceilingLightSet' )
+# will return a string array of objects which are illuminated by the
+# set ceilingLightSet. For example, the return value might be:
+# stillLifeSet table chair floor roomWallsSet binky
+
+cmds.lightlink( query=True, object='apple' )
+# will return a string array of lights which illuminate the object
+# apple. For example, the return value might be ceilingLightSet
+# spotLight1 spotLight2 ambientLight1
+
+cmds.lightlink( object='apple' )
+# will return a string array of lights which illuminate the object
+# apple. For example, the return value might be ceilingLightSet
+# spotLight1 spotLight2 ambientLight1. Note that no make, break
+# or query flag is specified, so query is assumed since no lights
+# are specified.
+
+cmds.lightlink( b=True, light='ceilingLightSet', object='apple' )
+# causes the light set ceilingLightSet to no longer illuminate the
+# object apple. If ceilingLightSet was already not illuminating apple,
+# nothing changes and a warning is produced.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

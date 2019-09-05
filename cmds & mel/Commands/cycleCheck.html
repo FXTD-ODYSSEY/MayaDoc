@@ -1,0 +1,514 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>cycleCheck command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-cycleCheck"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/cycleCheck.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>cycleCheck </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("cycleCheck.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>cycleCheck [-<a href="#flagall">all</a>] [-<a href="#flagchildren">children</a>] [-<a href="#flagdag">dag</a>] [-<a href="#flagevaluation">evaluation</a> <i>boolean</i>] [-<a href="#flagfirstCycleOnly">firstCycleOnly</a>] [-<a href="#flagfirstPlugPerNode">firstPlugPerNode</a>] [-<a href="#flaglastPlugPerNode">lastPlugPerNode</a>] [-<a href="#flaglist">list</a>] [-<a href="#flaglistSeparator">listSeparator</a> <i>string</i>] [-<a href="#flagparents">parents</a>] [-<a href="#flagsecondary">secondary</a> <i>boolean</i>] [-<a href="#flagtimeLimit">timeLimit</a> <i>time</i>] 
+string[]
+     </code> </p>
+      <p>cycleCheck is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command searches for plug cycles in the dependency graph. If
+a plug or node is selected then it searches for cycles that
+that plug or node is involved with. Plugs or nodes can also be passed
+as arguments. If the -all flag is used then the entire graph is searched.
+<p>
+Normally the return value is a boolean indicating whether or not the
+given items were involved in a cycle.  If the -list flag is used then
+the return value is the list of all plugs in cycles (involving the
+selected plug or node if any).
+<p>
+Note that it is possible for evaluation cycles to occur even where
+no DG connections exist. Here are some examples:
+<p>
+1) Nodes with evaluation-time dependent connections: An example is
+expression nodes, because we cannot tell what an expression
+node is actually referring to until it is evaluated, and such
+evaluation-time dependent nodes may behave differently based on
+the context (e.g. time) they are evaluated at. If you suspect a
+cycle due to such a connection, the best way to detect the
+cycle is through manual inspection.
+<p>
+2) Cycles due to DAG hierarchy: noting that DAG nodes are implicitely
+connected through parenting, if a child DAG node connects an output into
+the input of a parent node, a cycle will exist if the plugs involved
+also affect each other. In order to enable detection of cycles
+involving the DAG, add the -dag flag to the command line.
+<p>
+Note also that this command may incorrectly report a cycle on
+an instanced skeleton where some of the instances use IK.
+You will have to examine the reported cycle yourself to determine
+if it is truly a cycle or not.
+The evaluation time cycle checking will not report false cycles.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>in the general case.</td></tr><tr><td valign="top"><i>string[]</i></td><td>When the list flag is used.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagall">all</a>, <a href="#flagchildren">children</a>, <a href="#flagdag">dag</a>, <a href="#flagevaluation">evaluation</a>, <a href="#flagfirstCycleOnly">firstCycleOnly</a>, <a href="#flagfirstPlugPerNode">firstPlugPerNode</a>, <a href="#flaglastPlugPerNode">lastPlugPerNode</a>, <a href="#flaglist">list</a>, <a href="#flaglistSeparator">listSeparator</a>, <a href="#flagparents">parents</a>, <a href="#flagsecondary">secondary</a>, <a href="#flagtimeLimit">timeLimit</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagall">
+          <code><b>-all</b>(<b>-all</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+search the entire graph for cycles instead of the selection list.
+(Note: if nothing is selected, -all is assumed).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchildren">
+          <code><b>-children</b>(<b>-c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Do not consider cycles on the children, only the specified plugs
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdag">
+          <code><b>-dag</b>(<b>-dag</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Also look for cycles due to relationships in the DAG. For each DAG node,
+the parenting connection on its children is also considered when searching
+for cycles.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagevaluation">
+          <code><b>-evaluation</b>(<b>-e</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn on and off cycle detection during graph evaluation
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfirstCycleOnly">
+          <code><b>-firstCycleOnly</b>(<b>-fco</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When -list is used to return a plug list, the list may contain
+multiple cycles or partial cycles. When -firstCycleOnly is specified
+only the first such cycle (which will be a full cycle) is returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfirstPlugPerNode">
+          <code><b>-firstPlugPerNode</b>(<b>-fpn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When -list is used to return a plug list, the list will typically contain
+multiple plugs per node (e.g. ... A.output B.input B.output C.input ...),
+reflecting internal &quot;affects&quot; relationships rather than external DG connections.
+When -firstPlugPerNode is specified, only the first plug in the list for each
+node is returned (B.input in the example).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglastPlugPerNode">
+          <code><b>-lastPlugPerNode</b>(<b>-lpn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When -list is used to return a plug list, the list will typically contain
+multiple plugs per node (e.g. ... A.output B.input B.output C.input ...),
+reflecting internal &quot;affects&quot; relationships rather than external DG connections.
+When -lastPlugPerNode is specified, only the last plug in the list for each
+node is returned (B.output in the example).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglist">
+          <code><b>-list</b>(<b>-l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return all plugs involved in one or more cycles.  If not
+specified, returns a boolean indicating whether a cycle exists.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistSeparator">
+          <code><b>-listSeparator</b>(<b>-ls</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When -list is used to return a plug list, the list may contain
+multiple cycles or partial cycles. Use -listSeparator to specify
+a string that will be inserted into the returned string array
+to separate the cycles.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparents">
+          <code><b>-parents</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Do not consider cycles on the parents, only the specified plugs
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsecondary">
+          <code><b>-secondary</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Look for cycles on related plugs as well as the specified plugs
+Default is &quot;on&quot; for the &quot;-all&quot; case and &quot;off&quot; for others
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtimeLimit">
+          <code><b>-timeLimit</b>(<b>-tl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Limit the search to the given amount of time
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+  // Print a message if xNode.tx is in a cycle.
+createNode transform -n xNode;
+if( `cycleCheck xNode.tx` &gt; 0 ) {
+      print( &quot;xNode.tx is in a cycle\n&quot; );
+  }
+
+  // Get the list of plugs in a cycle with xNode.yAttr
+connectAttr xNode.tx xNode.ty;
+connectAttr xNode.ty xNode.tx;
+string $cycles[] = `cycleCheck -list xNode.tx`;
+
+  // Print a message if there are any cycles in the graph.
+if( `cycleCheck -all -tl 10sec` &gt; 0 ) {
+      warning( &quot;Your graph has a cycle&quot; );
+  } else {
+      print( &quot;Your graph probably does not have a cycle\n&quot; );
+  }
+
+  // List all cycles involving the DG and DAG hierarchy.
+  cycleCheck -all -dag -l;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

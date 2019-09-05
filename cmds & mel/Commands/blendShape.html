@@ -1,0 +1,1432 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>blendShape command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-blendShape"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/blendShape.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>blendShape </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Deformation" target="contentFrame">Deformation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("blendShape.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>blendShape [-<a href="#flagafter">after</a>] [-<a href="#flagafterReference">afterReference</a>] [-<a href="#flagautomatic">automatic</a>] [-<a href="#flagbefore">before</a>] [-<a href="#flagcopyDelta">copyDelta</a> <i>uint uint uint</i>] [-<a href="#flagcopyInBetweenDelta">copyInBetweenDelta</a> <i>uint uint uint uint</i>] [-<a href="#flagdeformerTools">deformerTools</a>] [-<a href="#flagenvelope">envelope</a> <i>float</i>] [-<a href="#flagexclusive">exclusive</a> <i>string</i>] [-<a href="#flagexport">export</a> <i>string</i>] [-<a href="#flagexportTarget">exportTarget</a> <i>int int</i>] [-<a href="#flagflipTarget">flipTarget</a> <i>uint uint</i>] [-<a href="#flagfrontOfChain">frontOfChain</a>] [-<a href="#flaggeometry">geometry</a> <i>string</i>] [-<a href="#flaggeometryIndices">geometryIndices</a>] [-<a href="#flagignoreSelected">ignoreSelected</a>] [-<a href="#flagimport">import</a> <i>string</i>] [-<a href="#flaginBetween">inBetween</a>] [-<a href="#flaginBetweenIndex">inBetweenIndex</a> <i>uint</i>] [-<a href="#flaginBetweenType">inBetweenType</a> <i>string</i>] [-<a href="#flagincludeHiddenSelections">includeHiddenSelections</a>] [-<a href="#flagmergeSource">mergeSource</a> <i>int</i>] [-<a href="#flagmergeTarget">mergeTarget</a> <i>uint</i>] [-<a href="#flagmirrorDirection">mirrorDirection</a> <i>uint</i>] [-<a href="#flagmirrorTarget">mirrorTarget</a> <i>uint uint</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagnormalizationGroups">normalizationGroups</a>] [-<a href="#flagorigin">origin</a> <i>string</i>] [-<a href="#flagparallel">parallel</a>] [-<a href="#flagprune">prune</a>] [-<a href="#flagremove">remove</a>] [-<a href="#flagresetTargetDelta">resetTargetDelta</a> <i>uint uint</i>] [-<a href="#flagsplit">split</a>] [-<a href="#flagsuppressDialog">suppressDialog</a>] [-<a href="#flagsymmetryAxis">symmetryAxis</a> <i>string</i>] [-<a href="#flagsymmetryEdge">symmetryEdge</a> <i>string</i>] [-<a href="#flagsymmetrySpace">symmetrySpace</a> <i>uint</i>] [-<a href="#flagtangentSpace">tangentSpace</a>] [-<a href="#flagtarget">target</a> <i>string uint string float</i>] [-<a href="#flagtopologyCheck">topologyCheck</a> <i>boolean</i>] [-<a href="#flagtransform">transform</a> <i>string</i>] [-<a href="#flagweight">weight</a> <i>uint float</i>] [-<a href="#flagweightCount">weightCount</a> <i>uint</i>] 
+[objects]
+     </code> </p>
+      <p>blendShape is undoable, queryable, and editable.</p>
+      This command creates a blendShape deformer, which blends in specified
+amounts of each target shape to the initial base shape.
+Each base shape is deformed by its own set of target shapes.
+Every target shape has an index that associates it with one of
+the shape weight values.<br>
+<p>
+In the create mode the first item on the selection list is treated
+as the base and the remaining inputs as targets. If the first item
+on the list has multiple shapes grouped beneath it, the targets must
+have an identical shape hierarchy. Additional base shapes
+can be added in edit mode using the deformers -g flag.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>(the blendShape node name)</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="bindSkin.html">bindSkin</a>, <a href="boneLattice.html">boneLattice</a>, <a href="copyFlexor.html">copyFlexor</a>, <a href="copySkinWeights.html">copySkinWeights</a>, <a href="flexor.html">flexor</a>, <a href="skinCluster.html">skinCluster</a>, <a href="skinPercent.html">skinPercent</a>, <a href="wire.html">wire</a>, <a href="wrinkle.html">wrinkle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagafter">after</a>, <a href="#flagafterReference">afterReference</a>, <a href="#flagautomatic">automatic</a>, <a href="#flagbefore">before</a>, <a href="#flagcopyDelta">copyDelta</a>, <a href="#flagcopyInBetweenDelta">copyInBetweenDelta</a>, <a href="#flagdeformerTools">deformerTools</a>, <a href="#flagenvelope">envelope</a>, <a href="#flagexclusive">exclusive</a>, <a href="#flagexport">export</a>, <a href="#flagexportTarget">exportTarget</a>, <a href="#flagflipTarget">flipTarget</a>, <a href="#flagfrontOfChain">frontOfChain</a>, <a href="#flaggeometry">geometry</a>, <a href="#flaggeometryIndices">geometryIndices</a>, <a href="#flagignoreSelected">ignoreSelected</a>, <a href="#flagimport">import</a>, <a href="#flaginBetween">inBetween</a>, <a href="#flaginBetweenIndex">inBetweenIndex</a>, <a href="#flaginBetweenType">inBetweenType</a>, <a href="#flagincludeHiddenSelections">includeHiddenSelections</a>, <a href="#flagmergeSource">mergeSource</a>, <a href="#flagmergeTarget">mergeTarget</a>, <a href="#flagmirrorDirection">mirrorDirection</a>, <a href="#flagmirrorTarget">mirrorTarget</a>, <a href="#flagname">name</a>, <a href="#flagnormalizationGroups">normalizationGroups</a>, <a href="#flagorigin">origin</a>, <a href="#flagparallel">parallel</a>, <a href="#flagprune">prune</a>, <a href="#flagremove">remove</a>, <a href="#flagresetTargetDelta">resetTargetDelta</a>, <a href="#flagsplit">split</a>, <a href="#flagsuppressDialog">suppressDialog</a>, <a href="#flagsymmetryAxis">symmetryAxis</a>, <a href="#flagsymmetryEdge">symmetryEdge</a>, <a href="#flagsymmetrySpace">symmetrySpace</a>, <a href="#flagtangentSpace">tangentSpace</a>, <a href="#flagtarget">target</a>, <a href="#flagtopologyCheck">topologyCheck</a>, <a href="#flagtransform">transform</a>, <a href="#flagweight">weight</a>, <a href="#flagweightCount">weightCount</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafter">
+          <code><b>-after</b>(<b>-af</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the default behavior for insertion/appending into/onto
+the existing chain is not the desired behavior then this flag
+can be used to force the command to place the deformer
+node after the selected node in the chain even if
+a new geometry shape has to be created in order to do so.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafterReference">
+          <code><b>-afterReference</b>(<b>-ar</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The -afterReference flag is used to specify deformer ordering in a hybrid way that
+choses between -before and -after automatically. If the geometry being
+deformed is referenced then the -after mode is used when adding the new deformer,
+otherwise the -before mode is used. The net effect when using -afterReference to build
+deformer chains is that internal shape nodes in the deformer chain will only
+appear at reference file boundaries, leading to lightweight deformer networks that
+may be more amicable to reference swapping.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagautomatic">
+          <code><b>-automatic</b>(<b>-at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The -automatic flag is used to specify deformer ordering in a way that
+choses between -frontOfChain and -before automatically. If the geometry being
+deformed is only affected by invertible deformers, the -frontOfChain mode is used, otherwise
+the -before mode is used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbefore">
+          <code><b>-before</b>(<b>-bf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the default behavior for insertion/appending into/onto
+the existing chain is not the desired behavior then this flag
+can be used to force the command to place the deformer
+node before the selected node in the chain even if
+a new geometry shape has to be created in order to do so.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopyDelta">
+          <code><b>-copyDelta</b>(<b>-cd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint uint uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the base, source, and destination delta index values.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopyInBetweenDelta">
+          <code><b>-copyInBetweenDelta</b>(<b>-cid</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint uint uint uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the base, target, source, and destination delta index values.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeformerTools">
+          <code><b>-deformerTools</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the name of the deformer tool objects (if any)
+as string string ...
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenvelope">
+          <code><b>-envelope</b>(<b>-en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the envelope value for the deformer, controlling
+how much of the total deformation gets applied. Default is 1.0.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexclusive">
+          <code><b>-exclusive</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Puts the deformation set in a deform partition.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexport">
+          <code><b>-export</b>(<b>-ep</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export the shapes to the named file path.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportTarget">
+          <code><b>-exportTarget</b>(<b>-et</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the base and target index pairs for the export.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflipTarget">
+          <code><b>-flipTarget</b>(<b>-ft</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Flip the list of base and target pairs.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfrontOfChain">
+          <code><b>-frontOfChain</b>(<b>-foc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This command is used to specify that the new deformer
+node should be placed ahead (upstream) of existing deformer
+and skin nodes in the shape's history (but not ahead of
+existing tweak nodes). The input to the
+deformer will be the upstream shape rather than the visible
+downstream shape, so the behavior of this flag is the most
+intuitive if the downstream deformers are in their reset
+(hasNoEffect) position when the new deformer is added.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometry">
+          <code><b>-geometry</b>(<b>-g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The specified object will be added to the list of
+objects being deformed by this deformer object, unless
+the -rm flag is also specified. When queried, this flag
+returns string string string ...
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometryIndices">
+          <code><b>-geometryIndices</b>(<b>-gi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Complements the -geometry flag in query mode. Returns
+the multi index of each geometry.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreSelected">
+          <code><b>-ignoreSelected</b>(<b>-is</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tells the command to not deform objects on the
+current selection list
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimport">
+          <code><b>-import</b>(<b>-ip</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Import the shapes from the named file path.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginBetween">
+          <code><b>-inBetween</b>(<b>-ib</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicate that the specified target should serve as
+an inbetween. An inbetween target is one that serves as an
+intermediate target between the base shape and another target.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginBetweenIndex">
+          <code><b>-inBetweenIndex</b>(<b>-ibi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Only used with the -rtd/-resetTargetDelta flag to remove delta values
+for points in the inbetween target geometry defined by this index.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginBetweenType">
+          <code><b>-inBetweenType</b>(<b>-ibt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify if the in-between target to be created is relative to the hero
+target or if it is absolute.
+If it is relative to hero targets, the in-between target will get any changes made to the hero target.
+Valid values are &quot;relative&quot; and &quot;absolute&quot;.
+This flag should always be used with the -ib/-inBetween and -t/-target flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeHiddenSelections">
+          <code><b>-includeHiddenSelections</b>(<b>-ihs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Apply the deformer to any visible and hidden objects in the selection list.
+Default is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmergeSource">
+          <code><b>-mergeSource</b>(<b>-mgs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List of source indexes for a merge.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmergeTarget">
+          <code><b>-mergeTarget</b>(<b>-mgt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Target index of a merge
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmirrorDirection">
+          <code><b>-mirrorDirection</b>(<b>-md</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Mirror direction; 0 = negative, 1 = positive
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmirrorTarget">
+          <code><b>-mirrorTarget</b>(<b>-mt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Mirror the list of base and target pairs.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to specify the name of the node being created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnormalizationGroups">
+          <code><b>-normalizationGroups</b>(<b>-ng</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns a list of the used normalization group IDs.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagorigin">
+          <code><b>-origin</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+blendShape will be performed with respect to the
+world by default. Valid values are &quot;world&quot; and &quot;local&quot;. The local flag will cause the blend
+shape to be performed with respect to the shape's local
+origin.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparallel">
+          <code><b>-parallel</b>(<b>-par</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Inserts the new deformer in a parallel chain to any existing deformers in
+the history of the object. A blendShape is inserted to blend the parallel
+results together.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprune">
+          <code><b>-prune</b>(<b>-pr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Removes any points not being deformed by the deformer in
+its current configuration from the deformer set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>-remove</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that objects listed after the -g flag should
+be removed from this deformer.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresetTargetDelta">
+          <code><b>-resetTargetDelta</b>(<b>-rtd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove all delta values for points in the target geometry,
+including all sequential targets defined by target index.
+<br>Parameter list:
+<ol>
+<li>uint: the base object index</li>
+<li>uint: the target index</li>
+</ol>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsplit">
+          <code><b>-split</b>(<b>-sp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Branches off a new chain in the dependency graph instead
+of inserting/appending the deformer into/onto an
+existing chain.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsuppressDialog">
+          <code><b>-suppressDialog</b>(<b>-sd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Suppress dialog box and run the command as defined by the user.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsymmetryAxis">
+          <code><b>-symmetryAxis</b>(<b>-sa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Axis for symmetry. Valid values are &quot;X&quot;, &quot;Y&quot;, and &quot;Z&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsymmetryEdge">
+          <code><b>-symmetryEdge</b>(<b>-se</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+One or two symmetry edge names, separated by a &quot;.&quot;. See the blendShape node's
+symmetryEdge attribute for legal values.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsymmetrySpace">
+          <code><b>-symmetrySpace</b>(<b>-ss</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Space for symmetry. 0 = Topological, 1 = Object, 2 = UV
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtangentSpace">
+          <code><b>-tangentSpace</b>(<b>-ts</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicate that the delta of the specified target should be relative to
+the tangent space of the surface.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtarget">
+          <code><b>-target</b>(<b>-t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string uint string float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set target object as the index target shape for the base shape base
+object. The full influence of target shape takes effect when its shape
+weight is targetValue.
+<br>Parameter list:
+<ol>
+<li>string: the base object</li>
+<li>int: index</li>
+<li>string: the target object</li>
+<li>double: target value</li>
+</ol>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtopologyCheck">
+          <code><b>-topologyCheck</b>(<b>-tc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the state of checking for a topology match between the
+shapes being blended. Default is on.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransform">
+          <code><b>-transform</b>(<b>-tr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set transform for target, then the deltas will become relative to a post transform. Typically the
+best workflow for this option is to choose a joint that is related to the fix you have introduced.
+This flag should be used only if the &quot;Deformation order&quot; of blendShape node is &quot;Before&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweight">
+          <code><b>-weight</b>(<b>-w</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the weight value (second parameter) at index (first parameter).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweightCount">
+          <code><b>-weightCount</b>(<b>-wc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the number of shape weight values.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+//
+// Perform a blendShape using the currently-selected objects.
+// The lead (last-selected) object will be the base shape, and each
+// of the others become targets.
+//
+blendShape;
+
+//
+// Create a blendShape that starts with curve3 as the base, and blends
+// in curve1 and curve2 as targets.
+
+blendShape curve1 curve2 curve3;
+
+//
+// Apply 80% of the total blendShape deformation, by setting
+// the envelope parameter to 0.8
+blendShape -edit -en 0.8 blendShape1;
+
+//
+// Set the weights for the first two target shapes to 0.6
+// and 0.1 respectively
+blendShape -edit -w 0 0.6 -w 1 0.1 blendShape1;
+
+//
+// Add a third target (target1) to the blendShape on curve3
+blendShape -edit -t curve3 2 target1 1.0 blendShape1;
+
+//
+// Add &quot;smirk&quot;, an inbetween on the third target for base
+// shape curve3. The inbetween will take effect at a weight of 0.2
+blendShape -edit -ib -t curve3 2 smirk 0.2 blendShape1;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

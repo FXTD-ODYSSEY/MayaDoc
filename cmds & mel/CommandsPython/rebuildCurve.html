@@ -1,0 +1,766 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>rebuildCurve command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-rebuildCurve"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/rebuildCurve.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>rebuildCurve </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Curves" target="contentFrame">Curves</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("rebuildCurve.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>rebuildCurve(
+curve [curve]
+    , [<a href="#flagcaching">caching</a>=<i>boolean</i>], [<a href="#flagconstructionHistory">constructionHistory</a>=<i>boolean</i>], [<a href="#flagdegree">degree</a>=<i>int</i>], [<a href="#flagendKnots">endKnots</a>=<i>int</i>], [<a href="#flagfitRebuild">fitRebuild</a>=<i>boolean</i>], [<a href="#flagkeepControlPoints">keepControlPoints</a>=<i>boolean</i>], [<a href="#flagkeepEndPoints">keepEndPoints</a>=<i>boolean</i>], [<a href="#flagkeepRange">keepRange</a>=<i>int</i>], [<a href="#flagkeepTangents">keepTangents</a>=<i>boolean</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagnodeState">nodeState</a>=<i>int</i>], [<a href="#flagobject">object</a>=<i>boolean</i>], [<a href="#flagrange">range</a>=<i>boolean</i>], [<a href="#flagrebuildType">rebuildType</a>=<i>int</i>], [<a href="#flagreplaceOriginal">replaceOriginal</a>=<i>boolean</i>], [<a href="#flagsmartSurfaceCurveRebuild">smartSurfaceCurveRebuild</a>=<i>boolean</i>], [<a href="#flagspans">spans</a>=<i>int</i>], [<a href="#flagtolerance">tolerance</a>=<i>linear</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>rebuildCurve is undoable, queryable, and editable.</p>
+      This command rebuilds a curve by modifying its parameterization.
+In some cases the shape may also change. The rebuildType (-rt)
+determines how the curve is to be rebuilt.
+<p>
+The optional second curve can be used to specify a reference
+parameterization.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>Object name and node name</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="fitBspline.html">fitBspline</a>, <a href="smoothCurve.html">smoothCurve</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcaching">caching</a>, <a href="#flagconstructionHistory">constructionHistory</a>, <a href="#flagdegree">degree</a>, <a href="#flagendKnots">endKnots</a>, <a href="#flagfitRebuild">fitRebuild</a>, <a href="#flagkeepControlPoints">keepControlPoints</a>, <a href="#flagkeepEndPoints">keepEndPoints</a>, <a href="#flagkeepRange">keepRange</a>, <a href="#flagkeepTangents">keepTangents</a>, <a href="#flagname">name</a>, <a href="#flagnodeState">nodeState</a>, <a href="#flagobject">object</a>, <a href="#flagrange">range</a>, <a href="#flagrebuildType">rebuildType</a>, <a href="#flagreplaceOriginal">replaceOriginal</a>, <a href="#flagsmartSurfaceCurveRebuild">smartSurfaceCurveRebuild</a>, <a href="#flagspans">spans</a>, <a href="#flagtolerance">tolerance</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcaching">
+          <code><b>caching</b>(<b>cch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Toggle caching for all attributes so that no recomputation is needed
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdegree">
+          <code><b>degree</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The degree of the resulting curve
+1 - linear,
+2 - quadratic,
+3 - cubic,
+5 - quintic,
+7 - heptic
+<br><i>Default:</i> 3
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendKnots">
+          <code><b>endKnots</b>(<b>end</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+End conditions for the curve
+0 - uniform end knots,
+1 - multiple end knots,
+<br><i>Default:</i> 0
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfitRebuild">
+          <code><b>fitRebuild</b>(<b>fr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true use the least squares fit rebuild.
+Otherwise use the convert method.
+<br><i>Default:</i> true
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepControlPoints">
+          <code><b>keepControlPoints</b>(<b>kcp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, the CVs will remain the same.
+This forces uniform parameterization unless rebuildType is matchKnots.
+<br><i>Default:</i> false
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepEndPoints">
+          <code><b>keepEndPoints</b>(<b>kep</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, keep the endpoints the same.
+<br><i>Default:</i> true
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepRange">
+          <code><b>keepRange</b>(<b>kr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Determine the parameterization for the resulting curve.
+0 - reparameterize the resulting curve from 0 to 1,
+1 - keep the original curve parameterization,
+2 - reparameterize the result from 0 to number of spans
+<br><i>Default:</i> 1
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepTangents">
+          <code><b>keepTangents</b>(<b>kt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, keep the end tangents the same.
+<br><i>Default:</i> true
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeState">
+          <code><b>nodeState</b>(<b>nds</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+<p>
+Maya dependency nodes have 6 possible states.
+The <b>Normal (0)</b>, <b>HasNoEffect (1)</b>, and <b>Blocking (2)</b> states can be
+used to alter how the graph is evaluated.
+
+
+<p>
+The <b>Waiting-Normal (3)</b>, <b>Waiting-HasNoEffect (4)</b>, <b>Waiting-Blocking (5)</b>
+are for internal use only. They temporarily shut off parts of the graph during interaction
+(e.g., manipulation). The understanding is that once the operation is done,
+the state will be reset appropriately, e.g. <b>Waiting-Blocking</b> will reset
+back to <b>Blocking</b>.
+
+
+<p>
+The <b>Normal</b> and <b>Blocking</b> cases apply to all nodes, while
+<b>HasNoEffect</b> is node specific; many nodes do not support this option.
+Plug-ins store state in the <i>MPxNode::state</i> attribute. Anyone can set
+it or check this attribute.  Additional details about each of these 3 states follow.
+
+<p> 
+
+<table border="1">
+<tr>
+<th>State</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>Normal</b></td>
+<td>The normal node state. This is the default.</td>
+</tr>
+<tr>
+<td><b>HasNoEffect</b></td>
+<td>
+<p>
+The <b>HasNoEffect</b> option (a.k.a. pass-through), is used in cases where
+there is an operation on an input producing an output of the same data type.
+Nearly all deformers support this state, as do a few other nodes.
+As stated earlier, it is not supported by all nodes.
+
+<p>
+It’s typical to implement support for the <b>HasNoEffect</b> state in
+the node’s compute method and to perform appropriate operations.
+Plug-ins can also support <b>HasNoEffect</b>.
+
+<p>
+The usual implementation of this state is to copy the input directly to the
+matching output without applying the algorithm in the node. For deformers,
+applying this state leaves the input geometry undeformed on the output.
+
+</td>
+</tr>
+<tr>
+<td><b>Blocking</b></td>
+<td>
+<p>
+This is implemented in the depend node base class and applies to all nodes.
+<b>Blocking</b> is applied during the evaluation phase to connections.
+An evaluation request to a blocked connection will return as failures,
+causing the destination plug to retain its current value. Dirty propagation
+is indirectly affected by this state since blocked connections are never cleaned.
+
+<p>
+When a node is set to <b>Blocking</b> the behavior is supposed to be the same as
+if all outgoing connections were broken. As long as nobody requests evaluation
+of the blocked node directly it won’t evaluate after that. Note that a blocked
+node will still respond to <i>getAttr</i> requests but a <i>getAttr</i> on a
+downstream node will not reevaluate the blocked node.
+
+<p>
+Setting the root transform of a hierarchy to <b>Blocking</b> won’t automatically
+influence child transforms in the hierarchy. To do this, you’d need to
+explicitly set all child nodes to the <b>Blocking</b> state.
+
+<p>
+For example, to set all child transforms to <b>Blocking</b>, you could use the
+following script.
+
+<pre>
+
+import maya.cmds as cmds
+def blockTree(root):
+nodesToBlock = []
+for node in {child:1 for child in cmds.listRelatives( root, path=True, allDescendents=True )}.keys():
+nodesToBlock += cmds.listConnections(node, source=True, destination=True )
+for node in {source:1 for source in nodesToBlock}.keys():
+cmds.setAttr( '%s.nodeState' % node, 2 )
+
+</pre>
+<p>
+Applying this script would continue to draw objects but things would not be animated.
+
+</td>
+</tr>
+</table>
+<br><i>Default:</i> kdnNormal
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrebuildType">
+          <code><b>rebuildType</b>(<b>rt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+How to rebuild the input curve.
+0 - uniform,
+1 - reduce spans,
+2 - match knots,
+3 - remove multiple knots,
+4 - curvature
+5 - rebuild ends
+6 - clean
+<br><i>Default:</i> 0
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsmartSurfaceCurveRebuild">
+          <code><b>smartSurfaceCurveRebuild</b>(<b>scr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, curve on surface is rebuild in 3D and 2D info is kept
+<br><i>Default:</i> false
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagspans">
+          <code><b>spans</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The number of spans in resulting curve
+Used only if rebuildType is uniform.
+<br><i>Default:</i> 4
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtolerance">
+          <code><b>tolerance</b>(<b>tol</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The tolerance with which to rebuild.
+<br><i>Default:</i> 0.01
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Common flags</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconstructionHistory">
+          <code><b>constructionHistory</b>(<b>ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn the construction history on or off.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the name of the newly-created node. If it contains
+namespace path, the new node will be created under the
+specified namespace; if the namespace does not exist, it
+will be created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobject">
+          <code><b>object</b>(<b>o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create the result, or just the dependency node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrange">
+          <code><b>range</b>(<b>rn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Force a curve range on complete input curve.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceOriginal">
+          <code><b>replaceOriginal</b>(<b>rpo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create &quot;in place&quot; (i.e., replace).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# rebuild curve to 5 uniform spans
+cmds.rebuildCurve( rt=0, s=5 )
+
+# rebuild curve by reducing redundant spans
+cmds.rebuildCurve( rt=1 )
+
+# rebuild curve by matching the parameterization of another curve
+# curve1 is the curve to rebuild
+# curve2 is the reference curve
+cmds.rebuildCurve( 'curve1', 'curve2', rt=2 )
+
+# rebuild curve by removing all multiple interior knots
+cmds.rebuildCurve( rt=3 )
+
+# rebuild curve using the curvature of the curve
+# to create more spans where curvature is higher
+cmds.rebuildCurve( rt=4 )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

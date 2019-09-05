@@ -1,0 +1,449 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>referenceEdit command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-referenceEdit"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/referenceEdit.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>referenceEdit </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("referenceEdit.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>referenceEdit([<a href="#flagapplyFailedEdits">applyFailedEdits</a>=<i>boolean</i>], [<a href="#flagchangeEditTarget">changeEditTarget</a>=<i>[string, string]</i>], [<a href="#flageditCommand">editCommand</a>=<i>string</i>], [<a href="#flagfailedEdits">failedEdits</a>=<i>boolean</i>], [<a href="#flagonReferenceNode">onReferenceNode</a>=<i>string</i>], [<a href="#flagremoveEdits">removeEdits</a>=<i>boolean</i>], [<a href="#flagsuccessfulEdits">successfulEdits</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>referenceEdit is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Use this command to remove and change the modifications which have
+been applied to references. A valid commandTarget is either a reference node,
+a reference file, a node in a reference, or a plug from a reference.
+Only modifications that have been made from the currently open scene can
+be changed or removed. The 'referenceQuery -topReference' command can be used
+to determine what modifications have been made to a given commandTarget.
+Additionally only unapplied edits will be affected. Edits are unapplied
+when the node(s) which they affect are unloaded, or when they could
+not be successfully applied. By default this command only works on failed
+edits (this can be adjusted using the &quot;-failedEdits&quot; and
+&quot;-successfulEdits&quot; flags).
+Specifying a reference node as the command target is equivalent to
+specifying every node in the target reference file as a target. In this
+situation the results may differ depending on whether the target
+reference is loaded or unloaded. When it is unloaded, edits that affect both
+a node in the target reference and a node in one of its descendant references
+may be missed (e.g. those edits may not be removed). This is because when a
+reference is unloaded Maya no longer retains detailed information about which
+nodes belong to it. However, edits that only affect nodes in the target reference
+or in one of its ancestral references should be removed as expected.
+When the flags -removeEdits and -editCommand are used together, by default
+all connectAttr edits are removed from the specified source object. To remove
+only edits that connect to a specific target object, the target object can be
+passed as an additional argument to the command. This narrows the match criteria,
+so that only edits that connect the source object to the provided target in this
+additional argument are removed. See the example below.
+NOTE:
+When specifying a plug it is important to use the appropriate long attribute
+name.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      <h2><a name="hKeywords">Keywords</a></h2>reference, attribute, node
+      <h2><a name="hRelated">Related</a></h2><a href="file.html">file</a>, <a href="referenceQuery.html">referenceQuery</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagapplyFailedEdits">applyFailedEdits</a>, <a href="#flagchangeEditTarget">changeEditTarget</a>, <a href="#flageditCommand">editCommand</a>, <a href="#flagfailedEdits">failedEdits</a>, <a href="#flagonReferenceNode">onReferenceNode</a>, <a href="#flagremoveEdits">removeEdits</a>, <a href="#flagsuccessfulEdits">successfulEdits</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagapplyFailedEdits">
+          <code><b>applyFailedEdits</b>(<b>afe</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Attempts to apply any unapplied edits. This flag is useful if previously
+failing edits have been fixed using the -changeEditTarget flag. This flag
+can only be used on loaded references. If the command target is a referenced
+node, the associated reference is used instead.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchangeEditTarget">
+          <code><b>changeEditTarget</b>(<b>cet</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to change a target of the specified edits.
+This flag takes two parameters: the old target of the edits, and the
+new target to change it to. The target can either be a node name (&quot;node&quot;), a
+node and attribute name (&quot;node.attr&quot;), or just an attribute name (&quot;.attr&quot;).
+If an edit currently affects the old target, it will be changed to affect
+the new target.
+Flag 'referenceQuery' should be used to determine the format of the edit targets.
+As an example most edits store the long name of the attribute
+(e.g. &quot;translateX&quot;), so when specifying the old target, a long name must also
+be used. If the short name is specified (e.g. &quot;tx&quot;), chances are the edit
+won't be retargeted.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfailedEdits">
+          <code><b>failedEdits</b>(<b>fld</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a secondary flag used to indicate whether or not failed
+edits should be acted on (e.g. queried, removed, etc...). A failed
+edit is an edit which could not be successfully applied the last
+time its reference was loaded.
+An edit can fail for a variety of reasons (e.g. the referenced
+node to which it applies was removed from the referenced file).
+By default failed edits will be acted on.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveEdits">
+          <code><b>removeEdits</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove edits which affect the specified unloaded commandTarget.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsuccessfulEdits">
+          <code><b>successfulEdits</b>(<b>scs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a secondary flag used to indicate whether or not successful
+edits should be acted on (e.g. queried, removed, etc...). A successful
+edit is any edit which was successfully applied the last time its
+reference was loaded. This flag will have no affect if the
+commandTarget is loaded.
+By default successful edits will not be acted on.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditCommand">
+          <code><b>editCommand</b>(<b>ec</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a secondary flag used to indicate which type of reference edits should
+be considered by the command.
+If this flag is not specified all edit types will be included.
+This flag requires a string parameter. Valid values are: &quot;addAttr&quot;,
+&quot;connectAttr&quot;, &quot;deleteAttr&quot;, &quot;disconnectAttr&quot;, &quot;parent&quot;, &quot;setAttr&quot;,
+&quot;lock&quot; and &quot;unlock&quot;. In some contexts, this flag may be specified
+more than once to specify multiple edit types to consider.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagonReferenceNode">
+          <code><b>onReferenceNode</b>(<b>orn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a secondary flag used to indicate that only those edits which are stored
+on the indicated reference node should be considered. This flag only supports
+multiple uses when specified with the &quot;exportEdits&quot; command.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+#
+# EXAMPLE FOR -removeEdits
+#
+# Assume:
+# main.ma contains a reference to mid.ma.
+# mid.ma contains a reference to bot.ma.
+
+# NOTE: The target reference must be unloaded for the
+# following commands to work.
+
+# Remove all the edits which apply to mid.ma.
+# This can be done by specifying either the reference
+# node or the reference file.
+cmds.referenceEdit( 'midRN', removeEdits=True )
+cmds.referenceEdit( 'mid.ma', removeEdits=True )
+
+# Remove all &quot;setAttr&quot; edits which apply to mid.ma.
+# This can be done by specifying either the reference
+# node or the reference file.
+cmds.referenceEdit( 'midRN', editCommand='setAttr', removeEdits=True )
+cmds.referenceEdit( 'mid.ma', editCommand='setAttr', removeEdits=True )
+
+# Remove all the &quot;parent&quot; edits which apply to mid:pSphere1.
+cmds.referenceEdit( 'mid:pSphere1', editCommand='parent', removeEdits=True )
+
+# Remove all the &quot;connectAttr&quot; edits which apply to mid:pSphere1.translateX.
+cmds.referenceEdit( 'mid:pSphere1.translateX', editCommand='connectAttr', removeEdits=True )
+
+#Remove the &quot;connectAttr&quot; edit having mid:pSphere1.translateX as a source and mid:pSphere2.translateX as a destination.
+cmds.referenceEdit( [&quot;|mid:pSphere1.translateX&quot;, &quot;|mid:pSphere2.translateX&quot;], failedEdits = True, successfulEdits = True, editCommand = 'connectAttr', removeEdits = True )
+
+# Remove all the edits which apply to bot.ma and are stored on midRN.
+# The referenceEdit command is only capable of removing edits which
+# are stored on a top level reference node. The only edits which
+# are stored on a top level reference node are those which were made
+# from the main scene. If the file mid.ma was previously opened and
+# modifications were made to bot.ma, those edits can only be removed
+# by opening mid.ma and issuing a referenceEdit command.
+#
+cmds.referenceEdit( 'mid:botRN', removeEdits=True )
+cmds.referenceEdit( 'bot.ma', removeEdits=True )
+
+#
+# EXAMPLE FOR -changeEditTarget
+#
+tempDir = cmds.internalVar(utd=True)
+
+# Create a reference containing pSphere1.
+#
+cmds.file( f=True, new=True )
+cmds.polySphere( ch=1, r=1, sx=20, sy=20, ax=(0, 1, 0) )
+newFileName = '%sref.ma' % tempDir
+cmds.file( rename=newFileName )
+cmds.file( f=True, s=True, type='mayaAscii')
+
+# Reference the file in and position pSphere1
+#
+cmds.file( f=True, new=True )
+cmds.file( newFileName, r=True, ns='ref' )
+cmds.select( 'ref:pSphere1', r=True )
+cmds.move( 5, 5, 5 )
+topFileName = '%stop.ma' % tempDir
+cmds.file( rename=topFileName )
+cmds.file( f=True, s=True, type='mayaAscii')
+
+# Later on its determined that pSphere1 is actually
+# BobMrozowski.
+#
+cmds.file( newFileName, f=True, o=True )
+cmds.rename( 'pSphere1', 'BobMrozowski' )
+cmds.file( f=True, s=True, type='mayaAscii')
+
+# Now go to open your main scene again...
+#
+cmds.file( topFileName, f=True, o=True )
+# ... and notice that BobMrozowski is back at
+# the origin.
+#
+# So remap all edits so that anything that used to
+# affect ref:pSphere1 now affects ref:BobMrozowski...
+#
+cmds.referenceEdit( 'refRN', changeEditTarget=('ref:pSphere1','ref:BobMrozowski') )
+# ... and then force all previously failing edits affecting
+# refRN to be re-applied.
+#
+cmds.referenceEdit( 'refRN', applyFailedEdits=True )
+# BobMrozowski should now be back at 5 5 5.
+#
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,271 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>flow command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-flow"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/flow.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>flow </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("flow.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>flow(
+objects
+    , [<a href="#flagdivisions">divisions</a>=<i>[uint, uint, uint]</i>], [<a href="#flaglocalCompute">localCompute</a>=<i>boolean</i>], [<a href="#flaglocalDivisions">localDivisions</a>=<i>[uint, uint, uint]</i>], [<a href="#flagobjectCentered">objectCentered</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>flow is undoable, queryable, and editable.</p>
+      The flow command creates a deformation lattice to `bend' the object
+that is animated along a curve of a motion path animation.
+The motion path animation has to have the follow option set to be on.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>The names of the created flow node and associated
+lattice nodes.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdivisions">divisions</a>, <a href="#flaglocalCompute">localCompute</a>, <a href="#flaglocalDivisions">localDivisions</a>, <a href="#flagobjectCentered">objectCentered</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdivisions">
+          <code><b>divisions</b>(<b>dv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[uint, uint, uint]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the number of lattice slices
+in x,y,z.<br>
+The default values are 2 5 2.<br>
+When queried, it returns the <i>uint32_t uint32_t uint32_t</i>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglocalCompute">
+          <code><b>localCompute</b>(<b>lc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies whether or not to have local
+control over the object deformation.<br>
+Default value:
+is on when the lattice is around the curve, and
+is off when the lattice is around the object. <br>
+When queried, it returns a <i>boolean</i>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglocalDivisions">
+          <code><b>localDivisions</b>(<b>ld</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[uint, uint, uint]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the extent of the region of effect.<br>
+Default values are 2 2 2.<br>
+When queried, it returns the <i>uint32_t uint32_t uint32_t</i>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobjectCentered">
+          <code><b>objectCentered</b>(<b>oc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies whether to create the lattice around
+the selected object at its center, or to create the lattice
+around the curve.<br>
+Default value is true.<br>
+When queried, it returns a <i>boolean</i>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Create a simple motion path animation
+
+# create a path, e,g, a curve
+path = cmds.curve(d=3,p=[(-10, 0, 0),(-6, 0, 10),(-3, 0, -10),(10, 0, 0)],k=[0, 0, 0, 1, 1, 1])
+
+# create an object, e.g. a sphere
+object = cmds.sphere()
+cmds.scale( 0.5, 2.0, 0.2 )
+
+# animate the object using a motion path with follow on for 30 frames
+cmds.pathAnimation( object[0], f=1, stu=0, etu=30, c=path )
+
+# select only the animated object
+cmds.select( object[0], r=True )
+
+# Create flow deformation on the selected object with default values:
+cmds.flow()
+
+# Create flow deformation on the selected object with
+# the lattice around the path, and lattice division of 3,20,2:
+cmds.flow( oc=False, dv=(3, 20, 2) )
+
+# Create flow deformation on the selected object with
+# lattice subdivisions 4, 7, and 3:
+
+cmds.flow( dv=(4, 7, 3) )
+
+# When the object is not currently selected, the name of the object
+# has to be specified in the command line (note: $object[0] has to
+# have a motion path animation):
+
+cmds.flow( object[0], dv=(4, 7, 3) )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

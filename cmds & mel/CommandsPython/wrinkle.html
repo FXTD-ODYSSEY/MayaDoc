@@ -1,0 +1,488 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>wrinkle command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-wrinkle"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/wrinkle.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>wrinkle </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Deformation" target="contentFrame">Deformation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("wrinkle.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>wrinkle(
+objects
+    , [<a href="#flagaxis">axis</a>=<i>[linear, linear, linear]</i>], [<a href="#flagbranchCount">branchCount</a>=<i>uint</i>], [<a href="#flagbranchDepth">branchDepth</a>=<i>uint</i>], [<a href="#flagcenter">center</a>=<i>[linear, linear, linear]</i>], [<a href="#flagcrease">crease</a>=<i>string</i>], [<a href="#flagdropoffDistance">dropoffDistance</a>=<i>linear</i>], [<a href="#flagenvelope">envelope</a>=<i>linear</i>], [<a href="#flagrandomness">randomness</a>=<i>linear</i>], [<a href="#flagstyle">style</a>=<i>string</i>], [<a href="#flagthickness">thickness</a>=<i>linear</i>], [<a href="#flaguvSpace">uvSpace</a>=<i>[linear, linear, linear, linear, linear]</i>], [<a href="#flagwrinkleCount">wrinkleCount</a>=<i>uint</i>], [<a href="#flagwrinkleIntensity">wrinkleIntensity</a>=<i>linear</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>wrinkle is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The wrinkle command is used to create a network of wrinkles on a surface.
+It automatically creates a network of wrinkle curves that control a wire
+deformer. The wrinkle curves are attached to a cluster deformer.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>List of clusters created followed by list of wire deformers created.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="cluster.html">cluster</a>, <a href="deformer.html">deformer</a>, <a href="flexor.html">flexor</a>, <a href="lattice.html">lattice</a>, <a href="percent.html">percent</a>, <a href="sculpt.html">sculpt</a>, <a href="wire.html">wire</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaxis">axis</a>, <a href="#flagbranchCount">branchCount</a>, <a href="#flagbranchDepth">branchDepth</a>, <a href="#flagcenter">center</a>, <a href="#flagcrease">crease</a>, <a href="#flagdropoffDistance">dropoffDistance</a>, <a href="#flagenvelope">envelope</a>, <a href="#flagrandomness">randomness</a>, <a href="#flagstyle">style</a>, <a href="#flagthickness">thickness</a>, <a href="#flaguvSpace">uvSpace</a>, <a href="#flagwrinkleCount">wrinkleCount</a>, <a href="#flagwrinkleIntensity">wrinkleIntensity</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaxis">
+          <code><b>axis</b>(<b>ax</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[linear, linear, linear]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the plane of the wrinkle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbranchCount">
+          <code><b>branchCount</b>(<b>brc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the number of branches per wrinkle. Default is 2.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbranchDepth">
+          <code><b>branchDepth</b>(<b>bd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the depth of the branching. Default is 0.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcenter">
+          <code><b>center</b>(<b>ct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[linear, linear, linear]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the center of the wrinkle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcrease">
+          <code><b>crease</b>(<b>cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies an existing curve to serve as the wrinkle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdropoffDistance">
+          <code><b>dropoffDistance</b>(<b>dds</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the dropoff distance around the center.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenvelope">
+          <code><b>envelope</b>(<b>en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The envelope globally attenuates the amount of deformation. Default is 1.0.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrandomness">
+          <code><b>randomness</b>(<b>rnd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Amount of randomness. Default is 0.2.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstyle">
+          <code><b>style</b>(<b>st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the wrinkle style. Valid values are &quot;radial&quot; or &quot;tangential&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagthickness">
+          <code><b>thickness</b>(<b>th</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Wrinkle thickness. Default is 1.0.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvSpace">
+          <code><b>uvSpace</b>(<b>uv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[linear, linear, linear, linear, linear]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+1/2 length, 1/2 breadth, rotation angle, center u, v
+definition of a patch in uv space where the wrinkle is
+to be constructed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwrinkleCount">
+          <code><b>wrinkleCount</b>(<b>wc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the number of wrinkle lines to be generated.
+Default is 3.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwrinkleIntensity">
+          <code><b>wrinkleIntensity</b>(<b>wi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Increasing the intensity makes it more wrinkly. Default is 0.5.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Apply radial wrinkles to a sphere:
+
+mySph = cmds.sphere()
+cmds.wrinkle( mySph, st='radial', wc=3, brc=2, bd=0, th=1, rnd=0.2, wi=0.5, uv=(2.0, 4.0, 0.0, 2.0, 4.0) )
+
+# Apply a 5-line tangential wrinkle to a plane:
+
+myPlane = cmds.nurbsPlane( w=50, u=20, v=20 )
+cmds.wrinkle( myPlane, st='lines', wc=5, th=1.0, rnd=0.2, wi=0.5, uv=(1.0, 1.0, 0.0, 0.5, 0.5) )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

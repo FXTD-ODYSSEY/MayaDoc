@@ -1,0 +1,127 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>makeRoll command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-makeRoll"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>makeRoll </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("makeRoll.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+makeRoll objectName groundHeight boxSimulation diameter
+<br>
+
+	 </code> </p>
+      
+      Creates an expression that simulates rolling an object on the ground.
+The rotation of the specified object is set based on the change in
+position from the last time the expression was evaluated. The start
+rotation values(for frame 1) are initially cached in dynamic
+attributes added to the object: startRotX,Y and Z. Look under the extra
+attributes block in the attribute editor to change these values.
+Note that one should keyframe the X and Z position of the object to
+animate, but not key the rotate values because the expression sets
+these using rotate commands. When the animation is satisfactory one
+should then bake the result, as scrubbing the time slider or rendering
+will otherwise have inconsistent results.
+Note that when the current frame is greater than 1 you can
+interactively move the object in x and z while seeing the effect
+of the rolling rotation.
+If you are using radians for your rotate values, you will need to
+remove &quot;rad_to_deg&quot; from the created expression.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name=""><b></b></a></td><td><i></i></td><td>None.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>	<i>// Create a 1 unit sphere rolling on the groundplane
+</i>
+  sphere;
+  makeRoll nurbsSphere1 0.0 false 1.0;
+
+	<i>// Create a rectangular prism rolling on the groundplane
+</i>
+  nurbsCube;
+  scale -r 1 2 3;
+  makeRoll nurbsSphere1 0.0 true 1.0;
+
+	<i>// Create a card rolling on the groundplane
+</i>
+  plane;
+  scale -r 1 0.7 1;
+  makeRoll plane1 0.0 true 1.0;
+
+	<i>// Create a torus rolling on the groundplane
+</i>
+  torus -ax 0 1 0 -hr 0.5;
+  makeRoll nurbsTorus1 0.0 true 0.5;
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

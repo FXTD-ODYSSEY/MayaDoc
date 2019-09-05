@@ -1,0 +1,337 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>dynExpression command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-dynExpression"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/dynExpression.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>dynExpression </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Dynamics" target="contentFrame">Dynamics</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("dynExpression.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>dynExpression [-<a href="#flagcreation">creation</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagruntime">runtime</a>] [-<a href="#flagruntimeAfterDynamics">runtimeAfterDynamics</a>] [-<a href="#flagruntimeBeforeDynamics">runtimeBeforeDynamics</a>] [-<a href="#flagstring">string</a> <i>string</i>] 
+selectionItem
+     </code> </p>
+      <p>dynExpression is undoable, queryable, and editable.</p>
+      This command describes an expression that belongs to the specified
+particle shape.  The expression is a block of code of unlimited length
+with a C-like syntax that can perform conversions, mathematical
+operations, and logical decision making on any numeric attribute(s) or
+per-particle attribute(s) in the scene.  One expression can read and
+alter any number of these attributes.  Every particle shape in your
+scene has three expressions, one for the runtimeBeforeDynamics, one
+for the runtimeAfterDynamics and one for creation time.  The create
+expression gets executed for every particle in the object whose age is
+0.0.  The runtime expression gets executed for each particle with an
+age greater then 0.0.  Unlike expressions created with the
+<b>expression</b> command, particle expressions always exist and are a
+part of the owning particle object's shape.  They default to empty
+strings, but they are always there.  Because of this, there is no need
+to use the '-e' flag.  Every call to the dynExpression command is
+considered an edit by default.  Per-particle attributes are those
+attributes of a particle shape that have a potentially different value
+for each particle in the object.  Examples of these include
+<b>position</b> and <b>velocity</b>.
+<p>
+If this command is being sent by the command line or in a script, then
+the user should be sure to embed escaped newlines (\n), tabs (\t) for
+clarity when reading them in the expression editor.  Also, quotes in
+an expression must be escaped (\&quot;) so that they are not confused by
+the system as the end of your string.  When using the expression
+editor, these characters are escaped for you unless they are already
+within quotes.
+<p>
+This type of expression is executed during the evaluation of the
+dynamics.  If an output of the expression is requested before that,
+then the dynamics will be force to compute at that time.  If dynamics
+is disabled, then these expressions will have no effect.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The particle shape which this expression belongs to</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="particle.html">particle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcreation">creation</a>, <a href="#flagname">name</a>, <a href="#flagruntime">runtime</a>, <a href="#flagruntimeAfterDynamics">runtimeAfterDynamics</a>, <a href="#flagruntimeBeforeDynamics">runtimeBeforeDynamics</a>, <a href="#flagstring">string</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreation">
+          <code><b>-creation</b>(<b>-c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tells the command that the string passed will be a
+creation expression for the particle shape.  This means that
+this expression will be executed when a particle is emitted
+or at the beginning of the scene for existing particles.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name to use for this command
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagruntime">
+          <code><b>-runtime</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tells the command that the string passed will be a
+runtime expression for the particle shape.  This expression
+will be executed at the beginning of runtime.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagruntimeAfterDynamics">
+          <code><b>-runtimeAfterDynamics</b>(<b>-rad</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tells the command that the string passed will be a
+runtime expression for the particle shape.  This expression
+will be executed after dynamics whenever a particle's age
+is greater then zero (0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagruntimeBeforeDynamics">
+          <code><b>-runtimeBeforeDynamics</b>(<b>-rbd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tells the command that the string passed will be a
+runtime expression for the particle shape.  This expression
+will be executed before dynamics whenever a particle's age
+is greater then zero (0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstring">
+          <code><b>-string</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the expression string. This is queriable with the -q/query flag and the -rbd/runtimeBeforeDynamics,
+the -rab/runtimeAfterDynamics or the -c/creation flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+dynExpression -c -s &quot;rgbPP = &lt;&lt; 1, 0, 0 &gt;&gt;;&quot; particleShape1;
+
+// This expression tells particleShape1 that whenever new particles are
+// created for this object, then their color should start out as &lt;&lt; 1, 0, 0 &gt;&gt;,
+// which is red.
+
+dynExpression -rbd -s &quot;rgbPP = rgbPP * .9;&quot; particleShape1;
+
+// This sets the runtime before dynamics expression for rgbPP.  When a particle is
+// first &quot;born&quot;, its color will be red from the previous example.  Every other frame after
+// that, its color is reduced by 10 percent each time the expression is executed.
+
+dynExpression -rad -s &quot;rgbPP = rgbPP * .9;&quot; particleShape1;
+
+// This sets the runtime after dynamics expression for rgbPP.  When a particle is
+// first &quot;born&quot;, its color will be red from the previous example.  Every other frame after
+// that, its color is reduced by 10 percent each time the expression is executed.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

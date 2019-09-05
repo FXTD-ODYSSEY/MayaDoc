@@ -1,0 +1,160 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>rand command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-rand"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>rand </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Math" target="contentFrame">Math</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("rand.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>rand 
+[string|int] float|vector [float|vector]
+     </code> </p>
+      <p>rand is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The command returns random numbers evenly distributed over the
+range 0-&gt;range or in the case of the second version between
+start_range and end_range. The vector version generates an
+independent random number for each of the three components.
+<p>
+<b>Multiple random number streams:</b><br>
+The three stream-based variants of <i>rand</i> accept a
+stream name parameter which specifies the name of the random number
+stream to use when generating random numbers. For details on
+random number streams please refer to the section &quot;An overview of
+MEL's multiple random number stream support&quot; later in this document.
+The behaviour of the
+function is identical to the non-stream versions with the exception
+that random number generation is performed from the specified rather
+than the default random number stream. The first two stream-based
+variants take a string which specifies the stream name. The third
+variant takes an integer as the stream name (this is a convenience
+function which internally converts the integer to a string in the event
+the use wants to work with numeric-only stream names).
+<p>
+<b>An overview of MEL's multiple random number stream support:</b><br>
+The random numbers returned by <i>rand</i>, <i>sphrand</i> and
+<i>gauss</i> all follow a fixed sequence (called a <i>random
+number stream</i>). Prior to the addition of multiple random number
+streams to Maya, the only way to ensure repeatability was to
+explicitely reseed the generator using the <i>seed</i> function.
+There are, however, cases where random calls occur in arbitrary
+order and reseeding is either impossible or impractical.
+<p>
+To resolve this issue, MEL supports an arbitrary number of user-defined
+random number streams. Each MEL random call (<i>rand</i>, <i>sphrand</i>,
+<i>gauss</i>, etc) allows a stream name to be provided which identifies
+the random stream to be used during random number generation. Streams are
+created implicitely: each MEL random function checks first if the stream
+exists and if not, it is created and seeded with an internal default.
+The internal default is identical so that the default and user-defined
+streams always generate the same sequence of numbers when generated
+via an identical set of random calls. (This repeatability can be
+avoided by manually reseeding the stream via the <i>seed</i> function).
+Stream names may be any user-defined string not containing a &quot;*&quot; as a
+character. The stream named &quot;default&quot; is pre-defined and refers to the
+standard stream used by the non-stream-based MEL random calls.
+The intent with random number streams is that the user can target
+specific areas of MEL random calls to use dedicated random number
+streams and thus ensure repeatability of the random numbers which
+are generated.
+<p>
+Internally, streams are managed through an efficient database,
+so it is not unreasonable to allocate large stream counts (e.g.
+100,000 streams). Streams may be deleted via the <i>delrandstr</i>
+function. The state of a random number stream may be queried via the
+<i>randstate</i> function.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>float|vector</i></td><td>Command result</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="delrandstr.html">delrandstr</a>, <a href="gauss.html">gauss</a>, <a href="seed.html">seed</a>, <a href="sphrand.html">sphrand</a>
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+   rand 42;
+   // Result: 39.1327 //
+   rand 42;
+   // Result: 23.8585 //
+   rand -80 42;
+   // Result: -12.1565 //
+   rand &lt;&lt;1,1,1&gt;&gt;;
+   // Result: &lt;&lt;0.531557, 0.920261, 0.515431&gt;&gt;  //
+   rand &lt;&lt;1,1,1&gt;&gt; &lt;&lt;100, 200, 300&gt;&gt;;
+   // Result: &lt;&lt;81.2325, 38.4956, 266.008&gt;&gt;  //
+
+// &lt;b&gt;Multiple random number stream examples:&lt;/b&gt;&lt;br&gt;
+   string $s1 = &quot;stream1&quot;;
+   // Result: stream1 //
+   rand $s1 42;
+   // Result: 39.1327 //
+   rand $s1 42;
+   // Result: 23.8585 //
+   string $s2 = &quot;stream2&quot;;
+   // Result: s2 //
+   rand $s2 42;
+   // Result: 39.1327 //
+   rand $s2 42;
+   // Result: 23.8585 //
+
+   // Example using the convenience method which allows an integer to be used
+   // as the stream name:
+   // Assume `particleID' is an integer... //
+   rand particleID -80 42;
+   // Result: 33.6711 //
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

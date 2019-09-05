@@ -1,0 +1,581 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>hudButton command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-hudButton"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/hudButton.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>hudButton </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#Controls" target="contentFrame">Controls</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("hudButton.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>hudButton([string], [<a href="#flagallowOverlap">allowOverlap</a>=<i>boolean</i>], [<a href="#flagblock">block</a>=<i>int</i>], [<a href="#flagblockAlignment">blockAlignment</a>=<i>string</i>], [<a href="#flagblockSize">blockSize</a>=<i>string</i>], [<a href="#flagbuttonShape">buttonShape</a>=<i>string</i>], [<a href="#flagbuttonWidth">buttonWidth</a>=<i>int</i>], [<a href="#flaglabel">label</a>=<i>string</i>], [<a href="#flaglabelFontSize">labelFontSize</a>=<i>string</i>], [<a href="#flagpadding">padding</a>=<i>int</i>], [<a href="#flagpressCommand">pressCommand</a>=<i>script</i>], [<a href="#flagreleaseCommand">releaseCommand</a>=<i>script</i>], [<a href="#flagsection">section</a>=<i>int</i>], [<a href="#flagvisible">visible</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>hudButton is <b>NOT undoable</b>, queryable, and editable.</p>
+      This command creates a Heads-up Display (HUD) button control which is placed in
+a 2D inactive overlay plane on the 3D viewport. It is to be used to provide hands-on
+interaction designated by a user script. The HUD button is derived from
+a generic HUD object and thus inherits a similar workflow.
+<p>
+Although this command provides much of the same functionality as the headsUpDisplay
+command, it does not provide headsUpDisplay layout controls such as layoutVisibility,
+nextFreeBlock, lastOccupiedBlock, exists, remove, etc. To access that functionality,
+please use the headsUpDisplay command. This command is focused solely around the creation
+and management of HUD button controls. Similarly, all operations performed by
+this command are limited to HUDs that are button controls.
+<p>
+The only mandatory flags, on creation are the section and block flags.
+<p>
+Like the headsUpDisplay command, upon creation of a HUD button, an ID number
+will be assigned to it. This can be used to remove the HUD via the headsUpDisplay
+command (-rid/removeID [int IDNumber]), if desired. Alternatively, the headsUpDisplay
+command can remove HUD objects via their position (section and block),
+or their unique name.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>ID number of the Heads-Up Display (HUD).</td></tr><tr><td valign="top"><i>string|int|int[2]</i></td><td>HUD name, HUD ID or Section and block value, for respective remove commands.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>hud, headsupdisplay, button, hudbutton
+      <h2><a name="hRelated">Related</a></h2><a href="button.html">button</a>, <a href="headsUpDisplay.html">headsUpDisplay</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallowOverlap">allowOverlap</a>, <a href="#flagblock">block</a>, <a href="#flagblockAlignment">blockAlignment</a>, <a href="#flagblockSize">blockSize</a>, <a href="#flagbuttonShape">buttonShape</a>, <a href="#flagbuttonWidth">buttonWidth</a>, <a href="#flaglabel">label</a>, <a href="#flaglabelFontSize">labelFontSize</a>, <a href="#flagpadding">padding</a>, <a href="#flagpressCommand">pressCommand</a>, <a href="#flagreleaseCommand">releaseCommand</a>, <a href="#flagsection">section</a>, <a href="#flagvisible">visible</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallowOverlap">
+          <code><b>allowOverlap</b>(<b>ao</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the Heads-Up Display to be visible regardless of overlapping section
+widths/limitations (see -s/section flag description for more details).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagblock">
+          <code><b>block</b>(<b>b</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Denotes the individual block that the HUD will reside in, within a
+section. Each section is composed of a single column of blocks.
+The total number of blocks contained within each section is variable.
+<p>
+The number of blocks that will be visible within each section is
+dependent on the size of blocks contained in each section and the
+current size of the window. Blocks begin enumerating from 0 and
+flexibly increase based on need.
+<p>
+For HUD buttons, the format differs from that of the standard HUD.
+The layout using parameters defined by the formatting flags listed
+below (eg. justify, padding, buttonWidth) is shown below:
+<pre>
+ __________________________________
+|     |     |          |     |     |
+|  P  |  J  |  Button  |  J  |  P  |
+|_____|_____|__________|_____|_____|
+P = Sub-block of width, padding
+J = Justification of the entire block
+Button = Sub-block of width, buttonWidth
+</pre>
+<p>
+<b>Block Positioning</b>
+<p>
+Blocks on the top section begin from the top edge of the main
+viewport, while the bottom section begins from the bottom edge.
+Blocks are dynamically removed from visibility from the midpoint
+of the viewport. So, a relatively large block number will not
+draw to the viewport.
+<p>
+Lastly, there can be at most one HUD occupying a block at any time.
+Trying to position a HUD in an occupied block will result in an error.
+Keep this in mind when positioning the HUD.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagblockAlignment">
+          <code><b>blockAlignment</b>(<b>ba</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the alignment of the block within its respective column. Available
+alignments are: &quot;center&quot;, &quot;left&quot; and &quot;right&quot;. The default alignment is &quot;left&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagblockSize">
+          <code><b>blockSize</b>(<b>bs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the height of each block. Available heights are: small, medium and large.
+In pixel measurements, each corresponds to a 20, 35 or 50 pixel height, respectively.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbuttonShape">
+          <code><b>buttonShape</b>(<b>bsh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the shape of the button. Available button shapes are:
+&quot;rectangle&quot; and &quot;roundRectangle&quot;. The first will draw a rectangular
+button, while the latter is a rectangle with rounded edges.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbuttonWidth">
+          <code><b>buttonWidth</b>(<b>bw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the width of the button.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglabel">
+          <code><b>label</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Text label of the HUD button.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglabelFontSize">
+          <code><b>labelFontSize</b>(<b>lfs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the font size of the label. Available sizes are: small and large.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpadding">
+          <code><b>padding</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the width of both the left and right margins of a block. Default
+value is 15 pixels.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpressCommand">
+          <code><b>pressCommand</b>(<b>pc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the procedure or script to run during a mouse click event.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreleaseCommand">
+          <code><b>releaseCommand</b>(<b>rc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the procedure or script to run during a mouse release event.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsection">
+          <code><b>section</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Defines the section the HUD will appear in. There are 10 sections
+divided across the screen. Five columns and two rows make up the
+ten element matrix which divide the main viewport. Here is a visual
+layout of the sections.
+<p><pre>
+ ________________________
+|    |    |    |    |    |
+|    |    |    |    |    |
+| 0  | 1  | 2  | 3  | 4  |
+|    |    |    |    |    |
+|____|____|____|____|____|
+|    |    |    |    |    |
+|    |    |    |    |    |
+| 5  | 6  | 7  | 8  | 9  |
+|    |    |    |    |    |
+|____|____|____|____|____|</pre><p>
+Each section is denoted by a number from 0 to 9 as illustrated above.
+For example, if the second column of the top row was desired, the
+section would be defined as: -sec 1
+<p>
+To prevent HUD objects from displaying over each other and causing a
+clutter of letters, each row has a defined visibility precedence,
+where each section would have a visibility priority level. Depending
+on each priority level, when the screen space begins to shrink to
+a point where the section widths of a given row begin to collide, the
+HUD automatically compensates for this by removing the sections of
+least priority. These sections are made invisible and a warning is
+issued to inform the user of the removal. This continues until only
+the section of highest priority remains.
+<p>
+For each row, the priorities are defined as follows. Using the top
+row as an example: Section 0, has the highest priority, followed
+by Section 4, making the outermost sections of highest priority.
+Next in the list is Section 2, and lastly Sections 1 and 3 are of
+the equal and least priority. This priority structure can be applied
+to the bottom row as well. The two outermost sections have the highest
+priority, followed by the middle section, and finally the remaining
+two sections are of lowest priority.
+<p>
+This means that as the viewport gradually decreases in width
+to the point where sections in the top row begin to overlap, sections
+1 and 3 will be removed from view first, followed by section 2, and
+finally section 4. A similar note is provided below for the block layout.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvisible">
+          <code><b>visible</b>(<b>vis</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the visibility of the Heads-Up Display on and off.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Define a &quot;Hello!&quot; counter procedure. This procedure will output
+# &quot;Hello! [number]&quot;
+# each time it is run. The number is incremented at the end of each call.
+#
+gHelloCount = 0
+
+def HUDButtonHello(*args):
+  global gHelloCount
+  print 'Hello!( %i )' % gHelloCount
+  gHelloCount += 1
+
+# Now create our button. Only execute on mouse release.
+#
+cmds.hudButton('HUDHelloButton', s=7, b=5, vis=1, l='Button', bw=80, bsh='roundRectangle', rc=HUDButtonHello )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

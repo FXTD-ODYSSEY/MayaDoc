@@ -1,0 +1,414 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>propMove command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-propMove"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/propMove.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>propMove </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#NURBS" target="contentFrame">NURBS</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("propMove.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>propMove(
+[objects]
+    , [<a href="#flagpercent">percent</a>=<i>float</i>], [<a href="#flagpercentX">percentX</a>=<i>float</i>], [<a href="#flagpercentY">percentY</a>=<i>float</i>], [<a href="#flagpercentZ">percentZ</a>=<i>float</i>], [<a href="#flagpivot">pivot</a>=<i>[float, float, float]</i>], [<a href="#flagrotate">rotate</a>=<i>[angle, angle, angle]</i>], [<a href="#flagscale">scale</a>=<i>[float, float, float]</i>], [<a href="#flagtranslate">translate</a>=<i>[linear, linear, linear]</i>], [<a href="#flagworldSpace">worldSpace</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>propMove is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Performs a proportional translate, scale or rotate operation on any
+number of objects. The percentages to rotate, scale or translate by
+can be specified using either the -p flags or -px, -py, -pz
+flags. Each selected object must have a corresponding -p or -px, -py,
+-pz flag. The rotate, scale or translate performed is relative.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagpercent">percent</a>, <a href="#flagpercentX">percentX</a>, <a href="#flagpercentY">percentY</a>, <a href="#flagpercentZ">percentZ</a>, <a href="#flagpivot">pivot</a>, <a href="#flagrotate">rotate</a>, <a href="#flagscale">scale</a>, <a href="#flagtranslate">translate</a>, <a href="#flagworldSpace">worldSpace</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpercent">
+          <code><b>percent</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The percentage effect that the specified x,y,z has on an object.
+This flag must be specified once for each object, ie. if there
+are 4 objects specified, there must be 4 &quot;-p&quot; flags, (otherwise
+a percentage of 1.0 will be used).  This flag generally has a
+range between 0.0 and 1.0, but can be any float value.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpercentX">
+          <code><b>percentX</b>(<b>px</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The percentage effect that the specified x has on an object.
+This flag is specified one per object.
+The value ranges between 0.0 and 1.0, but can be any float value.
+If the -p flag has been specified, this flag usage is invalid.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpercentY">
+          <code><b>percentY</b>(<b>py</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The percentage effect that the specified y has on an object.
+This flag is specified one per object.
+The value ranges between 0.0 and 1.0, but can be any float value.
+If the -p flag has been specified, this flag usage is invalid.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpercentZ">
+          <code><b>percentZ</b>(<b>pz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The percentage effect that the specified z has on an object.
+This flag is specified one per object.
+The value ranges between 0.0 and 1.0, but can be any float value.
+If the -p flag has been specified, this flag usage is invalid.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpivot">
+          <code><b>pivot</b>(<b>pi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[float, float, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the pivot about which a rotation or scale will occur.
+The change in pivot lasts only as long as the current 'propMove' command, and so
+must be used in conjunction with one of the above move flags for any effect to be
+noticeable.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotate">
+          <code><b>rotate</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[angle, angle, angle]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Proportionally rotate each object by the given angles. The rotation values
+are scaled by the percentage specified by that object's
+corresponding &quot;-percent&quot; flag.
+All angles are in degrees.
+The rotation is about the pivot specified by the &quot;-pivot&quot; flag, or (0, 0, 0)
+if the &quot;-pivot&quot; flag is not present.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscale">
+          <code><b>scale</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[float, float, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Proportionally scale each object by the given amounts. The scale values
+are scaled by the percentage specified by that object's
+corresponding &quot;-percent&quot; flag.
+The position and size of each object is measured relative to the pivot
+specified by the &quot;-pivot&quot; flag, and defaults to each object's individual pivot.
+In the case of control vertices, or some other object component, the
+default is the parent object's pivot.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtranslate">
+          <code><b>translate</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[linear, linear, linear]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Proportionally translate each object by the given amounts. The translation
+values are scaled by the percentage specified by that object's
+corresponding &quot;-percent&quot; flag.
+The &quot;-pivot&quot; flag has no effect on translation.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldSpace">
+          <code><b>worldSpace</b>(<b>ws</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use worldspace for the calculations.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.propMove( 3, 6, 0, 'surface1', 'surface2', 'surface3', 'surface4', 'surface5', 'surface6', 'surface7', p=[0.1, 0.5, 0.7, 1.0, 0.7, 0.5, 0.1] )
+# This performs a proportional translate of (3,6,0) on seven surfaces.
+# Note that there are 7 &quot;-p&quot; flags, one for each surface.
+
+cmds.propMove( 'surface1', 'surface2', 'surface3', 'surface4', 'surface5', 'surface6', 'surface7', p=[0.1, 0.5, 0.7, 1.0, 0.7, 0.5, 0.1], pivot=(1, 1, 1), s=(3, 3, 3) )
+# This performs a proportional scale of (3,3,3) on seven surfaces.
+# Note that there are 7 &quot;-p&quot; flags, one for each surface. The scale
+# happened about the specified pivot (1,1,1).
+
+cmds.propMove( 'surface1', 'surface2', 'surface3', 'surface4', 'surface5', 'surface6', 'surface7', p=[0.1, 0.5, 0.7, 1.0, 0.7, 0.5, 0.1], r=(30, 60, 90) )
+# This performs a proportional rotate of (30,60,90) on seven surfaces.
+# Note that there are 7 &quot;-p&quot; flags, one for each surface.
+
+cmds.propMove( 'surface1', 'surface2', 'surface3', 'surface4', 'surface5', 'surface6', 'surface7', px=[0.1, 0.5, 0.7, 1.0, 0.7, 0.5, 0.1], r=(30, 60, 90) )
+# This performs a proportional rotate of (30,60,90) on seven surfaces.
+# The percentages are only applied on the rotation 30 about the X axis. The
+# percentages along Y and Z are  1.0. Note that there are 7 &quot;-px&quot; flags, one
+# for each surface. The surfaces are rotated by 60, 90 in Y and Z.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

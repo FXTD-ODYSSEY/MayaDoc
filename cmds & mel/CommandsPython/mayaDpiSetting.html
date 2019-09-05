@@ -1,0 +1,254 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>mayaDpiSetting command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-mayaDpiSetting"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/mayaDpiSetting.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>mayaDpiSetting </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#MiscUI" target="contentFrame">Misc. UI</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("mayaDpiSetting.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>mayaDpiSetting([<a href="#flagmode">mode</a>=<i>uint</i>], [<a href="#flagrealScaleValue">realScaleValue</a>=<i>boolean</i>], [<a href="#flagscaleValue">scaleValue</a>=<i>float</i>], [<a href="#flagsystemDpi">systemDpi</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>mayaDpiSetting is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      Provide Maya interface scaling based on system DPI or custom scale setting or no scaling. Please note that the change will only take effect after relaunching Maya.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>Scale mode or system DPI value, as queried</td></tr><tr><td valign="top"><i>float</i></td><td>Defined scale or real scale, as queried</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>mayaDpiSetting, dpi
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagmode">mode</a>, <a href="#flagrealScaleValue">realScaleValue</a>, <a href="#flagscaleValue">scaleValue</a>, <a href="#flagsystemDpi">systemDpi</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmode">
+          <code><b>mode</b>(<b>m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the interface scaling mode:
+<ul>
+<li>0 - System Dpi Based Scaling</li>
+<li>1 - Custom Scaling (Must provide the custom scale value with flag &quot;-scaleValue&quot;)</li>
+<li>2 - No Scaling</li>
+</ul>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrealScaleValue">
+          <code><b>realScaleValue</b>(<b>rsv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a query mode only flag which returns the real scale value depending on current scaling mode and defined scale value:
+<ul>
+<li>mode 0 - Return the current real scale value which is the ratio of current system dpi to default system dpi</li>
+<li>mode 1 - Return the current real scale value which is the product of the defined scale value and the ratio of current system dpi to default system dpi</li>
+<li>mode 2 - Always return 1.0 which indicates real scale is 100% when the scaling mode is no scaling.</li>
+</ul>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscaleValue">
+          <code><b>scaleValue</b>(<b>sv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the custom scale of the interface if scaling mode is 1. The allowed values are [1.0, 1.25, 1.5, 2.0].
+In query mode, return the scale value depend on current scaling mode:
+<ul>
+<li>mode 0 - Always return 1.0 which indicates 100% scaling</li>
+<li>mode 1 - Return the custom scale value used</li>
+<li>mode 2 - Always return 1.0 which indicates no custom scaling</li>
+</ul>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsystemDpi">
+          <code><b>systemDpi</b>(<b>sd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a query mode only flag which returns the current system dpi value.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+
+# Set the scale mode to system dpi based scaling.
+cmds.mayaDpiSetting( mode=0 )
+
+# Set the interface scaling to 150% custom scaling.
+cmds.mayaDpiSetting( mode=1, scaleValue=1.5 )
+
+# Disable the interface scaling.
+cmds.mayaDpiSetting( mode=2 )
+
+# Query the current scaling mode.
+cmds.mayaDpiSetting( query=True, mode=True )
+
+# Query the current scale value.
+cmds.mayaDpiSetting( query=True, scaleValue=True )
+
+# Query the system dpi value.
+cmds.mayaDpiSetting( query=True, systemDpi=True )
+
+# Query the current real scale value.
+cmds.mayaDpiSetting( query=True, realScaleValue=True )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

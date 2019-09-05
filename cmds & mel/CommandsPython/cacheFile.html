@@ -1,0 +1,1444 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>cacheFile command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-cacheFile"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/cacheFile.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>cacheFile </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Utilities" target="contentFrame">Utilities</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("cacheFile.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>cacheFile([<a href="#flagappendFrame">appendFrame</a>=<i>boolean</i>], [<a href="#flagattachFile">attachFile</a>=<i>boolean</i>], [<a href="#flagcacheFileNode">cacheFileNode</a>=<i>string</i>], [<a href="#flagcacheFormat">cacheFormat</a>=<i>string</i>], [<a href="#flagcacheInfo">cacheInfo</a>=<i>string</i>], [<a href="#flagcacheableAttrs">cacheableAttrs</a>=<i>string</i>], [<a href="#flagcacheableNode">cacheableNode</a>=<i>string</i>], [<a href="#flagchannelIndex">channelIndex</a>=<i>boolean</i>], [<a href="#flagchannelName">channelName</a>=<i>string</i>], [<a href="#flagconvertPc2">convertPc2</a>=<i>boolean</i>], [<a href="#flagcreateCacheNode">createCacheNode</a>=<i>boolean</i>], [<a href="#flagcreationChannelName">creationChannelName</a>=<i>string</i>], [<a href="#flagdataSize">dataSize</a>=<i>boolean</i>], [<a href="#flagdeleteCachedFrame">deleteCachedFrame</a>=<i>boolean</i>], [<a href="#flagdescriptionFileName">descriptionFileName</a>=<i>boolean</i>], [<a href="#flagdirectory">directory</a>=<i>string</i>], [<a href="#flagdoubleToFloat">doubleToFloat</a>=<i>boolean</i>], [<a href="#flagendTime">endTime</a>=<i>time</i>], [<a href="#flagfileName">fileName</a>=<i>string</i>], [<a href="#flagformat">format</a>=<i>string</i>], [<a href="#flaggeometry">geometry</a>=<i>boolean</i>], [<a href="#flaginAttr">inAttr</a>=<i>string</i>], [<a href="#flaginTangent">inTangent</a>=<i>string</i>], [<a href="#flaginterpEndTime">interpEndTime</a>=<i>time</i>], [<a href="#flaginterpStartTime">interpStartTime</a>=<i>time</i>], [<a href="#flagnoBackup">noBackup</a>=<i>boolean</i>], [<a href="#flagoutAttr">outAttr</a>=<i>string</i>], [<a href="#flagoutTangent">outTangent</a>=<i>string</i>], [<a href="#flagpc2File">pc2File</a>=<i>string</i>], [<a href="#flagpointCount">pointCount</a>=<i>boolean</i>], [<a href="#flagpoints">points</a>=<i>string</i>], [<a href="#flagpointsAndNormals">pointsAndNormals</a>=<i>string</i>], [<a href="#flagprefix">prefix</a>=<i>boolean</i>], [<a href="#flagrefresh">refresh</a>=<i>boolean</i>], [<a href="#flagreplaceCachedFrame">replaceCachedFrame</a>=<i>boolean</i>], [<a href="#flagreplaceWithoutSimulating">replaceWithoutSimulating</a>=<i>boolean</i>], [<a href="#flagrunupFrames">runupFrames</a>=<i>int</i>], [<a href="#flagsampleMultiplier">sampleMultiplier</a>=<i>int</i>], [<a href="#flagsimulationRate">simulationRate</a>=<i>time</i>], [<a href="#flagsingleCache">singleCache</a>=<i>boolean</i>], [<a href="#flagstartTime">startTime</a>=<i>time</i>], [<a href="#flagstaticCache">staticCache</a>=<i>boolean</i>], [<a href="#flagworldSpace">worldSpace</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>cacheFile is undoable, queryable, and editable.</p>
+      Creates one or more cache files on disk to store attribute data for a span of
+frames. The caches can be created for points/normals on a geometry (using
+the pts/points or pan/pointsAndNormals flag), for vectorArray output data
+(using the oa/outAttr flag), or for additional node specific data (using the
+cnd/cacheableNode flag for those nodes that support it).
+<p>
+When the ia/inAttr flag is used, connects a cacheFile node that
+associates the data file on disk with the attribute.
+<p>
+Frames can be replaced/appended to an existing cache with the
+rcf/replaceCachedFrame and apf/appendFrame flag.  Replaced frames are never deleted.
+They are stored in the same directory as the original cache files with the
+name provided by the f/fileName flag. If no file name is provided,
+the cacheFile name is prefixed with &quot;backup&quot; followed by a unique number.
+<p>
+Single file caches are backed up in their entirety. To revert to an older
+version, simply attach to this cache. One file per frame caches only backup
+the description file and the frames that were replaced. To recover these
+types of caches, the user must rename these files to the original name.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>name of created cache description file(s)</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>cache, file, disk
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagappendFrame">appendFrame</a>, <a href="#flagattachFile">attachFile</a>, <a href="#flagcacheFileNode">cacheFileNode</a>, <a href="#flagcacheFormat">cacheFormat</a>, <a href="#flagcacheInfo">cacheInfo</a>, <a href="#flagcacheableAttrs">cacheableAttrs</a>, <a href="#flagcacheableNode">cacheableNode</a>, <a href="#flagchannelIndex">channelIndex</a>, <a href="#flagchannelName">channelName</a>, <a href="#flagconvertPc2">convertPc2</a>, <a href="#flagcreateCacheNode">createCacheNode</a>, <a href="#flagcreationChannelName">creationChannelName</a>, <a href="#flagdataSize">dataSize</a>, <a href="#flagdeleteCachedFrame">deleteCachedFrame</a>, <a href="#flagdescriptionFileName">descriptionFileName</a>, <a href="#flagdirectory">directory</a>, <a href="#flagdoubleToFloat">doubleToFloat</a>, <a href="#flagendTime">endTime</a>, <a href="#flagfileName">fileName</a>, <a href="#flagformat">format</a>, <a href="#flaggeometry">geometry</a>, <a href="#flaginAttr">inAttr</a>, <a href="#flaginTangent">inTangent</a>, <a href="#flaginterpEndTime">interpEndTime</a>, <a href="#flaginterpStartTime">interpStartTime</a>, <a href="#flagnoBackup">noBackup</a>, <a href="#flagoutAttr">outAttr</a>, <a href="#flagoutTangent">outTangent</a>, <a href="#flagpc2File">pc2File</a>, <a href="#flagpointCount">pointCount</a>, <a href="#flagpoints">points</a>, <a href="#flagpointsAndNormals">pointsAndNormals</a>, <a href="#flagprefix">prefix</a>, <a href="#flagrefresh">refresh</a>, <a href="#flagreplaceCachedFrame">replaceCachedFrame</a>, <a href="#flagreplaceWithoutSimulating">replaceWithoutSimulating</a>, <a href="#flagrunupFrames">runupFrames</a>, <a href="#flagsampleMultiplier">sampleMultiplier</a>, <a href="#flagsimulationRate">simulationRate</a>, <a href="#flagsingleCache">singleCache</a>, <a href="#flagstartTime">startTime</a>, <a href="#flagstaticCache">staticCache</a>, <a href="#flagworldSpace">worldSpace</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagappendFrame">
+          <code><b>appendFrame</b>(<b>apf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Appends data to the cache for the times specified by the startTime and endTime flags. If no
+time is provided, appends the current time. Must be used in conjunction
+with the pts/points or cnd/cacheableNode flag. Any overwritten frames will not be
+deleted, but renamed as specified by the f/fileName flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattachFile">
+          <code><b>attachFile</b>(<b>af</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to indicate that rather than creating a cache file, that an
+existing cache file on disk should be attached to an attribute in the scene.
+The inAttr flag is used to specify the attribute.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcacheFileNode">
+          <code><b>cacheFileNode</b>(<b>cfn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the cache file node(s) we are appending/replacing to
+if more than one cache is attached to the specified geometries.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcacheFormat">
+          <code><b>cacheFormat</b>(<b>cf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Cache file format, default is Maya's .mcx format, but others available via plugin
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcacheInfo">
+          <code><b>cacheInfo</b>(<b>ci</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In create mode, used to specify a mel script returning a string array. When
+creating the cache, this mel script will be executed and the returned strings
+will be written to the .xml description file of the cache.
+In query mode, returns descriptive info stored in the cacheFile such as
+the user name, Maya scene name and maya version number.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcacheableAttrs">
+          <code><b>cacheableAttrs</b>(<b>cat</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the list of cacheable attributes defined on the accompanying cache node.
+This argument requires the use of the cacheableNode flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcacheableNode">
+          <code><b>cacheableNode</b>(<b>cnd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of a cacheable node whose contents will be cached.
+A cacheable node is a node that is specially designed to work with
+the caching mechanism.  An example of a cacheable node is a nCloth node.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchannelIndex">
+          <code><b>channelIndex</b>(<b>chi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A query-only flag which returns the channel index for the selected geometry
+for the cacheFile node specified using the cacheFileNode flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchannelName">
+          <code><b>channelName</b>(<b>cnm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When attachFile is used, used to indicate the channel in the file that
+should be attached to inAttr.  If not specified, the first channel in
+the file is used. In query mode, allows user to query the channels associated
+with a description file.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconvertPc2">
+          <code><b>convertPc2</b>(<b>pc2</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Convert a PC2 file to the Maya cache format (true), or convert Maya cache to pc2 format (false)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreateCacheNode">
+          <code><b>createCacheNode</b>(<b>ccn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to indicate that rather than creating a cache file, that a cacheFile
+node should be created related to an existing cache file on disk.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreationChannelName">
+          <code><b>creationChannelName</b>(<b>cch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When creating a new cache, this multi-use flag specifies the channels to be cached.
+The names come from the cacheable channel names defined by the object being cached.
+If this flag is not used when creating a cache, then all cacheable channels are cached.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdataSize">
+          <code><b>dataSize</b>(<b>dsz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a query-only flag that returns the size of the data being cached per frame.
+This flag is to be used in conjunction with the cacheableNode, points,
+pointsAndNormals and outAttr flags.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeleteCachedFrame">
+          <code><b>deleteCachedFrame</b>(<b>dcf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Deletes cached data for the times specified by the startTime/endTime flags.
+If no time is provided, deletes the current frame. Must be used in conjunction
+with the pts/points or cnd/cacheableNode flag. Deleted frames will not be
+removed from disk, but renamed as specified by the f/fileName flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdescriptionFileName">
+          <code><b>descriptionFileName</b>(<b>dfn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a query-only flag that returns the name of the description file
+for an existing cacheFile node. Or if no cacheFile node is specified, it
+returns the description file name that would be created based on the other
+flags specified.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdirectory">
+          <code><b>directory</b>(<b>dir</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the directory where the cache files will be located. If the
+directory flag is not specified, the cache files will be placed in the
+project data directory.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdoubleToFloat">
+          <code><b>doubleToFloat</b>(<b>dtf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+During cache creation, double data is stored in the file as floats.  This helps cut down
+file size.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendTime">
+          <code><b>endTime</b>(<b>et</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the end frame of the cache range.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfileName">
+          <code><b>fileName</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the base file name for the cache files. If more than one object is
+being cached and the format is OneFilePerFrame, each cache file will be
+prefixed with this base file name. In query mode, returns the files
+associated with the specified cacheFile node.
+When used with rpf/replaceCachedFrame or apf/appendFrame specifies the name of the backup files.
+If not specified, replaced frames will be stored with a default name.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagformat">
+          <code><b>format</b>(<b>fm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the distribution format of the cache.  Valid values are &quot;OneFile&quot; and &quot;OneFilePerFrame&quot;
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometry">
+          <code><b>geometry</b>(<b>gm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A query flag which returns the geometry controlled by the specified cache node
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginAttr">
+          <code><b>inAttr</b>(<b>ia</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the attribute that the cache file will drive.
+This file is optional when creating cache files.
+If this flag is not used during create mode, the cache files will
+be created on disk, but will not be driving anything in the scene.
+This flag is required when the attachFile flag is used.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginTangent">
+          <code><b>inTangent</b>(<b>it</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the in-tangent type when interpolating frames before the replaced
+frame(s). Must be used with the ist/interpStartTime and iet/interpEndTime flags.
+Valid values are &quot;linear&quot;, &quot;smooth&quot; and &quot;step&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginterpEndTime">
+          <code><b>interpEndTime</b>(<b>iet</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the frame until which there will be linear interpolation, beginning
+at endTime. Must be used with the rpf/replaceCachedFrame or apf/appendFrame flag.
+Interpolation is achieved by removing frames between endTime and
+interpEndTime from the cache. Removed frames will be renamed as specified
+by the f/fileName flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginterpStartTime">
+          <code><b>interpStartTime</b>(<b>ist</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the frame from which to begin linear interpolation, ending at
+startTime. Must be used with the rpf/replaceCachedFrame or apf/appendFrame flags.
+Interpolation is achieved by removing  frames between interpStartTime and
+startTime from the cache. These removed frames will will be renamed as
+specified by the f/fileName flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoBackup">
+          <code><b>noBackup</b>(<b>nb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that backup files should not be created for any files that may be over-written during
+append, replace or delete cache frames. Can only be used with the apf/appendFrame,
+rpf/replaceCachedFrame or dcf/deleteCachedFrame flags.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoutAttr">
+          <code><b>outAttr</b>(<b>oa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the attribute that will be cached to disk.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoutTangent">
+          <code><b>outTangent</b>(<b>ot</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the out-tangent type when interpolating frames after the replaced
+frame(s). Must be used with the ist/interpStartTime and iet/interpEndTime flags.
+Valid values are &quot;linear&quot;, &quot;smooth&quot; and &quot;step&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpc2File">
+          <code><b>pc2File</b>(<b>pcf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the full path to the pc2 file.  Must be used in conjunction with the pc2 flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpointCount">
+          <code><b>pointCount</b>(<b>pc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A query flag which returns the number of points stored in the cache file.
+The channelName flag should be used to specify the channel to be queried.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpoints">
+          <code><b>points</b>(<b>pts</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of a geometry whose points will be cached.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpointsAndNormals">
+          <code><b>pointsAndNormals</b>(<b>pan</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of a geometry whose points and normals will be cached.
+The normals is per-vertex per-polygon. The normals cache cannot be imported
+back to geometry.
+This flag can only be used to export cache file. It cannot be used with
+the apf/appendFrame, dcf/deleteCachedFrame and rpf/replaceCachedFrame flags.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprefix">
+          <code><b>prefix</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that the specified fileName should be used as a prefix for the
+cacheName.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrefresh">
+          <code><b>refresh</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used during cache creation, forces a screen refresh during caching.
+This causes the cache creation to be slower but allows you to see how the
+simulation is progressing during the cache.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceCachedFrame">
+          <code><b>replaceCachedFrame</b>(<b>rcf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Replaces cached data for the times specified by the startTime/endTime
+flags. If no time is provided, replaces cache file for the current time.
+Must be used in conjunction with the pts/points or cnd/cacheableNode flag.
+Replaced frames will not be deleted, but renamed as specified by the
+f/fileName flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceWithoutSimulating">
+          <code><b>replaceWithoutSimulating</b>(<b>rws</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When replacing cached frames, this flag specifies whether the replacement should
+come from the cached node without simulating or from advancing time and letting
+the simulation run.  This flag is valid only when neither the startTime nor endTime flags
+are used or when both the startTime and endTime flags specify the same time value.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrunupFrames">
+          <code><b>runupFrames</b>(<b>rf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the number of frames of runup to simulate ahead of the starting frame.
+The value must be greater than or equal to 0.  The default is 2.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsampleMultiplier">
+          <code><b>sampleMultiplier</b>(<b>spm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the sample rate when caches are being created as a multiple of
+simulation Rate. If the value is 1, then a sample will be cached everytime
+the time is advanced.  If the value
+is 2, then every other sample will be cached, and so on.  The default is 1.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsimulationRate">
+          <code><b>simulationRate</b>(<b>smr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the simulation rate when caches are being created.  During cache
+creation, the time will be advanced by the simulation rate, until the end
+time of the cache is reached or surpassed.  The value is given in frames.
+The default value is 1 frame.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsingleCache">
+          <code><b>singleCache</b>(<b>sch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used in conjunction with the points, pointsAndNormal or cacheableNode
+flag, specifies whether multiple geometries should be put into a single
+cache or to create one cache per geometry (default).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstartTime">
+          <code><b>startTime</b>(<b>st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the start frame of the cache range.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstaticCache">
+          <code><b>staticCache</b>(<b>sc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If false, during cache creation, do not save a cache for the object if it
+appears to have no animation or deformation. If true, save a cache even if
+the object appears to have no animation or deformation. Default is true. In
+query mode, when supplied a shape, the flag returns true if the shape appears
+to have no animation or deformation.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldSpace">
+          <code><b>worldSpace</b>(<b>ws</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the points flag is used, turning on this flag will result in the world
+space positions of the points being written. The expected use of this
+flag is for cache export.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Create a disk cache containing the points of a plane from
+# frames 1 - 100. Typically the shape would be deforming.
+#
+cmds.polyPlane()
+cacheFiles = cmds.cacheFile(f='shapeCache', st=1, et=100, points='pPlaneShape1')
+
+# Add a historySwitch node to the history of the shape, and attach the
+# newly created cache into the historySwitch node.
+#
+switch = maya.mel.eval('createHistorySwitch(&quot;pPlaneShape1&quot;,false)')
+cacheNode = cmds.cacheFile(f=cacheFiles[0], cnm='pPlaneShape1', ia='%s.inp[0]' % switch ,attachFile=True)
+cmds.setAttr( '%s.playFromCache' % switch, 1 )
+
+# query the files associated with a cacheFile node
+#
+cmds.cacheFile( cacheNode, query=True, f=True )
+
+# Now use the staticCache flag to indicate that the cache should not be
+# created if the object appears to have no animation.
+# Since the plane is not animated or deformed, no cache will be created.
+#
+cmds.polyPlane()
+cacheFiles = cmds.cacheFile(f='shapeCache', staticCache=0, st=1, et=100, points='pPlaneShape2')
+
+# Convert a maya cache into pc2 format. The maya cache is named
+# pSphereShape1.xml and located in the directory &quot;c:/test/&quot;.
+#
+cmds.cacheFile(pc2=0,pcf='c:/test/mypc2.pc2',f='pSphereShape1',dir='c:/test/')
+
+# Convert a pc2 cache into a maya cache, with the cache data in a single
+# file.
+#
+cmds.cacheFile(pc2=1,pcf='c:/test/mypc2.pc2',f='mayaCache2',dir='c:/test/',format='OneFile')
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

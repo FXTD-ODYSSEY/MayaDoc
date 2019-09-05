@@ -1,0 +1,419 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>marker command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-marker"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/marker.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>marker </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("marker.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>marker(
+[string]
+    , [<a href="#flagattach">attach</a>=<i>boolean</i>], [<a href="#flagdetach">detach</a>=<i>boolean</i>], [<a href="#flagfrontTwist">frontTwist</a>=<i>angle</i>], [<a href="#flagorientationMarker">orientationMarker</a>=<i>boolean</i>], [<a href="#flagpositionMarker">positionMarker</a>=<i>boolean</i>], [<a href="#flagsideTwist">sideTwist</a>=<i>angle</i>], [<a href="#flagtime">time</a>=<i>time</i>], [<a href="#flagupTwist">upTwist</a>=<i>angle</i>], [<a href="#flagvalueU">valueU</a>=<i>float</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>marker is undoable, queryable, and editable.</p>
+      The marker command creates one or two markers, on a motion path curve,
+at the specified time and location.
+The optionnal string argument is the parent object name.<br>
+<p>
+One can specify &quot;-pm -om&quot; option to create both, a position marker
+and an orientation marker.<br>
+<p>
+Since there is only one keyframe for each marker of the same type,
+no more than one marker of the same type with the same time value
+can exist.<br>
+<p>
+The default marker type is the position marker. The default time is
+the current time.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>(name of the created markers)</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagattach">attach</a>, <a href="#flagdetach">detach</a>, <a href="#flagfrontTwist">frontTwist</a>, <a href="#flagorientationMarker">orientationMarker</a>, <a href="#flagpositionMarker">positionMarker</a>, <a href="#flagsideTwist">sideTwist</a>, <a href="#flagtime">time</a>, <a href="#flagupTwist">upTwist</a>, <a href="#flagvalueU">valueU</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattach">
+          <code><b>attach</b>(<b>a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies to attach the selected 3D position markers
+to their parent geometry.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdetach">
+          <code><b>detach</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies to detach the selected position markers from
+their parent geometry to the 3D space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfrontTwist">
+          <code><b>frontTwist</b>(<b>ft</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the amount of twist angle about
+the front vector for the marker.<br>
+Default is 0.<br>
+When queried, this flag returns a <i>angle</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagorientationMarker">
+          <code><b>orientationMarker</b>(<b>om</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies creation of an orientation marker.<br>
+Default is not set..<br>
+When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpositionMarker">
+          <code><b>positionMarker</b>(<b>pm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies creation of a position marker.<br>
+Default is set.<br>
+When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsideTwist">
+          <code><b>sideTwist</b>(<b>st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies  the amount of twist angle about
+the side vector for the marker.<br>
+Default is 0.<br>
+When queried, this flag returns a <i>angle</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtime">
+          <code><b>time</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the time for the marker.<br>
+Default is the current time.<br>
+When queried, this flag returns a <i>time</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupTwist">
+          <code><b>upTwist</b>(<b>ut</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the amount of twist angle about
+the up vector for the marker.<br>
+Default is 0.<br>
+When queried, this flag returns a <i>angle</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalueU">
+          <code><b>valueU</b>(<b>u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the location of the position marker
+w.r.t. the parent geometry u parameterization.<br>
+Default is the value at current time.<br>
+When queried, this flag returns a <i>linear</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Create a simple motion path animation:
+
+# create a path, e,g, a curve
+path = cmds.curve(d=3,p=[(-10, 0, 0),(-6, 0, 10),(-3, 0, -10),(10, 0, 0)],k=[0, 0, 0, 1, 1, 1])
+
+# Create an object, e.g. a sphere
+object = cmds.sphere()
+cmds.scale( 0.5, 2.0, 0.2 )
+
+# animate the object using a motion path with follow on
+cmds.pathAnimation( object[0], f=1, stu=0, etu=30, c=path )
+
+# change the current time to be frame 20
+cmds.currentTime( 20, edit=True )
+
+# Create a position marker on the path, at curve parameter value
+# 0.75 and at current time:
+cmds.marker( path, u=0.75 )
+
+# Create an orientation marker on the path, at time 15:
+cmds.marker( path, om=True, t=15 )
+
+# Create a position marker and an orientation marker on the path,
+# at curve parameter value .35 and at time 10:
+cmds.marker( path, pm=True, om=True, t=10, u=0.35 )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,1987 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>scriptTable command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-scriptTable"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/scriptTable.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>scriptTable </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#Controls" target="contentFrame">Controls</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("scriptTable.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>scriptTable [-<a href="#flagafterCellChangedCmd">afterCellChangedCmd</a> <i>script</i>] [-<a href="#flagannotation">annotation</a> <i>string</i>] [-<a href="#flagbackgroundColor">backgroundColor</a> <i>float float float</i>] [-<a href="#flagcellBackgroundColorCommand">cellBackgroundColorCommand</a> <i>script</i>] [-<a href="#flagcellChangedCmd">cellChangedCmd</a> <i>script</i>] [-<a href="#flagcellForegroundColorCommand">cellForegroundColorCommand</a> <i>script</i>] [-<a href="#flagcellIndex">cellIndex</a> <i>int int</i>] [-<a href="#flagcellValue">cellValue</a> <i>string</i>] [-<a href="#flagclearRow">clearRow</a> <i>int</i>] [-<a href="#flagclearTable">clearTable</a>] [-<a href="#flagcolumnFilter">columnFilter</a> <i>int string</i>] [-<a href="#flagcolumnWidth">columnWidth</a> <i>int int</i>] [-<a href="#flagcolumns">columns</a> <i>int</i>] [-<a href="#flagdefineTemplate">defineTemplate</a> <i>string</i>] [-<a href="#flagdeleteRow">deleteRow</a> <i>int</i>] [-<a href="#flagdocTag">docTag</a> <i>string</i>] [-<a href="#flagdragCallback">dragCallback</a> <i>script</i>] [-<a href="#flagdropCallback">dropCallback</a> <i>script</i>] [-<a href="#flageditable">editable</a> <i>boolean</i>] [-<a href="#flagenable">enable</a> <i>boolean</i>] [-<a href="#flagenableBackground">enableBackground</a> <i>boolean</i>] [-<a href="#flagenableKeyboardFocus">enableKeyboardFocus</a> <i>boolean</i>] [-<a href="#flagexcludingHeaders">excludingHeaders</a>] [-<a href="#flagexists">exists</a>] [-<a href="#flagfullPathName">fullPathName</a>] [-<a href="#flaggetCellCmd">getCellCmd</a> <i>script</i>] [-<a href="#flagheight">height</a> <i>int</i>] [-<a href="#flaghighlightColor">highlightColor</a> <i>float float float</i>] [-<a href="#flaginsertRow">insertRow</a> <i>int</i>] [-<a href="#flagisObscured">isObscured</a>] [-<a href="#flaglabel">label</a> <i>int string</i>] [-<a href="#flagmanage">manage</a> <i>boolean</i>] [-<a href="#flagmultiEditEnabled">multiEditEnabled</a> <i>boolean</i>] [-<a href="#flagnoBackground">noBackground</a> <i>boolean</i>] [-<a href="#flagnumberOfPopupMenus">numberOfPopupMenus</a>] [-<a href="#flagparent">parent</a> <i>string</i>] [-<a href="#flagpopupMenuArray">popupMenuArray</a>] [-<a href="#flagpreventOverride">preventOverride</a> <i>boolean</i>] [-<a href="#flagrowHeight">rowHeight</a> <i>int</i>] [-<a href="#flagrows">rows</a> <i>int</i>] [-<a href="#flagrowsRemovedCmd">rowsRemovedCmd</a> <i>script</i>] [-<a href="#flagrowsToBeRemovedCmd">rowsToBeRemovedCmd</a> <i>script</i>] [-<a href="#flagselectedCells">selectedCells</a> <i>int[]</i>] [-<a href="#flagselectedColumns">selectedColumns</a> <i>int[]</i>] [-<a href="#flagselectedRow">selectedRow</a>] [-<a href="#flagselectedRows">selectedRows</a> <i>int[]</i>] [-<a href="#flagselectionBehavior">selectionBehavior</a> <i>int</i>] [-<a href="#flagselectionChangedCmd">selectionChangedCmd</a> <i>script</i>] [-<a href="#flagselectionMode">selectionMode</a> <i>int</i>] [-<a href="#flagsortEnabled">sortEnabled</a> <i>boolean</i>] [-<a href="#flagstatusBarMessage">statusBarMessage</a> <i>string</i>] [-<a href="#flagunderPointerColumn">underPointerColumn</a>] [-<a href="#flagunderPointerRow">underPointerRow</a>] [-<a href="#flaguseDoubleClickEdit">useDoubleClickEdit</a> <i>boolean</i>] [-<a href="#flaguseTemplate">useTemplate</a> <i>string</i>] [-<a href="#flagvisible">visible</a> <i>boolean</i>] [-<a href="#flagvisibleChangeCommand">visibleChangeCommand</a> <i>script</i>] [-<a href="#flagwidth">width</a> <i>int</i>] 
+[name]
+     </code> </p>
+      <p>scriptTable is undoable, queryable, and editable.</p>
+      This command creates/edits/queries the script table control.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The full path name to the created script table control.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagafterCellChangedCmd">afterCellChangedCmd</a>, <a href="#flagannotation">annotation</a>, <a href="#flagbackgroundColor">backgroundColor</a>, <a href="#flagcellBackgroundColorCommand">cellBackgroundColorCommand</a>, <a href="#flagcellChangedCmd">cellChangedCmd</a>, <a href="#flagcellForegroundColorCommand">cellForegroundColorCommand</a>, <a href="#flagcellIndex">cellIndex</a>, <a href="#flagcellValue">cellValue</a>, <a href="#flagclearRow">clearRow</a>, <a href="#flagclearTable">clearTable</a>, <a href="#flagcolumnFilter">columnFilter</a>, <a href="#flagcolumnWidth">columnWidth</a>, <a href="#flagcolumns">columns</a>, <a href="#flagdefineTemplate">defineTemplate</a>, <a href="#flagdeleteRow">deleteRow</a>, <a href="#flagdocTag">docTag</a>, <a href="#flagdragCallback">dragCallback</a>, <a href="#flagdropCallback">dropCallback</a>, <a href="#flageditable">editable</a>, <a href="#flagenable">enable</a>, <a href="#flagenableBackground">enableBackground</a>, <a href="#flagenableKeyboardFocus">enableKeyboardFocus</a>, <a href="#flagexcludingHeaders">excludingHeaders</a>, <a href="#flagexists">exists</a>, <a href="#flagfullPathName">fullPathName</a>, <a href="#flaggetCellCmd">getCellCmd</a>, <a href="#flagheight">height</a>, <a href="#flaghighlightColor">highlightColor</a>, <a href="#flaginsertRow">insertRow</a>, <a href="#flagisObscured">isObscured</a>, <a href="#flaglabel">label</a>, <a href="#flagmanage">manage</a>, <a href="#flagmultiEditEnabled">multiEditEnabled</a>, <a href="#flagnoBackground">noBackground</a>, <a href="#flagnumberOfPopupMenus">numberOfPopupMenus</a>, <a href="#flagparent">parent</a>, <a href="#flagpopupMenuArray">popupMenuArray</a>, <a href="#flagpreventOverride">preventOverride</a>, <a href="#flagrowHeight">rowHeight</a>, <a href="#flagrows">rows</a>, <a href="#flagrowsRemovedCmd">rowsRemovedCmd</a>, <a href="#flagrowsToBeRemovedCmd">rowsToBeRemovedCmd</a>, <a href="#flagselectedCells">selectedCells</a>, <a href="#flagselectedColumns">selectedColumns</a>, <a href="#flagselectedRow">selectedRow</a>, <a href="#flagselectedRows">selectedRows</a>, <a href="#flagselectionBehavior">selectionBehavior</a>, <a href="#flagselectionChangedCmd">selectionChangedCmd</a>, <a href="#flagselectionMode">selectionMode</a>, <a href="#flagsortEnabled">sortEnabled</a>, <a href="#flagstatusBarMessage">statusBarMessage</a>, <a href="#flagunderPointerColumn">underPointerColumn</a>, <a href="#flagunderPointerRow">underPointerRow</a>, <a href="#flaguseDoubleClickEdit">useDoubleClickEdit</a>, <a href="#flaguseTemplate">useTemplate</a>, <a href="#flagvisible">visible</a>, <a href="#flagvisibleChangeCommand">visibleChangeCommand</a>, <a href="#flagwidth">width</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafterCellChangedCmd">
+          <code><b>-afterCellChangedCmd</b>(<b>-acc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the script to call after the value of a cell has been
+changed. The procedure is called with
+2 integer arguments specifying the row and column for
+which the value was changed. The 3rd argument is the string
+which was entered into that cell. The procedure does not need to
+return any value.
+The row and column numbers passed in are 1-based
+(i.e. (1,1) is the upper left cell). The procedure should be
+of the form:
+<p>
+global proc procedureName(int $row, int $column, string $value)
+<p>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagannotation">
+          <code><b>-annotation</b>(<b>-ann</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Annotate the control with an extra string value.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbackgroundColor">
+          <code><b>-backgroundColor</b>(<b>-bgc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The background color of the control. The arguments correspond
+to the red, green, and blue color components. Each component ranges
+in value from 0.0 to 1.0.
+<br>When setting backgroundColor, the background is automatically
+enabled, unless enableBackground is also specified with a false
+value.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcellBackgroundColorCommand">
+          <code><b>-cellBackgroundColorCommand</b>(<b>-cbc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the script to call when it requires
+the background color of a cell.
+The procedure is called with
+2 integer arguments specifying the row and column for
+which the value is required. The procedure should return
+an array of ints which is the RGB color value for the cell.
+The row and column numbers passed in are 1-based
+(i.e. (1,1) is the upper left cell).
+The procedure should be of the form:
+<pre>
+global proc int[] procedureName(int $row, int $column) {
+return {255,0,0}; // return Red as cell background color
+}
+</pre>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcellChangedCmd">
+          <code><b>-cellChangedCmd</b>(<b>-ccc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the script to call when somebody has
+changed the value of a cell. The procedure is called with
+2 integer arguments specifying the row and column for
+which the value was changed. The 3rd argument is the string
+which was entered into that cell. The procedure should return
+an integer value which indicates whether that value should be
+accepted (return 1 if yes, and 0 if no).
+The row and column numbers passed in are 1-based
+(i.e. (1,1) is the upper left cell). The procedure should be
+of the form:
+<p>
+global proc int procedureName(int $row, int $column, string $value)
+<p>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcellForegroundColorCommand">
+          <code><b>-cellForegroundColorCommand</b>(<b>-cfc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the script to call when it requires
+the foreground color of a cell.
+The procedure is called with
+2 integer arguments specifying the row and column for
+which the value is required. The procedure should return
+an array of ints which is the RGB color value for the cell.
+The row and column numbers passed in are 1-based
+(i.e. (1,1) is the upper left cell).
+The procedure should be of the form:
+<pre>
+global proc int[] procedureName(int $row, int $column) {
+return {0,0,0}; // return Black as Text color
+}
+</pre>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcellIndex">
+          <code><b>-cellIndex</b>(<b>-ci</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+used with cellValue , to give the index of row and column
+This flag and its argument must be passed to the command before the
+-q flag (see examples).
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcellValue">
+          <code><b>-cellValue</b>(<b>-cv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+query and set the cell value on the table by the index of row and column referred in
+flag -cellIndex.<br>
+In edit mode, if flag -multiEditEnabled is True and any cell is selected,
+the flag -cellIndex is not used and the selected cells will be changed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclearRow">
+          <code><b>-clearRow</b>(<b>-cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clear the contents for all the cells on the specified
+row. Any procedure specified by the -gcc flag will be
+called to populate the cleared cells
+The row number is 1-based (i.e. the first row is 1 not 0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclearTable">
+          <code><b>-clearTable</b>(<b>-ct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clears the contents of all the cells in the table.
+Any procedure specified by the -gcc flag will be
+called to populate the cleared cells
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolumnFilter">
+          <code><b>-columnFilter</b>(<b>-cf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Filter the specified column with the string value provided.
+Set filter to columns 0 will apply the filter to all columns.
+The filter is case insensitive and support wildcards.
+Wildcard Matching: Wildcard matching is much simpler than full regexps and has only four features:
+c	Any character represents itself apart from those mentioned below. Thus c matches the character c.
+?	Matches any single character. It is the same as . in full regexps.
+*	Matches zero or more of any characters. It is the same as .* in full regexps.
+[...]	Sets of characters can be represented in square brackets, similar to full regexps.
+Within the character class, backslash has no special meaning.
+(i.e. you can search for &quot;MyValue&quot; with &quot;y*u&quot; or &quot;??Val??&quot; or &quot;[MyThe]Value&quot; or any letters in &quot;MyValue&quot;
+The column number is 1-based (i.e. the first row is 1 not 0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolumnWidth">
+          <code><b>-columnWidth</b>(<b>-cw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the width of the specified column
+The column number is 1-based (ie. the first column is 1 not 0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolumns">
+          <code><b>-columns</b>(<b>-c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the number of columns in the table
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefineTemplate">
+          <code><b>-defineTemplate</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Puts the command in a mode where any other flags and arguments are
+parsed and added to the command template specified in the argument.
+They will be used as default arguments in any subsequent
+invocations of the command when templateName is set as the
+current template.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeleteRow">
+          <code><b>-deleteRow</b>(<b>-dr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Delete the specified row
+The row number is 1-based (i.e. the first row is 1 not 0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdocTag">
+          <code><b>-docTag</b>(<b>-dtg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add a documentation flag to the control.  The documentation flag
+has a directory structure.
+(e.g., -dt render/multiLister/createNode/material)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdragCallback">
+          <code><b>-dragCallback</b>(<b>-dgc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds a callback that is called when the middle mouse button
+is pressed.  The MEL version of the callback is of the form:
+<p>
+global proc string[] callbackName(string $dragControl, int $x, int $y, int $mods)
+<p>
+The proc returns a string array that is transferred to the drop site.
+By convention the first string in the array describes the user settable
+message type.  Controls that are application defined drag sources may
+ignore the callback. $mods allows testing for the key modifiers CTRL and
+SHIFT. Possible values are 0 == No modifiers, 1 == SHIFT, 2 == CTRL,
+3 == CTRL + SHIFT.
+<p>
+In Python, it is similar, but there are two ways to specify the callback.  The
+recommended way is to pass a Python function object as the argument.  In that
+case, the Python callback should have the form:
+<p>
+def callbackName( dragControl, x, y, modifiers ):
+<p>
+The values of these arguments are the same as those for the MEL version above.
+<p>
+The other way to specify the callback in Python is to specify a string to be
+executed.  In that case, the string will have the values substituted into it
+via the standard Python format operator.  The format values are passed in a
+dictionary with the keys &quot;dragControl&quot;, &quot;x&quot;, &quot;y&quot;, &quot;modifiers&quot;.  The
+&quot;dragControl&quot; value is a string and the other values are integers (eg the
+callback string could be &quot;print '%(dragControl)s %(x)d %(y)d %(modifiers)d'&quot;)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdropCallback">
+          <code><b>-dropCallback</b>(<b>-dpc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds a callback that is called when a drag and drop
+operation is released above the drop site.  The MEL version of the callback is
+of the form:
+<p>
+global proc callbackName(string $dragControl, string $dropControl, string $msgs[], int $x, int $y, int $type)
+<p>
+The proc receives a string array that is transferred from the drag source.
+The first string in the msgs array describes the user defined message type.
+Controls that are application defined drop sites may ignore the
+callback. $type can have values of 1 == Move, 2 == Copy, 3 == Link.
+<p>
+In Python, it is similar, but there are two ways to specify the callback.  The
+recommended way is to pass a Python function object as the argument.  In that
+case, the Python callback should have the form:
+<p>
+def pythonDropTest( dragControl, dropControl, messages, x, y, dragType ):
+<p>
+The values of these arguments are the same as those for the MEL version above.
+<p>
+The other way to specify the callback in Python is to specify a string to be
+executed.  In that case, the string will have the values substituted into it
+via the standard Python format operator.  The format values are passed in a
+dictionary with the keys &quot;dragControl&quot;, &quot;dropControl&quot;, &quot;messages&quot;, &quot;x&quot;, &quot;y&quot;,
+&quot;type&quot;.  The &quot;dragControl&quot; value is a string and the other values are integers
+(eg the callback string could be
+&quot;print '%(dragControl)s %(dropControl)s %(messages)r %(x)d %(y)d %(type)d'&quot;)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditable">
+          <code><b>-editable</b>(<b>-ed</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The edit state of the table.
+By default, this flag is set to true, and the table can be edited.
+If false, then the table is 'read only' and cannot be typed into.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenable">
+          <code><b>-enable</b>(<b>-en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The enable state of the control.  By default, this flag is
+set to true and the control is enabled.  Specify false and the control
+will appear dimmed or greyed-out indicating it is disabled.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenableBackground">
+          <code><b>-enableBackground</b>(<b>-ebg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Enables the background color of the control.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenableKeyboardFocus">
+          <code><b>-enableKeyboardFocus</b>(<b>-ekf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If enabled, the user can navigate to the control with the tab key and select values with the keyboard. If not, the user can only use the mouse.
+This flag would typically be used to turn off keyboard focus support from controls that get it by default, like Edit and List controls
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexcludingHeaders">
+          <code><b>-excludingHeaders</b>(<b>-eh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+when querying the count for the rows or the columns , the number returned will not include the headers
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>-exists</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns whether the
+specified object exists or not. Other flags are ignored.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfullPathName">
+          <code><b>-fullPathName</b>(<b>-fpn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the full path name of the widget, which includes all the parents.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggetCellCmd">
+          <code><b>-getCellCmd</b>(<b>-gcc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the script to call when it requires
+the contents of a cell. The procedure is called with
+2 integer arguments specifying the row and column for
+which the value is required. The procedure should return
+a string which is the value for the cell.
+The row and column numbers passed in are 1-based
+(ie. (1,1) is the upper left cell). The procedure should be
+of the form:
+<p>
+global proc string procedureName(int $row, int $column)
+<p>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagheight">
+          <code><b>-height</b>(<b>-h</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The height of the control.  The control will attempt to
+be this size if it is not overruled by parent layout conditions.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghighlightColor">
+          <code><b>-highlightColor</b>(<b>-hlc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The highlight color of the control. The arguments correspond
+to the red, green, and blue color components. Each component ranges
+in value from 0.0 to 1.0.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginsertRow">
+          <code><b>-insertRow</b>(<b>-ir</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Insert an empty row before the specified row. Any
+procedure specified by the -gcc flag will be called to
+populate the new new cells.
+The row number is 1-based (i.e. the first row is 1 not 0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisObscured">
+          <code><b>-isObscured</b>(<b>-io</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return whether the control can actually be seen by the user.
+The control will be obscured if its state is invisible, if it is
+blocked (entirely or partially) by some other control, if it or a
+parent layout is unmanaged, or if the control's window is
+invisible or iconified.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglabel">
+          <code><b>-label</b>(<b>-l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the label of the specified column.
+The column number is 1-based (ie. the first column is 1 not 0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmanage">
+          <code><b>-manage</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Manage state of the control.  An unmanaged control is
+not visible, nor does it take up any screen real estate.  All
+controls are created managed by default.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmultiEditEnabled">
+          <code><b>-multiEditEnabled</b>(<b>-mee</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+True: scriptTable support multi-editing function
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoBackground">
+          <code><b>-noBackground</b>(<b>-nbg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clear/reset the control's background.
+Passing true means the background should not be drawn at all, false means the background should be drawn.  The state of this flag is inherited by children of this control.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnumberOfPopupMenus">
+          <code><b>-numberOfPopupMenus</b>(<b>-npm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the number of popup menus attached to this control.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparent">
+          <code><b>-parent</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The parent layout for this control.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpopupMenuArray">
+          <code><b>-popupMenuArray</b>(<b>-pma</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the names of all the popup menus attached to this
+control.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreventOverride">
+          <code><b>-preventOverride</b>(<b>-po</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, this flag prevents overriding the control's
+attribute via the control's right mouse button menu.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrowHeight">
+          <code><b>-rowHeight</b>(<b>-rh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the height for each row in the scriptTable
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrows">
+          <code><b>-rows</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the number of rows in the table
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrowsRemovedCmd">
+          <code><b>-rowsRemovedCmd</b>(<b>-rrc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the script to call after rows are removed by pressing 'delete' or
+'backspace' key. The procedure is called with one argument
+specifying that selected rows have been removed.
+The rows passed in are 1-based. The procedure should be
+of the form:
+<p>
+global proc procedureName(int $rows[])
+<p>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrowsToBeRemovedCmd">
+          <code><b>-rowsToBeRemovedCmd</b>(<b>-rtc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the script to call when 'delete' or 'backspace' key is
+pressed. The procedure is called with one argument
+specifying the selected rows to be removed. The procedure
+should return an integer value which indicates whether the
+selected rows should be removed (return 1 if yes, and 0 if no).
+The rows passed in are 1-based. The procedure should be
+of the form:
+<p>
+global proc int procedureName(int $rows[])
+<p>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectedCells">
+          <code><b>-selectedCells</b>(<b>-sc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int[]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Select the cells or return  the cells currently selected.
+This returns a list of indices, the first of each pair is the row, the second is the column, repeated for each cell selected
+The returned cell numbers are 1-based (ie. the first row is 1 not 0, the first column is 1 not 0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectedColumns">
+          <code><b>-selectedColumns</b>(<b>-scs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int[]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+select the columns or return the columns currently selected.
+This returns a list of indices of each column completely selected
+The returned column numbers are 1-based
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectedRow">
+          <code><b>-selectedRow</b>(<b>-sr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The current row selected.
+The returned row number is 1-based (ie. the first row is 1 not 0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectedRows">
+          <code><b>-selectedRows</b>(<b>-srs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int[]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In edit mode, select the rows given as argument.
+In query mode, return a list of indices of completely selected rows.
+The row numbers are 1-based
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectionBehavior">
+          <code><b>-selectionBehavior</b>(<b>-sb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the selection behavior, valid values are from 0 to 2 (inclusive)
+0 - Selecting single items.
+1 - Selecting only rows.
+2 - Selecting only columns.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectionChangedCmd">
+          <code><b>-selectionChangedCmd</b>(<b>-scc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the script to call when a complete selection
+operation triggered by the user has occurred successfully.
+The script does not pass any parameters and does not need to
+return any value (i.e. It is simply a notification mechanism).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectionMode">
+          <code><b>-selectionMode</b>(<b>-sm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the selection Mode, valid values are from 0 to 4 (inclusive)<br>
+0 - Items cannot be selected.<br>
+1 - When the user selects an item, any already-selected item becomes unselected, and the user cannot unselect the selected item by clicking on it.<br>
+2 - When the user selects an item in the usual way, the selection status of that item is toggled and the other items are left alone. Multiple items can be toggled by dragging the mouse over them.<br>
+3 - When the user selects an item in the usual way, the selection is cleared and the new item selected. However, if the user presses the Ctrl key when clicking on an item, the clicked item gets toggled and all other items are left untouched. If the user presses the Shift key while clicking on an item, all items between the current item and the clicked item are selected or unselected, depending on the state of the clicked item. Multiple items can be selected by dragging the mouse over them.<br>
+4 - When the user selects an item in the usual way, the selection is cleared and the new item selected. However, if the user presses the Shift key while clicking on an item, all items between the current item and the clicked item are selected or unselected, depending on the state of the clicked item.<br>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsortEnabled">
+          <code><b>-sortEnabled</b>(<b>-se</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+enable scriptTable sorted by column
+default value is false and the whole row will be sorted
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstatusBarMessage">
+          <code><b>-statusBarMessage</b>(<b>-sbm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Extra string to display in the status bar when the mouse is over the control.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunderPointerColumn">
+          <code><b>-underPointerColumn</b>(<b>-upc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The column under the pointer.
+The returned column number is 1-based (i.e. the first column is 1 not 0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunderPointerRow">
+          <code><b>-underPointerRow</b>(<b>-upr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The row under the pointer.
+The returned row number is 1-based (i.e. the first row is 1 not 0).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseDoubleClickEdit">
+          <code><b>-useDoubleClickEdit</b>(<b>-udc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+this controls the cell edit mode<br>
+False: Click in the cell to select (in Row selection, the last cell of the row is edited, in Column selection, the last cell of the column is edited)(default) <br>
+True:  Clicked in cell is edited when double-clicked only
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseTemplate">
+          <code><b>-useTemplate</b>(<b>-ut</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Forces the command to use a command template other than
+the current one.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvisible">
+          <code><b>-visible</b>(<b>-vis</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The visible state of the control.  A control is created
+visible by default.  Note that a control's actual appearance is
+also dependent on the visible state of its parent layout(s).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvisibleChangeCommand">
+          <code><b>-visibleChangeCommand</b>(<b>-vcc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Command that gets executed when visible state of the control changes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwidth">
+          <code><b>-width</b>(<b>-w</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The width of the control.  The control will attempt to
+be this size if it is not overruled by parent layout conditions.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+proc int edit_cell(int $row, int $column, string $value){
+    return 1;
+}
+
+string $window = `window -widthHeight 400 300`;
+string $form = `formLayout`;
+string $table = `scriptTable -rows 4 -columns 2
+    -label 1 &quot;Column 1&quot; -label 2 &quot;Column 2&quot; -cellChangedCmd edit_cell`;
+string $addButton = `button -label &quot;Add Row&quot;
+    -command (&quot;scriptTable -edit -insertRow 1 $table&quot;)`;
+string $deleteButton = `button -label &quot;Delete Row&quot;
+    -command (&quot;scriptTable -edit -deleteRow 1 $table&quot;)`;
+
+formLayout -edit
+    -attachForm     $table        &quot;top&quot;    0
+    -attachForm     $table        &quot;left&quot;   0
+    -attachControl  $table        &quot;bottom&quot; 0 $addButton
+    -attachForm     $table        &quot;right&quot;  0
+
+    -attachNone     $addButton    &quot;top&quot;
+    -attachForm     $addButton    &quot;left&quot;   0
+    -attachForm     $addButton    &quot;bottom&quot; 0
+    -attachPosition $addButton    &quot;right&quot;  0 50
+
+    -attachNone     $deleteButton &quot;top&quot;
+    -attachPosition $deleteButton &quot;left&quot;   0 50
+    -attachForm     $deleteButton &quot;bottom&quot; 0
+    -attachForm     $deleteButton &quot;right&quot;  0
+    $form;
+
+showWindow $window;
+
+// Set and query cells
+scriptTable -edit -cellIndex 1 1 -cellValue &quot;MyValue&quot; $table;
+scriptTable -cellIndex 1 1 -query -cellValue $table;
+
+// Select and query rows, columns and cells
+scriptTable -edit -selectedRows {1, 3} $table;
+scriptTable -query -selectedRows $table;
+scriptTable -edit -selectedColumns {1} $table;
+scriptTable -query -selectedColumns $table;
+scriptTable -edit -selectedCells {1,2,2,1,3,2,4,1} $table;
+scriptTable -query -selectedCells $table;
+
+// Set a filter for the first column
+scriptTable -edit -columnFilter 1 &quot;MyValue&quot; $table;
+// Set a filter for all columns
+scriptTable -edit -columnFilter 0 &quot;MyValue&quot; $table;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

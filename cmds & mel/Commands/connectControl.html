@@ -1,0 +1,300 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>connectControl command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-connectControl"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/connectControl.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>connectControl </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("connectControl.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>connectControl [-<a href="#flagfileName">fileName</a>] [-<a href="#flagindex">index</a> <i>uint</i>] [-<a href="#flagpreventContextualMenu">preventContextualMenu</a> <i>boolean</i>] [-<a href="#flagpreventOverride">preventOverride</a> <i>boolean</i>] 
+string attribute...
+     </code> </p>
+      <p>connectControl is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command attaches a UI widget, specified as the first argument, to
+one or more dependency node attributes. The attributes/nodes don't
+have to exist yet, they will get looked up as needed. With no flag
+specified, this command works on these kinds of controls: floatField,
+floatScrollBar, floatSlider, intField, intScrollBar, intSlider,
+floatFieldGrp, intFieldGrp, checkBox, radioCollection, and
+optionMenu. With the <em>index</em> flag, It will also work on the
+individual components of all other groups.
+<p>
+This command sets up a <b>two-way connection</b> between the control
+and the (first-specified) attribute. If this first attribute is
+changed in any way, the control will be appropriately updated to match
+its value.
+<p>
+Summary: if you change the control, ALL the connected attributes
+change. If you change the FIRST attribute attached to the control,
+then the control will change.
+<p>
+NOTE: the two-way connection will not be established if the attributes
+do not exist when the <b>connectControl</b> command is run. If the
+user later uses the control, the connection will be established at
+that time.
+<p>
+To effectively use <b>connectControl</b> with radioCollections and
+optionMenus, you must attach a piece of data to each radioButton and
+menuItem. This piece of data (an integer) can be attached using the
+<b>data</b> flag in the <b>radioButton</b> and <b>menuItem</b>
+commands. When the button/item is selected, the attribute will be set
+to the value of its data. When the attribute is changed, the
+collection (or optionMenu) will switch to the item that matches the
+new attribute value. If no item matches, it will be left unchanged.
+<p>
+There are some specialized controls that have connection capability
+(and more) built right into them. See attrFieldSliderGrp,
+attrFieldGrp, and attrColorSliderGrp. Using these classes can be
+easier than using connectControl.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagfileName">fileName</a>, <a href="#flagindex">index</a>, <a href="#flagpreventContextualMenu">preventContextualMenu</a>, <a href="#flagpreventOverride">preventOverride</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfileName">
+          <code><b>-fileName</b>(<b>-fi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag causes the connection to be treated as a
+filename, and the conversion from internal to external
+filename representation is made as the data is
+copied. This only applies to connections to Tfield
+controls.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagindex">
+          <code><b>-index</b>(<b>-in</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag enables you to pick out a sub-control from a
+group that contains a number of different controls.
+For example, you can connect one field of a
+floatFieldGrp.  You must count each member of the
+group, including any text labels that may exist.  For
+example, if you have a check box group with a label,
+the label will count as index 1, and the first check
+box as index 2.  (Indices are 1-based)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreventContextualMenu">
+          <code><b>-preventContextualMenu</b>(<b>-pcm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, this flag will block the right mouse button menu
+of the associated control attribute.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreventOverride">
+          <code><b>-preventOverride</b>(<b>-po</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, this flag disallows overriding the control's
+attribute via the control's right mouse button menu.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+{
+    string $sphereNames[] = `sphere`;
+    string $sphereName = $sphereNames[0];
+    string $window = `window`;
+    columnLayout;
+    text -l &quot;X Value:&quot;;
+    floatField xx;
+    connectControl xx ($sphereName+&quot;.tx&quot;);
+    text -l &quot;Visibility&quot;;
+    checkBox vis;
+    connectControl vis ($sphereName+&quot;.visibility&quot;);
+    floatFieldGrp -l &quot;Rotation:&quot; -numberOfFields 3 rot;
+    // index 1 would be the text label
+    connectControl -index 2 rot ($sphereName+&quot;.rx&quot;);
+    connectControl -index 3 rot ($sphereName+&quot;.ry&quot;);
+    connectControl -index 4 rot ($sphereName+&quot;.rz&quot;);
+    showWindow $window;
+}
+
+// Connecting two attributes to a single control
+{
+    window;
+    columnLayout;
+    floatSlider slider;
+    showWindow;
+
+    polySphere;
+    polyCube;
+    move 0 2 0;
+    connectControl slider pCube1.tx pSphere1.tx;
+}
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,603 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>exportEdits command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-exportEdits"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/exportEdits.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>exportEdits </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("exportEdits.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>exportEdits([<a href="#flageditCommand">editCommand</a>=<i>string</i>], [<a href="#flagexcludeHierarchy">excludeHierarchy</a>=<i>boolean</i>], [<a href="#flagexcludeNode">excludeNode</a>=<i>string</i>], [<a href="#flagexportSelected">exportSelected</a>=<i>boolean</i>], [<a href="#flagforce">force</a>=<i>boolean</i>], [<a href="#flagincludeAnimation">includeAnimation</a>=<i>boolean</i>], [<a href="#flagincludeConstraints">includeConstraints</a>=<i>boolean</i>], [<a href="#flagincludeDeformers">includeDeformers</a>=<i>boolean</i>], [<a href="#flagincludeNetwork">includeNetwork</a>=<i>boolean</i>], [<a href="#flagincludeNode">includeNode</a>=<i>string</i>], [<a href="#flagincludeSetAttrs">includeSetAttrs</a>=<i>boolean</i>], [<a href="#flagincludeSetDrivenKeys">includeSetDrivenKeys</a>=<i>boolean</i>], [<a href="#flagincludeShaders">includeShaders</a>=<i>boolean</i>], [<a href="#flagonReferenceNode">onReferenceNode</a>=<i>string</i>], [<a href="#flagselected">selected</a>=<i>boolean</i>], [<a href="#flagtype">type</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>exportEdits is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      Use this command to export edits made in the scene to a file.
+The exported file can be subsequently imported to another scene.
+Edits may include: nodes, connections and reference edits such as value changes.
+The nodes that are included in the exported file will be based on the
+options used.
+At least one option flag that describes the set of target nodes to include in the
+exported file must be specified (e.g. 'selected', 'onReferenceNode').
+Use the inclusion flags ('includeAnimation', 'includeShaders', 'includeNetwork') to
+specify which additional related nodes will be added to the export list.
+In export mode, when the command completes successfully, the name of the exported file will
+be returned.
+In query mode, this command will return information about the contents of the exported
+file.
+The query mode will return the list of nodes that will be considered for
+inclusion in the exported file based on the specified flags.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>For query execution.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>reference, export, node, import
+      <h2><a name="hRelated">Related</a></h2><a href="file.html">file</a>, <a href="referenceEdit.html">referenceEdit</a>, <a href="referenceQuery.html">referenceQuery</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flageditCommand">editCommand</a>, <a href="#flagexcludeHierarchy">excludeHierarchy</a>, <a href="#flagexcludeNode">excludeNode</a>, <a href="#flagexportSelected">exportSelected</a>, <a href="#flagforce">force</a>, <a href="#flagincludeAnimation">includeAnimation</a>, <a href="#flagincludeConstraints">includeConstraints</a>, <a href="#flagincludeDeformers">includeDeformers</a>, <a href="#flagincludeNetwork">includeNetwork</a>, <a href="#flagincludeNode">includeNode</a>, <a href="#flagincludeSetAttrs">includeSetAttrs</a>, <a href="#flagincludeSetDrivenKeys">includeSetDrivenKeys</a>, <a href="#flagincludeShaders">includeShaders</a>, <a href="#flagonReferenceNode">onReferenceNode</a>, <a href="#flagselected">selected</a>, <a href="#flagtype">type</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexcludeHierarchy">
+          <code><b>excludeHierarchy</b>(<b>ehr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+By default, all DAG parents and DAG history are written to the export file.
+To prevent any DAG relations not otherwise connected to the target nodes to be
+included, specify the -excludeHierarchy flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexcludeNode">
+          <code><b>excludeNode</b>(<b>en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Prevent the node from being included in the list of nodes being
+exported. This flag is useful to exclude specific scene nodes that might
+otherwise be exported. In the case where more than one Maya node has the
+same name, the DAG path can be specified to uniquely identify the node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportSelected">
+          <code><b>exportSelected</b>(<b>exs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The selected nodes and their connections to each other will be exported. Additionally,
+any dangling connections to non-exported nodes will be exported.
+Default nodes are ignored and never exported.
+Note that when using the exportSelected flag, only selected nodes are exported, and
+-include/-exclude flags such as -includeHierarchy are ignored.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforce">
+          <code><b>force</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Force the export action to take place. This flag is required to overwrite an existing file.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeAnimation">
+          <code><b>includeAnimation</b>(<b>ian</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Additionally include animation nodes and animation helper nodes associated with
+the target nodes being exported.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeConstraints">
+          <code><b>includeConstraints</b>(<b>ic</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Additionally include constraint-related nodes associated with the target nodes being exported.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeDeformers">
+          <code><b>includeDeformers</b>(<b>idf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Additionally include deformer networks associated with the target nodes being exported.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeNetwork">
+          <code><b>includeNetwork</b>(<b>inw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Additionally include the network of nodes connected to the target nodes being exported.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeNode">
+          <code><b>includeNode</b>(<b>includeNode</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Additionally include the named node in the list of nodes being
+exported. In the case where more than one Maya node has the
+same name, the DAG path can be specified to uniquely identify the node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeSetAttrs">
+          <code><b>includeSetAttrs</b>(<b>isa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When using the -selected/-sel flag, if any of the selected nodes are referenced,
+also include/exclude any setAttr edits on those nodes. If used with the -onReferenceNode/-orn
+flag, include/exclude any setAttr edits on the reference.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeSetDrivenKeys">
+          <code><b>includeSetDrivenKeys</b>(<b>sdk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Additionally include setDrivenKey-related nodes associated with the target nodes being exported.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeShaders">
+          <code><b>includeShaders</b>(<b>ish</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Additionally include shaders associated with the target nodes being exported.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselected">
+          <code><b>selected</b>(<b>sel</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export will operate on the list of nodes currently selected. This flag differs from the
+exportSelected flag in that the selected nodes are not exported, only the edits on
+them, and any nodes found via the include flags that are used (such as includeAnimation,
+includeNetwork and so on).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>type</b>(<b>typ</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the type of the exported file.
+Valid values are &quot;editMA&quot; or &quot;editMB&quot;.
+Note that this command respects the global &quot;defaultExtensions&quot; setting
+for file naming that is controlled with the file command defaultExtensions
+option.  See the file command for more information.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditCommand">
+          <code><b>editCommand</b>(<b>ec</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a secondary flag used to indicate which type of reference edits should
+be considered by the command.
+If this flag is not specified all edit types will be included.
+This flag requires a string parameter. Valid values are: &quot;addAttr&quot;,
+&quot;connectAttr&quot;, &quot;deleteAttr&quot;, &quot;disconnectAttr&quot;, &quot;parent&quot;, &quot;setAttr&quot;,
+&quot;lock&quot; and &quot;unlock&quot;. In some contexts, this flag may be specified
+more than once to specify multiple edit types to consider.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagonReferenceNode">
+          <code><b>onReferenceNode</b>(<b>orn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a secondary flag used to indicate that only those edits which are stored
+on the indicated reference node should be considered. This flag only supports
+multiple uses when specified with the &quot;exportEdits&quot; command.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+
+# query nodes to be exported, target is selected nodes, include related shaders
+nodeList = cmds.exportEdits(query=1,selected=1,includeShaders=1)
+
+# exported selected nodes and related animation nodes to file
+cmds.exportEdits(&quot;myExportFile.ma&quot;,type='editMA',selected=1,includeShaders=1)
+# Result: C:/Documents and Settings/user/My Documents/maya/projects/default/scenes/myExportFile.editMA
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

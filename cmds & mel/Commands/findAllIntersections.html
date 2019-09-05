@@ -1,0 +1,123 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>findAllIntersections command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-findAllIntersections"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>findAllIntersections </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Curves" target="contentFrame">Curves</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("findAllIntersections.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+string[] findAllIntersections(string $crvs[], int $numCrvsToIntersect,
+<br>
+int $useDir, float $dirX, float $dirY, float $dirZ, 
+<br>
+float $tolerance, int $sorted, int $history,
+<br>
+string $intersectNodes[] )
+<br>
+
+	 </code> </p>
+      
+      Find all intersections between a list of curves, two at a time.
+If there are no intersections, then no nodes are created.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      <h2><a name="hKeywords">Keywords</a></h2>curve NURBS intersect , 
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$crvs"><b>$crvs</b></a></td><td><i>string[]</i></td><td>List of curves to intersect
+</td></tr>
+<tr><td><a name="$crvCount"><b>$crvCount</b></a></td><td><i>int</i></td><td>Number of curves on the list
+</td></tr>
+<tr><td><a name="$useDir"><b>$useDir</b></a></td><td><i>int</i></td><td>Use the direction for intersection
+</td></tr>
+<tr><td><a name="$dirX"><b>$dirX</b></a></td><td><i>float</i></td><td>X Direction for intersection
+</td></tr>
+<tr><td><a name="$dirY"><b>$dirY</b></a></td><td><i>float</i></td><td>Y Direction for intersection
+</td></tr>
+<tr><td><a name="$dirZ"><b>$dirZ</b></a></td><td><i>float</i></td><td>Z Direction for intersection
+</td></tr>
+<tr><td><a name="$tolerance"><b>$tolerance</b></a></td><td><i>float</i></td><td>Intersection tolerance
+</td></tr>
+<tr><td><a name="$sorted"><b>$sorted</b></a></td><td><i>int</i></td><td>Sort the parameter list?
+</td></tr>
+<tr><td><a name="$history"><b>$history</b></a></td><td><i>int</i></td><td>Remember construction history?
+</td></tr>
+<tr><td><a name="$intersectNodes"><b>$intersectNodes</b></a></td><td><i>string[]</i></td><td>List of intersection nodes created
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>	curve -d 3 -p -1.16652 0 11.032493 -p -1.944098 0 9.982625 -p -3.499254 0 7.882891 -p -3.360333 0 -5.757598 -p 3.819598 0 -1.063913 -p 7.409563 0 1.282929 -k 0 -k 0 -k 0 -k 1 -k 2 -k 3 -k 3 -k 3 ;
+	curve -d 3 -p -7.921998 0 -6.423076 -p -2.89468 0 -2.134852 -p 7.159956 0 6.441594 -p 8.281336 0 7.981051 -p 8.842026 0 8.75078 -k 0 -k 0 -k 0 -k 1 -k 2 -k 2 -k 2 ;
+	string $curves[2] = {&quot;curve1&quot;,&quot;curve2&quot;};
+	global string $nodes[];
+	findAllIntersections($curves, size($curves), 0, 0,0,0, 0, 0, 0, $nodes);
+	<i>// Result:  1.851245417  0.3818904997 //
+</i>
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

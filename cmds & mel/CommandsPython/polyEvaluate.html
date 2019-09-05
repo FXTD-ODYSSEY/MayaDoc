@@ -1,0 +1,1101 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyEvaluate command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-polyEvaluate"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/polyEvaluate.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyEvaluate </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyEvaluate.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyEvaluate(
+[poly poly...]
+    , [<a href="#flagaccurateEvaluation">accurateEvaluation</a>=<i>boolean</i>], [<a href="#flagactiveShells">activeShells</a>=<i>boolean</i>], [<a href="#flagactiveUVShells">activeUVShells</a>=<i>boolean</i>], [<a href="#flagarea">area</a>=<i>boolean</i>], [<a href="#flagboundingBox">boundingBox</a>=<i>boolean</i>], [<a href="#flagboundingBox2d">boundingBox2d</a>=<i>boolean</i>], [<a href="#flagboundingBoxComponent">boundingBoxComponent</a>=<i>boolean</i>], [<a href="#flagboundingBoxComponent2d">boundingBoxComponent2d</a>=<i>boolean</i>], [<a href="#flagdisplayStats">displayStats</a>=<i>boolean</i>], [<a href="#flagedge">edge</a>=<i>boolean</i>], [<a href="#flagedgeComponent">edgeComponent</a>=<i>boolean</i>], [<a href="#flagface">face</a>=<i>boolean</i>], [<a href="#flagfaceArea">faceArea</a>=<i>boolean</i>], [<a href="#flagfaceComponent">faceComponent</a>=<i>boolean</i>], [<a href="#flagformat">format</a>=<i>boolean</i>], [<a href="#flagshell">shell</a>=<i>boolean</i>], [<a href="#flagtriangle">triangle</a>=<i>boolean</i>], [<a href="#flagtriangleComponent">triangleComponent</a>=<i>boolean</i>], [<a href="#flaguvArea">uvArea</a>=<i>boolean</i>], [<a href="#flaguvComponent">uvComponent</a>=<i>boolean</i>], [<a href="#flaguvEdgePairs">uvEdgePairs</a>=<i>boolean</i>], [<a href="#flaguvFaceArea">uvFaceArea</a>=<i>boolean</i>], [<a href="#flaguvSetName">uvSetName</a>=<i>string</i>], [<a href="#flaguvShell">uvShell</a>=<i>boolean</i>], [<a href="#flaguvShellIds">uvShellIds</a>=<i>boolean</i>], [<a href="#flaguvcoord">uvcoord</a>=<i>boolean</i>], [<a href="#flaguvsInShell">uvsInShell</a>=<i>int</i>], [<a href="#flagvertex">vertex</a>=<i>boolean</i>], [<a href="#flagvertexComponent">vertexComponent</a>=<i>boolean</i>], [<a href="#flagworldArea">worldArea</a>=<i>boolean</i>], [<a href="#flagworldFaceArea">worldFaceArea</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>polyEvaluate is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Returns the required counts on the specified objects.
+<br>If no objects are specified in the command line, then the
+objects from the active list are used.
+<p>
+In MEL, the values are returned in the same order as the flags are set.
+Under Python, there is no concept of argument ordering, so the items are
+returned in a dictionary keyed by the name of the flag.  In Python, if only
+one item is requested, then it will not be returned in a dictionary.
+<br>For user convenience, if no flag is set, then all values are echoed.
+<p>
+All flags (except -fmt/format) are in fact query-flags. For
+user convenience, the -q flag may be ommitted.
+<p>
+Some comments for non-formatted output :<br>
+<ul>
+<li>3d bounding boxes are returned as 3 couples of floats,
+2d ones as 2 couples of floats.</li>
+<li>
+if a bounding box is queried and cannot be computed (for example
+the component bounding box when no component is selected, or 2d bounding box for
+and unmapped object) 0 is returned for each array element, so that
+indices in the output array remain consistent.</li>
+<li>
+<i>int</i> values (queried by topological flags) cannot be
+mixed with <i>float</i> values (queried by bounding box flags).
+Thus if no flag is set, only <i>int</i> values are returned.</li>
+</ul>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>Any</i></td><td>a MEL array of values, a Python dictionary, or a string, depending on
+the format requested and the language called from.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="polyInfo.html">polyInfo</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaccurateEvaluation">accurateEvaluation</a>, <a href="#flagactiveShells">activeShells</a>, <a href="#flagactiveUVShells">activeUVShells</a>, <a href="#flagarea">area</a>, <a href="#flagboundingBox">boundingBox</a>, <a href="#flagboundingBox2d">boundingBox2d</a>, <a href="#flagboundingBoxComponent">boundingBoxComponent</a>, <a href="#flagboundingBoxComponent2d">boundingBoxComponent2d</a>, <a href="#flagdisplayStats">displayStats</a>, <a href="#flagedge">edge</a>, <a href="#flagedgeComponent">edgeComponent</a>, <a href="#flagface">face</a>, <a href="#flagfaceArea">faceArea</a>, <a href="#flagfaceComponent">faceComponent</a>, <a href="#flagformat">format</a>, <a href="#flagshell">shell</a>, <a href="#flagtriangle">triangle</a>, <a href="#flagtriangleComponent">triangleComponent</a>, <a href="#flaguvArea">uvArea</a>, <a href="#flaguvComponent">uvComponent</a>, <a href="#flaguvEdgePairs">uvEdgePairs</a>, <a href="#flaguvFaceArea">uvFaceArea</a>, <a href="#flaguvSetName">uvSetName</a>, <a href="#flaguvShell">uvShell</a>, <a href="#flaguvShellIds">uvShellIds</a>, <a href="#flaguvcoord">uvcoord</a>, <a href="#flaguvsInShell">uvsInShell</a>, <a href="#flagvertex">vertex</a>, <a href="#flagvertexComponent">vertexComponent</a>, <a href="#flagworldArea">worldArea</a>, <a href="#flagworldFaceArea">worldFaceArea</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaccurateEvaluation">
+          <code><b>accurateEvaluation</b>(<b>ae</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+used to get accurate results for the bounding box computation
+For objects with large vertex counts, accurate evaluation takes more time
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveShells">
+          <code><b>activeShells</b>(<b>activeShells</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the indices of active shells as an array of int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveUVShells">
+          <code><b>activeUVShells</b>(<b>aus</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the indices of active UV shells (for the current map if one
+is not specified) as an array of int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagarea">
+          <code><b>area</b>(<b>a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the surface area of the object's faces in local space as a float
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagboundingBox">
+          <code><b>boundingBox</b>(<b>b</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the object's bounding box in 3d space
+as 6 floats in MEL: xmin xmax ymin ymax zmin zmax, or as
+a tuple of three pairs in Python: ((xmin,xmax), (ymin,ymax), (zmin,zmax))
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagboundingBox2d">
+          <code><b>boundingBox2d</b>(<b>b2</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the object's uv bounding box (for the current map if one is not specified) in 2d space
+as 4 floats in MEL : xmin xmax ymin ymax, or as
+a tuple of three pairs in Python: ((xmin,xmax), (ymin,ymax), (zmin,zmax))
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagboundingBoxComponent">
+          <code><b>boundingBoxComponent</b>(<b>bc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the bounding box of selected components in 3d space
+as 6 floats in MEL : xmin xmax ymin ymax zmin zmax, or as
+a tuple of three pairs in Python: ((xmin,xmax), (ymin,ymax), (zmin,zmax))
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagboundingBoxComponent2d">
+          <code><b>boundingBoxComponent2d</b>(<b>bc2</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the bounding box of selected/specified components uv coordinates in 2d space
+as 4 floats in MEL : xmin xmax ymin ymax, or as
+a tuple of two pairs in Python: ((xmin,xmax), (ymin,ymax))
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisplayStats">
+          <code><b>displayStats</b>(<b>ds</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+toggles the display of poly statistics for the active View.
+All other flags are ignored if this flag is specified (Obsolete
+- refer to the headsUpDisplay command)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagedge">
+          <code><b>edge</b>(<b>e</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the number of edges as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagedgeComponent">
+          <code><b>edgeComponent</b>(<b>ec</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the object's number of selected edges as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagface">
+          <code><b>face</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the number of faces as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfaceArea">
+          <code><b>faceArea</b>(<b>fa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the surface area of selected/specified faces in local space as an array of float
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfaceComponent">
+          <code><b>faceComponent</b>(<b>fc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the object's number of selected faces as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagformat">
+          <code><b>format</b>(<b>fmt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+used to display the results as an explicit sentence
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshell">
+          <code><b>shell</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the number of shells (disconnected pieces) as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtriangle">
+          <code><b>triangle</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the number of triangles as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtriangleComponent">
+          <code><b>triangleComponent</b>(<b>tc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the number of triangles of selected components as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvArea">
+          <code><b>uvArea</b>(<b>uva</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the UV area of the object's faces in 2d space as a float
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvComponent">
+          <code><b>uvComponent</b>(<b>uvc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the object's number of selected uv coordinates as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvEdgePairs">
+          <code><b>uvEdgePairs</b>(<b>uep</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the pairs of UVs that are on the selected/specified edges
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvFaceArea">
+          <code><b>uvFaceArea</b>(<b>ufa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the UV area of selected/specified faces in 2d space as an array of float
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvSetName">
+          <code><b>uvSetName</b>(<b>uvs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+used when querying texture vertices to specify the uv set.  If a uv set
+is not specified then the current map for the object will be used
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvShell">
+          <code><b>uvShell</b>(<b>us</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the number of UV shells (for the current map if one is not
+specified) as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvShellIds">
+          <code><b>uvShellIds</b>(<b>usi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the UV shell indices for selected/specified faces or UVs as an array of int
+(for the current map if one is not specified), one shell index per each face/UV.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvcoord">
+          <code><b>uvcoord</b>(<b>uv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the number of uv coordinates (for the current map if one is
+not specified) as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvsInShell">
+          <code><b>uvsInShell</b>(<b>uis</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns all UVs inside specified shell(for the current map if one is not specified), use activeUVShells
+to get shell indices for current selection, use uvShellIds to get shell indices for specified faces or UVs
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvertex">
+          <code><b>vertex</b>(<b>v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the number of vertices as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvertexComponent">
+          <code><b>vertexComponent</b>(<b>vc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the object's number of selected vertices as an int
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldArea">
+          <code><b>worldArea</b>(<b>wa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the surface area of the object's faces in world space as a float
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldFaceArea">
+          <code><b>worldFaceArea</b>(<b>wfa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the surface area of selected/specified faces in world space as an array of float
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.polyPlane( n='plg', sx=4, sy=4, w=5, h=5 )
+cmds.select( 'plg.f[2]', 'plg.f[4]' )
+
+# query the number of faces
+cmds.polyEvaluate( f=True )
+# Result: 16
+
+# query the number of triangles
+cmds.polyEvaluate( t=True )
+# Result: 32
+
+# query the number of selected faces
+cmds.polyEvaluate( faceComponent=True )
+# Result: 2
+
+# query the number of vertices and faces
+cmds.polyEvaluate( v=True, f=True )
+# Result: {'vertex': 25, 'face': 16}
+
+# formatted query of the number of vertices and faces
+cmds.polyEvaluate( v=True, f=True, fmt=True )
+# Result: &quot;face=16 vertex=25&quot;
+
+# query all
+cmds.polyEvaluate()
+# Result: {'edge': 40, 'edgeComponent': 0, 'face': 16, 'faceComponent': 2, 'shell': 1, 'triangle': 32, 'triangleComponent': 0, 'uvComponent': 0, 'uvShell': 1, 'uvcoord': 25, 'vertex': 25,'vertexComponent': 0}
+
+#formatted query of all information
+cmds.polyEvaluate( fmt=True )
+# Result: vertex=25 edge=40 face=16 uvcoord=25 triangle=32 shell=1 uvShell=1
+#    vertexComponent=0 edgeComponent=0 faceComponent=2 uvComponent=0
+#    triangleComponent=4 activeShells= 0 activeUVShells= 0 uvShellIds= 0 0
+#    faceArea= 1.5625 1.5625 worldFaceArea= 1.5625 1.5625 uvFaceArea= 0.0625 0.0625
+#    boundingBox= X[-2.50,2.50] Y[-0.00,0.00] Z[-2.50,2.50]
+#    boundingBoxComponent= X[-2.50,1.25] Y[-0.00,0.00] Z[0.00,2.50]
+#    boundingBox2d= U[0.00,1.00] V[0.00,1.00]
+#    boundingBoxComponent2d= U[0.00,0.75] V[0.00,0.50]
+#    area=25.00 worldArea=25.00 uvArea=1.00
+
+# accurate bounding box evaluation
+cmds.polyCylinder( r=1, h=2, sx=20, sy=1, sz=1, ax=(0, 1, 0), tx=1, ch=1 )
+# Result: pCylinder1 polyCylinder1 #
+cmds.rotate( 38.340875, 0, 0, r=True, os=True )
+cmds.rotate( 0, 0, -36.177835, r=True, os=True )
+
+cmds.polyEvaluate( b=True )
+# Result: ((-1.3974823703620598, 1.39748217791327), (-1.7164316223605844, -1.7164316223605844), (-1.6512467204212007, 1.6512465272260637)) #
+cmds.polyEvaluate( b=True, ae=True )
+# Result: ((-1.3974823951721191, 1.39748215675354), (-1.4071073532104492, -1.4071073532104492), (-1.3598332405090332, 1.3598330020904541)) #
+
+# Local and World Space Area
+cmds.polyCube( w=1, h=1, d=1, sx=1, sy=1, sz=1, ax=(0, 0, 1), cuv=1, ch=1 )
+cmds.setAttr( 'pCube1.scaleY', 2 )
+cmds.polyEvaluate( a=True )
+# Result: 6
+cmds.polyEvaluate( wa=True )
+# Result: 10
+
+# UV Shell information
+cmds.polySphere( sx=20, sy=20 )
+cmds.polyAutoProjection()
+cmds.hilite()
+cmds.select( 'pSphere1.f[282]', 'pSphere1.f[189:192]', replace = True )
+
+# number of UV shells
+cmds.polyEvaluate( uvShell=True )
+# Result: 6
+
+# active UV Shells
+cmds.polyEvaluate( activeUVShells=True )
+# Result: [1, 4, 5]
+
+# UV shell IDs for selected faces
+cmds.polyEvaluate( uvShellIds=True )
+# Result: [1, 1, 1, 4, 5]
+
+# UV edge pairs for selected edges
+cmds.polyEvaluate( 'pSphere1.e[642]', uvEdgePairs=True )
+# Result: [u'pSphereShape1.map[67] pSphereShape1.map[74] pSphereShape1.map[307] pSphereShape1.map[300] ']
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

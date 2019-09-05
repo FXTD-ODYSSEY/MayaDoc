@@ -1,0 +1,300 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>displayString command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-displayString"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/displayString.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>displayString </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Localization" target="contentFrame">Localization</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("displayString.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>displayString [-<a href="#flagdelete">delete</a>] [-<a href="#flagexists">exists</a>] [-<a href="#flagkeys">keys</a>] [-<a href="#flagreplace">replace</a>] [-<a href="#flagvalue">value</a> <i>string</i>] [string][string][string][string] </code> </p>
+      <p>displayString is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      Assign a string value to a string identifier. Allows you define a string in
+one location and then refer to it by its identifier in many other locations.
+Formatted strings are also supported (NOTE however, this functionality is now
+provided in a more general fashion by the format command, use of format
+is recommended). You may embed up to 3 special character sequences
+^1s, ^2s, and ^3s to perform automatic string replacement. The
+embedded characters will be replaced with the extra command arguments. See
+example section for more detail. Note the extra command arguments do not need
+to be display string identifiers.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>display, string
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdelete">delete</a>, <a href="#flagexists">exists</a>, <a href="#flagkeys">keys</a>, <a href="#flagreplace">replace</a>, <a href="#flagvalue">value</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdelete">
+          <code><b>-delete</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used to remove an identifer string.
+The command will fail if the identifier does not exist.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>-exists</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true or false depending upon whether the specified identifier exists.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeys">
+          <code><b>-keys</b>(<b>-k</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all displayString keys that match the identifier string.
+The identifier string may be a whole or partial key string.
+The command will return a list of all identifier keys that contain this
+identifier string as a substring.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplace">
+          <code><b>-replace</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Since a displayString command will fail if it tries to assign a new value
+to an existing identifer, this flag is required to allow updates
+to the value of an already-existing identifier.  If the identifier does
+not already exist, a new identifier is added as if the -replace flag were
+not present.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalue">
+          <code><b>-value</b>(<b>-v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The display string\'s value. If you do not specify this flag when
+creating a display string then the value will be the same as the
+identifier.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Associate a string with an identifier.
+//
+displayString -value &quot;Hello world&quot; kExampleHelloWorld;
+
+// Query string associated with an identifer.
+//
+displayString -query -value kExampleHelloWorld;
+
+
+// Define a simple formatted string to append ellipses.
+//
+displayString -value &quot;^1s...&quot; kExampleEllipsesFormat;
+displayString -query -value kExampleEllipsesFormat kExampleHelloWorld;
+
+// Define a formatted string using all the available
+// embedded characters.
+//
+displayString -value &quot;These ^1s are ^2s me ^3s&quot; kExampleAnotherFormat;
+displayString -value &quot;pretzels&quot; kExamplePretzels;
+displayString -query -value kExampleAnotherFormat kExamplePretzels &quot;making&quot; &quot;thirsty&quot;;
+
+// Obtain a list of matching displayString keys.
+// In the first example  a list of  all keys containing the substring
+// &quot;niceName&quot;.
+// In the second example a list of all keys in the string set
+// m_testStrings
+displayString -query -keys &quot;niceName&quot;;
+displayString -query -keys &quot;m_testStrings.&quot;;
+
+// If you don't specify the -v/value flag on creating then
+// the value will be the same as the identifier.
+//
+displayString kExampleMissingValue;
+displayString -query -value kExampleMissingValue;
+
+// Delete a string identifer.
+//
+displayString -delete kExampleHelloWorld;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,409 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>freeze command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-freeze"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/freeze.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>freeze </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("freeze.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>freeze [-<a href="#flagallNodes">allNodes</a>] [-<a href="#flagdisplayLayers">displayLayers</a>] [-<a href="#flagdownstream">downstream</a>] [-<a href="#flagforceDownstream">forceDownstream</a>] [-<a href="#flagfrozen">frozen</a>] [-<a href="#flaginvisible">invisible</a>] [-<a href="#flagnoFreeze">noFreeze</a>] [-<a href="#flagunfreeze">unfreeze</a>] [-<a href="#flagupstream">upstream</a>]  </code> </p>
+      <p>freeze is undoable, queryable, and <b>NOT editable</b>.</p>
+      When a node is frozen none of its inputs will be requested when they
+change, the node will use the inputs that existed at the time of freezing
+until the node is unfrozen.
+A node can be frozen in one of two ways; either directly, via setting the
+&quot;frozen&quot; attribute on the node to be true, or indirectly, via setting the
+&quot;frozenAffected&quot; extension attribute on the node to be true.
+This command lets you freeze nodes based on various criteria. See the flags
+for the types of criteria the command uses to decide what to freeze or unfreeze.
+The nodes that are selected are frozen directly. The nodes affected by directly
+frozen nodes, considering the argument settings, are frozen indirectly.
+If the frozen attribute, visibililty, or display layer mode has an input
+connection then the frozen state will not propagate because the node could
+be unfrozen or become visible at playback time.
+In query mode this command will find the nodes with each of the frozen states
+set (frozen, frozenAffected, and neither).
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>In query mode the list of currently frozen or unfrozen nodes. The list is in three parts separated by an empty string; nodes with frozen state (un)set, nodes with frozenAffected state (un)set, and the rest of the selected nodes</td></tr><tr><td valign="top"><i>string[]</i></td><td>the list of nodes whose frozen state was set by the command. The list is in two parts separated by an empty string; nodes with frozen state set, and nodes with frozenAffected state set</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>evaluation, manager, DG, runtime
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallNodes">allNodes</a>, <a href="#flagdisplayLayers">displayLayers</a>, <a href="#flagdownstream">downstream</a>, <a href="#flagforceDownstream">forceDownstream</a>, <a href="#flagfrozen">frozen</a>, <a href="#flaginvisible">invisible</a>, <a href="#flagnoFreeze">noFreeze</a>, <a href="#flagunfreeze">unfreeze</a>, <a href="#flagupstream">upstream</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallNodes">
+          <code><b>-allNodes</b>(<b>-all</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Select which nodes are to be used for the operation.
+If it is not set then the selection list will be used. If nothing is selected
+all nodes in the scene will be used.
+This flag can be used in query mode to find the set of frozen nodes in the scene.
+It can also be used in create mode with filters (displayLayers, invisible,
+or frozen) to target a specific subset of nodes in the scene.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisplayLayers">
+          <code><b>-displayLayers</b>(<b>-dl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this flag is enabled then the display layers on the list to be processed
+will be walked. Any nodes they control will be added to the processing list,
+providing the display layer visibility control is off and not connected.
+Note: Animated visibility or enabled states will be treated as matches to
+be thorough. No attempt is made to check for static animation.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdownstream">
+          <code><b>-downstream</b>(<b>-dn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this flag is enabled then the frozen state will attempt to propagate
+downstream from the selected nodes. e.g. the mesh shape deformations being
+controlled by a skeleton rig.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforceDownstream">
+          <code><b>-forceDownstream</b>(<b>-fd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this flag is enabled then the frozen state will attempt to propagate
+downstream from the selected nodes. e.g. the mesh shape deformations being
+controlled by a skeleton rig. Unlike the downstream flag though this one
+will freeze downstream nodes even if they have other, unfrozen, inputs.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfrozen">
+          <code><b>-frozen</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this flag is enabled then the list of nodes to be processed will be
+filtered out so that only nodes with the frozen attribute already set are
+included. Otherwise all nodes being processed will first have their frozen
+attribute set before propagating the frozen state.
+This flag would only be used if nodes were previously frozen and the command
+is used to propagate the frozen state through the graph.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvisible">
+          <code><b>-invisible</b>(<b>-i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this flag is enabled then the invisible nodes on the list to be processed
+will be walked. Any nodes below them in the DAG hierarchy will be added to
+the processing list, providing the visibility attribute is not connected.
+Note: Animated visibility states will be treated as a match to
+be thorough. No attempt is made to check for static animation.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoFreeze">
+          <code><b>-noFreeze</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag previews the nodes that will be frozen without actually freezing them.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunfreeze">
+          <code><b>-unfreeze</b>(<b>-uf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this flag is enabled then the nodes being processed will have their frozen
+state turned off instead of on. All of the same filtering and propagating will
+be done when deciding which nodes to modify.
+In query mode this flag switches from returning the already-frozen nodes to
+returning the unfrozen nodes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupstream">
+          <code><b>-upstream</b>(<b>-up</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this flag is enabled then the frozen state will attempt to propagate
+upstream through the selected nodes. e.g. the param curves feeding into
+a frozen transform.
+Heuristics are applied to this propagation to ensure that upstream nodes
+that are still used by unfrozen nodes will stay unfrozen themselves.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// Set all selected nodes to be frozen
+freeze;
+// Result: node1 node2 node3
+
+// Set all nodes in the scene to be unfrozen
+freeze -all -unfreeze;
+// Result: node1 node2 node3 nodeAlreadyFrozen
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

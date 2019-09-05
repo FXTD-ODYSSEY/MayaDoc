@@ -1,0 +1,1243 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>dgtimer command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-dgtimer"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/dgtimer.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>dgtimer </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Utilities" target="contentFrame">Utilities</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("dgtimer.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>dgtimer [-<a href="#flagcombineType">combineType</a>] [-<a href="#flaghide">hide</a> <i>string</i>] [-<a href="#flaghierarchy">hierarchy</a>] [-<a href="#flagmaxDisplay">maxDisplay</a> <i>int</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagnoHeader">noHeader</a>] [-<a href="#flagoutputFile">outputFile</a> <i>string</i>] [-<a href="#flagoverhead">overhead</a> <i>boolean</i>] [-<a href="#flagrangeLower">rangeLower</a> <i>float</i>] [-<a href="#flagrangeUpper">rangeUpper</a> <i>float</i>] [-<a href="#flagreset">reset</a>] [-<a href="#flagreturnCode">returnCode</a> <i>string</i>] [-<a href="#flagreturnType">returnType</a> <i>string</i>] [-<a href="#flagshow">show</a> <i>string</i>] [-<a href="#flagsortMetric">sortMetric</a> <i>string</i>] [-<a href="#flagsortType">sortType</a> <i>string</i>] [-<a href="#flagthreshold">threshold</a> <i>float</i>] [-<a href="#flagtimerOff">timerOff</a>] [-<a href="#flagtimerOn">timerOn</a>] [-<a href="#flagtrace">trace</a> <i>boolean</i>] [-<a href="#flagtype">type</a> <i>string</i>] [-<a href="#flaguniqueName">uniqueName</a>] [-<a href="#flagupdateHeatMap">updateHeatMap</a> <i>int</i>]  </code> </p>
+      <p>dgtimer is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      This command measures dependency graph node performance by managing
+timers on a per-node basis. Logically, each DG node has a timer
+associated with it which records the amount of real time spent
+in various operations on its plugs. The time measurement includes the cost
+of copying data to the node on behalf of the operation, MEL commands
+executed by an expression contained in an expression invoked by the
+node, and includes
+any wait time such as when a fileTexture node loads an image file from
+disk. Most DG operations are reported including compute, draw, and dirty
+propagation.
+<p>
+The various operations we measure are called &quot;metrics&quot; and the types of
+timers are called &quot;timer types&quot;. The various metrics are always measured
+when timing is on, but are only queried when specified via the -show and
+-hide flags. The metrics currently supported are listed in detail under
+the -show flag below. For each metric we support a standard set of timer
+types. There are three of these:
+&quot;self&quot; for self time (the time specific to the node and not its children),
+&quot;inclusive&quot; (time including children of the node), and
+&quot;count&quot; (number of operations of the given metric on the node).
+<p>
+The timing mechanism which is used by <i>dgtimer</i> is built into the DG
+itself, thus ALL depend nodes can be timed and there is no need for
+programmers writing plug-ins using the OpenMaya API to add any special
+code in order for their nodes to be timed -- its all
+handled transparently.
+<p>
+The <i>dgtimer</i> command allows node timers to be turned on, off, reset
+to zero, and have their current value displayed, and these operations
+can be performed globally on all nodes or on a specific set of nodes
+defined by name, type or parentage. Note that all timer measurements are
+computed in &quot;real time&quot; (the same time measurement you get from a
+wristwatch) as opposed to &quot;CPU time&quot; (which only measures time when the
+processor is executing your code). All times are displayed in seconds.
+<p>
+Use the -query flag to display the current timer values on a node,
+<br>
+use -on to turn on timing,
+<br>
+use -off to turn off timing,
+<br>
+and -reset to reset timers to zero.
+<p>
+To display the values measured during timing, there are two approaches.
+The first method is to use the -query flag can be used to report the information which
+has been measured. The second method is to use the query methods available on
+the OpenMaya class MFnDependencyNode (see the OpenMaya documentation for details).
+<p>
+What follows is a description of what is generated via -query. The output
+is broken out into several sections and these are described as follows:
+<p>
+<b>SECTION 1:</b><br>
+Section 1 of the dgtimer output contains global information. This section
+can be disabled via the -hoHeader flag.
+These values are reset whenever a global timer reset
+occurs (i.e. <i>dgtimer -reset;</i> is specified). The global values which are
+reported are:
+<p>
+<ul>
+<li><b>Total real time:</b> the total wall-clock time since the
+last global timer reset. This is the actual time which has been spent as you
+might measure it measure it with your watch.
+On a multi-processing system, this value will always remain true to to real
+time (unlike <i>user</i> and <i>sys</i> time).</li>
+<li><b>Total user time:</b> the total time the CPU(s) spent
+processing Maya not including any system time since the last global
+timer reset.</li>
+<li><b>Total sys time:</b> the total time the CPU(s) spent in
+operating system calls on behalf of Maya since the last global timer reset.
+</li>
+<li><b>Summary of each metric for all nodes:</b> a summary of self and count for each metric
+that we measure:</li>
+<ul>
+<li><b>Real time in callbacks</b> reports the self time and count for the &quot;callback&quot; metric.</li>
+<li><b>Real time in compute</b> reports the self time and count for the &quot;compute&quot; metric.</li>
+<li><b>Real time in dirty propagation</b> reports the self time and count for the &quot;dirty&quot; metric.</li>
+<li><b>Real time in drawing</b> reports the self time and count for the &quot;draw&quot; metric.</li>
+<li><b>Real time fetching data from plugs</b> reports the self time and count for the &quot;fetch&quot; metric.</li>
+</ul>
+<li><b>Breakdown of select metrics in greater detail:</b> a reporting of certain combinations of
+metrics that we measure:</li>
+<ul>
+</ul>
+<li><b>Real time in compute invoked from callback</b> reports the self time spent in compute
+when invoked either directly or indirectly by a callback.</li>
+<li><b>Real time in compute not invoked from callback</b> reports the self time spent in compute
+not invoked either directly or indirectly by a callback.</li>
+</ul>
+<b>SECTION 2:</b><br>
+Section 2 of the dgtimer -query output contains per-node information. There is a header which
+describes the meaning of each column, followed by the actual per-node data, and this is
+ultimately followed by a footer which summarises the totals per column. Note that the data
+contained in the footer is the global total for each metric and will include any nodes that
+have been deleted since the last reset, so the value in the footer MAY exceed what you get when you total the
+individual values in the column. To prevent the header
+and footer from appearing, use the -noHeader flag to just display the per-node data.
+<p>
+The columns which are displayed are as follows:
+<ul>
+<li><b>Rank:</b> The order of this node in the sorted list of all nodes, where the list
+is sorted by -sortMetric and -sortType flag values (if these are omitted the default
+is to sort by self compute time).</li>
+<li><b>ON:</b> Tells you if the timer for that node is currently on or off. (With
+dgtimer, you have the ability to turn timing on and off on a per-node basis).</li>
+<li><b>Per-metric information:</b> various columns are reported for each metric. The
+name of the metric is reported at in the header in capital letters (e.g. &quot;DRAW&quot;). The standard
+columns for each metric are:</li>
+<ul>
+<li><b>Self:</b> The amount of real time (i.e. elapsed time as you might measure
+it with a stopwatch) spent performing the operation (thus if the metric is &quot;DRAW&quot;, then
+this will be time spent drawing the node).</li>
+<li><b>Inclusive:</b> The amount of real time (i.e. elapsed time as you might measure
+it with a stopwatch) spent performing the operation including any child operations
+that were invoked on behalf of the operation (thus if the metric is &quot;DRAW&quot;, then
+this will be the total time taken to draw the node including any child operations).</li>
+<li><b>Count:</b> The number of operations that occued on this node (thus if the metric
+is &quot;DRAW&quot;, then the number of draw operations on the node will be reported).</li>
+<p>
+<li><b>Sort information</b> if a column is the one being used to sort all the per-node
+dgtimer information, then that column is followed by a <b>Percent</b> and <b>Cumulative</b>
+column which describe a running total through the listing. Note that &quot;-sortType none&quot;
+prevents these two columns from appearing and implicitely sorts on &quot;self&quot; time.</li>
+</ul>
+<li>After the per-metric columns, the node name and type are reported:</li>
+<ul>
+<li><b>Type</b> The node type.</li>
+<li><b>Name</b> The name of the node. If the node is file referenced and you
+are using namespaces, the namespace will be included. You can also force the
+dagpath to be displayed by specifying the -uniqueName flag.</li>
+<li><b>Plug-in name</b> If the node was implemented in an OpenMaya plug-in, the
+name of that plug-in is reported.</li>
+</ul>
+</ul>
+<b>SECTION 3:</b><br>
+Section 3 of the dgtimer -query output describes time spent in callbacks. Note that
+section 3 only appears when the CALLBACK metric is shown (see the -show flag).
+<p>
+The first part is SECTION 3.1 lists the time per callback with each entry comprising:
+<ul>
+<li>The name of the callback, such as &quot;attributeChangedMsg&quot;. These names are internal
+Maya names, and in the cases where the callback is available through the OpenMaya API,
+the API access to the callback is similarly named.</li>
+<li>The name is followed by a breakdown per callbackId. The callbackId is an identifying
+number which is unique to each client that is registered to a callback and can
+be deduced by the user, such as through the OpenMaya API. You can cross-reference by finding
+the same callbackId value listed in SECTIONs 3.1 and 3.3.</li>
+<ul>
+<li>Self time (i.e. real time spent within that callbackId type not including any child
+operations which occur while processing the callback).</li>
+<li>Percent (see the -sortType flag). Note that the percent values are listed to sum up to
+100% for that callback. This is not a global percent.</li>
+<li>Cumulative (see the -sortType flag).</li>
+<li>Inclusive time (i.e. real time spent within that callbackId including any child operations).</li>
+<li>Count (number of times the callbackId was invoked).</li>
+<li>API lists &quot;Y&quot; if the callbackId was defined through the OpenMaya API, and &quot;N&quot; if the
+callbackId was defined internally within Maya.</li>
+<li>Node lists the name of the node this callbackId was associated with. If the callbackId was
+associated with more than one node, the string &quot;*multiple*&quot; is printed. If there was no node
+associated with the callbackId (or its a callback type in which the node is hard to deduce),
+the entry is blank.</li>
+</ul>
+<li>After the callbackId entries are listed, a dashed line is printed followed by a single
+line listing the self, inclusive and count values for the callback. Note that the percent
+is relative to the global callback time.</li>
+</ul>
+At the bottom of SECTION 3.1 is the per-column total. The values printed match the summation at
+the bottom of the listing in section 2. Note that the values from SECTION 3.1
+include any nodes that have been deleted since the last reset. The thresholding parameters
+(-threshold, -rangeLower, -rangeUpper and -maxDisplay) are honoured when generating the listing.
+The sorting of the
+rows and display of the Percent and Cumulative columns obeys the -sortType flag. As the listing
+can be long, zero entries are not displayed.
+<p>
+The second part is SECTION 3.2 which lists the data per callbackId. As noted earlier, the
+callbackId is an identifying
+number which is unique to each client that is registered to a callback and can
+be deduced by the user, such as through the OpenMaya API. The entries in SECTION 3.2 appear
+as follows:
+<ul>
+<li>CallbackId the numeric identifier for the callback. You can cross reference by
+finding the same callbackId value listed in SECTIONs 3.1 and 3.3.</li>
+<li>For each callbackId, the data is broken down per-callback:</li>
+<ul>
+<li>Callback the name of the callback, e.g. &quot;attributeChangedMsg&quot;.</li>
+<li>Percent, Cumulative, Inclusive, Count, API and Node entries as described in SECTION 3.1.</li>
+</ul>
+<li>After the callback entries are listed for the callbackId, a dashed followed by a summary line is
+printed. The summary line lists the self, inclusive and count values for the callback. Note that
+the percent is relative to the global callback time.</li>
+</ul>
+<p>
+The third part is SECTION 3.3 which lists data per-callback per-node. The
+nodes are sorted based on the -sortType flag, and for each node, the
+callbacks are listed, also sorted based on the -sortType flag. As this
+listing can be long, zero entries are not displayed. An important note for SECTION 3.3 is
+that only nodes which still exist are displayed. If a node has been deleted, no infromation
+is listed.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>float</i></td><td>By default, the total of self-compute time for all nodes. Can be modified via the -returnType, -sortMetric and -sortType flags.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>dependency, graph, optimize, performance
+      <h2><a name="hRelated">Related</a></h2><a href="dbfootprint.html">dbfootprint</a>, <a href="dbtrace.html">dbtrace</a>, <a href="profiler.html">profiler</a>, <a href="timerX.html">timerX</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcombineType">combineType</a>, <a href="#flaghide">hide</a>, <a href="#flaghierarchy">hierarchy</a>, <a href="#flagmaxDisplay">maxDisplay</a>, <a href="#flagname">name</a>, <a href="#flagnoHeader">noHeader</a>, <a href="#flagoutputFile">outputFile</a>, <a href="#flagoverhead">overhead</a>, <a href="#flagrangeLower">rangeLower</a>, <a href="#flagrangeUpper">rangeUpper</a>, <a href="#flagreset">reset</a>, <a href="#flagreturnCode">returnCode</a>, <a href="#flagreturnType">returnType</a>, <a href="#flagshow">show</a>, <a href="#flagsortMetric">sortMetric</a>, <a href="#flagsortType">sortType</a>, <a href="#flagthreshold">threshold</a>, <a href="#flagtimerOff">timerOff</a>, <a href="#flagtimerOn">timerOn</a>, <a href="#flagtrace">trace</a>, <a href="#flagtype">type</a>, <a href="#flaguniqueName">uniqueName</a>, <a href="#flagupdateHeatMap">updateHeatMap</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcombineType">
+          <code><b>-combineType</b>(<b>-ct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Causes all nodes of the same type (e.g. animCurveTA) to be combined in the
+output display.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghide">
+          <code><b>-hide</b>(<b>-hi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is the converse of -show. As with -show, it is a query-only
+flag which can be specified multiple times. If you do specify -hide, we display
+all columns except those listed by the -hide flags.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghierarchy">
+          <code><b>-hierarchy</b>(<b>-h</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to specify that a hierarchy of the dependency graph be affected,
+thus &quot;-reset -hierarchy -name ball&quot; will reset the timers on the node
+named &quot;ball&quot; and all of its descendents in the dependency graph.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxDisplay">
+          <code><b>-maxDisplay</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Truncates the display so that only the most expenive &quot;n&quot; entries are
+printed in the output display.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in conjunction with -reset or -query to specify the name of the node
+to reset or print timer values for. When querying a single timer, only a
+single line of output is generated (i.e. the global timers and header
+information is omitted). Note that one can force output to the script editor
+window via the &quot;-outputFile MEL&quot; option to make it easy to grab the values
+in a MEL script. Note: the -name and -type flag cannot be used together.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoHeader">
+          <code><b>-noHeader</b>(<b>-nh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in conjunction with -query to prevent any header or footer information
+from being printed. All that will be output is the per-node timing data.
+This option makes it easier to parse the output such as when you output the
+query to a file on disk using the <i>-outputFile</i> option.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoutputFile">
+          <code><b>-outputFile</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies where the output of timing or tracing is displayed. The flag takes a string
+argument which accepts three possible values:
+<p>
+<ol>
+<li>The name of a file on disk.</li>
+<li>Or the keyword &quot;stdout&quot;, which causes output to be displayed on the terminal window (Linux and Macintosh), and the status window on Windows.</li>
+<li>Or the keyword &quot;MEL&quot;, which causes output to be displayed in the Maya Script Editor (only supported with -query).</li>
+</ol>
+The &quot;stdout&quot; setting is the default behaviour.
+<p>
+This flag can be used with the -query flag as well as the -trace flag.
+<p>
+When used with the -trace flag, any tracing output will be displayed on the destination
+specified by the -outputFile (or stdout if -outputFile is omitted). Tracing operations
+will continue to output to the destination until you specify the -trace and -outputFile
+flags again.
+<p>
+When used with the -query flag, timing output will be displayed to the destination
+specified by the -outputFile (or &quot;stdout&quot; if -outputFile is omitted).
+<p>
+Here are some examples of how to use the -query, -trace and -outputFile flags:
+<p>
+<b>Example: output the timing information to a single file on disk:</b>
+<p>
+<pre>
+dgtimer -on;                                       // Turn on timing
+create some animated scene content;
+play -wait;                                        // Play the scene through
+dgtimer -query -outputFile &quot;/tmp/timing.txt&quot;       // Output node timing information to a file on disk
+</pre>
+<p>
+<b>Example: output the tracing information to a single file on disk:</b>
+<p>
+<pre>
+dgtimer -on;                                       // Turn on timing
+create some animated scene content;
+dgtimer -trace on -outputFile &quot;/tmp/trace.txt&quot;     // Turn on tracing and output the results to file
+play -wait;                                        // Play the scene through; trace info goes to /tmp/trace.txt
+dgtimer -query;                                    // But the timing info goes to the terminal window
+play -wait;                                        // Play the scene again, trace info still goes to /tmp/trace.txt
+</pre>
+<p>
+<b>Example: two runs, outputting the trace information and timing information to separate files:</b>
+<p>
+<pre>
+dgtimer -on;                                       // Turn on timing
+create some animated scene content;
+dgtimer -trace on -outputFile &quot;/tmp/trace1.txt&quot;    // Turn on tracing and output the results to file
+play -wait;                                        // Play the scene through
+dgtimer -query -outputFile &quot;/tmp/query1.txt&quot;       // Output node timing information to another file
+dgtimer -reset;
+dgtimer -trace on -outputFile &quot;/tmp/trace2.txt&quot;    // Output tracing results to different file
+play -wait;                                        // Play the scene through
+dgtimer -query -outputFile &quot;/tmp/query2.txt&quot;       // Output node timing information to another file
+</pre>
+<p>
+<b>Tips and tricks:</b>
+<p>
+<ul>
+<li>Outputting the timing results to the script editor makes it easy to
+use the results in MEL e.g. string $timing[] = `dgtimer -query -outputFile MEL`.</li>
+<li>It is important to note that the -outputFile you specify with -trace is
+totally independent from the one you specify with -query.</li>
+<li>If the file you specify already exists, Maya will empty the file first
+before outputting data to it (and if the file is not writable, an error is
+generated instead).</li>
+</ul>
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoverhead">
+          <code><b>-overhead</b>(<b>-oh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turns on and off the measurement of timing overhead. Under ordinary circumstances the
+amount of timing overhead is minimal compared with the events being measured, but in
+complex scenes, one might find the overhead to be measurable. By default this option
+is turned off. To enable it, specify &quot;dgtimer -overhead true&quot; prior to starting timing.
+When querying timing, the overhead is reported in SECTION 1.2 of the dgtimer output and
+is not factored out of each individual operation.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrangeLower">
+          <code><b>-rangeLower</b>(<b>-rgl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be specified to limit the range of nodes which are displayed
+in a query, or the limits of the heat map with -updateHeatMap. The value
+is the lower percentage cutoff for the nodes which are processed. There is also
+a -rangeLower flag which sets the lower range limit. The default value is 0,
+meaning that all nodes with timing value below the upper range limit are considered.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrangeUpper">
+          <code><b>-rangeUpper</b>(<b>-rgu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be specified to limit the range of nodes which are displayed
+in a query, or the limits of the heat map with -updateHeatMap. The value
+is the upper percentage cutoff for the nodes which are processed. There is also
+a -rangeLower flag which sets the lower range limit. The default value is 100,
+meaning that all nodes with timing value above the lower range limit are considered.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreset">
+          <code><b>-reset</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Resets the node timers to zero. By default, the timers on all nodes as
+well as the global timers are reset, but if specified with the -name or
+-type flags, only the timers on specified nodes are reset.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreturnCode">
+          <code><b>-returnCode</b>(<b>-rc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag has been replaced by the more general -returnType flag.
+The -returnCode flag was unfortunately specific to the compute metric only.
+It exists only for backwards compatability purposes.
+It will be removed altogether in a future release.
+<p>
+Here are some handy equivalences:
+<p>
+To get the total number of nodes:<br>
+OLD WAY: dgtimer -rc nodecount -q;<br>
+// Result:325//<br>
+<p>
+NEW WAY: dgtimer -returnType total -sortType none -q;<br>
+// Result:325//<br>
+<p>
+OLD WAY: dgtimer -rc count -q;<br>
+// Result:1270//<br>
+<p>
+To get the sum of the compute count column:<br>
+NEW WAY: dgtimer -returnType total -sortMetric compute -sortType count -q;<br>
+// Result:1270//<br>
+<p>
+OLD WAY: dgtimer -rc selftime -q;<br>
+// Result:0.112898//<br>
+<p>
+To get the sum of the compute self column:<br>
+NEW WAY: dgtimer -returnType total -sortMetric compute -sortType self -q;<br>
+// Result:0.112898//<br>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreturnType">
+          <code><b>-returnType</b>(<b>-rt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies what the double value returned by the dgtimer command represents.
+By default, the value returned is the global total as displayed in SECTION 1 for the
+column we are sorting on in the per-node output (the sort column can be specified
+via the -sortMetric and -sortType flags). However, instead of the
+total being returned, the user can instead request the individual entries for
+the column. This flag is useful mainly for querying without forcing any output.
+The flag accepts the values &quot;total&quot;, to just display the column total, or
+&quot;all&quot; to display all entries individually.
+<p>
+For example, if you want to get the total of draw self time without any other
+output simply specify the following:
+<br>
+dgtimer -returnType total -sortMetric draw -sortType self -threshold 100 -noHeader -query;<br>
+// Result: 7718.01 //
+<p>
+To instead get each individual entry, change the above query to:
+<br>
+dgtimer -returnType all -sortMetric draw -sortType self -threshold 100 -noHeader -query;<br>
+// Result: 6576.01 21.91 11.17 1108.92 //
+<p>
+To get the inclusive dirty time for a specific node, use -name as well as -returnType all:
+<br>
+dgtimer -name &quot;virginia&quot; -returnType all -sortMetric dirty -sortType inclusive -threshold 100 -noHeader -query;<br>
+<p>
+Note: to get the total number of nodes, use &quot;-sortType none -returnType total&quot;.  To get
+the on/off status for each node, use &quot;-sortType none -returnType all&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshow">
+          <code><b>-show</b>(<b>-sh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in conjunction with -query to specify which columns are to be displayed
+in the per-node section of the output. -show takes an argument, which can
+be
+&quot;all&quot; (to display all columns),
+&quot;callback&quot; (to display the time spent during any callback processing on the node not due to evaluation),
+&quot;compute&quot; (to display the time spent in the node's compute methods),
+&quot;dirty&quot; (to display time spent propagating dirtiness on behalf of the node),
+&quot;draw&quot; (to display time spent drawing the node),
+&quot;compcb&quot; (to display time spent during callback processing on node due to compute),
+and
+&quot;compncb&quot; (to display time spent during callback processing on node NOT due to compute).
+The -show flag can be used multiple
+times, but cannot be specified with -hide. By default, if neither -show,
+-hide, or -sort are given, the effective display mode is:
+&quot;dgtimer -show compute -query&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsortMetric">
+          <code><b>-sortMetric</b>(<b>-sm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in conjunction with -query to specify which metric is to be sorted on
+when the per-node section of the output is generated, for example &quot;draw&quot; time.
+Note that the -sortType flag can also be specified to define which timer is
+sorted on: for example &quot;dgtimer -sortMetric draw -sortType count -query&quot; will
+sort the output by the number of times each node was drawn. Both -sortMetric and
+-sortType are optional and you can specify one without the other. The -sortMetric
+flag can only be specified at most once. The flag takes the following arguments:
+&quot;callback&quot; (to sort on time spent during any callback processing on the node),
+&quot;compute&quot; (to sort on the time spent in the node's compute methods),
+&quot;dirty&quot; (to sort on the time spent propagating dirtiness on behalf of the node),
+&quot;draw&quot; (to sort on time spent drawing the node),
+&quot;fetch&quot; (to sort on time spent copying data from the datablock),
+The default, if -sortMetric is omitted, is to sort on the first displayed column.
+Note that the sortMetric is
+independent of which columns are displayed via -show and -hide. Sort on a hidden
+column is allowed.
+The column selected by -sortMetric and -sortType specifies which total is returned
+by the dgtimer command on the MEL command line.
+This flag is also used with -updateHeatMap to specify which metric to build the heat map for.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsortType">
+          <code><b>-sortType</b>(<b>-st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in conjunction with -query to specify which timer is to be sorted on
+when the per-node section of the output is generated, for example &quot;self&quot; time.
+Note that the -sortMetric flag can also be specified to define which metric is
+sorted on: for example &quot;dgtimer -sortMetric draw -sortType count -query&quot; will
+sort the output by the number of times each node was drawn. Both -sortMetric and
+-sortType are optional and you can specify one without the other. The -sortType
+flag can be specified at most once. The flag takes the following arguments:
+&quot;self&quot; (to sort on self time, which is the time specific to the node and not its children),
+&quot;inclusive&quot; (to sort on the time including children of the node),
+&quot;count&quot; (to sort on the number of times the node was invoked).
+and
+&quot;none&quot; (to sort on self time, but do not display the Percent and Cumulative columns
+in the per-node display, as well as cause the total number of nodes in Maya to be
+returned on the command line).
+The default, if -sortType is omitted, is to sort on self time.
+The column selected by -sortMetric and -sortType specifies which total is returned
+by the dgtimer command on the MEL command line. The global total as displayed in
+SECTION 1 of the listing is returned. The special case of &quot;-sortType none&quot;
+causes the number of nodes in Maya to instead be returned.
+This flag is also used with -updateHeatMap to specify which metric to build the heat map for.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagthreshold">
+          <code><b>-threshold</b>(<b>-th</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Truncates the display once the value falls below the threshold value. The
+threshold applies to whatever timer is being used for sorting. For example, if
+our sort key is self compute time (i.e. -sortMetric is &quot;compute&quot; and -sortType
+is &quot;self&quot;) and the threshold parameter is 20.0, then only nodes with a compute
+self-time of 20.0 or higher will be displayed. (Note that -threshold uses
+absolute time. There are the similar -rangeUpper and -rangeLower parameters
+which specify a range using percentage).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtimerOff">
+          <code><b>-timerOff</b>(<b>-off</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turns off node timing. By default, the timers on all nodes are turned off,
+but if specified with the -name or
+-type flags, only the timers on specified nodes are turned off.
+If the timers on all nodes become turned off, then global timing is also
+turned off as well.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtimerOn">
+          <code><b>-timerOn</b>(<b>-on</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turns on node timing. By default, the timers on all nodes are turned on,
+but if specified with the -name or
+-type flags, only the timers on specified nodes are turned on.
+The global timers are also turned on by this command.
+Note that turning on timing does NOT reset the timers to zero. Use the -reset
+flag to reset the timers. The idea for NOT resetting the timers is to allow the
+user to arbitrarily turn timing on and off and continue to add to the
+existing timer values.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrace">
+          <code><b>-trace</b>(<b>-tr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turns on or off detailed execution tracing.
+By default, tracing is off. If enabled, each timeable operation is logged when it starts and
+again when it ends. This flag can be used in conjunction with -outputFile to specify where the
+output is generated to. The following example shows how the output is formatted:<br>
+<ul>
+dgtimer:begin: compute 3 particleShape1Deformed particleShape1Deformed.lastPosition
+</ul>
+The above is an example of the output when -trace is true that marks the start
+of an operation. For specific details on each field: the &quot;dgtimer:begin:&quot; string
+is an identifying marker to flag that this is a begin operation record. The
+second argument, &quot;compute&quot; in our example, is the operation metric. You can view
+the output of each given metric via &quot;dgtimer -q&quot; by specifying the -show flag.
+The integer which follows (3 in this case) is the depth in the operation stack,
+and the third argument is the name of the node (particleShape1Deformed). The
+fourth argument is specific to the metric. For &quot;compute&quot;, it gives the name of
+the plug being computed. For &quot;callback&quot;, its the internal Maya name of the callback.
+For &quot;dirty&quot;, its the name of the plug that dirtiness is being propagated from.<br>
+<ul>
+dgtimer:end: compute 3 particleShape1Deformed 0.000305685 0.000305685
+</ul>
+The above is the end operation record. The &quot;compute&quot;, &quot;3&quot; and &quot;particleShapeDeformed&quot;
+arguments were described in the &quot;dgtimer:begin&quot; overview earlier. The two floating-point
+arguments are self time and inclusive time for the operation measured in seconds.
+The inclusive measure lists the total time since the matching &quot;dgtimer:begin:&quot; entry
+for this operation, while the self measure lists the inclusive time minus any time
+consumed by child operations which may have occurred during execution of the current operation.
+As noted elsewhere in this document, these two times are &quot;wall clock times&quot;, measuring
+elapsed time including any time in which Maya was idle or performing system calls.
+<p>
+Since dgtimer can measure some non-node qualities in Maya, such as global message
+callbacks, a &quot;-&quot; is displayed where the node name would ordinarily be displayed.
+The &quot;-&quot; means &quot;not applicable&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>-type</b>(<b>-t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in conjunction with -reset or -query to specify the type of the node(s)
+(e.g. animCurveTA) to reset or print timer values for.
+When querying, use of the -combineType flag will cause all nodes of the
+same type to be combined into one entry, and only one line of output is
+generated (i.e. the global timers and header information is omitted).
+Note: the -name and -type flag cannot be used together.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguniqueName">
+          <code><b>-uniqueName</b>(<b>-un</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to specify that the DAG nodes listed in the output should be
+listed by their unique names.  The full DAG path to the object
+will be printed out instead of just the node name.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupdateHeatMap">
+          <code><b>-updateHeatMap</b>(<b>-uhm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Forces Maya's heat map to rebuild based on the specified parameters.
+The heat map is an internal dgtimer structure used in mapping
+intensity values to colourmap entries during display by the HyperGraph
+Editor. There is one heat map shared by all editors that are using heat
+map display mode. Updating the heat map causes the timer values on all
+nodes to be analysed to compose the distribution of entries in the heat map.
+The parameter is the integer number of divisions in the map and should equal
+the number of available colours for displaying the heat map. This flag can
+be specified with the -rangeLower and -rangeUpper flags
+to limit the range of displayable to lie between the percentile range.
+The dgtimer command returns the maximum timing value for all nodes in Maya
+for the specified metric and type.
+Note: when the display range includes 0, the special zeroth (exactly zero)
+slot in the heat map is avilable.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Turns on node timing and resets the timers.
+dgtimer -on;
+
+// Turns off node timing. Note that this does not reset the
+// timers.
+dgtimer -off;
+
+// Prints the current timer values to the default (stdout).
+dgtimer -query;
+
+// To reset the timers:
+dgtimer -reset;
+
+// Turn on node timing and reset the timer values to zero.
+// Then, playback the scene, turn off timing and dump to a file.
+// Turn on timing without resetting the timers, and repeat.
+dgtimer -on -reset;
+play -wait;
+dgtimer -off;
+dgtimer -outputFile &quot;/home/virginia/timing/dgtrace_once.txt&quot; -query;
+dgtimer -on;
+play -wait;
+dgtimer -off;
+dgtimer -outputFile &quot;/home/virginia/timing/dgtrace_twice.txt&quot; -query;
+
+// To display the draw and dirty metrics, and sort by inclusive
+// draw time.
+dgtimer -show draw -show dirty -sortMetric draw -sortType inclusive -query;
+
+// To display the dirty metric, and not show the sort columns (i.e.
+// percent and cumulative). Note that &quot;-sortType none&quot; internally assumes
+// self time, and since we don't give a sortMetric, it uses the -show
+// column. Net effect is sorting on dirty self time.
+dgtimer -show dirty -sortType none -query;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

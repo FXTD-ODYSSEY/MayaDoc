@@ -1,0 +1,139 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>saveMenu command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-saveMenu"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/saveMenu.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>saveMenu </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#Menus" target="contentFrame">Menus</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("saveMenu.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>saveMenu(
+string string
+    ) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>saveMenu is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command is used for saving the contents of a menu, so that
+another instance of the menu may be recreated later. The command
+writes out a file which, when run as a script, will rebuild the
+menuItems contained in the original menu. Note that the fileName
+is relative to the user's marking menu preference directory.
+<p>
+Note that this command is used solely by the Marking Menu Editor
+and is not intended to be used for general purposes.
+<p>
+Note that this command doesn't work well with controls that have
+mixed mel and python command callbacks.  Also, because it saves the menu
+state to a mel file, it does not work with callbacks that are python
+callable objects.
+<p>
+The first argument is the name of the manu to save, the second one is
+the name of the file.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The name of the saved file.</td></tr></table>
+      
+      
+
+      
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Create a window with two frames.
+#
+win = cmds.window(title='saveMenu Example')
+cmds.columnLayout()
+frame1 = cmds.frameLayout( h=90, l='Original Menu (LMB)' )
+cmds.text( l='(click here)' )
+cmds.setParent( '..' )
+frame2 = cmds.frameLayout( h=90, l='Copy of Original (LMB)' )
+cmds.text( l='(click here)' )
+cmds.setParent( '..' )
+
+# Create a menu.
+#
+menu1 = cmds.popupMenu( parent=frame1, b=1, mm=True )
+
+cmds.menuItem( rp='N', l='Up' )
+cmds.menuItem( rp='S', l='Down' )
+cmds.menuItem( rp='E', l='Right' )
+cmds.menuItem( rp='W', l='Left' )
+cmds.menuItem( label='Warm', sm=True )
+cmds.menuItem( l='Red' )
+cmds.menuItem( l='Orange' )
+cmds.menuItem( l='Yellow' )
+cmds.setParent( '..', m=True )
+cmds.menuItem( label='Cold', sm=True )
+cmds.menuItem( l='Green' )
+cmds.menuItem( l='Blue' )
+cmds.menuItem( l='Indigo' )
+cmds.menuItem( l='Violet' )
+cmds.setParent( '..', m=True )
+cmds.setParent( '..', m=True )
+
+# Save the menu to a file.
+#
+result = cmds.saveMenu(menu1, 'menu_example')
+
+# Use the file to rebuild another instance of the menu.
+#
+menu1 = cmds.popupMenu( parent=frame2, b=1, mm=True )
+maya.mel.eval( 'source \&quot;' + cmds.internalVar(userMarkingMenuDir=True) + 'menu_example.mel\&quot;' )
+
+# Finish up.
+print (&quot;The menu was saved in [&quot; + cmds.internalVar(userMarkingMenuDir=True) + result + &quot;]\n&quot; )
+cmds.showWindow( win )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

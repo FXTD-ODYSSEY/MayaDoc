@@ -1,0 +1,896 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>prepareRender command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-prepareRender"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/prepareRender.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>prepareRender </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("prepareRender.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>prepareRender [-<a href="#flagdefaultTraversalSet">defaultTraversalSet</a> <i>string</i>] [-<a href="#flagderegister">deregister</a> <i>string</i>] [-<a href="#flaginvokePostRender">invokePostRender</a>] [-<a href="#flaginvokePostRenderFrame">invokePostRenderFrame</a>] [-<a href="#flaginvokePostRenderLayer">invokePostRenderLayer</a>] [-<a href="#flaginvokePreRender">invokePreRender</a>] [-<a href="#flaginvokePreRenderFrame">invokePreRenderFrame</a>] [-<a href="#flaginvokePreRenderLayer">invokePreRenderLayer</a>] [-<a href="#flaginvokeSettingsUI">invokeSettingsUI</a>] [-<a href="#flaglabel">label</a> <i>string</i>] [-<a href="#flaglistTraversalSets">listTraversalSets</a>] [-<a href="#flagpostRender">postRender</a> <i>script</i>] [-<a href="#flagpostRenderFrame">postRenderFrame</a> <i>script</i>] [-<a href="#flagpostRenderLayer">postRenderLayer</a> <i>script</i>] [-<a href="#flagpreRender">preRender</a> <i>script</i>] [-<a href="#flagpreRenderFrame">preRenderFrame</a> <i>script</i>] [-<a href="#flagpreRenderLayer">preRenderLayer</a> <i>script</i>] [-<a href="#flagrestore">restore</a>] [-<a href="#flagsaveAssemblyConfig">saveAssemblyConfig</a> <i>boolean</i>] [-<a href="#flagsettingsUI">settingsUI</a> <i>script</i>] [-<a href="#flagsetup">setup</a>] [-<a href="#flagtraversalSet">traversalSet</a> <i>string</i>] [-<a href="#flagtraversalSetInit">traversalSetInit</a> <i>script</i>]  </code> </p>
+      <p>prepareRender is undoable, queryable, and editable.</p>
+      This command is used to register, manage and invoke render traversals.
+Render traversals are used to configure a scene to prepare it for rendering.
+<p>This command has special support for scene assembly nodes.  To render scene
+assembly nodes, a rendering traversal can activate an appropriate
+representation, for each assembly node in the scene.  When rendering is
+done, this command can correspondingly restore the representation that was
+active before rendering on each assembly.
+Render traversals are grouped into traversal sets.  A render traversal set
+includes callbacks, or render traversals, for one or more of the following
+steps of rendering, ordered by decreasing level of granularity.
+A render traversal callback is an arbitrary script, either MEL or Python,
+that can transform the Maya scene for rendering purposes.
+<dl>
+<dt>preRender</dt>
+<dd>Traversal run once per render, before any rendering is performed.</dd>
+<dt>postRender</dt>
+<dd>Traversal run once per render, after all rendering has been performed.</dd>
+<dt>preRenderLayer</dt>
+<dd>Traversal run before rendering each render layer.</dd>
+<dt>postRenderLayer</dt>
+<dd>Traversal run after rendering each render layer.</dd>
+<dt>preRenderFrame</dt>
+<dd>Traversal run before rendering each frame.</dd>
+<dt>postRenderFrame</dt>
+<dd>Traversal run after rendering each frame.</dd>
+</dl>
+During a render view or batch render, Maya will run the render traversals from
+the same traversal set, the default traversal set.  Traversal sets are named,
+so multiple traversal sets can be registered with this command, and the
+default render traversal set can be switched to any one of these registered
+traversal sets.  When changing the default traversal set, the different
+render traversal callbacks (preRender, preRenderLayer, preRenderFrame,
+postRender, postRenderLayer, postRenderFrame) are switched as a unit.
+<p>At render time, the software rendering code invokes the callbacks of the
+default traversal set.  The prepareRender scripting capability allows for the
+development of multiple rendering preparation scripts, including from plugins,
+to provide extensibility rather than being constrained to a single
+implementation.
+<p>A special traversal set is the &quot;null&quot; traversal set.  It is the initial
+default traversal set, and cannot be deregistered.  It performs no work,
+and does not save and restore the assembly node active representation
+configuration.  It will provide WYSIWYG (What You See Is What You Get)
+rendering of assembly nodes, without switching to a different representation
+to render.
+<p>Render traversals are invoked by Maya using this command's create mode.
+This is done by Maya's rendering infrastructure, and should not be required
+unless developing new render views or batch render code.  Most uses of this
+command will simply use the edit mode to register render traversals into a
+render traversal set, or the query mode to query the names of the render
+traversals in a render traversal set.
+<h2>Render Traversals versus Render MEL Scripts</h2>
+Render traversals are similar in intent to the user-specified pre- and
+post-render, pre- and post-render layer, pre- and post-render frame MEL
+script capability.  The difference with the user MEL scripts is
+that prepareRender is in addition to, and does not replace, the user
+MEL scripts, can register multiple render traversal sets and switch them,
+and supports both MEL and Python.  The MEL render scripts are run inside
+the scope of the render traversals, that is, the preRender traversal is
+run before the pre-render MEL script and the postRender traversal is run
+after the post-render MEL script, the preRenderLayer traversal is run before
+the pre-render layer MEL script and the postRenderLayer traversal is run
+after the post-render layer MEL script, and finally the preRenderFrame
+traversal is run before the pre-render frame MEL script and the
+postRenderFrame traversal is run after the post-render frame MEL script.
+<h2>Saving and Restoring State</h2>
+<p>The prepareRender command has support for saving and restoring the active
+representation of assembly nodes in the scene.  Use the saveAssemblyConfig flag
+to indicate that the render traversal set requires saving the assembly node
+active representation before rendering begins, and should restore the
+assembly node active representation after rendering ends.
+<p>It is the responsibility of render traversals that modify the scene in ways
+other than changing the active representation on assembly nodes to restore the
+scene to its previous state, most likely using the postRender, postRenderLayer,
+and postRenderFrame traversals.
+<p>Note that Maya does not call the prepareRender -restore command on
+batch render completion, since batch rendering is done on a copy of the
+scene which is discarded once rendering terminates.  Implementors of
+render traversals may wish to check whether they are running in batch mode,
+to implement the same optimization.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>render, assembly
+      <h2><a name="hRelated">Related</a></h2><a href="assembly.html">assembly</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdefaultTraversalSet">defaultTraversalSet</a>, <a href="#flagderegister">deregister</a>, <a href="#flaginvokePostRender">invokePostRender</a>, <a href="#flaginvokePostRenderFrame">invokePostRenderFrame</a>, <a href="#flaginvokePostRenderLayer">invokePostRenderLayer</a>, <a href="#flaginvokePreRender">invokePreRender</a>, <a href="#flaginvokePreRenderFrame">invokePreRenderFrame</a>, <a href="#flaginvokePreRenderLayer">invokePreRenderLayer</a>, <a href="#flaginvokeSettingsUI">invokeSettingsUI</a>, <a href="#flaglabel">label</a>, <a href="#flaglistTraversalSets">listTraversalSets</a>, <a href="#flagpostRender">postRender</a>, <a href="#flagpostRenderFrame">postRenderFrame</a>, <a href="#flagpostRenderLayer">postRenderLayer</a>, <a href="#flagpreRender">preRender</a>, <a href="#flagpreRenderFrame">preRenderFrame</a>, <a href="#flagpreRenderLayer">preRenderLayer</a>, <a href="#flagrestore">restore</a>, <a href="#flagsaveAssemblyConfig">saveAssemblyConfig</a>, <a href="#flagsettingsUI">settingsUI</a>, <a href="#flagsetup">setup</a>, <a href="#flagtraversalSet">traversalSet</a>, <a href="#flagtraversalSetInit">traversalSetInit</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefaultTraversalSet">
+          <code><b>-defaultTraversalSet</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the default traversal set.  The prepareRender
+command performs operations on the default traversal set, unless the
+-traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagderegister">
+          <code><b>-deregister</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Deregister a registered traversal set.  If the deregistered traversal set is
+the default traversal set, the new default traversal set will be the &quot;null&quot;
+traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvokePostRender">
+          <code><b>-invokePostRender</b>(<b>-ior</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Invoke the postRender render traversal for a given traversal
+set.  The traversal set will be the default traversal set, unless the
+-traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvokePostRenderFrame">
+          <code><b>-invokePostRenderFrame</b>(<b>-iof</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Invoke the postRenderFrame render traversal for a given traversal
+set.  The traversal set will be the default traversal set, unless the
+-traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvokePostRenderLayer">
+          <code><b>-invokePostRenderLayer</b>(<b>-iol</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Invoke the postRenderLayer render traversal for a given traversal
+set.  The traversal set will be the default traversal set, unless the
+-traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvokePreRender">
+          <code><b>-invokePreRender</b>(<b>-irr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Invoke the preRender render traversal for a given traversal
+set.  The traversal set will be the default traversal set, unless the
+-traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvokePreRenderFrame">
+          <code><b>-invokePreRenderFrame</b>(<b>-irf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Invoke the preRenderFrame render traversal for a given traversal
+set.  The traversal set will be the default traversal set, unless the
+-traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvokePreRenderLayer">
+          <code><b>-invokePreRenderLayer</b>(<b>-irl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Invoke the preRenderLayer render traversal for a given traversal
+set.  The traversal set will be the default traversal set, unless the
+-traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvokeSettingsUI">
+          <code><b>-invokeSettingsUI</b>(<b>-isu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Invoke the settings UI callback to populate a layout with UI controls,
+for a given traversal set.  The current UI parent will be a form layout,
+which the callback can query using the setParent command.  The traversal set
+will be the default traversal set, unless the -traversalSet flag is used to
+specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglabel">
+          <code><b>-label</b>(<b>-lbl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the label for a given traversal set.  The label is used for UI
+display purposes, and can be localized.  The traversal set will be the default,
+unless the -traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistTraversalSets">
+          <code><b>-listTraversalSets</b>(<b>-lt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the supported render traversal sets.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpostRender">
+          <code><b>-postRender</b>(<b>-por</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the postRender render traversal for a given traversal
+set.  This traversal is run after a render.  The traversal set will be the
+default traversal set, unless the -traversalSet flag is used to specify an
+explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpostRenderFrame">
+          <code><b>-postRenderFrame</b>(<b>-pof</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the postRenderFrame render traversal for a given traversal
+set.  This traversal is run after the render of a single frame, with a
+render layer.  The traversal set will be the default traversal set, unless
+the -traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpostRenderLayer">
+          <code><b>-postRenderLayer</b>(<b>-pol</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the postRenderLayer render traversal for a given traversal
+set.  This traversal is run after a render layer is rendered, within a
+render.  The traversal set will be the default traversal set, unless the
+-traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreRender">
+          <code><b>-preRender</b>(<b>-prr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the preRender render traversal for a given traversal
+set.  This traversal is run before a render.  The traversal set will be the
+default traversal set, unless the -traversalSet flag is used to specify an
+explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreRenderFrame">
+          <code><b>-preRenderFrame</b>(<b>-prf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the preRenderFrame render traversal for a given traversal
+set.  This traversal is run before the render of a single frame, with a
+render layer.  The traversal set will be the default traversal set, unless
+the -traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreRenderLayer">
+          <code><b>-preRenderLayer</b>(<b>-prl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the preRenderLayer render traversal for a given traversal
+set.  This traversal is run before a render layer is rendered, within a
+render.  The traversal set will be the default traversal set, unless the
+-traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrestore">
+          <code><b>-restore</b>(<b>-rtr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clean up after rendering, including restoring the assembly active
+representation configuration for the whole scene, if the saveAssemblyConfig
+flag for the traversal set is true.  The traversal set will be the default
+traversal set, unless the -traversalSet flag is used to specify an explicit
+traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsaveAssemblyConfig">
+          <code><b>-saveAssemblyConfig</b>(<b>-sac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query whether or not the assembly active representation configuration
+for the whole scene should be saved for a given traversal set.  The traversal
+set will be the default, unless the -traversalSet flag is used to specify an
+explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsettingsUI">
+          <code><b>-settingsUI</b>(<b>-sui</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the settings UI callback for a given traversal set.  The
+traversal set will be the default traversal set, unless the -traversalSet
+flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsetup">
+          <code><b>-setup</b>(<b>-stp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Setup render preparation, including saving the assembly active representation
+configuration for the whole scene, if the saveAssemblyConfig flag for
+the traversal set is true.  Any previously-saved configuration will be
+overwritten.  The traversal set will be the default traversal set, unless the
+-traversalSet flag is used to specify an explicit traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtraversalSet">
+          <code><b>-traversalSet</b>(<b>-ts</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query properties for the specified registered traversal set.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtraversalSetInit">
+          <code><b>-traversalSetInit</b>(<b>-tsi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set or query the traversal set initialisation callback for a given traversal set.
+The traversal set will be the default traversal set, unless the -traversalSet flag
+is used to specify an explicit traversal set. This callback is invoked whenever
+the specified traversal set becomes the default.
+traversal set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// Query what the default render traversal set is.
+prepareRender -q -defaultTraversalSet
+
+// Set the render traversal set to MyPrepareRender.
+prepareRender -e -defaultTraversalSet MyPrepareRender
+
+// Set the default render traversal set to require saving the assembly node
+// configuration before render, and restore it once rendering completes.
+prepareRender -e -saveAssemblyConfig
+
+// Set the label of traversal set &quot;MyPrepareRender&quot; to be &quot;Custom Render&quot;.
+prepareRender -e -label &quot;Custom Render&quot; -traversalSet &quot;MyPrepareRender&quot;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

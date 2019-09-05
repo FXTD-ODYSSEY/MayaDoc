@@ -1,0 +1,418 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>colorAtPoint command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-colorAtPoint"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/colorAtPoint.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>colorAtPoint </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Fluids" target="contentFrame">Fluids</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("colorAtPoint.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>colorAtPoint [-<a href="#flagcoordU">coordU</a> <i>float</i>] [-<a href="#flagcoordV">coordV</a> <i>float</i>] [-<a href="#flagmaxU">maxU</a> <i>float</i>] [-<a href="#flagmaxV">maxV</a> <i>float</i>] [-<a href="#flagminU">minU</a> <i>float</i>] [-<a href="#flagminV">minV</a> <i>float</i>] [-<a href="#flagoutput">output</a> <i>string</i>] [-<a href="#flagsamplesU">samplesU</a> <i>uint</i>] [-<a href="#flagsamplesV">samplesV</a> <i>uint</i>]  </code> </p>
+      <p>colorAtPoint is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The <b>colorAtPoint</b> command is used to query textures or ocean
+          shaders at passed in uv coordinates.
+      (For ocean shaders uv is x and z in worldspace ).
+          The return value is a floating point array whose size is
+          determined by either the number of input uv arguments passed in and the
+          the queried value.  One can query alpha only, rgb only, or rgba values.
+          The returned array is only single indexed, so if rgb is specified then
+          the index for red values would be index * 3. Blue is index * 3 + 1, and
+          green is index * 3 + 2. For rgba use a multiple of 4 instead of 3.
+          For alpha only one can simply use the index.
+          There are two basic argument formats that may be used:
+          colorAtPoint -u 0 -v 0   -u .2 -v .1  etc.. for all points
+          or
+          colorAtPoint -mu 0 -mv 0  -xu 1 -xv 1 -su 10 -sv 10 // samples 100 points
+          If one is sampling several points and they are all in a regular grid
+          formation it is more efficient to call this routine with the latter
+          method, which uses a min/max uv and number of samples, rather than
+          a long argument list of uv coords.
+          <ul>
+          <li>return values (<b>-o A or RGB or RGBA </b>)</li>
+          <li>individual UV coordinates to sample (<b>-u float  -v float </b>)</li>
+          <li>  (numbers of calls to -u and -v must match)</li>
+          <li>uniform grid of points to sample (<b>-su int -sv int</b>)</li>
+          <li>  (may not use this in combination with -u or -v)</li>
+          <li>bounds for sample grid  (<b>-mu float  -mv float -xu float -xv float</b>)</li>
+          </ul>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      <h2><a name="hKeywords">Keywords</a></h2>texture, color, alpha, uv, ocean, outColor, paramUV
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcoordU">coordU</a>, <a href="#flagcoordV">coordV</a>, <a href="#flagmaxU">maxU</a>, <a href="#flagmaxV">maxV</a>, <a href="#flagminU">minU</a>, <a href="#flagminV">minV</a>, <a href="#flagoutput">output</a>, <a href="#flagsamplesU">samplesU</a>, <a href="#flagsamplesV">samplesV</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcoordU">
+          <code><b>-coordU</b>(<b>-u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Input u coordinate to sample texture at.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcoordV">
+          <code><b>-coordV</b>(<b>-v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Input v coordinate to sample texture at.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxU">
+          <code><b>-maxU</b>(<b>-xu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+DEFAULT 1.0
+Maximum u bounds to sample.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxV">
+          <code><b>-maxV</b>(<b>-xv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+DEFAULT 1.0
+Maximum v bounds to sample.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminU">
+          <code><b>-minU</b>(<b>-mu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+DEFAULT 0.0
+Minimum u bounds to sample.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminV">
+          <code><b>-minV</b>(<b>-mv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+DEFAULT 0.0
+Minimum v bounds to sample.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoutput">
+          <code><b>-output</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Type of data to output:
+        A        = alpha only
+        RGB  = color only
+        RGBA = color and alpha
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsamplesU">
+          <code><b>-samplesU</b>(<b>-su</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+DEFAULT 1
+The number of points to sample in the U dimension.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsamplesV">
+          <code><b>-samplesV</b>(<b>-sv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+DEFAULT 1
+The number of points to sample in the V dimension.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// The return value is the array of values determined by the number of
+// coord flag uses or samplesU * samplesV. The default return value is alpha.
+// If instead the return value is RGB there will be 3 times as many values returned,
+// and if it is RGBA there will be 4 times as many values.
+
+createNode checker;
+
+colorAtPoint checker1;
+// returns the alpha value at uv (0.0,0.0) for texture checker1
+// The return array will have one entry corresponding to this alpha.
+
+colorAtPoint -u .5 -v .5  checker1;
+// returns the alpha value at uv (0.5,0.5) for texture checker1
+// The return array will have one entry corresponding to this alpha.
+
+colorAtPoint -o RGB -u .5 -v .5 -u 0.0 -v 0.1  checker1;
+// returns the colors at uv (0.5,0.5) and (0.0, 0.01) for texture checker1
+// The return array will have 6 values in the following order: RGBRGB
+
+colorAtPoint -o A -su 11 -sv 6 checker1;
+// returns the alpha for 50 points in a uniform 11 by 6 grid mapped across
+// uv (0.0, 0.0) to uv (1.0, 1.0) The 12th point would be the first point
+// in the second row of samples where uv = (0.0, 0.2)
+
+colorAtPoint -o A -su 3 -sv 3 -mu 0.3 -mv 0.3 -xu 0.4 -xv 0.4 checker1;
+// returns the alpha for 9 points in a uniform 3 by 3 grid mapped across
+// uv (0.3, 0.3) to uv (0.4, 0.4) The 4th point would be the first point
+// in the second row of samples where uv = (0.35, 0.3).
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

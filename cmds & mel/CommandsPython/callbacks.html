@@ -1,0 +1,882 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>callbacks command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-callbacks"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/callbacks.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>callbacks </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#MiscUI" target="contentFrame">Misc. UI</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("callbacks.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>callbacks([<a href="#flagaddCallback">addCallback</a>=<i>script</i>], [<a href="#flagclearAllCallbacks">clearAllCallbacks</a>=<i>boolean</i>], [<a href="#flagclearCallbacks">clearCallbacks</a>=<i>boolean</i>], [<a href="#flagdescribeHooks">describeHooks</a>=<i>boolean</i>], [<a href="#flagdumpCallbacks">dumpCallbacks</a>=<i>boolean</i>], [<a href="#flagexecuteCallbacks">executeCallbacks</a>=<i>boolean</i>], [<a href="#flaghook">hook</a>=<i>string</i>], [<a href="#flaglistCallbacks">listCallbacks</a>=<i>boolean</i>], [<a href="#flagowner">owner</a>=<i>string</i>], [<a href="#flagremoveCallback">removeCallback</a>=<i>script</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>callbacks is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command allows you to add callbacks at key times during UI creation so
+that the Maya UI can be extended.
+The list of standard Maya hooks, as well as the arguments which will be passed
+to the callback based on the context are enumerated in the <tt>describeHooks</tt>
+section below.
+Custom hooks can also be added if third parties want to add UI extensibility to
+their plugins.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>Command result</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>ui, callback
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaddCallback">addCallback</a>, <a href="#flagclearAllCallbacks">clearAllCallbacks</a>, <a href="#flagclearCallbacks">clearCallbacks</a>, <a href="#flagdescribeHooks">describeHooks</a>, <a href="#flagdumpCallbacks">dumpCallbacks</a>, <a href="#flagexecuteCallbacks">executeCallbacks</a>, <a href="#flaghook">hook</a>, <a href="#flaglistCallbacks">listCallbacks</a>, <a href="#flagowner">owner</a>, <a href="#flagremoveCallback">removeCallback</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddCallback">
+          <code><b>addCallback</b>(<b>ac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add a callback for the specified hook. The owner must also be specified
+when adding callbacks.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclearAllCallbacks">
+          <code><b>clearAllCallbacks</b>(<b>cac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clear all the callbacks for all hooks and owners. This is generally
+only used during plugin development and testing as it affects all callbacks
+registered by Maya and other third parties.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclearCallbacks">
+          <code><b>clearCallbacks</b>(<b>cc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clear all the callbacks for the specified owner. If a hook is specified,
+only the callbacks for that hook and owner will be cleared.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdescribeHooks">
+          <code><b>describeHooks</b>(<b>dh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List the standard Maya hooks. Below is a list of the hooks and their associated arguments
+and return values. Custom hooks added by third parties are not listed.
+<p>
+<dl>
+<dt><i>hyperShadePanelBuildCreateMenu</i></dt>
+<dd>
+This hook is called to add content to the Hypershade panel create menu. It will
+be called after the standard Maya node entries have been created.
+<p>
+This callback does not have any arguments or return values. In order to preserve
+the desired look in the Maya UI, these callbacks should add a menu item divider just
+before returning using: menuItem -divider true.
+</dd>
+<dt><i>hyperShadePanelBuildCreateSubMenu</i></dt>
+<dd>
+This hook is called to get a classification string for the custom renderer
+shading nodes, to prevent them from being listed with the standard Maya nodes.
+<p>
+This callback does not have any arguments.
+<ul>
+<li>returns: a classification string, such as <tt>rendernode/myrenderer</tt></li>
+</ul>
+</dd>
+<dt><i>hyperShadePanelPluginChange</i></dt>
+<dd>
+This hook is called when a plugin change event (loading / unloading) has occurred to inform Maya whether the
+Hypershade panel needs to be rebuilt.
+<ul>
+<li>classification (string): classification string belonging to a plugin node,
+    possibly from another plugin</li>
+<li>changeType (string): either <tt>loadPlugin</tt> or <tt>unloadPlugin</tt></li>
+<li>returns: (int) non-zero if your plugin is responsible for nodes of this classification,
+    and a Hypershade rebuild is required</li>
+</ul>
+</dd>
+<dt><i>createRenderNodeSelectNodeCategories</i></dt>
+<dd>
+This hook is called when the Create Render Node dialog is being constructed, and allows
+a third party to have their nodes selected by default. A flag of the form <tt>-allWithMyRendererUp</tt>
+is the standard form, and the selection can be set up in the tree lister in the callback.
+<p>
+There is no return value for this callback.
+<ul>
+<li>flag (string): flag passed to the Create Render Node dialog command with the leading minus (-) removed</li>
+<li>treeLister (string): the tree lister widget which should be affected</li>
+</ul>
+<p>
+For example, your callback might look like:
+<p>
+<pre>
+global proc myRendererCreateRenderNodeSelectNodeCategoriesCallback(string $flag, string $treeLister){
+    if($flag == &quot;allWithMyRendererUp&quot;) {
+        treeLister -e -selectPath &quot;myrenderer&quot; $treeLister;
+    }
+}
+</pre>
+</dd>
+<dt><i>createRenderNodePluginChange</i></dt>
+<dd>
+This hook is called when a plugin change event has occurred to decide if the
+Create Render Node dialog needs to be closed.
+<ul>
+<li>classification (string): classification string belonging to a plugin node,
+    possibly from another plugin</li>
+<li>returns: (int) non-zero if your plugin is responsible for nodes of this classification,
+    and the Create Render Node dialog needs to be closed</li>
+</ul>
+</dd>
+<dt><i>renderNodeClassification</i></dt>
+<dd>
+This hook is called to get a classification string for the custom renderer
+shading nodes.  This is used to determine if a given node type belongs to
+a plugin renderer.
+<p>
+This callback does not have any arguments.
+<ul>
+<li>returns: a classification string, such as <tt>rendernode/myrenderer</tt></li>
+</ul>
+</dd>
+<dt><i>createRenderNodeCommand</i></dt>
+<dd>
+This hook is called to give plugin renderers the chance to register their own command for
+creating their nodes from the render node treeLister and Node Editor. The callback should
+determine from the classification of the node type in question if it is theirs, and if so,
+return the appropriate command for creating new nodes of that type.
+<p>
+<ul>
+<li>postCommand (string): command to be run after the create command</li>
+<li>type (string): nodeType</li>
+<li>returns: (string) MEL create command</li>
+</ul>
+</dd>
+<dt><i>buildRenderNodeTreeListerContent</i></dt>
+<dd>
+This hook is called to give plugin renderers the chance to add their content to the render node
+tree lister.
+<p>
+<ul>
+<li>renderNodeTreeLister (string): the render node tree lister</li>
+<li>postCommand (string): command to be run post-creation</li>
+<li>filterString (string): a space delimited list of filters</li>
+</ul>
+</dd>
+<dt><i>AETemplateCustomContent</i></dt>
+<dd>
+This hook is called to give plugins a chance to add content to the Attribute Editor for nodes which source AEdependNodeTemplate.
+<p>
+<ul>
+<li>nodeName (string): the name of the node for which the Attribute Editor is being constructed</li>
+</ul>
+</dd>
+<dt><i>firstConnectedShader</i></dt>
+<dd>
+This hook is called to determine the primary custom shader connected to the given Shading Engine.
+<p>
+<ul>
+<li>nodeName (string): the name of the Shading Engine</li>
+<li>returns (string): the name of the custom shader if applicable</li>
+</ul>
+</dd>
+<dt><i>allConnectedShaders</i></dt>
+<dd>
+This hook is called to determine all the shaders connected to the given Shading Engine.
+<p>
+<ul>
+<li>nodeName (string): the name of the Shading Engine</li>
+<li>returns (string): a colon separated list of the connected custom shaders (shader1:shader2:shader3)</li>
+</ul>
+</dd>
+<dt><i>renderLayerPresetMenu</i></dt>
+<dd>
+This hook is called to give plugins a chance to add presets to a renderLayer node.
+<p>
+<ul>
+<li>nodeName (string): the name of the renderLayer node</li>
+</ul>
+</dd>
+<dt><i>addBakingMenuItems</i></dt>
+<dd>
+This hook is called to give plugins a chance to add baking menu items to the global Render - Lighting/Shading menu.
+<p>
+<ul>
+<li>menuItemAnchor (string): the name of the menuItem which the new baking menu items should be inserted after. </li>
+</ul>
+</dd>
+<dt><i>addVertexBakingMenuItems</i></dt>
+<dd>
+This hook is called to give plugins a chance to add baking menu items to the global Polygon - Color menu.
+<p>
+</dd>
+<dt><i>addPrelightMenuItems</i></dt>
+<dd>
+This hook is called to give plugins a chance to add pre-lighting menu items to the global Polygon - Color Set Editor menu.
+<p>
+</dd>
+<dt><i>addRMBBakingMenuItems</i></dt>
+<dd>
+This hook is called to give plugins a chance to add baking menu items to the RMB menu.
+<p>
+<ul>
+<li>objectName (string): the name of the object the right mouse button event occured on.</li>
+</ul>
+</dd>
+<dt><i>addMayaRenderingPreferences</i></dt>
+<dd>
+This hook is called to give plugins a chance to add custom preferences to the Maya's Rendering Preferences section.
+<p>
+</dd>
+<dt><i>updateMayaRenderingPreferences</i></dt>
+<dd>
+This hook is called to give plugins a chance to update custom preferences of the Maya's Rendering Preferences section.
+<p>
+</dd>
+<dt><i>addMayaMuscleMenuItems</i></dt>
+<dd>
+This hook is called to give plugins a chance to add menu items to the Maya muscle Displace menu.
+<p>
+<ul>
+<li>menuItemAnchor (string): the name of the menuItem which the new Maya muscle menu items should be inserted after. </li>
+</ul>
+</dd>
+<dt><i>addMayaMuscleShelfButtons</i></dt>
+<dd>
+This hook is called to give plugins a chance to add items to the Maya muscle shelves.
+<p>
+</dd>
+<dt><i>addBackburnerRendererMenuItems</i></dt>
+<dd>
+This hook is called to give plugins a chance to add items to Maya's Backburner list of available renderers. Note: The menuItem added must be named with the short name equivalent of the renderer. eg: The Maya software renderer adds a menuItem named 'sw'.
+<p>
+</dd>
+<dt><i>provideAETemplateForNodeType</i></dt>
+<dd>
+This hook is called to give plugins a chance to provide a UI template for nodes which do not have a corresponding AE'nodeType'Template procedure.
+<p>
+<ul>
+<li>nodeType (string): the type of the node for which the AE is being constructed. </li>
+<li>returns (string): the name of a MEL command or procedure to use as the AETemplate for the requested node type. </li>
+</ul>
+</dd>
+<dt><i>AEnewMultiHandler</i></dt>
+<dd>
+This hook is called to give plugins a chance to provide a UI creation handler for multi attributes.
+<p>
+<ul>
+<li>nodeName (string): the name of the node for which the AE is being constructed. </li>
+<li>atributeName (string): the name of the multi attribute.</li>
+<li>uiName (string): the UI name of the attribute.</li>
+<li>changedCommand (string): the MEL command or procedure to be executed when the value of the multi attribute is changed.</li>
+<li>elementIndexString (string): a colon separated list of indices at which the elements of the multi attribute live.</li>
+<li>returns (string): if the callback handled the attribute then it should return the full name of the topmost UI element that it created, otherwise it should return an empty string.</li>
+</ul>
+</dd>
+<dt><i>AEreplaceMultiHandler</i></dt>
+<dd>
+This hook is called to give plugins a chance to provide an update handler for multi attributes.
+<p>
+<ul>
+<li>layoutName (string): the well defined name of the Maya UI component which represents the multi attribute (.</li>
+<li>nodeName (string): the name of the node for which the AE is being constructed. </li>
+<li>atributeName (string): the name of the multi attribute.</li>
+<li>changedCommand (string): the MEL command or procedure to be executed when the value of the multi attribute is changed.</li>
+<li>elementIndexString (string): a colon separated list of indices at which the elements of the multi attribute live.</li>
+<li>returns (int): Return 1 if the callback handled the multi attribute, Return 0 if Maya should provide its default handling.</li>
+</ul>
+</dd>
+<dt><i>AEnewAttributeHandler</i></dt>
+<dd>
+This hook is called to give plugins a chance to provide a UI creation handler for attributes.
+<p>
+<ul>
+<li>nodeName (string): the name of the node for which the AE is being constructed. </li>
+<li>atributeName (string): the name of the attribute.</li>
+<li>uiName (string): the UI name of the attribute.</li>
+<li>changedCommand (string): the MEL command or procedure to be executed when the value of the attribute is changed.</li>
+<li>returns (string): if the callback handled the attribute then it should return the full name of the topmost UI element that it created, otherwise it should return an empty string.</li>
+</ul>
+</dd>
+<dt><i>AEreplaceAttributeHandler</i></dt>
+<dd>
+This hook is called to give plugins a chance to provide an update handler for attributes.
+<p>
+<ul>
+<li>nodeName (string): the name of the node for which the AE is being constructed. </li>
+<li>atributeName (string): the name of the attribute.</li>
+<li>changedCommand (string): the MEL command or procedure to be executed when the value of the attribute is changed.</li>
+<li>returns (int): Return 1 if the callback handled the attribute, Return 0 if Maya should provide its default handling.</li>
+</ul>
+</dd>
+<dt><i>provideClassificationStrings</i></dt>
+<dd>
+This hook must be supplied by all third parties that add nodes to the 'shader/surface' classification namespace.
+<p>
+<ul>
+<li>returns (string): a colon separated list representing the different plugin node classifications.</li>
+</ul>
+</dd>
+<dt><i>provideClassificationExclusionStrings</i></dt>
+<dd>
+This hook is called to give plugins a chance to provide a list of classifications which should be filtered out from a nodeTreeLister category. For example a plugin might want to filter out nodes classified as both 'material' and 'legacy' out of the 'material' category.
+<p>
+<ul>
+<li>classification (string): the classification the nodeTreeBuilder is inquiring about.</li>
+<li>returns (string): a colon separated list representing the different classifications that should be excluded from the classification the nodeTreeBuilder is inquiring about.</li>
+</ul>
+</dd>
+<dt><i>provideClassificationStringsForFilteredTreeLister</i></dt>
+<dd>
+This hook is called by 'createAssignNewMaterialTreeLister' and gives plugins a chance to append to the classification filter passed to the Tree Lister builder. It must return a string where each new classification is separated by a white space.
+<p>
+<ul>
+<li>currentFilterString (string): a white-space-separated string representing the current classifications.</li>
+</ul>
+</dd>
+<dt><i>nodeCanBeUsedAsMaterial</i></dt>
+<dd>
+The hook is used by the RMB 'Assign Favorite Material' menu to determine which shading nodes can be used as materials. It must return 1 if the node can be used as a material node and 0 otherwise.
+<p>
+<ul>
+<li>nodeId (string): the node Id of the shading node being queried.</li>
+<li>nodeOwner (string): the name of the plugin the node belongs to.</li>
+</ul>
+</dd>
+<dt><i>addHeaderContentToMayaLambertianShadersAE</i></dt>
+<dd>
+This hook is called to give plugins a chance to add content to the header of the Attribute Editor of Maya's Lambertian-​derived shaders.
+<p>
+<ul>
+<li>nodeName (string): the name of the node for which the Attribute Editor is being constructed.</li>
+</ul>
+</dd>
+<dt><i>provideNodeToAttrConnection</i></dt>
+<dd>
+This hook is called to give plugins a chance to provide which output attribute should be used when a node is connected to an input attribute.
+If an input attribute type is given an output attribute of matching type should be returned. If no attribute type is specified (empty string)
+a preferred output attribute of any type can be returned. If no output attribute of matching type is available an empty string should be returned.
+<p>
+<ul>
+<li>nodeType (string): the node type of the node queried.</li>
+<li>attributeType (string): the data type of the input attribute.</li>
+<li>returns (string): the name of the output attribute to use.</li>
+</ul>
+</dd>
+<dt><i>provideNodeToNodeConnection</i></dt>
+<dd>
+This hook is called to give plugins a chance to provide which attributes should be connected when a node to node connection is made.
+Both the source and destination attributes should be returned in a colon separated list, e.g. &quot;src1:dst1:src2:dst2:src3:dst3&quot;
+<p>
+<ul>
+<li>srcType (string): the node type of the source node.</li>
+<li>dstType (string): the node type of the destination node.</li>
+<li>returns (string): A colon separated list of source and destination attribute names.</li>
+</ul>
+</dd>
+<dt><i>provideOutputAttributeNameForTextureNode</i></dt>
+<dd>
+This hook is called to give plugins a chance to provide a different output attribute name for Texture nodes. If this hook isn't provided 'outColor' is used.
+<p>
+<ul>
+<li>nodeName (string): the name of the texture node queried.</li>
+<li>returns (string): the output attribute name of the Texture node.</li>
+</ul>
+</dd>
+<dt><i>addItemsToHypergraphNodePopupMenu</i></dt>
+<dd>
+This hook is called to give plugins a chance to add items to the Hypergraph node popup menu.
+<p>
+<ul>
+<li>nodeName (string): the name of the node for which the Hypergraph node menu is being constructed.</li>
+</ul>
+</dd>
+<dt><i>addItemsToRenderLayerEditorPopupMenu</i></dt>
+<dd>
+This hook is called to give plugins a chance to add items to the Render Layer Editor popup menu.
+<p>
+<ul>
+<li>layerName (string): the name of the render layer for which the popup menu is being constructed.</li>
+</ul>
+</dd>
+<dt><i>preventMaterialDeletionFromCleanUpSceneCommand</i></dt>
+<dd>
+This hook is called by the cleanUpScene command and gives the plugin a chance to communicate that a material node is still in use and shouldn't be deleted. The hook is called once per plug/connection pair of each shader instance.
+<p>
+<ul>
+<li>shader (string): the name of the shader node being deleted.</li>
+<li>plug (string): the name of the plug queried.</li>
+<li>connection (string): the name of the connection queried.</li>
+</ul>
+</dd>
+<dt><i>connectNodeToNodeOverrideCallback</i></dt>
+<dd>
+This hook is called to give plugins a chance to redefine the behavior of drag and drop.
+<p>
+<ul>
+<li>srcNode (string): the name of the source node (the dragged node).</li>
+<li>dstNode (string): the name of the destination node (the dropped-on node).</li>
+<li>returns (int): Return 1 if Maya should perform the operation that would normally result from this connection. Return 0 to override and provide custom behavior.</li>
+</ul>
+</dd>
+<dt><i>prepareRenderChanged</i></dt>
+<dd>
+This hook is called after an edit on a traversal set with the prepareRender command.
+<p>
+</dd>
+<dt><i>enableRenderPassMenuOfRenderView</i></dt>
+<dd>
+This hook is called to give plugins a chance to tell Maya it should enable the render pass menu of the render view (under File-&gt;Load Render Pass). 'addRenderPassMenuItemsToRenderView' can be used to add items to this menu.
+<p>
+<ul>
+<li>returns (int): Return 1 if the plugin wants the render pass menu of the render view to be enabled. Return 0 otherwise.</li>
+</ul>
+</dd>
+<dt><i>addItemsToRenderPassMenuOfRenderView</i></dt>
+<dd>
+This hook is called to give plugins a chance to add menu items to the 'render pass' menu of the render view (under File-&gt;Load Render Pass). 'enableRenderPassMenuOfRenderView' can be used to enable the render pass menu of the render view.
+<p>
+</dd>
+<dt><i>addItemsToRMBMenuOfTreeLister</i></dt>
+<dd>
+This hook is called to give plugins a chance to populate the RMB menu of nodes listed in a tree lister. Plugins should add a menu item divider (using: menuItem -divider true) before adding any more items to the RMB menu.
+<p>
+<ul>
+<li>nodeType (string): The node type of the tree lister node for which the RMB menu is being built.</li>
+<li>scriptCommand (string): The script command associated with the tree lister node for which the RMB menu is being built.</li>
+<li>returns (int): Return 0 if Maya should append its own items to the menu of the current node type. This should be the return value for all node types a plugin isn't explicitly interested in. Return 1 if Maya shouldn't add any of its items to the menu of the current node type. Note: All menu items related to managing the 'Favorites' section of the tree lister will always be added to the RMB menu regardless of the return value (those are treated as special cases).</li>
+</ul>
+</dd>
+<dt><i>saveCustomNodePresetAttributes</i></dt>
+<dd>
+This hook is called to give plugins a chance to store extra commands in the node preset file being saved.
+<p>
+<ul>
+<li>presetNodeToSave (string): The name of the preset node being saved.</li>
+<li>returns (string): The custom procedure to use to generate the mel script to be appended to the nodePreset -custom flag of the current presetNode save event (see the documentation of the nodePreset command for more information on the format of the -custom flag).</li>
+</ul>
+</dd>
+<dt><i>addItemToFileMenu</i></dt>
+<dd>
+This hook is called to give plugins a chance to add menu items to the main File menu.
+<p>
+</dd>
+<dt><i>addItemToCreateLightMenu</i></dt>
+<dd>
+This hook is called to give plugins a chance to add menu items to the create light menu.
+</dd>
+<dt><i>textureReload</i></dt>
+<dd>
+This hook is called to give plugins a chance to update all nodes that reference the texture file.
+<p>
+<ul>
+<li>file (string): the file path of the texture to reload.</li>
+</ul>
+</dd>
+<dt><i>renderSettingsBuilt</i></dt>
+<dd>
+This hook is called after the render settings window has been built.
+</dd>
+<dt><i>rendererAddOneTabToGlobalsWindowCreateProc</i></dt>
+<dd>
+This hook is called to allow renderers the opportunity to add renderer specific tabs to the unified render globals window (render settings window).
+<p>
+<ul>
+<li>createProc (string): the name of the procedure used to create the content of the tab. </li>
+</ul>
+</dd>
+<dt><i>shouldEarlyReturnFromUpdateMultiCameraBufferNamingMenu</i></dt>
+<dd>
+This hook is called to allow users to early return from the updateMultiCameraBufferNamingMenu() function by returning &quot;true&quot; in the callback handler.
+<p>
+<ul>
+<li>returns (string): Returns &quot;true&quot; if the caller wishes to early return from the updateMultiCameraBufferNamingMenu() function.</li>
+</ul>
+</dd>
+<dt><i>shouldEarlyReturnFromUpdateMayaSoftwareImageFormatControl</i></dt>
+<dd>
+This hook is called to allow users to early return from the updateMayaSoftwareImageFormatControl() function by returning &quot;true&quot; in the callback handler.
+<p>
+<ul>
+<li>returns (string): Returns &quot;true&quot; if the caller wishes to early return from the updateMayaSoftwareImageFormatControl() function.</li>
+</ul>
+</dd>
+<dt><i>shouldEarlyReturnFromUpdateDefaultTraversalSetMenu</i></dt>
+<dd>
+This hook is called to allow users to early return from the updateDefaultTraversalSetMenu() function by returning &quot;true&quot; in the callback handler.
+<p>
+<ul>
+<li>returns (string): Returns &quot;true&quot; if the caller wishes to early return from the updateDefaultTraversalSetMenu() function.</li>
+</ul>
+</dd>
+<dt><i>shouldEarlyReturnFromShouldAppearInNodeCreateUI</i></dt>
+<dd>
+This hook is called to allow users to early return from the shouldAppearInNodeCreateUI() function by returning &quot;true&quot; in the callback handler.
+<p>
+<ul>
+<li>returns (string): Returns &quot;true&quot; if the caller wishes to early return from the shouldAppearInNodeCreateUI() function.</li>
+</ul>
+</dd>
+<dt><i>updateAE</i></dt>
+<dd>
+This hook is called at the end of the updateAE() function.
+</dd>
+</dl>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdumpCallbacks">
+          <code><b>dumpCallbacks</b>(<b>dc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Gives a list of all the registered callbacks for all hooks and owners. Can be
+useful for debugging.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexecuteCallbacks">
+          <code><b>executeCallbacks</b>(<b>ec</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Execute the callbacks for the specified hook, passing the extra arguments to
+each callback when it is executed.  Returns an array (MEL) or list (Python)
+containing the return values from each callback that was executed.
+If a callback returns no value, the array will contain an empty string (MEL)
+or None (Python).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghook">
+          <code><b>hook</b>(<b>h</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The name of the hook for which the callback should be registered.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistCallbacks">
+          <code><b>listCallbacks</b>(<b>lc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get the list of callbacks for the specified hook name. If the owner is
+specified, only callbacks for the specified hook and owner will be listed.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagowner">
+          <code><b>owner</b>(<b>o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The name of the owner registering the callback. This is typically a plugin name.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveCallback">
+          <code><b>removeCallback</b>(<b>rc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove an existing callback for the specified hook name. The owner must
+also be specified when removing a callback.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+def myCallbackFunction(arg1, arg2):
+		return arg1 + arg2
+
+# add a new callback for myPlugin to be called when creating the attribute editor UI
+cmds.callbacks(addCallback=myCallbackFunction, hook='desiredHook', owner='myPlugin')
+# remove an individual callback
+cmds.callbacks(removeCallback=myCallbackFunction, hook='desiredHook', owner='myPlugin')
+# remove all callbacks for myPlugin for a specified hook
+cmds.callbacks(clearCallbacks=True, hook='desiredHook', owner='myPlugin')
+# remove all callbacks for myPlugin for all hooks
+cmds.callbacks(clearCallbacks=True, owner='myPlugin')
+# list callbacks for a specified hook
+callbacks = cmds.callbacks(listCallbacks=True, hook='desiredHook')
+# list callbacks for a specified hook and for a specified owner
+callbacks = cmds.callbacks(listCallbacks=True, hook='desiredHook', owner='myPlugin')
+# get a list of the standard Maya hooks
+cmds.callbacks(describeHooks=True)
+# execute the callbacks for the hook 'desiredHook'
+results = cmds.callbacks('arg1', 'arg2', executeCallbacks=True, hook='desiredHook')
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

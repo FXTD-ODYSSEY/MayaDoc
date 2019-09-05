@@ -1,0 +1,484 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyForceUV command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-polyForceUV"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/polyForceUV.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyForceUV </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyForceUV.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyForceUV([<a href="#flagcameraProjection">cameraProjection</a>=<i>boolean</i>], [<a href="#flagcreateNewMap">createNewMap</a>=<i>boolean</i>], [<a href="#flagflipHorizontal">flipHorizontal</a>=<i>boolean</i>], [<a href="#flagflipVertical">flipVertical</a>=<i>boolean</i>], [<a href="#flagg">g</a>=<i>boolean</i>], [<a href="#flaglocal">local</a>=<i>boolean</i>], [<a href="#flagnormalize">normalize</a>=<i>string</i>], [<a href="#flagnumItems">numItems</a>=<i>uint</i>], [<a href="#flagpreserveAspectRatio">preserveAspectRatio</a>=<i>boolean</i>], [<a href="#flagunitize">unitize</a>=<i>boolean</i>], [<a href="#flagunshare">unshare</a>=<i>boolean</i>], [<a href="#flaguvSetName">uvSetName</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>polyForceUV is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      A set of functionalities can be called through this command.  The input for
+this command is a set of faces.  Based on the arguments passed, the UVs for
+these selected faces can be created.
+<br>
+<b>Project UVs based on the camera:</b> <i>(UV creation) </i> <br>
+        Based on the current view direction/orientation, the UVs are generated and
+assigned to the faces.  Any previously assigned UV information will be lost.
+<br>
+<b>Best Plane Projection:</b>                   <i>     (UV creation) </i> <br>
+        The UVs are computed based on the plane defined by the user, and is applied
+to the selected faces.  This tool has 2 phases.  In the first phase,
+the faces to be mapped (faces to which UVs are to be created) are selected.
+In the second phase, the points (vertices, CVs) that define the
+projecting plane are selected.  Any previously assigned UV information will
+be lost.
+<br>
+<b>Unitize:</b>                                                 <i>     (UV creation) </i> <br>
+        A new set of unitized UVs are generated and assigned to the faces.
+        Any previously assigned UV information will be lost.
+<br>
+<b>Unshare:</b> <i>(UV creation) </i> <br>
+        Force the specified UV to be unshared by possibly creating new UVs.  Any previously assigned UV information will be lost.
+<br>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>true/false</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>poly, uv, normalize, unitize, flip, bestPlane
+      <h2><a name="hRelated">Related</a></h2><a href="polyClipboard.html">polyClipboard</a>, <a href="polyCylindricalProjection.html">polyCylindricalProjection</a>, <a href="polyEditUV.html">polyEditUV</a>, <a href="polyMapCut.html">polyMapCut</a>, <a href="polyMapDel.html">polyMapDel</a>, <a href="polyMapSew.html">polyMapSew</a>, <a href="polyMoveFacetUV.html">polyMoveFacetUV</a>, <a href="polyMoveUV.html">polyMoveUV</a>, <a href="polyPlanarProjection.html">polyPlanarProjection</a>, <a href="polyProjection.html">polyProjection</a>, <a href="polySphericalProjection.html">polySphericalProjection</a>, <a href="polyUVSet.html">polyUVSet</a>, <a href="untangleUV.html">untangleUV</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcameraProjection">cameraProjection</a>, <a href="#flagcreateNewMap">createNewMap</a>, <a href="#flagflipHorizontal">flipHorizontal</a>, <a href="#flagflipVertical">flipVertical</a>, <a href="#flagg">g</a>, <a href="#flaglocal">local</a>, <a href="#flagnormalize">normalize</a>, <a href="#flagnumItems">numItems</a>, <a href="#flagpreserveAspectRatio">preserveAspectRatio</a>, <a href="#flagunitize">unitize</a>, <a href="#flagunshare">unshare</a>, <a href="#flaguvSetName">uvSetName</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcameraProjection">
+          <code><b>cameraProjection</b>(<b>cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Project the UVs based on the camera position/orientation
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreateNewMap">
+          <code><b>createNewMap</b>(<b>cm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Create new map if it does not exist.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflipHorizontal">
+          <code><b>flipHorizontal</b>(<b>fh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+OBSOLETE flag.  Use polyFlipUV instead.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflipVertical">
+          <code><b>flipVertical</b>(<b>fv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+OBSOLETE flag.  Use polyFlipUV instead.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagg">
+          <code><b>g</b>(<b>g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        OBSOLETE flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglocal">
+          <code><b>local</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        OBSOLETE flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnormalize">
+          <code><b>normalize</b>(<b>nor</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+OBSOLETE flag.  Use polyNormalizeUV instead.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnumItems">
+          <code><b>numItems</b>(<b>ni</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        This flag is only used for the <b>best plane texturing</b>
+        of polygonal faces.  This flag should be followed by a
+        selection list. If not specified, the selected objects will
+        be used (in the order they were selected). <br>
+        This flag specifies the number of items (leading) in the
+        selection list that should be used for the mapping.
+        The trailing items will be used for computing the
+        plane (See example below).  The <b>best plane texturing</b>
+        is better suited for using interactively from within its context.
+        You can type &quot;BestPlaneTexturingTool&quot;
+        in the command window OR (EditPolygons-&gt;Texture-&gt;BestPlaneTexturing
+        from the Menu) to enter its context.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreserveAspectRatio">
+          <code><b>preserveAspectRatio</b>(<b>par</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        OBSOLETE flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunitize">
+          <code><b>unitize</b>(<b>uni</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        To unitize the UVs of the selected faces
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunshare">
+          <code><b>unshare</b>(<b>u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        To unshare tye specified UV
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvSetName">
+          <code><b>uvSetName</b>(<b>uvs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+                Specifies name of the uv set to work on
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.polyForceUV( uni=True )
+# unitize the UV values of the selected faces separately
+
+cmds.polyForceUV( cp=True )
+# create UVs on the selected faces based on the current camera
+
+cmds.polyForceUV( 'pCylinder1.f[11:14]', 'pCylinder1.vtx[33:34]', 'pCylinder1.vtx[13:14]', ni=1 )
+# create the UVs for the first item (ie, 4 polygonal faces, in this case)
+# in the selection list, by computing the plane using the rest of the
+# items in the list
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

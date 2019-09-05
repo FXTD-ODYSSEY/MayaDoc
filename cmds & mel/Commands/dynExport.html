@@ -1,0 +1,419 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>dynExport command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-dynExport"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/dynExport.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>dynExport </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Dynamics" target="contentFrame">Dynamics</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("dynExport.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>dynExport [-<a href="#flagallObjects">allObjects</a> <i>boolean</i>] [-<a href="#flagattribute">attribute</a> <i>string</i>] [-<a href="#flagformat">format</a> <i>string</i>] [-<a href="#flagmaxFrame">maxFrame</a> <i>time</i>] [-<a href="#flagminFrame">minFrame</a> <i>time</i>] [-<a href="#flagonlyUpdateParticles">onlyUpdateParticles</a> <i>boolean</i>] [-<a href="#flagoverSampling">overSampling</a> <i>int</i>] [-<a href="#flagpath">path</a> <i>string</i>] 
+[objects]
+     </code> </p>
+      <p>dynExport is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Export particle data to disk files.
+<p>
+For cache export (-format cache), dynExport also sets three attributes
+of the current dynGlobals node.  It sets the useParticleRenderCache
+attribute to true, and the min/maxFrameOfLastParticleRenderCache
+attributes to correspond to the min and max frames.
+<p>
+Exported .pda or .pdb files are assigned a name of form <i>object
+name.frame.extension</i>, where <i>extension</i> is &quot;pda&quot; or &quot;pdb.&quot;
+<p>
+The naming convention for .pdc files is similar but does not use frame
+numbers, it uses a more precise representation of the time instead.
+<p>
+By default, the pda and pdb formats export all per-particle
+attributes, and all integer or float type attributes except those
+which are hidden or not storable. (Exception: level of detail is not
+exported, by default) The pdc format exports all attributes which the
+particle object needs for its state cache.
+<p>
+To specify only selected attributes, use the -atr flag (which is
+multi-use).  In general, it is recommended not to use this flag with
+pdc type, since you need all the attributes in order for the cache to
+be useful.
+<p>
+dynExport exports data for the current frame, or for a range of frames
+specified with -mnf and -mxf. If you are not already at the start
+frame, dynExport will run up the scene for you. <b> VERY VERY
+IMPORTANT NOTE:</b> If you use dynExport in -prompt mode, it does NOT
+automatically force evaluation of your objects.  You must do this
+yourself from your script.  The easiest way is to request each
+particle object's &quot;count&quot; attribute each frame.  You must request the
+count attribute for each object you want to export, because their
+solvers run independently of one another.  In interactive mode,
+objects WILL get evaluated automatically and you don't have to worry
+about any of this.
+<p>
+When exporting a particle object whose particles are created from
+collisions involving particles in another particle object(s), you must
+make sure you simultaneously export all the particle objects involved
+in the dependency chain otherwise you will get an empty cache file.
+<p>
+For non-per-particle attributes, pda and pdb formats write the
+identical value once for each particle.  The following types of
+non-per-particle attributes can be exported: float, double,
+doubleLinear, doubleAngle, byte, short, long, enum.  The first four
+are exported as &quot;Real&quot; (in PDB parlance), and the last four as
+&quot;Integer.&quot;
+<p>
+In the pda and pdb formats, &quot;particleId&quot; and &quot;particleId0&quot; are
+exported as Integer, and are exported under the names &quot;id&quot; and &quot;id0&quot;
+respectively.  All other attributes are exported under their long
+names.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Path to the exported files</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="getParticleAttr.html">getParticleAttr</a>, <a href="particle.html">particle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallObjects">allObjects</a>, <a href="#flagattribute">attribute</a>, <a href="#flagformat">format</a>, <a href="#flagmaxFrame">maxFrame</a>, <a href="#flagminFrame">minFrame</a>, <a href="#flagonlyUpdateParticles">onlyUpdateParticles</a>, <a href="#flagoverSampling">overSampling</a>, <a href="#flagpath">path</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallObjects">
+          <code><b>-allObjects</b>(<b>-all</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Ignore the selection list and export all particle objects.
+If you also specify an object name, the -all flag will be ignored.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattribute">
+          <code><b>-attribute</b>(<b>-atr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of attribute to be exported. If any specified object
+does not have one of the specified attributes, dynExport will issue
+an error and not do the export.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagformat">
+          <code><b>-format</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Desired format: &quot;binary&quot; (&quot;pdb&quot;), &quot;ascii&quot; (&quot;pda&quot;), or &quot;cache&quot; (&quot;pdc&quot;).
+<br>The pdc format is for use by the Maya particle system to
+cache particle data.  The pda and pdb format options
+are intended for pipelines involving other software (for example,
+sending the data to some program written in-house);
+Maya cannot read pda or pdb files.
+<br>There is no formal description of the PDB format, but the
+ExploreMe/particles/readpdb directory contains the source
+and Makefile for a small, simple C program called &quot;readpdb&quot;
+which reads it. Note that you must compile and run readpdb on the
+platform which you exported the files on.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxFrame">
+          <code><b>-maxFrame</b>(<b>-mxf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Ending frame to be exported.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminFrame">
+          <code><b>-minFrame</b>(<b>-mnf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Starting frame to be exported. The export operation will play the
+scene through from min frame to max frame as it exports.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagonlyUpdateParticles">
+          <code><b>-onlyUpdateParticles</b>(<b>-oup</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify to only update the particles before exporting.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoverSampling">
+          <code><b>-overSampling</b>(<b>-os</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+OverSampling to be used during export.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpath">
+          <code><b>-path</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This option allows you to specify a subdirectory of the workspace
+&quot;particles&quot; directory where you want the exported files to be stored.
+By default, files are stored in the workspace particles directory,
+i.e., -path is relative to that directory.
+<br>(<b> Please Read This: </b> This is a change from previous versions of Maya
+in which the path was relative to the workspace root directory.)
+You can set the &quot;particles&quot; directory anywhere you want using the
+project window or workspace -fr command. (In this way, you can use
+an absolute path for export).
+<br>The -path flag cannot handle strings which include &quot;/&quot; or &quot;\&quot;,
+in other words, it lets you go down only one level in the directory hierarchy.
+If you specify a path which doesn't exist, the action will create it
+if possible; if it can't create the path it will warn you and fail.
+If you are using a project for which a particle data directory is
+not defined, dynExport will create a default one called &quot;particles&quot;
+and add it to your workspace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+dynExport -mnf 5 -mxf 10 -os 2 -atr position -atr velocity -p &quot;PDB&quot; particle1;
+
+// Export position and velocity attributes for particle1
+// for frames 5 through 10 at every half frame interval,
+// to files in subdirectory &quot;PDB&quot; of the workspace root
+// directory. The default format (binary) will be used.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,446 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>evaluator command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-evaluator"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/evaluator.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>evaluator </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("evaluator.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>evaluator([<a href="#flagclusters">clusters</a>=<i>boolean</i>], [<a href="#flagconfiguration">configuration</a>=<i>string</i>], [<a href="#flagenable">enable</a>=<i>boolean</i>], [<a href="#flaginfo">info</a>=<i>boolean</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagnodeType">nodeType</a>=<i>string</i>], [<a href="#flagnodeTypeChildren">nodeTypeChildren</a>=<i>boolean</i>], [<a href="#flagpriority">priority</a>=<i>int</i>], [<a href="#flagvalueName">valueName</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>evaluator is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      Handles turning on and off custom evaluation overrides used by the evaluation
+manager.
+Query no flag to see all available custom evaluators.
+Query the 'enable' flag to check if an evaluator is currently enabled.
+If the 'name' flag isn't used then return all modes and their current
+active state.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>the list of available evaluators (querying with no evaluator flag or invalid evaluator name)</td></tr><tr><td valign="top"><i>boolean</i></td><td>the previous active state of the named evaluator (with 'name' and 'enable' flags)</td></tr><tr><td valign="top"><i>boolean</i></td><td>the active state of the named evaluator (query with 'name' and 'enable' flags)</td></tr><tr><td valign="top"><i>string[]</i></td><td>the list of evaluators in the requested active state (query 'enable' flag alone)</td></tr><tr><td valign="top"><i>string[]</i></td><td>the list of nodes for which the evaluator was activated or deactivated (with 'nodeType' or 'nodeTypeChildren' flags)</td></tr><tr><td valign="top"><i>string</i></td><td>the queried value for the evaluator (with 'name' and 'valueName' flags)</td></tr><tr><td valign="top"><i>boolean</i></td><td>true if the configuration request was accepted by the evaluator (with 'name' flag and 'configuration' flag)</td></tr><tr><td valign="top"><i>string[]</i></td><td>the list of configuration parameters accepted by the evaluator (query mode with 'name' flag and 'configuration' flag)</td></tr><tr><td valign="top"><i>string[]</i></td><td>the list of clusters currently assigned to the evaluator with intervening sublist sizes (query mode with 'name' flag and 'clusters' flag)</td></tr><tr><td valign="top"><i>string</i></td><td>the help information supplied by the evaluator (query mode with 'name' flag and 'info' flag)</td></tr><tr><td valign="top"><i>int</i></td><td>the priority value of the evaluator (query mode with 'name' flag and 'priority' flag)</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>evaluation, manager, DG, runtime
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagclusters">clusters</a>, <a href="#flagconfiguration">configuration</a>, <a href="#flagenable">enable</a>, <a href="#flaginfo">info</a>, <a href="#flagname">name</a>, <a href="#flagnodeType">nodeType</a>, <a href="#flagnodeTypeChildren">nodeTypeChildren</a>, <a href="#flagpriority">priority</a>, <a href="#flagvalueName">valueName</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclusters">
+          <code><b>clusters</b>(<b>cl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag queries the list of clusters currently assigned to the named custom evaluator.
+The return value will be an array of strings where the array consists of a
+set of (number, string[]) groups. e.g. If an evaluator has 2 clusters with
+2 and 3 nodes in them respectively the output would be something like:
+(2, 'transform2', 'transform3', 3, 'joint1', 'joint2', 'joint3')
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconfiguration">
+          <code><b>configuration</b>(<b>c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sends configuration information to a custom evaluator. It's up to the evaluator
+to understand what they mean.
+Multiple configuration messages can be sent in a single command.
+Query this flag for a given evaluator to find out what configuration
+messages it accepts.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenable">
+          <code><b>enable</b>(<b>en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Enables or disables a specific graph evaluation runtime, depending on the
+state of the flag.  In order to use this flag you must also specify the
+name in the 'name' argument.
+When the 'enable' flag is used in conjunction with the 'nodeType' flag then
+it is used to selectively turn on or off the ability of the given evaluator
+to handle nodes of the given type (i.e. it no longer toggles the evaluator
+enabled state).
+When the 'enable' flag is used in conjunction with the 'configuration' flag then
+it is passed along with the configuration message interpreted by the custom
+evaluator.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginfo">
+          <code><b>info</b>(<b>i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Queries the evaluator information. Only valid in query mode since the
+information is generated by the evaluator's internal state and cannot be
+changed.
+In order to use this flag, the 'name' argument must also be specified.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Names a particular DG evaluation override evaluator. Evaluators are registered
+automatically by name. Query this flag to get a list of available runtimes.
+When a runtime is registered it is enabled by default. Use the 'enable'
+flag to change its enabled state.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeType">
+          <code><b>nodeType</b>(<b>nt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Names a particular node type to be passed to the evaluator request.
+Evaluators can either use or ignore the node type information as passed.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeTypeChildren">
+          <code><b>nodeTypeChildren</b>(<b>ntc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If enabled when using the 'nodeType' flag then handle all of the node types
+derived from the given one as well. Default is to only handle the named
+node type.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpriority">
+          <code><b>priority</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query or set the evaluator priority. Custom evaluator with highest priority
+order will get the chance to claim the nodes first.  Evaluators must have
+unique priority values.
+In order to use this flag you must also specify the name in the 'name' argument.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalueName">
+          <code><b>valueName</b>(<b>vn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Queries a value from a given evaluator.  Evaluators can define a set of
+values for which they answer.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+
+import maya.cmds as cmds
+
+# Load a custom evaluator plug-in (not a real plug-in, just an example)
+cmds.loadPlugin( 'MY_CUSTOM_EVALUATOR' );
+# Result: MY_CUSTOM_EVALUATOR #
+
+# List the available evaluators
+cmds.evaluator( query=True );
+# Result: [u'MY_CUSTOM_EVALUATOR'] #
+
+# Is 'MY_CUSTOM_EVALUATOR' disabled?
+cmds.evaluator( query=True, name='MY_CUSTOM_EVALUATOR' )
+# Result: False #
+
+# Check which evaluators are disabled
+cmds.evaluator( enable=False, query=True )
+# Result: [u'MY_CUSTOM_EVALUATOR'] #
+
+# Turn on 'MY_CUSTOM_EVALUATOR'
+cmds.evaluator( enable=True, name='MY_CUSTOM_EVALUATOR' )
+# Result: False #
+
+# Check to see which evaluators are enabled
+cmds.evaluator( enable=True, query=True )
+# Result: [u'MY_CUSTOM_EVALUATOR'] #
+
+# Make 'MY_CUSTOM_EVALUATOR' handle nodes of type 'transform'
+cmds.evaluator( enable=True, name='MY_CUSTOM_EVALUATOR', nodeType='transform' )
+# Result: [u'transform'] #
+
+# Make 'MY_CUSTOM_EVALUATOR' handle nodes of type 'transform' and all derived types
+cmds.evaluator( enable=True, name='MY_CUSTOM_EVALUATOR', nodeType='transform', nodeTypeChildren=True )
+# Result: [u'transform', u'joint', &lt;large list omitted&gt;] #
+
+# Get the list of clustered nodes handled by 'MY_CUSTOM_EVALUATOR' in the current scene.
+cmds.evaluator( name='MY_CUSTOM_EVALUATOR', query=True, clusters=True )
+# Result: ['2', 'transform1', 'transform2', '3', 'joint3', 'joint4', 'joint5' ] #
+
+# Send a configuration message to 'MY_CUSTOM_EVALUATOR'
+cmds.evaluator( name='MY_CUSTOM_EVALUATOR', configuration='cluster=subgraph' )
+# Result: #
+
+# Query information about 'MY_CUSTOM_EVALUATOR'
+cmds.evaluator( query=True, name='MY_CUSTOM_EVALUATOR', info=True )
+# Result: #
+
+# Query 'pruneRoots' priority
+cmds.evaluator( query=True, name='pruneRoots', priority=True )
+# Result: 1000
+
+# Set &quot;pruneRoots&quot; priority to 2500
+cmds.evaluator( name='pruneRoots', priority=2500 )
+# Result: True
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

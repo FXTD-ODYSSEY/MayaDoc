@@ -1,0 +1,899 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>namespace command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-namespace"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/namespace.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>namespace </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("namespace.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>namespace [-<a href="#flagabsoluteName">absoluteName</a>] [-<a href="#flagaddNamespace">addNamespace</a> <i>string</i>] [-<a href="#flagcollapseAncestors">collapseAncestors</a> <i>string</i>] [-<a href="#flagdeleteNamespaceContent">deleteNamespaceContent</a>] [-<a href="#flagexists">exists</a> <i>string</i>] [-<a href="#flagforce">force</a>] [-<a href="#flagisRootNamespace">isRootNamespace</a> <i>string</i>] [-<a href="#flagmergeNamespaceWithOther">mergeNamespaceWithOther</a> <i>string</i>] [-<a href="#flagmergeNamespaceWithParent">mergeNamespaceWithParent</a>] [-<a href="#flagmergeNamespaceWithRoot">mergeNamespaceWithRoot</a>] [-<a href="#flagmoveNamespace">moveNamespace</a> <i>string string</i>] [-<a href="#flagparent">parent</a> <i>string</i>] [-<a href="#flagrecurse">recurse</a>] [-<a href="#flagrelativeNames">relativeNames</a> <i>boolean</i>] [-<a href="#flagremoveNamespace">removeNamespace</a> <i>string</i>] [-<a href="#flagrename">rename</a> <i>string string</i>] [-<a href="#flagsetNamespace">setNamespace</a> <i>string</i>] [-<a href="#flagvalidateName">validateName</a> <i>string</i>] 
+[string]
+     </code> </p>
+      <p>namespace is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command allows a namespace to be created, set or removed.
+<p>
+A namespace is a simple grouping of objects under a given name.
+Namespaces are primarily used to resolve name-clash issues in Maya,
+where a new object has the same name as an existing object (from
+importing a file, for example).  Using namespaces, you can have two
+objects with the same name, as long as they are contained in
+differenct namespaces.
+<p>
+Namespaces are reminiscent of hierarchical structures like file
+systems where namespaces are analogous to directories and objects are
+analogous to files. The colon (':') character is the separator used to
+separate the names of namespaces and nodes instead of the slash ('/')
+or backslash ('\') character.  Namespaces can contain other namespaces
+as well as objects.  Like objects, the names of namespaces must be
+unique within another namespace. Objects and namespaces can be in only
+one namespace. Namespace names and object names don't clash so a
+namespace and an object contained in another namespace can have the
+same name.
+<p>
+There is an unnamed root namespace specified with a leading colon
+(':').  Any object not in a named namespace is in the root namespace.
+Normally, the leading colon is omitted from the name of an object as
+it's presence is implied. The presence of a leading colon is
+important when moving objects between namespaces using the 'rename'
+command.  For the 'rename' command, the new name is relative to the
+current namespace unless the new name is fully qualified with a
+leading colon.
+<p>
+Namespaces are created using the 'add/addNamespace' flag. By default they are
+created under the current namespace. Changing the current namespace is
+done with the 'set/setNamespace' flag. To reset the current namespace to
+the root namespace, use 'namespace -set &quot;:&quot;;'. Whenever an object is
+created, it is added by default to the current namespace.
+<p>
+When creating a new namespace using a qualified name, any intervening namespaces which do
+not yet exist will be automatically created. For example, if the name of
+the new namespace is specified as &quot;A:B&quot; and the current namespace already
+has a child namespace named &quot;A&quot; then a new child namespace named &quot;B&quot; will
+be created under &quot;A&quot;. But if the current namespace does not yet have a
+child named &quot;A&quot; then it will be created automatically. This applies
+regardless of the number of levels in the provided name (e.g. &quot;A:B:C:D&quot;).
+<p>
+The 'p/parent' flag can be used to explicitly specify the parent namespace
+under which the new one should be created, rather than just defaulting to
+the current namespace.
+<p>
+If the name given for the new namespace is absolute (i.e. it begins with a
+colon, as in &quot;:A:B&quot;) then both the current namespace and the 'parent' flag
+will be ignored and the new namespace will be created under the root namespace.
+<p>
+The relativeNamespace flag can be used to change the way node names
+are displayed in the UI and returned by the 'ls' command. Here are
+some specific details on how the return from the 'ls' command works in
+relativeNamespace mode:
+<ul>
+List all mesh objects in the scene:<br>
+ls -type &quot;mesh&quot;;<br>
+The above command lists all mesh objects in the root and any child namespaces. In relative name lookup mode, all names will be displayed relative to the current namespace. When not in relative name lookup mode (the default behaviour in Maya), results are printed relative to the root namespace.
+<br><br>
+Using a &quot;*&quot; wildcard:<br>
+namespace -set myNS;<br>
+ls -type &quot;mesh &quot;*&quot;;<br>
+<br><br>
+In relative name lookup mode, the &quot;*&quot; will match to the current namespace and thus the ls command will list only those meshes defined within the current namespace (i.e. myNs). If relative name lookup is off (the default behaviour in Maya), names are root-relative and thus &quot;*&quot; matches the root namespace, with the net result being that only thoses meshes defined in the root namespace will be listed.
+<br><br>
+You can force the root namespace to be listed when in relative name lookup mode by specifying &quot;:*&quot; as your search pattern (i.e.
+ls -type mesh &quot;:*&quot; which lists those meshes defined in the root namespace only). Note that you can also use &quot;:*&quot; when relative name lookup mode is off to match the root if you want a consistent way to list the root.
+<br><br>
+Listing child namespace contents:<br>
+ls -type mesh &quot;*:*&quot;;<br>
+<br><br>
+For an example to list all meshes in immediate child namespaces, use &quot;*:*&quot;. In relative name lookup mode &quot;*:*&quot; lists those meshes in immediate child namespaces of the current namespaces. When not in relative name lookup mode, &quot;*:*&quot; lists meshes in namespaces one level below the root.
+<br><br>
+Recursive listing of namespace contents:<br>
+Example: ls -type mesh -recurse on &quot;*&quot;<br>
+<br><br>
+The 'recurse' flag is provided on the &quot;ls&quot; command to recursively traverse any child namespaces. In relative name lookup mode, the above example command will list all meshes in the current and any child namespaces of current. When not in relative name lookup mode, the above example command works from the root downwards and is thus equivalent to &quot;ls -type mesh&quot;.
+</ul>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Command result</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="namespaceInfo.html">namespaceInfo</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagabsoluteName">absoluteName</a>, <a href="#flagaddNamespace">addNamespace</a>, <a href="#flagcollapseAncestors">collapseAncestors</a>, <a href="#flagdeleteNamespaceContent">deleteNamespaceContent</a>, <a href="#flagexists">exists</a>, <a href="#flagforce">force</a>, <a href="#flagisRootNamespace">isRootNamespace</a>, <a href="#flagmergeNamespaceWithOther">mergeNamespaceWithOther</a>, <a href="#flagmergeNamespaceWithParent">mergeNamespaceWithParent</a>, <a href="#flagmergeNamespaceWithRoot">mergeNamespaceWithRoot</a>, <a href="#flagmoveNamespace">moveNamespace</a>, <a href="#flagparent">parent</a>, <a href="#flagrecurse">recurse</a>, <a href="#flagrelativeNames">relativeNames</a>, <a href="#flagremoveNamespace">removeNamespace</a>, <a href="#flagrename">rename</a>, <a href="#flagsetNamespace">setNamespace</a>, <a href="#flagvalidateName">validateName</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagabsoluteName">
+          <code><b>-absoluteName</b>(<b>-an</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a general flag which can be used to specify the desired format for
+the namespace(s) returned by the command.
+The absolute name of the namespace is a full namespace path, starting from the root namespace &quot;:&quot;
+and including all parent namespaces.  For example &quot;:ns:ball&quot; is an absolute namespace
+name while &quot;ns:ball&quot; is not.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddNamespace">
+          <code><b>-addNamespace</b>(<b>-add</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create a new namespace with the given name. Both qualified names (&quot;A:B&quot;) and unqualified names (&quot;A&quot;) are acceptable. If any of the higher-level namespaces in a qualified name do not yet exist, they will be created.
+If the supplied name contains invalid characters it will first be modified as per the validateName flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcollapseAncestors">
+          <code><b>-collapseAncestors</b>(<b>-ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Delete all empty ancestors of the given namespace.
+An empty namespace is a a namespace that does not contain any objects
+or other nested namespaces
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeleteNamespaceContent">
+          <code><b>-deleteNamespaceContent</b>(<b>-dnc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the 'rm/removeNamespace' flag to indicate that when removing a namespace
+the contents of the namespace will also be removed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>-exists</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if the specified namespace exists, false if not.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforce">
+          <code><b>-force</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with 'mv/moveNamespace' to force the move operation to ignore
+name clashes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisRootNamespace">
+          <code><b>-isRootNamespace</b>(<b>-ir</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if the specified namespace is root, false if not.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmergeNamespaceWithOther">
+          <code><b>-mergeNamespaceWithOther</b>(<b>-mno</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the 'rm/removeNamespace' flag.
+When removing a namespace, move the rest of the namespace
+content to the specified namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmergeNamespaceWithParent">
+          <code><b>-mergeNamespaceWithParent</b>(<b>-mnp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the 'rm/removeNamespace' flag.
+When removing a namespace, move the rest of the namespace
+content to the parent namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmergeNamespaceWithRoot">
+          <code><b>-mergeNamespaceWithRoot</b>(<b>-mnr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the 'rm/removeNamespace' flag.
+When removing a namespace, move the rest of the namespace
+content to the root namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmoveNamespace">
+          <code><b>-moveNamespace</b>(<b>-mv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Move the contents of the first namespace into the second namespace.
+Child namespaces will also be moved.
+<br><br>
+Attempting to move a namespace containing referenced nodes will
+result in an error; use the 'file' command ('file -edit -namespace')
+to change a reference namespace.
+<br><br>
+If there are objects in the source namespace with the same name as
+objects in the destination namespace, an error will be issued. Use
+the 'force' flag to override this error - name clashes will be
+resolved by renaming the objects to ensure uniqueness.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparent">
+          <code><b>-parent</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the 'addNamespace' or 'rename' flags to specifiy
+the parent of the new namespace. The full namespace parent path is required.
+When using 'addNamespace' with an absolute name, the 'parent' will be ignored
+and the command will display a warning
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrecurse">
+          <code><b>-recurse</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Can be used with the 'exists' flag to recursively look for the
+specified namespace
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelativeNames">
+          <code><b>-relativeNames</b>(<b>-rel</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turns on relative name lookup, which causes name lookups within Maya
+to be relative to the current namespace. By default this is off, meaning
+that name lookups are always relative to the root namespace. Be careful
+turning this feature on since commands such as setAttr will behave
+differently. It is wise to only turn this feature on while executing
+custom procedures that you have written to be namespace independent and
+turning relativeNames off when returning control from your custom procedures.
+Note that Maya will turn on relative naming during file I/O. Although it
+is not recommended to leave relativeNames turned on, if you try to toggle
+the value during file I/O you may notice that the value stays &quot;on&quot; because
+Maya has already temporarily enabled it internally.
+<br><br>
+When relativeNames are enabled, the returns provided by the 'ls' command
+will be relative to the current namespace. See the main description of this
+command for more details.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveNamespace">
+          <code><b>-removeNamespace</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Deletes the given namespace.  The namespace
+must be empty for it to be deleted.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrename">
+          <code><b>-rename</b>(<b>-ren</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Rename the first namespace to second namespace name. Child namespaces will
+also be renamed. Both names are relative to the current namespace. Use the
+'parent' flag to specify a parent namespace for the renamed namespace.
+An error is issued if the second namespace name already exists.
+If the supplied name contains invalid characters it will first be modified
+as per the validateName flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsetNamespace">
+          <code><b>-setNamespace</b>(<b>-set</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the current namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalidateName">
+          <code><b>-validateName</b>(<b>-vn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Convert the specified name to a valid name to make it contain no illegal characters.
+The leading illegal characters will be removed and other illegal characters will be converted to '_'.
+Specially, the leading numeric characters and trailing space characters will be also removed.
+
+Full name path can be validated as well. However, if the namespace of the path does not exist, command will only
+return the base name. For example, &quot;:nonExistentNS:name&quot; will be converted to &quot;name&quot;.
+
+If the entire name consists solely of illegal characters, e.g. &quot;123&quot; which contains only leading digits, then the returned string will be empty.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+  // Create three namespaces
+  namespace -add &quot;FOO&quot;;
+  namespace -add &quot;BAR&quot;;
+  namespace -add &quot;FRED&quot;;
+
+  // Create namespace with qualified name
+  namespace -add &quot;A:B&quot;;
+
+  // Create &quot;C:D&quot; under &quot;A:B&quot;
+  namespace -add &quot;C:D&quot; -parent &quot;A:B&quot;;
+
+  // Create absolute name
+  namespace -add &quot;:A:B:C:D:E&quot;;
+
+  // Set the current namespace to FOO
+  namespace -set &quot;FOO&quot;;
+
+  // Create the namespace BAR Under FOO. Note there are
+  // two &quot;BAR&quot; namespaces, :BAR and :FOO:BAR.
+  namespace -add &quot;BAR&quot;;
+
+  // Validate the name
+  namespace -validateName &quot;name$space&quot;;
+  // Result : name_space
+
+  // Check to see that the BAR namespace exists within the current
+  // namespace (FOO)
+  namespace -exists &quot;BAR&quot;;
+  // Result: 1 //
+
+  // Check to see that the FRED namespace exists under the root namespace
+  namespace -exists &quot;:FRED&quot;;
+  // Result: 1 //
+
+  // Create two objects. It gets added to the current namespace FOO;
+  sphere -n sphere1;
+  sphere -n sphere2;
+  // Result: FOO:sphere2 //
+
+  // Move sphere1 from namespace FOO to FOO:BAR. Note that we
+  // need to qualify sphere1 with the namespace FOO because
+  // &quot;sphere1&quot; identifies a non-existent object in the root namespace.
+  rename FOO:sphere1 &quot;BAR:sphere1&quot;;
+  // Result: FOO:BAR:sphere1 //
+
+  // Move sphere2 from namespace FOO to BAR.  Note the leading
+  // colon on the new name.
+  rename FOO:sphere2 :BAR:sphere2;
+  // Result: BAR:sphere2 //
+
+  // query the current namespace (using the namespaceInfo command)
+  namespaceInfo -currentNamespace;
+  // Result: FOO //
+
+  // remove the namespace FRED (it must be empty)
+  namespace -set &quot;:&quot;;
+  namespace -rm &quot;FRED&quot;;
+
+  // Check to see that the FRED namespace has been removed
+  namespace -exists &quot;:FRED&quot;;
+  // Result: 0 //
+
+  // Rename namespace BAR to JOE
+  // Note: this is done by creating JOE, moving the contents of
+  // BAR into JOE, and then removing the (now empty) BAR.
+  namespace -set &quot;:&quot;;
+  namespace -add &quot;JOE&quot;;
+  namespace -mv &quot;BAR&quot; &quot;JOE&quot;;
+  namespace -rm &quot;BAR&quot;;
+
+  // JOE should now contain a single node: 'sphere2'.
+  // Move the contents of JOE into FRANK, when FRANK already
+  // has a 'sphere2' node. The '-force'
+  // flag is needed.
+  namespace -set &quot;:&quot;;
+  namespace -add &quot;FRANK&quot;;
+  namespace -set &quot;FRANK&quot;;
+  sphere -n &quot;sphere2&quot;;
+  namespace -force -mv &quot;:JOE&quot; &quot;:FRANK&quot;;
+  // In moving 'sphere2' from JOE to FRANK it will be renamed to
+  // 'sphere3' to ensure uniqueness.
+  // The namespace FRANK should now contain 'sphere2', 'sphere2Shape',
+  // and 'sphere3'.
+
+  // Determine whether the specified namespace is root
+  //
+  namespace -query -isRootNamespace &quot;FOO&quot;;
+
+  //Set return value to be absolute namespace name
+  //
+  string $retName = `namespace -add &quot;testAbsoluteName&quot; -absoluteName`;
+  print $retName;
+
+  //Create a sample hierachy that contains only empty namespaces, then collapse it
+  //
+  namespace -set &quot;:&quot;;
+  namespace -add &quot;emptyLevel1&quot;;
+  namespace -add &quot;emptyLevel2&quot; -parent &quot;emptyLevel1&quot;;
+  namespace -add &quot;leaf&quot; -parent &quot;emptyLevel1:emptyLevel2&quot;;
+  namespace -collapseAncestors &quot;emptyLevel1:emptyLevel2:leaf&quot;;
+
+  // Create a sample for &quot;namespace -remove&quot; command.
+  // This command can also be used together with these option flags:
+  // -deleteNamespaceContent
+  // -mergeNamespaceWithParent
+  // -mergeNamespaceWithRoot
+  // -mergeNamespaceWithOther
+  //
+  // The functionality of the option flags will also be displayed in the
+  // following sample.
+  // Note: The three option flags are mutually exclusive.
+  //       The default way the &quot;namespace -remove&quot; acts is that it is used to
+  //       remove a namespace that is empty. If you want to remove any namespace
+  //       with contents, please add option flag -deleteNamespaceContent.
+  //
+
+  namespace -set &quot;:&quot;;
+  namespace -add &quot;:RM_TEST_ROOT:FOO:BAR:JOE&quot;;
+  sphere -n &quot;:RM_TEST_ROOT:FOO:obj1&quot;;
+  sphere -n &quot;:RM_TEST_ROOT:FOO:BAR:obj2&quot;;
+
+  // Trying to remove a namespace that is not empty without option flag,
+  // user will get an error message show that maya cannot remove a namespace that
+  // is not empty.
+  //
+  // namespace -removeNamespace &quot;:RM_TEST_ROOT:FOO&quot;; // Run this command you'll get an error.
+
+  // Trying to remove an empty namespace.
+  // Namespace :RM_TEST_ROOT:FOO:BAR:JOE has been removed successfully by the command.
+  //
+  namespace -removeNamespace &quot;:RM_TEST_ROOT:FOO:BAR:JOE&quot;;
+
+  undo; // Recover namespace structure.
+
+  // Usage of -deleteNamespaceContent flag:
+  // Remove all the contents in the target namespace specified in the command and
+  // remove the namespace
+  namespace -deleteNamespaceContent -removeNamespace &quot;:RM_TEST_ROOT:FOO:BAR&quot;;
+
+  undo; // Recover namespace structure.
+
+  // Usage of -mergeNamespaceWithParent flag:
+  // Move the content of the target namespace specified in the command to its parent
+  // namespace and remove the namespace.
+  namespace -mergeNamespaceWithParent -removeNamespace &quot;:RM_TEST_ROOT:FOO:BAR&quot;;
+
+  undo; // Recover namespace structure.
+
+  // Usage of -mergeNamespaceWithRoot flag:
+  // Move the content of the target namespace specified in the command to the root
+  // namespace and remove the namespace.
+  namespace -mergeNamespaceWithRoot -removeNamespace &quot;:RM_TEST_ROOT:FOO:BAR&quot;;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

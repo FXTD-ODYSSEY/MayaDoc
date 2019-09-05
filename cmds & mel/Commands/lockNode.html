@@ -1,0 +1,257 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>lockNode command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-lockNode"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/lockNode.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>lockNode </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("lockNode.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>lockNode [-<a href="#flagignoreComponents">ignoreComponents</a>] [-<a href="#flaglock">lock</a> <i>boolean</i>] [-<a href="#flaglockName">lockName</a> <i>boolean</i>] [-<a href="#flaglockUnpublished">lockUnpublished</a> <i>boolean</i>]  </code> </p>
+      <p>lockNode is undoable, queryable, and <b>NOT editable</b>.</p>
+      <p>
+Locks or unlocks one or more dependency nodes. A locked node is restricted
+in the following ways:
+
+<ul>
+<li>It may not be deleted.</li>
+<li>It may not be renamed.</li>
+<li>Its parenting may not be changed.</li>
+<li>Attributes may not be added to or removed from it.</li>
+<li>Locked attributes may not be unlocked.</li>
+<li>Unlocked attributes may not be locked.</li>
+</ul>
+<p>
+Note that an unlocked attribute of a locked node may still have its value
+set, or connections to it made or broken. For more information on attribute
+locking, see the <b>setAttr</b> command.
+
+<p>
+If no node names are specified then the current selection list is used.
+
+<p>
+There are a few special behaviors when locking containers. Containers are
+automatically expanded to their constituent objects. When a container is
+locked, members of the container may not be unlocked and the container
+membership may not be modified. Containers may also be set to lock unpublished
+attributes. When in this state, unpublished member attributes may not have
+existing connections broken, new connections cannot be made, and values on unconnected
+attributes may not be modified. Parenting is allowed to change on members of locked
+containers that have been published as parent or child anchors.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean[]</i></td><td>For query execution.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>node, dependency, graph, lock
+      <h2><a name="hRelated">Related</a></h2><a href="delete.html">delete</a>, <a href="group.html">group</a>, <a href="instance.html">instance</a>, <a href="parent.html">parent</a>, <a href="rename.html">rename</a>, <a href="setAttr.html">setAttr</a>, <a href="ungroup.html">ungroup</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagignoreComponents">ignoreComponents</a>, <a href="#flaglock">lock</a>, <a href="#flaglockName">lockName</a>, <a href="#flaglockUnpublished">lockUnpublished</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreComponents">
+          <code><b>-ignoreComponents</b>(<b>-ic</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Normally, the presence of a component in the list of objects to be locked
+will cause the command to fail with an error. But if this flag is supplied
+then components will be silently ignored.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglock">
+          <code><b>-lock</b>(<b>-l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the new lock state for the node. The default is true.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglockName">
+          <code><b>-lockName</b>(<b>-ln</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the new lock state for the node's name.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglockUnpublished">
+          <code><b>-lockUnpublished</b>(<b>-lu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in conjunction with the lock flag. On a container, lock or unlock all
+unpublished attributes on the members of the container. For non-containers,
+lock or unlock unpublished attributes on the specified node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// create a sphere, lock it, then try to delete it.
+sphere -n sphere1;
+lockNode sphere1;
+delete sphere1;
+// Error: Cannot delete locked nodes.
+
+// Unlock the sphere, then it can be deleted.
+lockNode -lock off sphere1;
+delete sphere1;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

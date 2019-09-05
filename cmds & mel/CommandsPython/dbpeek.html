@@ -1,0 +1,351 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>dbpeek command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-dbpeek"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/dbpeek.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>dbpeek </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Utilities" target="contentFrame">Utilities</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("dbpeek.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>dbpeek([<a href="#flagallObjects">allObjects</a>=<i>boolean</i>], [<a href="#flagargument">argument</a>=<i>string</i>], [<a href="#flagcount">count</a>=<i>uint</i>], [<a href="#flagevaluationGraph">evaluationGraph</a>=<i>boolean</i>], [<a href="#flagoperation">operation</a>=<i>string</i>], [<a href="#flagoutputFile">outputFile</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>dbpeek is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      The <b>dbpeek</b> command is used to analyze the Maya data for
+information of interest. See a description of the flags for details
+on what types of things can be analyzed.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>Query of operation yields a string array with available operations</td></tr><tr><td valign="top"><i>string[]</i></td><td>Query of argument yields a string array with available argument definitions on the specified operation</td></tr><tr><td valign="top"><i>string</i></td><td>Query of specific operation without an output file returns a string with help information for that operation</td></tr><tr><td valign="top"><i>int</i></td><td>Query of specific operation with an output file dumps the help information for that operation to that file and returns the number of errors encountered</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>debug, node, attribute
+      <h2><a name="hRelated">Related</a></h2><a href="dbcount.html">dbcount</a>, <a href="dgInfo.html">dgInfo</a>, <a href="dgdirty.html">dgdirty</a>, <a href="dgeval.html">dgeval</a>, <a href="dgmodified.html">dgmodified</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallObjects">allObjects</a>, <a href="#flagargument">argument</a>, <a href="#flagcount">count</a>, <a href="#flagevaluationGraph">evaluationGraph</a>, <a href="#flagoperation">operation</a>, <a href="#flagoutputFile">outputFile</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallObjects">
+          <code><b>allObjects</b>(<b>all</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Ignore any specified or selected objects and peek into all applicable
+objects. The definition of &quot;allObjects&quot; will vary based on the peek
+operation being performed - see the flag documentation for details on
+what it means for a given operation.
+By default if no objects are selected or specified then it will behave
+as though this flag were set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagargument">
+          <code><b>argument</b>(<b>a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify one or more arguments to be passed to the operation. The acceptable
+values for the argument string are documented in the flag to which they will be
+applied. If the argument itself takes a value then the value will be of the
+form &quot;argname=argvalue&quot;.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcount">
+          <code><b>count</b>(<b>c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify a count to be used by the test. Different tests make different use of
+the count, query the operation to find out how it interprets the value.
+For example a performance test might use it as the number of iterations to run
+in the test, an output operation might use it to limit the amount of output it
+produces.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagevaluationGraph">
+          <code><b>evaluationGraph</b>(<b>eg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Ignore any nodes that are not explicitly part of the evaluation graph.
+Usually this means nodes that are affected either directly or indirectly
+by animation. May also tailor the operation to be EM-specific in the
+areas where the structure of the DG differs from the structure of the
+EM, for example, plug configurations.
+This is a filter on the currently selected nodes, including the use of
+the &quot;allObjects&quot; flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoperation">
+          <code><b>operation</b>(<b>op</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the peeking operation to perform. The various operations are registered at
+run time and can be listed by querying this flag without a value. If you
+query it with a value then you get the detail values that peek operation accepts and
+a description of what it does.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoutputFile">
+          <code><b>outputFile</b>(<b>of</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the location of a file to which the information is to be
+dumped. Default will return the value from the command.  Use the
+special names <i>stdout</i> and <i>stderr</i> to redirect to your
+command window.
+The special name <i>msdev</i> is available when debugging on Windows
+to direct your output to the debug tab in the output window of Visual
+Studio.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+import maya.cmds as cmds
+// Find the available peek operations
+cmds.dbpeek( op=True, query=True )
+# Return: ['metadata', 'nodes', 'references', 'plugIterator'] #
+
+// Describe the detail of a single available operation
+cmds.dbpeek( query=True, op='nodes' )
+# Return: '
+Peek operation 'nodes':
+    Normal display  will  show a count of nodes in the scene of each type.
+Recognized 'argument' values:
+    attributes
+        Includes the attribute  count for each node as well, segregated by static, extension, and dynamic types.
+    visible
+        Filter the display  list to ignore any hidden or internal nodes. Default is to show all nodes.
+'#
+
+# Describe the detail of a single available operation
+cmds.dbpeek( query=True, op='plugIterator' )
+# Return: '
+Peek operation 'plugIterator':
+    This tests the performance of the class by iterating over all of the
+    networked plugs in a plug tree.
+    Suggested iteration count minimum is 1000000 for which the test machine
+    measured a time of 19.234s.
+This operation does not take any arguments.
+'#
+
+cmds.dbpeek( op='plugIterator', count=10000 )
+# Return: 'Run 10,000 loops of plug iteration over a tree of size 51, depth 4
+Total time:   17.0s
+Maximum time: 0.81s
+Minimum time: 0.23s
+Average time: 0.30s
+'#
+# Run a performance test for 1000000 loops and store the results
+cmds.dbpeek( op='plugIterator', count=1000000, outputFile='MyFile.txt' )
+# Return: 0 #
+
+
+cmds.loadPlugin( 'MetadataSample' )
+cmds.polyPlane( name='planeLuck' )
+cmds.dataStructure( asString='name=TestStructure:int32=ID )
+cmds.importMetadata( asString='channel face\n stream\n TestStream\n TestStructure\n 0\n 99\n 1\n 999\n 2\n 9999\n endStream\n endChannel\n endAssociations&quot; &quot;planeLuckShape' )
+
+# Peek at the newly created metadata
+#
+cmds.dbpeek( op='metadata', argument='summary' )
+# Return: 'Node planeLuckShape : face( TestStream[3] )' #
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

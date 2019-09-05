@@ -1,0 +1,511 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>optionVar command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-optionVar"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/optionVar.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>optionVar </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("optionVar.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>optionVar [-<a href="#flagarraySize">arraySize</a> <i>string</i>] [-<a href="#flagclearArray">clearArray</a> <i>string</i>] [-<a href="#flagexists">exists</a> <i>string</i>] [-<a href="#flagfloatValue">floatValue</a> <i>string float</i>] [-<a href="#flagfloatValueAppend">floatValueAppend</a> <i>string float</i>] [-<a href="#flagintValue">intValue</a> <i>string int</i>] [-<a href="#flagintValueAppend">intValueAppend</a> <i>string int</i>] [-<a href="#flaglist">list</a>] [-<a href="#flagremove">remove</a> <i>string</i>] [-<a href="#flagremoveFromArray">removeFromArray</a> <i>string int</i>] [-<a href="#flagstringValue">stringValue</a> <i>string string</i>] [-<a href="#flagstringValueAppend">stringValueAppend</a> <i>string string</i>] [-<a href="#flagversion">version</a> <i>int</i>]  </code> </p>
+      <p>optionVar is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command allows you to set and query variables which are
+persistent between different invocations of Maya.  These variables
+are stored as part of the preferences.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>0 or 1 for the <i>exists</i> option</td></tr><tr><td valign="top"><i>string[]</i></td><td>When the <i>list</i> option is used</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagarraySize">arraySize</a>, <a href="#flagclearArray">clearArray</a>, <a href="#flagexists">exists</a>, <a href="#flagfloatValue">floatValue</a>, <a href="#flagfloatValueAppend">floatValueAppend</a>, <a href="#flagintValue">intValue</a>, <a href="#flagintValueAppend">intValueAppend</a>, <a href="#flaglist">list</a>, <a href="#flagremove">remove</a>, <a href="#flagremoveFromArray">removeFromArray</a>, <a href="#flagstringValue">stringValue</a>, <a href="#flagstringValueAppend">stringValueAppend</a>, <a href="#flagversion">version</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagarraySize">
+          <code><b>-arraySize</b>(<b>-as</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns the size of the array named &quot;string&quot;.  If no such
+variable exists, it returns 0.  If the variable is not an
+array, it returns 1.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclearArray">
+          <code><b>-clearArray</b>(<b>-ca</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If there is an array named &quot;string&quot;, it is set to be empty.
+Empty arrays are not saved.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>-exists</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+returns 1 if a variable named &quot;string&quot; exists, 0 otherwise.
+All other flags will be ignored if this is used. (Query has
+higher precedence)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfloatValue">
+          <code><b>-floatValue</b>(<b>-fv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+creates a new variable named &quot;string&quot; with double value &quot;float&quot;.
+If a variable already exists with this name, it is overridden
+in favour of the new value (even if the type is different)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfloatValueAppend">
+          <code><b>-floatValueAppend</b>(<b>-fva</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+adds this value to the end of the array of floats named &quot;string&quot;.
+If no such array exists, one is created.  If there was a float
+value with this name before, it becomes the first element of the
+array.  If any other kind of value existed, it is overridden.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagintValue">
+          <code><b>-intValue</b>(<b>-iv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+creates a new variable named &quot;string&quot; with integer value &quot;int&quot;.
+If a variable already exists with this name, it is overridden
+in favour of the new value (even if the type is different).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagintValueAppend">
+          <code><b>-intValueAppend</b>(<b>-iva</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+adds this value to the end of the array of ints named &quot;string&quot;.
+If no such array exists, one is created.  If there was an int
+value with this name before, it becomes the first element of the
+array.  If any other kind of value existed, it is overridden.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglist">
+          <code><b>-list</b>(<b>-l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+this returns a list of all the defined variable names.  All other
+flags will be ignored if this one is used. (Query and exists flags
+have a higher precedence).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>-remove</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+removes the variable named &quot;string&quot;, if one exists.<br>
+Note: all removals are done before any value
+setting, if both the -r and other (-sv, -iv, -fv) flags are
+used in the same command.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveFromArray">
+          <code><b>-removeFromArray</b>(<b>-rfa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+removes the element numbered &quot;int&quot; in the array named &quot;string&quot;.
+Everything beyond it then gets shuffled down.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstringValue">
+          <code><b>-stringValue</b>(<b>-sv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+creates a new variable named using the first string with value given
+by the second string.
+If a variable already exists with this name, it is overridden
+in favour of the new value (even if the type is different)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstringValueAppend">
+          <code><b>-stringValueAppend</b>(<b>-sva</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+adds the value given by the second string to the end of the array of
+strings named by the first string.
+If no such array exists, one is created. If there was a string
+value with this name before, it becomes the first element of the
+array. If any other kind of value existed, it is overridden.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagversion">
+          <code><b>-version</b>(<b>-v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Preferences version number to warn about incompatbile preference
+files
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+optionVar -iv &quot;defaultTriangles&quot; 4 -sv &quot;defaultFileName&quot; &quot;buffalo.maya&quot;;
+optionVar -exists &quot;defaultTriangles&quot;;
+// Result: 1 //
+optionVar -q &quot;defaultFileName&quot;;
+// Result: buffalo.maya //
+optionVar -list;
+optionVar -remove defaultTriangles;
+optionVar -exists &quot;defaultTriangles&quot;;
+// Result: 0 //
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

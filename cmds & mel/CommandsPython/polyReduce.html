@@ -1,0 +1,1641 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyReduce command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-polyReduce"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/polyReduce.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyReduce </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyReduce.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyReduce([<a href="#flagcaching">caching</a>=<i>boolean</i>], [<a href="#flagcachingReduce">cachingReduce</a>=<i>boolean</i>], [<a href="#flagcolorWeights">colorWeights</a>=<i>float</i>], [<a href="#flagcompactness">compactness</a>=<i>float</i>], [<a href="#flagconstructionHistory">constructionHistory</a>=<i>boolean</i>], [<a href="#flaggeomWeights">geomWeights</a>=<i>float</i>], [<a href="#flaginvertVertexWeights">invertVertexWeights</a>=<i>boolean</i>], [<a href="#flagkeepBorder">keepBorder</a>=<i>boolean</i>], [<a href="#flagkeepBorderWeight">keepBorderWeight</a>=<i>float</i>], [<a href="#flagkeepColorBorder">keepColorBorder</a>=<i>boolean</i>], [<a href="#flagkeepColorBorderWeight">keepColorBorderWeight</a>=<i>float</i>], [<a href="#flagkeepCreaseEdge">keepCreaseEdge</a>=<i>boolean</i>], [<a href="#flagkeepCreaseEdgeWeight">keepCreaseEdgeWeight</a>=<i>float</i>], [<a href="#flagkeepFaceGroupBorder">keepFaceGroupBorder</a>=<i>boolean</i>], [<a href="#flagkeepFaceGroupBorderWeight">keepFaceGroupBorderWeight</a>=<i>float</i>], [<a href="#flagkeepHardEdge">keepHardEdge</a>=<i>boolean</i>], [<a href="#flagkeepHardEdgeWeight">keepHardEdgeWeight</a>=<i>float</i>], [<a href="#flagkeepMapBorder">keepMapBorder</a>=<i>boolean</i>], [<a href="#flagkeepMapBorderWeight">keepMapBorderWeight</a>=<i>float</i>], [<a href="#flagkeepOriginalVertices">keepOriginalVertices</a>=<i>boolean</i>], [<a href="#flagkeepQuadsWeight">keepQuadsWeight</a>=<i>float</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagnodeState">nodeState</a>=<i>int</i>], [<a href="#flagpercentage">percentage</a>=<i>float</i>], [<a href="#flagpreserveLocation">preserveLocation</a>=<i>boolean</i>], [<a href="#flagpreserveTopology">preserveTopology</a>=<i>boolean</i>], [<a href="#flagreplaceOriginal">replaceOriginal</a>=<i>boolean</i>], [<a href="#flagsharpness">sharpness</a>=<i>float</i>], [<a href="#flagsymmetryPlaneW">symmetryPlaneW</a>=<i>float</i>], [<a href="#flagsymmetryPlaneX">symmetryPlaneX</a>=<i>float</i>], [<a href="#flagsymmetryPlaneY">symmetryPlaneY</a>=<i>float</i>], [<a href="#flagsymmetryPlaneZ">symmetryPlaneZ</a>=<i>float</i>], [<a href="#flagsymmetryTolerance">symmetryTolerance</a>=<i>float</i>], [<a href="#flagtermination">termination</a>=<i>int</i>], [<a href="#flagtriangleCount">triangleCount</a>=<i>int</i>], [<a href="#flagtriangulate">triangulate</a>=<i>boolean</i>], [<a href="#flaguseVirtualSymmetry">useVirtualSymmetry</a>=<i>int</i>], [<a href="#flaguvWeights">uvWeights</a>=<i>float</i>], [<a href="#flagversion">version</a>=<i>int</i>], [<a href="#flagvertexCount">vertexCount</a>=<i>int</i>], [<a href="#flagvertexMapName">vertexMapName</a>=<i>string</i>], [<a href="#flagvertexWeightCoefficient">vertexWeightCoefficient</a>=<i>float</i>], [<a href="#flagweightCoefficient">weightCoefficient</a>=<i>float</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>polyReduce is undoable, queryable, and editable.</p>
+      Simplify a polygonal object by reducing geometry while preserving the
+overall shape of the mesh.
+<p>
+The algorithm for polyReduce was changed in 2014 to use a new algorithm derived
+from Softimage. However, the command still defaults to using the old algorithm
+for backwards compatibility.  Therefore, we recommend setting the version flag
+to 1 for best results as the new algorithm is better at preserving geometry
+features.  Additionally, some flags only apply to a specific algorithm and
+this is documented for each flag.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The node name.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="polyCloseBorder.html">polyCloseBorder</a>, <a href="polyCollapseEdge.html">polyCollapseEdge</a>, <a href="polyCollapseFacet.html">polyCollapseFacet</a>, <a href="polyDelEdge.html">polyDelEdge</a>, <a href="polyDelFacet.html">polyDelFacet</a>, <a href="polyDelVertex.html">polyDelVertex</a>, <a href="polyMergeEdge.html">polyMergeEdge</a>, <a href="polyMergeFacet.html">polyMergeFacet</a>, <a href="polyMergeVertex.html">polyMergeVertex</a>, <a href="polyQuad.html">polyQuad</a>, <a href="polySewEdge.html">polySewEdge</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcaching">caching</a>, <a href="#flagcachingReduce">cachingReduce</a>, <a href="#flagcolorWeights">colorWeights</a>, <a href="#flagcompactness">compactness</a>, <a href="#flagconstructionHistory">constructionHistory</a>, <a href="#flaggeomWeights">geomWeights</a>, <a href="#flaginvertVertexWeights">invertVertexWeights</a>, <a href="#flagkeepBorder">keepBorder</a>, <a href="#flagkeepBorderWeight">keepBorderWeight</a>, <a href="#flagkeepColorBorder">keepColorBorder</a>, <a href="#flagkeepColorBorderWeight">keepColorBorderWeight</a>, <a href="#flagkeepCreaseEdge">keepCreaseEdge</a>, <a href="#flagkeepCreaseEdgeWeight">keepCreaseEdgeWeight</a>, <a href="#flagkeepFaceGroupBorder">keepFaceGroupBorder</a>, <a href="#flagkeepFaceGroupBorderWeight">keepFaceGroupBorderWeight</a>, <a href="#flagkeepHardEdge">keepHardEdge</a>, <a href="#flagkeepHardEdgeWeight">keepHardEdgeWeight</a>, <a href="#flagkeepMapBorder">keepMapBorder</a>, <a href="#flagkeepMapBorderWeight">keepMapBorderWeight</a>, <a href="#flagkeepOriginalVertices">keepOriginalVertices</a>, <a href="#flagkeepQuadsWeight">keepQuadsWeight</a>, <a href="#flagname">name</a>, <a href="#flagnodeState">nodeState</a>, <a href="#flagpercentage">percentage</a>, <a href="#flagpreserveLocation">preserveLocation</a>, <a href="#flagpreserveTopology">preserveTopology</a>, <a href="#flagreplaceOriginal">replaceOriginal</a>, <a href="#flagsharpness">sharpness</a>, <a href="#flagsymmetryPlaneW">symmetryPlaneW</a>, <a href="#flagsymmetryPlaneX">symmetryPlaneX</a>, <a href="#flagsymmetryPlaneY">symmetryPlaneY</a>, <a href="#flagsymmetryPlaneZ">symmetryPlaneZ</a>, <a href="#flagsymmetryTolerance">symmetryTolerance</a>, <a href="#flagtermination">termination</a>, <a href="#flagtriangleCount">triangleCount</a>, <a href="#flagtriangulate">triangulate</a>, <a href="#flaguseVirtualSymmetry">useVirtualSymmetry</a>, <a href="#flaguvWeights">uvWeights</a>, <a href="#flagversion">version</a>, <a href="#flagvertexCount">vertexCount</a>, <a href="#flagvertexMapName">vertexMapName</a>, <a href="#flagvertexWeightCoefficient">vertexWeightCoefficient</a>, <a href="#flagweightCoefficient">weightCoefficient</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Common poly modifier operation flags</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcaching">
+          <code><b>caching</b>(<b>cch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Toggle caching for all attributes so that no recomputation is needed
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcachingReduce">
+          <code><b>cachingReduce</b>(<b>cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Cache intermediate reductions for speed at the expense of memory.
+It is recommended that caching be enabled when using the new
+algorithm. (-version 1)  However, caching is not recommended
+when using then old algorithm because it can cause stability
+issues.
+<br>C: Default is false.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolorWeights">
+          <code><b>colorWeights</b>(<b>cwt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag only applies when using the old algorithm and
+is provided for backwards compatibility.
+How much consideration vertex color is given in the reduction
+algorithm. A higher weight means the reduction will try
+harder to preserve vertex coloring.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcompactness">
+          <code><b>compactness</b>(<b>com</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag only applies when using the old algorithm and
+is provided for backwards compatibility.
+Tolerance for compactness for the generated triangles
+A value of 0 will accept all triangles during decimation
+A value close to 0 will attempt to eliminate triangles
+that have collinear edges (zero area triangles)
+A value closer to 1 will attempt to eliminate triangles
+that are not strictly equilateral (of equal lengths)
+The closer to 1.0, the more expensive the computation
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconstructionHistory">
+          <code><b>constructionHistory</b>(<b>ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn the construction history on or off (where applicable). If
+construction history is on then the corresponding node will be
+inserted into the history chain for the mesh. If construction history
+is off then the operation will be performed directly on the object.
+<br>
+<b>Note:</b> If the object already has construction history then
+this flag is ignored and the node will always be inserted into
+the history chain.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeomWeights">
+          <code><b>geomWeights</b>(<b>gwt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag only applies when using the old algorithm and
+is provided for backwards compatibility.
+How much consideration vertex positions are given in the
+reduction algorithm.  A higher weight means the reduction
+will try harder to preserve geometry.
+<br>C: Default is 1.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvertVertexWeights">
+          <code><b>invertVertexWeights</b>(<b>iwt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag controls how weight map values are interpreted.
+If true, a vertex weight of 1.0 means a vertex is unlikely to be reduced.
+If false, a vertex weight of 0.0 means a vertex is unlikely to be reduced.
+This flag only applies when using the new algorithm. (-version 1)
+<br>C: Default is true.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepBorder">
+          <code><b>keepBorder</b>(<b>kb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, reduction will try to retain geometric borders and
+the border of the selection.
+<br>C: Default is true.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepBorderWeight">
+          <code><b>keepBorderWeight</b>(<b>kbw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If keepBorder is on, this flag specifies the weight to assign
+to borders.  Setting this value to 0 will disable border preservation
+and a value of 1 will exactly preserve all border vertices which is
+useful for matching adjacent meshes.  This flag only applies
+when using the new algorithm. (-version 1)
+<br>C: Default is 0.5.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepColorBorder">
+          <code><b>keepColorBorder</b>(<b>kcb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, reduction will try to retain color borders.  These are
+determined according to color Ids.  This flag only applies
+when using the new algorithm. (-version 1)
+<br>C: Default is true.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepColorBorderWeight">
+          <code><b>keepColorBorderWeight</b>(<b>kcw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If keepColorBorder is on, this flag specifies the weight to
+assign to color borders.  Setting this value to 0 will disable
+color border preservation and a value of 1 will exactly preserve
+all color borders.  This flag only applies when using the new
+algorithm. (-version 1)
+<br>C: Default is 0.5.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepCreaseEdge">
+          <code><b>keepCreaseEdge</b>(<b>kce</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, reduction will try to retain crease edges.
+<br>C: Default is true.  This flag only applies
+when using the new algorithm. (-version 1)
+<br>C: Default is true.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepCreaseEdgeWeight">
+          <code><b>keepCreaseEdgeWeight</b>(<b>cew</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If keepCreaseEdge is on, this flag specifies the weight to assign
+to crease edges.  Setting this value to 0 will disable crease
+edge preservation and a value of 1 will exactly preserve all crease edges.
+This flag only applies when using the new algorithm. (-version 1)
+<br>C: Default is 0.5.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepFaceGroupBorder">
+          <code><b>keepFaceGroupBorder</b>(<b>kfb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, reduction will try to retain borders of face groups,
+which are mostly used to define material assignments.  This
+flag only applies when using the new algorithm. (-version 1)
+<br>C: Default is true.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepFaceGroupBorderWeight">
+          <code><b>keepFaceGroupBorderWeight</b>(<b>kfw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If keepFaceGroupBorder is on, this flag specifies the weight to
+assign to material borders.  Setting this value to 0 will disable
+group border preservation and a value of 1 will exactly preserve all
+group borders.  This flag only applies when using the new
+algorithm. (-version 1)
+<br>C: Default is 0.5.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepHardEdge">
+          <code><b>keepHardEdge</b>(<b>khe</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, reduction will try to retain hard edges.
+<br>C: Default is true.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepHardEdgeWeight">
+          <code><b>keepHardEdgeWeight</b>(<b>khw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If keepHardEdge is on, this flag specifies the weight to assign
+to hard edges.  Setting this value to 0 will disable hard
+edge preservation and a value of 1 will exactly preserve all hard edges.
+This flag only applies when using the new algorithm. (-version 1)
+<br>C: Default is 0.5.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepMapBorder">
+          <code><b>keepMapBorder</b>(<b>kmb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, reduction will try to retain UV borders.  A UV border
+is present if the faces on either side of the edge do not share
+UV Ids.
+<br>C: Default is true.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepMapBorderWeight">
+          <code><b>keepMapBorderWeight</b>(<b>kmw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If keepMapBorder is on, this flag specifies the weight to assign
+to UV map borders.  Setting this value to 0 will disable UV map
+border preservation and a value of 1 will exactly preserve all UV borders.
+This flag only applies when using the new algorithm. (-version 1)
+<br>C: Default is 0.5.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepOriginalVertices">
+          <code><b>keepOriginalVertices</b>(<b>kev</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag only applies when using the old algorithm and
+is provided for backwards compatibility.
+If true, vertices will try to retain their original positions
+and will not be repositioned for optimal shape.
+<br>NOTE: In the newer algorithm vertices always retain
+their exact original positions. (though the Ids will change)
+<br>C: Default is false.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepQuadsWeight">
+          <code><b>keepQuadsWeight</b>(<b>kqw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag controls how much consideration is given to
+oreserving quad faces during reduction.  A higher
+weight means the reduction will try harder to keep quad
+faces and avoid creation of triangles. If the version
+flag is set to 1 (-version 1) and the keepQuadsWeight
+flag is set to 1.0 then a special quad reduction algorithm
+is used that does a better job of preserving quads.
+Howver, this special quad reduction algorithm does
+not support symmetry so those flags will be ignored
+when the keepQuadsWeight flag is set to 1.0.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Give a name to the resulting node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeState">
+          <code><b>nodeState</b>(<b>nds</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+<p>
+Maya dependency nodes have 6 possible states.
+The <b>Normal (0)</b>, <b>HasNoEffect (1)</b>, and <b>Blocking (2)</b> states can be
+used to alter how the graph is evaluated.
+
+
+<p>
+The <b>Waiting-Normal (3)</b>, <b>Waiting-HasNoEffect (4)</b>, <b>Waiting-Blocking (5)</b>
+are for internal use only. They temporarily shut off parts of the graph during interaction
+(e.g., manipulation). The understanding is that once the operation is done,
+the state will be reset appropriately, e.g. <b>Waiting-Blocking</b> will reset
+back to <b>Blocking</b>.
+
+
+<p>
+The <b>Normal</b> and <b>Blocking</b> cases apply to all nodes, while
+<b>HasNoEffect</b> is node specific; many nodes do not support this option.
+Plug-ins store state in the <i>MPxNode::state</i> attribute. Anyone can set
+it or check this attribute.  Additional details about each of these 3 states follow.
+
+<p> 
+
+<table border="1">
+<tr>
+<th>State</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>Normal</b></td>
+<td>The normal node state. This is the default.</td>
+</tr>
+<tr>
+<td><b>HasNoEffect</b></td>
+<td>
+<p>
+The <b>HasNoEffect</b> option (a.k.a. pass-through), is used in cases where
+there is an operation on an input producing an output of the same data type.
+Nearly all deformers support this state, as do a few other nodes.
+As stated earlier, it is not supported by all nodes.
+
+<p>
+It’s typical to implement support for the <b>HasNoEffect</b> state in
+the node’s compute method and to perform appropriate operations.
+Plug-ins can also support <b>HasNoEffect</b>.
+
+<p>
+The usual implementation of this state is to copy the input directly to the
+matching output without applying the algorithm in the node. For deformers,
+applying this state leaves the input geometry undeformed on the output.
+
+</td>
+</tr>
+<tr>
+<td><b>Blocking</b></td>
+<td>
+<p>
+This is implemented in the depend node base class and applies to all nodes.
+<b>Blocking</b> is applied during the evaluation phase to connections.
+An evaluation request to a blocked connection will return as failures,
+causing the destination plug to retain its current value. Dirty propagation
+is indirectly affected by this state since blocked connections are never cleaned.
+
+<p>
+When a node is set to <b>Blocking</b> the behavior is supposed to be the same as
+if all outgoing connections were broken. As long as nobody requests evaluation
+of the blocked node directly it won’t evaluate after that. Note that a blocked
+node will still respond to <i>getAttr</i> requests but a <i>getAttr</i> on a
+downstream node will not reevaluate the blocked node.
+
+<p>
+Setting the root transform of a hierarchy to <b>Blocking</b> won’t automatically
+influence child transforms in the hierarchy. To do this, you’d need to
+explicitly set all child nodes to the <b>Blocking</b> state.
+
+<p>
+For example, to set all child transforms to <b>Blocking</b>, you could use the
+following script.
+
+<pre>
+
+import maya.cmds as cmds
+def blockTree(root):
+nodesToBlock = []
+for node in {child:1 for child in cmds.listRelatives( root, path=True, allDescendents=True )}.keys():
+nodesToBlock += cmds.listConnections(node, source=True, destination=True )
+for node in {source:1 for source in nodesToBlock}.keys():
+cmds.setAttr( '%s.nodeState' % node, 2 )
+
+</pre>
+<p>
+Applying this script would continue to draw objects but things would not be animated.
+
+</td>
+</tr>
+</table>
+<br><i>Default:</i> kdnNormal
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpercentage">
+          <code><b>percentage</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies how many vertices to remove during reduction as a
+percentage of the original mesh.  This flag only applies if the termination
+flag is set to 0 or when using the old algorithm.
+<br>C: Default is 0. 100 will remove every possible vertex, 0 will remove none.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreserveLocation">
+          <code><b>preserveLocation</b>(<b>pl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag guarantees that if the original geometry is preserved, the new
+geometry will have the same location.
+<br>C: Default is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreserveTopology">
+          <code><b>preserveTopology</b>(<b>top</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+this flag guarantees that the topological type will be preserved during
+reduction.  In particular, if the input is manifold then the output will be
+manifold.  This option also prevents holes in the mesh from being closed off.
+This flag only applies when using the new algorithm. (-version 1)
+<br>C: Default is true.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceOriginal">
+          <code><b>replaceOriginal</b>(<b>rpo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create &quot;in place&quot; (i.e., replace) (not available in all commands). NOTE:
+This flag is intended for use by the &quot;Reduce&quot; menu item. If
+'polyReduce -rpo 0' is executed from the command line, Shader information will
+not be copied from the original mesh to the result.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsharpness">
+          <code><b>sharpness</b>(<b>shp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sharpness controls the balance between preserving small, sharp
+details versus larger shapes.  At low values, details that are
+small relative to the general shape of the object are more
+likely to be collapsed.  At high values, they are more likely
+to be kept.  This flag only applies when using the new
+algorithm. (-version 1)
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsymmetryPlaneW">
+          <code><b>symmetryPlaneW</b>(<b>sw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+W value of the symmetry plane.  This flag only applies
+when using the new algorithm (-version 1) and the
+useVirtualSymmetry flag is set to 2.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsymmetryPlaneX">
+          <code><b>symmetryPlaneX</b>(<b>sx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+X value of the symmetry plane.  This flag only applies
+when using the new algorithm (-version 1) and the
+useVirtualSymmetry flag is set to 2.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsymmetryPlaneY">
+          <code><b>symmetryPlaneY</b>(<b>sy</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Y value of the symmetry plane.  This flag only applies
+when using the new algorithm (-version 1) and the
+useVirtualSymmetry flag is set to 2.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsymmetryPlaneZ">
+          <code><b>symmetryPlaneZ</b>(<b>sz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Z value of the symmetry plane.  This flag only applies
+when using the new algorithm (-version 1) and the
+useVirtualSymmetry flag is set to 2.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsymmetryTolerance">
+          <code><b>symmetryTolerance</b>(<b>stl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tolerance to use when applying symmetry.
+For each vertex of the mesh, we find its exact symmetric point,
+then we look for the closest vertex to the exact symmetry up to
+the tolerance distance.  Higher values risk finding more
+spurious symmetries, lower values might miss symmetries.
+The value is distance in object space.  This flag only applies
+when using the new algorithm (-version 1) and the
+useVirtualSymmetry flag is not set to 0.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtermination">
+          <code><b>termination</b>(<b>trm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the termination condition to use
+when reducing the mesh.  This flag only applies to the
+new algorithm. (-version 1)
+<br>0 Percentage
+<br>1 Vertex count
+<br>2 Triangle count
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns an <i>integer</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtriangleCount">
+          <code><b>triangleCount</b>(<b>tct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies a target number of triangles to retain after reduction.
+Note that other factors such as quad and feature preservation
+may take precendence and cause the actual number of triangles to be different.
+This flag only applies when using the new algorithm (-version 1)
+and the termination flag is set to 2.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns an <i>integer</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtriangulate">
+          <code><b>triangulate</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag only applies when using the old algorithm and
+is provided for backwards compatibility.
+This attribute specifies if the geometry
+or the selected faces has to be triangulated,
+before performing reduction.
+<br>C: Default is true.
+<br>Q: When queried, this flag returns a <i>boolean</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseVirtualSymmetry">
+          <code><b>useVirtualSymmetry</b>(<b>uvs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag controls whether symmetry is preserved during the
+reduction. This flag only applies when using the new
+algorithm (-version 1) and the keepQuadsWeight flag is less
+than 1.0.
+<br>0 No symmetry preservation
+<br>1 Automatic. Try to find suitable symmetry during reduction.
+<br>2 Plane.  Specify a symmetry plane to use during reduction.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns an <i>integer</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvWeights">
+          <code><b>uvWeights</b>(<b>uwt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag only applies when using the old algorithm and
+is provided for backwards compatibility.
+How much consideration uv positions are given in the
+reduction algorithm. A higher weight means the
+reduction will try harder to preserve uv positions.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagversion">
+          <code><b>version</b>(<b>ver</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Version of the poly reduce algorithm to use.
+<br>0 Old algorithm used in Maya 2013 and prior for backwards compatibility
+<br>1 New algorithm derived from Softimage and used in Maya 2014 and later
+<br>The default is 0 for backwards compatibility but for best results
+it is recommended that the new algorithm is used as it is better at
+preserving mesh details. Some flags only apply to a specific algorithm
+and this is documented for each flag.
+<br>C: Default is 0 for backwards compatibility.
+<br>Q: When queried, this flag returns an <i>integer</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvertexCount">
+          <code><b>vertexCount</b>(<b>vct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies a target number of vertices to retain after reduction.
+Note that other factors such as quad and feature preservation
+may take precendence and cause the actual number of vertices to be different.
+This flag only applies when using the new algorithm (-version 1)
+and the termination flag is set to 1.
+<br>C: Default is 0.
+<br>Q: When queried, this flag returns an <i>integer</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvertexMapName">
+          <code><b>vertexMapName</b>(<b>vmp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of a color set to be added to the output mesh that stores
+a mapping from vertices in the output mesh to vertices in the
+input mesh.  The color set is RGB.  The original vertex Id that
+maps to an output vertex is of a vertex is 65536*r + g where r
+and g are the red and green channel at a vertex. The blue
+channel is always zero.  Each vertex in the output mesh has a
+shared color. This flag only applies when using the new
+algorithm. (-version 1)
+<br>Q: When queried, this flag returns a <i>string</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvertexWeightCoefficient">
+          <code><b>vertexWeightCoefficient</b>(<b>vwc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies a constant value to multiply to each weight map value.
+A value of zero turns off the weight map.  This flag only applies
+when using the new algorithm. (-version 1)
+<br>C: Default is 1.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweightCoefficient">
+          <code><b>weightCoefficient</b>(<b>wc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag only applies when using the old algorithm and
+is provided for backwards compatibility.
+The weight of each vertex is multiplied with this coefficient
+when the reduction is performed.  This value does not have
+to be edited, normally.  It gives finer control over the
+weighted reduction. This attribute is replaced by
+vertexWeightCoefficient in the new algorithm when the version
+flag is set to 1.
+<br>C: Default is 10000.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.polySphere( ver=1, n='plg' )
+cmds.polyReduce( ver=1, p=35, 'plg.f[0:399]' )
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

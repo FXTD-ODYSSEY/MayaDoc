@@ -1,0 +1,432 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>connectionInfo command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-connectionInfo"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/connectionInfo.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>connectionInfo </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("connectionInfo.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>connectionInfo [-<a href="#flagdestinationFromSource">destinationFromSource</a>] [-<a href="#flaggetExactDestination">getExactDestination</a>] [-<a href="#flaggetExactSource">getExactSource</a>] [-<a href="#flaggetLockedAncestor">getLockedAncestor</a>] [-<a href="#flagisDestination">isDestination</a>] [-<a href="#flagisExactDestination">isExactDestination</a>] [-<a href="#flagisExactSource">isExactSource</a>] [-<a href="#flagisLocked">isLocked</a>] [-<a href="#flagisSource">isSource</a>] [-<a href="#flagsourceFromDestination">sourceFromDestination</a>] 
+string
+     </code> </p>
+      <p>connectionInfo is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The <b>connectionInfo</b> command is used to get information about
+connection sources and destinations.  Unlike the isConnected command,
+this command needs only one end of the connection.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>When asking for a property, depending on the flags used.</td></tr><tr><td valign="top"><i>string</i></td><td>When asking for a plug name.</td></tr><tr><td valign="top"><i>string[]</i></td><td>When asking for a list of plugs.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="connectAttr.html">connectAttr</a>, <a href="isConnected.html">isConnected</a>, <a href="listConnections.html">listConnections</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdestinationFromSource">destinationFromSource</a>, <a href="#flaggetExactDestination">getExactDestination</a>, <a href="#flaggetExactSource">getExactSource</a>, <a href="#flaggetLockedAncestor">getLockedAncestor</a>, <a href="#flagisDestination">isDestination</a>, <a href="#flagisExactDestination">isExactDestination</a>, <a href="#flagisExactSource">isExactSource</a>, <a href="#flagisLocked">isLocked</a>, <a href="#flagisSource">isSource</a>, <a href="#flagsourceFromDestination">sourceFromDestination</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdestinationFromSource">
+          <code><b>-destinationFromSource</b>(<b>-dfs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the specified plug (or its ancestor) is a source, this flag returns
+the list of destinations connected from the source. (array of strings,
+empty array if none)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggetExactDestination">
+          <code><b>-getExactDestination</b>(<b>-ged</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the plug or its ancestor is connection destination, this returns the
+name of the plug that is the exact destination. (empty string if there
+is no such connection).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggetExactSource">
+          <code><b>-getExactSource</b>(<b>-ges</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the plug or its ancestor is a connection source, this returns the
+name of the plug that is the exact source. (empty string if there is
+no such connection).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggetLockedAncestor">
+          <code><b>-getLockedAncestor</b>(<b>-gla</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the specified plug is locked, its name is returned.  If an
+ancestor of the plug is locked, its name is returned.  If more
+than one ancestor is locked, only the name of the closest one
+is returned.  If neither this plug nor any ancestors are locked,
+an empty string is returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisDestination">
+          <code><b>-isDestination</b>(<b>-id</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if the plug (or its ancestor) is the destination
+of a connection, false otherwise.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisExactDestination">
+          <code><b>-isExactDestination</b>(<b>-ied</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if the plug is the exact destination of a connection,
+false otherwise.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisExactSource">
+          <code><b>-isExactSource</b>(<b>-ies</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if the plug is the exact source of a connection,
+false otherwise.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisLocked">
+          <code><b>-isLocked</b>(<b>-il</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if this plug (or its ancestor) is locked
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisSource">
+          <code><b>-isSource</b>(<b>-is</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if the plug (or its ancestor) is the source of a
+connection, false otherwise.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsourceFromDestination">
+          <code><b>-sourceFromDestination</b>(<b>-sfd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the specified plug (or its ancestor) is a destination, this flag returns
+the source of the connection. (string, empty if none)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+//    Create a sphere and a cone and make the Z translation of the cone
+//    be dependent on the X translation of the sphere.
+//
+string $cone[] = `cone`;
+string $sphere[] = `sphere`;
+connectAttr ($sphere[0] + &quot;.tx&quot;) ($cone[0] + &quot;.tz&quot;);
+
+//    Verify the connection and print out the source plug.
+//
+if (`connectionInfo -isDestination ($cone[0] + &quot;.tz&quot;)`) {
+    print (&quot;Source: &quot;
+        + `connectionInfo -sourceFromDestination ($cone[0] + &quot;.tz&quot;)`
+        + &quot;\n&quot;);
+}
+
+//    Verify the connection and print out the destination plug.
+//
+if (`connectionInfo -isSource ($sphere[0] + &quot;.tx&quot;)`) {
+    string $destinations[];
+    $destinations = `connectionInfo -destinationFromSource ($sphere[0] + &quot;.tx&quot;)`;
+    print (&quot;Destination: &quot;);
+    for ($destination in $destinations) {
+        print ($destination + &quot; &quot;);
+    }
+    print (&quot;\n&quot;);
+}
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

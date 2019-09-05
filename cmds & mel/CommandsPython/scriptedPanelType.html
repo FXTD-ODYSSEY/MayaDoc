@@ -1,0 +1,793 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>scriptedPanelType command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-scriptedPanelType"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/scriptedPanelType.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>scriptedPanelType </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#Panels" target="contentFrame">Panels</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("scriptedPanelType.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>scriptedPanelType(
+[string]
+    , [<a href="#flagaddCallback">addCallback</a>=<i>string</i>], [<a href="#flagcopyStateCallback">copyStateCallback</a>=<i>string</i>], [<a href="#flagcreateCallback">createCallback</a>=<i>string</i>], [<a href="#flagcustomView">customView</a>=<i>boolean</i>], [<a href="#flagdefineTemplate">defineTemplate</a>=<i>string</i>], [<a href="#flagdeleteCallback">deleteCallback</a>=<i>string</i>], [<a href="#flagexists">exists</a>=<i>boolean</i>], [<a href="#flaghotkeyCtxClient">hotkeyCtxClient</a>=<i>string</i>], [<a href="#flaginitCallback">initCallback</a>=<i>string</i>], [<a href="#flaglabel">label</a>=<i>string</i>], [<a href="#flagobsolete">obsolete</a>=<i>boolean</i>], [<a href="#flagremoveCallback">removeCallback</a>=<i>string</i>], [<a href="#flagretainOnFileOpen">retainOnFileOpen</a>=<i>boolean</i>], [<a href="#flagsaveStateCallback">saveStateCallback</a>=<i>string</i>], [<a href="#flagunique">unique</a>=<i>boolean</i>], [<a href="#flaguseTemplate">useTemplate</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>scriptedPanelType is undoable, queryable, and editable.</p>
+      This command defines the callbacks for a type of scripted panel.  The panel type
+created by this command is then used when creating a scripted panel.  See also
+the 'scriptedPanel' command.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The name of the scripted panel type.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaddCallback">addCallback</a>, <a href="#flagcopyStateCallback">copyStateCallback</a>, <a href="#flagcreateCallback">createCallback</a>, <a href="#flagcustomView">customView</a>, <a href="#flagdefineTemplate">defineTemplate</a>, <a href="#flagdeleteCallback">deleteCallback</a>, <a href="#flagexists">exists</a>, <a href="#flaghotkeyCtxClient">hotkeyCtxClient</a>, <a href="#flaginitCallback">initCallback</a>, <a href="#flaglabel">label</a>, <a href="#flagobsolete">obsolete</a>, <a href="#flagremoveCallback">removeCallback</a>, <a href="#flagretainOnFileOpen">retainOnFileOpen</a>, <a href="#flagsaveStateCallback">saveStateCallback</a>, <a href="#flagunique">unique</a>, <a href="#flaguseTemplate">useTemplate</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddCallback">
+          <code><b>addCallback</b>(<b>acb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the callback procedure for adding the panel
+to a particular control layout.  The parent layout is guaranteed to be
+the current default layout when the proc is called.  If its name is
+required then it can be queried with 'setParent -q'.  Any editors should
+be parented here.
+global proc procName (string $panelName) { .... }
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopyStateCallback">
+          <code><b>copyStateCallback</b>(<b>ocb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the callback procedure for copying the state of
+the panel when a tear-off copy of the panel is made.  The callback proc has the form:
+global proc procName (string $panelName, string $newPanelName) { .... }
+This procedure will be executed immediately after the addCallback
+procedure has finished executing. At that point, the copied panel will be
+fully created and accessible to facilitate copying of panel settings.
+Note: the addCallback procedure is called after the createCallback
+procedure has been called.
+
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreateCallback">
+          <code><b>createCallback</b>(<b>ccb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the callback procedure for initially creating
+the panel object.  No UI should be created here.  Any editors owned
+by the panel should be created here unparented.
+The callback proc has the form:
+global proc procName (string $panelName) { .... }
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcustomView">
+          <code><b>customView</b>(<b>cv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies if this view is a custom 3d view for
+MPx3dModelView types. This flag should only be used for
+MPx3dModelView types.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefineTemplate">
+          <code><b>defineTemplate</b>(<b>dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Puts the command in a mode where any other flags and arguments are
+parsed and added to the command template specified in the argument.
+They will be used as default arguments in any subsequent
+invocations of the command when templateName is set as the
+current template.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeleteCallback">
+          <code><b>deleteCallback</b>(<b>dcb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the callback procedure for final deletion of
+the panel.  The callback proc has the form:
+global proc procName (string $panelName) { .... }
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>exists</b>(<b>ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns whether the
+specified object exists or not. Other flags are ignored.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghotkeyCtxClient">
+          <code><b>hotkeyCtxClient</b>(<b>hkc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used to specify the name of the hotkey context client for this panel type.
+By default, it is the same as the panel type.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginitCallback">
+          <code><b>initCallback</b>(<b>icb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the callback procedure for the initialize
+callback.  This will be called on file -new and file -open to give the
+panel an opportunity to re-initialize to a starting state, if required.
+The panel may be parented or unparented at this time.
+The callback proc has the form:
+global proc procName (string $panelName) { .... }
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglabel">
+          <code><b>label</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Label for the panel
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobsolete">
+          <code><b>obsolete</b>(<b>o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies that this type is no longer used in Maya.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveCallback">
+          <code><b>removeCallback</b>(<b>rcb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the callback procedure for removing the panel
+from its current control layout.  Any editors should be unparented here.
+The callback proc has the form:
+global proc procName (string $panelName) { .... }
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagretainOnFileOpen">
+          <code><b>retainOnFileOpen</b>(<b>rfo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies if panels of this type should be retained after
+restoring panel cofiguration during file open. Default value is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsaveStateCallback">
+          <code><b>saveStateCallback</b>(<b>scb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the callback procedure for saving the state of
+the panel.  The callback proc has the form:
+global proc string procName (string $panelName) { .... }
+Note that the proc returns a string.  This string will be executed after
+the createCallback has been called to facilitate restoring the panel
+state.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunique">
+          <code><b>unique</b>(<b>u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies if only one instance of this type of panel can exist
+at a given time.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseTemplate">
+          <code><b>useTemplate</b>(<b>ut</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Forces the command to use a command template other than
+the current one.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+// NOTE: The scriptedPanelType command does not support python
+// 		 callbacks; these callbacks must be MEL.
+
+
+global proc sampleCreateCallback(string $panelName) {
+//
+//  Description:
+//      Create any editors unparented here and do
+//      any other initialization required.
+//
+//      In this example we will only declare a global array to
+//        maintain some state information.
+//
+    global float $gSampleState[5];
+
+}
+
+
+global proc sampleInitCallback(string $panelName) {
+//
+//  Description:
+//      Re-initialize the panel on file -new or file -open.
+//
+//      In this example we will only re-init the global array.
+//
+    global float $gSampleState[];
+
+       $gSampleState[0] = 20.2;
+       $gSampleState[1] = 50.5;
+       $gSampleState[2] = 34.7;
+       $gSampleState[3] = 2.0;
+       $gSampleState[4] = 1.0;
+
+}
+
+global proc sampleAddCallback(string $panelName) {
+//
+//  Description:  Create UI and parent any editors.
+//
+    global float $gSampleState[];
+
+    columnLayout -adj true topCol;
+    separator -style &quot;none&quot; -h 10;
+        frameLayout -l &quot;Sliders&quot; -mw 10;
+            columnLayout -adj true sampleCol;
+                separator -style &quot;none&quot; -h 10;
+
+                floatSliderGrp -l &quot;Property A&quot; -f true
+                    -v $gSampleState[0]
+                    fsg1;
+                floatSliderGrp -l &quot;Property B&quot; -f true
+                    -v $gSampleState[1]
+                    fsg2;
+                floatSliderGrp -l &quot;Property C&quot; -f true
+                    -v $gSampleState[2]
+                    fsg3;
+                separator -style &quot;none&quot; -h 10;
+            setParent ..;
+        setParent ..;
+
+        separator -style &quot;none&quot; -h 10;
+        frameLayout -l &quot;Radio Buttons&quot; -mw 10;
+            columnLayout sampleCol2;
+                separator -style &quot;none&quot; -h 10;
+                radioButtonGrp -nrb 3
+                    -l &quot;Big Options&quot;
+                    -la3 &quot;Option 1&quot; &quot;Option 2&quot; &quot;Option 3&quot;
+                    -select $gSampleState[3]
+                    rbg;
+                radioButtonGrp -nrb 3
+                    -l &quot;Little Options&quot;
+                    -la3 &quot;Option 4&quot; &quot;Option 5&quot; &quot;Option 6&quot;
+                    -select $gSampleState[4]
+                    rbg2;
+                separator -style &quot;none&quot; -h 10;
+
+}
+
+global proc sampleRemoveCallback(string $panelName) {
+//
+//  Description:
+//        Unparent any editors and save state if required.
+//
+        global float $gSampleState[];
+       //  Scope the control names to this panel.
+       //
+       string $control = `scriptedPanel -q -control $panelName`;
+       setParent $control;
+
+       $gSampleState[0] = `floatSliderGrp -q -v fsg1`;
+       $gSampleState[1] = `floatSliderGrp -q -v fsg2`;
+       $gSampleState[2] = `floatSliderGrp -q -v fsg3`;
+       $gSampleState[3] = `radioButtonGrp -q -sl rbg`;
+       $gSampleState[4] = `radioButtonGrp -q -sl rbg2`;
+}
+
+global proc sampleDeleteCallback(string $panelName) {
+//
+//  Description:
+//        Delete any editors and do any other cleanup required.
+
+}
+
+global proc string sampleSaveStateCallback(string $panelName) {
+//
+//  Description:
+//        Return a string that will restore the current state
+//        when it is executed.
+
+        global float $gSampleState[];
+       $indent = &quot;\n\t\t\t&quot;;
+
+       return ($indent+&quot;$gSampleState[0]=&quot;+$gSampleState[0]+&quot;;&quot; +
+               $indent+&quot;$gSampleState[1]=&quot;+$gSampleState[1]+&quot;;&quot; +
+               $indent+&quot;$gSampleState[2]=&quot;+$gSampleState[2]+&quot;;&quot; +
+               $indent+&quot;$gSampleState[3]=&quot;+$gSampleState[3]+&quot;;&quot; +
+               $indent+&quot;$gSampleState[4]=&quot;+$gSampleState[4]+&quot;;&quot; +
+               $indent+&quot;setSamplePanelState $panelName;\n&quot; );
+}
+
+global proc setSamplePanelState( string $whichPanel ) {
+//
+//  Description:
+//        This is a convenience proc to set the panel state from the
+//        global array
+
+        global float $gSampleState[];
+
+       //  Scope the control names to this panel.
+       //
+       string $control = `scriptedPanel -q -control $whichPanel`;
+       if (&quot;&quot; != $control) {
+              setParent $control;
+
+              floatSliderGrp -e -v $gSampleState[0] fsg1;
+              floatSliderGrp -e -v $gSampleState[1] fsg2;
+              floatSliderGrp -e -v $gSampleState[2] fsg3;
+              if (0 != $gSampleState[3]) {
+               radioButtonGrp -e -sl $gSampleState[3] rbg;
+              };
+           if (0 != $gSampleState[4]) {
+               radioButtonGrp -e -sl $gSampleState[4] rbg2;
+           }
+       }
+}
+
+# Below is the python code to create and use scriptedPanelType and scriptedPanel using the MEL
+# callbacks defined above.
+
+# Use unique flag as we don't want two panels sharing the same global data.
+cmds.scriptedPanelType( 'sampleScriptedPanelType', ccb='sampleCreateCallback', icb='sampleInitCallback', acb='sampleAddCallback', rcb='sampleRemoveCallback', dcb='sampleDeleteCallback', scb='sampleSaveStateCallback', unique=True )
+
+#  This script will create an unparented scripted panel, place it
+#  in one window, remove it, and place it in another window then
+#  return it to the first window.
+#
+#
+#  Create unparented scripted panel
+#
+cmds.scriptedPanel( 'sampleScriptedPanel', unParent=True, type='sampleScriptedPanelType', label='Sample' )
+
+#    Create a couple of windows and parent the scripted panel to the first.
+#
+cmds.window( 'sampleWin' )
+cmds.frameLayout( 'frm', lv=False, bv=False )
+cmds.scriptedPanel( 'sampleScriptedPanel', e=True, parent='sampleWin|frm' )
+cmds.showWindow()
+
+cmds.window( 'sampleWin2', w=cmds.window('sampleWin', q=True, w=True), h=cmds.window('sampleWin', q=True, h=True) )
+cmds.frameLayout( 'frm', lv=False, bv=False )
+cmds.showWindow()
+
+#    Reparent the scripted panel to the second window.
+#
+cmds.scriptedPanel( 'sampleScriptedPanel', e=True, unParent=True )
+cmds.scriptedPanel( 'sampleScriptedPanel', e=True, parent='sampleWin2|frm' )
+
+#    Reparent the scripted panel back to the first window.
+#
+cmds.scriptedPanel( 'sampleScriptedPanel', e=True, unParent=True )
+cmds.scriptedPanel( 'sampleScriptedPanel', e=True, parent='sampleWin|frm' )
+
+#    Close both windows
+#
+cmds.window( 'sampleWin', e=True, visible=False )
+cmds.window( 'sampleWin2', e=True, visible=False )
+
+#    The scripted panel should appear in the Panel menu.  Select
+#    Panels-&gt;Panel-&gt;Sample and the panel should appear in the main window.
+#
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

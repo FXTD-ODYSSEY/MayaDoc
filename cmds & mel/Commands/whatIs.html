@@ -1,0 +1,117 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>whatIs command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-whatIs"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>whatIs </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("whatIs.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hNotes">Notes</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>whatIs 
+string
+     </code> </p>
+      <p>whatIs is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command takes one string type argument and returns a string
+indicating whether the argument is a builtin &quot;Command&quot;, a &quot;Mel
+procedure&quot;, a &quot;Script&quot;, or a variable. If it is a variable, the type
+of the variable is also given. If it is none of these things, whatIs
+returns the string &quot;Unknown&quot;.
+<p>
+If the argument is a Mel procedure or a script file, the path to the
+file containing the script or procedure is included in the return
+value.
+<p>
+	  <h2><a name="hNotes">Notes</a></h2>
+The difference between a &quot;Mel Procedure&quot; and a &quot;Script&quot; can be subtle.
+If a procedure has not been invoked, and therefore never compiled, the
+whatIs command will search for a file of the same name.  However, this
+file could contain a script (a series of Mel statements/commands) or
+it could contain a procedure definition.  Because Mel will not compile
+the file just to execute the whatIs command, it cannot distinguish
+which it is. In these cases, the whatIs command will return the string
+&quot;Script&quot;.
+<p>
+  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Argument type.
+The return values are not localized.</td></tr></table>
+      
+      
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+whatIs &quot;sphere&quot;;
+// Result: Command //
+
+whatIs &quot;initToolBox&quot;;
+// Result: Mel procedure found in: /u/mayauser/maya/scripts/initToolBox.mel //
+
+whatIs &quot;kaosFieldTest&quot;;
+// Result: Script found in: /u/mayauser/maya/scripts/kaosFieldTest.mel //
+
+whatIs &quot;fdsafda&quot;;
+// Result: Unknown //
+
+int $abc[42];
+whatIs &quot;$abc&quot;;
+// Result: int[] variable //
+
+$s=`pwd`;
+whatIs &quot;$s&quot;;
+// Result: string variable //
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

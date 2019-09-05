@@ -1,0 +1,717 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyUVSet command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-polyUVSet"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/polyUVSet.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyUVSet </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyUVSet.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyUVSet([<a href="#flagallUVSets">allUVSets</a>=<i>boolean</i>], [<a href="#flagallUVSetsIndices">allUVSetsIndices</a>=<i>boolean</i>], [<a href="#flagallUVSetsWithCount">allUVSetsWithCount</a>=<i>boolean</i>], [<a href="#flagcopy">copy</a>=<i>boolean</i>], [<a href="#flagcreate">create</a>=<i>boolean</i>], [<a href="#flagcurrentLastUVSet">currentLastUVSet</a>=<i>boolean</i>], [<a href="#flagcurrentPerInstanceUVSet">currentPerInstanceUVSet</a>=<i>boolean</i>], [<a href="#flagcurrentUVSet">currentUVSet</a>=<i>boolean</i>], [<a href="#flagdelete">delete</a>=<i>boolean</i>], [<a href="#flaggenNewUVSet">genNewUVSet</a>=<i>boolean</i>], [<a href="#flagnewUVSet">newUVSet</a>=<i>string</i>], [<a href="#flagperInstance">perInstance</a>=<i>boolean</i>], [<a href="#flagprojections">projections</a>=<i>boolean</i>], [<a href="#flagrename">rename</a>=<i>boolean</i>], [<a href="#flagreorder">reorder</a>=<i>boolean</i>], [<a href="#flagshareInstances">shareInstances</a>=<i>boolean</i>], [<a href="#flagunshared">unshared</a>=<i>boolean</i>], [<a href="#flaguvSet">uvSet</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>polyUVSet is undoable, queryable, and editable.</p>
+      Command to do the following to uv sets:
+        - delete an existing uv set.
+        - rename an existing uv set.
+    - create a new empty uv set.
+    - copy the values from one uv set to a another
+      pre-existing uv set.
+        - reorder two uv sets
+        - set the current uv set to a pre-existing uv set.
+    - modify sharing between instances of per-instance uv sets
+        - query the current uv set.
+        - set the current uv set to the last uv set added to an object.
+    - query the names of all uv sets.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>Success or Failure.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>poly, uvSet, currentUVSet, renameUVSet, deleteUVSet, copyUVSet, createUVSet
+      <h2><a name="hRelated">Related</a></h2><a href="polyClipboard.html">polyClipboard</a>, <a href="polyCylindricalProjection.html">polyCylindricalProjection</a>, <a href="polyEditUV.html">polyEditUV</a>, <a href="polyForceUV.html">polyForceUV</a>, <a href="polyMapCut.html">polyMapCut</a>, <a href="polyMapDel.html">polyMapDel</a>, <a href="polyMapSew.html">polyMapSew</a>, <a href="polyMoveFacetUV.html">polyMoveFacetUV</a>, <a href="polyMoveUV.html">polyMoveUV</a>, <a href="polyPlanarProjection.html">polyPlanarProjection</a>, <a href="polyProjection.html">polyProjection</a>, <a href="polySphericalProjection.html">polySphericalProjection</a>, <a href="untangleUV.html">untangleUV</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallUVSets">allUVSets</a>, <a href="#flagallUVSetsIndices">allUVSetsIndices</a>, <a href="#flagallUVSetsWithCount">allUVSetsWithCount</a>, <a href="#flagcopy">copy</a>, <a href="#flagcreate">create</a>, <a href="#flagcurrentLastUVSet">currentLastUVSet</a>, <a href="#flagcurrentPerInstanceUVSet">currentPerInstanceUVSet</a>, <a href="#flagcurrentUVSet">currentUVSet</a>, <a href="#flagdelete">delete</a>, <a href="#flaggenNewUVSet">genNewUVSet</a>, <a href="#flagnewUVSet">newUVSet</a>, <a href="#flagperInstance">perInstance</a>, <a href="#flagprojections">projections</a>, <a href="#flagrename">rename</a>, <a href="#flagreorder">reorder</a>, <a href="#flagshareInstances">shareInstances</a>, <a href="#flagunshared">unshared</a>, <a href="#flaguvSet">uvSet</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallUVSets">
+          <code><b>allUVSets</b>(<b>auv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used in in a query will return a list of all
+of the uv set names
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallUVSetsIndices">
+          <code><b>allUVSetsIndices</b>(<b>uvn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when queried will return a list of the logical plug
+indices of all the uv sets in the sparse uv set array.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallUVSetsWithCount">
+          <code><b>allUVSetsWithCount</b>(<b>awc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used in a query will return a list of all
+of the uv set family names, with a count appended to the perInstance
+sets indicating the number of instances in the uv set shared by
+the specified or selected shape.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopy">
+          <code><b>copy</b>(<b>cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will result in the copying of the uv set corresponding
+to name specified with the uvSet flag to the uvset corresponding
+to the name specified with the newUVSet flag
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreate">
+          <code><b>create</b>(<b>cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will result in the creation of an empty uv set
+corresponding to the name specified with the uvSet flag. If
+a uvSet with that name already exists, then no new uv set will
+be created.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentLastUVSet">
+          <code><b>currentLastUVSet</b>(<b>luv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will set the current uv set that the object needs to
+work on, to be the last uv set added to the object.
+If no uv set exists for the object, then no uv set name will be returned.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentPerInstanceUVSet">
+          <code><b>currentPerInstanceUVSet</b>(<b>cpi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a query-only flag for use when the current uv set is a per-instance
+uv set family. This returns the member of the set family that corresponds
+to the currently select instance.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentUVSet">
+          <code><b>currentUVSet</b>(<b>cuv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will set the current uv set that the object needs to
+work on, to be the uv set corresponding to the name specified with the
+uvSet flag. This does require that a uvSet with the specified name exist.
+When queried, this returns the current uv set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdelete">
+          <code><b>delete</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will result in the deletion of the uv set corresponding
+to the name specified with the uvSet flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggenNewUVSet">
+          <code><b>genNewUVSet</b>(<b>gen</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a query-only flag to generate a new unique name.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnewUVSet">
+          <code><b>newUVSet</b>(<b>nuv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name that the uv set corresponding to the name specified with
+the uvSet flag, needs to be renamed to.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagperInstance">
+          <code><b>perInstance</b>(<b>pi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used in conjunction with the create flag to indicate
+whether or not the uv set is per-instance. When you create a per-instance
+uv set, the set will be applied as shared between all selected instances
+of the shape unless the unshared flag is used. The perInstance flag can
+be used in query mode with the currentUVSet or allUVSets  flag to indicate
+that the set family names (i.e. not containing instance identifiers) will
+be returned by the query.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprojections">
+          <code><b>projections</b>(<b>pr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used in a query will return a list of polygon
+uv projection node names. The order of the list is from
+most-recently-applied to least-recently-applied.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrename">
+          <code><b>rename</b>(<b>rn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will result in the renaming of the uv set corresponding
+to the name specified with the uvSet flag to the name specified using the
+newUVSet flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreorder">
+          <code><b>reorder</b>(<b>ro</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will result in the reordering of two uv sets corresponding
+to name specified with the uvSet flag, and the uvset corresponding
+to the name specified with the newUVSet flag
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshareInstances">
+          <code><b>shareInstances</b>(<b>si</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used to modify the sharing of per-instance uv sets within
+a given uv set family so that all selected instances share the specified
+set. In query mode, it returns a list of the instances that share the
+set specified by the uvSet flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunshared">
+          <code><b>unshared</b>(<b>us</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used in conjunction with the create and perInstance flags
+to indicate that the newly created per-instance set should be created with
+a separate set per instance.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvSet">
+          <code><b>uvSet</b>(<b>uvs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the uv set that this command needs to work on.
+This flag has to be specified for this command to do anything meaningful
+other than query the current uv set.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+
+# start with poly object
+cmds.polySphere(n='plg', cuv=1, r=10.0)
+
+# Make a copy of &quot;map1&quot; to a new uvset. The
+# name of which is automatically generated and returned.
+cmds.polyUVSet( copy=True, uvSet='map1' )
+
+# Create a new empty uv set
+cmds.polyUVSet( create=True, uvSet='map2' )
+
+# To set the current uv set to be &quot;map2&quot;.
+cmds.polyUVSet( currentUVSet=True,  uvSet='map2')
+
+# To set the current uv set to the last uv set added to an object.
+cmds.polyUVSet( currentLastUVSet=True )
+
+# To query the current uv set.
+cmds.polyUVSet( query=True, currentUVSet=True )
+
+# To rename a currently existing uv set from &quot;map2&quot; to &quot;map3&quot;.
+cmds.polyUVSet(rename=True, newUVSet='map3', uvSet= 'map2')
+
+# Rename the current uv set (if any) to &quot;map4&quot;.
+cmds.polyUVSet(rename=True, newUVSet='map4' )
+
+# To delete a currently existing uv set &quot;map4&quot;.
+cmds.polyUVSet( delete=True, uvSet='map4')
+
+# To delete the current uv set (if any)
+cmds.polyUVSet( delete=True )
+
+# Copy values of uvset &quot;map1&quot; to &quot;map2&quot;
+cmds.polyUVSet( copy=True, nuv='map2', uvSet='map1' )
+
+# Copy values of the current uvset to &quot;map2&quot;
+cmds.polyUVSet( copy=True, nuv='map2' )
+
+# Reorder uvsets &quot;map1&quot; and &quot;map2&quot;
+cmds.polyUVSet( reorder=True, nuv='map2', uvSet='map1' )
+
+# Create a new empty uv set with a generate new name
+# The newly generated name is returned.
+cmds.polyUVSet( create=True )
+
+# To query all of the uv sets
+cmds.polyUVSet( query=True, allUVSets=True )
+
+# To query the logical indices of the uv sets in the
+# uv set array of the node
+node = &quot;plg&quot;
+indices = cmds.polyUVSet(node, query=True, allUVSetsIndices=True)
+
+for i in indices[:]:
+	name = cmds.getAttr(node+&quot;.uvSet[&quot;+str(i)+&quot;].uvSetName&quot;)
+	print(&quot;Found uv set called &quot; + name )
+
+# To create a new per-instance uv set named &quot;myMap&quot;
+cmds.polyUVSet(create=True,perInstance=True,uvSet='myMap');
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

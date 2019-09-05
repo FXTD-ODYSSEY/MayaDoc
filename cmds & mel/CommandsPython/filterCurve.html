@@ -1,0 +1,653 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>filterCurve command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-filterCurve"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/filterCurve.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>filterCurve </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("filterCurve.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>filterCurve([<a href="#flagcutoffFrequency">cutoffFrequency</a>=<i>float</i>], [<a href="#flagendTime">endTime</a>=<i>time</i>], [<a href="#flagfilter">filter</a>=<i>string</i>], [<a href="#flagkeepKeysOnFrame">keepKeysOnFrame</a>=<i>boolean</i>], [<a href="#flagkernel">kernel</a>=<i>string</i>], [<a href="#flagkeySync">keySync</a>=<i>boolean</i>], [<a href="#flagmaxTimeStep">maxTimeStep</a>=<i>float</i>], [<a href="#flagminTimeStep">minTimeStep</a>=<i>float</i>], [<a href="#flagperiod">period</a>=<i>float</i>], [<a href="#flagprecision">precision</a>=<i>float</i>], [<a href="#flagprecisionMode">precisionMode</a>=<i>int</i>], [<a href="#flagpreserveKeyTangent">preserveKeyTangent</a>=<i>string</i>], [<a href="#flagsamplingRate">samplingRate</a>=<i>float</i>], [<a href="#flagselectedKeys">selectedKeys</a>=<i>boolean</i>], [<a href="#flagstartTime">startTime</a>=<i>time</i>], [<a href="#flagtimeTolerance">timeTolerance</a>=<i>float</i>], [<a href="#flagtolerance">tolerance</a>=<i>float</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>filterCurve is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The filterCurve command takes a list of anim curve and filters
+        them using a specified filter. The following filters are supported:
+        <strong>butterworth</strong>
+        <strong>euler</strong>
+        <strong>keyReducer</strong>
+        <strong>keySync</strong>
+        <strong>resample</strong>
+        <strong>simplify</strong>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>The number of filtered curves</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>filter
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcutoffFrequency">cutoffFrequency</a>, <a href="#flagendTime">endTime</a>, <a href="#flagfilter">filter</a>, <a href="#flagkeepKeysOnFrame">keepKeysOnFrame</a>, <a href="#flagkernel">kernel</a>, <a href="#flagkeySync">keySync</a>, <a href="#flagmaxTimeStep">maxTimeStep</a>, <a href="#flagminTimeStep">minTimeStep</a>, <a href="#flagperiod">period</a>, <a href="#flagprecision">precision</a>, <a href="#flagprecisionMode">precisionMode</a>, <a href="#flagpreserveKeyTangent">preserveKeyTangent</a>, <a href="#flagsamplingRate">samplingRate</a>, <a href="#flagselectedKeys">selectedKeys</a>, <a href="#flagstartTime">startTime</a>, <a href="#flagtimeTolerance">timeTolerance</a>, <a href="#flagtolerance">tolerance</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcutoffFrequency">
+          <code><b>cutoffFrequency</b>(<b>cof</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Defines the cutoff frequency (in Hz) for the Butterworth filter.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendTime">
+          <code><b>endTime</b>(<b>e</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the end time of the section to filter. If not specified, the last
+key of the animation curve is used to define the end time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfilter">
+          <code><b>filter</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the filter type to use. The avalible filters are:
+butterworth
+euler (default)
+keyReducer
+keySync
+resample
+simplify
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepKeysOnFrame">
+          <code><b>keepKeysOnFrame</b>(<b>kof</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When specified, a secondary filter pass is applied to position keys on whole
+frames. This flag is only supported by the Butterworth filter.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkernel">
+          <code><b>kernel</b>(<b>ker</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The resample kernel is a decimation resampling filter used to resample
+dense data. It works on the keyframes and may not produce the desired results
+when used with sparse data.
+<p>
+The resample filter converts from either uniform or non-uniform
+timestep input data samples to the specified uniform timeStep. Various
+time domain filters are available and are specified with the kernel
+flag which selects the resampling kernel applied to the keyframes
+on the animation curves.
+<p>
+        <table border="1">
+        <caption><strong>Kernel Values</strong></caption>
+        <tr><td>closest</td>
+                  <td> Closest sample to output timestamp</td></tr>
+          <tr><td>lirp</td>
+                  <td> Linear interpolation between closest samples</td></tr>
+          <tr><td>box</td>
+                  <td> Box filter: moving average</td></tr>
+          <tr><td>triangle</td>
+                  <td> Triangle filter: (1 - |x|)  weighted moving average</td></tr>
+          <tr><td>gaussian2</td>
+                  <td> Gaussian2 Filter: (2^(-2x*x))  weighted moving average</td></tr>
+          <tr><td>gaussian4</td>
+                  <td> Gaussian4 Filter: (2^(-4x*x))  weighted moving average</td></tr>
+        </table>
+<p>
+This filter is <strong>only</strong> targeted at decimation resampling
+-- interpolation resampling is basically unsupported.  If your
+output framerate is much higher than your input frame rate
+(approximate, as the input timestep is not assumed to be regular)
+the lirp and triangle will interpolate (usually) and the rest will
+either average, or use the closest sample (depending on the
+phase and frequency of the input).  However this mode of operation
+may not give the expected result.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeySync">
+          <code><b>keySync</b>(<b>ks</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When specified, a secondary filter pass is applied that adds a key to sibling
+curves (X,Y,Z) for each key that is encountered. This flag is only supported by the
+Key Reducer filter.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxTimeStep">
+          <code><b>maxTimeStep</b>(<b>mxs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Simplify filter.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminTimeStep">
+          <code><b>minTimeStep</b>(<b>mns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Simplify filter.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagperiod">
+          <code><b>period</b>(<b>per</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Resample filter
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprecision">
+          <code><b>precision</b>(<b>pre</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Defines the precision parameter.
+For the Key Reducer filter, this parameter specifies the error limit between the
+source and output curves. Greater values reduce precision. Lower values increase
+precision.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprecisionMode">
+          <code><b>precisionMode</b>(<b>pm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Defines whether the precision value should be treated as:
+0: An absolute value
+1: A percentage.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreserveKeyTangent">
+          <code><b>preserveKeyTangent</b>(<b>pkt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When specified, keys whose in or out tangent type match the
+specified type are preserved.
+Supported tangent types:
+fixed
+linear
+flat
+smooth
+step
+clamped
+plateau
+stepnext
+auto
+This flag is only supported by the Key Reducer filter.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsamplingRate">
+          <code><b>samplingRate</b>(<b>sr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Defines the rate at which keys are added to the Butterworth filtered curve in
+frames per second (FPS).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectedKeys">
+          <code><b>selectedKeys</b>(<b>sk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When specified, the filter is only applied to selected keys. This flag
+supercedes the startTime/endTime specification.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstartTime">
+          <code><b>startTime</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the start time to filter. If not specified, then the first key in the
+animation curve is used to get the start time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtimeTolerance">
+          <code><b>timeTolerance</b>(<b>tto</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Simplify filter.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtolerance">
+          <code><b>tolerance</b>(<b>tol</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Simplify filter.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+
+cmds.filterCurve( 'nurbsCone1_rotateX', 'nurbsCone1_rotateY', 'nurbsCone1_rotateZ' )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

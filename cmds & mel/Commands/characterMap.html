@@ -1,0 +1,329 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>characterMap command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-characterMap"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/characterMap.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>characterMap </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("characterMap.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>characterMap [-<a href="#flagmapAttr">mapAttr</a> <i>string string</i>] [-<a href="#flagmapMethod">mapMethod</a> <i>string</i>] [-<a href="#flagmapNode">mapNode</a> <i>string string</i>] [-<a href="#flagmapping">mapping</a> <i>string</i>] [-<a href="#flagproposedMapping">proposedMapping</a>] [-<a href="#flagunmapAttr">unmapAttr</a> <i>string string</i>] [-<a href="#flagunmapNode">unmapNode</a> <i>string string</i>]  </code> </p>
+      <p>characterMap is undoable, queryable, and editable.</p>
+      This command is used to create a correlation between the attributes of 2 or more characters.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>characterMap name</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>character, clip, animation
+      <h2><a name="hRelated">Related</a></h2><a href="bakeClip.html">bakeClip</a>, <a href="character.html">character</a>, <a href="clip.html">clip</a>, <a href="clipEditor.html">clipEditor</a>, <a href="clipSchedule.html">clipSchedule</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagmapAttr">mapAttr</a>, <a href="#flagmapMethod">mapMethod</a>, <a href="#flagmapNode">mapNode</a>, <a href="#flagmapping">mapping</a>, <a href="#flagproposedMapping">proposedMapping</a>, <a href="#flagunmapAttr">unmapAttr</a>, <a href="#flagunmapNode">unmapNode</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmapAttr">
+          <code><b>-mapAttr</b>(<b>-ma</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In query mode, this flag can be used to query the mapping stored by the specified map node. It returns an array of strings.
+In non-query mode, this flag can be used to create a mapping between the specified character members. Any previous mapping on the attributes is removed in favor of the newly specified mapping.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmapMethod">
+          <code><b>-mapMethod</b>(<b>-mm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is is valid in create mode only. It specifies how the mapping should be done. Valid options are: &quot;byNodeName&quot;, &quot;byAttrName&quot;, and &quot;byAttrOrder&quot;. &quot;byAttrOrder&quot; is the default. The flags mean the following: &quot;byAttrOrder&quot; maps using the order that the character stores the attributes internally, &quot;byAttrName&quot; uses the attribute name to find a correspondence, &quot;byNodeName&quot; uses the node name *and* the attribute name to find a correspondence.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmapNode">
+          <code><b>-mapNode</b>(<b>-mn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used to map all the attributes on the source node to their matching attributes on the destination node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmapping">
+          <code><b>-mapping</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is valid in query mode only. It must be used before the query flag with a string argument. It is used for querying the mapping for a particular attribute.  A string array is returned.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagproposedMapping">
+          <code><b>-proposedMapping</b>(<b>-pm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is valid in query mode only. It is used to get an array of the mapping that the character map would prvide if called with the specified characters and the (optional) specified mappingMethod. If a character map exists on the characters, the map is not affected by the query operation.  A string array is returned.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunmapAttr">
+          <code><b>-unmapAttr</b>(<b>-ua</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used to unmap the mapping stored by the specified map node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunmapNode">
+          <code><b>-unmapNode</b>(<b>-umn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        This flag can be used to unmap all the attributes on the source node to their matching attributes on the destination node. Note that mapped attributes which do not have matching names, will not be unmapped.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// Create a mapping between character1 and character2, or if a map already
+// exists, update the mapping between any unmapped members.
+//
+characterMap character1 character2;
+
+// Query as to whether a mapping exists between two characters
+//
+characterMap -q character1 character2;
+
+// Query which attributes are mapped between two characters
+//
+characterMap -q -mapAttr character1 character2;
+
+// Delete the mapping between two pairs of attributes. If no mapping
+// exists between the attributes, nothing will happen.
+//
+characterMap -unmapAttr sphere1.tx cone1.tx character1 character2;
+
+// Add a mapping between two attributes.  Only attributes that
+// are members of characters can be mapped.
+//
+characterMap -mapAttr sphere1.tx sphere2.tx character1 character2;
+
+// Query what attribute(s) are mapped to sphere1.tx between character1 and
+// character2
+//
+characterMap -mapping sphere1.tx character1 character2;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

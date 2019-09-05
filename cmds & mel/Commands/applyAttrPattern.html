@@ -1,0 +1,180 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>applyAttrPattern command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-applyAttrPattern"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/applyAttrPattern.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>applyAttrPattern </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("applyAttrPattern.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>applyAttrPattern [-<a href="#flagnodeType">nodeType</a> <i>string</i>] [-<a href="#flagpatternName">patternName</a> <i>string</i>]  </code> </p>
+      <p>applyAttrPattern is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Take the attribute structure described by a pre-defined pattern and apply it either to a
+node (as dynamic attributes) or a node type (as extension attributes). The same pattern
+can be applied more than once to different nodes or node types as the operation duplicates
+the attribute structure described by the pattern.  See the 'createAttrPatterns' command
+for a description of how to create a pattern.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>Number of nodes or node types to which the attribute were added</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>attribute, pattern
+      <h2><a name="hRelated">Related</a></h2><a href="addAttr.html">addAttr</a>, <a href="addExtension.html">addExtension</a>, <a href="createAttrPatterns.html">createAttrPatterns</a>, <a href="deleteAttrPattern.html">deleteAttrPattern</a>, <a href="listAttrPatterns.html">listAttrPatterns</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagnodeType">nodeType</a>, <a href="#flagpatternName">patternName</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeType">
+          <code><b>-nodeType</b>(<b>-nt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the node type to which the attribute pattern is to be applied. This flag
+will cause a new extension attribute tree to be created, making the new attributes
+available on all nodes of the given type. If it is not specified then either a node
+name must be specified or a node must be selected for application of dynamic
+attributes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpatternName">
+          <code><b>-patternName</b>(<b>-pn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The name of the pattern to apply. The pattern with this name must have been previously created using the createAttrPatterns command.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+polySphere -n &quot;sphere1&quot;;
+applyAttrPattern -patternName &quot;myXMLPattern&quot; &quot;sphere1&quot;;
+// Result: 1 //
+
+polySphere -n &quot;sphere2&quot;;
+polySphere -n &quot;sphere3&quot;;
+select sphere1 sphere2;
+applyAttrPattern -patternName &quot;myXMLPattern&quot;;
+// Result: 2 //
+
+applyAttrPattern -patternName &quot;myXMLPattern&quot; -nodeType &quot;transform&quot;;
+// Result: 1 //
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

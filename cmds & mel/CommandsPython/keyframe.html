@@ -1,0 +1,1000 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>keyframe command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-keyframe"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/keyframe.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>keyframe </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("keyframe.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>keyframe(
+[objects]
+    , [<a href="#flagabsolute">absolute</a>=<i>boolean</i>], [<a href="#flagadjustBreakdown">adjustBreakdown</a>=<i>boolean</i>], [<a href="#flaganimation">animation</a>=<i>string</i>], [<a href="#flagattribute">attribute</a>=<i>string</i>], [<a href="#flagbreakdown">breakdown</a>=<i>boolean</i>], [<a href="#flagclipTime">clipTime</a>=<i>[time, time, float]</i>], [<a href="#flagcontrolPoints">controlPoints</a>=<i>boolean</i>], [<a href="#flageval">eval</a>=<i>boolean</i>], [<a href="#flagfloat">float</a>=<i>floatrange</i>], [<a href="#flagfloatChange">floatChange</a>=<i>float</i>], [<a href="#flaghierarchy">hierarchy</a>=<i>string</i>], [<a href="#flagincludeUpperBound">includeUpperBound</a>=<i>boolean</i>], [<a href="#flagindex">index</a>=<i>uint</i>], [<a href="#flagindexValue">indexValue</a>=<i>boolean</i>], [<a href="#flagkeyframeCount">keyframeCount</a>=<i>boolean</i>], [<a href="#flaglastSelected">lastSelected</a>=<i>boolean</i>], [<a href="#flagname">name</a>=<i>boolean</i>], [<a href="#flagoption">option</a>=<i>string</i>], [<a href="#flagrelative">relative</a>=<i>boolean</i>], [<a href="#flagselected">selected</a>=<i>boolean</i>], [<a href="#flagshape">shape</a>=<i>boolean</i>], [<a href="#flagtickDrawSpecial">tickDrawSpecial</a>=<i>boolean</i>], [<a href="#flagtime">time</a>=<i>timerange</i>], [<a href="#flagtimeChange">timeChange</a>=<i>time</i>], [<a href="#flagvalueChange">valueChange</a>=<i>float</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>keyframe is undoable, queryable, and editable.</p>
+      This command operates on a keyset.  A keyset is
+defined as a group of keys within a specified time range on one or
+more animation curves.
+<p>
+The animation curves comprising a keyset depend on the value
+of the &quot;-animation&quot; flag:
+<ul>
+<li>
+<b>keysOrObjects</b>:
+<ol>
+<li>Any active keys, when no target objects or -attribute
+flags appear on the command line, or</li>
+<p>
+<li>All animation curves connected to all keyframable
+attributes of objects specified as the command line's
+targetList, when there are no active keys.</li>
+</ol>
+</li>
+<p>
+<li>
+<b>keys</b>:
+Only act on active keys or tangents.
+If there are no active keys or tangents, don't do anything.
+</li>
+<p>
+<li>
+<b>objects</b>:
+Only act on specified objects.  If there are no objects specified, don't
+do anything.
+</li>
+</ul>
+<p>
+Note that the &quot;-animation&quot; flag can be used to override
+the curves uniquely identified by the multi-use
+&quot;-attribute&quot; flag, which takes an argument of the form
+attributeName, such as &quot;translateX&quot;.
+<p>
+Keys on animation curves are identified by either
+their time values or their indices.  Times and indices can
+be given individually or as part of a list or range (see Examples).
+<p>
+This command edits the time and/or value of keys of
+specified objects and/or parameter curves
+<p>
+Unless otherwise specified by the -query flag, the command
+defaults to editing keyframes.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>(except where noted below)
+Number of curves on which keys were modified.
+In -query mode, the command can return a variety of things,
+as described with each queryable flag below.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="copyKey.html">copyKey</a>, <a href="cutKey.html">cutKey</a>, <a href="findKeyframe.html">findKeyframe</a>, <a href="keyTangent.html">keyTangent</a>, <a href="keyframeOutliner.html">keyframeOutliner</a>, <a href="keyframeStats.html">keyframeStats</a>, <a href="pasteKey.html">pasteKey</a>, <a href="scaleKey.html">scaleKey</a>, <a href="setInfinity.html">setInfinity</a>, <a href="snapKey.html">snapKey</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagabsolute">absolute</a>, <a href="#flagadjustBreakdown">adjustBreakdown</a>, <a href="#flaganimation">animation</a>, <a href="#flagattribute">attribute</a>, <a href="#flagbreakdown">breakdown</a>, <a href="#flagclipTime">clipTime</a>, <a href="#flagcontrolPoints">controlPoints</a>, <a href="#flageval">eval</a>, <a href="#flagfloat">float</a>, <a href="#flagfloatChange">floatChange</a>, <a href="#flaghierarchy">hierarchy</a>, <a href="#flagincludeUpperBound">includeUpperBound</a>, <a href="#flagindex">index</a>, <a href="#flagindexValue">indexValue</a>, <a href="#flagkeyframeCount">keyframeCount</a>, <a href="#flaglastSelected">lastSelected</a>, <a href="#flagname">name</a>, <a href="#flagoption">option</a>, <a href="#flagrelative">relative</a>, <a href="#flagselected">selected</a>, <a href="#flagshape">shape</a>, <a href="#flagtickDrawSpecial">tickDrawSpecial</a>, <a href="#flagtime">time</a>, <a href="#flagtimeChange">timeChange</a>, <a href="#flagvalueChange">valueChange</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagabsolute">
+          <code><b>absolute</b>(<b>a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Move amounts are absolute.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagadjustBreakdown">
+          <code><b>adjustBreakdown</b>(<b>abd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When false, moving keys will not preserve breakdown
+timing, when true (the default) breakdowns will be adjusted
+to preserve their timing relationship.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaganimation">
+          <code><b>animation</b>(<b>an</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Where this command should get the animation to act
+on.  Valid values are &quot;objects,&quot; &quot;keys,&quot; and
+&quot;keysOrObjects&quot; Default: &quot;keysOrObjects.&quot;  (See
+Description for details.)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattribute">
+          <code><b>attribute</b>(<b>at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List of attributes to select
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbreakdown">
+          <code><b>breakdown</b>(<b>bd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the breakdown state for the key.  Returns
+an integer.  Default is false.  The breakdown state of a key
+cannot be set in the same command as it is moved (i.e., via
+the -tc or -fc flags).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipTime">
+          <code><b>clipTime</b>(<b>ct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[time, time, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Modifies the final time where a key is inserted using an
+offset, pivot, and scale.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcontrolPoints">
+          <code><b>controlPoints</b>(<b>cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag explicitly specifies whether or not to include the
+control points of a shape (see &quot;-s&quot; flag) in the list of attributes.
+Default: false.  <b>(Not valid for &quot;pasteKey&quot; cmd.)</b>
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageval">
+          <code><b>eval</b>(<b>ev</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the value(s) of the animCurves when evaluated
+(without regard to input connections)
+at the times given by the -t/time or -f/float flags.  Cannot
+be used in combination with other query flags, and
+cannot be used with time ranges (-t &quot;5:10&quot;).
+When no -t or -f flags appear on the command line, the
+evals are queried at the current time.  Query returns a float[].
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfloat">
+          <code><b>float</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>floatrange</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+value uniquely representing a non-time-based
+key (or key range) on a time-based animCurve.  Valid
+floatRange include single values (-f 10) or a
+string with a lower and upper bound, separated by a
+colon (-f &quot;10:20&quot;)
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfloatChange">
+          <code><b>floatChange</b>(<b>fc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+How much (with -relative) or where (with -absolute)
+to move keys (on non-time-input animation curves)
+along the x (float) axis. Returns float[] when queried.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghierarchy">
+          <code><b>hierarchy</b>(<b>hi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Hierarchy expansion options.  Valid values are &quot;above,&quot;
+&quot;below,&quot; &quot;both,&quot; and &quot;none.&quot; <b>(Not valid for &quot;pasteKey&quot; cmd.)</b>
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeUpperBound">
+          <code><b>includeUpperBound</b>(<b>iub</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When the -t/time or -f/float flags represent a range
+of keys, this flag determines whether the keys at the
+upper bound of the range are included in the keyset.
+Default value: true.  This flag is only valid when
+the argument to the -t/time flag is a time range with
+a lower and upper bound.  (When used with the &quot;pasteKey&quot;
+command, this flag refers only to the time range of the
+target curve that is replaced, when using options such
+as &quot;replace,&quot; &quot;fitReplace,&quot; or &quot;scaleReplace.&quot;  This
+flag has no effect on the curve pasted from the clipboard.)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagindex">
+          <code><b>index</b>(<b>index</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+index of a key on an animCurve
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagindexValue">
+          <code><b>indexValue</b>(<b>iv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query-only flag that returns an int for the key's index.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeyframeCount">
+          <code><b>keyframeCount</b>(<b>kc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns an int for the number of keys found for the
+targets.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglastSelected">
+          <code><b>lastSelected</b>(<b>lsl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used in queries, this flag returns requested values
+for the last selected key.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the names of animCurves of specified nodes,
+attributes or keys.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoption">
+          <code><b>option</b>(<b>o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Valid values are &quot;move,&quot; &quot;insert,&quot; &quot;over,&quot; and
+&quot;segmentOver.&quot; When you &quot;move&quot; a key, the key will not cross over
+(in time) any keys before or after it. When you &quot;insert&quot; a key,
+all keys before or after (depending upon the -timeChange value)
+will be moved an equivalent amount. When you &quot;over&quot; a key, the key
+is allowed to move to any time (as long as a key is not there already).
+When you &quot;segmentOver&quot; a set of keys (this option only has a
+noticeable effect when more than one key is being moved) the first
+key (in time) and last key define a segment (unless you specify a
+time range). That segment is then allowed to move over other keys,
+and keys will be moved to make room for the segment.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelative">
+          <code><b>relative</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Move amounts are relative to a key's current position.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselected">
+          <code><b>selected</b>(<b>sl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used in queries, this flag returns requested values
+for any active keys.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshape">
+          <code><b>shape</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Consider attributes of shapes below transforms as well,
+except &quot;controlPoints&quot;.  Default: true.  <b>(Not valid for &quot;pasteKey&quot; cmd.)</b>
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtickDrawSpecial">
+          <code><b>tickDrawSpecial</b>(<b>tds</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the special drawing state for this key when it
+is drawn as a tick in the timeline.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtime">
+          <code><b>time</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>timerange</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+time uniquely representing a key (or key
+range) on a time-based animCurve. See the code
+examples below on how to format for a single
+frame or frame ranges.
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtimeChange">
+          <code><b>timeChange</b>(<b>tc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+How much (with -relative) or where (with -absolute)
+to move keys (on time-input animation curves)
+along the x (time) axis.  Returns float[] when queried.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalueChange">
+          <code><b>valueChange</b>(<b>vc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+How much (with -relative) or where (with -absolute)
+to move keys along the y (value) axis. Returns float[]
+when queried.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Keys on animation curves are identified by either
+# their time values or their indices.  Times and indices can
+# be given as a range or list of ranges.
+
+# time=('10pal','10pal') means the key at frame 10 (PAL format).
+# time=[(1.0,1.0),('15ntsc','15ntsc'),(20,20)] means the keys at time 1.0 second, frame 15 (in NTSC format), and time 20 (in the currently defined global time unit).
+# time=(10,20) means all keys in the range from 10 to 20, inclusive, in the current time unit.
+# Omitting one end of a range means &quot;go to infinity&quot;, as in the following examples:
+# time=(10,) means all keys from time 10 (in the current time unit) onwards.
+# time=(0,10) means all keys up to (and including) time 10 (in the current time unit).
+# time=() is a short form to specify all keys.
+# index=(0,0) means the first key of each animation curve. (Indices are 0-based.)
+# index=[(2,2),(5,5),(7,7)] means the 3rd, 6th, and 8th keys.
+# index=(1,5) means the 2nd, 3rd, 4th, 5th, and 6th keys of each animation curve.
+
+# Two ways to find out how many keys there are on the
+# paramCurve connected to surface1.translateX;
+#
+cmds.keyframe( 'surface1', attribute='translateX', query=True, keyframeCount=True )
+cmds.keyframe( 'surface1.translateX', query=True, keyframeCount=True )
+
+# Query all keyframes of object &quot;surface1&quot; within the time range 0 to 20.
+#
+cmds.keyframe( 'surface1', time=(0,20), query=True, valueChange=True, timeChange=True);
+
+# Query just the time of the first key in the
+# &quot;Translate X&quot; parameter curve.  Note that the indices are 0-based.
+#
+cmds.keyframe('surface1.translateX',index=(0,0),query=True);
+
+# Shift all the active object's keys in the range 10-20
+# by one (current) time unit (frame, second, etc.)
+#
+cmds.keyframe(edit=True,relative=True,timeChange=1,time=(10,20))
+
+# Two ways to move all keys at time 10 of
+# the active object to time 12.  Note that &quot;-absolute&quot;
+# is the default.
+#
+cmds.keyframe(time=(10,10),timeChange=12)
+cmds.keyframe(time=(10,10),absolute=True,timeChange=12)
+
+# Set the 2nd keyframe of cube1's Translate X parameter
+# curve to be 10.25 at time 1.5 seconds.
+#
+cmds.keyframe('surface1.translateX',edit=True,index=(1,1),timeChange='1.5sec',valueChange=10.25)
+
+# Evaluate the animCurve feeding into nurbsCone1's translateX attribute at time 3
+#
+cmds.keyframe('nurbsCone1',at='tx',t=(3,3),q=True,eval=True)
+
+# Query the times of the active keys on attribute translateX of nurbsCone1
+#
+cmds.keyframe( 'nurbsCone1', at='tx', sl=True, q=True, tc=True )
+
+# How many keys are selected on nurbsCone1?
+#
+cmds.keyframe( 'nurbsCone1', sl=True, q=True, kc=True )
+
+# Here's a script to print out all a cone's animCurves that have
+# keys selected.  Each animCurve is followed by a list of times
+# for the selected keys.  The result of this script is:
+#     nurbsCone1_translateX: 5
+#     nurbsCone1_translateY: 12
+#     nurbsCone1_translateZ: 4 14
+#
+myCone = cmds.cone()
+cmds.setKeyframe( myCone[0], t=[0,5,10], at='tx', v=5 )
+cmds.setKeyframe( myCone[0], t=[2,7,12], at='ty', v=10 )
+cmds.setKeyframe( myCone[0], t=[4,9,14], at='tz', v=15 )
+cmds.selectKey( t=[(5,5),(12,12),(4,4)] )
+cmds.selectKey( animation='objects', add=True, t=(14,14) )
+
+nodes = cmds.keyframe(myCone,query=True,name=True)
+for node in nodes:
+   keyTimes = cmds.keyframe(node,sl=True,query=True,tc=True)
+   print &quot;Node: %s&quot; % node
+   print keyTimes
+
+# For the above sample script, the last selected key is
+# nurbsCone1_translateZ: 14.  The following may be used to query
+# the values for that key
+#
+cmds.keyframe( query=True, lastSelected=True, name=True )
+cmds.keyframe( query=True, lastSelected=True, timeChange=True )
+cmds.keyframe( query=True, lastSelected=True, valueChange=True )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,1173 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyAutoProjection command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-polyAutoProjection"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/polyAutoProjection.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyAutoProjection </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyAutoProjection.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyAutoProjection [-<a href="#flagcaching">caching</a> <i>boolean</i>] [-<a href="#flagconstructionHistory">constructionHistory</a> <i>boolean</i>] [-<a href="#flagcreateNewMap">createNewMap</a> <i>boolean</i>] [-<a href="#flaginsertBeforeDeformers">insertBeforeDeformers</a> <i>boolean</i>] [-<a href="#flaglayout">layout</a> <i>int</i>] [-<a href="#flaglayoutMethod">layoutMethod</a> <i>int</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagnodeState">nodeState</a> <i>int</i>] [-<a href="#flagoptimize">optimize</a> <i>int</i>] [-<a href="#flagpercentageSpace">percentageSpace</a> <i>float</i>] [-<a href="#flagpivot">pivot</a> <i>linear linear linear</i>] [-<a href="#flagpivotX">pivotX</a> <i>linear</i>] [-<a href="#flagpivotY">pivotY</a> <i>linear</i>] [-<a href="#flagpivotZ">pivotZ</a> <i>linear</i>] [-<a href="#flagplanes">planes</a> <i>int</i>] [-<a href="#flagprojectBothDirections">projectBothDirections</a> <i>boolean</i>] [-<a href="#flagrotate">rotate</a> <i>angle angle angle</i>] [-<a href="#flagrotateX">rotateX</a> <i>angle</i>] [-<a href="#flagrotateY">rotateY</a> <i>angle</i>] [-<a href="#flagrotateZ">rotateZ</a> <i>angle</i>] [-<a href="#flagscale">scale</a> <i>float float float</i>] [-<a href="#flagscaleMode">scaleMode</a> <i>int</i>] [-<a href="#flagscaleX">scaleX</a> <i>float</i>] [-<a href="#flagscaleY">scaleY</a> <i>float</i>] [-<a href="#flagscaleZ">scaleZ</a> <i>float</i>] [-<a href="#flagskipIntersect">skipIntersect</a> <i>boolean</i>] [-<a href="#flagtranslate">translate</a> <i>linear linear linear</i>] [-<a href="#flagtranslateX">translateX</a> <i>linear</i>] [-<a href="#flagtranslateY">translateY</a> <i>linear</i>] [-<a href="#flagtranslateZ">translateZ</a> <i>linear</i>] [-<a href="#flaguvSetName">uvSetName</a> <i>string</i>] [-<a href="#flagworldSpace">worldSpace</a> <i>boolean</i>]  </code> </p>
+      <p>polyAutoProjection is undoable, queryable, and editable.</p>
+      Projects a map onto an object, using several orthogonal projections
+simultaneously.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The node name.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcaching">caching</a>, <a href="#flagconstructionHistory">constructionHistory</a>, <a href="#flagcreateNewMap">createNewMap</a>, <a href="#flaginsertBeforeDeformers">insertBeforeDeformers</a>, <a href="#flaglayout">layout</a>, <a href="#flaglayoutMethod">layoutMethod</a>, <a href="#flagname">name</a>, <a href="#flagnodeState">nodeState</a>, <a href="#flagoptimize">optimize</a>, <a href="#flagpercentageSpace">percentageSpace</a>, <a href="#flagpivot">pivot</a>, <a href="#flagpivotX">pivotX</a>, <a href="#flagpivotY">pivotY</a>, <a href="#flagpivotZ">pivotZ</a>, <a href="#flagplanes">planes</a>, <a href="#flagprojectBothDirections">projectBothDirections</a>, <a href="#flagrotate">rotate</a>, <a href="#flagrotateX">rotateX</a>, <a href="#flagrotateY">rotateY</a>, <a href="#flagrotateZ">rotateZ</a>, <a href="#flagscale">scale</a>, <a href="#flagscaleMode">scaleMode</a>, <a href="#flagscaleX">scaleX</a>, <a href="#flagscaleY">scaleY</a>, <a href="#flagscaleZ">scaleZ</a>, <a href="#flagskipIntersect">skipIntersect</a>, <a href="#flagtranslate">translate</a>, <a href="#flagtranslateX">translateX</a>, <a href="#flagtranslateY">translateY</a>, <a href="#flagtranslateZ">translateZ</a>, <a href="#flaguvSetName">uvSetName</a>, <a href="#flagworldSpace">worldSpace</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Global Values</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglayoutMethod">
+          <code><b>-layoutMethod</b>(<b>-lm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set which layout method to use:
+<br>0 Block Stacking.
+<br>1 Shape Stacking.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpivot">
+          <code><b>-pivot</b>(<b>-pvt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear linear linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the pivot for scaling and rotation.
+<br>C: Default is 0.0 0.0 0.0.
+<br>Q: When queried, this flag returns a <i>float[3]</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpivotX">
+          <code><b>-pivotX</b>(<b>-pvx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the X pivot for scaling and rotation.
+<br>C: Default is 0.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpivotY">
+          <code><b>-pivotY</b>(<b>-pvy</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the Y pivot for scaling and rotation.
+<br>C: Default is 0.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpivotZ">
+          <code><b>-pivotZ</b>(<b>-pvz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the Z pivot for scaling and rotation.
+<br>C: Default is 0.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotate">
+          <code><b>-rotate</b>(<b>-ro</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle angle angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the rotation angles around X, Y, Z.
+<br>C: Default is 0.0 0.0 0.0.
+<br>Q: When queried, this flag returns a <i>float[3]</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotateX">
+          <code><b>-rotateX</b>(<b>-rx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the rotation angle around X.
+<br>C: Default is 0.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotateY">
+          <code><b>-rotateY</b>(<b>-ry</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the rotation angle around Y.
+<br>C: Default is 0.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotateZ">
+          <code><b>-rotateZ</b>(<b>-rz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the rotation angle around Z.
+<br>C: Default is 0.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscale">
+          <code><b>-scale</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the scaling vector.
+<br>C: Default is 1.0 1.0 1.0.
+<br>Q: When queried, this flag returns a <i>float[3]</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscaleX">
+          <code><b>-scaleX</b>(<b>-sx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies X for scaling vector.
+<br>C: Default is 1.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscaleY">
+          <code><b>-scaleY</b>(<b>-sy</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies Y for scaling vector.
+<br>C: Default is 1.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscaleZ">
+          <code><b>-scaleZ</b>(<b>-sz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies Z for scaling vector.
+<br>C: Default is 1.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtranslate">
+          <code><b>-translate</b>(<b>-t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear linear linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the translation vector.
+<br>C: Default is 0.0 0.0 0.0.
+<br>Q: When queried, this flag returns a <i>float[3]</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtranslateX">
+          <code><b>-translateX</b>(<b>-tx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the X translation vector.
+<br>C: Default is 0.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtranslateY">
+          <code><b>-translateY</b>(<b>-ty</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the Y translation vector.
+<br>C: Default is 0.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtranslateZ">
+          <code><b>-translateZ</b>(<b>-tz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the Z translation vector.
+<br>C: Default is 0.0.
+<br>Q: When queried, this flag returns a <i>float</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Common poly modifier operation flags</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcaching">
+          <code><b>-caching</b>(<b>-cch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Toggle caching for all attributes so that no recomputation is needed
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconstructionHistory">
+          <code><b>-constructionHistory</b>(<b>-ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn the construction history on or off (where applicable). If
+construction history is on then the corresponding node will be
+inserted into the history chain for the mesh. If construction history
+is off then the operation will be performed directly on the object.
+<br>
+<b>Note:</b> If the object already has construction history then
+this flag is ignored and the node will always be inserted into
+the history chain.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreateNewMap">
+          <code><b>-createNewMap</b>(<b>-cm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set to true if a new map should be created
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginsertBeforeDeformers">
+          <code><b>-insertBeforeDeformers</b>(<b>-ibd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set to true if the new node created should inserted before any deformer nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglayout">
+          <code><b>-layout</b>(<b>-l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+What layout algorithm should be used:
+<br>0 UV pieces are set to no layout.
+<br>1 UV pieces are aligned along the U axis.
+<br>2 UV pieces are moved in a square shape.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Give a name to the resulting node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeState">
+          <code><b>-nodeState</b>(<b>-nds</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+<p>
+Maya dependency nodes have 6 possible states.
+The <b>Normal (0)</b>, <b>HasNoEffect (1)</b>, and <b>Blocking (2)</b> states can be
+used to alter how the graph is evaluated.
+
+
+<p>
+The <b>Waiting-Normal (3)</b>, <b>Waiting-HasNoEffect (4)</b>, <b>Waiting-Blocking (5)</b>
+are for internal use only. They temporarily shut off parts of the graph during interaction
+(e.g., manipulation). The understanding is that once the operation is done,
+the state will be reset appropriately, e.g. <b>Waiting-Blocking</b> will reset
+back to <b>Blocking</b>.
+
+
+<p>
+The <b>Normal</b> and <b>Blocking</b> cases apply to all nodes, while
+<b>HasNoEffect</b> is node specific; many nodes do not support this option.
+Plug-ins store state in the <i>MPxNode::state</i> attribute. Anyone can set
+it or check this attribute.  Additional details about each of these 3 states follow.
+
+<p> 
+
+<table border="1">
+<tr>
+<th>State</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>Normal</b></td>
+<td>The normal node state. This is the default.</td>
+</tr>
+<tr>
+<td><b>HasNoEffect</b></td>
+<td>
+<p>
+The <b>HasNoEffect</b> option (a.k.a. pass-through), is used in cases where
+there is an operation on an input producing an output of the same data type.
+Nearly all deformers support this state, as do a few other nodes.
+As stated earlier, it is not supported by all nodes.
+
+<p>
+It’s typical to implement support for the <b>HasNoEffect</b> state in
+the node’s compute method and to perform appropriate operations.
+Plug-ins can also support <b>HasNoEffect</b>.
+
+<p>
+The usual implementation of this state is to copy the input directly to the
+matching output without applying the algorithm in the node. For deformers,
+applying this state leaves the input geometry undeformed on the output.
+
+</td>
+</tr>
+<tr>
+<td><b>Blocking</b></td>
+<td>
+<p>
+This is implemented in the depend node base class and applies to all nodes.
+<b>Blocking</b> is applied during the evaluation phase to connections.
+An evaluation request to a blocked connection will return as failures,
+causing the destination plug to retain its current value. Dirty propagation
+is indirectly affected by this state since blocked connections are never cleaned.
+
+<p>
+When a node is set to <b>Blocking</b> the behavior is supposed to be the same as
+if all outgoing connections were broken. As long as nobody requests evaluation
+of the blocked node directly it won’t evaluate after that. Note that a blocked
+node will still respond to <i>getAttr</i> requests but a <i>getAttr</i> on a
+downstream node will not reevaluate the blocked node.
+
+<p>
+Setting the root transform of a hierarchy to <b>Blocking</b> won’t automatically
+influence child transforms in the hierarchy. To do this, you’d need to
+explicitly set all child nodes to the <b>Blocking</b> state.
+
+<p>
+For example, to set all child transforms to <b>Blocking</b>, you could use the
+following script.
+
+<pre>
+
+import maya.cmds as cmds
+def blockTree(root):
+nodesToBlock = []
+for node in {child:1 for child in cmds.listRelatives( root, path=True, allDescendents=True )}.keys():
+nodesToBlock += cmds.listConnections(node, source=True, destination=True )
+for node in {source:1 for source in nodesToBlock}.keys():
+cmds.setAttr( '%s.nodeState' % node, 2 )
+
+</pre>
+<p>
+Applying this script would continue to draw objects but things would not be animated.
+
+</td>
+</tr>
+</table>
+<br><i>Default:</i> kdnNormal
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoptimize">
+          <code><b>-optimize</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use two different flavors for the cut generation.
+<br>0 Every face is assigned to the best plane. This optimizes the
+map distortion.
+<br>1 Small UV pieces are incorporated into larger ones, when the
+extra distortion introduced is reasonable. This tends to produce fewer
+UV pieces.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpercentageSpace">
+          <code><b>-percentageSpace</b>(<b>-ps</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When layout is set to square, this value is a percentage of
+the texture area which is added around each UV piece. It can be
+used to ensure each UV piece uses different pixels in the texture.
+<br>Maximum value is 5 percent.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagplanes">
+          <code><b>-planes</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Number of intermediate projections used. Valid numbers
+are 4, 5, 6, 8, and 12.
+<br>C: Default is 6.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprojectBothDirections">
+          <code><b>-projectBothDirections</b>(<b>-pb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies which reference to use.
+If &quot;on&quot; : projections are mirrored on directly opposite faces.
+If &quot;off&quot; : projections are not mirrored on opposite faces.
+<br>C: Default is &quot;off&quot;.
+<br>Q: When queried, this flag returns an <i>integer</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscaleMode">
+          <code><b>-scaleMode</b>(<b>-sc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+How to scale the pieces, after projections:
+<br>0 No scale is applied.
+<br>1 Uniform scale to fit in unit square.
+<br>2 Non proportional scale to fit in unit square.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagskipIntersect">
+          <code><b>-skipIntersect</b>(<b>-si</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When on, self intersection of UV pieces are not
+tested. This makes the projection faster and produces fewer pieces,
+but may lead to overlaps in UV space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvSetName">
+          <code><b>-uvSetName</b>(<b>-uvs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the UV set to be created
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldSpace">
+          <code><b>-worldSpace</b>(<b>-ws</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies which reference to use.
+If &quot;on&quot; : all geometrical values are taken in world reference.
+If &quot;off&quot; : all geometrical values are taken in object reference.
+<br>C: Default is off.
+<br>Q: When queried, this flag returns an <i>int</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Create a plane with default UVs.
+polySphere -n sph;
+
+// Automatic projections with 6 planes.
+polyAutoProjection &quot;sphShape.f[*]&quot;;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

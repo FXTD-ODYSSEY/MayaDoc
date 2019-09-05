@@ -1,0 +1,325 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>currentUnit command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-currentUnit"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/currentUnit.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>currentUnit </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Display" target="contentFrame">Display</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("currentUnit.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>currentUnit([<a href="#flagangle">angle</a>=<i>string</i>], [<a href="#flagfullName">fullName</a>=<i>boolean</i>], [<a href="#flaglinear">linear</a>=<i>string</i>], [<a href="#flagtime">time</a>=<i>string</i>], [<a href="#flagupdateAnimation">updateAnimation</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>currentUnit is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command allows you to change the units in which you will work
+in Maya. There are three types of units: linear, angular and time.
+<p>
+The current unit affects how all commands in Maya interpret their
+numeric values. For example, if the current linear unit is <i>cm</i>,
+then the command:
+<pre>
+move 5 -2 3;
+sphere -radius 4;
+</pre>
+will be interpreted as moving 5cm in X, -2cm in Y, 3cm in Z, and as
+creating a sphere with radius 4cm. Similarly, if the current time unit
+is Film (24 frames per second), then the command:
+<pre>
+currentTime 6;
+</pre>
+will be interpreted as setting the current time to frame 6 in the Film
+unit, which is 6/24 or 0.25 seconds.
+<p>
+You can always override the unit of a particular numeric value to a
+command be specifying it one the command. For example, using the above
+examples:
+<pre>
+move 5m -2mm 3cm;
+sphere -radius 4inch;
+currentTime 6ntsc;
+</pre>
+would move the object 5 meters in X, -2 millimeters in Y, 3 centimeters
+in Z, create a sphere of radius 4 inches, and change the current time
+to 6 frames in the NTSC unit, which would be 0.2 seconds, or 4.8 frames
+in the current (Film) unit.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The new current unit that has been set</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="displayAffected.html">displayAffected</a>, <a href="displayColor.html">displayColor</a>, <a href="displayCull.html">displayCull</a>, <a href="displayLevelOfDetail.html">displayLevelOfDetail</a>, <a href="displayPref.html">displayPref</a>, <a href="displayRGBColor.html">displayRGBColor</a>, <a href="displaySmoothness.html">displaySmoothness</a>, <a href="displayStats.html">displayStats</a>, <a href="displaySurface.html">displaySurface</a>, <a href="hide.html">hide</a>, <a href="refresh.html">refresh</a>, <a href="showHidden.html">showHidden</a>, <a href="toggle.html">toggle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagangle">angle</a>, <a href="#flagfullName">fullName</a>, <a href="#flaglinear">linear</a>, <a href="#flagtime">time</a>, <a href="#flagupdateAnimation">updateAnimation</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagangle">
+          <code><b>angle</b>(<b>a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the current angular unit. Valid strings are:
+<br>
+[deg | degree | rad | radian]
+<br>
+When queried, returns a string which is the current angular unit
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfullName">
+          <code><b>fullName</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A query only flag. When specified in conjunction with any of
+the -linear/-angle/-time flags, will return the long form of the unit.
+For example, <i>mm</i> and <i>millimeter</i> are the same unit, but
+the former is the short form of the unit name, and the latter is the
+long form of the unit name.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglinear">
+          <code><b>linear</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the current linear unit. Valid strings are:
+<br>
+[mm | millimeter | cm | centimeter | m | meter | km | kilometer | in | inch | ft | foot | yd | yard | mi | mile]
+<br>
+When queried, returns a string which is the current linear unit
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtime">
+          <code><b>time</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the current time unit. Valid strings are:
+<br>
+[hour | min | sec | millisec | game | film | pal | ntsc | show | palf | ntscf | 23.976fps | 29.97fps | 29.97df | 47.952fps | 59.94fps | 44100fps | 48000fps]
+<br>
+When queried, returns a string which is the current time unit
+<p>
+Note that there is no long form for any of the time units.
+The non-seconds based time units are interpreted as the following
+frames per second:
+<ul>
+<li>game: 15 fps</li>
+<li>film: 24 fps</li>
+<li>pal: 25 fps</li>
+<li>ntsc: 30 fps</li>
+<li>show: 48 fps</li>
+<li>palf: 50 fps</li>
+<li>ntscf: 60 fps</li>
+</ul>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupdateAnimation">
+          <code><b>updateAnimation</b>(<b>ua</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+An edit only flag.  When specified in conjunction with the -time
+flag indicates that times for keys are not updated.  By default when the
+current time unit is changed, the times for keys are modified so that
+playback timing is preserved.  For example a key set a frame 12film is
+changed to frame 15ntsc when the current time unit is changed to ntsc,
+since they both represent a key at a time of 0.5 seconds.  Specifying
+-updateAnimation false would leave the key at frame 12ntsc.
+Default is -updateAnimation true.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# What is the current linear unit?
+cmds.currentUnit( query=True, linear=True )
+
+# What is the current angular unit in its long name form?
+cmds.currentUnit( fullName=True, query=True, angle=True )
+
+# Change the current time unit to ntsc
+cmds.currentUnit( time='ntsc' )
+
+# Change the current linear unit to inches
+cmds.currentUnit( linear='in' )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,383 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>addMetadata command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-addMetadata"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/addMetadata.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>addMetadata </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("addMetadata.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>addMetadata([<a href="#flagchannelName">channelName</a>=<i>string</i>], [<a href="#flagchannelType">channelType</a>=<i>string</i>], [<a href="#flagindexType">indexType</a>=<i>string</i>], [<a href="#flagscene">scene</a>=<i>boolean</i>], [<a href="#flagstreamName">streamName</a>=<i>string</i>], [<a href="#flagstructure">structure</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>addMetadata is undoable, queryable, and <b>NOT editable</b>.</p>
+      <p>
+Defines the attachment of a metadata structure to one or more selected
+objects. This creates a placeholder with an empty metadata Stream for
+later population through the <b>editMetadata</b> command. It's similar
+in concept to the <b>addAttr</b> command for nodes - a data description
+is added but no data is actually set.
+
+<p>
+When assigning a metadata structure you must specify these flags
+- <i>channelName</i> is the metadata channel type (e.g. &quot;vertex&quot;),
+<i>streamName</i> is the name of the metadata stream to be created,
+and <i>structure</i> is the name of the structure type defining the
+contents of the metadata. The <i>indexType</i> flag is optional.
+If it is not present then the index will be presumed to be a standard
+numerical value.
+
+<p>
+You can query metadata information at a variety of levels. See the
+table below for a full list of the queryable arguments. In each case
+the specification of any of the non-queried arguments filters the list
+of metadata to be examined during the query. For all queries a single
+object must be selected for querying.
+
+<p>
+For example querying the <i>channelName</i> flag with no other
+arguments will return the list of all Channel types on the selected
+object that contain any metadata. Querying the <i>channelName</i> flag
+with the <i>indexType</i> flag specified will return only those
+channel types containing metadata streams that use that particular
+type of index.
+
+<ul>
+<li>Query the <i>channelName</i> flag to return the list of any channel types
+that have metadata.</li>
+<li>Specify the <i>channelName</i> and <i>streamName</i> flags and query the
+<i>structure</i> flag to return the name of the structure assigned to the
+given stream (if any).</li>
+<li>Specify a <i>channelName</i> and query the <i>streamName</i> to return
+the list of all streams assigned to that particular channel type.</li>
+<li>If you query the <i>streamName</i> without a specific <i>channelName</i>
+then it returns a list of pairs of (channelName, streamName) for all metadata
+streams.</li>
+</ul>
+
+<p>
+Flag Combinations:
+<pre>
+ChannelName IndexType StreamName Structure   Create   Can Query
+     0          0          0         0         X        ChannelName, StreamName, Structure
+     0          0          0         1         X        ChannelName, StreamName, IndexType
+     0          0          1         0         X        ChannelName, Structure, IndexType
+     0          0          1         1         X        ChannelName, IndexType
+     0          1          0         0         X        ChannelName, StreamName, Structure
+     0          1          0         1         X        ChannelName, StreamName
+     0          1          1         0         X        ChannelName, Structure
+     0          1          1         1         X        ChannelName
+     1          0          0         0         X        StreamName, Structure, IndexType
+     1          0          0         1         X        StreamName, IndexType
+     1          0          1         0         X        Structure, IndexType
+     1          0          1         1        (a)       IndexType
+     1          1          0         0         X        StreamName, Structure
+     1          1          0         1         X        StreamName
+     1          1          1         0         X        Structure
+     1          1          1         1        (b)       X
+    (a) Assign an empty metadata stream with default index type
+    (b) Assign an empty metadata stream with the named index type
+</pre>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>List of nodes to which a new Stream was successfully added (create mode)</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of channel types containing metadata on an object when querying the channelName flag</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of stream names on an object when querying the streamName flag</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of structures used by an object's metadata Streams when querying the structure flag</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of index types used by an object when querying the indexType flag</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>metadata, component, stream, channel, association
+      <h2><a name="hRelated">Related</a></h2><a href="applyMetadata.html">applyMetadata</a>, <a href="dataStructure.html">dataStructure</a>, <a href="editMetadata.html">editMetadata</a>, <a href="getMetadata.html">getMetadata</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagchannelName">channelName</a>, <a href="#flagchannelType">channelType</a>, <a href="#flagindexType">indexType</a>, <a href="#flagscene">scene</a>, <a href="#flagstreamName">streamName</a>, <a href="#flagstructure">structure</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchannelName">
+          <code><b>channelName</b>(<b>cn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the Channel type to which the structure is to be added (e.g. &quot;vertex&quot;).
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchannelType">
+          <code><b>channelType</b>(<b>cht</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Obsolete - use the 'channelName' flag instead.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagindexType">
+          <code><b>indexType</b>(<b>idt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the index type the new Channel should be using. If not specified this defaults
+to a simple numeric index. Of the native types only a mesh &quot;vertexFace&quot; channel is
+different, using a &quot;pair&quot; index type.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscene">
+          <code><b>scene</b>(<b>scn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use this flag when you want to add metadata to the scene as a whole rather than to
+any individual nodes. If you use this flag and have nodes selected the nodes will
+be ignored and a warning will be displayed.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstreamName">
+          <code><b>streamName</b>(<b>stn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the empty stream being created. In query mode not specifying a value will
+return a list of streams on the named channel type.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstructure">
+          <code><b>structure</b>(<b>str</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the structure which defines the metadata to be attached to the object.
+In query mode this will return the name of the structure attached at a given
+stream.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+import maya.cmds as cmds
+cmds.polyPlane( name='p', ch=False )
+cmds.select( 'pShape', replace=True )
+cmds.dataStructure( format='raw', asString='name=IdStruct:int32=ID' )
+cmds.dataStructure( format='raw', asString='name=OffStruct:float=Offset' )
+cmds.dataStructure( format='raw', asString='name=OrgStruct:float[3]=Origin Point' )
+# Add three metadata streams
+cmds.addMetadata( streamName='IdStream', channelName='vertex', structure='IdStruct' )
+cmds.addMetadata( streamName='OffStream', channelName='vertex', structure='OffStruct' )
+cmds.addMetadata( streamName='OrgStream', channelName='edge', structure='OrgStruct' )
+cmds.addMetadata( streamName='VFStream', channelName='vertexFace', indexType='pair', structure='OrgStruct' )
+
+# Query for the list of all channel types possessing metadata
+cmds.addMetadata( query=True, channelName=True )
+# Return: ['edge', 'vertex', 'vertexFace'] #
+
+# Query for the structure assigned to a specific stream
+cmds.addMetadata( channelName='vertex', streamName='OffStream', query=True, structure=True )
+# Return: 'OffStruct' #
+
+# Query for the list of all streams on a specific channel type
+cmds.addMetadata( channelName='vertex', query=True, streamName=True )
+# Return: ['IdStream', 'OffStream'] #
+
+# Query for the list of all streams
+cmds.addMetadata( query=True, streamName=True )
+# Return: ['IdStream', 'OffStream', 'OrgStream', 'VFStream'] #
+
+# You can combine queries to answer more general questions about the
+# metadata on an object. For example suppose you wanted to know the
+# index type used by all Streams on the 'vertex' Channel.
+# First extract the list of Streams on the Channel
+streams = cmds.addMetadata( channelName='vertex', query=True, streamName=True )
+# Loop through each Stream, querying the IndexType only for that Stream
+for stream in streams:
+	indexType = cmds.addMetadata( channelName='vertex', streamName=stream, query=True, indexType=True )[0]
+	print 'Index type on %s is %s' % (stream, indexType)
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

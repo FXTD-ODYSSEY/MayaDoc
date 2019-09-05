@@ -1,0 +1,169 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>aliasAttr command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-aliasAttr"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/aliasAttr.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>aliasAttr </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("aliasAttr.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>aliasAttr [-<a href="#flagremove">remove</a>]  </code> </p>
+      <p>aliasAttr is undoable, queryable, and editable.</p>
+      Allows aliases (alternate names) to be defined for any attribute of
+a specified node. When an attribute is aliased, the alias will be
+used by the system to display information about the attribute.
+The user may, however, freely use either the alias or the original
+name of the attribute. Only a single alias can be specified for an
+attribute so setting an alias on an already-aliased attribute destroys
+the old alias.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>in query mode.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>dg, dependency, graph, alias, attribute, name
+      <h2><a name="hRelated">Related</a></h2><a href="addAttr.html">addAttr</a>, <a href="attributeInfo.html">attributeInfo</a>, <a href="connectAttr.html">connectAttr</a>, <a href="deleteAttr.html">deleteAttr</a>, <a href="disconnectAttr.html">disconnectAttr</a>, <a href="getAttr.html">getAttr</a>, <a href="getClassification.html">getClassification</a>, <a href="nodeType.html">nodeType</a>, <a href="objExists.html">objExists</a>, <a href="objectType.html">objectType</a>, <a href="renameAttr.html">renameAttr</a>, <a href="setAttr.html">setAttr</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagremove">remove</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>-remove</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that aliases listed should be removed (otherwise new aliases
+are added).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+createNode blendShape -n blender;
+//
+// Define intuitive names for the weights of a blendShape.
+// The blendShape command does this automatically to allow you
+// to refer to the weight corresponding to a target shape by the name
+// of that shape.
+//
+aliasAttr smile blender.w[0] frown blender.w[1];
+// Result: 2 //
+//
+// List all the attribute aliases for the node blendShape1
+//
+aliasAttr -q blender;
+// Result: smile weight[0] frown weight[1] //
+//
+// Allow the X rotation on a joint to be called its &quot;roll&quot;
+//
+createNode joint -n elbow;
+aliasAttr roll elbow.rx;
+// Result: 1 //
+aliasAttr tuck elbow.ry;
+// Result: 1 //
+//
+// Remove the roll alias defined above.
+//
+aliasAttr -rm elbow.roll;
+//
+// Remove the tuck alias defined above.
+//
+aliasAttr -rm elbow.ry;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

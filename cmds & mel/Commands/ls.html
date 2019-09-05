@@ -1,0 +1,1935 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>ls command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-ls"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/ls.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>ls </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("ls.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>ls [-<a href="#flagabsoluteName">absoluteName</a>] [-<a href="#flagallPaths">allPaths</a>] [-<a href="#flagassemblies">assemblies</a>] [-<a href="#flagcameras">cameras</a>] [-<a href="#flagcontainerType">containerType</a> <i>string</i>] [-<a href="#flagcontainers">containers</a>] [-<a href="#flagdagObjects">dagObjects</a>] [-<a href="#flagdefaultNodes">defaultNodes</a>] [-<a href="#flagdependencyNodes">dependencyNodes</a>] [-<a href="#flagexactType">exactType</a> <i>string</i>] [-<a href="#flagexcludeType">excludeType</a> <i>string</i>] [-<a href="#flagflatten">flatten</a>] [-<a href="#flaggeometry">geometry</a>] [-<a href="#flagghost">ghost</a>] [-<a href="#flaghead">head</a> <i>int</i>] [-<a href="#flaghilite">hilite</a>] [-<a href="#flagintermediateObjects">intermediateObjects</a>] [-<a href="#flaginvisible">invisible</a>] [-<a href="#flagleaf">leaf</a>] [-<a href="#flaglights">lights</a>] [-<a href="#flaglive">live</a>] [-<a href="#flaglockedNodes">lockedNodes</a>] [-<a href="#flaglong">long</a>] [-<a href="#flagmaterials">materials</a>] [-<a href="#flagmodified">modified</a>] [-<a href="#flagnoIntermediate">noIntermediate</a>] [-<a href="#flagnodeTypes">nodeTypes</a>] [-<a href="#flagobjectsOnly">objectsOnly</a>] [-<a href="#flagorderedSelection">orderedSelection</a>] [-<a href="#flagpartitions">partitions</a>] [-<a href="#flagpersistentNodes">persistentNodes</a>] [-<a href="#flagplanes">planes</a>] [-<a href="#flagpreSelectHilite">preSelectHilite</a>] [-<a href="#flagreadOnly">readOnly</a>] [-<a href="#flagrecursive">recursive</a> <i>boolean</i>] [-<a href="#flagreferencedNodes">referencedNodes</a>] [-<a href="#flagreferences">references</a>] [-<a href="#flagrenderGlobals">renderGlobals</a>] [-<a href="#flagrenderQualities">renderQualities</a>] [-<a href="#flagrenderResolutions">renderResolutions</a>] [-<a href="#flagrenderSetups">renderSetups</a>] [-<a href="#flagselection">selection</a>] [-<a href="#flagsets">sets</a>] [-<a href="#flagshapes">shapes</a>] [-<a href="#flagshortNames">shortNames</a>] [-<a href="#flagshowNamespace">showNamespace</a>] [-<a href="#flagshowType">showType</a>] [-<a href="#flagtail">tail</a> <i>int</i>] [-<a href="#flagtemplated">templated</a>] [-<a href="#flagtextures">textures</a>] [-<a href="#flagtransforms">transforms</a>] [-<a href="#flagtype">type</a> <i>string</i>] [-<a href="#flagundeletable">undeletable</a>] [-<a href="#flaguntemplated">untemplated</a>] [-<a href="#flaguuid">uuid</a>] [-<a href="#flagvisible">visible</a>] 
+[object [object...]]
+     </code> </p>
+      <p>ls is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The <b><code>ls</code></b> command returns the names (and
+optionally the type names) of objects in the scene.
+<p>
+The most common use of <b><code>ls</code></b> is to filter or
+match objects based on their name (using wildcards) or based on their
+type.
+By default <b><code>ls</code></b> will match any object in the
+scene but it can also be used to filter or list the selected
+objects when used in conjunction with the -selection flag.
+<p>
+If type names are requested, using the showType flag, they
+will be interleaved with object names so the result will be
+pairs of <em>&lt;object, type&gt;</em> values.
+<p>
+Internal nodes (for example itemFilter nodes) are typically filtered
+so that only scene objects are returned. However, using a wildcard
+will cause all the nodes matching the wild card to show up, including
+internal nodes.  For example, <b><code>ls *</code></b> will list all
+nodes whether internal or not.
+<p>
+Use the syntax &quot;::&quot; to denote a recursive namespace search when listing nodes.
+For example, <b><code>ls &quot;::pSphere1&quot;</code></b> would match objects named
+&quot;pSphere1&quot; in any namespace, at any depth. <b><code>ls &quot;ns::*&quot;</code></b>
+would match any node in namespace &quot;ns&quot; or children namespaces.
+<p>
+When Maya is in relativeNames mode, the <b><code>ls</code></b> command
+will return names <i>relative</i> to the current namespace and
+<b><code>ls *</code></b> will list from the the current namespace.
+For more details, please refer to the <b><code>-relativeNames</code></b>
+flag of the <b><code>namespace</code></b> command.
+<p>
+The command may also be passed node UUIDs instead of names/paths, and
+can return UUIDs instead of names via the -uuid flag.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>Command result</td></tr></table>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagabsoluteName">absoluteName</a>, <a href="#flagallPaths">allPaths</a>, <a href="#flagassemblies">assemblies</a>, <a href="#flagcameras">cameras</a>, <a href="#flagcontainerType">containerType</a>, <a href="#flagcontainers">containers</a>, <a href="#flagdagObjects">dagObjects</a>, <a href="#flagdefaultNodes">defaultNodes</a>, <a href="#flagdependencyNodes">dependencyNodes</a>, <a href="#flagexactType">exactType</a>, <a href="#flagexcludeType">excludeType</a>, <a href="#flagflatten">flatten</a>, <a href="#flaggeometry">geometry</a>, <a href="#flagghost">ghost</a>, <a href="#flaghead">head</a>, <a href="#flaghilite">hilite</a>, <a href="#flagintermediateObjects">intermediateObjects</a>, <a href="#flaginvisible">invisible</a>, <a href="#flagleaf">leaf</a>, <a href="#flaglights">lights</a>, <a href="#flaglive">live</a>, <a href="#flaglockedNodes">lockedNodes</a>, <a href="#flaglong">long</a>, <a href="#flagmaterials">materials</a>, <a href="#flagmodified">modified</a>, <a href="#flagnoIntermediate">noIntermediate</a>, <a href="#flagnodeTypes">nodeTypes</a>, <a href="#flagobjectsOnly">objectsOnly</a>, <a href="#flagorderedSelection">orderedSelection</a>, <a href="#flagpartitions">partitions</a>, <a href="#flagpersistentNodes">persistentNodes</a>, <a href="#flagplanes">planes</a>, <a href="#flagpreSelectHilite">preSelectHilite</a>, <a href="#flagreadOnly">readOnly</a>, <a href="#flagrecursive">recursive</a>, <a href="#flagreferencedNodes">referencedNodes</a>, <a href="#flagreferences">references</a>, <a href="#flagrenderGlobals">renderGlobals</a>, <a href="#flagrenderQualities">renderQualities</a>, <a href="#flagrenderResolutions">renderResolutions</a>, <a href="#flagrenderSetups">renderSetups</a>, <a href="#flagselection">selection</a>, <a href="#flagsets">sets</a>, <a href="#flagshapes">shapes</a>, <a href="#flagshortNames">shortNames</a>, <a href="#flagshowNamespace">showNamespace</a>, <a href="#flagshowType">showType</a>, <a href="#flagtail">tail</a>, <a href="#flagtemplated">templated</a>, <a href="#flagtextures">textures</a>, <a href="#flagtransforms">transforms</a>, <a href="#flagtype">type</a>, <a href="#flagundeletable">undeletable</a>, <a href="#flaguntemplated">untemplated</a>, <a href="#flaguuid">uuid</a>, <a href="#flagvisible">visible</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagabsoluteName">
+          <code><b>-absoluteName</b>(<b>-an</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used in conjunction with the showNamespace flag to specify
+that the namespace(s) returned by the command be in absolute namespace format.
+The absolute name of the namespace is a full namespace path, starting from the root namespace &quot;:&quot;
+and including all parent namespaces.  For example &quot;:ns:ball&quot; is an absolute namespace
+name while &quot;ns:ball&quot; is not.
+The absolute namespace name is invariant and is not affected by the current namespace or
+relative namespace modes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallPaths">
+          <code><b>-allPaths</b>(<b>-ap</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all paths to nodes in DAG. This flag only works
+if <b>-dag</b> is also specified or if an object name is
+supplied.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagassemblies">
+          <code><b>-assemblies</b>(<b>-as</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List top level transform Dag objects
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcameras">
+          <code><b>-cameras</b>(<b>-ca</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List camera shapes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcontainerType">
+          <code><b>-containerType</b>(<b>-ct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List containers with the specified user-defined type.
+<br> This flag cannot be used in conjunction with the type or exactType flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcontainers">
+          <code><b>-containers</b>(<b>-con</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List containers. Includes both standard containers as well as other types of
+containers such as dagContainers.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdagObjects">
+          <code><b>-dagObjects</b>(<b>-dag</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List Dag objects of any type. If object name arguments are
+passed to the command then this flag will list all Dag objects
+below the specified object(s).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefaultNodes">
+          <code><b>-defaultNodes</b>(<b>-dn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns default nodes.
+A default node is one that Maya creates automatically and does not get
+saved out with the scene, although some of its attribute values may.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdependencyNodes">
+          <code><b>-dependencyNodes</b>(<b>-dep</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List dependency nodes. (including Dag objects)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexactType">
+          <code><b>-exactType</b>(<b>-et</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all objects of the specified type, but <b>not</b> objects that are
+descendents of that type. This flag can appear
+multiple times on the command line. Note: the type passed to
+this flag is the same type name returned from the showType
+flag.
+<br> This flag cannot be used in conjunction with the type or excludeType flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexcludeType">
+          <code><b>-excludeType</b>(<b>-ext</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all objects that are not of the specified type.
+This flag can appear multiple times on the command line. Note: the type passed to
+this flag is the same type name returned from the showType flag.
+<br> This flag cannot be used in conjunction with the type or exactType flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflatten">
+          <code><b>-flatten</b>(<b>-fl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Flattens the returned list of objects so that each component
+is identified individually.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometry">
+          <code><b>-geometry</b>(<b>-g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List geometric Dag objects.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagghost">
+          <code><b>-ghost</b>(<b>-gh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List ghosting objects.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghead">
+          <code><b>-head</b>(<b>-hd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag  specifies the maximum number of elements to be
+returned from the beginning of the list of items.
+Note: each type flag will return at most this many items so
+if multiple type flags are specified then the number of items
+returned can be greater than this amount.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghilite">
+          <code><b>-hilite</b>(<b>-hl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List objects that are currently hilited for component selection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagintermediateObjects">
+          <code><b>-intermediateObjects</b>(<b>-io</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List only intermediate dag nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvisible">
+          <code><b>-invisible</b>(<b>-iv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List only invisible dag nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagleaf">
+          <code><b>-leaf</b>(<b>-lf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all leaf nodes in Dag. This flag is a modifier and must
+be used in conjunction with the -dag flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglights">
+          <code><b>-lights</b>(<b>-lt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List light shapes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglive">
+          <code><b>-live</b>(<b>-lv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List objects that are currently live.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglockedNodes">
+          <code><b>-lockedNodes</b>(<b>-ln</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns locked nodes, which cannot be deleted or renamed. However, their status may change.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglong">
+          <code><b>-long</b>(<b>-l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return full path names for Dag objects. By default the
+shortest unique name is returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaterials">
+          <code><b>-materials</b>(<b>-mat</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List materials or shading groups.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmodified">
+          <code><b>-modified</b>(<b>-mod</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When this flag is set, only nodes modified since the last save will be returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoIntermediate">
+          <code><b>-noIntermediate</b>(<b>-ni</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List only non intermediate dag nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeTypes">
+          <code><b>-nodeTypes</b>(<b>-nt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Lists all registered node types.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobjectsOnly">
+          <code><b>-objectsOnly</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When this flag is set only object names will be returned and
+components/attributes will be ignored.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagorderedSelection">
+          <code><b>-orderedSelection</b>(<b>-os</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List objects and components that are currently selected in their order of selection.  This flag depends
+on the value of the -tso/trackSelectionOrder flag of the selectPref command.  If that flag is not
+enabled than this flag will return the same thing as the -sl/selection flag would.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpartitions">
+          <code><b>-partitions</b>(<b>-pr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List partitions.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpersistentNodes">
+          <code><b>-persistentNodes</b>(<b>-pn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns persistent nodes, which are nodes that stay in the Maya session after a file &gt; new.
+These are a special class of default nodes that do not get reset on file &gt; new.
+Ex: itemFilter and selectionListOperator nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagplanes">
+          <code><b>-planes</b>(<b>-pl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List construction plane shapes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreSelectHilite">
+          <code><b>-preSelectHilite</b>(<b>-psh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List components that are currently hilited for pre-selection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreadOnly">
+          <code><b>-readOnly</b>(<b>-ro</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns referenced nodes. Referenced nodes are read only.
+NOTE: Obsolete. Please use &quot;-referencedNodes&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrecursive">
+          <code><b>-recursive</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When set to true, this command will look for name matches
+in all namespaces. When set to false, this command will only look
+for matches in namespaces that are requested (e.g. by specifying
+a name containing the ':'... &quot;ns1:pSphere1&quot;).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreferencedNodes">
+          <code><b>-referencedNodes</b>(<b>-rn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns referenced nodes. Referenced nodes are read only.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreferences">
+          <code><b>-references</b>(<b>-rf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List references associated with files. Excludes special reference
+nodes such as the sharedReferenceNode and unknown reference nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderGlobals">
+          <code><b>-renderGlobals</b>(<b>-rg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List render globals.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderQualities">
+          <code><b>-renderQualities</b>(<b>-rq</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List named render qualities.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderResolutions">
+          <code><b>-renderResolutions</b>(<b>-rr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List render resolutions.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderSetups">
+          <code><b>-renderSetups</b>(<b>-rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Alias for <em>-renderGlobals</em>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselection">
+          <code><b>-selection</b>(<b>-sl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List objects that are currently selected.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsets">
+          <code><b>-sets</b>(<b>-set</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List sets.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshapes">
+          <code><b>-shapes</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List shape objects.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshortNames">
+          <code><b>-shortNames</b>(<b>-sn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return short attribute names. By default long attribute names
+are returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshowNamespace">
+          <code><b>-showNamespace</b>(<b>-sns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the namespace of each object after the object name.
+<br> This flag cannot be used in conjunction with the showType flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshowType">
+          <code><b>-showType</b>(<b>-st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List the type of each object after its name.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtail">
+          <code><b>-tail</b>(<b>-tl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the maximum number of elements to be
+returned from the end of the list of items.
+Note: each    type flag will return at most this many items so
+if multiple type flags are specified then the number of items
+returned can be greater than this amount
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtemplated">
+          <code><b>-templated</b>(<b>-tm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List only templated dag nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtextures">
+          <code><b>-textures</b>(<b>-tex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List textures.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtransforms">
+          <code><b>-transforms</b>(<b>-tr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List transform objects.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>-type</b>(<b>-typ</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all objects of the specified type. This flag can appear
+multiple times on the command line. Note: the type passed to
+this flag is the same type name returned from the showType
+flag. Note: some selection items in Maya do not have a specific
+object/data type associated with them and will return &quot;untyped&quot;
+when listed with this flag.
+<br> This flag cannot be used in conjunction with the exactType or excludeType flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagundeletable">
+          <code><b>-undeletable</b>(<b>-ud</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns nodes that cannot be deleted (which includes locked nodes). These nodes also cannot be renamed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguntemplated">
+          <code><b>-untemplated</b>(<b>-ut</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List only un-templated dag nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguuid">
+          <code><b>-uuid</b>(<b>-uid</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return node UUIDs instead of names.
+Note that there are no &quot;UUID paths&quot; - combining this
+flag with e.g. the -long flag will not result in a path
+formed of node UUIDs.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvisible">
+          <code><b>-visible</b>(<b>-v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List only visible dag nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// create some objects to operate on and select them all.
+// Note that there are two objects named circle1;
+circle -n circle1; group; circle -n circle1;
+sphere -n sphere1; group; instance;
+select -ado;
+
+// list all objects
+ls;
+
+// List all selected objects
+ls -selection;
+
+// List all hilited objects
+ls -hilite;
+
+// List last selected object
+ls -selection -tail 1;
+
+// List all objects named &quot;sphere1&quot;. Note that since sphere1 is
+// instanced, the command below lists only the first instance.
+ls sphere1;
+
+// To list all instances of sphere1, use the -ap/allPaths flag.
+ls -ap sphere1;
+
+// List all selected objects named &quot;group*&quot;
+ls -sl &quot;group*&quot;;
+
+// List all geometry, lights and cameras in the DAG.
+ls -geometry -lights -cameras;
+
+// List all shapes in the dag.
+ls -shapes;
+
+// One thing to note is that it is better to always use the
+// -l/long flag when listing nodes without any filter. This is
+// because there may be two nodes with the same name (in this
+// example, circle1). 'ls' will list the names of all the objects
+// in the scene. Objects with the same name need a qualified
+// path name which uniquely identifies the object. A command
+// to select all objects such as &quot;select `ls`&quot; will fail because
+// the object lookup can't resolve which &quot;circle1&quot; object is
+// intended. To select all objects, you need the following:
+// select `ls -l`;
+
+// When trying to find a list of all objects of a specific
+// type, one approach might be to list all objects and then
+// use the nodeType command to then filter the list. As in:
+// string  $allObjects[];
+// string  $obj;
+// $allObjects = `ls -l`;
+// for ( $obj in $allObjects ) {
+//     if ( `nodeType $obj` == &quot;surfaceShape&quot; ) {
+//         print ($obj + &quot;\n&quot;);
+//     }
+// }
+//
+// The problem with this is that 'nodeType' returns the
+// most derived type of the node. In this example, &quot;surfaceShape&quot;
+// is a base type for nurbsSurface so nothing will be printed.
+// To do this properly, the -typ/type flag should be used
+// to list objects of a specific type as in:
+// $allObjects = `ls -type surfaceShape`;
+// for ( $obj in $allObjects ) {
+//     print ($obj + &quot;\n&quot;);
+// }
+
+// List all geometry shapes and their types
+ls -type geometryShape -showType;
+
+// List all paths to all leaf nodes in the DAG
+ls -dag -lf -ap;
+
+// List all nodes below the selected node
+ls -dag -ap -sl;
+
+// List all ghosting objects
+ls -ghost;
+
+// List all dag nodes that are read-only (i.e. referenced nodes)
+ls -dag -ro;
+
+// List reference nodes associated with specific files
+ls -references;
+
+// List all reference nodes, including unknown and shared reference
+// nodes
+ls -type reference;
+
+// Select some components and then get the list in both selected and numeric order
+string $obj1[] = `polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1`;
+select -clear;
+selectPref -trackSelectionOrder 1;
+
+select ($obj1[0]+&quot;.f[100]&quot;);
+select -add ($obj1[0]+&quot;.f[50:55]&quot;);
+select -add ($obj1[0]+&quot;.f[0]&quot;);
+select -add ($obj1[0]+&quot;.f[56:60]&quot;);
+
+// regular -selection flag returns the components in compacted numeric order.
+ls -selection;
+// Result: pSphere1.f[0] pSphere1.f[50:60] pSphere1.f[100] //
+// -orderedSelection flag returns the components in the order that we selected them.
+ls -orderedSelection;
+// Result: pSphere1.f[100] pSphere1.f[50:55] pSphere1.f[0] pSphere1.f[56:60] //
+
+// turn off tracking when we are done
+selectPref -trackSelectionOrder 0;
+
+// init some namespace
+namespace -add &quot;A:B:C&quot;;
+
+// add object into namespace
+namespace -set &quot;:A:B&quot;;
+polySphere -name &quot;obj1&quot;;
+namespace -set &quot;:A:B:C&quot;;
+polySphere -name &quot;obj1&quot;;
+polySphere -name &quot;obj2&quot;;
+
+// The current Namespace is &quot;:A:B:C&quot; and relative mode is off
+// List all objects and their namespace in the scene
+// If the object is in the root namespace, then return root &quot;:&quot;
+// Note that the results shown below have been elided (...) for documentation purposes.
+ls -showNamespace;
+// Result: time1 : sequenceManager1 : renderPartition :  (...) A:B:obj1 A:B A:B:C:obj1 A:B:C A:B:C:obj2 A:B:C //
+
+select -r &quot;:A:B:obj1&quot;;
+select -add &quot;:A:B:C:obj2&quot;;
+
+// List both name and namespace of each selected object
+ls -showNamespace -selection;
+// Result: A:B:obj1 A:B A:B:C:obj2 A:B:C //
+
+// List name and namespace of all objects named &quot;obj1&quot;
+ls -showNamespace -recursive true &quot;obj1&quot;;
+// Result: A:B:obj1 A:B A:B:C:obj1 A:B:C //
+
+// Set current namespace
+namespace -set &quot;:A:B&quot;;
+
+// Enable relative mode
+namespace -relativeNames true;
+
+// Now the current namespace is &quot;:A:B&quot; and relative mode is on
+// Note that the name of the current namespace is &quot;&quot; in relative mode
+// List both name and namespace of each selected objects
+ls -showNamespace -selection;
+// Result: obj1  C:obj1 C //
+
+// Make a new scene, modify the transform of the camera perspective, play with the timeline and modify the camera's shape
+file -new -force
+setAttr &quot;persp.translateX&quot; 10;
+currentTime 8 ;
+setAttr &quot;perspShape.horizontalFilmAperture&quot; 16;
+
+// List all modified objects of type camera and type time
+ls -modified -type time -type camera;
+// Result: perspShape time1 //
+
+ls -modified;
+// Result: persp perspShape time1 //
+
+ls -excludeType camera -modified
+// Result: persp time1 //
+
+// Return a node's UUID
+ls -uuid sphere1;
+// Result: ECE85CCC-438D-8113-0236-39A6917DE484 //
+
+// Find a node by UUID
+ls &quot;ECE85CCC-438D-8113-0236-39A6917DE484&quot;;
+// Result: group2|sphere1 //
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

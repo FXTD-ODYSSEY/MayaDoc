@@ -1,0 +1,589 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>hotkey command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-hotkey"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/hotkey.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>hotkey </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#MiscUI" target="contentFrame">Misc. UI</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("hotkey.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>hotkey([<a href="#flagaltModifier">altModifier</a>=<i>boolean</i>], [<a href="#flagautoSave">autoSave</a>=<i>boolean</i>], [<a href="#flagcommandModifier">commandModifier</a>=<i>boolean</i>], [<a href="#flagctrlModifier">ctrlModifier</a>=<i>boolean</i>], [<a href="#flagctxClient">ctxClient</a>=<i>string</i>], [<a href="#flagdragPress">dragPress</a>=<i>boolean</i>], [<a href="#flagfactorySettings">factorySettings</a>=<i>boolean</i>], [<a href="#flagisModifier">isModifier</a>=<i>boolean</i>], [<a href="#flagkeyShortcut">keyShortcut</a>=<i>string</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagpressCommandRepeat">pressCommandRepeat</a>=<i>boolean</i>], [<a href="#flagreleaseCommandRepeat">releaseCommandRepeat</a>=<i>boolean</i>], [<a href="#flagreleaseName">releaseName</a>=<i>string</i>], [<a href="#flagshiftModifier">shiftModifier</a>=<i>boolean</i>], [<a href="#flagsourceUserHotkeys">sourceUserHotkeys</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>hotkey is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command sets the single-key hotkeys for the entire application.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="hotkeyCtx.html">hotkeyCtx</a>, <a href="hotkeySet.html">hotkeySet</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaltModifier">altModifier</a>, <a href="#flagautoSave">autoSave</a>, <a href="#flagcommandModifier">commandModifier</a>, <a href="#flagctrlModifier">ctrlModifier</a>, <a href="#flagctxClient">ctxClient</a>, <a href="#flagdragPress">dragPress</a>, <a href="#flagfactorySettings">factorySettings</a>, <a href="#flagisModifier">isModifier</a>, <a href="#flagkeyShortcut">keyShortcut</a>, <a href="#flagname">name</a>, <a href="#flagpressCommandRepeat">pressCommandRepeat</a>, <a href="#flagreleaseCommandRepeat">releaseCommandRepeat</a>, <a href="#flagreleaseName">releaseName</a>, <a href="#flagshiftModifier">shiftModifier</a>, <a href="#flagsourceUserHotkeys">sourceUserHotkeys</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaltModifier">
+          <code><b>altModifier</b>(<b>alt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagautoSave">
+          <code><b>autoSave</b>(<b>autoSave</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set to true then the hotkeys will always be saved when
+you quit.  If false then the hotkeys are not saved unless
+&quot;savePrefs -hotkeys&quot; is used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcommandModifier">
+          <code><b>commandModifier</b>(<b>cmd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The Command key must be pressed to get the hotkey.
+This is only available on systems which have a separate
+command key.
+Note that if menu item accelerator keys are being used
+(menuItem -ke/keyEquivalent), then the accelerator key
+settings override the hotkey settings.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagctrlModifier">
+          <code><b>ctrlModifier</b>(<b>ctl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The Ctrl key must be pressed to get the hotkey.
+Note that if menu item accelerator keys are being used
+(menuItem -ke/keyEquivalent), then the accelerator key
+settings override the hotkey settings.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagctxClient">
+          <code><b>ctxClient</b>(<b>cc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the hotkey context. It is used together with the other flags to modify or query
+the hotkey for a certain hotkey context. If it is not specified, the global hotkey context will be taken into
+account. Check hotkeyCtx command to see how the hotkeys work with the hotkey contexts.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdragPress">
+          <code><b>dragPress</b>(<b>dp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify true and the command may be executed during
+manipulator dragging, if the tool context also allows
+this. This flag is false by default.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfactorySettings">
+          <code><b>factorySettings</b>(<b>fs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Resets the hotkeys back to the initial defaults.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisModifier">
+          <code><b>isModifier</b>(<b>mod</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete and should no longer be used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeyShortcut">
+          <code><b>keyShortcut</b>(<b>k</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify what key is being set. The key must be either a single
+ascii character (capital and lowercase can be set independently)
+or one of the keyword
+strings for the <i>special</i> keyboard characters.
+<p>
+The valid keywords are:<br>
+Up, Down, Right, Left,<br>
+Home, End, Page_Up, Page_Down, Insert<br>
+Return, Space<br>
+F1 to F12<br>
+Tab (Will only work when modifiers are specified)<br>
+Delete, Backspace (Will only work when modifiers are specified)<br>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The name of the namedCommand object that will be executed when the key is pressed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpressCommandRepeat">
+          <code><b>pressCommandRepeat</b>(<b>pcr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify true and the command may be repeated by executing
+the command repeatLast. This flag is false by default.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreleaseCommandRepeat">
+          <code><b>releaseCommandRepeat</b>(<b>rcr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify true and the command may be repeated by executing
+the command repeatLast. This flag is false by default.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreleaseName">
+          <code><b>releaseName</b>(<b>rn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The name of the namedCommand object that will be executed when the key is released.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshiftModifier">
+          <code><b>shiftModifier</b>(<b>sht</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The Shift key must be pressed to get the hotkey.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsourceUserHotkeys">
+          <code><b>sourceUserHotkeys</b>(<b>suh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete. Please use import flag from hotkeySet command
+to import the user hotkeys.<p>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Here's an example of how to create a namedCommand
+# object and then map it to a key.
+#
+cmds.nameCommand( 'circleToolNamedCommand', annotation='Select Circle Tool', command='setToolTo circleContext')
+cmds.hotkey( k='F5', alt=True, name='circleToolNamedCommand' )
+
+
+# Here are more examples of how to use the hotkey command.
+#
+cmds.hotkey( k='d', name='Delete_Command' )
+cmds.hotkey( k='d', name='' ) # unsets the above command
+
+cmds.hotkey( k='d', name='Delete_Command' )
+cmds.hotkey( k='d', releaseName='After_Delete_Command' )
+cmds.hotkey( k='d', name='' ) #only unsets the key press name
+cmds.hotkey( k='d', releaseName='' ) #only unsets the key release name
+cmds.hotkey( k='d', n='', rn='' ) #unsets both the key press and release name
+
+#    Determine if a command is attached to either the press or release
+#    of the &quot;z&quot; hotkey.
+#
+cmds.hotkey( 'z', query=True )
+
+#    Likewise, for the modified variations of the &quot;z&quot; key.
+#
+cmds.hotkey( 'z', query=True, alt=True )
+cmds.hotkey( 'z', query=True, ctl=True )
+cmds.hotkey( 'z', query=True, alt=True, ctl=True )
+
+#    Determine the press command attached to the &quot;z&quot; key.
+#
+cmds.hotkey( 'z', query=True, name=True )
+
+#    To query the &quot;-&quot; hotkey use the string &quot;Dash&quot; instead.
+#
+cmds.hotkey( 'Dash', query=True )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

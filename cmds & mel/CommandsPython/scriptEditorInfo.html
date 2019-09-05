@@ -1,0 +1,430 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>scriptEditorInfo command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-scriptEditorInfo"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/scriptEditorInfo.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>scriptEditorInfo </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("scriptEditorInfo.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>scriptEditorInfo([<a href="#flagclearHistory">clearHistory</a>=<i>boolean</i>], [<a href="#flagclearHistoryFile">clearHistoryFile</a>=<i>boolean</i>], [<a href="#flaghistoryFilename">historyFilename</a>=<i>string</i>], [<a href="#flaginput">input</a>=<i>string</i>], [<a href="#flagsuppressErrors">suppressErrors</a>=<i>boolean</i>], [<a href="#flagsuppressInfo">suppressInfo</a>=<i>boolean</i>], [<a href="#flagsuppressResults">suppressResults</a>=<i>boolean</i>], [<a href="#flagsuppressStackWindow">suppressStackWindow</a>=<i>boolean</i>], [<a href="#flagsuppressWarnings">suppressWarnings</a>=<i>boolean</i>], [<a href="#flagwriteHistory">writeHistory</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>scriptEditorInfo is undoable, queryable, and editable.</p>
+      Use this command to directly manipulate and query the contents of the
+Command Window window.
+<p><i>Note: Due to recent changes, certain flags will no longer work
+on the Script Editor Window.  All flags will continue to work with the
+CommandWindow (old Script Editor).</i>
+<p><i>Note: This command cannot be used to create a new script
+editor window.</i>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The name of the Command Window window is returned.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagclearHistory">clearHistory</a>, <a href="#flagclearHistoryFile">clearHistoryFile</a>, <a href="#flaghistoryFilename">historyFilename</a>, <a href="#flaginput">input</a>, <a href="#flagsuppressErrors">suppressErrors</a>, <a href="#flagsuppressInfo">suppressInfo</a>, <a href="#flagsuppressResults">suppressResults</a>, <a href="#flagsuppressStackWindow">suppressStackWindow</a>, <a href="#flagsuppressWarnings">suppressWarnings</a>, <a href="#flagwriteHistory">writeHistory</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclearHistory">
+          <code><b>clearHistory</b>(<b>ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clears the read-only text in the upper field of the Command Window.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclearHistoryFile">
+          <code><b>clearHistoryFile</b>(<b>chf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clear the file defined by the -hf/historyFilename flag, but only
+if -wh/writeHistory is true. Use this flag to start a new history file,
+since the default behaviour of the Command Window is to append to
+the existing file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghistoryFilename">
+          <code><b>historyFilename</b>(<b>hfn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets or returns the name of the file that the Command Window will
+use to echo all of its history to. If this is an empty string when
+the -wh/writeHistory flag is set to true, then it will automatically be
+set to the default file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginput">
+          <code><b>input</b>(<b>i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the text in the lower field of the Command Window.
+Set this value to an empty string to clear the field.
+
+Note: this flag only affects the Command Window and not the new script editor.
+To find out how to manipulate the new script editor please refer to the documentation
+on the cmdScrollFieldExecuter and cmdScrollFieldReporter.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsuppressErrors">
+          <code><b>suppressErrors</b>(<b>se</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When true, Command Window and Script Editor will not display error messages.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsuppressInfo">
+          <code><b>suppressInfo</b>(<b>si</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When true, Command Window and Script Editor will not display info messages
+generated by Maya.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsuppressResults">
+          <code><b>suppressResults</b>(<b>sr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When true, Command Window and Script Editor will not display command results.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsuppressStackWindow">
+          <code><b>suppressStackWindow</b>(<b>ssw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When true and when the stackTrace mechanism is on, this
+flag will suppress the display of the stack window. If stack
+trace is enabled then results will be returned to the output
+window instead of a separate stack window.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsuppressWarnings">
+          <code><b>suppressWarnings</b>(<b>sw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When true, Command Window and Script Editor will not display warning messages.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwriteHistory">
+          <code><b>writeHistory</b>(<b>wh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When true, Command Window will echo all of its
+history to the file defined by the -hf/historyFilename flag. This
+flag effectively turns file writing on/off.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Set the text of the input area of the Script Editor.
+cmds.scriptEditorInfo(input='// select -all; delete;')
+# Clear the input area of the Script Editor.
+cmds.scriptEditorInfo(input=&quot;&quot;)
+
+# Begin recording the Script Editor history to a file called
+# tempHistoryLog.txt in your maya directory.
+cmds.scriptEditorInfo( historyFilename='tempHistoryLog.txt', writeHistory=True )
+
+# Stop recording the Script Editor history
+cmds.scriptEditorInfo(writeHistory=False )
+
+# On Windows the following line would print something like &quot;C:/maya/tempHistoryLog.txt&quot;
+# On Linux it would be &quot;~/maya/tempHistoryLog.txt&quot;
+cmds.scriptEditorInfo(query=True, historyFilename=True)
+
+# Suppress all warning and info messages
+cmds.scriptEditorInfo(suppressWarnings=True)
+cmds.scriptEditorInfo(suppressInfo=True)
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

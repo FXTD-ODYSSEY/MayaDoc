@@ -1,0 +1,115 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>addDynamic command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-addDynamic"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/addDynamic.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>addDynamic </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Dynamics" target="contentFrame">Dynamics</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("addDynamic.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>addDynamic 
+object object
+     </code> </p>
+      <p>addDynamic is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Makes the &quot;object&quot; specified as second argument the source of an
+existing field or emitter specified as the first argument. In
+practical terms, what this means is that a field will emanate its
+force from its owner object, and an emitter will emit from its owner
+object.
+<p>
+addDynamic makes the specified field or emitter a child of
+the owner's transform (adding it to the model if it was not already
+there), and makes the necessary attribute connections.
+<p>
+If either of the arguments is omitted, addDynamic searches the
+selection list for objects to use instead. If more than one possible
+owner or field/emitter is selected, addDynamic will do
+nothing.
+<p>
+If the specified field/emitter already has a source, addDynamic will
+remove the current source and replace it with the newly specified
+source.
+<p>
+If a subset of the owner object's cvs/particles/vertices is selected,
+addDynamic will add the field/emitter to that subset only.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The name of the source object and the field or emitter which was
+attached to it.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="air.html">air</a>, <a href="drag.html">drag</a>, <a href="emitter.html">emitter</a>, <a href="gravity.html">gravity</a>, <a href="newton.html">newton</a>, <a href="radial.html">radial</a>
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Create an emitter
+emitter -pos 0 0 0 -type omni -r 100 -sro 0 -nuv 0 -cye none -cyi 1 -spd 1 -srn 0 -nsp 1 -tsp 0 -mxd 0 -mnd 0 -dx 1 -dy 0 -dz 0 -sp 0 ;
+// Result: emitter1 //
+
+// Get the emitter to emit particles
+particle;
+// Result: particle2
+connectDynamic -em emitter1 particle1;
+
+// Create a particle to use as the source of the emitter
+  particle -p 6.0 0 7.0 -p 6.0 0 2.0 -c 1 ;
+// Result: particle2
+
+// Use particle2 as a source of the emitter
+addDynamic emitter1 particle2;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,126 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>alias command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-alias"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>alias </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Utilities" target="contentFrame">Utilities</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("alias.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>alias 
+&lt;aliasName&gt; &lt;commandName&gt; [ arg_1 ... arg_n ] or { list-of-statements }
+     </code> </p>
+      <p>alias is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      MEL aliases don't work exactly like csh aliases.  When MEL sees the
+use of an alias, it doesn't replace the alias name with the text of
+what it is aliased with and rescan that. It can't do that. It isn't a
+command line interpreter like csh is. When MEL sees an alias command,
+it enters the name into the same procedure table with the regular user
+written MEL procedures and it keeps a pointer to the argument list
+passed to it (in the case of the first syntax). When someone uses name
+in a script, it is processed just like a procedure call. You cannot
+pass arguments to an alias specified as a statement list.
+<p>
+MEL is an interpreter in the sense that it generates a data structure
+instead of real machine code.  Instead of having your machine execute
+the output, MEL executes it by interpreting the data structure it
+generated for your code.  Shell interpreters execute input as it is
+being read in. This allows them to do text replacement on the
+fly. Fortunately MEL has procedures which make up for any
+functionality that is missing from its own version of aliases.
+<p>
+<b>Special Notes:</b>
+<p>
+<ol>
+<li>You can nest aliases.</li>
+<p>
+<li>You can't use variables in aliases. This is because MEL isn't a
+command line interpreter. If you were to alias to something which used
+to a local variable, MEL wouldn't be able to detect when the access of
+that variable was out of scope. It is difficult (read: expensive) for
+MEL to detect these sorts of errors, so user beware.</li>
+<p>
+<li>Aliases have the same scope as the procedures/commands which they
+alias.  If you alias a local procedure, the alias will become
+unavailable when the local procedure goes out of scope.</li>
+<p>
+<li>&quot;alias&quot; is a directive and not a command.  The alias is created
+when the script is read, not when it is actually executed.  So, you
+cannot put an &quot;alias&quot; directive in an if statement have it created or
+not based on the code path taken.  The alias will already have been
+created by the time the code is executed.  To create an alias
+conditionally, it would have to be embedded in an &quot;eval&quot; directive so
+that it is compiled at runtime.</li>
+<p>
+</ol>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+alias s sphere -r;
+s 2.2;  // creates a sphere of radius 2.2.
+alias s2 s 2;  // nested alias: sphere -r 2.
+alias es s -esw;
+es 90;  // syntax error: sphere -r -esw
+alias jj { select -all; delete; };
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

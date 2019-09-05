@@ -1,0 +1,525 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyWedgeFace command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-polyWedgeFace"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/polyWedgeFace.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyWedgeFace </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyWedgeFace.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyWedgeFace([<a href="#flagaxis">axis</a>=<i>[float, float, float]</i>], [<a href="#flagcaching">caching</a>=<i>boolean</i>], [<a href="#flagcenter">center</a>=<i>[float, float, float]</i>], [<a href="#flagconstructionHistory">constructionHistory</a>=<i>boolean</i>], [<a href="#flagdivisions">divisions</a>=<i>int</i>], [<a href="#flagedge">edge</a>=<i>int</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagnodeState">nodeState</a>=<i>int</i>], [<a href="#flagwedgeAngle">wedgeAngle</a>=<i>angle</i>], [<a href="#flagworldSpace">worldSpace</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>polyWedgeFace is undoable, queryable, and editable.</p>
+      Extrude faces about an axis.
+The axis is the average of all the selected edges.
+If the edges are not aligned, the wedge may not look
+intuitive.  To separately wedge faces about different
+wedge axes, the command should be issued as many times
+as the wedge axes. (as in the second example)
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The node name.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="polyChipOff.html">polyChipOff</a>, <a href="polyExtrudeEdge.html">polyExtrudeEdge</a>, <a href="polyExtrudeFacet.html">polyExtrudeFacet</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaxis">axis</a>, <a href="#flagcaching">caching</a>, <a href="#flagcenter">center</a>, <a href="#flagconstructionHistory">constructionHistory</a>, <a href="#flagdivisions">divisions</a>, <a href="#flagedge">edge</a>, <a href="#flagname">name</a>, <a href="#flagnodeState">nodeState</a>, <a href="#flagwedgeAngle">wedgeAngle</a>, <a href="#flagworldSpace">worldSpace</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Common poly modifier operation flags</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaxis">
+          <code><b>axis</b>(<b>ax</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[float, float, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag (along with -center) can be used instead of the -edge flag to
+specify the axis about which the wedge is performed. The flag expects
+three coordinates that form a vector about which the rotation is performed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcaching">
+          <code><b>caching</b>(<b>cch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Toggle caching for all attributes so that no recomputation is needed
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcenter">
+          <code><b>center</b>(<b>cen</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[float, float, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag (along with -axis) can be used instead of the -edge flag to
+specify the location about which the wedge is performed. The flag expects
+three coordinates that define the center of rotation.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconstructionHistory">
+          <code><b>constructionHistory</b>(<b>ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn the construction history on or off (where applicable). If
+construction history is on then the corresponding node will be
+inserted into the history chain for the mesh. If construction history
+is off then the operation will be performed directly on the object.
+<br>
+<b>Note:</b> If the object already has construction history then
+this flag is ignored and the node will always be inserted into
+the history chain.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdivisions">
+          <code><b>divisions</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the number of subdivisions
+along the extrusion.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagedge">
+          <code><b>edge</b>(<b>ed</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the edgeId that should be
+used to perform the wedge about. Multiple edges
+can be specified. The wedge operation is performed
+about an axis that is the average of all the edges.
+It is recommended that only colinear edges are
+used, otherwise the result may not look intuitive.
+<p>
+Instead of specifying the -edge flag, the wedge can be
+performed about a point and axis. See the -center and
+-axis flags for details.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Give a name to the resulting node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeState">
+          <code><b>nodeState</b>(<b>nds</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+<p>
+Maya dependency nodes have 6 possible states.
+The <b>Normal (0)</b>, <b>HasNoEffect (1)</b>, and <b>Blocking (2)</b> states can be
+used to alter how the graph is evaluated.
+
+
+<p>
+The <b>Waiting-Normal (3)</b>, <b>Waiting-HasNoEffect (4)</b>, <b>Waiting-Blocking (5)</b>
+are for internal use only. They temporarily shut off parts of the graph during interaction
+(e.g., manipulation). The understanding is that once the operation is done,
+the state will be reset appropriately, e.g. <b>Waiting-Blocking</b> will reset
+back to <b>Blocking</b>.
+
+
+<p>
+The <b>Normal</b> and <b>Blocking</b> cases apply to all nodes, while
+<b>HasNoEffect</b> is node specific; many nodes do not support this option.
+Plug-ins store state in the <i>MPxNode::state</i> attribute. Anyone can set
+it or check this attribute.  Additional details about each of these 3 states follow.
+
+<p> 
+
+<table border="1">
+<tr>
+<th>State</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><b>Normal</b></td>
+<td>The normal node state. This is the default.</td>
+</tr>
+<tr>
+<td><b>HasNoEffect</b></td>
+<td>
+<p>
+The <b>HasNoEffect</b> option (a.k.a. pass-through), is used in cases where
+there is an operation on an input producing an output of the same data type.
+Nearly all deformers support this state, as do a few other nodes.
+As stated earlier, it is not supported by all nodes.
+
+<p>
+It’s typical to implement support for the <b>HasNoEffect</b> state in
+the node’s compute method and to perform appropriate operations.
+Plug-ins can also support <b>HasNoEffect</b>.
+
+<p>
+The usual implementation of this state is to copy the input directly to the
+matching output without applying the algorithm in the node. For deformers,
+applying this state leaves the input geometry undeformed on the output.
+
+</td>
+</tr>
+<tr>
+<td><b>Blocking</b></td>
+<td>
+<p>
+This is implemented in the depend node base class and applies to all nodes.
+<b>Blocking</b> is applied during the evaluation phase to connections.
+An evaluation request to a blocked connection will return as failures,
+causing the destination plug to retain its current value. Dirty propagation
+is indirectly affected by this state since blocked connections are never cleaned.
+
+<p>
+When a node is set to <b>Blocking</b> the behavior is supposed to be the same as
+if all outgoing connections were broken. As long as nobody requests evaluation
+of the blocked node directly it won’t evaluate after that. Note that a blocked
+node will still respond to <i>getAttr</i> requests but a <i>getAttr</i> on a
+downstream node will not reevaluate the blocked node.
+
+<p>
+Setting the root transform of a hierarchy to <b>Blocking</b> won’t automatically
+influence child transforms in the hierarchy. To do this, you’d need to
+explicitly set all child nodes to the <b>Blocking</b> state.
+
+<p>
+For example, to set all child transforms to <b>Blocking</b>, you could use the
+following script.
+
+<pre>
+
+import maya.cmds as cmds
+def blockTree(root):
+nodesToBlock = []
+for node in {child:1 for child in cmds.listRelatives( root, path=True, allDescendents=True )}.keys():
+nodesToBlock += cmds.listConnections(node, source=True, destination=True )
+for node in {source:1 for source in nodesToBlock}.keys():
+cmds.setAttr( '%s.nodeState' % node, 2 )
+
+</pre>
+<p>
+Applying this script would continue to draw objects but things would not be animated.
+
+</td>
+</tr>
+</table>
+<br><i>Default:</i> kdnNormal
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwedgeAngle">
+          <code><b>wedgeAngle</b>(<b>wa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the angle of rotation.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldSpace">
+          <code><b>worldSpace</b>(<b>ws</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies which reference to use.
+If &quot;on&quot; : all geometrical values are taken in world reference.
+If &quot;off&quot; : all geometrical values are taken in object reference.
+<br>C: Default is off.
+<br>Q: When queried, this flag returns an <i>int</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.polyPlane( n='plg', w=10, h=10 )
+
+# Wedge about a single axis
+cmds.polyWedgeFace( 'plg.f[24:29]', 'plg.f[34]', 'plg.f[44]', 'plg.f[54]', 'plg.f[64]', 'plg.f[74:79]', ws=1, wedgeAngle=90, divisions=8, ed=(62,167), ch=1 )
+
+# Wedge about multiple axes (one axis for each command)
+cmds.polyCube( n='plg', w=1, h=1, d=1, sx=4, sy=4, sz=4, ax=(0, 1, 0), tx=1, ch=1 )
+cmds.polyWedgeFace( 'plg.f[64:79]', ws=1, wedgeAngle=90, divisions=9, ed=(128, 133, 138, 143), ch=1 )
+cmds.polyWedgeFace( 'plg.f[0:15]', ws=1, wedgeAngle=90, divisions=9, ed=(0, 1, 2, 3), ch=1 )
+cmds.polyWedgeFace( 'plg.f[80:95]', ws=1, wedgeAngle=90, divisions=9, ed=(100, 105, 110, 115), ch=1 )
+cmds.polyWedgeFace( 'plg.f[32:47]', ws=1, wedgeAngle=90, divisions=9, ed=(36, 37, 38, 39), ch=1 )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

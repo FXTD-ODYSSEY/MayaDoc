@@ -1,0 +1,727 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>deformerWeights command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-deformerWeights"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/deformerWeights.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>deformerWeights </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Deformation" target="contentFrame">Deformation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("deformerWeights.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>deformerWeights [-<a href="#flagattribute">attribute</a> <i>string</i>] [-<a href="#flagdefaultValue">defaultValue</a> <i>float</i>] [-<a href="#flagdeformer">deformer</a> <i>string</i>] [-<a href="#flagexport">export</a>] [-<a href="#flagformat">format</a> <i>string</i>] [-<a href="#flagignoreName">ignoreName</a>] [-<a href="#flagimport">import</a>] [-<a href="#flagmethod">method</a> <i>string</i>] [-<a href="#flagpath">path</a> <i>string</i>] [-<a href="#flagpositionTolerance">positionTolerance</a> <i>float</i>] [-<a href="#flagremap">remap</a> <i>string</i>] [-<a href="#flagshape">shape</a> <i>string</i>] [-<a href="#flagskip">skip</a> <i>string</i>] [-<a href="#flagvertexConnections">vertexConnections</a>] [-<a href="#flagweightPrecision">weightPrecision</a> <i>uint</i>] [-<a href="#flagweightTolerance">weightTolerance</a> <i>float</i>] [-<a href="#flagworldSpace">worldSpace</a>]  </code> </p>
+      <p>deformerWeights is undoable, queryable, and editable.</p>
+      Command to import and export deformer weights to and from a simple XML
+ file. The weight data is stored in a per-vertex fashion along with a
+ &quot;point cloud&quot; corresponding to the vertices from the geometry input to
+ the deformer.
+ For example a cluster deformer would have the following information:
+ <deformerweight>
+  <headerinfo filename="clusterWeights.xml"></headerinfo>
+  <shape group="1" max="36" name="pPlaneShape1" size="36" stride="3">
+    <point index="0" value=" -5.000000 -0.000000 5.000000"></point>
+   </shape>
+  <weights deformer="testCluster" layer="0" max="35" shape="pPlaneShape1" size="36" source="baseLayer">
+    <point index="0" value="0.500"></point>
+   </weights>
+ </deformerweight>
+ On import the weights are then mapped back to a specified deformer
+ based on the specified mapping method. Note that the geometry used to
+ perform the mapping association is not the visible shape but rather
+ the incoming geometry to the deformer. For example, in the case of a
+ skin cluster this would be the bind pose geometry.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>STRING</i></td><td>path to the file imported/exported, if successful</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>deformer, export
+      <h2><a name="hRelated">Related</a></h2><a href="blendShape.html">blendShape</a>, <a href="skinCluster.html">skinCluster</a>, <a href="skinPercent.html">skinPercent</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagattribute">attribute</a>, <a href="#flagdefaultValue">defaultValue</a>, <a href="#flagdeformer">deformer</a>, <a href="#flagexport">export</a>, <a href="#flagformat">format</a>, <a href="#flagignoreName">ignoreName</a>, <a href="#flagimport">import</a>, <a href="#flagmethod">method</a>, <a href="#flagpath">path</a>, <a href="#flagpositionTolerance">positionTolerance</a>, <a href="#flagremap">remap</a>, <a href="#flagshape">shape</a>, <a href="#flagskip">skip</a>, <a href="#flagvertexConnections">vertexConnections</a>, <a href="#flagweightPrecision">weightPrecision</a>, <a href="#flagweightTolerance">weightTolerance</a>, <a href="#flagworldSpace">worldSpace</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattribute">
+          <code><b>-attribute</b>(<b>-at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the long name of deformer attribute that should be imported/exported along with the deformerWeights. i.e. -at &quot;envelope&quot; -at &quot;skinningMethod&quot; etc.. No warning or error is given if a specified attribute does not exist on a particular deformer, making it possible to use this command with multiple deformers without aborting or slowing down the import/export process.  Currently supports numeric attributes and matrix attributes
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefaultValue">
+          <code><b>-defaultValue</b>(<b>-dv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Manually set the default value. Default values are values that are not written to file. For example, for blendShapes the default value is automatically set to 1.0 and these values are not written to disk. For skinClusters the value is 0.0. If all weights should be forced to be written to disk, set a defaultValue = -1.0.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeformer">
+          <code><b>-deformer</b>(<b>-df</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the deformer whose weights should be exported or imported. If a pattern is supplied for the deformer
+name (i.e: cluster*), only the first deformer that matches the pattern will be imported/exported unless used
+in conjunction with the -skip option
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexport">
+          <code><b>-export</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export the given deformer
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagformat">
+          <code><b>-format</b>(<b>-fm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify either &quot;XML&quot; or &quot;JSON&quot; as the file extension to save as.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreName">
+          <code><b>-ignoreName</b>(<b>-ig</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Ignore the names of the layers on import, just use the order of the layers instead. This can be used when
+joint names have been changed. Leaving it on only name that match on import will be write to the deformer.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimport">
+          <code><b>-import</b>(<b>-im</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Import weights to the specified deformer. See the method flag for details
+on how the weights will be mapped to the destination deformer.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmethod">
+          <code><b>-method</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the method used to map the weight during import. Valid values are:
+&quot;index&quot;, &quot;nearest&quot;, &quot;barycentric&quot;, &quot;bilinear&quot; and &quot;over&quot;. The &quot;index&quot; method
+uses the vertex index to map the weights onto the object. This is most useful
+when the destination object shares the same topology as the exported data.
+The &quot;nearest&quot; method finds the nearest vertex in the imported data set and
+sets the weight value to that value. This is best used when mapping a higher
+resolution mesh to a lower resolution. The &quot;barycentric&quot; and &quot;bilinear&quot; methods
+are only supported with polygon mesh exported with -vc/vertexConnections flag.
+The &quot;barycentric&quot; method finds the nearest triangle of the input geometry and
+rescales the weights at the triangle vertices according to the barycentric
+weights to each vertex of the nearest triangle. The &quot;bilinear&quot; method finds the
+nearest convex quad of the input geometry and rescales the weights at the quad
+vertices according to the bilinear weights to each vertex of the nearest convex
+quad. For non-quad polygon, the &quot;bilinear&quot; method will fall back to &quot;barycentric&quot;
+method. The &quot;over&quot; method is similar to the &quot;index&quot; method but the weights on the
+destination mesh are not cleared prior to mapping, so that unmatched indices
+keep their weights intact.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpath">
+          <code><b>-path</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The path to the given file. Default to the current project.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpositionTolerance">
+          <code><b>-positionTolerance</b>(<b>-pt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The position tolerance is used to determine the radius of search for the nearest method. This flag is only
+used with import.
+Defaults to a huge number.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremap">
+          <code><b>-remap</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remap maps source regular expression to destination format. It maps any name that matches the regular expression (before the semi-colon) to the expression format (after the semi-colon).
+For example, -remap &quot;test:(.*);$1&quot; will rename all items in the test namespace to the global namespace. Accepts $1, $2, .., $9 as pattern holders in the expression format.
+Remap flag must be used together with import or export. When working with import, the name of the object from the xml file matching the regular expression is remapped to object in scene. When working with export, the name of the object from the scene matching the regular expression is remapped to object in xml file.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshape">
+          <code><b>-shape</b>(<b>-sh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the source shape. Export will write out all the deformers on the shape node into one file.
+If a pattern is supplied for the shape name (i.e: pCylinder*), only the first shape that matches the pattern will
+be imported/exported unless used in conjunction with the -skip option.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagskip">
+          <code><b>-skip</b>(<b>-sk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Skip any deformer, shape, or layer that whose name matches the given regular expression string
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvertexConnections">
+          <code><b>-vertexConnections</b>(<b>-vc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export vertex connection information, which is required for -m/-method &quot;barycentric&quot; and &quot;bilinear&quot;. The flag is only used with -ex/-export flag. The vertex connection information is automatically loaded during import if available in xml file.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweightPrecision">
+          <code><b>-weightPrecision</b>(<b>-wp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the output decimal precision for exported weights. The default value is 3.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweightTolerance">
+          <code><b>-weightTolerance</b>(<b>-wt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The weight tolerance is used to decide if a given weight value is close enough to the default value that it does not need to be included. This flag is only used with export. The default value is .001.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldSpace">
+          <code><b>-worldSpace</b>(<b>-ws</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For spatially based association methods (nearest), the position should be based on the world space position
+rather then the local object space.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+proc createRig(string $nsp, int $res)
+{
+
+    // Create a plane with two clusters in a namespace.
+    //
+    string $shpName = $nsp+&quot;:myShape&quot;;
+    print $shpName;
+    polyPlane -w 10 -h 10 -sx $res -sy $res -ax 0 1 0 -ch 1 -n $shpName;
+    cluster -n ($nsp+&quot;:clusterA&quot;) $shpName;
+    cluster -n ($nsp+&quot;:clusterB&quot;) $shpName;
+}
+
+
+//--------------------------------------------------------------------
+// Create the setup.
+//--------------------------------------------------------------------
+
+// Clear file.
+file -f -new;
+
+// Create plane and two clusters.
+createRig(&quot;nsp1&quot;, 5);
+
+// Modify some weights on clusterA
+select nsp1:myShape.vtx[6:11];
+percent -v 0.5 nsp1:clusterA;
+
+// Modify some weights on clusterB
+select nsp1:myShape.vtx[0:2] nsp1:myShape.vtx[6:8] nsp1:myShape.vtx[12:14];
+percent -v 0.3 nsp1:clusterB;
+
+
+//--------------------------------------------------------------------
+// Export the weights in a variety of different ways
+//--------------------------------------------------------------------
+
+// Write cluster A weights.
+//
+deformerWeights -export -deformer &quot;nsp1:clusterA&quot; &quot;clusterA.xml&quot;;
+
+// Write cluster B weights, but do not write values of 1.0.
+//
+deformerWeights -export -deformer &quot;nsp1:clusterB&quot; -dv 1.0 &quot;clusterB.xml&quot;;
+
+// Write cluster A and B weights at the same time.
+//
+deformerWeights -export -deformer &quot;nsp1:clusterA&quot; -deformer &quot;nsp1:clusterB&quot; &quot;clusterAB.xml&quot;;
+
+// Export weights for all deformers on the shape, including vertex connections.
+//
+deformerWeights -export -vc -sh &quot;nsp1:myShape&quot; &quot;shape_all.xml&quot;;
+
+// Same as above skipping deformers matching &quot;*B&quot;.
+//
+deformerWeights -export -vc -sh &quot;nsp1:myShape&quot; -sk &quot;*B&quot; &quot;shape_NotB.xml&quot;;
+
+// Export weights and attributes.
+//
+deformerWeights -export -vc -attribute &quot;envelope&quot; -attribute &quot;percentResolution&quot; -attribute &quot;usePartialResolution&quot; -sh &quot;nsp1:myShape&quot; &quot;shape_all_attr.xml&quot;;
+
+// Export name space nsp1: in scene to nsp2: in xml.
+deformerWeights -export -vc -sh &quot;nsp1:myShape&quot; -remap &quot;nsp1:(.*);nsp2:$1&quot; &quot;shape_all_nsp2.xml&quot;;
+
+
+
+//--------------------------------------------------------------------
+// Import the weights
+//--------------------------------------------------------------------
+
+// Read both cluster's weight files separately.
+deformerWeights -import -sh &quot;nsp1:myShape&quot; -deformer &quot;nsp1:clusterA&quot; &quot;clusterA.xml&quot;;
+deformerWeights -import -sh &quot;nsp1:myShape&quot; -deformer &quot;nsp1:clusterB&quot; &quot;clusterB.xml&quot;;
+
+// Read both deformers from the single file.
+deformerWeights -import -sh &quot;nsp1:myShape&quot; -deformer &quot;nsp1:clusterA&quot; -deformer &quot;nsp1:clusterB&quot; &quot;shape_all.xml&quot;;
+
+// Alternative way of reading both deformers.
+deformerWeights -import -deformer &quot;nsp1:clusterA&quot; -deformer &quot;nsp1:clusterB&quot; &quot;shape_all.xml&quot;;
+
+// Read clusterA from the file containing both clusters.
+deformerWeights -import -deformer &quot;nsp1:clusterA&quot; &quot;shape_all.xml&quot;;
+
+
+//
+// Create the same rig in a different namespace.
+//
+createRig(&quot;nsp2&quot;, 5);
+
+// Import weights from file that remapped the namespace on export.
+deformerWeights -import -sh &quot;nsp2:myShape&quot; -deformer &quot;nsp2:clusterA&quot; -deformer &quot;nsp2:clusterB&quot; &quot;shape_all_nsp2.xml&quot;;
+
+// Import weights from file containing a different namespace, and remap the namespace on import.
+deformerWeights -import -sh &quot;nsp2:myShape&quot; -deformer &quot;nsp2:clusterA&quot; -deformer &quot;nsp2:clusterB&quot; -remap &quot;nsp1:(.*);nsp2:$1&quot; &quot;shape_all.xml&quot; ;
+
+//
+// Create similar rig with different resolution (topology) in a different namespace.
+//
+createRig(&quot;nsp3&quot;, 8);
+
+// Import weights from file, remap the namespace on import, and use the barycentric method to remap the weight values.
+deformerWeights -import -sh &quot;nsp3:myShape&quot; -deformer &quot;nsp3:clusterA&quot; -deformer &quot;nsp3:clusterB&quot; -remap &quot;nsp1:(.*);nsp3:$1&quot; -method &quot;barycentric&quot; &quot;shape_all.xml&quot;;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

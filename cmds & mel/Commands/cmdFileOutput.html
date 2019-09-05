@@ -1,0 +1,274 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>cmdFileOutput command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-cmdFileOutput"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/cmdFileOutput.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>cmdFileOutput </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("cmdFileOutput.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>cmdFileOutput [-<a href="#flagclose">close</a> <i>uint</i>] [-<a href="#flagcloseAll">closeAll</a>] [-<a href="#flagopen">open</a> <i>string</i>] [-<a href="#flagstatus">status</a> <i>uint</i>]  </code> </p>
+      <p>cmdFileOutput is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command will open a text file to receive all of the commands
+and results that normally get printed to the Script Editor
+window or console. The file will stay open until an explicit -close
+with the correct file descriptor or a -closeAll, so care should be
+taken not to leave a file open.
+<p>
+To enable logging to commence as soon as Maya starts up, the
+environment variable MAYA_CMD_FILE_OUTPUT may be specified prior
+to launching Maya. Setting MAYA_CMD_FILE_OUTPUT to a filename
+will create and output to that given file. To access the descriptor
+after Maya has started, use the -query and -open flags together.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>: On open, returns a value (descriptor) that can be used to query
+the status or close the file. Otherwise, a status code
+indicating status of file</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagclose">close</a>, <a href="#flagcloseAll">closeAll</a>, <a href="#flagopen">open</a>, <a href="#flagstatus">status</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclose">
+          <code><b>-close</b>(<b>-c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Closes the file corresponding to the given descriptor.
+If -3 is returned, the file did not exist. -1 is returned
+on error, 0 is returned on successful close.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcloseAll">
+          <code><b>-closeAll</b>(<b>-ca</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Closes all open files.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagopen">
+          <code><b>-open</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Opens the given file for writing (will overwrite if it exists
+and is writable). If successful, a value is returned to enable
+status queries and file close. -1 is returned if the file cannot
+be opened for writing. The -open flag can also be specified in
+-query mode. In query mode, if the named file is currently opened,
+the descriptor for the specified file is returned, otherwise -1 is
+returned. This is an easy way to check if a given file is
+currently open.
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstatus">
+          <code><b>-status</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Queries the status of the given descriptor. -3 is returned
+if no such file exists, -2 indicates the file is not open,
+-1 indicates an error condition, 0 indicates file is ready
+for writing.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+cmdFileOutput -o &quot;dbOutput.txt&quot;;
+// Result: 1 //
+print &quot;This message is in the file\n&quot;;
+// This message is in the file
+cmdFileOutput -s 1;
+// Result: 0 //
+cmdFileOutput -s 2;
+// Result: -3 //
+cmdFileOutput -c 1;
+// Result: 0 //
+// Notice that the 'This message is in the file' string is in the file,
+// as are all of the entered commands and the
+// '// Result: ...' lines, etc.
+
+// Turn on logging to a file on Maya startup so as to log all error
+// messages which happen on startup.
+//
+// Set the environment variable MAYA_CMD_FILE_OUTPUT to &quot;trace.txt&quot;
+// Start up Maya
+// Messages should now be logged to the file &quot;trace.txt&quot; as well as the
+// script editor window.
+
+// Turn off logging to the filename specified by $MAYA_CMD_FILE_OUTPUT
+// after Maya has completed startup.
+//
+string $traceFile = getenv( &quot;MAYA_CMD_FILE_OUTPUT&quot; );
+int $descriptor = `cmdFileOutput -o $traceFile -q`;
+if ( -1 != $descriptor ) {
+    cmdFileOutput -close $descriptor;
+}
+// Result: 0 //
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

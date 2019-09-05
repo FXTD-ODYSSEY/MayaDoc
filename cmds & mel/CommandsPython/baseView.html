@@ -1,0 +1,321 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>baseView command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-baseView"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/baseView.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>baseView </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("baseView.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>baseView(string, [<a href="#flagitemInfo">itemInfo</a>=<i>string</i>], [<a href="#flagitemList">itemList</a>=<i>boolean</i>], [<a href="#flagviewDescription">viewDescription</a>=<i>boolean</i>], [<a href="#flagviewLabel">viewLabel</a>=<i>boolean</i>], [<a href="#flagviewList">viewList</a>=<i>boolean</i>], [<a href="#flagviewName">viewName</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>baseView is <b>NOT undoable</b>, queryable, and editable.</p>
+      A view defines the layout information for the attributes of a
+particular node type or container.  Views can be selected from a set of
+built-in views or may be defined on an associated container template.
+This command queries the view-related information for a container node or
+for a given template.  The information returned from this command will be
+based on the view-related settings in force on the container node at the time
+of the query (i.e. the container's view mode, template name, view name
+attributes), when applicable.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>base, view
+      <h2><a name="hRelated">Related</a></h2><a href="baseTemplate.html">baseTemplate</a>, <a href="containerView.html">containerView</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagitemInfo">itemInfo</a>, <a href="#flagitemList">itemList</a>, <a href="#flagviewDescription">viewDescription</a>, <a href="#flagviewLabel">viewLabel</a>, <a href="#flagviewList">viewList</a>, <a href="#flagviewName">viewName</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagitemInfo">
+          <code><b>itemInfo</b>(<b>ii</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in query mode in conjunction with the itemList flag.
+The command will return a list of information for each item in the view, the
+information fields returned for each item are determined by this argument value.
+The information fields will be listed in the string array returned.
+The order in which the keyword is specified will determine the order in which
+the data will be returned by the command.
+One or more of the following keywords, separated by colons ':' are used to
+specify the argument value.
+<ul>
+  <li>itemIndex  : sequential item number (0-based)</li>
+  <li>itemName   : item name (string)</li>
+  <li>itemLabel  : item display label (string)</li>
+  <li>itemDescription : item description field (string)</li>
+  <li>itemLevel  : item hierarchy level (0-n)</li>
+  <li>itemIsGroup : (boolean 0 or 1) indicates whether or not this item is a group</li>
+  <li>itemIsAttribute : (boolean 0 or 1) indicates whether or not this item is an attribute</li>
+  <li>itemNumChildren: number of immediate children (groups or attributes) of this item</li>
+  <li>itemAttrType : item attribute type (string)</li>
+  <li>itemCallback : item callback field (string)</li>
+</ul>
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagitemList">
+          <code><b>itemList</b>(<b>il</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in query mode, the command will return a list of information for each item in
+the view.  The viewName flag is used to select the view to query.
+The information returned about each item is determined by the itemInfo argument value.
+For efficiency, it is best to query all necessary item information at one time
+(to avoid recomputing the view information on each call).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagviewDescription">
+          <code><b>viewDescription</b>(<b>vd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in query mode, returns the description field associated with the
+selected view.
+If no description was defined for this view, the value will be empty.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagviewLabel">
+          <code><b>viewLabel</b>(<b>vb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in query mode, returns the display label associated with the view.
+An appropriate label suitable for the user interface will be
+returned based on the selected view.  Use of the view label
+is usually more suitable than the view name for display purposes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagviewList">
+          <code><b>viewList</b>(<b>vl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in query mode, command will return a list of all views defined for the
+given target (container or template).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagviewName">
+          <code><b>viewName</b>(<b>vn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in query mode, specifies the name of the queried view when used in
+conjunction with a template target. When used in conjunction with a container
+target, it requires no string argument, and returns the name of the currently
+active view associated with the container; this value may be empty if the
+current view is not a valid template view or is generated by one of the
+built-in views modes. For this reason, the view label is generally more
+suitable for display purposes.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+
+# Obtain a list of all available views for template1
+#
+cmds.baseView ( 'AEblinn', query=True, viewList=True);
+# Result: [u'Animation', u'Rendering'] #
+#
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

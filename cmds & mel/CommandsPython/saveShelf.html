@@ -1,0 +1,101 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>saveShelf command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-saveShelf"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/saveShelf.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>saveShelf </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#MiscUI" target="contentFrame">Misc. UI</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("saveShelf.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>saveShelf(
+string string
+    ) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>saveShelf is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command saves the specified shelf (first argument) to the
+specified file (second argument).
+<p>
+Note that this command doesn't work well with controls that have
+mixed mel and python command callbacks.  Also, because it saves the
+state to a mel file, it does not work with callbacks that are python
+callable objects.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>True if successful.</td></tr></table>
+      
+      
+
+      
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+#    Create a window with a shelf in it.
+#
+window = cmds.window()
+tabs = cmds.tabLayout()
+shelf = cmds.shelfLayout()
+cmds.shelfButton( '\&quot;Hello\\n\&quot;&quot;)', image1='commandButton.png', command='(&quot;print' )
+cmds.tabLayout( tabs, edit=True, tabLabel=(str(shelf),'Example Shelf')  )
+cmds.showWindow( window )
+
+#    At this point the example would be made more interesting if you
+#    put some additional items on this shelf.
+
+#    Now save the shelf in the temp directory.
+#
+tempDir = cmds.internalVar( userTmpDir=True )
+cmds.saveShelf( shelf, (tempDir + 'ExampleShelf') );
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,320 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>setParent command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-setParent"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/setParent.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>setParent </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("setParent.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>setParent(
+[string]
+    , [<a href="#flagdefineTemplate">defineTemplate</a>=<i>string</i>], [<a href="#flagmenu">menu</a>=<i>boolean</i>], [<a href="#flagtopLevel">topLevel</a>=<i>boolean</i>], [<a href="#flagupLevel">upLevel</a>=<i>boolean</i>], [<a href="#flaguseTemplate">useTemplate</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>setParent is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command changes the default parent to be the specified parent.
+Two special parents are &quot;|&quot; which indicates the top level layout of the
+window hierarchy, or &quot;..&quot; which indicates one level up in the hierarchy.
+Trying to move above the top level has no effect.
+<p>
+<p> A control must be parented to a control layout.  A control layout may
+be parented to another control layout or a window.  A menu may be parented
+to a window or a menu bar layout.  For all of these cases
+the <i>setParent</i> command (with no flags) will indicate the current
+default parent.
+<p>
+<p> A menu item must be parented to a menu.  To specify the default menu
+parent use the command <i>setParent -m/menu</i>.  Note that all menu item
+objects created using the <i>-sm/subMenu</i> may also be treated as menu
+objects.
+<p>
+<p> The default parent is ignored by any object that explicitly sets the
+<i>-p/parent</i> flag when it is created.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Name of the parent if the parent changes. Empty string if the parent
+doesn't change.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdefineTemplate">defineTemplate</a>, <a href="#flagmenu">menu</a>, <a href="#flagtopLevel">topLevel</a>, <a href="#flagupLevel">upLevel</a>, <a href="#flaguseTemplate">useTemplate</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefineTemplate">
+          <code><b>defineTemplate</b>(<b>dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Put a command in a mode where any other flags and args
+are parsed and added to the command template with the given name.
+They will be used as default arguments in any subsequent
+invocations of the command when templateName is set as the
+current template.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmenu">
+          <code><b>menu</b>(<b>m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Parent menu for menu items.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtopLevel">
+          <code><b>topLevel</b>(<b>top</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Move to the top level layout in the hierarchy. Equivalent to use &quot;|&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupLevel">
+          <code><b>upLevel</b>(<b>u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Move up one level in the hierarchy. Equivalent to use &quot;..&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseTemplate">
+          <code><b>useTemplate</b>(<b>ut</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Will force the command to use a command template given by the name other than
+the current one.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+#  Create a window with a menu bar and two menu bar layouts.
+#
+window = cmds.window(menuBar=True, widthHeight=(300, 200) )
+fileMenu = cmds.menu( label='File')
+cmds.menuItem( label='Open' )
+
+cmds.paneLayout( configuration='vertical2' )
+
+leftMenuBarLayout = cmds.menuBarLayout()
+leftMenu = cmds.menu( label='Left' )
+cmds.menuItem( label='One' )
+cmds.setParent( '..' )
+
+cmds.menuBarLayout()
+cmds.menu( label='Right' )
+rightSubMenu = cmds.menuItem(subMenu=True, label='Colors' )
+cmds.setParent( '..' )
+cmds.showWindow( window )
+
+#  Add item to the &quot;File&quot; menu.
+#
+cmds.setParent( fileMenu, menu=True )
+cmds.menuItem( label='Save' )
+
+#  Add item to the &quot;Left&quot; menu, explicitly ignore default parent
+#    by setting -p/parent flag.
+#
+cmds.menuItem( parent=leftMenu, label='Two' )
+
+#  Add more items to the &quot;File&quot; menu because it is still the
+#    default parent.
+#
+cmds.menuItem( divider=True )
+cmds.menuItem( label='Close' )
+
+#  Add another menu to the left menu bar layout.
+#
+cmds.setParent( leftMenuBarLayout )
+cmds.menu( label='Middle' )
+cmds.menuItem( label='Three' )
+
+#  Add items to right sub menu.
+#
+cmds.setParent( rightSubMenu, menu=True )
+cmds.menuItem( label='Red' )
+cmds.menuItem( label='Blue' )
+cmds.menuItem( label='Green' )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

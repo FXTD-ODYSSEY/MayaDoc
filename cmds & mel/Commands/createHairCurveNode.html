@@ -1,0 +1,166 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>createHairCurveNode command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-createHairCurveNode"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>createHairCurveNode </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Hair" target="contentFrame">Hair</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("createHairCurveNode.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+createHairCurveNode(
+<br>
+string $hsys, 
+<br>
+string $surface, 
+<br>
+float $u, float $v, 
+<br>
+int $numCvs, 
+<br>
+int $doOut, 
+<br>
+int $doStart,
+<br>
+int $doRest,
+<br>
+int $isPassive,
+<br>
+string $startCurve,
+<br>
+float $length,
+<br>
+int $endHairSystemIndex[],
+<br>
+string $hsysGroup,
+<br>
+string $hsysOutHairGroup,
+<br>
+int $simulationType )
+<br>
+
+	 </code> </p>
+      
+      This is a low level mel routine that sets up a hair follicle and manages all the attachments. It is used
+by the &quot;Create Hair&quot; menu as well as &quot;make selected curves dynamic&quot;.
+It is useful if one wishes to custom script creation of hairs or dynamic curves. Any strings passed
+into this routine should be the names of existing shape nodes of the type required by the arguments. In
+The argument $hsys requires a valid hairSystem node, however the other stringscan be set to &quot;&quot; and
+the hairsystem node will either not implement that node or create one.
+The argument $endHairSystemIndex is a simple 1 element int array that is used to keep track of the index
+we connect to between calls, so that it is faster when looping over large numbers of hairs.
+Initialize the first element of this array to zero, and if you are creating follicles in a loop then
+keep this initialization outside of the loop. For examples of the usage of this call look at createHair.mel.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$hys"><b>$hys</b></a></td><td><i>string</i></td><td>name of the hair system node 
+</td></tr>
+<tr><td><a name="$surface"><b>$surface</b></a></td><td><i>string</i></td><td>surface or mesh to attach the follicle to (set to &quot;&quot; if there is no surface)
+</td></tr>
+<tr><td><a name="$endHairSystemIndex"><b>$endHairSystemIndex</b></a></td><td><i>int[]</i></td><td>this keeps track between calls of the index of the last hair created 
+</td></tr>
+<tr><td><a name="$hsysGroup"><b>$hsysGroup</b></a></td><td><i>string</i></td><td>an existing group to parent the follices under (for no grouping set to &quot;&quot;)
+</td></tr>
+<tr><td><a name="$hsysOutHairGroup"><b>$hsysOutHairGroup</b></a></td><td><i>string</i></td><td>an existing group to parent the output hair curves under (for no grouping set to &quot;&quot;)
+</td></tr>
+<tr><td><a name="$simulationType"><b>$simulationType</b></a></td><td><i>int</i></td><td>1 = dynamic, 2 = static
+</td></tr>
+<tr><td><a name="$u"><b>$u</b></a></td><td><i>float</i></td><td>$v	uv coordinates on the surface to attach the follicle to (if no surface 0,0 is OK)
+</td></tr>
+<tr><td><a name="$numCvs"><b>$numCvs</b></a></td><td><i>int</i></td><td>number of cvs to create for the hair curve ( if a start curve is passed in it will override this value )
+</td></tr>
+<tr><td><a name="$doOut"><b>$doOut</b></a></td><td><i>int</i></td><td>if true then create output curves for the follice
+</td></tr>
+<tr><td><a name="$doStart"><b>$doStart</b></a></td><td><i>int</i></td><td>if true then create a start curve for the follicle
+</td></tr>
+<tr><td><a name="$doRest"><b>$doRest</b></a></td><td><i>int</i></td><td>if true then create a rest curve for the follicle
+</td></tr>
+<tr><td><a name="$isPassive"><b>$isPassive</b></a></td><td><i>int</i></td><td>if true then make the follicle passive
+</td></tr>
+<tr><td><a name="$startCurve"><b>$startCurve</b></a></td><td><i>string</i></td><td>name of a curve to use for the start position(if &quot;&quot; then a curve will be created)
+</td></tr>
+<tr><td><a name="$length"><b>$length</b></a></td><td><i>float</i></td><td>length of hair curve to create (ignored if a start curve is specified)
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+	sphere;
+	string $hsys = `createNode hairSystem`;
+	connectAttr time1.outTime ($hsys + &quot;.currentTime&quot;);
+	int $ind[1];
+	$ind[0] = 0;
+	int $i;
+	for( $i = 0; $i &lt; 10; $i++ ){
+		float $v = 0;
+		float $u = $i/10.0;
+		string $newHair = createHairCurveNode( $hsys, &quot;nurbsSphereShape1&quot;, $u,$v,10, true, true, false, false, &quot;&quot;, 3.0, $ind, &quot;&quot;,&quot;&quot;,1);
+	}
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

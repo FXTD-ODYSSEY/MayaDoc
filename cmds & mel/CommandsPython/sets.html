@@ -1,0 +1,1051 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>sets command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-sets"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/sets.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>sets </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("sets.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>sets(
+selectionList
+    , [<a href="#flagaddElement">addElement</a>=<i>name</i>], [<a href="#flagafterFilters">afterFilters</a>=<i>boolean</i>], [<a href="#flagclear">clear</a>=<i>name</i>], [<a href="#flagcolor">color</a>=<i>int</i>], [<a href="#flagcopy">copy</a>=<i>name</i>], [<a href="#flagedges">edges</a>=<i>boolean</i>], [<a href="#flageditPoints">editPoints</a>=<i>boolean</i>], [<a href="#flagempty">empty</a>=<i>boolean</i>], [<a href="#flagfacets">facets</a>=<i>boolean</i>], [<a href="#flagflatten">flatten</a>=<i>name</i>], [<a href="#flagforceElement">forceElement</a>=<i>name</i>], [<a href="#flaginclude">include</a>=<i>name</i>], [<a href="#flagintersection">intersection</a>=<i>name</i>], [<a href="#flagisIntersecting">isIntersecting</a>=<i>name</i>], [<a href="#flagisMember">isMember</a>=<i>name</i>], [<a href="#flaglayer">layer</a>=<i>boolean</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagnoSurfaceShader">noSurfaceShader</a>=<i>boolean</i>], [<a href="#flagnoWarnings">noWarnings</a>=<i>boolean</i>], [<a href="#flagnodesOnly">nodesOnly</a>=<i>boolean</i>], [<a href="#flagremove">remove</a>=<i>name</i>], [<a href="#flagrenderable">renderable</a>=<i>boolean</i>], [<a href="#flagsize">size</a>=<i>boolean</i>], [<a href="#flagsplit">split</a>=<i>name</i>], [<a href="#flagsubtract">subtract</a>=<i>name</i>], [<a href="#flagtext">text</a>=<i>string</i>], [<a href="#flagunion">union</a>=<i>name</i>], [<a href="#flagvertices">vertices</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>sets is undoable, queryable, and editable.</p>
+      This command is used to create a set, query some state of
+a set, or perform operations to update the membership of a set.
+A set is a logical grouping of an arbitrary collection of objects,
+attributes, or components of objects. Sets are dependency nodes.
+Connections from objects to a set define membership in the set.
+<p>
+Sets are used throughout Maya in a multitude of ways. They are used
+to define an association of material properties to objects, to define
+an association of lights to objects, to define a bookmark or named
+collection of objects, to define a character, and to define the
+components to be deformed by some deformation operation.
+<p>
+Sets can be connected to any number of partitions. A partition is
+a node which enforces mutual exclusivity amoung the sets in the
+partition. That is, if an object is in a
+set which is in a partition, that object cannot be a member of any
+other set that is in the partition.
+<p>
+Without any flags, the <b>sets</b> command will create a set with a
+default name of &quot;set#&quot; (where # is an integer). If no items are
+specified on the command line, the currently selected items are added
+to the set. The -em/empty flag can be used to create an empty
+set and not have the selected items added to the set.
+<p>
+Sets can be created to have certain restrictions on membership. There
+can be &quot;renderable&quot; sets which only allow renderable objects (such as
+nurbs geometry or polymesh faces) to be members of the set. There can
+also be vertex (or control point), edit point, edge, or face sets
+which only allow those types of components to be members of a set.
+Note that for these sets, if an object with a valid type of component
+is to be added to a set, the components of the object are
+added to the set instead.
+<p>
+Sets can have an associated color which is only of use
+when creating vertex sets. The color can be one of the eight user
+defined colors defined in the color preferences. This color can
+be used, for example to distinguish which vertices are being deformed
+by a particular deformation.
+<p>
+Objects, components, or attributes can be added to a set using one of
+three flags. The -add/addElement flag will add the objects to a set as
+long as this won't break any mutual exclusivity constraints. If there
+are any items which can't be added, the command will fail. The
+-in/include flag will only add those items which can be added and
+warn of those which can't. The -fe/forceElement flag will add all the
+items to the set but will also remove any of those items that are in
+any other set which is in the same partition as the set.
+<p>
+There are several operations on sets that can be performed with the
+<b>sets</b> command. Membership can be queried. Tests for whether
+an item is in a set or whether two sets share the same item
+can be performed. Also, the union, intersection and
+difference of sets can be performed which returns a list of members
+of the sets which are a result of the operation.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>For creation operations (name of the set that was created or edited)</td></tr><tr><td valign="top"><i>string[]</i></td><td>For query operation (names of items in the set)</td></tr><tr><td valign="top"><i>boolean</i></td><td>For isIntersecting and isMember operations</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="character.html">character</a>, <a href="listSets.html">listSets</a>, <a href="partition.html">partition</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaddElement">addElement</a>, <a href="#flagafterFilters">afterFilters</a>, <a href="#flagclear">clear</a>, <a href="#flagcolor">color</a>, <a href="#flagcopy">copy</a>, <a href="#flagedges">edges</a>, <a href="#flageditPoints">editPoints</a>, <a href="#flagempty">empty</a>, <a href="#flagfacets">facets</a>, <a href="#flagflatten">flatten</a>, <a href="#flagforceElement">forceElement</a>, <a href="#flaginclude">include</a>, <a href="#flagintersection">intersection</a>, <a href="#flagisIntersecting">isIntersecting</a>, <a href="#flagisMember">isMember</a>, <a href="#flaglayer">layer</a>, <a href="#flagname">name</a>, <a href="#flagnoSurfaceShader">noSurfaceShader</a>, <a href="#flagnoWarnings">noWarnings</a>, <a href="#flagnodesOnly">nodesOnly</a>, <a href="#flagremove">remove</a>, <a href="#flagrenderable">renderable</a>, <a href="#flagsize">size</a>, <a href="#flagsplit">split</a>, <a href="#flagsubtract">subtract</a>, <a href="#flagtext">text</a>, <a href="#flagunion">union</a>, <a href="#flagvertices">vertices</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddElement">
+          <code><b>addElement</b>(<b>add</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds the list of items to the given set.  If some of the
+items cannot be added to the set because they are in another
+set which is in the same partition as the set to edit, the
+command will fail.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafterFilters">
+          <code><b>afterFilters</b>(<b>af</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Default state is false. This flag is valid in edit mode only.
+This flag is for use on sets that are acted on by deformers
+such as sculpt, lattice, blendShape. The default edit mode
+is to edit the membership of the group acted on by the deformer.
+If you want to edit the group but not change the membership of
+the deformer, set the flag to true.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclear">
+          <code><b>clear</b>(<b>cl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+An operation which removes all items from the given set making
+the set empty.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolor">
+          <code><b>color</b>(<b>co</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Defines the hilite color of the set. Must be a value in
+range [-1, 7] (one of the user defined colors).  -1 marks the
+color has being undefined and therefore not having any affect.
+Only the vertices of a vertex set will be displayed in this
+color.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopy">
+          <code><b>copy</b>(<b>cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Copies the members of the given set to a new set.
+This flag is for use in creation mode only.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagedges">
+          <code><b>edges</b>(<b>eg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates the new set can contain edges only.
+This flag is for use in creation or query mode only.
+The default value is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditPoints">
+          <code><b>editPoints</b>(<b>ep</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates the new set can contain editPoints only.
+This flag is for use in creation or query mode only.
+The default value is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagempty">
+          <code><b>empty</b>(<b>em</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that the set to be created should be empty. That is,
+it ignores any arguments identifying objects to be added to
+the set. This flag is only valid for operations that create a new set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfacets">
+          <code><b>facets</b>(<b>fc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates the new set can contain facets only.
+This flag is for use in creation or query mode only.
+The default value is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflatten">
+          <code><b>flatten</b>(<b>fl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+An operation that flattens the structure of the given set.
+That is, any sets contained by the given set will be replaced by
+its members so that the set no longer contains other sets but
+contains the other sets' members.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforceElement">
+          <code><b>forceElement</b>(<b>fe</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For use in edit mode only. Forces addition of the items
+to the set. If the items are in another set which is in the
+same partition as the given set, the items will be removed
+from the other set in order to keep the sets in the partition
+mutually exclusive with respect to membership.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginclude">
+          <code><b>include</b>(<b>include</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds the list of items to the given set.  If some of the
+items cannot be added to the set, a warning will be issued.
+This is a less strict version of the -add/addElement operation.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagintersection">
+          <code><b>intersection</b>(<b>int</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+An operation that returns a list of items which are members of
+all the sets in the list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisIntersecting">
+          <code><b>isIntersecting</b>(<b>ii</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+An operation which tests whether the sets in the list have
+common members.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisMember">
+          <code><b>isMember</b>(<b>im</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+An operation which tests whether all the given items
+are members of the given set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglayer">
+          <code><b>layer</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+OBSOLETE. DO NOT USE.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Assigns string as the name for a new set. This flag is
+only valid for operations that create a new set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoSurfaceShader">
+          <code><b>noSurfaceShader</b>(<b>nss</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set is renderable, do not connect it to the default surface
+shader.  Flag has no meaning or effect for non renderable sets.
+This flag is for use in creation mode only.
+The default value is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoWarnings">
+          <code><b>noWarnings</b>(<b>nw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that warning messages should not be reported such
+as when trying to add an invalid item to a set. (used by UI)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodesOnly">
+          <code><b>nodesOnly</b>(<b>no</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is usable with the -q/query flag but is ignored if
+used with another queryable flags. This flag modifies the results
+of the set membership query such that
+when there are attributes (e.g. sphere1.tx) or components of
+nodes included in the set, only the nodes will be listed.
+Each node will only be listed once, even if more than one attribute
+or component of the node exists in the set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>remove</b>(<b>rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Removes the list of items from the given set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderable">
+          <code><b>renderable</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag indicates that a special type of set should
+be created. This type of set (shadingEngine as opposed to
+objectSet) has certain restrictions on its membership in that
+it can only contain renderable elements such as lights and
+geometry. These sets are referred to as shading groups and
+are automatically connected to the &quot;renderPartition&quot; node when
+created (to ensure mutual exclusivity of the set's members with
+the other sets in the partition).
+This flag is for use in creation or query mode only.
+The default value is false which means a normal set is
+created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsize">
+          <code><b>size</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use the size flag to query the length of the set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsplit">
+          <code><b>split</b>(<b>sp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Produces a new set with the list of items and removes
+each item in the list of items from the given set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsubtract">
+          <code><b>subtract</b>(<b>sub</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+An operation between two sets which returns the members of the
+first set that are not in the second set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtext">
+          <code><b>text</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Defines an annotation string to be stored with the set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunion">
+          <code><b>union</b>(<b>un</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+An operation that returns a list of all the members of all sets
+listed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvertices">
+          <code><b>vertices</b>(<b>v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates the new set can contain vertices only.
+This flag is for use in creation or query mode only.
+The default value is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# create some objects
+cmds.sphere( n=&quot;sphere1&quot; )
+cmds.cone( n=&quot;cone1&quot; )
+
+# create a set with whatever is currently active
+cmds.select( 'sphere1' )
+newSet1 = cmds.sets()
+cmds.select( 'cone1' )
+newSet2 = cmds.sets()
+
+# Query the members of a set
+cmds.sets( newSet1, q=True )
+
+# create a set which contains two sets
+cmds.sets( newSet1, newSet2, n=&quot;setOfSets&quot; )
+
+# To select a set, the -noExpand flag must be used. Otherwise
+# the members of a set are selected instead.
+cmds.select( newSet1, noExpand=True )
+cmds.ls( selection=True )
+
+# Select the members of a set
+cmds.select( newSet1 )
+cmds.ls( selection=True )
+
+# Create a vertex set named ballVertices. This will contain
+# all the vertices of the sphere.
+cmds.sets( 'sphere1', n=&quot;ballVertices&quot;, v=1 )
+cmds.select( 'ballVertices' )
+
+# Return the union of two sets
+cmds.sets( newSet2, un=newSet1 )
+
+# Test whether a list of sets have common members
+cmds.sets( 'ballVertices',ii=newSet1)
+
+# Test whether the sphere is a member of the set
+cmds.sets('sphere1',im=newSet1)
+
+# Remove the sphere from a set
+cmds.sets( 'sphere1', rm=newSet1 )
+
+# Test again whether the sphere is a member of the set
+cmds.sets( 'sphere1', im=newSet1 )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

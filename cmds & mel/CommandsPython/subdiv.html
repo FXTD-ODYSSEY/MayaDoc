@@ -1,0 +1,390 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>subdiv command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-subdiv"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/subdiv.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>subdiv </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#SubDs" target="contentFrame">SubDs</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("subdiv.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>subdiv([<a href="#flagcurrentLevel">currentLevel</a>=<i>boolean</i>], [<a href="#flagcurrentSubdLevel">currentSubdLevel</a>=<i>boolean</i>], [<a href="#flagdeepestLevel">deepestLevel</a>=<i>int</i>], [<a href="#flagdisplayLoad">displayLoad</a>=<i>boolean</i>], [<a href="#flagedgeStats">edgeStats</a>=<i>boolean</i>], [<a href="#flagfaceStats">faceStats</a>=<i>boolean</i>], [<a href="#flagmaxPossibleLevel">maxPossibleLevel</a>=<i>int</i>], [<a href="#flagproxyMode">proxyMode</a>=<i>int</i>], [<a href="#flagsmallOffsets">smallOffsets</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>subdiv is undoable, queryable, and <b>NOT editable</b>.</p>
+      Provides useful information about the selected subdiv or components, such
+as the deepest subdivided level, the children or parents of the currently
+selected components, etc.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>subdivision, surface, query, level
+      <h2><a name="hRelated">Related</a></h2><a href="changeSubdivComponentDisplayLevel.html">changeSubdivComponentDisplayLevel</a>, <a href="changeSubdivRegion.html">changeSubdivRegion</a>, <a href="createSubdivRegion.html">createSubdivRegion</a>, <a href="nurbsToSubdiv.html">nurbsToSubdiv</a>, <a href="polyToSubdiv.html">polyToSubdiv</a>, <a href="querySubdiv.html">querySubdiv</a>, <a href="refineSubdivSelectionList.html">refineSubdivSelectionList</a>, <a href="subdCollapse.html">subdCollapse</a>, <a href="subdToBlind.html">subdToBlind</a>, <a href="subdToPoly.html">subdToPoly</a>, <a href="subdivCrease.html">subdivCrease</a>, <a href="subdivDisplaySmoothness.html">subdivDisplaySmoothness</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcurrentLevel">currentLevel</a>, <a href="#flagcurrentSubdLevel">currentSubdLevel</a>, <a href="#flagdeepestLevel">deepestLevel</a>, <a href="#flagdisplayLoad">displayLoad</a>, <a href="#flagedgeStats">edgeStats</a>, <a href="#flagfaceStats">faceStats</a>, <a href="#flagmaxPossibleLevel">maxPossibleLevel</a>, <a href="#flagproxyMode">proxyMode</a>, <a href="#flagsmallOffsets">smallOffsets</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentLevel">
+          <code><b>currentLevel</b>(<b>cl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag returns an integer representing
+the level of the currently selected subdiv surface component(s).
+Returns -1, if there are more than one level of CVs are selected,
+(even if they are from different objects)
+Returns -2, if there are no input subdiv CVs to process.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentSubdLevel">
+          <code><b>currentSubdLevel</b>(<b>csl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag returns an integer representing
+the level of the currently selected subdiv surface, regardless
+of whether components are selected or not.
+Returns -2, if there are no input subdiv CVs to process.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeepestLevel">
+          <code><b>deepestLevel</b>(<b>dl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag returns an integer representing the
+deepest level to which the queried subdiv surface has
+been subdivided.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisplayLoad">
+          <code><b>displayLoad</b>(<b>dsl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag prints the display load of selected subdiv
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagedgeStats">
+          <code><b>edgeStats</b>(<b>est</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag prints stats on the current subd.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfaceStats">
+          <code><b>faceStats</b>(<b>fst</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag prints stats on the current subd.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxPossibleLevel">
+          <code><b>maxPossibleLevel</b>(<b>mpl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag returns an integer representing
+the maximum possible level to which the queried subdiv surface can
+been subdivided.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagproxyMode">
+          <code><b>proxyMode</b>(<b>pm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag returns an integer representing
+whether or not the subdivision surface is in &quot;polygon proxy&quot; mode.
+&quot;Proxy&quot; mode allows the base mesh of a subdivision surface
+without construction history to be edited using the polygonal
+editing tools.
+Returns 1, if the subdivision surface is in &quot;polygon proxy&quot; mode.
+Returns 0, if the surface is not currently in &quot;proxy&quot; mode, but could
+be put into &quot;proxy&quot; mode since it has no construction history.  (This state
+is also known as &quot;standard&quot; mode.)
+Returns 2, if the surface is not in &quot;proxy&quot; mode and cannot be put
+into proxy mode, as it has construction history.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsmallOffsets">
+          <code><b>smallOffsets</b>(<b>so</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag prints the number of subdiv vertices in the
+hierarchy that have a small enough offset so that the vertex is not required
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# To find the deepest subdivided level of polyToSubdShape1
+#
+cmds.subdiv( 'polyToSubdShape1', query=True, deepestLevel=True )
+
+# To find the level of the  selected subdiv CV
+#
+cmds.select( 'polyToSubdShape1.smp[2][67108865]', r=True)
+cmds.subdiv( currentLevel=True )
+# Result: 1 #
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

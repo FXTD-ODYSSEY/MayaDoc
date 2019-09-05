@@ -1,0 +1,302 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyClipboard command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-polyClipboard"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/polyClipboard.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyClipboard </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyClipboard.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyClipboard [-<a href="#flagclear">clear</a>] [-<a href="#flagcolor">color</a>] [-<a href="#flagcopy">copy</a>] [-<a href="#flagpaste">paste</a>] [-<a href="#flagshader">shader</a>] [-<a href="#flaguvCoordinates">uvCoordinates</a>]  </code> </p>
+      <p>polyClipboard is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The command allows the user to copy and paste certain polygonal
+attributes to a clipboard. These attributes are:
+ 1) Shader (shading engine) assignment.
+ 2) Texture coordinate (UV) assignment.
+ 3) Color value assignment.
+Any combination of attributes can be chosen for the copy or
+paste operation. If the attribute has not been copied
+to the clipboard, then naturally it cannot be pasted from
+the clipboard.
+The copy option will copy the attribute assignments from
+a single source polygonal dag object or polygon component.
+If the source does not have the either UV or color attributes,
+then nothing will be copied to the clipboard.
+The paste option will paste the attribute assignments to
+one or more polygon components or polygonal dag objects.
+If the destination does not have either UV or color attributes,
+then new values will be assigned as needed.
+Additionally, there is the option to clear the clipboard
+contents
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>Success or Failure</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>poly, clipboard, uv, color, shaders
+      <h2><a name="hRelated">Related</a></h2><a href="polyCylindricalProjection.html">polyCylindricalProjection</a>, <a href="polyEditUV.html">polyEditUV</a>, <a href="polyForceUV.html">polyForceUV</a>, <a href="polyMapCut.html">polyMapCut</a>, <a href="polyMapDel.html">polyMapDel</a>, <a href="polyMapSew.html">polyMapSew</a>, <a href="polyMoveFacetUV.html">polyMoveFacetUV</a>, <a href="polyMoveUV.html">polyMoveUV</a>, <a href="polyPlanarProjection.html">polyPlanarProjection</a>, <a href="polyProjection.html">polyProjection</a>, <a href="polySphericalProjection.html">polySphericalProjection</a>, <a href="polyUVSet.html">polyUVSet</a>, <a href="untangleUV.html">untangleUV</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagclear">clear</a>, <a href="#flagcolor">color</a>, <a href="#flagcopy">copy</a>, <a href="#flagpaste">paste</a>, <a href="#flagshader">shader</a>, <a href="#flaguvCoordinates">uvCoordinates</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclear">
+          <code><b>-clear</b>(<b>-cl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will mean to clear the specified attribute argument(s).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolor">
+          <code><b>-color</b>(<b>-clr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will be to copy or paste color attributes
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopy">
+          <code><b>-copy</b>(<b>-cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will mean to copy the specified attribute argument(s).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpaste">
+          <code><b>-paste</b>(<b>-ps</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will mean to paste the specified attribute argument(s).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshader">
+          <code><b>-shader</b>(<b>-sh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will be to copy or paste shader attributes
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvCoordinates">
+          <code><b>-uvCoordinates</b>(<b>-uv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will be to copy or paste texture coordinate attributes
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// Copy uv, color and shader attributes
+polyClipboard -copy -uv -color -shader;
+
+// Paste only shader attribute
+polyClipboard -paste -shader;
+
+// Copy color attribute only
+polyClipboard -copy -color;
+
+// Clear all the clipboard attributes
+polyClipboard -clear -uv -color -shader;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

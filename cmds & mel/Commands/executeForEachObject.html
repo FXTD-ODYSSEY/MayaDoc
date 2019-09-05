@@ -1,0 +1,123 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>executeForEachObject command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-executeForEachObject"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>executeForEachObject </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("executeForEachObject.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+string[] executeForEachObject( string $inThisList[], string $thisCmd )
+<br>
+
+	 </code> </p>
+      
+      This procedure takes a list of object names and applies the
+command in &quot;thisCmd&quot; to each object.  The object name is
+substituted for a %s in the command.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$inThisList"><b>$inThisList</b></a></td><td><i>string[]</i></td><td>- a list of object names to operate on
+</td></tr>
+<tr><td><a name="$thisCmd"><b>$thisCmd</b></a></td><td><i>string</i></td><td>- a string with %s in it.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+  <i>// Example 1. if &quot;thisCmd&quot; is a string that looks like:
+</i>
+          string $thisCmd = &quot;reverseCommand -ch off -rpo on %s&quot;;
+  <i>// and curve1 and curve2 are in the given list, then the commands 
+</i>
+  <i>// that will be executed for each object will look like:
+</i>
+          reverseCommand -ch off -rpo on curve1;
+          reverseCommand -ch off -rpo on curve2;
+
+  <i>// Example 2.  if &quot;thisCmd&quot; is a string that looks like:
+</i>
+          string $thisCmd = &quot;reverseProc( true, false, %s )&quot;;
+  <i>// and curve1 and curve2 are in the given list, then the commands 
+</i>
+  <i>// that will be executed for each object will look like:
+</i>
+          reverseProc( true, false, &quot;curve1&quot; );
+          reverseProc( true, false, &quot;curve2&quot; );
+
+  <i>// Example 3.
+</i>
+          cone; sphere; select -all;
+          string $cmd = &quot;duplicate %s&quot;;
+          string $itemList[] = `ls -sl`;
+          select -d;
+          string $results[] = executeForEachObject($itemList, $cmd);	
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

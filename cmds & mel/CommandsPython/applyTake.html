@@ -1,0 +1,380 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>applyTake command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-applyTake"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/applyTake.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>applyTake </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#MoCap" target="contentFrame">MoCap</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("applyTake.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>applyTake([<a href="#flagchannel">channel</a>=<i>string</i>], [<a href="#flagdevice">device</a>=<i>string</i>], [<a href="#flagfilter">filter</a>=<i>string</i>], [<a href="#flagpreview">preview</a>=<i>boolean</i>], [<a href="#flagrecurseChannel">recurseChannel</a>=<i>boolean</i>], [<a href="#flagreset">reset</a>=<i>boolean</i>], [<a href="#flagspecifyChannel">specifyChannel</a>=<i>boolean</i>], [<a href="#flagstartTime">startTime</a>=<i>time</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>applyTake is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command takes data in a device (refered to as a take) and converts
+it into a form that may be played back and reviewed. The take can either
+be imported through the readTake action, or recorded by the recordDevice
+action. The take is either converted into animation curves or if the
+-preview flag is used, into blendDevice nodes.
+<p>
+The command looks for animation curves attached to the target attributes
+of a device attachment. If animation curves exist, the take is
+pasted over the existing curves. If the curves do not exist, new
+animation curves are created.
+<p>
+If devices are not specified, all of the devices with take data and that
+are enabled for applyTake, will have their data applied.
+<p>
+See also: recordDevice, enableDevice, readTake, writeTake
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="defineDataServer.html">defineDataServer</a>, <a href="defineVirtualDevice.html">defineVirtualDevice</a>, <a href="enableDevice.html">enableDevice</a>, <a href="filter.html">filter</a>, <a href="movIn.html">movIn</a>, <a href="movOut.html">movOut</a>, <a href="readTake.html">readTake</a>, <a href="recordDevice.html">recordDevice</a>, <a href="writeTake.html">writeTake</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagchannel">channel</a>, <a href="#flagdevice">device</a>, <a href="#flagfilter">filter</a>, <a href="#flagpreview">preview</a>, <a href="#flagrecurseChannel">recurseChannel</a>, <a href="#flagreset">reset</a>, <a href="#flagspecifyChannel">specifyChannel</a>, <a href="#flagstartTime">startTime</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchannel">
+          <code><b>channel</b>(<b>c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag overrides the set channel enable value.
+If a channel is specified, it will be enabled. <br>
+C: The default is all applyTake enabled channels for the device(s).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdevice">
+          <code><b>device</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies which device contains the take. <br>
+C: The default is all applyTake enabled devices.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfilter">
+          <code><b>filter</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the filters to use during the
+applyTake. If this flag is used multiple times, the ordering
+of the filters is from left to right. <br>
+C: The default is no filters.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreview">
+          <code><b>preview</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Applies the take to blendDevice nodes attached to the target
+attributes connected to the device attachments. Animation curves
+attached to the attributes will not be altered, but for the time
+that preview data is defined, the preview data will be the data
+used during playback. <br>
+C: The default is to not preview.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrecurseChannel">
+          <code><b>recurseChannel</b>(<b>rc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When this flag is used, the children of the channel(s)
+specified by -c/channel are also applied.
+C: The default is all of the enabled channels.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreset">
+          <code><b>reset</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Resets the blendDevice nodes affected by -preview. The preview data
+is removed and if animation curves exist, they are used during
+playback.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagspecifyChannel">
+          <code><b>specifyChannel</b>(<b>sc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used with -c/channel flag. When used, applyTake
+will only work on the channels listed with the -c/channel flag. <br>
+C: The default is all of the enabled channels.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstartTime">
+          <code><b>startTime</b>(<b>st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The default start time for a take is determined at record time.
+The startTime option sets the starting time of the take in the
+current animation units. <br>
+C: The default is the first time stamp of the take. If a time
+stamp does not exist for the take, 0 is used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+#    Apply all of the recorded data to param curves.
+cmds.applyTake()
+
+#    Applies the takes from clock and ultra devices and starts the
+#    data at anim time 100.
+cmds.applyTake( d=('clock', 'ultra'), st=100 )
+
+#    Applies the take from the ultra device and uses the euler and
+#    simplify filters.
+cmds.applyTake( d='ultra', f=('euler', 'simplify') )
+
+#    Applies only the shoulder channel and all of its children.
+cmds.applyTake( d='ultra', c='shoulder', sc=True, rc=True )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

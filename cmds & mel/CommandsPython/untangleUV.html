@@ -1,0 +1,372 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>untangleUV command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-untangleUV"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/untangleUV.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>untangleUV </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("untangleUV.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>untangleUV([<a href="#flagmapBorder">mapBorder</a>=<i>string</i>], [<a href="#flagmaxRelaxIterations">maxRelaxIterations</a>=<i>int</i>], [<a href="#flagpinBorder">pinBorder</a>=<i>boolean</i>], [<a href="#flagpinSelected">pinSelected</a>=<i>boolean</i>], [<a href="#flagpinUnselected">pinUnselected</a>=<i>boolean</i>], [<a href="#flagrelax">relax</a>=<i>string</i>], [<a href="#flagrelaxTolerance">relaxTolerance</a>=<i>float</i>], [<a href="#flagshapeDetail">shapeDetail</a>=<i>float</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>untangleUV is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command will aid in the creation of non-overlapping regions (i.e. polygons)
+in texture space by untangling texture UVs. This is done in two stages:<br>
+1) Use this command to map the UV border determined by the current selection
+or passed component into a shape that is more suitable for subsequent relaxation.<br>
+2) Relax all the internal texture UVs by performing a length minimization
+algorithm on all edges in texture space.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>the number of relaxation iterations carried out</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>poly, uv, map, border, relax, untangle
+      <h2><a name="hRelated">Related</a></h2><a href="polyClipboard.html">polyClipboard</a>, <a href="polyCylindricalProjection.html">polyCylindricalProjection</a>, <a href="polyEditUV.html">polyEditUV</a>, <a href="polyForceUV.html">polyForceUV</a>, <a href="polyMapCut.html">polyMapCut</a>, <a href="polyMapDel.html">polyMapDel</a>, <a href="polyMapSew.html">polyMapSew</a>, <a href="polyMoveFacetUV.html">polyMoveFacetUV</a>, <a href="polyMoveUV.html">polyMoveUV</a>, <a href="polyPlanarProjection.html">polyPlanarProjection</a>, <a href="polyProjection.html">polyProjection</a>, <a href="polySphericalProjection.html">polySphericalProjection</a>, <a href="polyUVSet.html">polyUVSet</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagmapBorder">mapBorder</a>, <a href="#flagmaxRelaxIterations">maxRelaxIterations</a>, <a href="#flagpinBorder">pinBorder</a>, <a href="#flagpinSelected">pinSelected</a>, <a href="#flagpinUnselected">pinUnselected</a>, <a href="#flagrelax">relax</a>, <a href="#flagrelaxTolerance">relaxTolerance</a>, <a href="#flagshapeDetail">shapeDetail</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmapBorder">
+          <code><b>mapBorder</b>(<b>mb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Map the border containing the selected UV into a variety of shapes that may
+be more amenable to UV relaxation operations. There are various types of
+mapping available. All the resulting mappings are fit inside the unit square.<br>
+<br>
+Valid values for the STRING are:<br>
+<b>circular</b> - a circular mapping with picked UV closest to (0,0)<br>
+<b>square</b> - map to unit square with picked UV at (0,0)<br>
+<b>shape</b> - a mapping which attempts to reflect the actual shape of the object
+        where the picked UV is placed on the line from (0,0) -&gt; (0.5,0.5)<br>
+<b>shape_circular</b> - shape mapping which will interpolate to a circular mapping
+                 just enough to prevent self-intersections of the mapped border <br>
+<b>shape_square</b> - shape mapping which will interpolate to a square mapping just
+               enough to prevent self-intersections of the mapped border <br>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxRelaxIterations">
+          <code><b>maxRelaxIterations</b>(<b>mri</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The relaxation process is an iterative algorithm. Using this flag
+will put an upper limit on the number of iterations that will be
+performed.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpinBorder">
+          <code><b>pinBorder</b>(<b>pb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this is true, then the relevant texture borders are pinned in
+place during any relaxation
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpinSelected">
+          <code><b>pinSelected</b>(<b>ps</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this is true, then then any selected UVs are pinned in
+place during any relaxation
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpinUnselected">
+          <code><b>pinUnselected</b>(<b>pu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this is true, then all unselected UVs in each mesh are pinned in
+place during any relaxation
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelax">
+          <code><b>relax</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Relax all UVs in the shell of the selected UV's. The relaxation is done by
+simulating a spring system where each UV edge is treated as a spring.
+There are a number of different methods characterized by the way the UV
+edges are weighted in the spring system. These weightings are determined by
+STRING. Valid values for STRING are:<br>
+<b>uniform</b> - every edge is weighted the same. This is the fastest method.<br>
+<b>inverse_length</b> - every edge weight is inversely proportional to it's world space length.<br>
+<b>inverse_sqrt_length</b> - every edge weight is inversely proportional the the square root of it's world space length.<br>
+<b>harmonic</b> - this weighting can yield near optimal results in matching the UV's with
+the geometry, but can also take a long time.<br>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelaxTolerance">
+          <code><b>relaxTolerance</b>(<b>rt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This sets the tolerance which is used to determine when the
+relaxation process can stop. Smaller tolerances yield better
+results but can take much longer.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshapeDetail">
+          <code><b>shapeDetail</b>(<b>sd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the mapBorder flag is set to circular or square, then this flag
+will control how much of the border's corresponding surface shape
+should be retained in the final mapped border.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.untangleUV( mb='shape_square' )
+# map the border associated with the selected UV trying to retain the
+# shape of the object and use a square mapping to iron out crossings
+
+cmds.untangleUV( r='one_over_length', pb=True, ps=False, pu=False, rt=0.1 )
+# relax the shell associated with the selected UV using edge weights
+# that are inversely proportional to length of world space lengths
+# pin the UV on borders and use a tolerance of 0.1
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

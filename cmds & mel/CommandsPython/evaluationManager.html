@@ -1,0 +1,832 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>evaluationManager command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-evaluationManager"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/evaluationManager.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>evaluationManager </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("evaluationManager.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>evaluationManager([<a href="#flagcycleCluster">cycleCluster</a>=<i>string</i>], [<a href="#flagdisableInfo">disableInfo</a>=<i>string</i>], [<a href="#flagdownstreamFrom">downstreamFrom</a>=<i>string</i>], [<a href="#flagempty">empty</a>=<i>boolean</i>], [<a href="#flagenabled">enabled</a>=<i>boolean</i>], [<a href="#flagidleAction">idleAction</a>=<i>int</i>], [<a href="#flagidleBuild">idleBuild</a>=<i>boolean</i>], [<a href="#flaginvalidate">invalidate</a>=<i>boolean</i>], [<a href="#flagmanipulation">manipulation</a>=<i>boolean</i>], [<a href="#flagmanipulationReady">manipulationReady</a>=<i>boolean</i>], [<a href="#flagmode">mode</a>=<i>string</i>], [<a href="#flagnodeTypeGloballySerialize">nodeTypeGloballySerialize</a>=<i>boolean</i>], [<a href="#flagnodeTypeParallel">nodeTypeParallel</a>=<i>boolean</i>], [<a href="#flagnodeTypeSerialize">nodeTypeSerialize</a>=<i>boolean</i>], [<a href="#flagnodeTypeUntrusted">nodeTypeUntrusted</a>=<i>boolean</i>], [<a href="#flagsafeMode">safeMode</a>=<i>boolean</i>], [<a href="#flagupstreamFrom">upstreamFrom</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>evaluationManager is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      Handles turning on and off the evaluation manager method of evaluating the DG.
+Query the 'mode' flag to see all available evaluation modes. The special mode
+'off' disables the evaluation manager.
+The scheduling override flags 'nodeTypeXXX' force certain node types to use
+specific scheduling types, even though the node descriptions might indicate
+otherwise. Use with caution; certain nodes may not react well to
+alternative scheduling types.
+Only one scheduling type override will be in force at a time, the most
+restrictive one. In order, they are untrusted, globally serialized, locally
+serialized, and parallel. The node types will however remember all overrides.
+For example, if you set a node type override to be untrusted, then to be
+parallel it will continue to use the untrusted override. If you then turn off
+the untrusted override, the scheduling will advance to the parallel one.
+The actual node scheduling type is always superceded by the overrides. For example, a
+serial node will still be considered as parallel if the node type has the
+parallel override set, even though 'serial' is a more restrictive scheduling type.
+See the 'dbpeek' command 'graph' operation with arguments 'evaluationGraph' and
+'scheduling' to see what scheduling type any particular node will end up using
+after the hierarchy of overrides and native scheduling types is applied.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>The names of all evaluation manager modes (querying without flags)</td></tr><tr><td valign="top"><i>string[]</i></td><td>The names of all nodes involved in a cycle cluster with the selected one.</td></tr><tr><td valign="top"><i>boolean</i></td><td>The success of activating of deactivating manipulation (with the 'manipulation' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The manipulation active or inactive state (querying the 'manipulation' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The manipulation allowed or disallowed state (querying the 'manipulationReady' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The success of setting the evaluation manager mode (with the 'mode' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The success of setting the evaluation manager idle action (with the 'idleAction' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>False if there are any nodes in the evaluation graph (with the 'empty' flag)</td></tr><tr><td valign="top"><i>Int</i></td><td>The Evaluation Manager idle action (querying with the 'idleAction' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>Is the evaluation graph currently valid? (querying with the 'invalidate' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The success of setting the node type parallel scheduling mode (with the 'nodeTypeParallel' flag)</td></tr><tr><td valign="top"><i>boolean[]</i></td><td>The parallel scheduling states of specified node types (querying the 'nodeTypeParallel' flag with object(s))</td></tr><tr><td valign="top"><i>string[]</i></td><td>The names of all node types in parallel scheduling mode (querying the 'nodeTypeParallel' flag alone)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The success of setting the node type serialized mode (with the 'nodeTypeSerialize' flag)</td></tr><tr><td valign="top"><i>boolean[]</i></td><td>The serialized states of specified node types (querying the 'nodeTypeSerialize' flag with object(s))</td></tr><tr><td valign="top"><i>string[]</i></td><td>The names of all node types in serial scheduling mode (querying the 'nodeTypeSerialize' flag alone)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The success of setting the node type globally serialized mode (with the 'nodeTypeGloballySerialize' flag)</td></tr><tr><td valign="top"><i>boolean[]</i></td><td>The globally serialized states of specified node types (querying the 'nodeTypeGloballySerialize' flag with object(s))</td></tr><tr><td valign="top"><i>string[]</i></td><td>The names of all node types in globally serialized scheduling mode (querying the 'nodeTypeGloballySerialize' flag alone)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The success of setting the node type untrusted mode (with the 'nodeTypeUntrusted' flag)</td></tr><tr><td valign="top"><i>boolean[]</i></td><td>The untrusted of specified node types (querying the 'nodeTypeUntrusted' flag with object(s))</td></tr><tr><td valign="top"><i>string[]</i></td><td>The names of all node types in untrusted scheduling mode (querying the 'nodeTypeUntrusted' flag alone)</td></tr><tr><td valign="top"><i>string</i></td><td>The evaluation manager mode (querying with the 'mode' flag)</td></tr><tr><td valign="top"><i>string[]</i></td><td>The names of all nodes immediately downstream/upstream of the named one(s) (with the 'upstreamFrom' or 'downstreamFrom' flags)</td></tr><tr><td valign="top"><i>string[]</i></td><td>The list of reasons the evaluation manager has been disabled (querying the 'disableInfo' flag)</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>evaluation, manager, DG, runtime
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcycleCluster">cycleCluster</a>, <a href="#flagdisableInfo">disableInfo</a>, <a href="#flagdownstreamFrom">downstreamFrom</a>, <a href="#flagempty">empty</a>, <a href="#flagenabled">enabled</a>, <a href="#flagidleAction">idleAction</a>, <a href="#flagidleBuild">idleBuild</a>, <a href="#flaginvalidate">invalidate</a>, <a href="#flagmanipulation">manipulation</a>, <a href="#flagmanipulationReady">manipulationReady</a>, <a href="#flagmode">mode</a>, <a href="#flagnodeTypeGloballySerialize">nodeTypeGloballySerialize</a>, <a href="#flagnodeTypeParallel">nodeTypeParallel</a>, <a href="#flagnodeTypeSerialize">nodeTypeSerialize</a>, <a href="#flagnodeTypeUntrusted">nodeTypeUntrusted</a>, <a href="#flagsafeMode">safeMode</a>, <a href="#flagupstreamFrom">upstreamFrom</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcycleCluster">
+          <code><b>cycleCluster</b>(<b>ccl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns a list of nodes that are stored together with the given one in
+a cycle cluster. The list will be empty when the evaluation mode is not
+active or the node is not in a cycle.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisableInfo">
+          <code><b>disableInfo</b>(<b>di</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns a list of strings that contain the reasons that the evaluation manager has
+been disabled (as distinct from it being deliberately turned off, e.g. because an
+unsupported node type or attribute value was encountered).
+If the list is empty then the evaluation manager is operating normally.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagempty">
+          <code><b>empty</b>(<b>mt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Valid in query mode only. Checks to see if the evaluation graph has any nodes in it.
+This is independent of the current mode.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenabled">
+          <code><b>enabled</b>(<b>e</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Valid in query mode only. Checks to see if the evaluation manager is currently enabled.
+This is independent of the current mode.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagidleAction">
+          <code><b>idleAction</b>(<b>ia</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag sets the actions EM will perform on idle. It accepts the following values:
+<ul>
+<li>0 - No action</li>
+<li>1 - Graph Rebuild</li>
+<li>2 - EM Manipulation Preparation</li>
+<li>3 - Graph Rebuild and EM Manipulation Preparation</li>
+</ul>
+<br>
+Where:
+<ul>
+<li><b>Graph Rebuild</b> will rebuild the evaluation graph on an idle event as soon
+as it is able to do so.</li>
+<li><b>EM ManipulationPreparation</b> will get the evaluation manager to perform all
+the steps necessary for EM manipulation to be available after the next idle event.</li>
+</ul>
+<br>
+Note: These idle actions only apply to the graph attached to the normal context.
+All other graphs will be built according to their own rules.
+<br><br>
+The disadvantage of enabling idle actions is that for some workflows that are
+changing the graph frequently, or very large graphs, the graph build and
+manipulation preparation time may impact the workflow. If workflows are impacted
+it is suggested to turn idle actions off by passing this flag a value of 0.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagidleBuild">
+          <code><b>idleBuild</b>(<b>ib</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete. Please use the -idleAction flag with a value of 1
+in order to activate evaluation graph rebuild on idle.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvalidate">
+          <code><b>invalidate</b>(<b>inv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag invalidates the graph. Value is used to control auto rebuilding on idle (false) or forced (true).
+This command should be used as a last resort.
+In query mode it checks to see if the graph is valid.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmanipulation">
+          <code><b>manipulation</b>(<b>man</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used to activate evaluation manager manipulation support.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmanipulationReady">
+          <code><b>manipulationReady</b>(<b>mr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Valid in query mode only. Checks to see if the evaluation manager manipulation is currently ready/allowed.
+This is independent of the current mode.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmode">
+          <code><b>mode</b>(<b>m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Changes the current evaluation mode in the evaluation manager. Supported values are
+&quot;off&quot;, &quot;serial&quot; and &quot;parallel&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdownstreamFrom">
+          <code><b>downstreamFrom</b>(<b>dst</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Find the DG nodes that are immediately downstream of the named one in
+the evaluation graph. Note that the connectivity is via evaluation mode
+connections, not DG connections.
+In query mode the graph is walked and any nodes downstream of the named
+one are returned. The return type is alternating pairs of values that
+represent the graph level and the node name, e.g. if you walk downstream
+from A in the graph A -&gt; B -&gt; C then the return will be the array of
+strings (&quot;0&quot;,&quot;A&quot;,&quot;1&quot;,&quot;B&quot;,&quot;2&quot;,&quot;C&quot;). Scripts can deconstruct this
+information into something more visually recognizable. Note that cycles
+are likely to be present so any such scripts would have to handle them.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeTypeGloballySerialize">
+          <code><b>nodeTypeGloballySerialize</b>(<b>ntg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used only when the evaluation manager is in &quot;parallel&quot; mode
+but can be set at anytime. It activates or deactivates the override to force
+global serial scheduling for the class name argument(s) in the evaluation manager.
+Legal object values are class type names: e.g. &quot;transform&quot;, &quot;skinCluster&quot;, &quot;mesh&quot;.
+When queried without specified nodes, it returns the list of nodes with the
+global serial scheduling override active.
+Scheduling overrides take precedence over all of the node and node type
+scheduling rules. Use with caution; certain nodes may not react well to
+alternative scheduling types.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeTypeParallel">
+          <code><b>nodeTypeParallel</b>(<b>ntp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used only when the evaluation manager is in &quot;parallel&quot; mode
+but can be set at anytime. It activates or deactivates the override to force
+parallel scheduling for the class name argument(s) in the evaluation manager.
+Legal object values are class type names: e.g. &quot;transform&quot;, &quot;skinCluster&quot;, &quot;mesh&quot;.
+When queried without specified nodes, it returns the list of nodes with the
+parallel scheduling override active.
+Scheduling overrides take precedence over all of the node and node type
+scheduling rules. Use with caution; certain nodes may not react well to
+alternative scheduling types.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeTypeSerialize">
+          <code><b>nodeTypeSerialize</b>(<b>nts</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used only when the evaluation manager is in &quot;parallel&quot; mode
+but can be set at anytime. It activates or deactivates the override to force
+local serial scheduling for the class name argument(s) in the evaluation manager.
+Legal object values are class type names: e.g. &quot;transform&quot;, &quot;skinCluster&quot;, &quot;mesh&quot;.
+When queried without specified nodes, it returns the list of nodes with the
+local serial scheduling override active.
+Scheduling overrides take precedence over all of the node and node type
+scheduling rules. Use with caution; certain nodes may not react well to
+alternative scheduling types.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeTypeUntrusted">
+          <code><b>nodeTypeUntrusted</b>(<b>ntu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used only when the evaluation manager is in &quot;parallel&quot; mode
+but can be set at anytime. It activates or deactivates the override to force
+untrusted scheduling for the class name argument(s) in the evaluation manager.
+Legal object values are class type names: e.g. &quot;transform&quot;, &quot;skinCluster&quot;, &quot;mesh&quot;.
+When queried without specified nodes, it returns the list of nodes with the
+untrusted scheduling override active.
+Scheduling overrides take precedence over all of the node and node type
+scheduling rules. Use with caution; certain nodes may not react well to
+alternative scheduling types.
+Untrusted scheduling will allow nodes to be evaluated in a critical section,
+separately from any other node evaluation. It should be used only as a last resort
+since the lost parallelism caused by untrusted nodes can greatly reduce performance.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupstreamFrom">
+          <code><b>upstreamFrom</b>(<b>ust</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Find the DG nodes that are immediately upstream of the named one in
+the evaluation graph. Note that the connectivity is via evaluation mode
+connections, not DG connections.
+In query mode the graph is walked and any nodes upstream of the named
+one are returned. The return type is alternating pairs of values that
+represent the graph level and the node name, e.g. if you walk upstream
+from C in the graph A -&gt; B -&gt; C then the return will be the array of
+strings (&quot;0&quot;,&quot;C&quot;,&quot;1&quot;,&quot;B&quot;,&quot;2&quot;,&quot;A&quot;). Scripts can deconstruct this
+information into something more visually recognizable. Note that cycles
+are likely to be present so any such scripts would have to handle them.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsafeMode">
+          <code><b>safeMode</b>(<b>sfm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag activates/deactivates parallel evaluation safe mode. When
+enabled, parallel execution will fall back to serial when evaluation
+graph is missing dependencies. Detection is happening on scheduling
+of parallel evaluation, which means potential fallback will happen at
+the next evaluation.
+WARNING: This mode should be disabled with extreme caution. It will
+prevent parallel mode from falling back to serial mode when an invalid
+evaluation is detected. Sometimes the evaluation will still work
+correctly in those situations and use of this flag will keep the peak
+parallel performance running. However since the safe mode is used to
+catch invalid evaluation disabling it may also cause problems with
+evaluation, anything from invalid values, missing evaluation, or even
+crashes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+
+import maya.cmds as cmds
+
+# Enable evaluation manager in serial mode
+cmds.evaluationManager( mode=&quot;serial&quot; )
+# Result: True #
+
+# Confirm that the evaluation manager is currently enabled
+cmds.evaluationManager( query=True, enabled=True )
+# Result: True #
+
+# Check if the evaluation manager has at least one animated node in it
+cmds.evaluationManager( query=True, empty=True )
+# Result: True #
+
+# Does nothing since it was already in serial mode
+cmds.evaluationManager( mode=&quot;serial&quot; )
+# Result: True #
+
+# Return the current evaluation manager mode and graph state
+cmds.evaluationManager( query=True, mode=True )
+# Result: [u'serial'] #
+
+# Return all legal evaluation modes
+cmds.evaluationManager( query=True )
+# Result: [u'off', u'serial'] #
+
+# Disable evaluation manager
+cmds.evaluationManager( mode=&quot;off&quot; )
+# Result: True #
+
+# Activate parallel scheduling override on transform nodes
+cmds.evaluationManager( &quot;transform&quot;, nodeTypeParallel=True, on=True )
+# Result: True #
+
+# Query for node types with the parallel scheduling override
+cmds.evaluationManager( query=True, nodeTypeParallel=True )
+# Result: [&quot;transform&quot;] #
+
+# Query the parallel scheduling override of a particular node type
+cmds.evaluationManager( &quot;transform&quot;, query=True, nodeTypeParallel=True )
+# Result: True #
+
+# Activate locally serial scheduling override on transform nodes
+cmds.evaluationManager( &quot;transform&quot;, nodeTypeSerialize=True, on=True )
+# Result: True #
+
+# Query for node types with the locally serial scheduling override
+cmds.evaluationManager( query=True, nodeTypeSerialize=True )
+# Result: [&quot;transform&quot;] #
+
+# Query the locally serial scheduling override of a particular node type
+cmds.evaluationManager( &quot;transform&quot;, query=True, nodeTypeSerialize=True )
+# Result: True #
+
+# Activate globally serial scheduling override on transform nodes
+cmds.evaluationManager( &quot;transform&quot;, nodeTypeGloballySerialize=True, on=True )
+# Result: True #
+
+# Query for node types with the globally serial scheduling override
+cmds.evaluationManager( query=True, nodeTypeGloballySerialize=True )
+# Result: [&quot;transform&quot;] #
+
+# Query the globally serial scheduling override of a particular node type
+cmds.evaluationManager( &quot;transform&quot;, query=True, nodeTypeGloballySerialize=True )
+# Result: True #
+
+# Activate untrusted scheduling override on transform nodes
+cmds.evaluationManager( &quot;transform&quot;, nodeTypeUntrusted=True, on=True )
+# Result: True #
+
+# Query for node types with the untrusted scheduling override
+cmds.evaluationManager( query=True, nodeTypeUntrusted=True )
+# Result: [&quot;transform&quot;] #
+
+# Query the untrusted scheduling override of a particular node type
+cmds.evaluationManager( &quot;transform&quot;, query=True, nodeTypeUntrusted=True )
+# Result: True #
+
+# Force rebuild of evaluation graph for normal context
+cmds.evaluationManager( invalidate=True )
+# Result: True #
+
+# Test if evaluation graph is valid for normal context
+cmds.evaluationManager( query=True, invalidate=True )
+# Result: False #
+
+# Activate safe mode for parallel executor
+cmds.evaluationManager( safeMode=True )
+# Result: True #
+
+# Query safe mode for parallel executor
+cmds.evaluationManager( query=True, safeMode=True )
+# Result: True #
+
+# Enable manipulation with evaluation manager
+cmds.evaluationManager( manipulation=True )
+# Result: True #
+
+# Query manipulation with evaluation manager
+cmds.evaluationManager( query=True, manipulation=True )
+# Result: True #
+
+# Query if evaluation manager manipulation is ready/allowed
+cmds.evaluationManager( query=True, manipulationReady=True )
+# Result: True #
+
+# Show downstream nodes
+cmds.evaluationManager( downstreamFrom='myNode' )
+# Result: ['myDownstreamNode'] #
+
+# Show all downstream nodes
+cmds.evaluationManager( query=True, downstreamFrom='myRoot' )
+# Result: ['0', 'myRoot', '1', 'myNode', '2', 'myDownstreamNode' ] #
+
+# Show upstream nodes
+cmds.evaluationManager( upstreamFrom='myDownstreamNode' )
+# Result: ['myNode'] #
+
+# Show cycle cluster
+cmds.evaluationManager( cycleCluster='myNodeInCycle' )
+# Result: ['myNode', 'myNodeInCycle', 'myNode'] #
+
+# Activate idle rebuild
+cmds.evaluationManager( idleAction=1 )
+# Result: True #
+
+# Query idleAction
+cmds.evaluationManager( query=True, idleAction=True )
+# Result: 1 #
+
+# Show the reasons the evaluation manager was disabled
+cmds.evaluationManager( query=True, disableInfo=True )
+# Result: #
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

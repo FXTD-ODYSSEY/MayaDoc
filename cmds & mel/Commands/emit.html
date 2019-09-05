@@ -1,0 +1,434 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>emit command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-emit"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/emit.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>emit </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Dynamics" target="contentFrame">Dynamics</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("emit.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>emit [-<a href="#flagattribute">attribute</a> <i>string</i>] [-<a href="#flagfloatValue">floatValue</a> <i>float</i>] [-<a href="#flagobject">object</a> <i>string</i>] [-<a href="#flagposition">position</a> <i>float float float</i>] [-<a href="#flagvectorValue">vectorValue</a> <i>float float float</i>]  </code> </p>
+      <p>emit is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The <b>emit</b> action allows users to add particles to an existing particle
+object without the use of an emitter.  At the same time, it allows them to
+set any per-particle attribute for the particles that are created with the
+action.<p>
+The particles created do not become a part of the initial state
+for the particle object, and will disappear when the scene is rewound unless
+they are saved into the initial state by the user explicitly.  In addition,
+a particle object will accept particles from an emit action ONLY at frames
+greater than or equal to its start frame.  For example, if you want to use the
+emit action to create particles at frame -5, you must set startFrame for that
+particle shape to -5 or less.<p>
+Unlike many commands or actions, the emit action uses the order of its flags
+as important information as to how it works.  The <b>-object</b> and <b>-position</b>
+flags can appear anywhere in the argument list.  The <b>-attribute</b> and the
+value flags are interpreted based on their order.  Any value flags after an
+-attribute flag and before the next -attribute flag will set the values for
+the attribute specified by the closest -attribute flag before them in the
+argument list.  See the <b>Examples</b> section below for more detail on
+how these flags work.<p>
+Currently, no creation expression is executed for the new particles
+unless they are created from within a particle expression defined with
+the <b>dynExpression</b> command or the Expression Editor.  If you
+want any particular values put into the particles at the time they are
+created, then those values should be set using the <b>-attribute</b>,
+<b>-vectorValue</b>, and <b>-floatValue</b> flags.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int[]</i></td><td>Integer array containing the list of the particleId attribute values
+for the created particles in the same order that the <i>position</i> flags
+were passed.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="particle.html">particle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagattribute">attribute</a>, <a href="#flagfloatValue">floatValue</a>, <a href="#flagobject">object</a>, <a href="#flagposition">position</a>, <a href="#flagvectorValue">vectorValue</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattribute">
+          <code><b>-attribute</b>(<b>-at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the attribute on the particle object that any
+value flags following it and before the next -attribute flag
+will be associated with.  The same attribute can be specified
+later in the command to pick up where the first one left off.
+The attributes used must be per-particle attributes.  This
+will accept both long and short names for the attributes.
+Note the per-particle attribute must already exist on the
+particle object prior to being specified via this command flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfloatValue">
+          <code><b>-floatValue</b>(<b>-fv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the float value to be used for the &quot;current&quot; attribute of
+the &quot;current&quot; particle.  By current attribute, it is meant the
+attribute specified by the most recent -attribute flag.  By
+current particle, it is meant the particle in the list of -position
+flags that corresponds to the number of values that  have
+been set for the &quot;current&quot; attribute.  If the current attribute
+is a vector-per-particle attribute, then the float value
+specified will be used for all three components of the vector.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobject">
+          <code><b>-object</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag takes the name of a particleShape or the transform
+directly above it in the DAG as its parent.  It specifies
+which object to add the particles to.  This flag must
+be passed, as the selection list is ignored for this action.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagposition">
+          <code><b>-position</b>(<b>-pos</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the positions in the particle object's space
+(usually world space) where the particles are to be created.
+One particle is created for each occurence of this flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvectorValue">
+          <code><b>-vectorValue</b>(<b>-vv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the vector value to be used for the &quot;current&quot; attribute of
+the &quot;current&quot; particle.  By current attribute, it is meant the
+attribute specified by the most recent -attribute flag.  By
+current particle, it is meant the particle in the list of -position
+flags that corresponds to the number of values that have
+been set for the &quot;current&quot; attribute.  If the current attribute
+is a float-per-particle attribute, then the length of the
+vector described by this flag will be used.  The length is
+described as <i>SQR( xVal<sup>2</sup> + yVal<sup>2</sup> + zVal<sup>2</sup> )</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+particle;
+emit -object particle1 -position 1 1 1;
+
+// This will create one particle at position &lt;&lt;1,1,1&gt;&gt; in the
+// already-existing particle object &lt;i&gt;particle1&lt;/i&gt;.
+//
+
+particle;
+emit -object particle1
+          -position 1 1 1
+          -position 2 2 2
+          -attribute velocity
+               -vectorValue 1 2 3
+               -vectorValue 2 3 4
+          -attribute rgbPP
+               -vectorValue .5 1 0
+               -floatValue .1;
+
+// This will create two particles at positions &lt;&lt;1,1,1&gt;&gt; and &lt;&lt;2,2,2&gt;&gt; in
+// the already-existing particle object &lt;i&gt;particle1&lt;/i&gt;.  Then the velocity
+// attribute of those particles is set to &lt;&lt;1,2,3&gt;&gt; and &lt;&lt;2,3,4&gt;&gt;,
+// respectively.  Also, the rgbPP values are set to &lt;&lt;.5,1,0&gt;&gt; and
+// &lt;&lt;.1,.1,.1&gt;&gt;, respectively.  Notice that the rgbPP value for the
+// second particle was set with the -floatValue flag, even though rgbPP
+// is a vector attribute.  The single value was converted into a vector.
+
+   particle;
+     emit -object particle1
+          -position 1 1 1
+          -position 2 2 2
+          -position 3 3 3
+          -position 4 4 4
+          -position 5 5 5
+          -attribute velocity
+               -vectorValue 1 2 3
+               -vectorValue 2 3 4
+          -attribute mass
+               -floatValue .5
+               -vectorValue .1 .2 .3
+          -attribute velocity
+               -vectorValue 3 4 5;
+
+// This will create five particles in &lt;i&gt;particle1&lt;/i&gt;.  The values
+// for their attributes are:
+//
+// Attribute  Particle1   Particle2   Particle3   Particle4   Particle5
+// ----------+-----------+-----------+-----------+-----------+---------
+// position   &lt;&lt;&lt;&lt;1,1,1&gt;&gt;&gt;&gt;   &lt;&lt;&lt;&lt;2,2,2&gt;&gt;&gt;&gt;   &lt;&lt;&lt;&lt;3,3,3&gt;&gt;&gt;&gt;   &lt;&lt;&lt;&lt;4,4,4&gt;&gt;&gt;&gt;   &lt;&lt;&lt;&lt;5,5,5&gt;&gt;&gt;&gt;
+// velocity   &lt;&lt;&lt;&lt;1,2,3&gt;&gt;&gt;&gt;   &lt;&lt;&lt;&lt;2,3,4&gt;&gt;&gt;&gt;   &lt;&lt;&lt;&lt;3,4,5&gt;&gt;&gt;&gt;   &lt;b&gt;&lt;&lt;&lt;&lt;3,4,5&gt;&gt;&gt;&gt;   &lt;&lt;&lt;&lt;3,4,5&gt;&gt;&gt;&gt;&lt;/b&gt;
+// mass     .5          .3742       &lt;b&gt;.3742       .3742       .3742&lt;/b&gt;
+//
+// Notice that the second value for mass was seet with the -vectorValue
+// flag, even though mass is a float attribute.  The vector was
+// converted into a float by taking its length.  Also, notice the &lt;b&gt;bold&lt;/b&gt;
+// values in the table.  The values for those attribute values were not
+// explicitly set in the command.  If there are fewer values given for
+// an attribute than there are position flags, the remaining unset
+// values are set to the last value set for that attribute.  This
+// allows the user to set many of the values to be the same without
+// having to use multiple value flags.  One last note.  Notice that the
+// attribute flag was passed twice for the attribute velocity.  The value
+// flags for repeated attributes pick up where the previous ones left
+// off.
+
+float $x = rand(1);
+float $y = rand(1);
+float $z = rand(1);
+vector $p = sphrand(5);
+emit -object particle1
+         -pos $x $y $z
+         -pos ($p.x) ($p.y) ($p.z);
+
+// This is a piece of MEL code that could be put in a script or
+// even in an expression.  It adds two new particles to the
+// already-existing particle object &lt;i&gt;particle1&lt;/i&gt;.  It adds them
+// at random positions, however.  These random values can be computed
+// and stored in MEL variables.  Then those variables can be used in
+// the emit action.  Notice that the float variables can be used
+// directly, but the components of the vector must be enclosed in
+// parentheses.  This is also true if they are used to with the
+// &lt;b&gt;-vectorValue&lt;/b&gt; flag.
+
+int $i;
+int $emitCount = rand(10,15);
+string $objectName = &quot;object1&quot;;
+string $emitCmd = (&quot;emit -object &quot; + $objectName + &quot;\n&quot;);
+for( $i = 0; $i &lt; $emitCount; $i ++ ) {
+          vector $pos = sphrand(10);
+          $emitCmd += &quot;     -pos &quot;+$pos+&quot;\n&quot;; }
+$emitCmd += &quot;     -at velocity\n&quot;;
+for( $i = 0; $i &lt; $emitCount; $i ++ ) {
+          vector $vel = sphrand(5);
+          $emitCmd += &quot;          -vv &quot;+$vel+&quot;\n&quot;; }
+eval( $emitCmd );
+
+// This is a piece of MEL code that could be put in a script or
+// even in an expression.  It adds a random number of particles
+// to the already-existing particle object &lt;i&gt;particle1&lt;/i&gt;.  Since
+// the number of particles as well as the positions and velocities
+// of the particles are random, it would be impossible to just have
+// the emit action itself in the expression or script.  It must be
+// built as a string and then sent to the command processor with the
+// &lt;b&gt;eval&lt;/b&gt; or &lt;b&gt;evalEcho&lt;/b&gt; commands.  Notice that when appending
+// the vector variables to the string, it is not necessary to append
+// each component of the vectors separately.  When they are converted
+// from a vector to a string, the three components get separated with
+// a space automatically, thus formatting them in the desired way.
+// An example of a possible result from this &quot;script&quot; could be:
+
+         emit -object particle1
+              -pos 1.899864198 -6.721569708 0.585203937
+              -pos 8.103957656 -4.042442985 2.047724209
+              -pos -1.392914569 -0.109724376 8.62265813
+              -pos 1.960103537 -3.203145195 -7.6892516
+              -pos 2.564072614 -6.049536895 1.334818295
+              -pos -5.603376821 4.33595058 6.952385447
+              -pos -2.478591746 6.286855715 6.851659059
+              -pos 2.424670276 -4.083412217 6.320538621
+              -pos 6.440800453 3.405519296 5.462135819
+              -pos 2.445192551 1.397203422 3.443755853
+              -at velocity
+                   -vv -2.348796409 4.022130218 0.5316172944
+                   -vv 4.149667117 -1.023146404 1.97965556
+                   -vv -0.08429132578 -0.5518495233 1.591812495
+                   -vv 2.597930963 1.033536331 -1.398351383
+                   -vv -3.102859272 3.423569856 0.7895603241
+                   -vv -2.519331228 -2.5684916 -1.530779154
+                   -vv -2.645169119 -0.3186551381 0.9164776099
+                   -vv -0.6183816487 -1.060784068 -0.8748223942
+                   -vv -0.2460372256 3.567980747 -2.007567372
+                   -vv 1.735044809 -3.660099445 -1.765401859;
+
+// The spacing in the string is just for formatting reasons and does
+// not affect how the action executes or compiles.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

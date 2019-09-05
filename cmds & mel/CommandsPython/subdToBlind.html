@@ -1,0 +1,209 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>subdToBlind command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-subdToBlind"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/subdToBlind.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>subdToBlind </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#SubDs" target="contentFrame">SubDs</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("subdToBlind.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>subdToBlind([<a href="#flagabsolutePosition">absolutePosition</a>=<i>boolean</i>], [<a href="#flagincludeCreases">includeCreases</a>=<i>boolean</i>], [<a href="#flagincludeZeroOffsets">includeZeroOffsets</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>subdToBlind is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The subdivision surface hierarchical edits will get copied into blind
+data on the given polygon.  The polygon face count and topology
+must match the subdivision surface base mesh face count and topology.
+If they don't, the blind data will still appear, but is not guaranteed
+to produce the same result when converted back to a subdivision surface.
+<br><br>
+The command takes a single subdivision surface and a single polygonal
+object.  Additional subdivision surfaces or polygonal objects will be
+ignored.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>Command result</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>subdivision, surface, hierarchy, blind, data
+      <h2><a name="hRelated">Related</a></h2><a href="changeSubdivComponentDisplayLevel.html">changeSubdivComponentDisplayLevel</a>, <a href="changeSubdivRegion.html">changeSubdivRegion</a>, <a href="createSubdivRegion.html">createSubdivRegion</a>, <a href="nurbsToSubdiv.html">nurbsToSubdiv</a>, <a href="polyToSubdiv.html">polyToSubdiv</a>, <a href="querySubdiv.html">querySubdiv</a>, <a href="refineSubdivSelectionList.html">refineSubdivSelectionList</a>, <a href="subdCollapse.html">subdCollapse</a>, <a href="subdToPoly.html">subdToPoly</a>, <a href="subdiv.html">subdiv</a>, <a href="subdivCrease.html">subdivCrease</a>, <a href="subdivDisplaySmoothness.html">subdivDisplaySmoothness</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagabsolutePosition">absolutePosition</a>, <a href="#flagincludeCreases">includeCreases</a>, <a href="#flagincludeZeroOffsets">includeZeroOffsets</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagabsolutePosition">
+          <code><b>absolutePosition</b>(<b>ap</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set to true, the hierarchical edits are represented as the point positions,
+not the point offsets.  Most of the time, this is not desirable, but if you're
+just going to be merging/deleting a bunch of things and not move any vertices,
+then you could set it to true.  False is the default and saves the offsets.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeCreases">
+          <code><b>includeCreases</b>(<b>ic</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set, the creases get transfered as well.  With it false, the subdivision
+surface created from the blind data + polygon will have lost all the craese
+information.  The default is false.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeZeroOffsets">
+          <code><b>includeZeroOffsets</b>(<b>izo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set, the zero offset will get included in the blind data.  This will
+greatly increase the size of the blind data, but will also let you keep
+all created vertices in the conversion back to polys.  This flag does
+not change the behaviour for the vertices up to and including level 2
+as they're always created.  If not set, only the edited vertices will
+be included in the blind data.  This will still maintain the shape of
+your object faithfully.  The default is false.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.subdToBlind( 'subdShape1', 'polyShape4' )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

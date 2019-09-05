@@ -1,0 +1,248 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>defineDataServer command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-defineDataServer"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/defineDataServer.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>defineDataServer </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#MoCap" target="contentFrame">MoCap</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("defineDataServer.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>defineDataServer([<a href="#flagdevice">device</a>=<i>string</i>], [<a href="#flagserver">server</a>=<i>string</i>], [<a href="#flagundefine">undefine</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>defineDataServer is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      <p>Connects to the specified data servername, creating a named device which
+then can be attached to device handlers.
+<p>
+<p>When the device is defined, it queries queries the server for data axis
+information.  The &quot;CapChannels&quot; present are represented as axis in form
+&quot;channelName&quot;.&quot;usage&quot; for scalar channels and &quot;channelName&quot;.&quot;component&quot;
+for compound channels. See <b>listInputDeviceAxes</b> to list axis names.
+<p>
+<p>Note that undoing <pre>
+defineDataServer -d &quot;myDevice&quot; -s &quot;myServer&quot;
+</pre>
+does not break the connection with the data server until it cannot be
+redone.  Executing any other command (sphere for example) will cause
+this to occur.  Similarly, the command <pre>
+defineDataServer -d &quot;myDevice&quot; -u
+</pre>
+does not break the connection with the data server until it cannot be
+undone.  Either flushUndo, or the 'defineDataServer' command falling&quot;
+off the end of the undo queue causes this to occur, and the connection.
+to be broken.
+<p>
+<p>No return value.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="applyTake.html">applyTake</a>, <a href="defineVirtualDevice.html">defineVirtualDevice</a>, <a href="enableDevice.html">enableDevice</a>, <a href="filter.html">filter</a>, <a href="movIn.html">movIn</a>, <a href="movOut.html">movOut</a>, <a href="readTake.html">readTake</a>, <a href="recordDevice.html">recordDevice</a>, <a href="writeTake.html">writeTake</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdevice">device</a>, <a href="#flagserver">server</a>, <a href="#flagundefine">undefine</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdevice">
+          <code><b>device</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+specified the device name to be given to the server connection.
+device name must be unique or the command fails.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagserver">
+          <code><b>server</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+specifies the name of the server with which the define
+device connects, and can be specifiied in two ways
+
+<dl>
+<dt><var>name</var> -- the name of the server socket</dt>
+<dd>Server names of the form <var>name</var> connect to the
+server socket on the localhost corresponding to
+<var>name</var>.  If <var>name</var> does not begin with &quot;/&quot;,
+then /tmp/<var>name</var> is used. This is the default behavior
+of most servers. If <var>name</var> begins with &quot;/&quot;,
+<var>name</var> denotes the full path to the socket. </dd>
+<dt><var>host</var>:<var>service</var> - a udp service
+on the specified host.</dt>
+<dd>The <var>service</var> can be any one of a &quot;udp service name,&quot;
+a &quot;port number,&quot; or a named service of &quot;tcpmux,&quot; and they are
+found in that order. If
+<var>host</var> is omitted, the localhost is used. </dd>
+</dl>
+<p>In any case, if the server cannot be found, the device is not
+defined (created) and the command fails.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagundefine">
+          <code><b>undefine</b>(<b>u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+undefines (destroys) the dataServer device, closing the connection
+with the server.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.defineDataServer( s='ultratrak_server', d='melvin' )
+
+# Connects to the ultratrak_server running on the localhost and gives it
+# the name &quot;melvin&quot;
+
+cmds.defineDataServer( s='mocap_lab:5200', d='labFlock' )
+
+# Creates a device called &quot;labFlock&quot; which connects to the server running
+# on host &quot;mocap_lab&quot; at port &quot;5200&quot;.
+
+cmds.defineDataServer( undefine=True, d='labFlock' )
+
+# Delete the device &quot;labFlock&quot; closing the connection with the server
+# specified when it was created.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

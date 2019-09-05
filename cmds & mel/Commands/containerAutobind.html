@@ -1,0 +1,127 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>containerAutobind command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-containerAutobind"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>containerAutobind </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("containerAutobind.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+containerAutobind
+<br>
+
+	 </code> </p>
+      
+      This script performs autobind operations on a container.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$container"><b>$container</b></a></td><td><i>string</i></td><td>, the container to use, or &quot;&quot; to use selected
+</td></tr>
+<tr><td><a name="$bindingSet"><b>$bindingSet</b></a></td><td><i>string</i></td><td>, the bindingSet to use, or &quot;&quot; have default 
+bindingSet determined automatically
+</td></tr>
+<tr><td><a name="$autobindAll"><b>$autobindAll</b></a></td><td><i>int</i></td><td>, process all published names 
+(by default only unbound names are processed)
+</td></tr>
+<tr><td><a name="$force"><b>$force</b></a></td><td><i>int</i></td><td>,       forcibly unbind previously bound attributes
+if they are not matched.  By default unmatched 
+names will be skipped.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>	<i>// autobind myContainer using binding set &quot;MyBindings&quot;.  
+</i>
+  <i>// Since all option is used, all published names (bound and unbound)
+</i>
+  <i>// will be processed.
+</i>
+  <i>// Since force option is used, any unmatched name will be unbound.
+</i>
+	containerAutobind(myContainer, &quot;MyBindings&quot;, 1, 1);
+
+	<i>// autobind myContainer using a default binding set
+</i>
+  <i>// Since all option is not set, only unbound names will be processed.
+</i>
+	containerAutobind(myContainer, &quot;&quot;, 0, 0);
+
+	<i>// autobind myContainer using the default binding set.
+</i>
+  <i>// All published names will be processed.  
+</i>
+  <i>// Because force option is not used, names not 
+</i>
+  <i>// matched will be left with their current bindings 
+</i>
+  string $bindingSet = containerDefaultBindingSet();
+	containerAutobind(myContainer, $bindingSet, 1, 0);
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

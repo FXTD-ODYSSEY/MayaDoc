@@ -1,0 +1,1293 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>setAttr command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-setAttr"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/setAttr.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>setAttr </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("setAttr.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>setAttr(
+attribute Any [Any...]
+    , [<a href="#flagalteredValue">alteredValue</a>=<i>boolean</i>], [<a href="#flagcaching">caching</a>=<i>boolean</i>], [<a href="#flagcapacityHint">capacityHint</a>=<i>uint</i>], [<a href="#flagchannelBox">channelBox</a>=<i>boolean</i>], [<a href="#flagclamp">clamp</a>=<i>boolean</i>], [<a href="#flagkeyable">keyable</a>=<i>boolean</i>], [<a href="#flaglock">lock</a>=<i>boolean</i>], [<a href="#flagsize">size</a>=<i>uint</i>], [<a href="#flagtype">type</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>setAttr is undoable, queryable, and editable.</p>
+      Sets the value of a dependency node attribute.  No value for the
+the attribute is needed when the -l/-k/-s flags are used.
+The -type flag is only required when setting a non-numeric attribute.
+<p>
+The following chart outlines the syntax of setAttr for non-numeric
+data types:
+<p>
+<p>
+<ul>
+<li><b>{TYPE}</b> below means any number of values of type <b>TYPE</b>,
+separated by a space</li>
+<li><b>[TYPE]</b> means that the value of type <b>TYPE</b> is optional</li>
+<li><b>A|B</b> means that either of <b>A</b> or <b>B</b> may appear</li>
+</ul>
+In order to run its examples, first execute these commands to
+create the sample attribute types:<br>
+<pre><font size="-1">
+sphere -n node;
+addAttr -ln short2Attr -at short2;
+addAttr -ln short2a -p short2Attr -at short;
+addAttr -ln short2b -p short2Attr -at short;
+addAttr -ln short3Attr -at short3;
+addAttr -ln short3a -p short3Attr -at short;
+addAttr -ln short3b -p short3Attr -at short;
+addAttr -ln short3c -p short3Attr -at short;
+addAttr -ln long2Attr -at long2;
+addAttr -ln long2a -p long2Attr -at long;
+addAttr -ln long2b -p long2Attr -at long;
+addAttr -ln long3Attr -at long3;
+addAttr -ln long3a -p long3Attr -at long;
+addAttr -ln long3b -p long3Attr -at long;
+addAttr -ln long3c -p long3Attr -at long;
+addAttr -ln float2Attr -at float2;
+addAttr -ln float2a -p float2Attr -at &quot;float&quot;;
+addAttr -ln float2b -p float2Attr -at &quot;float&quot;;
+addAttr -ln float3Attr -at float3;
+addAttr -ln float3a -p float3Attr -at &quot;float&quot;;
+addAttr -ln float3b -p float3Attr -at &quot;float&quot;;
+addAttr -ln float3c -p float3Attr -at &quot;float&quot;;
+addAttr -ln double2Attr -at double2;
+addAttr -ln double2a -p double2Attr -at double;
+addAttr -ln double2b -p double2Attr -at double;
+addAttr -ln double3Attr -at double3;
+addAttr -ln double3a -p double3Attr -at double;
+addAttr -ln double3b -p double3Attr -at double;
+addAttr -ln double3c -p double3Attr -at double;
+addAttr -ln int32ArrayAttr -dt Int32Array;
+addAttr -ln doubleArrayAttr -dt doubleArray;
+addAttr -ln pointArrayAttr -dt pointArray;
+addAttr -ln vectorArrayAttr -dt vectorArray;
+addAttr -ln stringArrayAttr -dt stringArray;
+addAttr -ln stringAttr -dt &quot;string&quot;;
+addAttr -ln matrixAttr -dt &quot;matrix&quot;;
+addAttr -ln sphereAttr -dt sphere;
+addAttr -ln coneAttr -dt cone;
+addAttr -ln meshAttr -dt mesh;
+addAttr -ln latticeAttr -dt lattice;
+addAttr -ln spectrumRGBAttr -dt spectrumRGB;
+addAttr -ln reflectanceRGBAttr -dt reflectanceRGB;
+addAttr -ln componentListAttr -dt componentList;
+addAttr -ln attrAliasAttr -dt attributeAlias;
+addAttr -ln curveAttr -dt nurbsCurve;
+addAttr -ln surfaceAttr -dt nurbsSurface;
+addAttr -ln trimFaceAttr -dt nurbsTrimface;
+addAttr -ln polyFaceAttr -dt polyFaces;
+</font></pre>
+<p>
+<p>
+<table border="1">
+<tr>
+<th align="left" valign="top">-type short2</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Array of two short integers</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>short short</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>value1 value2</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.short2Attr -type short2 1 2;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.short2Attr',1,2,type='short2')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type short3</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Array of three short integers</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>short short short</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>value1 value2 value3</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.short3Attr -type short3 1 2 3;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.short3Attr',1,2,3,type='short3')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type long2</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Array of two long integers</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>long long</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>value1 value2</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.long2Attr -type long2 1000000 2000000;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.long2Attr',1000000,2000000,type='long2')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type long3</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Array of three long integers</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>long long long</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>value1 value2 value3</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.long3Attr -type long3 1000000 2000000 3000000;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.long3Attr',1000000,2000000,3000000,type='long3')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type Int32Array</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Variable length array of long integers</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>int {int}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>numberOfArrayValues {arrayValue}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.int32ArrayAttr -type Int32Array 2 12 75;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.int32ArrayAttr',[2,12,75],type='Int32Array')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type float2</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Array of two floats</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>float float</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>value1 value2</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.float2Attr -type float2 1.1 2.2;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.float2Attr',1.1,2.2,type='float2')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type float3</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Array of three floats</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>float float float</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>value1 value2 value3</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.float3Attr -type float3 1.1 2.2 3.3;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.float3Attr',1.1,2.2,3.3,type='float3')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type double2</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Array of two doubles</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>double double</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>value1 value2</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.double2Attr -type double2 1.1 2.2;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.double2Attr',1.1,2.2,type='double2')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type double3</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Array of three doubles</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>double double double</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>value1 value2 value3</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.double3Attr -type double3 1.1 2.2 3.3;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.double3Attr',1.1,2.2,3.3,type='double3')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type doubleArray</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Variable length array of doubles</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>int {double}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>numberOfArrayValues {arrayValue}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.doubleArrayAttr -type doubleArray 2 3.14159 2.782;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr( &quot;node.doubleArrayAttr&quot;, (2, 3.14159, 2.782,), type=&quot;doubleArray&quot;)</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type matrix</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>4x4 matrix of doubles</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>double double double double<br>
+double double double double<br>
+double double double double<br>
+double double double double</td>
+<tr>
+</tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>row1col1 row1col2 row1col3 row1col4<br>
+row2col1 row2col2 row2col3 row2col4<br>
+row3col1 row3col2 row3col3 row3col4<br>
+row4col1 row4col2 row4col3 row4col4</td>
+</tr>
+<tr>
+<th align="left" valign="top">Alternate Syntax</th>
+<td>string double double double<br>
+double double double<br>
+integer<br>
+double double double<br>
+double double double<br>
+double double double<br>
+double double double<br>
+double double double<br>
+double double double<br>
+double double double double<br>
+double double double double<br>
+double double double<br>
+boolean</td>
+</tr>
+<tr>
+<th align="left" valign="top">Alternate Meaning</th>
+<td>&quot;xform&quot; scaleX scaleY scaleZ<br>
+rotateX rotateY rotateZ<br>
+rotationOrder (0=XYZ, 1=YZX, 2=ZXY, 3=XZY, 4=YXZ, 5=ZYX)<br>
+translateX translateY translateZ<br>
+shearXY shearXZ shearYZ<br>
+scalePivotX scalePivotY scalePivotZ<br>
+scaleTranslationX scaleTranslationY scaleTranslationZ<br>
+rotatePivotX rotatePivotY rotatePivotZ<br>
+rotateTranslationX rotateTranslationY rotateTranslationZ<br>
+rotateOrientW rotateOrientX rotateOrientY rotateOrientZ<br>
+jointOrientW jointOrientX jointOrientY jointOrientZ<br>
+inverseParentScaleX inverseParentScaleY inverseParentScaleZ<br>
+compensateForParentScale
+</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.matrixAttr -type &quot;matrix&quot; 1 0 0 0 0 1 0 0 0 0 1 0 2 3 4 1;<br>
+setAttr node.matrixAttr -type &quot;matrix&quot; &quot;xform&quot; 1 1 1 0 0 0 0 2 3 4 0 0 0<br>0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 0 1 0 1 1 1 0 false;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.matrixAttr',(1,0,0,0,0,1,0,0,0,0,1,0,2,3,4,1),type='matrix')<br>
+cmds.setAttr('node.matrixAttr','xform',(1,1,1),(0,0,0),0,(2,3,4),(0,0,0),<br>(0,0,0),(0,0,0),(0,0,0),(0,1,1),(0,0,1,0),(1,0,1,0),(1,2,3),False,type=&quot;matrix&quot;)</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type pointArray</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Variable length array of points</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>int {double double double double}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>numberOfArrayValues {xValue yValue zValue wValue}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.pointArrayAttr -type pointArray 2 1 1 1 1 2 2 2 1;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.pointArrayAttr',2,(1,1,1,1),(2,2,2,1),type='pointArray')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type vectorArray</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Variable length array of vectors</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>int {double double double}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>numberOfArrayValues {xValue yValue zValue}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.vectorArrayAttr -type vectorArray 2 1 1 1 2 2 2;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.vectorArrayAttr',2,(1,1,1),(2,2,2),type='vectorArray')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type &quot;string&quot;</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Character string</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>string</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>characterStringValue</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.stringAttr -type &quot;string&quot; &quot;blarg&quot;;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.stringAttr',&quot;blarg&quot;,type=&quot;string&quot;)</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type stringArray</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Variable length array of strings</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>int {string}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>numberOfArrayValues {arrayValue}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.stringArrayAttr -type stringArray 3 &quot;a&quot; &quot;b&quot; &quot;c&quot;;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.stringArrayAttr',3,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,type='stringArray')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type sphere</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Sphere data</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>double</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>sphereRadius</td>
+</tr>
+<tr>
+<th align="left" valign="top">Example</th>
+<td>setAttr node.sphereAttr -type sphere 5.0;</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type cone</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Cone data</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>double double</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>coneAngle coneCap</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.coneAttr -type cone 45.0 5.0;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.coneAttr',45.0,5.0,type='cone')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type reflectanceRGB</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Reflectance data</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>double double double</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>redReflect greenReflect blueReflect</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.reflectanceRGBAttr -type reflectanceRGB 0.5 0.5 0.1;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.reflectanceRGBAttr',0.5,0.5,0.1,type='reflectanceRGB')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type spectrumRGB</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Spectrum data</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>double double double</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>redSpectrum greenSpectrum blueSpectrum</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.spectrumRGBAttr -type spectrumRGB 0.5 0.5 0.1;</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.spectrumRGBAttr',0.5,0.5,0.1,type='spectrumRGB')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type componentList</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Variable length array of components</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>int {string}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>numberOfComponents {componentName}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.componentListAttr -type componentList 3 cv[1] cv[12] cv[3];</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.componentListAttr',3,'cv[1]','cv[12]','cv[3]',type='componentList')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type attributeAlias</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>String alias data</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>string string</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>newAlias currentName</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>setAttr node.attrAliasAttr -type attributeAlias<br>
+{&quot;GoUp&quot;, &quot;translateY&quot;, &quot;GoLeft&quot;, &quot;translateX&quot;};</td>
+</tr>
+<tr>
+<th align="left" valign="top">Python Example</th>
+<td>cmds.setAttr('node.attrAliasAttr',(&quot;GoUp&quot;, &quot;translateY&quot;,<br>&quot;GoLeft&quot;, &quot;translateX&quot;),type='attributeAlias')</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type nurbsCurve</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>NURBS curve data</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>int int int bool int int {double}<br>
+int {double double double}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>degree spans form isRational dimension knotCount {knotValue}<br>
+cvCount {xCVValue yCVValue [zCVValue] [wCVValue]}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Mel Example</th>
+<td>// degree is the degree of the curve(range 1-7)<br>
+// spans is the number of spans <br>
+// form is open (0), closed (1), periodic (2)<br>
+// dimension is 2 or 3, depending on the dimension of the curve<br>
+// isRational is true if the curve CVs contain a rational component <br>
+// knotCount is the size of the knot list<br>
+//  knotValue is a single entry in the knot list<br>
+// cvCount is the number of CVs in the curve<br>
+//  xCVValue,yCVValue,[zCVValue] [wCVValue] is a single CV.<br>
+//  zCVValue is only present when dimension is 3.<br>
+//  wCVValue is only present when isRational is true.<br>
+//<br>
+setAttr node.curveAttr -type nurbsCurve 3 1 0 no 3<br>
+6 0 0 0 1 1 1<br>
+4 -2 3 0 -2 1 0 -2 -1 0 -2 -3 0;</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type nurbsSurface</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>NURBS surface data</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>int int int int bool <br>
+int {double} <br>
+int {double} <br>
+[string] int {double double double}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>uDegree vDegree uForm vForm isRational<br>
+uKnotCount {uKnotValue}<br>
+vKnotCount {vKnotValue} [&quot;TRIM&quot;|&quot;NOTRIM&quot;] cvCount {xCVValue yCVValue
+zCVValue [wCVValue]}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Example</th>
+<td>// uDegree is degree of the surface in U direction (range 1-7)<br>
+// vDegree is degree of the surface in V direction (range 1-7)<br>
+// uForm is open (0), closed (1), periodic (2) in U direction<br>
+// vForm is open (0), closed (1), periodic (2) in V direction<br>
+// isRational is true if the surface CVs contain a rational component<br>
+// uKnotCount is the size of the U knot list<br>
+//  uKnotValue is a single entry in the U knot list<br>
+// vKnotCount is the size of the V knot list<br>
+//  vKnotValue is a single entry in the V knot list<br>
+// If &quot;TRIM&quot; is specified then additional trim information is expected<br>
+// If &quot;NOTRIM&quot; is specified then the surface is not trimmed<br>
+// cvCount is the number of CVs in the surface<br>
+//  xCVValue,yCVValue,zCVValue [wCVValue]is a single CV.<br>
+//  zCVValue is only present when dimension is 3.<br>
+//  wCVValue is only present when isRational is true<br>
+//<br>
+setAttr node.surfaceAttr -type nurbsSurface 3 3 0 0 no <br>
+6 0 0 0 1 1 1<br>
+6 0 0 0 1 1 1<br>
+16 -2 3 0 -2 1 0 -2 -1 0 -2 -3 0<br>
+-1 3 0 -1 1 0 -1 -1 0 -1 -3 0<br>
+1 3 0 1 1 0 1 -1 0 1 -3 0<br>
+3 3 0 3 1 0 3 -1 0 3 -3 0;</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type nurbsTrimface</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>NURBS trim face data</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>bool int {int {int {double bool bool} int {bool double}}}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>flipNormal boundaryCount {boundaryType tedgeCountOnBoundary<br>
+{splineCountOnEdge {edgeTolerance isEdgeReversed geometricContinuity}<br>
+{splineCountOnPedge {isMonotone pedgeTolerance}}}
+</td>
+</tr>
+<tr>
+<th align="left" valign="top">Example</th>
+<td>// flipNormal if true turns the surface inside out<br>
+// boundaryCount: number of boundaries<br>
+// boundaryType: <br>
+// tedgeCountOnBoundary    : number of edges in a boundary<br>
+// splineCountOnEdge    : number of splines in an edge in<br>
+// edgeTolerance        : tolerance used to build the 3d edge<br>
+// isEdgeReversed        : if true, the edge is backwards<br>
+// geometricContinuity    : if true, the edge is tangent continuous<br>
+// splineCountOnPedge    : number of splines in a 2d edge<br>
+// isMonotone            : if true, curvature is monotone<br>
+// pedgeTolerance        : tolerance for the 2d edge<br>
+//<br>
+</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type polyFaces</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Polygon face data</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>{&quot;f&quot; int {int}}<br>
+{&quot;h&quot; int {int}}<br>
+{&quot;mf&quot; int {int}}<br>
+{&quot;mh&quot; int {int}}<br>
+{&quot;mu&quot; int int {int}}<br>
+{&quot;mc&quot; int int {int}}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>{&quot;f&quot; faceEdgeCount {edgeIdValue}}<br>
+{&quot;h&quot; holeEdgeCount {edgeIdValue}}<br>
+{&quot;mf&quot; faceUVCount {uvIdValue}}<br>
+{&quot;mh&quot; holeUVCount {uvIdValue}}<br>
+{&quot;mu&quot; uvSet faceUVCount {uvIdValue}}<br>
+{&quot;mc&quot; colorIndex multiColorCount {colorIdValue}}<br>
+</td>
+</tr>
+<tr>
+<th align="left" valign="top">Example</th>
+<td>// This data type (polyFace) is meant to be used in file I/O<br>
+// after setAttrs have been written out for vertex position<br>
+// arrays, edge connectivity arrays (with corresponding start<br>
+// and end vertex descriptions), texture coordinate arrays and<br>
+// color arrays.  The reason is that this data type references<br>
+// all of its data through ids created by the former types.<br>
+//<br>
+// <b>&quot;f&quot;</b> specifies the ids of the edges making up a face -<br>
+//     negative value if the edge is reversed in the face<br>
+// <b>&quot;h&quot;</b> specifies the ids of the edges making up a hole -<br>
+//     negative value if the edge is reversed in the face<br>
+// <b>&quot;mf&quot;</b> specifies the ids of texture coordinates (uvs) for a face.<br>
+//     This data type is obsolete as of version 3.0. It is replaced by &quot;mu&quot;.<br>
+// <b>&quot;mh&quot;</b> specifies the ids of texture coordinates (uvs) for a hole<br>
+//     This data type is obsolete as of version 3.0. It is replaced by &quot;mu&quot;.<br>
+// <b>&quot;mu&quot;</b> The  first argument refers to the uv set. This is a zero-based<br>
+//     integer number. The second argument refers to the number of vertices (n)<br>
+//     on the face which have valid uv values. The last n values are the uv<br>
+//     ids of the texture coordinates (uvs) for the face. These indices<br>
+//     are what used to be represented by the &quot;mf&quot; and &quot;mh&quot; specification.<br>
+//     There may be more than one &quot;mu&quot; specification, one for each unique uv set.<br>
+// <b>&quot;mc&quot;</b> specifies the color index values for a face. The first argument<br>
+//     is color index. The second argument is the number of color ids to follow.<br>
+//     Rest of the arguments are color ids for the face.<br>
+//<br>
+setAttr node.polyFaceAttr -type polyFaces &quot;f&quot; 3 1 2 3 &quot;mc&quot; 0 4 0 1 2 3;</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type mesh</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Polygonal mesh</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>{string [int {double double double}]}<br>
+{string [int {double double double}]}<br>
+[{string [int {double double}]}]<br>
+{string [int {double double string}]}
+</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td valign="top">&quot;v&quot; [vertexCount {vertexX vertexY vertexZ}]<br>
+&quot;vn&quot; [normalCount {normalX normalY normalZ}]<br>
+[&quot;vt&quot; [uvCount {uValue vValue}]]<br>
+&quot;e&quot; [edgeCount {startVertex endVertex &quot;smooth&quot;|&quot;hard&quot;}]<br>
+</td>
+</tr>
+<tr>
+<th align="left" valign="top">Example</th>
+<td>// <b>&quot;v&quot;</b> specifies the vertices of the polygonal mesh<br>
+// <b>&quot;vn&quot;</b> specifies the normal of each vertex<br>
+// <b>&quot;vt&quot;</b> is optional and specifies a U,V texture coordinate for
+each vertex<br>
+// <b>&quot;e&quot;</b> specifies the edge connectivity information between
+vertices<br>
+//<br>
+setAttr node.meshAttr -type mesh &quot;v&quot; 3 0 0 0 0 1 0 0 0 1<br>
+&quot;vn&quot; 3 1 0 0 1 0 0 1 0 0<br>
+&quot;vt&quot; 3 0 0 0 1 1 0<br>
+&quot;e&quot; 3 0 1 &quot;hard&quot; 1 2 &quot;hard&quot; 2 0 &quot;hard&quot;;</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<tr>
+<th align="left" valign="top">-type lattice</th>
+<td><table border="0">
+<tr>
+<td colspan="2"><i>Lattice data</i></td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Syntax</th>
+<td>int int int int {double double double}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Value Meaning</th>
+<td>sDivisionCount tDivisionCount uDivisionCount<br>
+pointCount {pointX pointY pointZ}</td>
+</tr>
+<tr>
+<th align="left" valign="top">Example</th>
+<td>// sDivisionCount is the horizontal lattice division count<br>
+// tDivisionCount is the vertical lattice division count<br>
+// uDivisionCount is the depth lattice division count<br>
+// pointCount is the total number of lattice points<br>
+// pointX,pointY,pointZ is one lattice point.  The list is<br>
+//   specified varying first in S, then in T, last in U so the<br>
+//   first two entries are (S=0,T=0,U=0) (s=1,T=0,U=0)<br>
+//<br>
+setAttr node.latticeAttr -type lattice 2 5 2 20<br>
+-2 -2 -2 2 -2 -2 -2 -1 -2 2 -1 -2 -2 0 -2<br>
+2 0 -2 -2 1 -2 2 1 -2 -2 2 -2 2 2 -2<br>
+-2 -2 2 2 -2 2 -2 -1 2 2 -1 2 -2 0 2<br>
+2 0 2 -2 1 2 2 1 2 -2 2 2 2 2 2;</td>
+</tr>
+</table></td>
+</tr>
+<p>
+<p>
+</table>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="addAttr.html">addAttr</a>, <a href="connectAttr.html">connectAttr</a>, <a href="disconnectAttr.html">disconnectAttr</a>, <a href="getAttr.html">getAttr</a>, <a href="listAttr.html">listAttr</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagalteredValue">alteredValue</a>, <a href="#flagcaching">caching</a>, <a href="#flagcapacityHint">capacityHint</a>, <a href="#flagchannelBox">channelBox</a>, <a href="#flagclamp">clamp</a>, <a href="#flagkeyable">keyable</a>, <a href="#flaglock">lock</a>, <a href="#flagsize">size</a>, <a href="#flagtype">type</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagalteredValue">
+          <code><b>alteredValue</b>(<b>av</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The value is only the current value, which may change in the
+next evalution (if the attribute has an incoming connection).
+This flag is only used during file I/O, so that attributes
+with incoming connections do not have their data overwritten
+during the first evaluation after a file is opened.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcaching">
+          <code><b>caching</b>(<b>ca</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the attribute's internal caching on or off. Not all attributes
+can be defined as caching. Only those attributes that are not defined
+by default to be cached can be made caching.  As well, multi attribute
+elements cannot be made caching. Caching also affects child attributes
+for compound attributes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcapacityHint">
+          <code><b>capacityHint</b>(<b>ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to provide a memory allocation hint to attributes
+where the -size flag cannot provide enough information.
+This flag is optional and is primarily intended to be
+used during file I/O.
+Only certain attributes make use of this flag, and
+the interpretation of the flag value varies per attribute.
+This flag is currently used by (node.attribute):
+<ul>
+<li>mesh.face - hints the total number of elements in the face edge lists</li>
+</ul>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchannelBox">
+          <code><b>channelBox</b>(<b>cb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the attribute's display in the channelBox on or off.
+Keyable attributes are always display in the channelBox regardless of
+the channelBox settting.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclamp">
+          <code><b>clamp</b>(<b>c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For numeric attributes, if the value is outside the
+range of the attribute, clamp it to the min or max instead
+of failing
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeyable">
+          <code><b>keyable</b>(<b>k</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the attribute's keyable state on or off.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglock">
+          <code><b>lock</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the attribute's lock state on or off.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsize">
+          <code><b>size</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Defines the size of a multi-attribute array. This is only a hint,
+used to help allocate memory as efficiently as possible.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>type</b>(<b>typ</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Identifies the type of data.  If the -type flag
+is not present, a numeric type is assumed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.sphere( n=&quot;sphere&quot; )
+
+# Set a simple numeric value
+cmds.setAttr( 'sphere.translateX', 5 )
+
+# Lock an attribute to prevent further modification
+cmds.setAttr( 'sphere.translateX', lock=True )
+
+# Make an attribute unkeyable
+cmds.setAttr( 'sphere.translateZ', keyable=False )
+
+# Set an entire list of multi-attribute values in one command
+cmds.setAttr( 'sphereShape.weights[0:6]',1, 1, 2, 1, 1, 1, 2,size=7)
+# Set an attribute with a compound numeric type
+cmds.setAttr('sphere.rotate', 0, 45, 90, type=&quot;double3&quot;)
+
+# Clamp the value of the attribute to the min/max
+# Useful floating point math leaves the value just
+# a little out of range - here the min is .01
+cmds.setAttr( 'anisotropic1.roughness', 0.0099978, clamp=True )
+
+# Set a multi-attribute with a compound numeric type
+cmds.setAttr( 'sphereShape.controlPoints[0:2]', 0, 0, 0, 1, 1, 1, 2, 2, 2,type=&quot;double3&quot; )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

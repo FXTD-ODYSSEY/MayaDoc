@@ -1,0 +1,752 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>cluster command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-cluster"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/cluster.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>cluster </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Deformation" target="contentFrame">Deformation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("cluster.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>cluster [-<a href="#flagafter">after</a>] [-<a href="#flagafterReference">afterReference</a>] [-<a href="#flagbefore">before</a>] [-<a href="#flagbindState">bindState</a> <i>boolean</i>] [-<a href="#flagdeformerTools">deformerTools</a>] [-<a href="#flagenvelope">envelope</a> <i>float</i>] [-<a href="#flagexclusive">exclusive</a> <i>string</i>] [-<a href="#flagfrontOfChain">frontOfChain</a>] [-<a href="#flaggeometry">geometry</a> <i>string</i>] [-<a href="#flaggeometryIndices">geometryIndices</a>] [-<a href="#flagignoreSelected">ignoreSelected</a>] [-<a href="#flagincludeHiddenSelections">includeHiddenSelections</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagparallel">parallel</a>] [-<a href="#flagprune">prune</a>] [-<a href="#flagrelative">relative</a>] [-<a href="#flagremove">remove</a>] [-<a href="#flagresetGeometry">resetGeometry</a>] [-<a href="#flagsplit">split</a>] [-<a href="#flagweightedNode">weightedNode</a> <i>string string</i>] 
+[objects]
+     </code> </p>
+      <p>cluster is undoable, queryable, and editable.</p>
+      The cluster command creates a cluster or edits the membership of
+an existing cluster. The command returns the name of the cluster
+node upon creation of a new cluster.
+<p>
+After creating a cluster, the cluster's weights can be modified
+using the percent command or the set editor window.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>(the cluster node name and the cluster handle name)</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="deformer.html">deformer</a>, <a href="flexor.html">flexor</a>, <a href="lattice.html">lattice</a>, <a href="percent.html">percent</a>, <a href="sculpt.html">sculpt</a>, <a href="wire.html">wire</a>, <a href="wrinkle.html">wrinkle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagafter">after</a>, <a href="#flagafterReference">afterReference</a>, <a href="#flagbefore">before</a>, <a href="#flagbindState">bindState</a>, <a href="#flagdeformerTools">deformerTools</a>, <a href="#flagenvelope">envelope</a>, <a href="#flagexclusive">exclusive</a>, <a href="#flagfrontOfChain">frontOfChain</a>, <a href="#flaggeometry">geometry</a>, <a href="#flaggeometryIndices">geometryIndices</a>, <a href="#flagignoreSelected">ignoreSelected</a>, <a href="#flagincludeHiddenSelections">includeHiddenSelections</a>, <a href="#flagname">name</a>, <a href="#flagparallel">parallel</a>, <a href="#flagprune">prune</a>, <a href="#flagrelative">relative</a>, <a href="#flagremove">remove</a>, <a href="#flagresetGeometry">resetGeometry</a>, <a href="#flagsplit">split</a>, <a href="#flagweightedNode">weightedNode</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafter">
+          <code><b>-after</b>(<b>-af</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the default behavior for insertion/appending into/onto
+the existing chain is not the desired behavior then this flag
+can be used to force the command to place the deformer
+node after the selected node in the chain even if
+a new geometry shape has to be created in order to do so.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafterReference">
+          <code><b>-afterReference</b>(<b>-ar</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The -afterReference flag is used to specify deformer ordering in a hybrid way that
+choses between -before and -after automatically. If the geometry being
+deformed is referenced then the -after mode is used when adding the new deformer,
+otherwise the -before mode is used. The net effect when using -afterReference to build
+deformer chains is that internal shape nodes in the deformer chain will only
+appear at reference file boundaries, leading to lightweight deformer networks that
+may be more amicable to reference swapping.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbefore">
+          <code><b>-before</b>(<b>-bf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the default behavior for insertion/appending into/onto
+the existing chain is not the desired behavior then this flag
+can be used to force the command to place the deformer
+node before the selected node in the chain even if
+a new geometry shape has to be created in order to do so.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbindState">
+          <code><b>-bindState</b>(<b>-bs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When turned on, this flag adds in a compensation to ensure
+the clustered objects preserve their spatial position
+when clustered. This is required to prevent the geometry
+from jumping at the time the cluster is created
+in situations when the
+cluster transforms at cluster time are not identity.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeformerTools">
+          <code><b>-deformerTools</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the name of the deformer tool objects (if any)
+as string string ...
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenvelope">
+          <code><b>-envelope</b>(<b>-en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the envelope value for the deformer. Default is 1.0
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexclusive">
+          <code><b>-exclusive</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Puts the deformation set in a deform partition.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfrontOfChain">
+          <code><b>-frontOfChain</b>(<b>-foc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This command is used to specify that the new deformer
+node should be placed ahead (upstream) of existing deformer
+and skin nodes in the shape's history (but not ahead of
+existing tweak nodes). The input to the
+deformer will be the upstream shape rather than the visible
+downstream shape, so the behavior of this flag is the most
+intuitive if the downstream deformers are in their reset
+(hasNoEffect) position when the new deformer is added.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometry">
+          <code><b>-geometry</b>(<b>-g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The specified object will be added to the list of
+objects being deformed by this deformer object, unless
+the -rm flag is also specified. When queried, this flag
+returns string string string ...
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometryIndices">
+          <code><b>-geometryIndices</b>(<b>-gi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Complements the -geometry flag in query mode. Returns
+the multi index of each geometry.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreSelected">
+          <code><b>-ignoreSelected</b>(<b>-is</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tells the command to not deform objects on the
+current selection list
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeHiddenSelections">
+          <code><b>-includeHiddenSelections</b>(<b>-ihs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Apply the deformer to any visible and hidden objects in the selection list.
+Default is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to specify the name of the node being created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparallel">
+          <code><b>-parallel</b>(<b>-par</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Inserts the new deformer in a parallel chain to any existing deformers in
+the history of the object. A blendShape is inserted to blend the parallel
+results together.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprune">
+          <code><b>-prune</b>(<b>-pr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Removes any points not being deformed by the deformer in
+its current configuration from the deformer set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelative">
+          <code><b>-relative</b>(<b>-rel</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Enable relative mode for the cluster. In relative mode,
+Only the transformations directly above the cluster are used
+by the cluster. Default is off.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>-remove</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that objects listed after the -g flag should
+be removed from this deformer.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresetGeometry">
+          <code><b>-resetGeometry</b>(<b>-rg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Reset the geometry matrices for the objects being deformed
+by the cluster. This flag is used to get rid of undesirable
+effects that happen if you scale an object that
+is deformed by a cluster.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsplit">
+          <code><b>-split</b>(<b>-sp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Branches off a new chain in the dependency graph instead
+of inserting/appending the deformer into/onto an
+existing chain.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweightedNode">
+          <code><b>-weightedNode</b>(<b>-wn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Transform node in the DAG above the cluster to which all percents are
+applied. The second DAGobject specifies the descendent of the first
+DAGobject from where the transformation matrix is evaluated. Default is
+the cluster handle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Create a cluster which uses the transformation of elbow1
+//
+cluster -wn elbow1 elbow1;
+
+// Edit cluster1 to use the transformation of wrist1.
+//
+cluster -bs 1 -wn wrist1 wrist1 cluster1;
+
+// Create a relative cluster with its own cluster handle. The
+// cluster handle is drawn as the letter &quot;C&quot;.
+//
+cluster -rel;
+
+// Modify the membership of an existing cluster. First, find
+// the name of the cluster's associated set, then use the sets
+// command to edit the set membership (add a cube and remove a plane).
+//
+listConnections -type objectSet cluster1;
+// Result: cluster1Set
+sets -add cluster1Set pCube1;
+sets -rm cluster1Set pPlane1;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

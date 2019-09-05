@@ -1,0 +1,1144 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>selectionConnection command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-selectionConnection"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/selectionConnection.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>selectionConnection </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("selectionConnection.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>selectionConnection [-<a href="#flagactiveCacheList">activeCacheList</a>] [-<a href="#flagactiveCharacterList">activeCharacterList</a>] [-<a href="#flagactiveList">activeList</a>] [-<a href="#flagaddScript">addScript</a> <i>script</i>] [-<a href="#flagaddTo">addTo</a> <i>string</i>] [-<a href="#flagcharacterList">characterList</a>] [-<a href="#flagclear">clear</a>] [-<a href="#flagconnectionList">connectionList</a>] [-<a href="#flagdefineTemplate">defineTemplate</a> <i>string</i>] [-<a href="#flagdeselect">deselect</a> <i>name</i>] [-<a href="#flageditor">editor</a> <i>string</i>] [-<a href="#flagexists">exists</a>] [-<a href="#flagfilter">filter</a> <i>string</i>] [-<a href="#flagfindObject">findObject</a> <i>name</i>] [-<a href="#flagglobal">global</a> <i>boolean</i>] [-<a href="#flaghighlightList">highlightList</a>] [-<a href="#flagidentify">identify</a>] [-<a href="#flagkeyframeList">keyframeList</a>] [-<a href="#flaglock">lock</a> <i>boolean</i>] [-<a href="#flagmodelList">modelList</a>] [-<a href="#flagobject">object</a> <i>name</i>] [-<a href="#flagparent">parent</a> <i>string</i>] [-<a href="#flagremove">remove</a> <i>string</i>] [-<a href="#flagremoveScript">removeScript</a> <i>script</i>] [-<a href="#flagselect">select</a> <i>name</i>] [-<a href="#flagsetList">setList</a>] [-<a href="#flagswitch">switch</a>] [-<a href="#flaguseTemplate">useTemplate</a> <i>string</i>] [-<a href="#flagworldList">worldList</a>] 
+string
+     </code> </p>
+      <p>selectionConnection is undoable, queryable, and editable.</p>
+      This command creates a named selectionConnection object. This object
+is simply a shared selection list. It may be used by editors to
+share their highlight data. For example, an outliner may attach its
+selected list to one of these objects, and a graph editor may use the
+same object as a list source. Then, the graph editor would only
+display objects that are selected in the outliner.
+<p>
+Selection connections are UI objects which contain a list of model
+objects. Selection connections are useful for specifying which objects
+are to be displayed within a particular editor. Editor's have three
+<em>plug sockets</em> where a selection connection may be attached.
+They are:
+<p>
+<dl>
+<dt><i>mainListConnection</i></dt>
+<dd>an <em>input</em> socket which contains a list of objects
+that are to be displayed within the editor</dd>
+<p>
+<dt><i>selectionConnection</i></dt>
+<dd>an <em>output</em> socket which contains a list of objects
+that are <em>selected</em> within the editor</dd>
+<p>
+<dt><i>highlightConnection</i></dt>
+<dd>an <em>input</em> socket which contains
+a list of objects that are to be <em>highlighted</em>
+within the editor</dd>
+</dl>
+<p>
+There are several different types of selection connections that may be
+created. They include:
+<p>
+<dl>
+<dt><i>activeList</i></dt>
+<dd>a selection connection which contains a list
+of everything in the model which is active (which includes
+geometry objects and keys)</dd>
+<p>
+<dt><i>modelList</i></dt>
+<dd>a selection connection which contains a list
+of all the geometry (i.e. excluding keys) objects that are currently
+active</dd>
+<p>
+<dt><i>keyframeList</i></dt>
+<dd>a selection connection which contains a list
+of all the keys that are currently active</dd>
+<p>
+<dt><i>worldList</i></dt>
+<dd>a selection connection which contains a list
+of all the objects in the world</dd>
+<p>
+<dt><i>objectList</i></dt>
+<dd>a selection connection which contains one
+model object (which may be a set)</dd>
+<p>
+<dt><i>listList</i></dt>
+<dd>a selection connection which contains a list
+of selection connections</dd>
+<p>
+<dt><i>editorList</i></dt>
+<dd>a selection connection which contains a list
+of objects that are attached to the mainListConnection
+of the specified editor</dd>
+<p>
+<dt><i>setList</i></dt>
+<dd>a selection connection which contains a list
+of all the sets in the world</dd>
+<p>
+<dt><i>characterList</i></dt>
+<dd>a selection connection which contains a list
+of all the characters in the world</dd>
+<p>
+<dt><i>highlightList</i></dt>
+<dd>a selection connection which contains a list
+of objects to be highlighted in some fashion</dd>
+</dl>
+<p>
+Below is an example selectionConnection network between two
+editors. Editor 1 is setup to display objects on the activeList.
+Editor 2 is setup to display objects which are selected within Editor
+1, and objects that are selected in Editor 2 are highlighted within
+Editor 1:
+<p>
+<pre>
+-- Editor 1--       -- Editor 2--
+inputList--&gt;| main |      |  |-&gt;| main |      |
+|      | sele |--|  |      | sele |--|
+|-&gt;| high |      |     | high |      |  |
+|   -------------       -------------   |
+|------------- fromEditor2 -------------|
+</pre>
+<p>
+The following commands will establish this network:
+<p>
+<pre>
+selectionConnection -activeList inputList;
+selectionConnection fromEditor1;
+selectionConnection fromEditor2;
+editor -edit -mainListConnection inputList Editor1;
+editor -edit -selectionConnection fromEditor1 Editor1;
+editor -edit -mainListConnection fromEditor1 Editor2;
+editor -edit -selectionConnection fromEditor2 Editor2;
+editor -edit -highlightConnection fromEditor2 Editor1;
+</pre>
+<p>
+Note: to delete a <em>selection connection</em> use the deleteUI command<br>
+Note: commands which expect objects may be given a selection connection
+instead, and the command will operate upon the objects wrapped by the
+selection connection<br>
+Note: the graph editor and the dope sheet are the only editors which can use the
+editor connection to the highlightConnection of another editor<br>
+WARNING: some flag combinations may not behave as you expect.  The command
+is really intended for internal use for managing the outliner used by
+the various editors.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Value of the queried flag</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagactiveCacheList">activeCacheList</a>, <a href="#flagactiveCharacterList">activeCharacterList</a>, <a href="#flagactiveList">activeList</a>, <a href="#flagaddScript">addScript</a>, <a href="#flagaddTo">addTo</a>, <a href="#flagcharacterList">characterList</a>, <a href="#flagclear">clear</a>, <a href="#flagconnectionList">connectionList</a>, <a href="#flagdefineTemplate">defineTemplate</a>, <a href="#flagdeselect">deselect</a>, <a href="#flageditor">editor</a>, <a href="#flagexists">exists</a>, <a href="#flagfilter">filter</a>, <a href="#flagfindObject">findObject</a>, <a href="#flagglobal">global</a>, <a href="#flaghighlightList">highlightList</a>, <a href="#flagidentify">identify</a>, <a href="#flagkeyframeList">keyframeList</a>, <a href="#flaglock">lock</a>, <a href="#flagmodelList">modelList</a>, <a href="#flagobject">object</a>, <a href="#flagparent">parent</a>, <a href="#flagremove">remove</a>, <a href="#flagremoveScript">removeScript</a>, <a href="#flagselect">select</a>, <a href="#flagsetList">setList</a>, <a href="#flagswitch">switch</a>, <a href="#flaguseTemplate">useTemplate</a>, <a href="#flagworldList">worldList</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveCacheList">
+          <code><b>-activeCacheList</b>(<b>-atc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should reflect the cache that objects
+on the active list belong to.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveCharacterList">
+          <code><b>-activeCharacterList</b>(<b>-acl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should reflect the characters that objects
+on the active list belong to.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveList">
+          <code><b>-activeList</b>(<b>-act</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should reflect the active
+list (geometry objects and keys).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddScript">
+          <code><b>-addScript</b>(<b>-as</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify a script to be called when something is added to the
+selection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddTo">
+          <code><b>-addTo</b>(<b>-add</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The name of a selection connection that should be added to this
+list of connections.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcharacterList">
+          <code><b>-characterList</b>(<b>-cl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should reflect all the characters in
+the world.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclear">
+          <code><b>-clear</b>(<b>-clr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove everything from the selection connection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconnectionList">
+          <code><b>-connectionList</b>(<b>-lst</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should contain a list of selection
+connections.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefineTemplate">
+          <code><b>-defineTemplate</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Puts the command in a mode where any other flags and arguments are
+parsed and added to the command template specified in the argument.
+They will be used as default arguments in any subsequent
+invocations of the command when templateName is set as the
+current template.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeselect">
+          <code><b>-deselect</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove something from the selection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditor">
+          <code><b>-editor</b>(<b>-ed</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should reflect the -mainListConnection
+of the specified editor.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>-exists</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns whether the
+specified object exists or not. Other flags are ignored.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfilter">
+          <code><b>-filter</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Optionally specifies an itemFilter for this connection.
+An empty string (&quot;&quot;) clears the current filter.
+If a filter is specified, all the information going into
+the selectionConnection must first pass through the filter
+before being accepted.
+
+NOTE: filters can only be attached to regular selectionConnections.
+They cannot be attached to any connection created using
+the -act, -mdl, -key, -wl, -sl, -cl, -lst, -obj, or -ren flags.
+We strongly recommend that you do not attach filters to a
+selectionConnection --- it is better to attach your filter
+to the editor that is using the selectionConnection instead.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfindObject">
+          <code><b>-findObject</b>(<b>-fo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Find a selection connection in this list that wraps the specified
+object.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagglobal">
+          <code><b>-global</b>(<b>-g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A global selection connection cannot be deleted by any script
+commands.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghighlightList">
+          <code><b>-highlightList</b>(<b>-hl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection is being used as a highlight list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagidentify">
+          <code><b>-identify</b>(<b>-id</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Find out what type of selection connection this is.  May be:
+activeList | modelList | keyframeList | worldList | objectList
+listList | editorList | connection | unknown
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeyframeList">
+          <code><b>-keyframeList</b>(<b>-key</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should reflect the animation
+portion of the active list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglock">
+          <code><b>-lock</b>(<b>-lck</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For activeList connections, locking the connection means that
+it will not listen to activeList changes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmodelList">
+          <code><b>-modelList</b>(<b>-mdl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should reflect the modeling
+(i.e. excluding keys) portion of the active list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobject">
+          <code><b>-object</b>(<b>-obj</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should wrap around the specified
+object (which may be a set).  Query will return all the members of the
+selection connection (if the connection wraps a set, the set members will
+be returned)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparent">
+          <code><b>-parent</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The name of a UI object this should be attached to.  When the
+parent is destroyed, the selectionConnection will auto-delete.
+If no parent is specified, the connection is created in the
+current controlLayout.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>-remove</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The name of a selection connection that should be removed from
+this list of connections.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveScript">
+          <code><b>-removeScript</b>(<b>-rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify a script to be called when something is removed from
+the selection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselect">
+          <code><b>-select</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add something to the selection. This does not replace the
+existing selection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsetList">
+          <code><b>-setList</b>(<b>-sl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should reflect all the sets in
+the world.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswitch">
+          <code><b>-switch</b>(<b>-sw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Acts as a modifier to -connectionList which sets the list of objects
+to be the first non-empty selection connection.  selection connections
+are tested in the order in which they are added.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseTemplate">
+          <code><b>-useTemplate</b>(<b>-ut</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Forces the command to use a command template other than
+the current one.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldList">
+          <code><b>-worldList</b>(<b>-wl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this connection should reflect all objects
+in the world.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+//    Example 1.
+//
+//    Create a window with two Outliner editors and a
+//    selection connection network.  Editor 1 will display the
+//    current scene's active list.  Editor 2 will display the items
+//    selected in Editor 1.
+//
+string $window = `window -wh 400 300`;
+paneLayout -configuration &quot;vertical2&quot;;
+string $editor1 = `outlinerEditor`;
+string $editor2 = `outlinerEditor`;
+
+//    Create the selection connection network.
+//
+string $inputList = `selectionConnection -activeList`;
+string $fromEditor1 = `selectionConnection`;
+string $fromEditor2 = `selectionConnection`;
+editor -edit -mainListConnection $inputList $editor1;
+editor -edit -selectionConnection $fromEditor1 $editor1;
+editor -edit -mainListConnection $fromEditor1 $editor2;
+editor -edit -selectionConnection $fromEditor2 $editor2;
+
+showWindow $window;
+
+//    Create some objects and select them.
+//
+sphere; cone; cylinder;
+select -all;
+
+// Now as you select objects on the left side, they will be
+// displayed on the right side.  You can also add a callback
+// script to do further processing on the list when objects
+// are added. (Use -removeScript for when objects are removed.)
+
+global proc addScriptCallback(string $array[])
+{
+    print &quot;Contents of callback array:\n&quot;;
+    print $array;
+}
+
+selectionConnection -e -addScript addScriptCallback $fromEditor1;
+
+
+//    Example 2.
+//
+//    Create a selection connection for a paritcular object.  Delete
+//    the selection connection and the object.
+//
+sphere -name sphere;
+
+//    Create a selection connection to wrap the sphere.
+//
+selectionConnection -object sphere holder;
+
+//    Select the sphere using the selection connection.
+//
+select holder;
+
+//    Delete the members (sphere) of the selection connection
+//
+delete holder;
+
+//    Delete the selection connection (does not delete the members of
+//    the selection connection.
+//
+deleteUI holder;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

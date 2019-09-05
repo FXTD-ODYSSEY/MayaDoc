@@ -1,0 +1,177 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>eval command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-eval"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>eval </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("eval.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>eval [-<a href="#flagundoEnabled">undoEnabled</a> <i>boolean</i>] 
+string|expression
+     </code> </p>
+      <p>eval is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The purpose of the eval command is to provide a way for the user to
+execute a MEL command or procedure which can only be determined at
+runtime. Any valid MEL statements can be passed as the string
+argument to eval. For those familiar with C, this provides a
+functionality akin to function pointers.
+<p>
+This feature is of particular use to plug-in users. Since a plugin
+command is available only after the execution of the loadPlugin
+command, references to that plugin can only be resolved at runtime.
+<p>
+If the user wants to use eval to execute only a single simple command
+with optional arguments, then he/she can use the 2nd form of the
+syntax. Otherwise, the user should construct a string consisting of
+the statements and/or commands to be executed.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>Any</i></td><td>The return value of the statement or command/procedure call.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="evalDeferred.html">evalDeferred</a>, <a href="evalEcho.html">evalEcho</a>, <a href="scriptJob.html">scriptJob</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagundoEnabled">undoEnabled</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagundoEnabled">
+          <code><b>-undoEnabled</b>(<b>-ue</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that the command to be executed should not be
+placed on the undo queue. Default is true.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+string $timeOfDay = &quot;afternoon&quot;;
+switch($timeOfDay) {
+   case &quot;morning&quot;:
+      $shape = &quot;circle&quot;;
+      break;
+   case &quot;afternoon&quot;:
+      $shape = &quot;sphere&quot;;
+      break;
+   case &quot;evening&quot;:
+      $shape = &quot;cone&quot;;
+      break;
+   default:
+      $shape = &quot;cylinder&quot;;
+   }
+   float $radius = 1.4;
+   eval $shape -r $radius;  // create specified shape with given radius.
+
+// The &quot;eval&quot; command above could also be constructed as a single string:
+eval ($shape + &quot; -r  &quot; + $radius);
+
+eval &quot;int $i = 3 + 2;&quot;;
+
+loadPlugin mySpecialNurbCmd.dll;
+int $arg1 = 1;
+int $arg2 = 10;
+eval mySpecialNurb $arg1 $arg2;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

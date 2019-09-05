@@ -1,0 +1,472 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>commandPort command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-commandPort"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/commandPort.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>commandPort </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("commandPort.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>commandPort [-<a href="#flagbufferSize">bufferSize</a> <i>int</i>] [-<a href="#flagclose">close</a>] [-<a href="#flagechoOutput">echoOutput</a>] [-<a href="#flaglistPorts">listPorts</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagnoreturn">noreturn</a>] [-<a href="#flagpickleOutput">pickleOutput</a>] [-<a href="#flagprefix">prefix</a> <i>string</i>] [-<a href="#flagreturnNumCommands">returnNumCommands</a>] [-<a href="#flagsecurityWarning">securityWarning</a>] [-<a href="#flagsourceType">sourceType</a> <i>string</i>]  </code> </p>
+      <p>commandPort is undoable, queryable, and <b>NOT editable</b>.</p>
+      Opens or closes the Maya command port. The command port comprises a socket
+to which a client program may connect. An example command port client
+&quot;mcp&quot; is included in the Motion Capture developers kit.
+<p>
+<p>It supports multi-byte commands and uses utf-8 as its transform
+format. It will receive utf8 command string and decode it to Maya native
+coding. The result will also be encoded to utf-8 before sending back.
+<p>
+<p>Care should be taken regarding INET domain sockets as no user
+identification, or authorization is required to connect to a given
+socket, and all commands (including &quot;system(...)&quot;) are allowed and
+executed with the user id and permissions of the Maya user. The prefix
+flag can be used to reduce this security risk, as only the prefix
+command is executed.
+<p>
+<p>The query flag can be used to determine if a given command port exists.
+See examples below.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>- in query mode</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagbufferSize">bufferSize</a>, <a href="#flagclose">close</a>, <a href="#flagechoOutput">echoOutput</a>, <a href="#flaglistPorts">listPorts</a>, <a href="#flagname">name</a>, <a href="#flagnoreturn">noreturn</a>, <a href="#flagpickleOutput">pickleOutput</a>, <a href="#flagprefix">prefix</a>, <a href="#flagreturnNumCommands">returnNumCommands</a>, <a href="#flagsecurityWarning">securityWarning</a>, <a href="#flagsourceType">sourceType</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbufferSize">
+          <code><b>-bufferSize</b>(<b>-bs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Commands and results are each subject to size limits. This option allows
+the user to specify the size of the buffer used to communicate with Maya. If
+unspecified the default buffer size is 4096 characters.
+Commands longer than bufferSize characters will cause the client connection to close.
+Results longer that bufferSize characters are replaced with an error message.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclose">
+          <code><b>-close</b>(<b>-cl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Closes the commandPort, deletes the pipes
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagechoOutput">
+          <code><b>-echoOutput</b>(<b>-eo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sends a copy of all command output to the command port. Typically
+only the result is transmitted. This option provides a copy of
+all output.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistPorts">
+          <code><b>-listPorts</b>(<b>-lp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the available ports
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the command port which this command
+creates. CommandPort names of the form <var>name</var> create a
+UNIX domain socket on the localhost corresponding to
+<var>name</var>. If <var>name</var> does not begin with &quot;/&quot;,
+then /tmp/<var>name</var> is used. If <var>name</var> begins
+with &quot;/&quot;, <var>name</var> denotes the full path to the socket. 
+Names of the form :<var>port number</var> create an INET domain
+on the local host at the given port.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoreturn">
+          <code><b>-noreturn</b>(<b>-nr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Do not write the results from executed commands back to the
+command port socket. Instead, the results from executed
+commands are written to the script editor window. As no information
+passes back to the command port client regarding the execution
+of the submitted commands, care must be taken not to overflow
+the command buffer, which would cause the connection to close.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpickleOutput">
+          <code><b>-pickleOutput</b>(<b>-po</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Python output will be pickled.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprefix">
+          <code><b>-prefix</b>(<b>-pre</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The string argument is the name of a Maya command taking one string
+argument. This command is called each time data is sent to the command
+port. The data written to the command port is passed as the argument to
+the prefix command. The data from the command port is encoded as with
+enocodeString and enclosed in quotes. 
+If newline characters are embedded in the command port data,
+the input is split into individual lines.
+These lines are treated as if they were separate
+writes to the command port. Only the result to the last
+prefix command is returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreturnNumCommands">
+          <code><b>-returnNumCommands</b>(<b>-rnc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Ignore the result of the command, but return the number of
+commands that have been read and executed in this call. This
+is a simple way to track buffer overflow. This flag is ignored
+when the <em>noreturn</em> flag is specified.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsecurityWarning">
+          <code><b>-securityWarning</b>(<b>-sw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Enables security warning on command port input.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsourceType">
+          <code><b>-sourceType</b>(<b>-stp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The string argument is used to indicate which source type
+would be passed to the commandPort, like &quot;mel&quot;, &quot;python&quot;.
+The default source type is &quot;mel&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Open a command port with the default name &quot;mayaCommand&quot;.
+commandPort;
+
+// Close the command port with the default name. Open client connections
+// are not broken.
+commandPort -cl;
+
+// Query to see if the command command port &quot;mayaCommand&quot; exists.
+commandPort -q mayaCommand;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

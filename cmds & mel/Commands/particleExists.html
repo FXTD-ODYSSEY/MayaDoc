@@ -1,0 +1,109 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>particleExists command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-particleExists"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/particleExists.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>particleExists </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Dynamics" target="contentFrame">Dynamics</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("particleExists.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>particleExists 
+string
+     </code> </p>
+      <p>particleExists is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command is used to query if a particle or soft object with
+the given name exists. Either the transform or shape name can be used
+as well as the name of the soft object.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>True if there is a particle object or soft object by the given
+name, false otherwise.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="particle.html">particle</a>
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// If the object does not exist then false (0) is returned
+file -f -new;
+particleExists particleShape1;
+// Result: 0 //
+
+// Create a particle shape and then querying for
+// it will return true (1)
+emitter;
+// Result: emitter1 //
+particle;
+// Result: particle1 particleShape1 //
+connectDynamic -em emitter1 particle1;
+// Result: particleShape1 //
+particleExists particleShape1;
+// Result: 1 //
+
+// You may also query using the transform name
+particleExists particle1;
+// Result: 1 //
+
+// The name of a soft body object can be used to query as well
+polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -tx 2 -ch 1;
+// Result: pSphere1 polySphere1 //
+soft -c;
+// Result: pSphere1Particle //
+particleExists pSphere1Particle;
+// Result: 1 //
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

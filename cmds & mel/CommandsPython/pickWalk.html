@@ -1,0 +1,249 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>pickWalk command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-pickWalk"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/pickWalk.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>pickWalk </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Selection" target="contentFrame">Selection</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("pickWalk.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>pickWalk(
+[objects]
+    , [<a href="#flagdirection">direction</a>=<i>string</i>], [<a href="#flagrecurse">recurse</a>=<i>boolean</i>], [<a href="#flagtype">type</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>pickWalk is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The pickWalk command allows you to quickly change the selection list
+relative to the nodes that are currently selected. It is called
+pickWalk, because it walks from one selection list to another
+by unselecting what's currently selected, and selecting nodes that
+are in the specified direction from the currently selected list.
+If you specify objects on the command line, the pickWalk command
+will walk from those objects instead of the selected list.
+<p>
+If the -type flag is instances, then the left and right direction will
+walk to the previous or next instance of the same selected dag node.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>A list of the newly selected items</td></tr></table>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdirection">direction</a>, <a href="#flagrecurse">recurse</a>, <a href="#flagtype">type</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdirection">
+          <code><b>direction</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The direction to walk from the node. The choices are
+up | down | left | right | in | out. up walks to the parent node,
+down to the child node, and left and right to the sibling nodes.
+If a CV on a surface is selected, the left and right directions walk
+in the U parameter direction of the surface, and the up and down directions
+walk in the V parameter direction.
+In and out are only used if the type flag is 'latticepoints'.
+Default is right.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrecurse">
+          <code><b>recurse</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If specified then recurse down when walking
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>type</b>(<b>typ</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The choices are nodes | instances | edgeloop | edgering | faceloop | keys | latticepoints | motiontrailpoints.
+If type is nodes, then the left and right direction walk to the next dag siblings.
+If type is instances, the left and right direction walk to the previous or next
+instance of the same dag node.
+If type is edgeloop, then the edge loop starting at the first selected edge will
+be selected.
+If type is edgering, then the edge ring starting at the first selected edge will
+be selected.
+If type is faceloop, and there are two connected quad faces selected which define
+a face loop, then that face loop will be selected.
+
+edgeloop, edgering and faceloop all remember which was the first edge or faces
+selected for as long as consecutive selections are made by this command.  They
+use this information to determine what the &quot;next&quot; loop or ring selection should
+be.  Users can make selections forwards and backwards by using the direction
+flag with &quot;left&quot; or &quot;right&quot;.
+
+If type is motiontrailpoints, then the left and right direction walk to the previous
+or next motion trail points respectively.
+
+Default is nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Given the transforms A and B which are parented to a transform C,
+# and C is instanced with parents D and E.
+
+cmds.pickWalk( 'A', direction='right' )
+
+cmds.select('|E|C')
+cmds.pickWalk( type='instances', direction='left')
+
+# The pickWalk command also works on CVs and edit points
+cmds.select('nurbsPlaneShape1.cv[2][1]')
+cmds.pickWalk(direction='right' )
+# Result: nurbsPlaneShape1.cv[3][1] #
+
+cmds.pickWalk( direction='up' )
+# Result: nurbsPlaneShape1.cv[3][2] #
+
+cmds.select( 'curveShape2.ep[1]' )
+cmds.pickWalk( direction='left' )
+# Result: curveShape2.ep[0] #
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

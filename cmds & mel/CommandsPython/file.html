@@ -1,0 +1,4200 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>file command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-file"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/file.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>file </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("file.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>file(
+string
+    , [<a href="#flagabsoluteName">absoluteName</a>=<i>boolean</i>], [<a href="#flagactivate">activate</a>=<i>boolean</i>], [<a href="#flagactiveProxy">activeProxy</a>=<i>boolean</i>], [<a href="#flagadd">add</a>=<i>boolean</i>], [<a href="#flaganyModified">anyModified</a>=<i>boolean</i>], [<a href="#flagapplyTo">applyTo</a>=<i>string</i>], [<a href="#flagbuildLoadSettings">buildLoadSettings</a>=<i>boolean</i>], [<a href="#flagchannels">channels</a>=<i>boolean</i>], [<a href="#flagcleanReference">cleanReference</a>=<i>string</i>], [<a href="#flagcommand">command</a>=<i>[string, string]</i>], [<a href="#flagcompress">compress</a>=<i>boolean</i>], [<a href="#flagconstraints">constraints</a>=<i>boolean</i>], [<a href="#flagconstructionHistory">constructionHistory</a>=<i>boolean</i>], [<a href="#flagcopyNumberList">copyNumberList</a>=<i>boolean</i>], [<a href="#flagdefaultExtensions">defaultExtensions</a>=<i>boolean</i>], [<a href="#flagdefaultNamespace">defaultNamespace</a>=<i>boolean</i>], [<a href="#flagdeferReference">deferReference</a>=<i>boolean</i>], [<a href="#flageditCommand">editCommand</a>=<i>string</i>], [<a href="#flagerrorStatus">errorStatus</a>=<i>boolean</i>], [<a href="#flagexecuteScriptNodes">executeScriptNodes</a>=<i>boolean</i>], [<a href="#flagexists">exists</a>=<i>boolean</i>], [<a href="#flagexpandName">expandName</a>=<i>boolean</i>], [<a href="#flagexportAll">exportAll</a>=<i>boolean</i>], [<a href="#flagexportAnim">exportAnim</a>=<i>boolean</i>], [<a href="#flagexportAnimFromReference">exportAnimFromReference</a>=<i>boolean</i>], [<a href="#flagexportAsReference">exportAsReference</a>=<i>boolean</i>], [<a href="#flagexportAsSegment">exportAsSegment</a>=<i>boolean</i>], [<a href="#flagexportSelected">exportSelected</a>=<i>boolean</i>], [<a href="#flagexportSelectedAnim">exportSelectedAnim</a>=<i>boolean</i>], [<a href="#flagexportSelectedAnimFromReference">exportSelectedAnimFromReference</a>=<i>boolean</i>], [<a href="#flagexportSelectedNoReference">exportSelectedNoReference</a>=<i>boolean</i>], [<a href="#flagexportSelectedStrict">exportSelectedStrict</a>=<i>boolean</i>], [<a href="#flagexportSnapshotCallback">exportSnapshotCallback</a>=<i>[script, string]</i>], [<a href="#flagexportUnloadedReferences">exportUnloadedReferences</a>=<i>boolean</i>], [<a href="#flagexpressions">expressions</a>=<i>boolean</i>], [<a href="#flagfileMetaData">fileMetaData</a>=<i>boolean</i>], [<a href="#flagflushReference">flushReference</a>=<i>string</i>], [<a href="#flagforce">force</a>=<i>boolean</i>], [<a href="#flaggroupLocator">groupLocator</a>=<i>boolean</i>], [<a href="#flaggroupName">groupName</a>=<i>string</i>], [<a href="#flaggroupReference">groupReference</a>=<i>boolean</i>], [<a href="#flagi">i</a>=<i>boolean</i>], [<a href="#flagignoreVersion">ignoreVersion</a>=<i>boolean</i>], [<a href="#flagimportFrameRate">importFrameRate</a>=<i>boolean</i>], [<a href="#flagimportReference">importReference</a>=<i>boolean</i>], [<a href="#flagimportTimeRange">importTimeRange</a>=<i>string</i>], [<a href="#flaglastFileOption">lastFileOption</a>=<i>boolean</i>], [<a href="#flaglastTempFile">lastTempFile</a>=<i>boolean</i>], [<a href="#flaglist">list</a>=<i>boolean</i>], [<a href="#flagloadAllDeferred">loadAllDeferred</a>=<i>boolean</i>], [<a href="#flagloadAllReferences">loadAllReferences</a>=<i>boolean</i>], [<a href="#flagloadNoReferences">loadNoReferences</a>=<i>boolean</i>], [<a href="#flagloadReference">loadReference</a>=<i>string</i>], [<a href="#flagloadReferenceDepth">loadReferenceDepth</a>=<i>string</i>], [<a href="#flagloadReferencePreview">loadReferencePreview</a>=<i>string</i>], [<a href="#flagloadSettings">loadSettings</a>=<i>string</i>], [<a href="#flaglocation">location</a>=<i>boolean</i>], [<a href="#flaglockContainerUnpublished">lockContainerUnpublished</a>=<i>boolean</i>], [<a href="#flaglockFile">lockFile</a>=<i>boolean</i>], [<a href="#flaglockReference">lockReference</a>=<i>boolean</i>], [<a href="#flagmapPlaceHolderNamespace">mapPlaceHolderNamespace</a>=<i>[string, string]</i>], [<a href="#flagmergeNamespaceWithParent">mergeNamespaceWithParent</a>=<i>boolean</i>], [<a href="#flagmergeNamespaceWithRoot">mergeNamespaceWithRoot</a>=<i>boolean</i>], [<a href="#flagmergeNamespacesOnClash">mergeNamespacesOnClash</a>=<i>boolean</i>], [<a href="#flagmodified">modified</a>=<i>boolean</i>], [<a href="#flagmoveSelected">moveSelected</a>=<i>boolean</i>], [<a href="#flagnamespace">namespace</a>=<i>string</i>], [<a href="#flagnewFile">newFile</a>=<i>boolean</i>], [<a href="#flagopen">open</a>=<i>boolean</i>], [<a href="#flagoptions">options</a>=<i>string</i>], [<a href="#flagparentNamespace">parentNamespace</a>=<i>boolean</i>], [<a href="#flagpostSaveScript">postSaveScript</a>=<i>string</i>], [<a href="#flagpreSaveScript">preSaveScript</a>=<i>string</i>], [<a href="#flagpreserveName">preserveName</a>=<i>boolean</i>], [<a href="#flagpreserveReferences">preserveReferences</a>=<i>boolean</i>], [<a href="#flagpreview">preview</a>=<i>boolean</i>], [<a href="#flagprompt">prompt</a>=<i>boolean</i>], [<a href="#flagproxyManager">proxyManager</a>=<i>string</i>], [<a href="#flagproxyTag">proxyTag</a>=<i>string</i>], [<a href="#flagreference">reference</a>=<i>boolean</i>], [<a href="#flagreferenceDepthInfo">referenceDepthInfo</a>=<i>uint</i>], [<a href="#flagreferenceNode">referenceNode</a>=<i>string</i>], [<a href="#flagrelativeNamespace">relativeNamespace</a>=<i>string</i>], [<a href="#flagremoveDuplicateNetworks">removeDuplicateNetworks</a>=<i>boolean</i>], [<a href="#flagremoveReference">removeReference</a>=<i>boolean</i>], [<a href="#flagrename">rename</a>=<i>string</i>], [<a href="#flagrenameAll">renameAll</a>=<i>boolean</i>], [<a href="#flagrenameToSave">renameToSave</a>=<i>boolean</i>], [<a href="#flagrenamingPrefix">renamingPrefix</a>=<i>string</i>], [<a href="#flagrenamingPrefixList">renamingPrefixList</a>=<i>boolean</i>], [<a href="#flagreplaceName">replaceName</a>=<i>[string, string]</i>], [<a href="#flagresetError">resetError</a>=<i>boolean</i>], [<a href="#flagreturnNewNodes">returnNewNodes</a>=<i>boolean</i>], [<a href="#flagsave">save</a>=<i>boolean</i>], [<a href="#flagsaveDiskCache">saveDiskCache</a>=<i>string</i>], [<a href="#flagsaveReference">saveReference</a>=<i>boolean</i>], [<a href="#flagsaveReferencesUnloaded">saveReferencesUnloaded</a>=<i>boolean</i>], [<a href="#flagsaveTextures">saveTextures</a>=<i>string</i>], [<a href="#flagsceneName">sceneName</a>=<i>boolean</i>], [<a href="#flagsegment">segment</a>=<i>string</i>], [<a href="#flagselectAll">selectAll</a>=<i>boolean</i>], [<a href="#flagshader">shader</a>=<i>boolean</i>], [<a href="#flagsharedNodes">sharedNodes</a>=<i>string</i>], [<a href="#flagsharedReferenceFile">sharedReferenceFile</a>=<i>boolean</i>], [<a href="#flagshortName">shortName</a>=<i>boolean</i>], [<a href="#flagstrict">strict</a>=<i>boolean</i>], [<a href="#flagswapNamespace">swapNamespace</a>=<i>[string, string]</i>], [<a href="#flagtype">type</a>=<i>string</i>], [<a href="#flaguiConfiguration">uiConfiguration</a>=<i>boolean</i>], [<a href="#flagunloadReference">unloadReference</a>=<i>string</i>], [<a href="#flagunresolvedName">unresolvedName</a>=<i>boolean</i>], [<a href="#flagusingNamespaces">usingNamespaces</a>=<i>boolean</i>], [<a href="#flagwithoutCopyNumber">withoutCopyNumber</a>=<i>boolean</i>], [<a href="#flagwritable">writable</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>file is undoable, queryable, and editable.</p>
+      <h4>Opening, importing, exporting, referencing, saving, or renaming a
+file</h4>
+<p>
+<p>
+This command needs a single main flag that specifies the action to take.
+Some of the main flags also take optional secondary flags to modify
+that action.
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead>The main flags are:</thead>
+<tr align="center">
+<td><b>cr</b></td> <td><b>ea</b></td>
+<td><b>ean</b></td> <td><b>ear</b></td> <td><b>eas</b></td>
+<td><b>er</b></td> <td><b>esa</b></td> <td><b>es</b></td>
+</tr>
+<tr align="center">
+<td><b>esn</b></td> <td><b>ex</b></td>
+<td><b>fr</b></td> <td><b>i</b></td> <td><b>ir</b></td>
+<td><b>l</b></td> <td><b>lr</b></td> <td><b>lrp</b></td>
+</tr>
+<tr align="center">
+<td><b>loc</b></td> <td><b>ltf</b></td>
+<td><b>mf</b></td> <td><b>new</b></td> <td><b>o</b></td>
+<td><b>op</b></td> <td><b>ot</b></td> <td><b>pmt</b></td>
+</tr>
+<tr align="center">
+<td><b>r</b></td> <td><b>rdi</b></td>
+<td><b>rn</b></td> <td><b>rr</b></td> <td><b>rts</b></td>
+<td><b>s</b></td> <td><b>sa</b></td> <td><b>sdx</b></td>
+</tr>
+<tr align="center">
+<td><b>st</b></td> <td><b>stx</b></td>
+<td><b>typ</b></td> <td><b>uc</b></td> <td><b>ur</b></td>
+<td><b>w</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead><b>o/open</b> can be modified by the following secondary flags:</thead>
+<tr align="center">
+<td><b>f</b></td> <td><b>lad</b></td>
+<td><b>lad</b></td> <td><b>lnr</b></td> <td><b>rnn</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead><b>es/exportSelected</b> can be modified by the following
+secondary flags:</thead>
+<tr align="center">
+<td><b>ch</b></td> <td><b>chn</b></td>
+<td><b>con</b></td> <td><b>exp</b></td> <td><b>sh</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead><b>r/reference</b> can be modified by the following secondary
+flags:</thead>
+<tr align="center">
+<td><b>dns</b></td> <td><b>dr</b></td>
+<td><b>gr</b></td> <td><b>gl</b></td> <td><b>gn</b></td>
+<td><b>mnc</b></td>
+<td><b>ns</b></td> <td><b>rfn</b></td> <td><b>rpr</b></td>
+<td><b>sns</b></td> <td><b>srf</b></td> <td><b>shd</b></td>
+<td><b>rnn</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead><b>i/import</b> can be modified by the following secondary
+flags:</thead>
+<tr align="center">
+<td><b>dns</b></td> <td><b>dr</b></td>
+<td><b>gr</b></td> <td><b>gn</b></td>
+<td><b>mnc</b></td>
+<td><b>pr</b></td>
+<td><b>ra</b></td> <td><b>rdn</b></td> <td><b>rnn</b></td>
+<td><b>rpr</b></td> <td><b>sns</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead><b>n/new</b> and <b>s/save</b> can be modified by the following
+secondary flags:</thead>
+<tr align="center">
+<td><b>f</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1">
+<thead><b>er/exportAsReference</b> can be modified by the following
+secondary flags:</thead>
+<tr align="center">
+<td><b>ns</b></td> <td><b>rpr</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead><b>ea/exportAll</b> and <b>es/exportSelected</b> can be modified by
+the following secondary flags:</thead>
+<tr align="center">
+<td><b>f</b></td> <td><b>pr</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1">
+<thead><b>ean/exportAnim</b>,  <b>eas/exportSelectedAnim</b>
+can be modified by the following secondary flags:</thead>
+<tr align="center">
+<td><b>f</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead><b>ear/exportAnimFromReference</b>, <b>esa/exportSelectedAnimFromReference</b>
+can be modified by the following secondary flags:</thead>
+<tr align="center">
+<td><b>f</b></td> <td><b>rfn</b></td>
+</tr>
+</table>
+<p>
+<p>
+<h4>Querying information about a file</h4>
+<p>
+<p>
+This command needs a single main query flag that specifies the query to take
+and then optional secondary flags to modify that query.
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead>The main query flags are:</thead>
+<tr align="center">
+<td><b>amf</b></td> <td><b>ch</b></td>
+<td><b>chn</b></td> <td><b>con</b></td> <td><b>dr</b></td>
+<td><b>err</b></td> <td><b>ex</b></td> <td><b>exn</b></td>
+</tr>
+<tr align="center">
+<td><b>exp</b></td> <td><b>l</b></td>
+<td><b>loc</b></td> <td><b>ltf</b></td> <td><b>mf</b></td>
+<td><b>ns</b></td> <td><b>op</b></td> <td><b>ot</b></td>
+</tr>
+<tr align="center">
+<td><b>pmt</b></td> <td><b>pns</b></td>
+<td><b>r</b></td> <td><b>rfn</b></td> <td><b>rpl</b></td>
+<td><b>rpr</b></td> <td><b>rts</b></td> <td><b>sdc</b></td>
+</tr>
+<tr align="center">
+<td><b>sh</b></td> <td><b>sn</b></td>
+<td><b>stx</b></td> <td><b>typ</b></td> <td><b>uc</b></td>
+<td><b>w</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead><b>dr/deferReference</b> can be modified by the following
+secondary flags:</thead>
+<tr align="center">
+<td><b>rfn</b></td>
+</tr>
+</table>
+<p>
+<p>
+<table border="1" cellpadding="2" cellspacing="0">
+<thead><b>exn/expandName</b>, <b>l/list</b>, <b>r/reference</b>, <b>sn/sceneName</b> can
+be modified by the following secondary flags:</thead>
+<tr align="center">
+<td><b>un</b></td> <td><b>shn</b></td>
+<td><b>wcn</b></td>
+</tr>
+</table>
+<p>
+<h4>Querying file names</h4>
+<p>
+<p>
+When querying a file name there are a number of ways to format the result:
+<p>
+<h5>Resolved vs. unresolved name:</h5>
+When a file is loaded into Maya (e.g., by opening or referencing it),
+the file path provided may not be complete. It could, for example, be
+a relative path (ex: &quot;scenes/myScene.ma&quot;), it could contain environment
+variables (ex: &quot;$PRODUCTION_DIR/myScene.ma&quot;), and it could even be a path
+which simply doesn't exist on the local disk. In each of these cases Maya
+goes through a number of steps to resolve the path and find the file on disk.
+By default the 'file' command will return the resolved file name (i.e., the
+location from which Maya is actually reading the file), but if the
+<b>un/unresolved</b> flag is used, the unresolved file (e.g., the one that
+was originally specified) will be returned. When providing a file path with
+an environment variable; for example, when using the -rename flag, the
+environment variable should be set to a relative path ( such as &quot;/scenes/scenesSetA&quot;; ).
+Providing a path using an environment variable that is set to an absolute path
+( for example, &quot;C:/scenes/&quot; ) is not supported.
+<p>
+<h5>Full vs. short name:</h5>
+By default the 'file' command will return the full
+path to a file, but if the <b>shn/shortName</b> flag is used just the
+file name will be returned.
+<p>
+<h5>With vs. without copy number:</h5>
+When the same file is loaded into Maya more
+than once (for example by referencing the same file twice), Maya
+distinguishes between the various copies by appending a copy number to the
+end of the file name. The first time the file is loaded, no copy number is
+appended. The second time the file is loaded a &quot;{1}&quot; is appended, the third
+time a &quot;{2}&quot; is used, and so on. By default the 'file' command will return
+the file name with the copy number appended, but if the
+<b>wcn/withoutCopyNumber</b> flag is used the file name will be returned
+without the copy number.
+<p>
+<h4>Additional Details</h4>
+<ul>
+<li>The file command usually expects a file name as its argument, if none
+is specified then the root scene is used.</li>
+<li>See the individual flag descriptions for details and limitations.</li>
+</ul>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The name of the specified file for most actions. When the returnNewNodes flag is used, an array of strings will be returned indicating the names of the nodes that were read.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="getFileList.html">getFileList</a>, <a href="namespace.html">namespace</a>, <a href="namespaceInfo.html">namespaceInfo</a>, <a href="referenceEdit.html">referenceEdit</a>, <a href="referenceQuery.html">referenceQuery</a>, <a href="workspace.html">workspace</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagabsoluteName">absoluteName</a>, <a href="#flagactivate">activate</a>, <a href="#flagactiveProxy">activeProxy</a>, <a href="#flagadd">add</a>, <a href="#flaganyModified">anyModified</a>, <a href="#flagapplyTo">applyTo</a>, <a href="#flagbuildLoadSettings">buildLoadSettings</a>, <a href="#flagchannels">channels</a>, <a href="#flagcleanReference">cleanReference</a>, <a href="#flagcommand">command</a>, <a href="#flagcompress">compress</a>, <a href="#flagconstraints">constraints</a>, <a href="#flagconstructionHistory">constructionHistory</a>, <a href="#flagcopyNumberList">copyNumberList</a>, <a href="#flagdefaultExtensions">defaultExtensions</a>, <a href="#flagdefaultNamespace">defaultNamespace</a>, <a href="#flagdeferReference">deferReference</a>, <a href="#flageditCommand">editCommand</a>, <a href="#flagerrorStatus">errorStatus</a>, <a href="#flagexecuteScriptNodes">executeScriptNodes</a>, <a href="#flagexists">exists</a>, <a href="#flagexpandName">expandName</a>, <a href="#flagexportAll">exportAll</a>, <a href="#flagexportAnim">exportAnim</a>, <a href="#flagexportAnimFromReference">exportAnimFromReference</a>, <a href="#flagexportAsReference">exportAsReference</a>, <a href="#flagexportAsSegment">exportAsSegment</a>, <a href="#flagexportSelected">exportSelected</a>, <a href="#flagexportSelectedAnim">exportSelectedAnim</a>, <a href="#flagexportSelectedAnimFromReference">exportSelectedAnimFromReference</a>, <a href="#flagexportSelectedNoReference">exportSelectedNoReference</a>, <a href="#flagexportSelectedStrict">exportSelectedStrict</a>, <a href="#flagexportSnapshotCallback">exportSnapshotCallback</a>, <a href="#flagexportUnloadedReferences">exportUnloadedReferences</a>, <a href="#flagexpressions">expressions</a>, <a href="#flagfileMetaData">fileMetaData</a>, <a href="#flagflushReference">flushReference</a>, <a href="#flagforce">force</a>, <a href="#flaggroupLocator">groupLocator</a>, <a href="#flaggroupName">groupName</a>, <a href="#flaggroupReference">groupReference</a>, <a href="#flagi">i</a>, <a href="#flagignoreVersion">ignoreVersion</a>, <a href="#flagimportFrameRate">importFrameRate</a>, <a href="#flagimportReference">importReference</a>, <a href="#flagimportTimeRange">importTimeRange</a>, <a href="#flaglastFileOption">lastFileOption</a>, <a href="#flaglastTempFile">lastTempFile</a>, <a href="#flaglist">list</a>, <a href="#flagloadAllDeferred">loadAllDeferred</a>, <a href="#flagloadAllReferences">loadAllReferences</a>, <a href="#flagloadNoReferences">loadNoReferences</a>, <a href="#flagloadReference">loadReference</a>, <a href="#flagloadReferenceDepth">loadReferenceDepth</a>, <a href="#flagloadReferencePreview">loadReferencePreview</a>, <a href="#flagloadSettings">loadSettings</a>, <a href="#flaglocation">location</a>, <a href="#flaglockContainerUnpublished">lockContainerUnpublished</a>, <a href="#flaglockFile">lockFile</a>, <a href="#flaglockReference">lockReference</a>, <a href="#flagmapPlaceHolderNamespace">mapPlaceHolderNamespace</a>, <a href="#flagmergeNamespaceWithParent">mergeNamespaceWithParent</a>, <a href="#flagmergeNamespaceWithRoot">mergeNamespaceWithRoot</a>, <a href="#flagmergeNamespacesOnClash">mergeNamespacesOnClash</a>, <a href="#flagmodified">modified</a>, <a href="#flagmoveSelected">moveSelected</a>, <a href="#flagnamespace">namespace</a>, <a href="#flagnewFile">newFile</a>, <a href="#flagopen">open</a>, <a href="#flagoptions">options</a>, <a href="#flagparentNamespace">parentNamespace</a>, <a href="#flagpostSaveScript">postSaveScript</a>, <a href="#flagpreSaveScript">preSaveScript</a>, <a href="#flagpreserveName">preserveName</a>, <a href="#flagpreserveReferences">preserveReferences</a>, <a href="#flagpreview">preview</a>, <a href="#flagprompt">prompt</a>, <a href="#flagproxyManager">proxyManager</a>, <a href="#flagproxyTag">proxyTag</a>, <a href="#flagreference">reference</a>, <a href="#flagreferenceDepthInfo">referenceDepthInfo</a>, <a href="#flagreferenceNode">referenceNode</a>, <a href="#flagrelativeNamespace">relativeNamespace</a>, <a href="#flagremoveDuplicateNetworks">removeDuplicateNetworks</a>, <a href="#flagremoveReference">removeReference</a>, <a href="#flagrename">rename</a>, <a href="#flagrenameAll">renameAll</a>, <a href="#flagrenameToSave">renameToSave</a>, <a href="#flagrenamingPrefix">renamingPrefix</a>, <a href="#flagrenamingPrefixList">renamingPrefixList</a>, <a href="#flagreplaceName">replaceName</a>, <a href="#flagresetError">resetError</a>, <a href="#flagreturnNewNodes">returnNewNodes</a>, <a href="#flagsave">save</a>, <a href="#flagsaveDiskCache">saveDiskCache</a>, <a href="#flagsaveReference">saveReference</a>, <a href="#flagsaveReferencesUnloaded">saveReferencesUnloaded</a>, <a href="#flagsaveTextures">saveTextures</a>, <a href="#flagsceneName">sceneName</a>, <a href="#flagsegment">segment</a>, <a href="#flagselectAll">selectAll</a>, <a href="#flagshader">shader</a>, <a href="#flagsharedNodes">sharedNodes</a>, <a href="#flagsharedReferenceFile">sharedReferenceFile</a>, <a href="#flagshortName">shortName</a>, <a href="#flagstrict">strict</a>, <a href="#flagswapNamespace">swapNamespace</a>, <a href="#flagtype">type</a>, <a href="#flaguiConfiguration">uiConfiguration</a>, <a href="#flagunloadReference">unloadReference</a>, <a href="#flagunresolvedName">unresolvedName</a>, <a href="#flagusingNamespaces">usingNamespaces</a>, <a href="#flagwithoutCopyNumber">withoutCopyNumber</a>, <a href="#flagwritable">writable</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagabsoluteName">
+          <code><b>absoluteName</b>(<b>an</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a general flag which can be used to specify the desired format for
+the namespace(s) returned by the command.
+The absolute name of the namespace is a full namespace path, starting from the root namespace &quot;:&quot;
+and including all parent namespaces.  For example &quot;:ns:ball&quot; is an absolute namespace
+name while &quot;ns:ball&quot; is not.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactivate">
+          <code><b>activate</b>(<b>a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveProxy">
+          <code><b>activeProxy</b>(<b>ap</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is intended for internal use by Maya during file referencing.
+It specifes which file is the active proxy when the file is loaded when
+used with the reference flag. It is also used to specify which file is
+the active proxy in the file referencing preload information when used
+with the referenceDepthInfo flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagadd">
+          <code><b>add</b>(<b>add</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with selectAll it indicates that the specified items should be
+added to the active list without removing existing
+items from the active list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaganyModified">
+          <code><b>anyModified</b>(<b>amf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete. Please use file -q -modified instead.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagapplyTo">
+          <code><b>applyTo</b>(<b>at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When importing or referencing an offline edit file, apply it to
+to the given reference (i.e., determine what &lt;main&gt; gets mapped to).
+Specify the reference node name as argument. To apply the edits to nodes in
+the main scene (i.e., the root namespace), pass in &quot;:&quot;.
+To collapse &lt;main&gt; (i.e., map it to &quot;None&quot;), pass in &quot;&quot;.
+May only be used with the file -i/import or -r/reference flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbuildLoadSettings">
+          <code><b>buildLoadSettings</b>(<b>bls</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with the &quot;o/open&quot; flag it indicates that the specified
+file should be read for reference hierarchy information only.
+This information will be stored in temporary load settings under
+the name &quot;implicitLoadSettings&quot;. When this flag is used the
+specified scene file will not be loaded: no objects/nodes will be
+created or modified.
+Note: most users will not need to use this flag or the
+&quot;implicitLoadSettings&quot; it builds. They can access the same
+functionality by setting the &quot;Selective Load&quot; option in the
+File &gt; Open Option Box.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchannels">
+          <code><b>channels</b>(<b>chn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For use with exportSelected to specify whether attached channels should be included in the export.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcleanReference">
+          <code><b>cleanReference</b>(<b>cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove edits from the passed in reference node.
+The reference must be in an unloaded state. To remove a particular
+type of edit, use the editCommand flag. If no flag is specified,
+all edits will be removed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcommand">
+          <code><b>command</b>(<b>c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the callback to execute before any file operation.
+This is an internal flag used only in the file format.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcompress">
+          <code><b>compress</b>(<b>cmp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with save, it will compress (gzip) the file on output.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconstraints">
+          <code><b>constraints</b>(<b>con</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For use with exportSelected to specify whether attached constraints should be included in the export.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconstructionHistory">
+          <code><b>constructionHistory</b>(<b>ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For use with exportSelected to specify whether attached construction history should be included in the export.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopyNumberList">
+          <code><b>copyNumberList</b>(<b>cnl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag returns a string array containing
+a number that uniquely identifies each instance the file
+is used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefaultExtensions">
+          <code><b>defaultExtensions</b>(<b>de</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use the default extensions to rename the files. This defaults to true, but
+is a persistent setting within a given session of Maya, meaning that if
+you set it to true or false, that value will
+continue to be used in subsequent file commands until a new value is set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefaultNamespace">
+          <code><b>defaultNamespace</b>(<b>dns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use the default name space for import and referencing.  This is
+an advanced option.  If set, then on import or reference, Maya will
+attempt to place all nodes from the imported or referenced file
+directly into the root (default) name space, without invoking any
+name clash resolution algorithms.  If the names of any of the new
+objects    already exist in the root namespace, then errors will result.
+The user of this flag is responsible for creating a name clash
+resolution mechanism outside of Maya to avoid such errors.
+<b>Note:</b> This flag    is intended only for use with custom file
+translators written through    the API. Use at your own risk.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeferReference">
+          <code><b>deferReference</b>(<b>dr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used in conjunction with the -reference flag, this
+flag determines if the reference is loaded, or if loading is
+deferred.<br>
+C: The default is false.<br>
+Q: When queried, this flag returns true if the reference is deferred,
+or false if the reference is not deferred. If this is used
+with -rfn/referenceNode, the -rfn flag must come before -q.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditCommand">
+          <code><b>editCommand</b>(<b>ec</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For use with cleanReference. Remove only this type of edit.
+Supported edits are: setAttr addAttr deleteAttr connectAttr
+disconnectAttr and parent
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagerrorStatus">
+          <code><b>errorStatus</b>(<b>err</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the error status of the last file read. Returns true if and error occurred during the last file read.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexecuteScriptNodes">
+          <code><b>executeScriptNodes</b>(<b>esn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, allow the appropriate script nodes to execute. If false,
+do not allow any script node scripts to run.<br>
+For more information, see the documentation for <em>script</em> nodes.<br>
+Default: true.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>exists</b>(<b>ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query if the file exists. Returns true if the file exists.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexpandName">
+          <code><b>expandName</b>(<b>exn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a query only flag that can be used to query for the
+file path name of the file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportAll">
+          <code><b>exportAll</b>(<b>ea</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export everything into a single file.
+Returns the name of the exported file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportAnim">
+          <code><b>exportAnim</b>(<b>ean</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export all animation nodes and animation helper nodes from all objects in the
+scene.
+The resulting animation export file will contain connections to objects that are
+not included in the animation file. As a result, importing/referencing this file
+back in will require objects of the same name to be present, else errors will occur.
+The -sns/swapNamespace flag is available for swapping the namespaces of given objects
+to another namespace. This use of namespaces can be used to re-purpose the animation
+file to multiple targets using a consistent naming scheme.
+
+The exportAnim flag will not export animation layers. For generalized file export of
+animLayers and other types of nodes,
+refer to the exportEdits command. Or
+use the Export Layers functionality.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportAnimFromReference">
+          <code><b>exportAnimFromReference</b>(<b>ear</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export the main scene animation nodes and animation helper nodes from all referenced
+objects. This flag, when used in conjunction with the -rfn/referenceNode flag,
+can be constrained to only export animation nodes from the specified reference
+file. See -ean/exportAnim flag description for details on usage of animation files.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportAsReference">
+          <code><b>exportAsReference</b>(<b>er</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export the selected objects into a reference file with the given
+name. The file is saved on disk during the process.
+Returns the name of the reference created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportAsSegment">
+          <code><b>exportAsSegment</b>(<b>exs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportSelected">
+          <code><b>exportSelected</b>(<b>es</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export the selected items into the specified file.
+Returns the name of the exported file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportSelectedAnim">
+          <code><b>exportSelectedAnim</b>(<b>eas</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export all animation nodes and animation helper nodes from the selected objects
+in the scene. See -ean/exportAnim flag description for details on usage of animation
+files.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportSelectedAnimFromReference">
+          <code><b>exportSelectedAnimFromReference</b>(<b>esa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export the main scene animation nodes and animation helper nodes from the selected
+referenced objects. This flag, when used in conjunction with the -rfn/referenceNode
+flag, can be constrained to only export animation nodes from the selected nodes
+of a specified reference file. See -ean/exportAnim flag description for details on
+usage of animation files.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportSelectedNoReference">
+          <code><b>exportSelectedNoReference</b>(<b>esr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportSelectedStrict">
+          <code><b>exportSelectedStrict</b>(<b>ess</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Export the selected items into the specified file. This flag differs from exportSelected
+in that it will only export the nodes that are explicitly on the selection list. Related
+nodes (both history and DAG related) are not automatically exported unless those nodes
+are also on the selection list. Node relationships are only preserved if both nodes in the
+relationship (parent/child, source/destination) are exported.
+It is important to note that there is potential for scene data loss in the exported
+scene since not all related nodes are not exported by default. The user is responsible for
+selecting all relevant nodes before exporting.
+Returns the name of the exported file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportSnapshotCallback">
+          <code><b>exportSnapshotCallback</b>(<b>esc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[script, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When specified alongside -ea/exportAll, es/exportSelected and -ess/exportSelectedStrict,
+this flag enables Maya to temporarily duplicate the export targets into a specified
+namespace and invoke a callback to interact with the duplicate export targets before
+writing the duplicate export targets to disk. Once written to disk, the duplicate
+export targets, new nodes created by the callback and temporary namespace are removed
+from the scene. Implicitly created nodes (eg. persp, top, etc.) are not duplicated.
+
+For the duration of the callback:
+1. The specified namespace will be made current.
+2. All nodes added by the callback are tracked as a temporary export target.
+3. Although the intent of the callback is to only operate on the duplicate export
+targets, there is nothing limiting the callback from modifying the main scene.
+Thus, the callback should be written with care.
+
+This flag accepts two arguments:
+a. [string] Callback to invoke prior to write to disk.
+b. [string] Temporary namespace to store duplicate export targets.
+
+This flag can only be used in conjunction with -ea/exportAll, -es/exportSelected and
+-ess/exportSelectedStrict.
+
+Note that the -pv/preview flag still only previews the contents of the export targets
+_prior_ to the snapshot duplication. It does not preview the final output after the
+callback.
+
+Referenced nodes are duplicated in the same manner as duplicating those nodes
+manually in the scene. Similarly, scene assembly nodes will duplicate as they would
+if manually duplicated, however scene assembly nodes have special duplication
+behavior, so the callback should be aware of these differences when anticipating
+the duplicate export targets.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexportUnloadedReferences">
+          <code><b>exportUnloadedReferences</b>(<b>eur</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Only effective when preserveReferences is used.
+When used with the exportAll flag, tells the exporter to
+include all unloaded references in the export.
+When used with the exportSelected flag, tells the exporter to
+include all unloaded proxy references that are related to
+any node in the selection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexpressions">
+          <code><b>expressions</b>(<b>exp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For use with exportSelected to specify whether attached expressions should be included in the export.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfileMetaData">
+          <code><b>fileMetaData</b>(<b>fmd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a query only flag to get the file metadata for audio files. It returns the referenceTime. This field is only extracted from BWAVE files,
+for other files it returns 0
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflushReference">
+          <code><b>flushReference</b>(<b>fr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will unload the reference file associated with the
+passed reference node, retaining all associated reference nodes
+and scene files. ** This option only works when using namespaces **.
+More Details: This flag is primarily intended to be
+used as part of a custom asset management system. It can be used to
+defer loading of a reference which contains child references without
+losing information about those child references. Prior to reloading a
+flushed    reference which contains child references, the
+'createNode reference' lines should be manually removed from the
+children's Maya ASCII files. If this is not done, extra reference
+nodes will be created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforce">
+          <code><b>force</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Force an action to take place.
+(new, open, save, remove reference, unload reference)
+Used with removeReference to force remove reference namespace even if it has contents.
+Cannot be used with removeReference if the reference resides in the root namespace.
+Used with unloadReference to force unload reference even if the reference node is locked,
+without prompting a dialog that warns user about the lost of edits.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggroupLocator">
+          <code><b>groupLocator</b>(<b>gl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used only with the -r and the -gr flag.
+Used to group the output of groupReference under a locator
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggroupName">
+          <code><b>groupName</b>(<b>gn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used only with the -gr flag.
+Optionally used to set the name of the transform node that the imported/referenced
+items will be grouped under.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggroupReference">
+          <code><b>groupReference</b>(<b>gr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used only with the -r or the -i flag.
+Used to group all the imported/referenced items under a single transform.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreVersion">
+          <code><b>ignoreVersion</b>(<b>iv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to open files with version greater or less than those officially supported.
+Data loss, data corruption or failure to open altogether are all possibilities,
+but as much as can be successfully read, will be.
+May only be used with the -o flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagi">
+          <code><b>i</b>(<b>i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Import the specified file.
+Returns the name of the imported file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportFrameRate">
+          <code><b>importFrameRate</b>(<b>ifr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used only with the -i flag.
+Used to import the frame rate and set it as Maya's frame rate.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportReference">
+          <code><b>importReference</b>(<b>ir</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the encapsulation of the reference around the data within
+the specified file.    This makes the contents of the specified file
+part of the current scene and all references to the original file
+are lost.
+Returns the name of the reference that was imported.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimportTimeRange">
+          <code><b>importTimeRange</b>(<b>itr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used only with the -i flag.
+Used to import the time range and apply it to Maya's playback range in one
+of three different ways as specified by the string.  The valid strings are
+&quot;keep&quot;, which keeps Maya's playback range untouched, &quot;override&quot;, which overrides
+Maya's playback range with the imported range, and &quot;combine&quot;, which extends Maya's
+playback range to encompass the imported range.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglastFileOption">
+          <code><b>lastFileOption</b>(<b>lfo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+On query, returns the last option string used by the file command.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglastTempFile">
+          <code><b>lastTempFile</b>(<b>ltf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When queried, this flag returns the temp file name used during
+file save. The temp file will be left in the same directory
+as the intended file name if the save fails.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglist">
+          <code><b>list</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all files.
+Returns a string array of the names of all segment/reference files.
+Duplicates will be removed. So if a file is referenced more than
+once, and the -withoutCopyNumber flag is set, it will only be listed once.
+in the scene.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagloadAllDeferred">
+          <code><b>loadAllDeferred</b>(<b>lad</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete, and has been replaced by
+the loadReferenceDepth flag. When used with the -open flag, determines
+if the -deferReference flag is respected when reading in the file. If
+true is passed, all of the references are loaded. If false is passed,
+the -deferReference flag is respected.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagloadAllReferences">
+          <code><b>loadAllReferences</b>(<b>lar</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete and has been replaced with the
+loadReferenceDepth flag. When used with the -open flag,
+this will cause all references to be loaded.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagloadNoReferences">
+          <code><b>loadNoReferences</b>(<b>lnr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete and has been replaced witht the
+loadReferenceDepth flag. When used with the -open flag,
+no references will be loaded. When used with -i/import,
+-r/reference or -lr/loadReference flags, will load the
+top-most reference only.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagloadReference">
+          <code><b>loadReference</b>(<b>lr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag loads a file and associates it with the passed reference
+node. If the reference node does not exist, the command will fail. If
+the file is already loaded, then this flag will reload the same file.<br>
+If a file is not given, the command will load (or reload) the last used
+reference file. <br>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagloadReferenceDepth">
+          <code><b>loadReferenceDepth</b>(<b>lrd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to specify which references should be loaded. Valid types are
+&quot;all&quot;, &quot;none&quot; and &quot;topOnly&quot;, which will load all references,
+no references and top-level references only, respectively. May only be used
+with the -o/open, -i/import, -r/reference or -lr/loadReference flags.
+When &quot;none&quot;
+is used with -lr/loadReference, only path validation is performed. This
+can be used to replace a reference without triggering reload. Not using
+loadReferenceDepth will load references in the same loaded or
+unloaded state that they were in when the file was saved.
+Additionally, the -lr/loadReference flag supports a fourth type, &quot;asPrefs&quot;.
+This will force any nested references to be loaded according to the
+state (if any) stored in the current scene file, rather than according to the
+state saved in the reference file itself.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagloadReferencePreview">
+          <code><b>loadReferencePreview</b>(<b>lrp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will perform a special preview-only load of a reference file.
+A preview-only reference file is not completely loaded, but instead is
+partially loaded so that certain information, such as nested references
+it contains, can be determined.
+Nested references that are previewed remain in a special preview-only state.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagloadSettings">
+          <code><b>loadSettings</b>(<b>ls</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with the &quot;o/open&quot; flag this flag specifies which reference
+load settings should be used. Reference load settings specify which
+references should be brought in loaded and which unloaded. Those
+reference files that are brought in unloaded will usually not need
+to be read and interpreted by Maya. This can potentially reduce the
+time it takes Maya to load the whole scene.
+If no &quot;ls/loadSettings&quot; flag is specified, or the empty string (&quot;&quot;) is
+used as the flag argument, the default load settings are used. The
+default load settings represent the state of all references when the file
+was last saved. The load settings &quot;implicitLoadSettings&quot; refer to the
+temporary load settings generated by the &quot;bls/buildLoadSettings&quot; flag and
+edited with the &quot;loadSettings&quot; command.
+Currently on the default and implicit load settings are supported.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglocation">
+          <code><b>location</b>(<b>loc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the location of the given file name.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglockContainerUnpublished">
+          <code><b>lockContainerUnpublished</b>(<b>lcu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the unpublised lock state for all containers in this file. This will not lock
+the attributes in the main scene directly, but any file that references this scene
+will have all its containers come in as unpublished locked.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglockFile">
+          <code><b>lockFile</b>(<b>lf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Lock or unlock the main scene. Any file referencing this scene will
+automatically lock all attributes and nodes. Also prevents reference
+edits from being saved to it from a parent file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglockReference">
+          <code><b>lockReference</b>(<b>lck</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Locks attributes and nodes from the referenced file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmapPlaceHolderNamespace">
+          <code><b>mapPlaceHolderNamespace</b>(<b>mns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Map a placeHolderNamespace to the given reference. Must be
+used with the file -i/import, -r/reference flags in create mode.
+The first string is the place holder namespace, including the angle
+brackets (ex: &quot;&lt;foo&gt;&quot;). The second string is the reference node
+whose namespace it should be mapped to (ex: &quot;refRN&quot;). If the namespace
+should be mapped to the root namespace, use &quot;:&quot;.
+To collapse the namespace (i.e., map it to &quot;None&quot;), use &quot;&quot;.
+When queried, namespaces that are mapped to &quot;None&quot; will return &quot;(None)&quot; for clarity.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmergeNamespaceWithParent">
+          <code><b>mergeNamespaceWithParent</b>(<b>mnp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the removeReference flag.
+When removing a file reference and its namespace, move the rest of the namespace
+content to parent namespace.
+Cannot be used if the reference resides in the root namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmergeNamespaceWithRoot">
+          <code><b>mergeNamespaceWithRoot</b>(<b>mnr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the removeReference flag.
+When removing a file reference and its namespace, move the rest of the namespace
+content to root namespace.
+Cannot be used if the reference resides in the root namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmergeNamespacesOnClash">
+          <code><b>mergeNamespacesOnClash</b>(<b>mnc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the import, reference or edit flags, this option will prevent new namespaces
+from being created when namespaces of the same name already exist within Maya.
+The default value is false.
+For example, if an object &quot;pSphere1&quot;, which is being imported, refers to the
+namespace &quot;ref&quot; and there is already a namespace called &quot;ref&quot; defined in Maya.
+If mergeNamespacesOnClash is true, the existing &quot;ref&quot; namespace will be reused
+and pSphere1 will be moved into the existing namespace; and if the namespace has
+another object which is also named &quot;pSphere1&quot;, then the imported one will be
+renamed with an incremental number(&quot;pSphere2&quot;). On the other hand, if
+mergeNamespacesOnClash is false, a new namespace will be created with an incremental
+number (in first case is &quot;ref1&quot;) and pSphere1 will be moved into the &quot;ref1&quot; namespace.
+This flag also support nested namespace, for example, if an object &quot;pSphere1&quot; which is
+imported and refers to namespace &quot;ref:foo&quot; and mergeNamespacesOnClash
+is true this time, then the existing &quot;ref:foo&quot; will be reused and the object will be
+moved into &quot;ref:foo&quot;. Also if mergeNamespacesOnClash is false, then a new namespace
+&quot;ref:foo1&quot; will be created and &quot;pSphere1&quot; will be moved into that new namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmodified">
+          <code><b>modified</b>(<b>mf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the modified state of the entire scene. If the scene is modified
+it will need to be saved before a new file is opened or created.
+Normally there is no need to edit this flag as the state of the file
+is updated automatically whenever an object is created or modified.
+If editing of the state is desired, it is done without use of
+the edit flag as covered in the example section below.
+In query mode, if the scene has been modified 1 is returned. Otherwise 0
+is returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmoveSelected">
+          <code><b>moveSelected</b>(<b>ms</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnamespace">
+          <code><b>namespace</b>(<b>ns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The namespace name to use that will group all objects during
+importing and referencing.
+Change the namespace used to group all the objects from
+the specified referenced file. The reference must have been created
+with the &quot;Using Namespaces&quot; option, and must be loaded. Non-referenced
+nodes contained in the existing namespace will also be moved to the new
+namespace. The new namespace will be created by this command and can
+not already exist. The old namespace will be removed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnewFile">
+          <code><b>newFile</b>(<b>new</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Initialize the scene.
+Returns untitled scene with default location.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagopen">
+          <code><b>open</b>(<b>o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Open the specified file.
+Returns the name of the opened file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoptions">
+          <code><b>options</b>(<b>op</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set/query the currently set file options.
+file options are used while saving a maya file.
+Two file option flags supported in current file command are <b>v</b> and <b>p</b>.<br>
+<li>
+<b>v</b>(verbose) indicates whether long or short attribute names and command flags names are used
+when saving the file. Used by both maya ascii and maya binary file formats.<br>
+It only can be 0 or 1.<br>
+Setting v=1 indicates that long attribute names and command flag names will be used.
+By default, or by setting v=0, short attribute names will be used.<br>
+</li>
+<li>
+<b>p</b>(precision) defines the maya file IO's precision when saving the file. Only used by maya ascii file format.<br>
+It is an integer value. The default value is 17.<br>
+</li>
+The option format is &quot;flag1=XXX;flag2=XXX&quot;.Maya uses the last <b>v</b> and <b>p</b> as the final result.<br>
+Note:<br>
+1. Use a semicolon(&quot;;&quot;) to separate several flags.
+2. No blank space(&quot; &quot;) in option string.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparentNamespace">
+          <code><b>parentNamespace</b>(<b>pns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the name(s) of a referenced file's parent namespaces.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpostSaveScript">
+          <code><b>postSaveScript</b>(<b>pos</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with the save flag, the specified script will be executed
+after the file is saved.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreSaveScript">
+          <code><b>preSaveScript</b>(<b>prs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with the save flag, the specified script will be executed
+before the file is saved.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreserveName">
+          <code><b>preserveName</b>(<b>pn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with compress, it will retain the regular extension rather than appending .gz.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreserveReferences">
+          <code><b>preserveReferences</b>(<b>pr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Modifies the various import/export flags such that
+references are imported/exported as actual references
+rather than copies of those references.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreview">
+          <code><b>preview</b>(<b>pv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in conjunction with any of the -exportXXX flags, causes Maya
+to return a list of the nodes that would be exported, without
+actually writing the exported file to disk.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprompt">
+          <code><b>prompt</b>(<b>pmt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag controls the display of file prompting dialogs.
+Some examples of file prompting dialogs include error
+messages that require user confirmation and missing file
+reference dialogs. Once this flag is used, every instance
+of the file command will use the last set value of this flag.
+Some interactive file operations may post dialogs even when
+the flag is set to false, but every scripted file command
+will not display any dialogs when this flag is set to
+false.  The default value is true.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagproxyManager">
+          <code><b>proxyManager</b>(<b>pm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When a one or more proxy references are added to an existing file reference,
+the proxy manage node is used to define the proxies associated with that
+reference. This flag is used in conjunction with the activeProxy and proxyTag
+flag to specify the proxyManager of interest. This flag is also used to
+specify the proxyManager for a proxy reference in the file referencing
+preload information, when used in conjunction with the referenceDepthInfo flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagproxyTag">
+          <code><b>proxyTag</b>(<b>pt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is intended for internal use only during file load or preload.
+Proxy tags are names you assign to proxy references to more easily
+manage the proxy references from the reference editor. Proxy tags are
+unique within a given proxy set.
+This flag must be  used in conjunction with the proxyManager flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreference">
+          <code><b>reference</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create a reference to the specified file. Returns the
+name of the file referenced.<br>
+Query all file references from the specified file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreferenceDepthInfo">
+          <code><b>referenceDepthInfo</b>(<b>rdi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used to store reference loading preferences
+associated with a Maya ascii file (.ma). This flag is only useful
+during file I/O so users should not have any need to use this flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreferenceNode">
+          <code><b>referenceNode</b>(<b>rfn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is only used during queries. In MEL, if it appears before -query
+then it must be followed by the name of one of the scene's reference
+nodes. That will determine the reference to be queried by whatever flags
+appear after -query. If the named reference node does not exist within
+the scene the command will fail with an error.
+<p>
+In Python the equivalent behavior is obtained by passing the name of the
+reference node as the flag's value.
+<p>
+In MEL, if this flag appears after -query then it takes no argument and will
+cause the command to return the name of the reference node associated with the
+file given as the command's argument. If the file is not a reference or
+for some reason does not have a reference node (e.g., the user deleted it)
+then an empty string will be returned. If the file is not part of the
+current scene then the command will fail with an error.
+<p>
+In Python the equivalent behavior is obtained by passing True as the flag's
+value.
+      <p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelativeNamespace">
+          <code><b>relativeNamespace</b>(<b>rns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used with the exportSelected, exportSelectedStrict and exportAll operations to specify
+that the nodes in the exported file are to be written out relative to a specified
+namespace. This provides the ability to remove undesired levels of namespacing from
+the node names as they are exported. The relativeNamespace value specifies the
+namespace to use as the relative root for the exported nodes, and must be specified
+as an absolute namespace. Nodes in the exported file not residing within the specified
+relative namespace will be written out using absolute namespace names.
+Note: this flag cannot be used in conjunction with the preserveReferences flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveDuplicateNetworks">
+          <code><b>removeDuplicateNetworks</b>(<b>rdn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When set, Maya will remove imported networks if the same network is also
+detected in the current scene. You can explicitly specify that certain types of
+networks be exempted from removal by this flag. For example, if you set to the
+optionVar removeDuplicateShadingNetworksOnImport to 0 (or disable the option
+Remove Duplicate Shading Networks from the File &gt; Import options), then shading
+networks will be exempted from removal by this flag.This flag can only be used
+in conjunction with the -i/import flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveReference">
+          <code><b>removeReference</b>(<b>rr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the given file reference from its parent. This will also
+Remove everything this file references.
+Returns the name of the file removed.
+If the reference is alone in its namespace, remove the namespace.
+If there are objects remaining in the namespace after the file reference is removed,
+by default, keep the remaining objects in the namespace.
+To merge the objects remaining in the namespace to the parent or root
+namespace, use flags mergeNamespaceWithParent
+or mergeNamespaceWithRoot. The empty file reference namespace is then removed.
+To forcibly delete all objects, use flag force. The empty file reference namespace is then removed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrename">
+          <code><b>rename</b>(<b>rn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Rename the scene.
+Used mostly during save to set the saveAs name.
+Returns the new name of the scene.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenameAll">
+          <code><b>renameAll</b>(<b>ra</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, rename all newly-created
+nodes, not just those whose names clash with existing nodes.
+Only available with -i/import.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenameToSave">
+          <code><b>renameToSave</b>(<b>rts</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, the scene will need to be renamed before it can be
+saved. When queried this flag returns true if the scene must be
+renamed before it can be saved. <br>
+The default is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenamingPrefix">
+          <code><b>renamingPrefix</b>(<b>rpr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The string to use as a prefix for all objects from this file.
+This flag has been replaced by -ns/namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenamingPrefixList">
+          <code><b>renamingPrefixList</b>(<b>rpl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag returns a list of all of the renaming prefixes used
+by the file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceName">
+          <code><b>replaceName</b>(<b>rep</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Define a search and replace string. Will apply search and replace to
+leaf node names. The search string can include namespaces and wild-cards,
+but will only apply to leaf nodes in a dag hierarchy. Intended for use
+with offline edits files. May only be used with file -i/import
+or -r/reference. If a nested reference also defines a substitution, it
+will become the active substitution table while loading the nested reference.
+Note: if used with the -e/edit flag, the replacement will only be applied
+the next time the reference is loaded
+Examples: -replace &quot;*pCube1&quot; &quot;prop&quot; will change &quot;foo:pCube1&quot; to
+&quot;foo:prop&quot; and &quot;|A:pCube1|B:pCube1&quot; to &quot;|A:pCube1|prop&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresetError">
+          <code><b>resetError</b>(<b>rer</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn off any pre-existing global file errors.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreturnNewNodes">
+          <code><b>returnNewNodes</b>(<b>rnn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to control the return value in open, import, loadReference,
+and reference operations. It will force the file command to return
+a list of new nodes added to the current scene.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsave">
+          <code><b>save</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Save the specified file.
+Returns the name of the saved file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsaveDiskCache">
+          <code><b>saveDiskCache</b>(<b>sdc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag sets the saveAs option for Jiggle disk caches.
+The valid inputs are &quot;always&quot; - always copy a file texture to a
+new location, &quot;never&quot; - do not copy at all. <br>
+C: The default is &quot;always&quot;. <br>
+Q: When queried it returns a string (&quot;always&quot;, &quot;never&quot;).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsaveReference">
+          <code><b>saveReference</b>(<b>sr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Save reference node edits and connections to reference file.
+This includes newly added history and animation, provided that
+these do not apply to any objects outside the reference being saved.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsaveReferencesUnloaded">
+          <code><b>saveReferencesUnloaded</b>(<b>sru</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used in conjunction with the save flag. It specifies
+that the saved file will be saved with all references unloaded.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsaveTextures">
+          <code><b>saveTextures</b>(<b>stx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag sets the saveAs option for 3d Paint file textures.
+The valid inputs are &quot;always&quot; - always copy a file texture to a
+new location, &quot;unlessRef&quot; - copy only if this is not a referenced
+file texture, &quot;never&quot; - do not copy at all. <br>
+C: The default is &quot;unlessRef&quot;. <br>
+Q: When queried it returns a string (&quot;always&quot;, unlessRef&quot;, &quot;never&quot;).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsceneName">
+          <code><b>sceneName</b>(<b>sn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+return the name of the current scene.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsegment">
+          <code><b>segment</b>(<b>seg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectAll">
+          <code><b>selectAll</b>(<b>sa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Select all the components of this file as well as its child
+files.  Note that the file specified must be one that is
+already opened in this Maya session.
+The default behavior is to replace the existing selection.
+Use with the &quot;add&quot; flag to keep the active selection list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshader">
+          <code><b>shader</b>(<b>sh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For use with exportSelected to specify whether attached shaders should be included in the export.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsharedNodes">
+          <code><b>sharedNodes</b>(<b>shd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the '-r/reference' flag to indicate that
+certain    types of nodes within that reference should be treated as
+shared nodes. All shared nodes will be placed in the default
+namespace. New copies of those nodes will not be created if a copy
+already exists in the default namespace, instead the shared node
+will be merged with the    existing node. The specifics of what
+happens when two nodes are merged depends on the node type. In
+general attribute values will not be merged, meaning the values set
+on any existing shared nodes will be retained, and the values of
+the nodes being merged in will be ignored.
+The valid options are &quot;displayLayers&quot;, &quot;shadingNetworks&quot;,
+&quot;renderLayersByName&quot;, and &quot;renderLayersById&quot;. This flag is
+multi-use; it may be specified multiple times to for
+example, share both display layers and shading networks.
+Two shading networks will only be merged if    they are identical:
+the network    of nodes feeding into the shading group must be
+arranged identically with equivalent nodes have the same name and
+node type. Additionally if a network is animated or contains a DAG
+object or expression it will not be mergeable.
+This flag cannot be used in conjunction with -srf/sharedReferenceFile.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsharedReferenceFile">
+          <code><b>sharedReferenceFile</b>(<b>srf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Can only be used in conjunction with the -r/reference flag and
+the -ns/namespace flag (there is no prefix support). This flag modifies
+the '-r/reference' flag to indicate that all nodes within that
+reference should be treated as shared nodes. New copies    of
+those nodes will not be created if a copy already exists. Instead,
+the shared node will be merged with the existing node. The specifics of
+what happens when two nodes are merged depends on the node type.
+This flag cannot be used in conjunction with -shd/sharedNodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshortName">
+          <code><b>shortName</b>(<b>shn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with a main query flag it indicates that the file name
+returned will be the short name (i.e., just a file name without
+any directory paths). If this flag is not present, the full name
+and directory path will be returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstrict">
+          <code><b>strict</b>(<b>str</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set strict file path resolution. If true, all paths will be matched
+exactly, both relative and absolute. Relative paths will be considered
+relative to the project root directory. May only be used with the -o/open,
+-i/import, -ir/importReference or -r/reference flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswapNamespace">
+          <code><b>swapNamespace</b>(<b>sns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Can only be used in conjunction with the -r/reference or -i/import
+flags. This flag will replace any occurrences of a given namespace to
+an alternate specified namespace. This namespace &quot;swap&quot; will occur
+as the file is referenced in. It takes in two string arguments. The
+first argument specifies the namespace to replace. The second argument
+specifies the replacement namespace. Use of this flag, implicitly
+enables the use of namespaces and cannot be used with deferReference.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>type</b>(<b>typ</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the type of this file.  By default this can be any one of:
+&quot;mayaAscii&quot;, &quot;mayaBinary&quot;, &quot;mel&quot;,  &quot;OBJ&quot;, &quot;directory&quot;, &quot;plug-in&quot;, &quot;audio&quot;, &quot;move&quot;, &quot;EPS&quot;, &quot;Adobe(R) Illustrator(R)&quot;, &quot;image&quot;
+plug-ins may define their own types as well.<br>
+Return a string array of file types that match this file.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguiConfiguration">
+          <code><b>uiConfiguration</b>(<b>uc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Save the ui configuration with the scene in a uiConfiguration
+script node. (eg. panes, etc.)
+The current default is on and is set in initialStartup.mel.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunloadReference">
+          <code><b>unloadReference</b>(<b>ur</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will unload the reference file associated with the
+passed reference node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunresolvedName">
+          <code><b>unresolvedName</b>(<b>un</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with a main query flag it indicates that the file name
+returned will be unresolved (i.e., it will be the path originally
+specified when the file was loaded into Maya; this path may
+contain environment variables and may not exist on disk). If this
+flag is not present, the resolved name will be returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagusingNamespaces">
+          <code><b>usingNamespaces</b>(<b>uns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns boolean.
+Queries whether the specified reference file uses namespaces
+or renaming prefixes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwithoutCopyNumber">
+          <code><b>withoutCopyNumber</b>(<b>wcn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with a main query flag it indicates that the file name
+returned will not have a copy number appended to the end. If this
+flag is not present, the file name returned may have a copy number
+appended to the end.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwritable">
+          <code><b>writable</b>(<b>w</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query whether the given file is writable in the current scene. For
+main scene files this indicates writable to the file system by the
+current user. Files referenced by the main scene file are always not
+writable (referenced files are by nature read only). Files not present
+in the current scene always return false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# save the current scene to an ascii file named &quot;fred.ma&quot;
+#
+cmds.file( rename='fred.ma' )
+cmds.file( save=True, type='mayaAscii' )
+
+# save the current scene to an ascii file without the &quot;.ma&quot; extension
+#
+cmds.file( rename='tmp' )
+cmds.file( save=True, defaultExtensions=False, type='mayaAscii' )
+
+# open the file fred.ma, using the default load settings. Any references will
+# be brought in in the same state they were in when fred.ma was last saved.
+#
+cmds.file( 'fred.ma', open=True )
+
+# reference the file wilma.mb
+#
+cmds.file( 'C:/mystuff/wilma.mb', reference=True )
+
+# get the name of the reference node for wilma.mb
+cmds.file( 'C:/mystuff/wilma.mb', query=True, referenceNode=True )
+# Result: wilmaRN #
+
+# does the wilmaRN reference node represent a deferred reference?
+cmds.file(query=True, referenceNode='wilmaRN', deferReference=True)
+# Result: False #
+
+# reference the file barney.mb into a namespace called &quot;rubble&quot;.
+#
+cmds.file( 'C:/maya/projects/default/scenes/barney.ma', reference=True, type='mayaAscii', namespace='rubble' )
+
+# change the namespace containing barney.mb.
+#
+cmds.file( 'C:/maya/projects/default/scenes/barney.ma', edit=True, namespace='purpleDinosaur' )
+
+# retrieve a string array of all files such as main scene and reference files in the scene
+#
+cmds.file( query=True, list=True )
+# Result: C:/maya/projects/default/scenes/fred.ma C:/mystuff/wilma.mb C:/maya/projects/default/scenes/barney.ma
+
+# Select &quot;betty&quot; and export betty to a separate file called &quot;betty.mb&quot;.
+# Reference the new betty file into this scene, replacing the
+# previous betty object from this scene with the reference to betty.
+#
+cmds.file( 'c:/mystuff/betty.mb', type='mayaBinary', namespace='rubble', exportAsReference=True )
+
+# Select all the objects associated with file betty.mb
+#
+cmds.file( 'c:/mystuff/betty.mb', selectAll=True )
+# Result: rubble:betty
+
+# Remove the reference file betty.mb. All nodes in betty.mb will
+# be removed from the scene
+cmds.file( 'c:/mystuff/betty.mb', removeReference=True )
+
+# Query whether the file named &quot;foo.mb&quot; exists on disk
+#
+cmds.file( 'foo.mb', query=True, exists=True )
+# Result: 0 #
+
+# Query whether the reference node &quot;rubble:betty is deferred loaded.
+# Note, -referenceNode flag has to come before -q flag.
+cmds.file(referenceNode='rubbleRN', query=True, deferReference=True )
+
+# Query the last temp file during file save
+#
+cmds.file( query=True, lastTempFile=True)
+
+####################################/
+#/   Example for the '-buildLoadSettings' and '-loadSettings' flags  #/
+####################################/
+
+# Build load settings for &quot;ref.ma&quot;
+cmds.file( 'ref.ma', open=True, buildLoadSettings=True )
+# Edit those settings, to indicate that some reference should
+# be brought in unloaded.
+# Note: the following command is primarily intended for internal
+# use. It may not be easy to determine the numeric ID of a given
+# reference (&quot;2&quot; in this case) .
+# cmds.loadSettings( '2', deferReference=1 )
+# Use the edited settings when opening the file
+cmds.file('ref.ma', open=True, loadSettings='implicitLoadSettings')
+
+#
+#   Example for the '-cleanReference' and '-editCommand' flags
+#
+
+# Create a simple reference to a sphere
+#
+cmds.file( force=True, new=True )
+cmds.polySphere()
+cmds.file( rename='ref.ma' )
+cmds.file( force=True, type='mayaAscii', save=True )
+cmds.file( force=True, new=True )
+cmds.file( 'ref.ma', reference=True, namespace='ref' )
+
+# Scale the sphere
+#
+cmds.setAttr( 'ref:pSphere1.s', 5, 5, 5 )
+cmds.getAttr( 'ref:pSphere1.s' )
+# Result: 5 5 5 #
+
+# The 'cleanReference' and 'editCommand' flags only work on
+# unloaded references.
+#
+cmds.file( unloadReference='refRN' )
+
+# Query the setAttr edits:
+#
+cmds.reference( referenceNode='refRN', query=True, editCommand=True )
+# Result: setAttr ref:pSphere1.s -type &quot;double3&quot; 5 5 5 setAttr ref:lightLinker1.lnk -s 2 #
+
+# Remove all setAttr edits on refRN:
+#
+cmds.file( cleanReference='refRN', editCommand='setAttr' )
+cmds.reference( referenceNode='refRN', query=True, editCommand=True )
+# Note that nothing is returned
+
+cmds.file( loadReference='refRN' )
+
+cmds.getAttr( 'ref:pSphere1.s' )
+# Result: 1 1 1 #
+# Note that scale has returned to 1 1 1
+
+# apply the edit file to a reference
+cmds.file(&quot;translateSphere.editMA&quot;, reference=True, applyTo=&quot;refRN&quot;)
+# Result: maps &lt;main&gt; to refRN's namespace
+
+# apply the edit file to nodes in the main scene
+cmds.file(&quot;translateSphere.editMA&quot;, i=True, applyTo=&quot;:&quot;)
+# Result: maps &lt;main&gt; to the root namespace
+
+# apply the edit file to a reference, but it also has connections between two refs
+cmds.file(&quot;connectionsBetweenRefs.editMA&quot;, reference=True, applyTo=&quot;refRN&quot;, mapPlaceHolderNamespace=(&quot;&lt;otherRef&gt;&quot;, &quot;otherRefRN&quot;))
+# Result: maps &lt;main&gt; to refRN's namespace and &lt;otherRef&gt; to otherRefRN's namespace
+
+# Change the modified state of the file.
+cmds.file(modified=True)
+
+# Set the file options
+cmds.file( force=True, save=True, options='v=1;p=17',type='mayaAscii');
+# Result:The saved file uses full names for attributes on nodes and flags in command.Also the precision of values in file is 17.
+
+# Load Reference Preview
+
+# Create a nested reference with a child reference under a parent reference.
+cmds.file( force=True, new=True )
+cmds.polySphere()
+cmds.file( rename='child.ma' )
+cmds.file( force=True, type='mayaAscii', save=True )
+cmds.file( force=True, new=True )
+cmds.file( 'child.ma', reference=True, namespace='child_namespace' )
+cmds.file( rename='parent.ma' )
+cmds.file( force=True, type='mayaAscii', save=True )
+
+# Preview the unloaded child reference under the unloaded parent reference.
+cmds.file( force=True, new=True )
+cmds.file( 'parent.ma', reference=True, namespace='parent_namespace' )
+cmds.file( 'parent.ma', unloadReference=True )
+cmds.file( 'parent.ma', loadReferencePreview=True )
+
+#
+#			   Example for 'mergeNamespacesOnClash'
+#
+
+# Create a reference
+cmds.file( force=True, new=True )
+cmds.namespace( add=&quot;bar&quot; )
+cmds.namespace( set=&quot;bar&quot; )
+cmds.polySphere();
+cmds.file( rename=&quot;ref.ma&quot; )
+cmds.file( force=True, type='mayaAscii', save=True )
+
+# Create a scene with some namespaces and objects
+cmds.file( force=True, new=True )
+cmds.namespace( add=&quot;ref:foo:bar&quot; )
+cmds.namespace( set=&quot;ref:foo:bar&quot; )
+cmds.polySphere();
+
+# Merge into root
+cmds.file('ref.ma', reference=True, mergeNamespacesOnClash=True, namespace=':');
+
+# Merge into nested namespace
+cmds.file('ref.ma', i=True, mergeNamespacesOnClash=True, namespace=':ref:foo');
+
+# Don't merge namespace
+cmds.file('ref.ma', reference=True, mergeNamespacesOnClash=False, namespace=':ref:foo');
+
+# Now Edit the new namespace and merge it
+cmds.file('ref.ma', edit=True, mergeNamespacesOnClash=True, namespace=':ref:foo');
+
+
+
+
+###############################################/
+#/ Example for export with relativeNamespace  #/
+###############################################/
+
+cmds.file(new=True,force=True)
+cmds.sphere(name=&quot;:A:sphereA&quot;)
+cmds.sphere(name=&quot;:A:B:sphereB&quot;)
+cmds.sphere(name=&quot;:A:B:C:sphereC&quot;)
+cmds.sphere(name=&quot;:D:sphereD&quot;)
+
+# Select all the spheres.
+#
+cmds.select(&quot;:A:sphereA&quot;, replace=True)
+cmds.select(&quot;:A:B:sphereB&quot;,add=True)
+cmds.select(&quot;:A:B:C:sphereC&quot;,add=True)
+cmds.select(&quot;:D:sphereD&quot;,add=True)
+
+# Export all these spheres with -relativeNamespace flag.
+#
+cmds.file(rename=&quot;exp.ma&quot;)
+cmds.file(force=True, exportSelected=True, type=&quot;mayaAscii&quot;, relativeNamespace=&quot;:A:B&quot;)
+# The result in the exported file:
+# :A:sphereA
+# :C:sphereC
+# :D:sphereD
+# -sphereB
+#
+
+####################################################/
+#/ Example for export with exportSnapshotCallback  #/
+####################################################/
+
+def python_export_callback():
+    &quot;&quot;&quot;
+	Print all nodes to be exported and triangulate all mesh shapes.
+	&quot;&quot;&quot;
+    oldRelNames = cmds.namespace(q=True, relativeNames=True)
+    cmds.namespace(relativeNames=True)
+    nodes = cmds.ls(&quot;*&quot;, r=True)
+    for node in nodes:
+        print(&quot;Exporting &quot; + node)
+    meshes = cmds.ls(&quot;*&quot;, r=True, typ=&quot;mesh&quot;)
+    for mesh in meshes:
+        print(&quot;Triangulating &quot; + mesh)
+        cmds.polyTriangulate(mesh)
+    cmds.namespace( relativeNames=oldRelNames )
+
+cmds.file( f=True, new=True)
+sphere = cmds.polySphere()
+cube = cmds.polyCube()
+cyl = cmds.polyCylinder()
+cmds.parent( sphere[0], cube[0] )
+cmds.parent( cube[0], cyl[0] )
+cmds.file( 'export.ma', force=True, options=&quot;v=0;&quot;, type=&quot;mayaAscii&quot;, ea=True, esc=(python_export_callback, &quot;TEMP_EXPORT&quot;))
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,235 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>instance command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-instance"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/instance.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>instance </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("instance.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>instance [-<a href="#flagleaf">leaf</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagsmartTransform">smartTransform</a>] 
+[objects]
+     </code> </p>
+      <p>instance is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Instancing is a way of making the same object appear twice in the
+scene. This is accomplished by creation of a new transform node
+that points to an exisiting object. Changes to the transform
+are independent but changes to the &quot;instanced&quot; object affect
+all instances since the node is shared.
+<p>
+If no objects are given, then the selected list is instanced.
+When an object is instanced a  new transform node is created
+that points to the selected object.
+<p>
+The smart transform feature allows instance to transform newly
+instanced objects based on previous transformations between instances.
+<p>
+Example: Instance an object and move it to a new location.  Instance
+it again with the smart transform flag.  It should have moved once
+again the distance you had previously moved it.
+<p>
+Note: changing the selected list between smart instances will cause
+the transform information to be deleted.
+<p>
+It returns a list of the new objects created by the instance operation.
+<p>
+<b>See also:</b> duplicate
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>- the name of the new transform node is returned.</td></tr></table>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagleaf">leaf</a>, <a href="#flagname">name</a>, <a href="#flagsmartTransform">smartTransform</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagleaf">
+          <code><b>-leaf</b>(<b>-lf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Instances leaf-level objects. Acts like duplicate
+except leaf-level objects are instanced.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name to give new instance
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsmartTransform">
+          <code><b>-smartTransform</b>(<b>-st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Transforms instances item based on movements between
+transforms
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+  // Create a hierarchy
+  sphere -n sphere1; move 3 0 0;
+  sphere -n sphere2; move -3 0 0;
+  group -n group1 sphere1 sphere2;
+  group -n group2 group1;
+
+  // Create an instance of one of the spheres
+instance sphere1;
+
+  // Duplicate the hierarchy except for the shapes which are
+  // instanced.instances of all leaf level shapes
+instance -leaf group1;
+
+  // Create a row of 4 instanced circles which are equally spaced
+  circle -n circle1;
+  instance; move 3 0 0;
+  instance -smartTransform;
+  instance -smartTransform;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

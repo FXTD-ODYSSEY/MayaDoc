@@ -1,0 +1,107 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>tokenize command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-tokenize"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>tokenize </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Strings" target="contentFrame">Strings</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("tokenize.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>tokenize 
+string [string] string[]
+     </code> </p>
+      <p>tokenize is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command will split the first string argument up according to
+split characters provided in the optional second argument.  If this
+argument is not provided, tokenize will use a default split string
+consisting of whitespace characters.
+<p>
+The input string is scanned for substrings (tokens) which are
+separated by any of the split characters. Note: tokenize does not
+match the entire split string; it matches any character in the string.
+<p>
+The resulting token strings are put into the third argument which is a
+string array. The return value of this procedure is the number of
+tokens into which the original string is divided.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>Number of tokens</td></tr></table>
+      
+      
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+string $buffer[];
+$numTokens = `tokenize &quot;A/B//C/D&quot; &quot;//&quot; $buffer`;
+
+// Buffer will contain 4 strings, not 2: &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;
+// and $numTokens will be 4.
+
+string $buffer[];
+$numTokens = tokenize(&quot;Mildred Pierce Femme Fatale&quot;, $buffer);
+
+// Buffer will contain 4 strings: &quot;Mildred&quot;, &quot;Pierce&quot;, &quot;Femme&quot;, and &quot;Fatale.&quot;
+// and $numTokens will be 4.
+
+string $buffer[];
+$numTokens = `tokenize &quot;testing=non-default separators&quot; &quot;=&quot; $buffer`;
+
+// Buffer will contain 2 strings: &quot;testing&quot; and &quot;non-default separators.&quot;
+// and $numTokens will be 2.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

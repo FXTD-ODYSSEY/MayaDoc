@@ -1,0 +1,1734 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>skinCluster command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-skinCluster"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/skinCluster.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>skinCluster </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Skinning" target="contentFrame">Skinning</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("skinCluster.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>skinCluster [-<a href="#flagaddInfluence">addInfluence</a> <i>string</i>] [-<a href="#flagaddToSelection">addToSelection</a>] [-<a href="#flagafter">after</a>] [-<a href="#flagafterReference">afterReference</a>] [-<a href="#flagbaseShape">baseShape</a> <i>string</i>] [-<a href="#flagbefore">before</a>] [-<a href="#flagbindMethod">bindMethod</a> <i>int</i>] [-<a href="#flagdeformerTools">deformerTools</a>] [-<a href="#flagdropoffRate">dropoffRate</a> <i>float</i>] [-<a href="#flagexclusive">exclusive</a> <i>string</i>] [-<a href="#flagforceNormalizeWeights">forceNormalizeWeights</a>] [-<a href="#flagfrontOfChain">frontOfChain</a>] [-<a href="#flaggeometry">geometry</a> <i>string</i>] [-<a href="#flaggeometryIndices">geometryIndices</a>] [-<a href="#flagheatmapFalloff">heatmapFalloff</a> <i>float</i>] [-<a href="#flagignoreBindPose">ignoreBindPose</a>] [-<a href="#flagignoreHierarchy">ignoreHierarchy</a>] [-<a href="#flagignoreSelected">ignoreSelected</a>] [-<a href="#flagincludeHiddenSelections">includeHiddenSelections</a>] [-<a href="#flaginfluence">influence</a> <i>string</i>] [-<a href="#flaglockWeights">lockWeights</a> <i>boolean</i>] [-<a href="#flagmaximumInfluences">maximumInfluences</a> <i>int</i>] [-<a href="#flagmoveJointsMode">moveJointsMode</a> <i>boolean</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagnormalizeWeights">normalizeWeights</a> <i>int</i>] [-<a href="#flagnurbsSamples">nurbsSamples</a> <i>int</i>] [-<a href="#flagobeyMaxInfluences">obeyMaxInfluences</a> <i>boolean</i>] [-<a href="#flagparallel">parallel</a>] [-<a href="#flagpolySmoothness">polySmoothness</a> <i>float</i>] [-<a href="#flagprune">prune</a>] [-<a href="#flagrecacheBindMatrices">recacheBindMatrices</a>] [-<a href="#flagremove">remove</a>] [-<a href="#flagremoveFromSelection">removeFromSelection</a>] [-<a href="#flagremoveInfluence">removeInfluence</a> <i>string</i>] [-<a href="#flagremoveUnusedInfluence">removeUnusedInfluence</a> <i>boolean</i>] [-<a href="#flagselectInfluenceVerts">selectInfluenceVerts</a> <i>string</i>] [-<a href="#flagskinMethod">skinMethod</a> <i>int</i>] [-<a href="#flagsmoothWeights">smoothWeights</a> <i>float</i>] [-<a href="#flagsmoothWeightsMaxIterations">smoothWeightsMaxIterations</a> <i>int</i>] [-<a href="#flagsplit">split</a>] [-<a href="#flagtoSelectedBones">toSelectedBones</a>] [-<a href="#flagtoSkeletonAndTransforms">toSkeletonAndTransforms</a>] [-<a href="#flagunbind">unbind</a>] [-<a href="#flagunbindKeepHistory">unbindKeepHistory</a>] [-<a href="#flaguseGeometry">useGeometry</a>] [-<a href="#flagvolumeBind">volumeBind</a> <i>float</i>] [-<a href="#flagvolumeType">volumeType</a> <i>int</i>] [-<a href="#flagweight">weight</a> <i>float</i>] [-<a href="#flagweightDistribution">weightDistribution</a> <i>int</i>] [-<a href="#flagweightedInfluence">weightedInfluence</a>] 
+objects
+     </code> </p>
+      <p>skinCluster is undoable, queryable, and editable.</p>
+      The skinCluster command is used for smooth skinning in maya. It
+binds the selected geometry to the selected
+joints or skeleton by means of a skinCluster node.  Each point of the bound
+geometry can be affected by any number of joints.
+The extent to which each joint affects the motion of each point is
+regulated by a corresponding weight factor.  Weight factors can be
+modified using the skinPercent command.  The command returns the name
+of the new skinCluster.<br>
+<p>
+The skinCluster binds only a single geometry at a time. Thus, to bind
+multiple geometries, multiple skinCluster commands must be issued.<br>
+<p>
+Upon creation of a new skinCluster, the command can be used to add
+and remove transforms (not necessarily joints) that influence the
+motion of the bound skin points.  <br>
+<p>
+The skinCluster command can also be used to adjust parameters such
+as the dropoff, nurbs samples, polygon smoothness on a particular
+influence object. Note: Any custom weights on a skin point that
+the influence object affects will be lost after adjusting these
+parameters.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>(the skinCluster node name)</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="bindSkin.html">bindSkin</a>, <a href="blendShape.html">blendShape</a>, <a href="boneLattice.html">boneLattice</a>, <a href="copyFlexor.html">copyFlexor</a>, <a href="copySkinWeights.html">copySkinWeights</a>, <a href="dagPose.html">dagPose</a>, <a href="flexor.html">flexor</a>, <a href="geomBind.html">geomBind</a>, <a href="skinPercent.html">skinPercent</a>, <a href="wire.html">wire</a>, <a href="wrinkle.html">wrinkle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaddInfluence">addInfluence</a>, <a href="#flagaddToSelection">addToSelection</a>, <a href="#flagafter">after</a>, <a href="#flagafterReference">afterReference</a>, <a href="#flagbaseShape">baseShape</a>, <a href="#flagbefore">before</a>, <a href="#flagbindMethod">bindMethod</a>, <a href="#flagdeformerTools">deformerTools</a>, <a href="#flagdropoffRate">dropoffRate</a>, <a href="#flagexclusive">exclusive</a>, <a href="#flagforceNormalizeWeights">forceNormalizeWeights</a>, <a href="#flagfrontOfChain">frontOfChain</a>, <a href="#flaggeometry">geometry</a>, <a href="#flaggeometryIndices">geometryIndices</a>, <a href="#flagheatmapFalloff">heatmapFalloff</a>, <a href="#flagignoreBindPose">ignoreBindPose</a>, <a href="#flagignoreHierarchy">ignoreHierarchy</a>, <a href="#flagignoreSelected">ignoreSelected</a>, <a href="#flagincludeHiddenSelections">includeHiddenSelections</a>, <a href="#flaginfluence">influence</a>, <a href="#flaglockWeights">lockWeights</a>, <a href="#flagmaximumInfluences">maximumInfluences</a>, <a href="#flagmoveJointsMode">moveJointsMode</a>, <a href="#flagname">name</a>, <a href="#flagnormalizeWeights">normalizeWeights</a>, <a href="#flagnurbsSamples">nurbsSamples</a>, <a href="#flagobeyMaxInfluences">obeyMaxInfluences</a>, <a href="#flagparallel">parallel</a>, <a href="#flagpolySmoothness">polySmoothness</a>, <a href="#flagprune">prune</a>, <a href="#flagrecacheBindMatrices">recacheBindMatrices</a>, <a href="#flagremove">remove</a>, <a href="#flagremoveFromSelection">removeFromSelection</a>, <a href="#flagremoveInfluence">removeInfluence</a>, <a href="#flagremoveUnusedInfluence">removeUnusedInfluence</a>, <a href="#flagselectInfluenceVerts">selectInfluenceVerts</a>, <a href="#flagskinMethod">skinMethod</a>, <a href="#flagsmoothWeights">smoothWeights</a>, <a href="#flagsmoothWeightsMaxIterations">smoothWeightsMaxIterations</a>, <a href="#flagsplit">split</a>, <a href="#flagtoSelectedBones">toSelectedBones</a>, <a href="#flagtoSkeletonAndTransforms">toSkeletonAndTransforms</a>, <a href="#flagunbind">unbind</a>, <a href="#flagunbindKeepHistory">unbindKeepHistory</a>, <a href="#flaguseGeometry">useGeometry</a>, <a href="#flagvolumeBind">volumeBind</a>, <a href="#flagvolumeType">volumeType</a>, <a href="#flagweight">weight</a>, <a href="#flagweightDistribution">weightDistribution</a>, <a href="#flagweightedInfluence">weightedInfluence</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddInfluence">
+          <code><b>-addInfluence</b>(<b>-ai</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The specified transform or joint will be added to the
+list of transforms that influence the bound geometry.
+The maximum number of influences will be observed
+and only the weights of the cv's that the specified
+transform effects will change.
+This flag is multi-use.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddToSelection">
+          <code><b>-addToSelection</b>(<b>-ats</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used in conjunction with the selectInfluenceVerts flag, causes the vertices
+afftected by the influence to be added to the current selection, without first
+de-selecting other vertices.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafter">
+          <code><b>-after</b>(<b>-af</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the default behavior for insertion/appending into/onto
+the existing chain is not the desired behavior then this flag
+can be used to force the command to place the deformer
+node after the selected node in the chain even if
+a new geometry shape has to be created in order to do so.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafterReference">
+          <code><b>-afterReference</b>(<b>-ar</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The -afterReference flag is used to specify deformer ordering in a hybrid way that
+choses between -before and -after automatically. If the geometry being
+deformed is referenced then the -after mode is used when adding the new deformer,
+otherwise the -before mode is used. The net effect when using -afterReference to build
+deformer chains is that internal shape nodes in the deformer chain will only
+appear at reference file boundaries, leading to lightweight deformer networks that
+may be more amicable to reference swapping.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbaseShape">
+          <code><b>-baseShape</b>(<b>-bsh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used in conjunction with
+the -addInfluence flag to specify the shape that will
+be used as the base shape when an influence object with
+geometry is added to the skinCluster.  If the flag
+is not used then the command will make a copy of the
+influence object's shape and use that as a base shape.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbefore">
+          <code><b>-before</b>(<b>-bf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the default behavior for insertion/appending into/onto
+the existing chain is not the desired behavior then this flag
+can be used to force the command to place the deformer
+node before the selected node in the chain even if
+a new geometry shape has to be created in order to do so.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbindMethod">
+          <code><b>-bindMethod</b>(<b>-bm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag sets the binding method.
+0 - Closest distance between a joint and a point of the geometry.
+1 - Closest distance between a joint, considering the skeleton
+hierarchy, and a point of the geometry.
+2 - Surface heat map diffusion.
+3 - Geodesic voxel binding.  geomBind command must be called after creating a skinCluster with this method.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeformerTools">
+          <code><b>-deformerTools</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the name of the deformer tool objects (if any)
+as string string ...
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdropoffRate">
+          <code><b>-dropoffRate</b>(<b>-dr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the rate at which the influence of a transform
+drops as the distance from that transform increases.
+The valid range is between 0.1 and 10.0.  In Create
+mode it sets the dropoff rate for all the bound
+joints.  In Edit mode the flag is used together with the
+inf/influence flag to set the dropoff rate of a
+particular influence.  Note: When the flag is used in
+Edit mode, any custom weights on the skin points the
+given transform influences will be lost.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexclusive">
+          <code><b>-exclusive</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Puts the deformation set in a deform partition.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforceNormalizeWeights">
+          <code><b>-forceNormalizeWeights</b>(<b>-fnw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the normalization mode is none or post, it is possible (indeed likely) for the weights in the skin
+cluster to no longer add up to 1.  This flag forces all weights to add back to 1 again.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfrontOfChain">
+          <code><b>-frontOfChain</b>(<b>-foc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This command is used to specify that the new deformer
+node should be placed ahead (upstream) of existing deformer
+and skin nodes in the shape's history (but not ahead of
+existing tweak nodes). The input to the
+deformer will be the upstream shape rather than the visible
+downstream shape, so the behavior of this flag is the most
+intuitive if the downstream deformers are in their reset
+(hasNoEffect) position when the new deformer is added.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometry">
+          <code><b>-geometry</b>(<b>-g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The specified object will be added to the list of
+objects being deformed by this deformer object, unless
+the -rm flag is also specified. When queried, this flag
+returns string string string ...
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggeometryIndices">
+          <code><b>-geometryIndices</b>(<b>-gi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Complements the -geometry flag in query mode. Returns
+the multi index of each geometry.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagheatmapFalloff">
+          <code><b>-heatmapFalloff</b>(<b>-hmf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag sets the heatmap binding falloff. If set to 0.0 (default) the
+deformation will be smoother due to many small weights spread over the mesh
+surface per influence. However, if set to 1.0, corresponding to maximum falloff,
+the number of influences per point will be reduced and points will tend to be
+greatly influenced by their closest joint decreasing the overall spread of small
+weights.
+This flag only works when using heatmap binding.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreBindPose">
+          <code><b>-ignoreBindPose</b>(<b>-ibp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is deprecated and no longer used.  It will be ignored
+if used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreHierarchy">
+          <code><b>-ignoreHierarchy</b>(<b>-ih</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Deprecated. Use bindMethod flag instead.
+Disregard the place of the joints in the skeleton
+hierarchy when computing the closest joints that influence
+a point of the geometry.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreSelected">
+          <code><b>-ignoreSelected</b>(<b>-is</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Tells the command to not deform objects on the
+current selection list
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeHiddenSelections">
+          <code><b>-includeHiddenSelections</b>(<b>-ihs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Apply the deformer to any visible and hidden objects in the selection list.
+Default is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginfluence">
+          <code><b>-influence</b>(<b>-inf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the influence object that
+will be used for the current edit operation. In query
+mode, returns a string array of the influence objects
+(joints and transform).
+      <p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglockWeights">
+          <code><b>-lockWeights</b>(<b>-lw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Lock the weights of the specified influence object
+to their current value or to the value specified by
+the -weight flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaximumInfluences">
+          <code><b>-maximumInfluences</b>(<b>-mi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the maximum number of transforms that can influence
+a point (have non-zero weight for the point) when
+the skinCluster is first created or a new influence
+is added.  Note: When this flag is used in Edit mode
+any custom weights will be lost and new weights will be
+reassigned to the whole skin.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmoveJointsMode">
+          <code><b>-moveJointsMode</b>(<b>-mjm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set to true, puts the skin into a mode where joints can be moved
+without modifying the skinning. If set to false, takes the skin out
+of move joints mode.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to specify the name of the node being created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnormalizeWeights">
+          <code><b>-normalizeWeights</b>(<b>-nw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag sets the normalization mode. 0 - none,
+1 - interactive, 2 - post (default)
+Interactive normalization makes sure the weights on the influences add up to 1.0, always.
+Everytime a weight is changed, the weights are automatically normalized.  This may make
+it difficult to perform weighting operations, as the normalization may interfere with
+the weights the user has set.  Post normalization leaves the weights the user has set
+as is, and only normalizes the weights at the moment it is needed
+(by dividing by the sum of the weights).  This makes it easier for users to weight their skins.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnurbsSamples">
+          <code><b>-nurbsSamples</b>(<b>-ns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the number of sample points that will be used
+along an influence curve or in each direction on an
+influence NURBS surface to influence the bound skin.
+The more the sample points the more closely the skin
+follows the influence NURBS curve/surface.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobeyMaxInfluences">
+          <code><b>-obeyMaxInfluences</b>(<b>-omi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When true, the skinCluster will continue to enforce the maximum
+influences each time the user modifies the weight, so that any
+given point is only weighted by the number of influences in the
+skinCluster's maximumInfluences attribute.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparallel">
+          <code><b>-parallel</b>(<b>-par</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Inserts the new deformer in a parallel chain to any existing deformers in
+the history of the object. A blendShape is inserted to blend the parallel
+results together.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpolySmoothness">
+          <code><b>-polySmoothness</b>(<b>-ps</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag controls how accurately the skin control
+points follow a given polygon influence object.
+The higher the value of polySmoothnmess the
+more rounded the deformation resulting from a polygonal
+influence object will be.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprune">
+          <code><b>-prune</b>(<b>-pr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Removes any points not being deformed by the deformer in
+its current configuration from the deformer set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrecacheBindMatrices">
+          <code><b>-recacheBindMatrices</b>(<b>-rbm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Forces the skinCluster node to recache its bind matrices.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>-remove</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that objects listed after the -g flag should
+be removed from this deformer.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveFromSelection">
+          <code><b>-removeFromSelection</b>(<b>-rfs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used in conjunction with the selectInfluenceVerts flag, causes the vertices
+afftected by the influence to be removed from the current selection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveInfluence">
+          <code><b>-removeInfluence</b>(<b>-ri</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the specified transform or joint from the list of
+transforms that influence the bound geometry
+The weights for the affected points are renormalized.
+This flag is multi-use.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveUnusedInfluence">
+          <code><b>-removeUnusedInfluence</b>(<b>-rui</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this flag is set to true then transform or joint whose weights are all zero
+(they have no effect) will not be bound to the geometry.  Having this
+option set will help speed-up the playback of animation.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectInfluenceVerts">
+          <code><b>-selectInfluenceVerts</b>(<b>-siv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Given the name of a transform, this will select the verts or control points
+being influenced by this transform, so users may visualize which vertices are
+being influenced by the transform.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagskinMethod">
+          <code><b>-skinMethod</b>(<b>-sm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag set the skinning method. 0 - classical linear skinning (default).
+1 - dual quaternion (volume preserving), 2 - a weighted blend between the two.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsmoothWeights">
+          <code><b>-smoothWeights</b>(<b>-sw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used to detect sudden jumps in skin weight values, which often
+indicates bad weighting, and then smooth out those jaggies in skin weights.
+The argument is the error tolerance ranging from 0 to 1.  A value of 1 means
+that the algorithm will smooth a vertex only if there is a 100% change in
+weight values from its neighbors.  The recommended default to use is 0.5
+(50% change in weight value from the neighbors).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsmoothWeightsMaxIterations">
+          <code><b>-smoothWeightsMaxIterations</b>(<b>-swi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is valid only with the smooth weights flag.  It is possible that not
+all the vertices detected as needing smoothing can be smoothed in 1 iteration
+(because all of their neighbors also have bad weighting and need to be smoothed).
+With more iterations, more vertices can be smoothed.  This flag controls the
+maximum number of iterations the algorithm will attempt to smooth weights.
+The default is 2 for this flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsplit">
+          <code><b>-split</b>(<b>-sp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Branches off a new chain in the dependency graph instead
+of inserting/appending the deformer into/onto an
+existing chain.
+Works in create mode (and edit mode if the deformer has
+no geometry added yet).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtoSelectedBones">
+          <code><b>-toSelectedBones</b>(<b>-tsb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+geometry will be bound to the selected bones only.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtoSkeletonAndTransforms">
+          <code><b>-toSkeletonAndTransforms</b>(<b>-tst</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+geometry will be bound to the skeleton and any transforms in the hierarchy.
+If any of the transforms are also bindable objects, assume that only the
+last object passed to the command is the bindable object. The rest are
+treated as influences.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunbind">
+          <code><b>-unbind</b>(<b>-ub</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Unbinds the geometry from the skinCluster and deletes
+the skinCluster node
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunbindKeepHistory">
+          <code><b>-unbindKeepHistory</b>(<b>-ubk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Unbinds the geometry from the skinCluster, but keeps
+the skinCluster node so that its weights can be used
+when the skin is rebound. To rebind, use the skinCluster
+command.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseGeometry">
+          <code><b>-useGeometry</b>(<b>-ug</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When adding an influence to a skinCluster, use the geometry
+parented under the influence transform to determine
+the weight dropoff of that influence.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvolumeBind">
+          <code><b>-volumeBind</b>(<b>-vb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Creates a volume bind node and attaches it to the new skin cluster node. This
+node holds hull geometry parameters for a volume based weighting system. This system is
+used in interactive skinning. The value passed will determine the minimum weight
+value when initializing the volume. The volume in be increase to enclose all the vertices
+that are above this value.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvolumeType">
+          <code><b>-volumeType</b>(<b>-vt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Defines the initial shape of the binding volume (see volumeBind). 0 - Default (currently set to a capsule)
+1 - Capsule, 2 - Cylinder.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweight">
+          <code><b>-weight</b>(<b>-wt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is only valid in conjunction with the -addInfluence flag.
+It sets the weight for the influence object that is being added.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweightDistribution">
+          <code><b>-weightDistribution</b>(<b>-wd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag sets the weight distribution mode.
+0 - distance (default), 1 - neighbors
+When normalizeWeights is in effect, and a weight has been reduced
+or removed altogether, the sum is usually brought back up to 1.0
+by increasing the contributions of the other non-zero weights.
+However, if there are no other non-zero weights, the algorithm
+has to create some weights from thin air and distribute the residual
+weight between them.
+This attribute controls how that is done.
+&quot;Distance&quot; - the algorithm calculates weights from
+the world-space distances from the component to the transforms.
+&quot;Neighbors&quot; - the algorithm calculates weights from
+the weights on the neighboring components.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweightedInfluence">
+          <code><b>-weightedInfluence</b>(<b>-wi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag returns a string array of the influence objects
+(joints and transform) that have non-zero weighting.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Create a joint chain and a polygonal plane.
+//
+select -d;
+joint -p -3 0 -12;
+joint -p -3 0 -5;
+joint -p 1 0 5.5;
+joint -p 6 0 10;
+polyPlane -w 20.0 -h 20.0 -sx 25 -sy 25;
+
+// Bind the joint chain that contains joint1 to pPlane1
+// and assign a dropoff of 4.5 to all the joints
+//
+skinCluster -dr 4.5 joint1 pPlane1;
+
+// Undo and bind only joint1 and joint3 to pPlane1
+//
+undo;
+skinCluster -tsb joint1 joint3 pPlane1;
+
+// Set the maximum number of transforms influencing each
+// point to 3
+skinCluster -e -mi 3 skinCluster1;
+
+// Add transform joint2 to the list of transforms
+// that influence the bound skin
+//
+select -r pPlane1;
+skinCluster -e -ai joint2;
+
+// Query the influences for the skinCluster
+//
+skinCluster -q -inf;
+
+// Add a nurbs curve influence object
+//
+curve -d 3 -p 2.0 0.0 -7.0 -p 5.0 0.0 -4.0 -p 6.0 0.0 1.0 -p 6.0 0.0 4.0 -p 5.0 0.0 6.0 -k 0 -k 0 -k 0 -k 1 -k 2 -k 2 -k 2;
+skinCluster -e -ai curve1;
+
+// Get the number of nurbsSamples taken along curve1
+//
+skinCluster -inf curve1 -q -ns skinCluster1;
+
+// Set the dropoff for joint3 to 5.0
+//
+skinCluster -e -inf joint3 -dr 5.0 skinCluster1;
+
+// Query for the dropoff of joint3
+//
+skinCluster -inf joint3 -q -dr skinCluster1;
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

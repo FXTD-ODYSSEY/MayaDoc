@@ -1,0 +1,405 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>stereoRigManager command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-stereoRigManager"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/stereoRigManager.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>stereoRigManager </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a>, <a href="cat_Rendering.html#Camera" target="contentFrame">Camera</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("stereoRigManager.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>stereoRigManager(
+objects
+    , [<a href="#flagaddRig">addRig</a>=<i>[string, string, string]</i>], [<a href="#flagcameraSetFunc">cameraSetFunc</a>=<i>[string, string]</i>], [<a href="#flagcreationProcedure">creationProcedure</a>=<i>[string, string]</i>], [<a href="#flagdefaultRig">defaultRig</a>=<i>string</i>], [<a href="#flagdelete">delete</a>=<i>string</i>], [<a href="#flaglanguage">language</a>=<i>[string, string]</i>], [<a href="#flaglistRigs">listRigs</a>=<i>boolean</i>], [<a href="#flagrigDefinition">rigDefinition</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>stereoRigManager is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command manages the set of stereo rig tools.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="camera.html">camera</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaddRig">addRig</a>, <a href="#flagcameraSetFunc">cameraSetFunc</a>, <a href="#flagcreationProcedure">creationProcedure</a>, <a href="#flagdefaultRig">defaultRig</a>, <a href="#flagdelete">delete</a>, <a href="#flaglanguage">language</a>, <a href="#flaglistRigs">listRigs</a>, <a href="#flagrigDefinition">rigDefinition</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Database query</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistRigs">
+          <code><b>listRigs</b>(<b>lr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When present, returns the list of all defined rigs. All other flags
+are ignored.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrigDefinition">
+          <code><b>rigDefinition</b>(<b>rd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the definition of a rig, in the same format as the add
+flag. A string array containing <i>lang</i>, <i>create</i> <i>cameraSet</i>.
+
+If an empty string is passed as the argument, then the default rig is used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Database manipulation</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddRig">
+          <code><b>addRig</b>(<b>add</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds a new stereo rig definition. This flag takes 3 arguments:
+name, language, create:
+<ul>
+<li>name: A unique name for the rig type.</li>
+<li>lang: The language used for the callback. Valid values are
+&quot;Python&quot; and &quot;MEL&quot;. Use the Python interface when
+possible.</li>
+<li>create: Procedure used to create a new rig of this type. This
+procedure takes no argument, and must return an array of strings.
+The first element is the root DAG node of the rig. The second and
+third elements are respectively the left and right cameras.</li>
+</ul>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcameraSetFunc">
+          <code><b>cameraSetFunc</b>(<b>csf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the function to call when a rig is about to be added to
+a camera set. This function must be the same language as originally
+defined by the tool.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreationProcedure">
+          <code><b>creationProcedure</b>(<b>cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Changes the creation procedure of an existing rig definition.
+
+This flag takes 2 arguments: the name of the existing rig definition
+and the procedure.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefaultRig">
+          <code><b>defaultRig</b>(<b>dr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the default rig tool. The argument must be the name of one of the
+rigs added using the <i>add</i> flag.
+
+Returns True if the default could be set, False otherwise.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdelete">
+          <code><b>delete</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Removes the definition of a stereo rig. The argument must be the name
+of one of the rigs added using the <i>add</i> flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglanguage">
+          <code><b>language</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Changes the language of an existing rig definition. Valid values are
+&quot;Python&quot; and &quot;MEL&quot;.
+
+This flag takes 2 arguments: the name of the existing rig definition
+and the language keyword.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Make sure the stereo plug-in is loaded
+cmds.loadPlugin(&quot;stereoCamera&quot;, quiet=True)
+
+# Remember the default rig
+defRigBefore = cmds.stereoRigManager(query=True, defaultRig=True)
+
+# Register new rig types, using MEL or Python implementations.
+cmds.stereoRigManager(add=['StereoCameraHier', 'Python', 'maya.app.stereo.stereoCameraHierarchicalRig.createRig'])
+cmds.stereoRigManager(add=['StereoCameraMulti', 'Python', 'maya.app.stereo.stereoCameraComplexRig.createRig'])
+cmds.stereoRigManager(add=['StereoCameraSimple', 'MEL', 'stereoCameraSimpleRig'])
+
+# Make the second one the default rig
+cmds.stereoRigManager(defaultRig='StereoCameraMulti')
+
+# Remove it
+cmds.stereoRigManager(delete='StereoCameraMulti')
+
+# Query the default rig.
+defRig = cmds.stereoRigManager(query=True, defaultRig=True)
+print 'Default rig is now &quot;'+defRig+'&quot;'
+
+# Print the definition of each rig type
+rigs = cmds.stereoRigManager(listRigs=True)
+for rig in rigs:
+  defs = cmds.stereoRigManager(rigDefinition=rig)
+  print 'Rig &quot;'+rig+'&quot;: (language '+defs[0]+') create callback: '+defs[1]
+
+# Cleanup after we are done
+cmds.stereoRigManager(delete='myDefaultRig')
+cmds.stereoRigManager(delete='mySimpleRig')
+cmds.stereoRigManager(defaultRig=defRigBefore)
+
+print 'After cleanup'
+
+defRig = cmds.stereoRigManager(query=True, defaultRig=True)
+print 'Default rig is now &quot;'+defRig+'&quot;'
+
+rigs = cmds.stereoRigManager(listRigs=True)
+for rig in rigs:
+  defs = cmds.stereoRigManager(rigDefinition=rig)
+  print 'Rig &quot;'+rig+'&quot;: (language '+defs[0]+') create callback: '+defs[1]
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

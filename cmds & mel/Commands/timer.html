@@ -1,0 +1,270 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>timer command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-timer"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/timer.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>timer </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Utilities" target="contentFrame">Utilities</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("timer.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>timer [-<a href="#flagendTimer">endTimer</a>] [-<a href="#flaglapTime">lapTime</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagstartTimer">startTimer</a>]  </code> </p>
+      <p>timer is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      <p>
+Allow simple timing of scripts and commands. The resolution of this timer
+is at the level of your OS's <i>gettimeofday()</i> function.
+
+<p>
+<b>Note:</b>This command does not handle stacked calls. For
+example, this code below will give an incorrect answer on the
+second <code>timer -e</code> call.<br>
+<pre>timer -s;
+timer -s;
+timer -e;
+timer -e;
+</pre>
+To do this use named timers:
+<pre>timer -s;
+timer -s -name &quot;innerTimer&quot;;
+timer -e -name &quot;innerTimer&quot;;
+timer -e;
+</pre>
+
+<ul>
+<li>I the -e flag or -lap flag return the time elapsed since
+the last 'timer -s' call.</li>
+<li>I the -s flag has no return value.</li>
+</ul>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      <h2><a name="hKeywords">Keywords</a></h2>debug, timer
+      <h2><a name="hRelated">Related</a></h2><a href="dgtimer.html">dgtimer</a>, <a href="timerX.html">timerX</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagendTimer">endTimer</a>, <a href="#flaglapTime">lapTime</a>, <a href="#flagname">name</a>, <a href="#flagstartTimer">startTimer</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendTimer">
+          <code><b>-endTimer</b>(<b>-e</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Stop the timer and return the time elapsed since the timer was
+started (in seconds). Once a timer is turned off it no longer exists,
+though it can be recreated with a new start
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglapTime">
+          <code><b>-lapTime</b>(<b>-lap</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get the lap time of the timer (time elapsed since start in seconds).
+Unlike the <i>end</i> flag this keeps the timer running.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use a named timer for the operation. If this is omitted then the default
+timer is assumed.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstartTimer">
+          <code><b>-startTimer</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Start the timer.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+timer -s;
+// code being timed
+print( &quot;START: time this\n&quot; );
+for ($i = 0 ; $i&lt;50 ; $i++)
+	print( &quot;time this &quot;+$i+&quot;\n&quot; );
+print( &quot;END: time this\n&quot; );
+timer -e;
+
+// Named timers can be used for nesting
+timer -s -tn &quot;outerLoop&quot;;
+print( &quot;START: macro loop timing\n&quot; );
+for ($i=0; $i&lt;50; $i++ )
+{
+	timer -s;
+	for ($j=5; $j&lt;50; $j++ )
+	{
+		delete `sphere -spans $j`;
+	}
+	$innerTime = `timer -e`;
+	print( &quot;\tInner loop &quot; + $i + &quot; = &quot; + $innerTime + &quot;\n&quot; );
+	$lapTime = `timer -lap -tn &quot;outerLoop&quot;`;
+	print( &quot;\t       SUB = &quot; + $lapTime + &quot;\n&quot; );
+}
+$lapTime = `timer -e -tn &quot;outerLoop&quot;`;
+print( &quot;END: Full timing was &quot; + $lapTime + &quot;\n&quot; );
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

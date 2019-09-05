@@ -1,0 +1,345 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>nodeCast command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-nodeCast"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/nodeCast.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>nodeCast </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("nodeCast.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>nodeCast [-<a href="#flagcopyDynamicAttrs">copyDynamicAttrs</a> <i>boolean</i>] [-<a href="#flagdisableAPICallbacks">disableAPICallbacks</a> <i>boolean</i>] [-<a href="#flagdisableScriptJobCallbacks">disableScriptJobCallbacks</a> <i>boolean</i>] [-<a href="#flagdisconnectUnmatchedAttrs">disconnectUnmatchedAttrs</a> <i>boolean</i>] [-<a href="#flagforce">force</a> <i>boolean</i>] [-<a href="#flagswapNames">swapNames</a> <i>boolean</i>] [-<a href="#flagswapValues">swapValues</a> <i>boolean</i>] stringstring </code> </p>
+      <p>nodeCast is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Given two nodes, a source node of type A and a target node of type B,
+where type A is either type B or a sub-type of B, this command will replace the
+target node with the source node. That is, all node connections, DAG hierarchy
+and attribute values on the target node will be removed from the target node
+and placed on the source node. This operation will fail if either object is
+referenced, locked or if the nodes do not share a common sub-type.
+This operation is atomic. If the given parameters fail, then the source and
+target nodes will remain in their initial state prior to execution of the
+command.
+IMPORTANT: the command will currently ignore instance connections and
+instance objects.  It will also ignore reference nodes.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>0 for success, 1 for failure.</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>node, swap, cast
+      <h2><a name="hRelated">Related</a></h2><a href="createNode.html">createNode</a>, <a href="nodeType.html">nodeType</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcopyDynamicAttrs">copyDynamicAttrs</a>, <a href="#flagdisableAPICallbacks">disableAPICallbacks</a>, <a href="#flagdisableScriptJobCallbacks">disableScriptJobCallbacks</a>, <a href="#flagdisconnectUnmatchedAttrs">disconnectUnmatchedAttrs</a>, <a href="#flagforce">force</a>, <a href="#flagswapNames">swapNames</a>, <a href="#flagswapValues">swapValues</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopyDynamicAttrs">
+          <code><b>-copyDynamicAttrs</b>(<b>-cda</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the target node contains any dynamic attributes that are not defined on the
+source node, then create identical dynamic attricutes on the source node and copy
+the values and connections from the target node into them.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisableAPICallbacks">
+          <code><b>-disableAPICallbacks</b>(<b>-dsa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+add comment
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisableScriptJobCallbacks">
+          <code><b>-disableScriptJobCallbacks</b>(<b>-dsj</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+add comment
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisconnectUnmatchedAttrs">
+          <code><b>-disconnectUnmatchedAttrs</b>(<b>-dua</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the node that is being swapped out has any connections that do not exist
+on the target node, then indicate if the connection should be disconnected.
+By default these connections are not removed because they cannot be restored
+if the target node is swapped back with the source node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforce">
+          <code><b>-force</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Forces the command to do the node cast operation even if the nodes do
+not share a common base object. When this flag is specified the command
+will try to do the best possible attribute matching when swapping the
+command.  It is <b>not</b> recommended to use the '-swapValues/sv' flag with
+this flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswapNames">
+          <code><b>-swapNames</b>(<b>-sn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Swap the names of the nodes. By default names are not swapped.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagswapValues">
+          <code><b>-swapValues</b>(<b>-sv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates if the commands should exchange attributes on the common attributes
+between the two nodes.  For example, if the nodes are the same base type
+as a transform node, then rotate, scale, translate values would be copied
+over.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// Create two transform nodes and make a connection between them.
+//
+string $tr1 = `createNode transform`;
+string $tr2 = `createNode transform`;
+connectAttr -f ($tr1 + &quot;.t&quot;) ($tr2 + &quot;.t&quot;);
+connectAttr -f ($tr2 + &quot;.r&quot;) ($tr1 + &quot;.r&quot;);
+
+// We want to swap $tr1 out. Create a new node $swapNode that will
+// replace $tr1. To prove that this is working, we will add a new
+// dynamic attribute to $tr1 and connect it to the middle man.
+// If nodeCast cannot find the corresponding attribute on the
+// node to be swaped, it will either ignore the connection or
+// disconnect the connection based on user input.
+//
+string $theT = $tr1;
+select -r $theT;
+addAttr -ln &quot;unmatched&quot; -at &quot;long&quot;;
+string $middle_man = `createNode transform`;
+connectAttr ($theT + &quot;.unmatched&quot;) ($middle_man + &quot;.tx&quot;);
+
+$swapNode = `createNode transform`;
+nodeCast -disconnectUnmatchedAttrs true $theT $swapNode;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

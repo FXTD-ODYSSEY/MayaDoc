@@ -1,0 +1,508 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>directionalLight command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-directionalLight"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/directionalLight.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>directionalLight </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a>, <a href="cat_Rendering.html#Lights" target="contentFrame">Lights</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("directionalLight.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>directionalLight [-<a href="#flagdecayRate">decayRate</a> <i>int</i>] [-<a href="#flagdiscRadius">discRadius</a> <i>linear</i>] [-<a href="#flagexclusive">exclusive</a> <i>boolean</i>] [-<a href="#flagintensity">intensity</a> <i>float</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagposition">position</a> <i>linear linear linear</i>] [-<a href="#flagrgb">rgb</a> <i>float float float</i>] [-<a href="#flagrotation">rotation</a> <i>angle angle angle</i>] [-<a href="#flagshadowColor">shadowColor</a> <i>float float float</i>] [-<a href="#flagshadowDither">shadowDither</a> <i>float</i>] [-<a href="#flagshadowSamples">shadowSamples</a> <i>int</i>] [-<a href="#flagsoftShadow">softShadow</a> <i>boolean</i>] [-<a href="#flaguseRayTraceShadows">useRayTraceShadows</a> <i>boolean</i>]  </code> </p>
+      <p>directionalLight is undoable, queryable, and editable.</p>
+      TlightCmd is the base class for other light commands.
+TnonAmbientLightCmd is a class that looks like a command but
+is not.  It is a base class for the extended/nonExtended
+lights.
+TnonExtendedLightCmd is a base class and not a real command. It is inherited by several
+lights: TpointLight, TdirectionalLight, TspotLight etc.
+The directionalLight command is used to edit the parameters
+of existing directionalLights, or to create new ones. The
+default behaviour is to create a new directionallight.
+<p>
+This is the commmand that instantiates an directionalLight
+or edits the parameters of an existing one.
+TdirectionalLightCmd inherits from TnonExtendedLightCmd
+which defines softShadow flags.
+See TlightCmd for a global picture of the light commands.
+<p>
+TdirectionalLightCmd behaves like any other command, it
+has flags, saves undo information etc. the only slightly
+different behaviour is that it calls up to
+TnonExtendedLightCmd to complete the functionality of
+the command.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>double[]</i></td><td>when querying the rgb or shadowColor flags
+double when querying the intensity flag
+boolean when querying the useRayTraceShadows or exclusive flags
+linear[] when querying the position flag
+angle[] when querying the rotation flag
+string when querying the name flag</td></tr><tr><td valign="top"><i>int</i></td><td>rate of light decay, when querying the decayRate flag</td></tr><tr><td valign="top"><i>int</i></td><td>Number of shadow samples, when querying the shadowSamples flag
+boolean True if soft shadows are enabled, when querying the softShadow flag
+float Shadow dithering value, when querying the shadowDither flag
+float Disc radius value, when querying the discRadius flag</td></tr><tr><td valign="top"><i>string</i></td><td>Light shape name</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="ambientLight.html">ambientLight</a>, <a href="exclusiveLightCheckBox.html">exclusiveLightCheckBox</a>, <a href="lightList.html">lightList</a>, <a href="lightlink.html">lightlink</a>, <a href="pointLight.html">pointLight</a>, <a href="spotLight.html">spotLight</a>, <a href="spotLightPreviewPort.html">spotLightPreviewPort</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdecayRate">decayRate</a>, <a href="#flagdiscRadius">discRadius</a>, <a href="#flagexclusive">exclusive</a>, <a href="#flagintensity">intensity</a>, <a href="#flagname">name</a>, <a href="#flagposition">position</a>, <a href="#flagrgb">rgb</a>, <a href="#flagrotation">rotation</a>, <a href="#flagshadowColor">shadowColor</a>, <a href="#flagshadowDither">shadowDither</a>, <a href="#flagshadowSamples">shadowSamples</a>, <a href="#flagsoftShadow">softShadow</a>, <a href="#flaguseRayTraceShadows">useRayTraceShadows</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdecayRate">
+          <code><b>-decayRate</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Decay rate of the light (0-no decay, 1-slow, 2-realistic, 3-fast)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdiscRadius">
+          <code><b>-discRadius</b>(<b>-drs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Radius of shadow disc.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexclusive">
+          <code><b>-exclusive</b>(<b>-exc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+True if the light is exclusively assigned
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagintensity">
+          <code><b>-intensity</b>(<b>-i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Intensity of the light
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the light
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagposition">
+          <code><b>-position</b>(<b>-pos</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear linear linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Position of the light
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrgb">
+          <code><b>-rgb</b>(<b>-rgb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+RGB colour of the light
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotation">
+          <code><b>-rotation</b>(<b>-rot</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>angle angle angle</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Rotation of the light for orientation, where applicable
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshadowColor">
+          <code><b>-shadowColor</b>(<b>-sc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Color of the light's shadow
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshadowDither">
+          <code><b>-shadowDither</b>(<b>-sd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Shadow dithering value.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshadowSamples">
+          <code><b>-shadowSamples</b>(<b>-sh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Numbr of shadow samples to use
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsoftShadow">
+          <code><b>-softShadow</b>(<b>-ss</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+True if soft shadowing is to be enabled
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseRayTraceShadows">
+          <code><b>-useRayTraceShadows</b>(<b>-rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+True if ray trace shadows are to be used
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Create a directional light
+string $light = `directionalLight -rotation 45 30 15`;
+
+// Change the light intensity
+directionalLight -e -intensity 0.5 $light;
+
+// Query it
+directionalLight -q -intensity $light;
+// Result:0.5//
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

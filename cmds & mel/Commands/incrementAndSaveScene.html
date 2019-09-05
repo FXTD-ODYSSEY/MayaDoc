@@ -1,0 +1,119 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>incrementAndSaveScene command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-incrementAndSaveScene"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>incrementAndSaveScene </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("incrementAndSaveScene.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+incrementAndSaveScene( int $force ) 
+<br>
+
+	 </code> </p>
+      
+      Called when the scene is saved and the &quot;File&quot; -&gt; &quot;Increment &amp; Save&quot;
+menu item is clicked or hotkey &quot;Ctrl+Alt+S&quot; is pressed .
+Performs a non-destructive save of the current scene by taking the
+version of the scene that was last saved to disk, incrementing the version 
+and putting it into the current scene folder.
+If the current scene has never been saved, the regular &quot;Save As...&quot; dialog will be opened.   
+Otherwise, the version in the current file name is incremented, and the file is saved with this new name. 
+If the new file name is an existing file, the user will be prompted to confirm that the file will be replaced.
+After saving, the current Maya scene will be the renamed file. The original file will be unchanged.
+How the file version is incremented:  
+Maya will look at the end of the root file name for a period followed by a string of digits [0-9]. 
+If this pattern is not found, then Maya will append &quot;.0001&quot; to the root file name.  
+If the pattern is found, then the string of digits will be incremented, adding a digit only if necessary. 
+Examples:  
+MyFile.mb ---&gt; MyFile.0001.mb  
+MyFile.01.mb ---&gt; MyFile.02.mb  
+MyFile.99.mb --&gt; MyFile.100.mb  
+MyFile01.mb --&gt; MyFile01.0001.mb  
+MyFile.0043.mb --&gt; MyFile.0044.mb  
+MyFile.00a22.mb --&gt; MyFile.00a22.0001.mb
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$force"><b>$force</b></a></td><td><i>int</i></td><td>When the argument is non-zero, the user will not be prompted for confirmation 
+before the file is written in the event that the file already exists.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>  
+  <i>// User will be prompted for confirmation if the file already exists.
+</i>
+	incrementAndSaveScene 0;
+
+  <i>// User will NOT be prompted for confirmation if the file already exists. The existing file gets overwritten.
+</i>
+	incrementAndSaveScene 1;
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,593 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>bindSkin command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-bindSkin"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/bindSkin.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>bindSkin </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Skinning" target="contentFrame">Skinning</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("bindSkin.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>bindSkin [-<a href="#flagbyClosestPoint">byClosestPoint</a>] [-<a href="#flagbyPartition">byPartition</a>] [-<a href="#flagcolorJoints">colorJoints</a>] [-<a href="#flagdelete">delete</a>] [-<a href="#flagdoNotDescend">doNotDescend</a>] [-<a href="#flagenable">enable</a> <i>boolean</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagpartition">partition</a> <i>string</i>] [-<a href="#flagtoAll">toAll</a>] [-<a href="#flagtoSelectedBones">toSelectedBones</a>] [-<a href="#flagtoSkeleton">toSkeleton</a>] [-<a href="#flagunbind">unbind</a>] [-<a href="#flagunbindKeepHistory">unbindKeepHistory</a>] [-<a href="#flagunlock">unlock</a>] 
+[objects]
+     </code> </p>
+      <p>bindSkin is undoable, queryable, and editable.</p>
+      This command binds the currently selected objects to the
+currently selected skeletons.  Shapes which can be bound are:
+meshes, nurbs curves, nurbs surfaces, lattices, subdivision
+surfaces, and API shapes. Multiple shapes and multiple skeletons can be
+bound at once by selecting them or specifying them on the command
+line. Selection order is not important.<p>
+<p>
+The skin is bound using the so-called &quot;rigid&quot; bind, in which
+the components are rigidly attached to the closest bone in the
+skeleton. Flexors can later be added to the skeleton to
+smooth out the skinning around joints.<p>
+<p>
+The skin(s) can be bound either to the entire skeleton hierarchy
+of the selected joint(s), or to only the selected joints. The
+entire hierarchy is the default. The -tsb/-toSelectedBones flag
+allows binding to only the selected bones.<p>
+<p>
+This command can also be used to detach the skin from the skeleton.
+Detaching the skin is useful in a variety of situations, such as:
+inserting additional bones, deleting bones, changing the bind
+position of the skeleton or skin, or simply getting rid of the
+skinning nodes altogether. The options to use when detaching the
+skin depend on how much of the skinning info you want to get rid
+of. Namely: (1) -delete or -unbind: remove all skinning nodes, (2) -unbindKeepHistory: remove the skinning sets, but keep the weights, (3) -disable: disable the skinning but keep the skinning sets and the weights.<p>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Command result</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="blendShape.html">blendShape</a>, <a href="boneLattice.html">boneLattice</a>, <a href="copyFlexor.html">copyFlexor</a>, <a href="copySkinWeights.html">copySkinWeights</a>, <a href="dagPose.html">dagPose</a>, <a href="flexor.html">flexor</a>, <a href="skinCluster.html">skinCluster</a>, <a href="skinPercent.html">skinPercent</a>, <a href="wire.html">wire</a>, <a href="wrinkle.html">wrinkle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagbyClosestPoint">byClosestPoint</a>, <a href="#flagbyPartition">byPartition</a>, <a href="#flagcolorJoints">colorJoints</a>, <a href="#flagdelete">delete</a>, <a href="#flagdoNotDescend">doNotDescend</a>, <a href="#flagenable">enable</a>, <a href="#flagname">name</a>, <a href="#flagpartition">partition</a>, <a href="#flagtoAll">toAll</a>, <a href="#flagtoSelectedBones">toSelectedBones</a>, <a href="#flagtoSkeleton">toSkeleton</a>, <a href="#flagunbind">unbind</a>, <a href="#flagunbindKeepHistory">unbindKeepHistory</a>, <a href="#flagunlock">unlock</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbyClosestPoint">
+          <code><b>-byClosestPoint</b>(<b>-bcp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+bind each point in the object to the segment closest to the point.
+The byClosestPoint and byPartition flags are mutually
+exclusive.  The byClosestPoint flag is the default.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbyPartition">
+          <code><b>-byPartition</b>(<b>-bp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+bind each group in the partition to the segment
+closest to the group's centroid. A partition must be specified
+with the -p/-partition flag
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolorJoints">
+          <code><b>-colorJoints</b>(<b>-cj</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In bind mode, this flag assigns colors to the joints based
+on the colors assigned to the joint's skin set.
+In delete and unlock mode, this flag removes the colors from
+joints that are no longer bound as skin.
+In disable and unbindKeepHistory mode, this flag does nothing.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdelete">
+          <code><b>-delete</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Detach the skin on the selected skeletons and remove all bind-
+related construction history.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdoNotDescend">
+          <code><b>-doNotDescend</b>(<b>-dnd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Do not descend to shapes that are parented below the selected
+object(s).
+Bind only the selected objects.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenable">
+          <code><b>-enable</b>(<b>-en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Enable or disable a bind that has been disabled on the selected
+skeletons.
+To enable the bind on selected bones only, select the bones and
+use the -tsb flag with the -en flag. This flag is used when you
+want to temporarily disable the bind without losing the set
+information or the weight information of the skinning, for example
+if you want to modify the bindPose.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpartition">
+          <code><b>-partition</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify a partition to bind by. This is only valid when
+used with the -bp/-byPartition flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtoAll">
+          <code><b>-toAll</b>(<b>-ta</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+objects will be bound to the entire selected skeletons. Even bones with zero influence
+will be bound, whereas the toSkeleton will only bind non-zero influences.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtoSelectedBones">
+          <code><b>-toSelectedBones</b>(<b>-tsb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+objects will be bound to the selected bones only.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtoSkeleton">
+          <code><b>-toSkeleton</b>(<b>-ts</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+objects will be bound to the selected skeletons. The toSkeleton, toAll
+and toSelectedBones flags are mutually exclusive. The toSkeleton flag is the default.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunbind">
+          <code><b>-unbind</b>(<b>-ub</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+unbind the selected objects. They will no longer move with
+the skeleton. Any bindSkin history that is no longer used
+will be deleted.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunbindKeepHistory">
+          <code><b>-unbindKeepHistory</b>(<b>-ubk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+unbind the selected objects. They will no longer move with
+the skeleton. However, existing weights on the skin
+will be kept for use the next time the skin is bound. This option
+is appropriate if you want to modify the skeleton without losing
+the weighting information on the skin.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunlock">
+          <code><b>-unlock</b>(<b>-ul</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+unlock the selected objects. Since bindSkin will no longer give
+normal results if bound objects are moved away from the skeleton,
+bindSkin locks translate, rotate and scale. This command unlocks
+the selected objects translate, rotate and scale.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// to bind the selected objects to the selected skeleton
+//
+bindSkin;
+
+// to bind nurbsSphere1 and pPlane1 to the skeleton containing joint2
+//
+bindSkin nurbsSphere1 joint1 pPlane1;
+
+// to bind the selected partition to the selected skeleton
+//
+bindSkin -bp;
+
+// to bind the selected objects to the selected bones only,
+// not the entire skeleton
+//
+bindSkin -tsb;
+
+// to detach the selected objects and delete any unused
+// bindSkin history
+//
+bindSkin -unbind;
+
+// to detach pPlane1 and delete any unused
+// bindSkin history
+//
+bindSkin -unbind pPlane1;
+
+// to detach the selected objects and keep the history
+//
+bindSkin -unbindKeepHistory;
+
+// to disable the skin on the selected skeletons. This gives
+// the effect of detaching the skin without removing the
+// bindSkin groups on the object
+//
+bindSkin -enable 0;
+
+// to enable skin on a skeleton which has been disabled
+//
+bindSkin -enable 1;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

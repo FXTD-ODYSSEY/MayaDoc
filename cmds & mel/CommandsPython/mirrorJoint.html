@@ -1,0 +1,280 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>mirrorJoint command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-mirrorJoint"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/mirrorJoint.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>mirrorJoint </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#IK" target="contentFrame">IK</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("mirrorJoint.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>mirrorJoint(
+object
+    , [<a href="#flagmirrorBehavior">mirrorBehavior</a>=<i>boolean</i>], [<a href="#flagmirrorXY">mirrorXY</a>=<i>boolean</i>], [<a href="#flagmirrorXZ">mirrorXZ</a>=<i>boolean</i>], [<a href="#flagmirrorYZ">mirrorYZ</a>=<i>boolean</i>], [<a href="#flagsearchReplace">searchReplace</a>=<i>[string, string]</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>mirrorJoint is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command will duplicate a branch of the skeleton from the selected
+joint symmetrically about a plane in world space.
+There are three mirroring modes(xy-, yz-, xz-plane).
+<p>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>Names of the mirrored joints</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="connectJoint.html">connectJoint</a>, <a href="ikHandle.html">ikHandle</a>, <a href="ikHandleDisplayScale.html">ikHandleDisplayScale</a>, <a href="ikSolver.html">ikSolver</a>, <a href="ikSystem.html">ikSystem</a>, <a href="ikSystemInfo.html">ikSystemInfo</a>, <a href="insertJoint.html">insertJoint</a>, <a href="joint.html">joint</a>, <a href="jointCluster.html">jointCluster</a>, <a href="jointDisplayScale.html">jointDisplayScale</a>, <a href="jointLattice.html">jointLattice</a>, <a href="removeJoint.html">removeJoint</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagmirrorBehavior">mirrorBehavior</a>, <a href="#flagmirrorXY">mirrorXY</a>, <a href="#flagmirrorXZ">mirrorXZ</a>, <a href="#flagmirrorYZ">mirrorYZ</a>, <a href="#flagsearchReplace">searchReplace</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmirrorBehavior">
+          <code><b>mirrorBehavior</b>(<b>mb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The mirrorBehavior flag is used to specify that when performing the
+mirror, the joint orientation axes should be mirrored such that equal
+rotations on the original and mirrored joints will place the skeleton
+in a mirrored position (symmetric across the mirroring plane). Thus,
+animation curves from the original joints can be copied to the mirrored
+side to produce a similar (but symmetric) behavior. When mirrorBehavior
+is not specified, the joint orientation on the mirrored side will be identical
+to the source side.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmirrorXY">
+          <code><b>mirrorXY</b>(<b>mxy</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+mirror skeleton from the selected joint about xy-plane in world space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmirrorXZ">
+          <code><b>mirrorXZ</b>(<b>mxz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+mirror skeleton from the selected joint about xz-plane in world space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmirrorYZ">
+          <code><b>mirrorYZ</b>(<b>myz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+mirror skeleton from the selected joint about yz-plane in world space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsearchReplace">
+          <code><b>searchReplace</b>(<b>sr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+After performing the mirror, rename the new joints by searching the name for the
+first specified string and replacing it with the second specified string.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Create a mirrored branch of the skeleton starting from the joint &quot;jointName&quot;
+# about the yz-plane.
+# Joint orientations on the mirrored side will be identical to the source side.
+#
+cmds.mirrorJoint( 'jointName' )
+
+# Create a mirrored branch of the skeleton starting from the joint &quot;jointName&quot;
+# about the yz-plane.
+# Joint orientations on the mirrored side will be mirrored from the source side.
+#
+cmds.mirrorJoint('jointName',mirrorBehavior=True,myz=True)
+
+# Create a mirrored branch of the skeleton starting from the selected joint
+# about the xy-plane.
+# Joint orientations on the mirrored side will be mirrored from the source side.
+# Joint names on the duplicated side will contain the string &quot;right_&quot; if
+# the corresponding joint on the original side contained the string &quot;left_&quot;.
+#
+cmds.mirrorJoint(mirrorXY=True,mirrorBehavior=True,searchReplace=('left_', 'right_') )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

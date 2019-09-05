@@ -1,0 +1,1233 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>playblast command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-playblast"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/playblast.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>playblast </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("playblast.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>playblast [-<a href="#flagactiveEditor">activeEditor</a>] [-<a href="#flagcameraSetup">cameraSetup</a> <i>string string</i>] [-<a href="#flagclearCache">clearCache</a> <i>boolean</i>] [-<a href="#flagcodecOptions">codecOptions</a>] [-<a href="#flagcombineSound">combineSound</a>] [-<a href="#flagcompleteFilename">completeFilename</a> <i>string</i>] [-<a href="#flagcompression">compression</a> <i>string</i>] [-<a href="#flageditorPanelName">editorPanelName</a> <i>string</i>] [-<a href="#flagendTime">endTime</a> <i>time</i>] [-<a href="#flagfilename">filename</a> <i>string</i>] [-<a href="#flagforceOverwrite">forceOverwrite</a>] [-<a href="#flagformat">format</a> <i>string</i>] [-<a href="#flagframe">frame</a> <i>time</i>] [-<a href="#flagframePadding">framePadding</a> <i>int</i>] [-<a href="#flagheight">height</a> <i>int</i>] [-<a href="#flagindexFromZero">indexFromZero</a>] [-<a href="#flagoffScreen">offScreen</a>] [-<a href="#flagoffScreenViewportUpdate">offScreenViewportUpdate</a>] [-<a href="#flagoptions">options</a>] [-<a href="#flagpercent">percent</a> <i>int</i>] [-<a href="#flagquality">quality</a> <i>int</i>] [-<a href="#flagrawFrameNumbers">rawFrameNumbers</a>] [-<a href="#flagreplaceAudioOnly">replaceAudioOnly</a>] [-<a href="#flagreplaceEndTime">replaceEndTime</a> <i>time</i>] [-<a href="#flagreplaceFilename">replaceFilename</a> <i>string</i>] [-<a href="#flagreplaceStartTime">replaceStartTime</a> <i>time</i>] [-<a href="#flagsequenceTime">sequenceTime</a> <i>boolean</i>] [-<a href="#flagshowOrnaments">showOrnaments</a> <i>boolean</i>] [-<a href="#flagsound">sound</a> <i>string</i>] [-<a href="#flagstartTime">startTime</a> <i>time</i>] [-<a href="#flagthrowOnError">throwOnError</a>] [-<a href="#flaguseTraxSounds">useTraxSounds</a>] [-<a href="#flagviewer">viewer</a> <i>boolean</i>] [-<a href="#flagwidth">width</a> <i>int</i>] [-<a href="#flagwidthHeight">widthHeight</a> <i>int int</i>] 
+filename
+     </code> </p>
+      <p>playblast is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command playblasts the current playback range.
+Sound is optional.
+<p>
+Note that the playblast command registers a condition called &quot;playblasting&quot;
+so that users can monitor whether playblasting is occurring. You may monitor the
+condition using the API (MConditionMessage) or a script (scriptJob and condition
+commands).
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Name of moviefile created.</td></tr></table>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagactiveEditor">activeEditor</a>, <a href="#flagcameraSetup">cameraSetup</a>, <a href="#flagclearCache">clearCache</a>, <a href="#flagcodecOptions">codecOptions</a>, <a href="#flagcombineSound">combineSound</a>, <a href="#flagcompleteFilename">completeFilename</a>, <a href="#flagcompression">compression</a>, <a href="#flageditorPanelName">editorPanelName</a>, <a href="#flagendTime">endTime</a>, <a href="#flagfilename">filename</a>, <a href="#flagforceOverwrite">forceOverwrite</a>, <a href="#flagformat">format</a>, <a href="#flagframe">frame</a>, <a href="#flagframePadding">framePadding</a>, <a href="#flagheight">height</a>, <a href="#flagindexFromZero">indexFromZero</a>, <a href="#flagoffScreen">offScreen</a>, <a href="#flagoffScreenViewportUpdate">offScreenViewportUpdate</a>, <a href="#flagoptions">options</a>, <a href="#flagpercent">percent</a>, <a href="#flagquality">quality</a>, <a href="#flagrawFrameNumbers">rawFrameNumbers</a>, <a href="#flagreplaceAudioOnly">replaceAudioOnly</a>, <a href="#flagreplaceEndTime">replaceEndTime</a>, <a href="#flagreplaceFilename">replaceFilename</a>, <a href="#flagreplaceStartTime">replaceStartTime</a>, <a href="#flagsequenceTime">sequenceTime</a>, <a href="#flagshowOrnaments">showOrnaments</a>, <a href="#flagsound">sound</a>, <a href="#flagstartTime">startTime</a>, <a href="#flagthrowOnError">throwOnError</a>, <a href="#flaguseTraxSounds">useTraxSounds</a>, <a href="#flagviewer">viewer</a>, <a href="#flagwidth">width</a>, <a href="#flagwidthHeight">widthHeight</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveEditor">
+          <code><b>-activeEditor</b>(<b>-ae</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will return the current model editor that would be used
+for playblast. It does not invoke playblast itself.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcameraSetup">
+          <code><b>-cameraSetup</b>(<b>-cs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Information about camera setup. The first string defines a camera setup MEL procedure.
+The camera setup procedure will be invoked before executing a playblast.
+The second string argument which is used as a camera identifier and is
+appended to the root file name to specify the final output file name(s).
+The command will fail there is not a pair of strings supplied to the argument.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclearCache">
+          <code><b>-clearCache</b>(<b>-cc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When true, all previous temporary playblast files will be deleted
+before the new playblast files are created and the remaining temporary
+playblast files will be deleted when the application quits.
+Any playblast files that were explicitly given a name by the user will not be deleted.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcodecOptions">
+          <code><b>-codecOptions</b>(<b>-co</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Brings up the OS specific dialog for setting playblast codec options, and
+does not run the playblast.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcombineSound">
+          <code><b>-combineSound</b>(<b>-csd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Combine the trax sounds into a single track. This might force a
+resampling of the sound if the sound paramters don't match up.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcompleteFilename">
+          <code><b>-completeFilename</b>(<b>-cf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When set, this string specifies the exact name of the output image.
+In contrast with the -f/filename flag, -cf/completeFilename does not
+append any frame number or extension string at the end of the filename.
+Additionally, playblast will not delete the image from disk after it is
+displayed. This flag should not be used in conjunction with -f/filename.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcompression">
+          <code><b>-compression</b>(<b>-c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the compression to use for the movie file.  To determine which settings are available on your system, use the
+`playblast -options` command. This will display a system-specific dialog with supported compression formats.
+<br>When the 'format' flag is 'image', this flag is used to pass in the
+desired image format. If the format is 'image' and the compression flag is ommitted,
+the output format specified via the Render Globals preference (see -format) will be used.
+If compression is set to 'none', the iff image format will be used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageditorPanelName">
+          <code><b>-editorPanelName</b>(<b>-epn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This optional flag specifies the name of the model editor or panel, which is to
+be used for playblast. The current model editor or panel won't be used for
+playblast unless its name is specified. Flag usage is specific to invoking
+playblast.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendTime">
+          <code><b>-endTime</b>(<b>-et</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the end time of the playblast.  Default
+is the end time of the playback range displayed in
+the Time Slider. Overridden by -frame.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfilename">
+          <code><b>-filename</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The filename to use for the output of this playblast.
+If the file already exists, a confirmation box will be
+displayed if playblast is performed interactively.  If
+playblast is executed from the command line and the file
+already exists, it will abort.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforceOverwrite">
+          <code><b>-forceOverwrite</b>(<b>-fo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Overwrite existing playblast files which may have the
+the same name as the one specified with the &quot;-f&quot; flag
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagformat">
+          <code><b>-format</b>(<b>-fmt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The format for the playblast output.
+<br>
+
+<table>
+<tr>
+<th>Value</th><th>Description</th>
+</tr>
+<tr>
+<td valign="top">&quot;movie&quot;</td>
+<td>This option selects a platform-specific default movie format.<br>
+On Linux and Mac OSX the default movie format is Quicktime.<br>
+On Windows the default movie format is Audio Video Interleave.
+</td>
+</tr>
+<tr>
+<td valign="top">&quot;avi&quot;</td>
+<td>Set the format to Audio Video Interleave (Windows only)</td>
+</tr>
+<tr>
+<td valign="top">&quot;qt&quot;</td>
+<td>Set the format to QuickTime (all platforms).</td>
+</tr>
+<tr>
+<td valign="top">&quot;avfoundation&quot;</td>
+<td>Write movie by AVFoundation (Mac only).</td>
+</tr>
+<tr>
+<td valign="top">&quot;image&quot;</td>
+<td>Outputs a sequence of image files.<br>
+The image format will be the Output Format specified using Window &gt; RenderEditors &gt; RenderSettings &gt; CommonTab.
+The resulting files use the value of the &quot;-f&quot; flag as a prefix, with an
+appended frame number, as in &quot;myFile.0007.iff&quot;</td>
+</tr>
+<tr>
+<td valign="top">&quot;iff&quot;</td>
+<td>Same as &quot;image&quot;</td>
+</tr>
+</table>
+
+<br>
+The default value of the -fmt/format flag is &quot;movie&quot;.
+Depending on the selected format, a platform-specific default application will be used to view results.
+For image sequences, the default application is &quot;fcheck&quot;.
+For movies, the default application is Windows Media Player (on Windows),
+Quicktime Player (on Mac OSX), and Lqtplay (on Linux).
+Users can specify different applications via Maya's application preferences.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagframe">
+          <code><b>-frame</b>(<b>-fr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List of frames to blast. One frame specified per flag.
+The frames can be specified in any order but will be output
+in an ordered sequence. When specified this flag will override any
+start/end range
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagframePadding">
+          <code><b>-framePadding</b>(<b>-fp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Number of zeros used to pad file name. Typically set to 4 to support fcheck.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagheight">
+          <code><b>-height</b>(<b>-h</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Height of the final image. This value will be clamped if larger
+than the width of the active window.<br>
+Windows: If not using fcheck, the width and height must each be divisible
+by 4.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagindexFromZero">
+          <code><b>-indexFromZero</b>(<b>-ifz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Output frames starting with file.0000.ext and incrementing by one. Typically
+frames use the Maya time as their frame number. This option can only be used
+for frame based output formats.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoffScreen">
+          <code><b>-offScreen</b>(<b>-os</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When set, this toggle allow playblast to use an offscreen buffer
+to render the view. This allows playblast to work when the application
+is iconified, or obscured.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoffScreenViewportUpdate">
+          <code><b>-offScreenViewportUpdate</b>(<b>-osv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When set, this toggle allows playblast to update the viewport
+while rendering with the offscreen buffer.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoptions">
+          <code><b>-options</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Brings up a dialog for setting playblast options, and
+does not run the playblast.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpercent">
+          <code><b>-percent</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Percentage of current view size  to use during blasting.
+Accepted values are integers between 10 and 100.  All other
+values are clamped to be within this range.  A value of 25
+means 1/4 of the  current view size; a  value of 50  means
+half the current view size; a value of 100 means full
+size.  (Default is 50.)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagquality">
+          <code><b>-quality</b>(<b>-qlt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the compression quality factor to use for the movie file.
+Value should be in the 0-100 range
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrawFrameNumbers">
+          <code><b>-rawFrameNumbers</b>(<b>-rfn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Playblast typically numbers its frames sequentially, starting at zero.
+This flag will override the default action and frames will be numbered using the
+actual frames specified by the -frame or -startFrame/-endFrame flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceAudioOnly">
+          <code><b>-replaceAudioOnly</b>(<b>-rao</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When set, this string dictates that only the audio will be replaced when
+the scene is re-playblasted.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceEndTime">
+          <code><b>-replaceEndTime</b>(<b>-ret</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the end time of a replayblast of an existing
+playblast.  Default is the start time of the playback
+range displayed in the Time Slider. Overridden by -frame.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceFilename">
+          <code><b>-replaceFilename</b>(<b>-rf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When set, this string specifies the name of an input playblast file which
+will have frames replaced according to the replace start and end times.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplaceStartTime">
+          <code><b>-replaceStartTime</b>(<b>-rst</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the start time of a replayblast of an existing
+playblast.  Default is the start time of the playback
+range displayed in the Time Slider. Overridden by -frame.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsequenceTime">
+          <code><b>-sequenceTime</b>(<b>-sqt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use sequence time
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshowOrnaments">
+          <code><b>-showOrnaments</b>(<b>-orn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets whether or not model view ornaments (e.g. the axis icon)
+should be displayed
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsound">
+          <code><b>-sound</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the sound node to be used during playblast
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstartTime">
+          <code><b>-startTime</b>(<b>-st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the start time of the playblast.  Default
+is the start time of the playback range displayed in
+the Time Slider. Overridden by -frame.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagthrowOnError">
+          <code><b>-throwOnError</b>(<b>-toe</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Playblast is tolerant of failures in most situations. When set,
+this toggle allows playblast to throw an error on these failures.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseTraxSounds">
+          <code><b>-useTraxSounds</b>(<b>-uts</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use sounds from TRAX.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagviewer">
+          <code><b>-viewer</b>(<b>-v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify whether a viewer should be launched for the
+playblast.  Default is &quot;true&quot;.  Runs &quot;fcheck&quot; when -fmt is &quot;image&quot;.
+The player for movie files depends on the OS: Windows uses Microsoft Media
+Player, Irix uses movieplayer, OSX uses QuickTime.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwidth">
+          <code><b>-width</b>(<b>-w</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Width of the final image. This value will be clamped if larger than
+the width of the active window.<br>
+Windows: If not using fcheck, the width and height must each be divisible
+by 4.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwidthHeight">
+          <code><b>-widthHeight</b>(<b>-wh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Final image's width and height.
+Values larger than the dimensions of the active window are clamped.
+A width and height of 0 means to use the window's current
+size.<br>
+Windows: If not using fcheck, the width and height must each be divisible
+by 4.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Run movieplayer on the currently playblasted range
+// (including sound) and save the movie to a file.
+//
+playblast -s ohNo -f myMovie.mv;
+
+// Run movieplayer on the currently playblasted range
+// (at 60% of the size of the current view), and
+// save the movie to file &quot;myMovie.mv&quot; and don't
+// launch any viewing program.
+//
+playblast -p 60 -s ohNo -f myMovie.mv -v false;
+
+// Output frames 2, 3, 8 as images and launch the viewer;
+//
+playblast  -frame 8 -frame 3 -frame 2 -format image -viewer 1;
+
+// Output an image sequence in 'gif' format
+//
+playblast -format &quot;image&quot; -compression &quot;gif&quot;;
+
+// Output depth with image in 'iff' format
+//
+playblast  -format image -compression &quot;maya&quot; -saveDepth;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

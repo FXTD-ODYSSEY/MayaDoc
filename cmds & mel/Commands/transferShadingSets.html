@@ -1,0 +1,186 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>transferShadingSets command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-transferShadingSets"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/transferShadingSets.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>transferShadingSets </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("transferShadingSets.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>transferShadingSets [-<a href="#flagsampleSpace">sampleSpace</a> <i>uint</i>] [-<a href="#flagsearchMethod">searchMethod</a> <i>uint</i>]  </code> </p>
+      <p>transferShadingSets is undoable, queryable, and editable.</p>
+      Command to transfer shading set assignments between meshes.
+The last mesh in the list receives the shading assignments from the other meshes.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>shading, sets
+      <h2><a name="hRelated">Related</a></h2><a href="transferAttributes.html">transferAttributes</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagsampleSpace">sampleSpace</a>, <a href="#flagsearchMethod">searchMethod</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsampleSpace">
+          <code><b>-sampleSpace</b>(<b>-spa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Selects which space the attribute transfer is performed in.
+0 is world space, 1 is model space. The default is world space.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsearchMethod">
+          <code><b>-searchMethod</b>(<b>-sm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies which search method to use when correlating points.
+0 is closest along normal, 3 is closest to point. The default is closest to point.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// make a low res sphere with shaders
+string $low[] = `polySphere -sx 6 -sy 6`;
+string $lowShape[] = `listRelatives -fullPath -shapes $low[0]`;
+string $redSG = `sets -r 1 -em`;
+string $redMat = `shadingNode -asShader &quot;lambert&quot;`;
+setAttr ($redMat + &quot;.color&quot;) -type &quot;double3&quot; 1 0 0;
+connectAttr -f ($redMat + &quot;.outColor&quot;) ($redSG + &quot;.surfaceShader&quot;);
+string $greenSG = `sets -r 1 -em`;
+string $greenMat = `shadingNode -asShader &quot;lambert&quot;`;
+setAttr ($greenMat + &quot;.color&quot;) -type &quot;double3&quot; 0 1 0;
+connectAttr -f ($greenMat + &quot;.outColor&quot;) ($greenSG + &quot;.surfaceShader&quot;);
+sets -e -fe $redSG ( $lowShape[0] + &quot;.f[0:17]&quot; );
+sets -e -fe $greenSG ( $lowShape[0] + &quot;.f[18:36]&quot; );
+
+// make a high res sphere
+string $high[] = `polySphere -sx 20 -sy 20`;
+string $highShape[] = `listRelatives -fullPath -shapes $high[0]`;
+xform -ws -t 2 0 0 $high[0];
+
+// transfer the shading sets
+select -r $low[0];
+select -tgl $high[0];
+transferShadingSets -sampleSpace 1;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

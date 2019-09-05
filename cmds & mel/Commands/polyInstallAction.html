@@ -1,0 +1,340 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyInstallAction command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-polyInstallAction"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/polyInstallAction.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyInstallAction </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyInstallAction.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyInstallAction [-<a href="#flagcommandName">commandName</a>] [-<a href="#flagconvertSelection">convertSelection</a>] [-<a href="#flaginstallConstraint">installConstraint</a>] [-<a href="#flaginstallDisplay">installDisplay</a>] [-<a href="#flagkeepInstances">keepInstances</a>] [-<a href="#flaguninstallConstraint">uninstallConstraint</a>] [-<a href="#flaguninstallDisplay">uninstallDisplay</a>] 
+name
+     </code> </p>
+      <p>polyInstallAction is undoable, queryable, and <b>NOT editable</b>.</p>
+      Installs/uninstalls several things to help the user to perform the
+specified action :
+<ul>
+<li>Pickmask</li>
+<li>Internal selection constraints</li>
+<li>Display attributes</li>
+</ul>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>When installing constraint, returns as an array of strings the
+items on which the installed command will act on. otherwise, returns nothing</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="polyListComponentConversion.html">polyListComponentConversion</a>, <a href="polySelectConstraint.html">polySelectConstraint</a>, <a href="polySelectConstraintMonitor.html">polySelectConstraintMonitor</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcommandName">commandName</a>, <a href="#flagconvertSelection">convertSelection</a>, <a href="#flaginstallConstraint">installConstraint</a>, <a href="#flaginstallDisplay">installDisplay</a>, <a href="#flagkeepInstances">keepInstances</a>, <a href="#flaguninstallConstraint">uninstallConstraint</a>, <a href="#flaguninstallDisplay">uninstallDisplay</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcommandName">
+          <code><b>-commandName</b>(<b>-cn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+return as a string the name of the command previously installed
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconvertSelection">
+          <code><b>-convertSelection</b>(<b>-cs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+convert all polys selected in object mode
+into their full matching component selection. For example : if a polyMesh is selected,
+<br><i>polyInstallAction -cs polyCloseBorder</i>
+<br>will select all border edges.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginstallConstraint">
+          <code><b>-installConstraint</b>(<b>-ic</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+<br>C: install selection pickmask and internal constraints for <i>actionname</i>
+<br>Q: returns 1 if any internal constraint is set for current action
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginstallDisplay">
+          <code><b>-installDisplay</b>(<b>-id</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+<br>C: install display attributes for <i>actionname</i>
+<br>Q: returns 1 if any display is set for current action
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkeepInstances">
+          <code><b>-keepInstances</b>(<b>-ki</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Convert components for all selected instances rather than only the first selected instance.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguninstallConstraint">
+          <code><b>-uninstallConstraint</b>(<b>-uc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+uninstall internal constraints previously installed
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguninstallDisplay">
+          <code><b>-uninstallDisplay</b>(<b>-ud</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+uninstall display attributes previously installed
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Will set pickmask to edges, install internal constraint
+// so that only border edges may be selected.
+polyInstallAction -ic polyCloseBorder;
+
+// Same as previous, plus force the display of borders if the
+// user didn't asked explicitely for it before.
+polyInstallAction -ic -id polyCloseBorder;
+
+// Shortcut for polyInstallAction -ic -id polyCloseBorder;
+polyInstallAction polyCloseBorder;
+
+// Assuming the previous install was for closeBorder,
+// will release internal border constraint, but go on displaying
+// borders if the user didn't asked explicitely for it before.
+polyInstallAction -uc;
+
+// Assuming the previous install was for closeBorder,
+// will release internal border constraint, stop displaying
+// borders if the user didn't asked explicitely for it before.
+polyInstallAction -uc -ud;
+
+// Shortcut for polyInstallAction -uc -ud;
+polyInstallAction;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

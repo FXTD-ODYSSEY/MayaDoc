@@ -1,0 +1,191 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>addPP command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-addPP"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/addPP.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>addPP </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Dynamics" target="contentFrame">Dynamics</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("addPP.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>addPP [-<a href="#flagattribute">attribute</a> <i>string</i>] 
+objects
+     </code> </p>
+      <p>addPP is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Adds per-point (per-cv, per-vertex, or per-particle) attribute
+capability for an attribute of an emitter or field.  The -atr flag
+identifies the attribute.  If no attribute is named, addPP returns a
+warning and does nothing.
+<p>
+The command adds any other necessary attributes wherever they are
+needed, and makes all necessary connections.  If any of the attributes
+already exist, the command simply connects to them.  The command also
+toggles any relevant attributes in the emitter or field to indicate
+that per-point capability is being used.
+<p>
+The command adds a separate per-point attribute to the owning object
+for each emitter/field.  For example, for emission rate, there is a
+separate ratePP for each emitter.  These attributes are named
+according to the convention &lt;emitter/field name&gt;&lt;attr
+name&gt;PP.  For example, if a particle shape owned an emitter
+&quot;smoke&quot;, that shape would get attribute &quot;smokeRatePP.&quot;
+<p>
+The name of the object must be the emitter or field for which
+per-point capability is to be added (or the name of its parent
+transform).  The addPP command adds the per-point capability for that
+emitter or field but not for any others owned by the same object.  If
+per-point capability is not supported for a named object, the command
+will trigger a warning, but will continue executing for any other
+objects which were valid.
+<p>
+If no objects are named, addPP uses any objects in the current
+selection list for which the specified attribute is applicable.  (For
+example, it would add per-point rate for all selected emitters.)
+<p>
+If addPP detects that the owner object has left-over attributes from a
+deleted emitter, it will remove those attributes before adding the new
+ones.  Thus, you can delete the emitter, make a new one, and run addPP
+again, and addPP will clean up after the deleted emitter.  This is
+most commonly used if you have a geometry emitter and then decide to
+change the geometry.  Likewise, if addPP detects that some cvs or
+vertices have been added to the geometry, then it will expand the
+corresponding multi-attributes as necessary.  However, if it detects
+that some cvs/vertices have been removed, it will not remove any
+entries from the multi.  See the user manual for more discussion.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>Returns names of emitters/fields for which the per-point
+capability was added for the specified attribute.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="emitter.html">emitter</a>, <a href="particle.html">particle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagattribute">attribute</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattribute">
+          <code><b>-attribute</b>(<b>-atr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of attribute to which you wish to add PP capability.
+Currently the only attribute supported is rate (for emitters).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+emitter -pos 0 0 0 -type omni -n myEmitter1;
+particle -n myParticle1;
+connectDynamic -em myEmitter1 myParticle1;
+select -r myParticle1;
+emitter -type omni -n myEmitter2;
+particle -n myParticle2;
+connectDynamic -em myEmitter2 myParticle2;
+addPP -atr &quot;rate&quot; myEmitter2;
+
+// Suppose that myEmitter2 is owned by a particle shape, &quot;myParticle1.&quot;
+// addPP will add an attribute &quot;myEmitter2RatePP&quot; to myParticle1, will connect
+// myParticle1.myEmitter2RatePP to myEmitter2.ratePP, and will set my2Emitter.useRatePP
+// to true.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

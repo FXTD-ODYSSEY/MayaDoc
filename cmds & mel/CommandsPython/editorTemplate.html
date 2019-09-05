@@ -1,0 +1,998 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>editorTemplate command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-editorTemplate"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/editorTemplate.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>editorTemplate </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("editorTemplate.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>editorTemplate([<a href="#flagaddAdskAssetControls">addAdskAssetControls</a>=<i>boolean</i>], [<a href="#flagaddComponents">addComponents</a>=<i>boolean</i>], [<a href="#flagaddControl">addControl</a>=<i>boolean</i>], [<a href="#flagaddDynamicControl">addDynamicControl</a>=<i>boolean</i>], [<a href="#flagaddExtraControls">addExtraControls</a>=<i>boolean</i>], [<a href="#flagaddSeparator">addSeparator</a>=<i>boolean</i>], [<a href="#flagannotateFieldOnly">annotateFieldOnly</a>=<i>boolean</i>], [<a href="#flagannotation">annotation</a>=<i>string</i>], [<a href="#flagbeginLayout">beginLayout</a>=<i>string</i>], [<a href="#flagbeginNoOptimize">beginNoOptimize</a>=<i>boolean</i>], [<a href="#flagbeginScrollLayout">beginScrollLayout</a>=<i>boolean</i>], [<a href="#flagcallCustom">callCustom</a>=<i>boolean</i>], [<a href="#flagcollapse">collapse</a>=<i>boolean</i>], [<a href="#flagdebugMode">debugMode</a>=<i>boolean</i>], [<a href="#flagdimControl">dimControl</a>=<i>[string, string, boolean]</i>], [<a href="#flagendLayout">endLayout</a>=<i>boolean</i>], [<a href="#flagendNoOptimize">endNoOptimize</a>=<i>boolean</i>], [<a href="#flagendScrollLayout">endScrollLayout</a>=<i>boolean</i>], [<a href="#flagextraControlsLabel">extraControlsLabel</a>=<i>string</i>], [<a href="#flaginterruptOptimize">interruptOptimize</a>=<i>boolean</i>], [<a href="#flaglabel">label</a>=<i>string</i>], [<a href="#flaglistExtraAttributes">listExtraAttributes</a>=<i>string</i>], [<a href="#flagpreventOverride">preventOverride</a>=<i>boolean</i>], [<a href="#flagqueryControl">queryControl</a>=<i>[string, string]</i>], [<a href="#flagqueryLabel">queryLabel</a>=<i>[string, string]</i>], [<a href="#flagqueryName">queryName</a>=<i>[string, string]</i>], [<a href="#flagremoveControl">removeControl</a>=<i>[string, string]</i>], [<a href="#flagsuppress">suppress</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>editorTemplate is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The editorTemplate command allows the user to specify the
+conceptual layout of an attribute editor and leave the details
+of exactly which UI elements are used in the final result to the
+automatic dialog generation mechanism.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>For queryControl, the appropriate attribute type will be
+returned.
+string array
+For listExtraAttributes, extra attributes will be returned.</td></tr></table>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaddAdskAssetControls">addAdskAssetControls</a>, <a href="#flagaddComponents">addComponents</a>, <a href="#flagaddControl">addControl</a>, <a href="#flagaddDynamicControl">addDynamicControl</a>, <a href="#flagaddExtraControls">addExtraControls</a>, <a href="#flagaddSeparator">addSeparator</a>, <a href="#flagannotateFieldOnly">annotateFieldOnly</a>, <a href="#flagannotation">annotation</a>, <a href="#flagbeginLayout">beginLayout</a>, <a href="#flagbeginNoOptimize">beginNoOptimize</a>, <a href="#flagbeginScrollLayout">beginScrollLayout</a>, <a href="#flagcallCustom">callCustom</a>, <a href="#flagcollapse">collapse</a>, <a href="#flagdebugMode">debugMode</a>, <a href="#flagdimControl">dimControl</a>, <a href="#flagendLayout">endLayout</a>, <a href="#flagendNoOptimize">endNoOptimize</a>, <a href="#flagendScrollLayout">endScrollLayout</a>, <a href="#flagextraControlsLabel">extraControlsLabel</a>, <a href="#flaginterruptOptimize">interruptOptimize</a>, <a href="#flaglabel">label</a>, <a href="#flaglistExtraAttributes">listExtraAttributes</a>, <a href="#flagpreventOverride">preventOverride</a>, <a href="#flagqueryControl">queryControl</a>, <a href="#flagqueryLabel">queryLabel</a>, <a href="#flagqueryName">queryName</a>, <a href="#flagremoveControl">removeControl</a>, <a href="#flagsuppress">suppress</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddAdskAssetControls">
+          <code><b>addAdskAssetControls</b>(<b>aac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds controls for dynamic attributes of adskMaterial nodes
+and organizes them in a layout according to the XML ui
+description specified in the asset library.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddComponents">
+          <code><b>addComponents</b>(<b>acp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will add a frameLayout with a channel box
+which will display any selected components for the
+object.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddControl">
+          <code><b>addControl</b>(<b>ac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The first argument is the name of the attribute for which
+you wish to add a control. You can assume that when the editor
+is created from the template, an appropriate type of control
+will be used.
+The second string argument is optional, and can be used
+to specify a command (or script) to be executed when the
+attribute is changed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddDynamicControl">
+          <code><b>addDynamicControl</b>(<b>adc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+As -addControl with the exception that the attribute
+for which the control is to be created/attached is dynamic.
+[Note: -addControl will also work for dynamic attributes,
+but will not preserve their order in the attribute editor].
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddExtraControls">
+          <code><b>addExtraControls</b>(<b>aec</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+By default, if there are attributes of a node which you do
+not -addControl or -suppress, then controls will be created
+automatically and appended to the end of editor created from the
+template. This flag allows you to specify a particular place
+in the template for such controls to be automatically inserted.
+If dynamic attributes have not already been addressed
+with -addControl, they will also be placed here.  A frameLayout
+will automatically be generated for you when you use this flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddSeparator">
+          <code><b>addSeparator</b>(<b>addSeparator</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds a separator to the template.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagannotateFieldOnly">
+          <code><b>annotateFieldOnly</b>(<b>afo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used with the -annotation flag.  By
+default, for any Attribute Editor controlGroups created by
+the -addControl flag, the -annotation flag displays its
+annotation string when the mouse hovers over any control
+that is part (the label, the value field, etc.) of the
+group.  Use this flag to limit display of the annotation to
+only the value field of the controlGroup.  This flag is
+ignored if the controlGroup has no value field (e.g., checkBoxGrp)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagannotation">
+          <code><b>annotation</b>(<b>ann</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used with the -addControl or
+the -addDynamicControl flags. The string will be used as
+an annotation on the controls created in the attribute editor.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbeginLayout">
+          <code><b>beginLayout</b>(<b>bl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Begins a layout in the template with the title specified
+by the string argument.
+Items between this flag and    its corresponding -endLayout flag
+will be contained within the layout. You can assume that when
+the editor is created from the template, an appropriate type of
+layout will be used. (frameLayout).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbeginNoOptimize">
+          <code><b>beginNoOptimize</b>(<b>bn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that the layout of items between this flag and its
+corresponding -endNoOptimize flag is not to be optimized to
+minimize space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbeginScrollLayout">
+          <code><b>beginScrollLayout</b>(<b>bsl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Begins a scrollLayout.  Items between this flag and its
+corresponding -endScrollLayout flag will be contained within
+the layout.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcallCustom">
+          <code><b>callCustom</b>(<b>ccu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that at this point in the template when building the
+dialog, the procedure specified by the first argument is to be
+called to create some UI objects when a new node type is edited.
+The procedure specified by the second argument is to be called if
+an attribute editor already exists and another node of the same
+type is now to be edited. The replacing procedure should connect
+any controls created by the creating procedure to the equivalent
+attributes in the new node. A list of zero or more attributes
+specifies the attributes which the two procedures will involve.
+The procedures should have the signature:
+<pre>
+proc AEcustomNew(string attributeName1, string attributeName2)
+</pre>
+The number of attributes specified in the call should correspond
+to the number of attributes in the procedure signature.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcollapse">
+          <code><b>collapse</b>(<b>cl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is only valid when used in conjunction with
+a -bl/beginLayout flag.  It is used to specify the initial
+expand/collapse state of the layout.  A true value will cause the
+layout to be collapsed upon creation, while a false value will
+expand the layout.  The default is true (ie. collapsed).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdebugMode">
+          <code><b>debugMode</b>(<b>dbm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set debugging mode for the template
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdimControl">
+          <code><b>dimControl</b>(<b>dc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string, boolean]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is only useful AFTER a control has already been
+created (using the -addControl flag).  The first argument
+is the node name and the second is the attribute
+whose control you wish to affect.  The third argument is a
+boolean which specifies whether to dim (true) or undim (false)
+the associated control.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendLayout">
+          <code><b>endLayout</b>(<b>el</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Ends a layout in the template started by -beginLayout.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendNoOptimize">
+          <code><b>endNoOptimize</b>(<b>en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Ends a set of non-optimized items.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendScrollLayout">
+          <code><b>endScrollLayout</b>(<b>esl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Ends a scrollLayout.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagextraControlsLabel">
+          <code><b>extraControlsLabel</b>(<b>ecl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+By default the label is &quot;Extra Attributes&quot;. Specify an
+alternate label or an empty string to hide the label. This flag
+must be used in conjuction with the -aec/addExtraControls flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginterruptOptimize">
+          <code><b>interruptOptimize</b>(<b>io</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Enforces a division between two sets of items whose layouts
+may be optimized.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglabel">
+          <code><b>label</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used with the -addControl or
+the -addDynamicControl flags.  And it must be specified FIRST.
+The string will override the name of the attribute that
+will be displayed in the attribute editor.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistExtraAttributes">
+          <code><b>listExtraAttributes</b>(<b>lea</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List extra attributes.This flag is only useful AFTER a control
+has already been created (using the -addControl flag). The
+first argument is the node name.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreventOverride">
+          <code><b>preventOverride</b>(<b>po</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, this flag disallows overriding the control's
+attribute via the control's right mouse button menu.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagqueryControl">
+          <code><b>queryControl</b>(<b>qc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is only useful AFTER a control has already been
+created (using the -addControl flag).  The first argument is
+the node name and the second is the attribute whose control
+you wish to query.  Note that in most cases, using this
+flag is identical to issuing a getAttr command, however, in
+the case of textFields (e.g. for message attributes), the text
+value currently being displayed will be returned, NOT the actual
+attribute value.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagqueryLabel">
+          <code><b>queryLabel</b>(<b>ql</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is only useful AFTER a control has already been
+created (using the -addControl flag).  The first argument is
+the node name and the second is the attribute whose control
+label you wish to query.  In most cases this flag
+returns the same value as the attribute's nice name,
+but when a -label flag was present on the -addControl command that
+created the control, -queryLabel will return that value instead
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagqueryName">
+          <code><b>queryName</b>(<b>qn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is only useful AFTER a control has already been
+created (using the -addControl flag).  The first argument is
+the node name and the second is the attribute whose control name
+you wish to query.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveControl">
+          <code><b>removeControl</b>(<b>rc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete and should no longer be used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsuppress">
+          <code><b>suppress</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Prevent a control for the attribute specified by the
+string argument from appearing in the editor created from the
+template.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# You will most likely want to use this command when defining the controls
+# that appear in the Attribute Editor for a custom node created in a plugin.
+
+# To see how this is done compile and load the transCircleNode plugin. Then
+# create a node of type &quot;transCircle&quot; and show the Attribute Editor.
+
+# Now look at the AEtransCircleTemplate.mel script to see how the
+# editorTemplate command is used to define the controls that appear in
+# the Attribute Editor.
+
+# As you may have noticed the name of the template script must match the
+# node type you create, ie. AEnodeTypeTemplate.mel.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

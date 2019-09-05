@@ -1,0 +1,110 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>seed command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-seed"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>seed </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Math" target="contentFrame">Math</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("seed.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>seed 
+[string] int
+     </code> </p>
+      <p>seed is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command seeds the generation of random numbers allowing
+repeatable sequences of random numbers. The seed function
+affects <i>rand</i>, <i>sphrand</i> and <i>gauss</i>.
+<p>
+<b>Multiple random number streams:</b><br>
+The stream-based variant of <i>seed</i> accepts a string parameter
+which specifies the name of the random number stream to seed.
+For more details on multiple random number streams please see
+the <i>rand</i> function. Note that there is no need to seed a
+stream upon creation because every stream created, including the
+default stream, is first initialised to the same internal seed
+value to ensure that every stream will generate identical results
+when called with the exact same sequence of random calls.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>The seed number</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="delrandstr.html">delrandstr</a>, <a href="gauss.html">gauss</a>, <a href="rand.html">rand</a>, <a href="randstate.html">randstate</a>, <a href="sphrand.html">sphrand</a>
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+seed 7718;
+// Result: 7718 //
+rand 1;
+// Result: 0.540686 //
+rand 1;
+// Result: 0.107317 //
+seed 7718;
+// Result: 7718 //
+rand 1;
+// Result: 0.540686 //
+rand 1;
+// Result: 0.107317 //
+
+string $s1 = &quot;stream1&quot;;
+// Result: stream1 //
+seed $s1 7718;
+// Result: 7718 //
+rand $s1 1;
+// Result: 0.540686 //
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

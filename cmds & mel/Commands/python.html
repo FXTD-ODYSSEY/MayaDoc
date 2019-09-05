@@ -1,0 +1,110 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>python command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-python"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>python </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("python.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>python 
+string
+     </code> </p>
+      <p>python is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command executes Python scripts from MEL. The command receives a
+string containing a snippet of Python code. That code is executed and
+then the result in returned to MEL.
+<p>
+Note that only single-line Python scripts will return a result due to
+a limitation in the Python interpreter.
+<p>
+The return type from the Python code will be converted into a MEL
+type. Python integer, float, and string return values will be
+converted into the match MEL types. As well, if the Python code
+returns a list, the python command will try to determine if it could
+be converted into a MEL array. MEL arrays of ints, floats, and
+strings are supported. If none of these conversions are possible,
+then Python will return the string representation of the returned
+object.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>The result of processing the input string by the Python interpreter.</td></tr></table>
+      
+      
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+python( &quot;import sys&quot; );
+
+// Call some python that will return a list of values. Note that we are
+// calling the python command with a single python statement. We have to
+// do that if we want to get a result back
+//
+string $version[] = python( &quot;sys.version_info&quot; );
+
+// The result will be an array of strings because one of the elements will
+// contain a string. Extract the major and minor parts of the version number
+//
+int $major = int( $version[0] );
+int $minor = int( $version[1] );
+
+// You can do mult-statement Python scripts, but there won't be a return
+// value
+python( &quot;import os\nprint os.environ[ 'MAYA_LOCATION' ]&quot; );
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

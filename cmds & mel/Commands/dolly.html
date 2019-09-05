@@ -1,0 +1,301 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>dolly command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-dolly"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/dolly.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>dolly </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a>, <a href="cat_Rendering.html#Camera" target="contentFrame">Camera</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("dolly.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>dolly [-<a href="#flagabsolute">absolute</a>] [-<a href="#flagdistance">distance</a> <i>linear</i>] [-<a href="#flagdollyTowardsCenter">dollyTowardsCenter</a> <i>boolean</i>] [-<a href="#flagorthoScale">orthoScale</a> <i>float</i>] [-<a href="#flagrelative">relative</a>] 
+[camera]
+     </code> </p>
+      <p>dolly is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The dolly command moves a camera along the viewing direction in
+the world space. The viewing-direction and up-direction of the
+camera are not altered. There are two modes of operation: <p>
+<p>
+Relative mode: for a perspective camera, the camera is moved along
+its viewing direction, and the distance of travel is computed with
+respect to the current position of the camera in the world
+space. In relative mode, when the camera is moved, its COI is
+moved along with it, and is kept at the same distance, in front of
+the camera, as before applying the dolly operation. For
+orthographic camera, the viewing width of the camera is changed by
+scaling its ortho width by the new value specified on the command
+line. <p>
+<p>
+Absolute mode: for a perspective camera, the camera is moved along
+its viewing direction, to the distance that is computed with
+respect to the current position of the world center of interest
+(COI) of the camera. In the absolute mode, when the camera is
+moved, the COI of the camera is not moved with the camera, but it
+is fixed at its current location in space. For orthographic
+camera, the viewing width of the camera is changed by replacing
+its ortho width with the new value specified on the command
+line. This command may be applied to more than one cameras;
+objects that are not cameras are ignored. When no camera name
+supplied on the command line, this command is applied to all
+currently active cameras. <p>
+<p>
+The dolly command can be applied to either a perspective or an
+orthographic camera. <p>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="camera.html">camera</a>, <a href="cameraView.html">cameraView</a>, <a href="listCameras.html">listCameras</a>, <a href="lookThru.html">lookThru</a>, <a href="orbit.html">orbit</a>, <a href="roll.html">roll</a>, <a href="track.html">track</a>, <a href="tumble.html">tumble</a>, <a href="viewCamera.html">viewCamera</a>, <a href="viewClipPlane.html">viewClipPlane</a>, <a href="viewFit.html">viewFit</a>, <a href="viewHeadOn.html">viewHeadOn</a>, <a href="viewLookAt.html">viewLookAt</a>, <a href="viewPlace.html">viewPlace</a>, <a href="viewSet.html">viewSet</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagabsolute">absolute</a>, <a href="#flagdistance">distance</a>, <a href="#flagdollyTowardsCenter">dollyTowardsCenter</a>, <a href="#flagorthoScale">orthoScale</a>, <a href="#flagrelative">relative</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagabsolute">
+          <code><b>-absolute</b>(<b>-abs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the behavior of the distance and orthoScale
+flags. When used in conjunction with the distance flag, the distance
+argument specifies how far the camera's eye point should be set from
+the camera's center of interest. When used with the orthoScale flag,
+the orthoScale argument specifies the camera's new ortho width.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdistance">
+          <code><b>-distance</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Unit distance to dolly a perspective camera.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdollyTowardsCenter">
+          <code><b>-dollyTowardsCenter</b>(<b>-dtc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag controls whether the dolly is performed towards the
+center of the view (if true), or towards the point where the user
+clicks (if false). By default, dollyTowardsCenter is on.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagorthoScale">
+          <code><b>-orthoScale</b>(<b>-os</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Scale to change the ortho width of an orthographic camera.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelative">
+          <code><b>-relative</b>(<b>-rel</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the behavior of the distance and orthoScale
+flags. When used in conjunction with the distance flag, the camera
+eye and center of interest are both moved by the amount specified
+by the distance flag's argument. When used with the orthoScale flag,
+the orthoScale argument is used multiply the camera's ortho width.By
+default the relative flag is always on.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+camera;
+
+// Moves the persp camera forward through its center of interest
+dolly -abs -d -3 persp;
+
+// Move the persp camera and its center of interest.
+dolly -d -3 persp;
+
+// Changes the ortho-width of the top camera to 7.5
+dolly -abs -os 7.5 top;
+
+// Scale the ortho-width of the top camera by a quarter from its current value.
+dolly -os 0.25 top;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

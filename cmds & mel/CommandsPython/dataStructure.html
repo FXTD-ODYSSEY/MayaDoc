@@ -1,0 +1,440 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>dataStructure command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-dataStructure"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/dataStructure.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>dataStructure </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("dataStructure.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>dataStructure([<a href="#flagasFile">asFile</a>=<i>string</i>], [<a href="#flagasString">asString</a>=<i>string</i>], [<a href="#flagdataType">dataType</a>=<i>boolean</i>], [<a href="#flagformat">format</a>=<i>string</i>], [<a href="#flaglistMemberNames">listMemberNames</a>=<i>string</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagremove">remove</a>=<i>boolean</i>], [<a href="#flagremoveAll">removeAll</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>dataStructure is undoable, queryable, and <b>NOT editable</b>.</p>
+      <p>
+Takes in a description of the structure and creates it, adding it to
+the list of available data structures. The structure definition can
+either be supplied in the <i>asString</i> flag or exist in a file that is
+referenced by the <i>asFile</i> flag.
+
+<p>
+If the <i>remove</i> flag is specified with a <i>name</i> flag then the data
+structure will be removed. This is to keep all structure operations
+in a single command rather than create separate commands to create,
+remove, and query the data structures. When you use the <i>removeAll</i>
+flag then every existing metadata structure is removed. Use with care!
+Note that removed structures may still be in use in metadata Streams after
+removal, they are just no longer available for the creation of new Streams.
+
+<p>
+Both the creation modes and the remove mode are undoable.
+
+<p>
+Creation of an exact duplicate of an existing structure (including name)
+will succeed silently without actually creating a new structure.
+Attempting to create a new non-duplicate structure with the same name
+as an existing structure will fail as there is no way to disambiguate
+two structures with the same name.
+
+<p>
+Querying modes are defined to show information both on the created
+structures and the structure serialization formats that have been
+registered. The serialization formats preserve the structure
+information as text (e.g. raw, XML, JSON). Since the <i>raw</i> structure
+type is built in it will be assumed when none are specified.
+
+<p>
+General query with no flags will return the list of names of all
+currently existing structures.
+
+<p>
+Querying the <i>format</i> flag will return the list of all registered structure
+serialization formats.
+
+<p>
+Querying with the <i>format</i> supplied before the <i>query</i> flag will
+show the detailed description of that particular structure
+serialization format.
+
+<p>
+Querying the <i>asString</i> flag with a structure name and serialization
+format supplied before the <i>query</i> flag will return a string
+representing the named data structure in the serialization format
+specified by the <i>format</i> flag. Even if the format is the same as
+the one that created the structure the query return string may not
+be identical since the queried value is formatted in a standard
+way - original formatting is not preserved.
+
+<p>
+Querying the <i>asFile</i> flag with a structure name supplied before the
+<i>query</i> flag will return the original file from which the structure
+was generated. If the structure was created using the <i>asString</i>
+flag or through the API then an empty string will be returned.
+
+<p>
+Querying the <i>name</i> flag returns the list of all structures created
+so far.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Name of the resulting structure, should match the name defined in the structure description</td></tr><tr><td valign="top"><i>string[]</i></td><td>Name(s) of the removed structures.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>metadata, component
+      <h2><a name="hRelated">Related</a></h2><a href="addMetadata.html">addMetadata</a>, <a href="applyMetadata.html">applyMetadata</a>, <a href="editMetadata.html">editMetadata</a>, <a href="getMetadata.html">getMetadata</a>, <a href="hasMetadata.html">hasMetadata</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagasFile">asFile</a>, <a href="#flagasString">asString</a>, <a href="#flagdataType">dataType</a>, <a href="#flagformat">format</a>, <a href="#flaglistMemberNames">listMemberNames</a>, <a href="#flagname">name</a>, <a href="#flagremove">remove</a>, <a href="#flagremoveAll">removeAll</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagasFile">
+          <code><b>asFile</b>(<b>af</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify a file that contains the serialized data which describes the
+structure.  The format of the data is specified by the 'format' flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagasString">
+          <code><b>asString</b>(<b>asString</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the string containing the serialized data which describes the
+structure. The format of the data is specified by the 'format' flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdataType">
+          <code><b>dataType</b>(<b>dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the flag 'listMemberNames' to query the type of the member.
+The type is appended after each relative member in the array.
+For example, if the format is &quot;name=idStructure:int32=id:string=name&quot;
+the returned array is &quot;id int32 name string&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagformat">
+          <code><b>format</b>(<b>fmt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Format of data to expect in the structure description. &quot;raw&quot; is supported
+natively and will be assumed if the format type is omitted. Others are
+available via plug-in. You can query the available formats by using this
+flag in query mode.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistMemberNames">
+          <code><b>listMemberNames</b>(<b>lmn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the member names in the dataStructure. The member names will be
+returned in an array. The name of the data structure will not be returned.
+To get the type of each member, use 'dataType' together. Then the type of
+the member will be appended in the array after their relative member.
+For example, if the format is &quot;name=idStructure:int32=id:string=name&quot;
+the returned array is &quot;id int32 name string&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query mode only.  Name of the data structure to be queried, or set to
+list the available names.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>remove</b>(<b>rem</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the named data structure. It's an error if it doesn't exist.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveAll">
+          <code><b>removeAll</b>(<b>ral</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove all metadata structures. This flag can not be used in conjunction with
+any other flags.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+import maya.cmds as cmds
+cmds.dataStructure( query=True, format=True )
+# Result: ['raw', 'debug'] #
+
+cmds.dataStructure( format='raw', asString='name=NameAndID:string=name:int32=ID' )
+# Result: 'NameAndID' #
+
+# Note that this file doesn't exist, it's just an example of how to read
+# from the file after you've created it. The file contents should look
+# like this:
+#		name=FileBasedStructure
+#		string=fileInformation
+cmds.dataStructure( asFile='someFile.raw' )
+
+cmds.dataStructure( query=True )
+# Result: ['NameAndID', 'FileBasedStructure'] #
+
+cmds.dataStructure( name='NameAndID', format='raw', query=True, asString=True )
+# Result: 'name=NameAndID:string=name:int32=ID' #
+
+cmds.dataStructure( name='NameAndID', query=True, listMemberNames=True )
+# Result: [u'name', u'ID'] #
+
+cmds.dataStructure( name='NameAndID', query=True, listMemberNames=True, dataType=True )
+# Result: [u'name', u'string', u'ID', u'int32'] #
+
+cmds.dataStructure( remove=True, name='NameAndID' )
+# Result: 'NameAndID' #
+
+cmds.dataStructure( query=True )
+# Result: ['FileBasedStructure'] #
+
+cmds.dataStructure( removeAll=True )
+# Result: ['FileBasedStructure'] #
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,207 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>sceneLint command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-sceneLint"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/sceneLint.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>sceneLint </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("sceneLint.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>sceneLint [-<a href="#flagissueType">issueType</a> <i>string</i>] [-<a href="#flagverbose">verbose</a>]  </code> </p>
+      <p>sceneLint is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      {
+        &quot;sceneLint&quot; : {
+                &quot;ISSUE_CODE&quot; : {
+                        &quot;description&quot; : &quot;DETAILED_DESCRIPTION_OF_ISSUE&quot;,
+                        &quot;mitigation&quot; : [        // List of mitigations that can be applied
+                                {
+                                        &quot;objects&quot;     : [ LIST_OF_STRINGS_NAMING_OBJECTS_TO_WHICH_IT_APPLIES ],
+                                        &quot;benefit&quot;     : DESCRIPTION_OF_HOW_THE_CODE_MAKES_THE_SCENE_BETTER,
+                                        &quot;description&quot; : DESCRIPTION_OF_WHAT_THE_CODE_DOES,
+                                        &quot;code&quot;        : PYTHON_MITIGATION_CODE_WITH_LOOP_OVER_INSTANCES
+                                }
+                        ]
+                }
+        }
+}
+<p>
+The <b>sceneLint</b> command is used to analyze the currently loaded scene
+to find potential areas for improvement in performance, memory use, or reduction
+of clutter.
+
+<p>
+In the query mode it will report back the list of available checks it can do.
+Each check will have an associated short-form which can be passed to the command
+to run specific checks.
+
+<p>
+In create mode the returned string is a JSON format list of issues and mitigations
+that suggest a way to solve the problem it describes.
+
+<p>
+Mitigation can be automatically performed by extracting the mitigation code and arguments
+then running the Python code <i>exec(code, {}, {'OBJECTS' : objects})</i>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>JSON formatted results showing the issues that could potentially cause problems in the scene.</td></tr><tr><td valign="top"><i>string[]</i></td><td>When querying issueType shows the description, and benefit values for the named scene issue.</td></tr><tr><td valign="top"><i>string[]</i></td><td>When querying returns the list of all issueTypes by name.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>debug, performance
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagissueType">issueType</a>, <a href="#flagverbose">verbose</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagissueType">
+          <code><b>-issueType</b>(<b>-i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify a set of issue types to be checked. If omitted then all known issue types are checked.
+In query mode returns a description of what a particular issue type is checking.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagverbose">
+          <code><b>-verbose</b>(<b>-v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If set then include both name and description when querying the list of available issue types.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Query the list of available issue types
+sceneLint -q;
+// Return: FOO BAR BAZ //
+
+// Find all scene issues
+sceneLint;
+// Return: { &quot;sceneLint&quot; : ... } //
+
+// Get more information on the &quot;FOO&quot; issue type
+sceneLint -issueTye &quot;FOO&quot; -issueType &quot;BAR&quot; -q;
+// Return: FOO FOO_DESCRIPTION BAR BAR_DESCRIPTION //
+
+// Run only the &quot;FOO&quot; issue check
+sceneLint -issueTye &quot;FOO&quot;;
+// Return: { &quot;sceneLint&quot; : ... } //
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

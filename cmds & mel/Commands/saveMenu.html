@@ -1,0 +1,150 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>saveMenu command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-saveMenu"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/saveMenu.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>saveMenu </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#Menus" target="contentFrame">Menus</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("saveMenu.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>saveMenu 
+string string
+     </code> </p>
+      <p>saveMenu is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command is used for saving the contents of a menu, so that
+another instance of the menu may be recreated later. The command
+writes out a file which, when run as a script, will rebuild the
+menuItems contained in the original menu. Note that the fileName
+is relative to the user's marking menu preference directory.
+<p>
+Note that this command is used solely by the Marking Menu Editor
+and is not intended to be used for general purposes.
+<p>
+Note that this command doesn't work well with controls that have
+mixed mel and python command callbacks.  Also, because it saves the menu
+state to a mel file, it does not work with callbacks that are python
+callable objects.
+<p>
+The first argument is the name of the manu to save, the second one is
+the name of the file.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The name of the saved file.</td></tr></table>
+      
+      
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Create a window with two frames.
+//
+string $win = `window -t &quot;saveMenu Example&quot;`;
+columnLayout;
+string $frame1 = `frameLayout
+    -h 90
+    -l &quot;Original Menu (LMB)&quot;`;
+
+    text -l &quot;(click here)&quot;;
+setParent ..;
+string $frame2 = `frameLayout
+    -h 90
+    -l &quot;Copy of Original (LMB)&quot;`;
+
+    text -l &quot;(click here)&quot;;
+setParent ..;
+
+// Create a menu.
+//
+string $menu1 = `popupMenu
+    -parent $frame1
+    -b 1
+    -mm true`;
+
+    menuItem -rp &quot;N&quot; -l &quot;Up&quot;;
+    menuItem -rp &quot;S&quot; -l &quot;Down&quot;;
+    menuItem -rp &quot;E&quot; -l &quot;Right&quot;;
+    menuItem -rp &quot;W&quot; -l &quot;Left&quot;;
+    menuItem -label &quot;Warm&quot; -sm true;
+        menuItem -l &quot;Red&quot;;
+        menuItem -l &quot;Orange&quot;;
+        menuItem -l &quot;Yellow&quot;;
+    setParent -m ..;
+    menuItem -label &quot;Cold&quot; -sm true;
+        menuItem -l &quot;Green&quot;;
+        menuItem -l &quot;Blue&quot;;
+        menuItem -l &quot;Indigo&quot;;
+        menuItem -l &quot;Violet&quot;;
+    setParent -m ..;
+setParent -m ..;
+
+// Save the menu to a file.
+//
+string $result = `saveMenu $menu1 menu_example`;
+
+// Use the file to rebuild another instance of the menu.
+//
+string $menu1 = `popupMenu
+    -parent $frame2
+    -b 1
+    -mm true`;
+eval (&quot;source \&quot;&quot; + `internalVar -userMarkingMenuDir` + &quot;menu_example.mel\&quot;&quot;);
+
+// Finish up.
+print (&quot;The menu was saved in [&quot; + `internalVar -userMarkingMenuDir` + $result + &quot;]\n&quot;);
+showWindow $win;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

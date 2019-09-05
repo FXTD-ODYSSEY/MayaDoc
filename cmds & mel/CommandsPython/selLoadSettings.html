@@ -1,0 +1,507 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>selLoadSettings command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-selLoadSettings"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/selLoadSettings.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>selLoadSettings </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("selLoadSettings.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>selLoadSettings([<a href="#flagactiveProxy">activeProxy</a>=<i>string</i>], [<a href="#flagdeferReference">deferReference</a>=<i>boolean</i>], [<a href="#flagfileName">fileName</a>=<i>string</i>], [<a href="#flagnumSettings">numSettings</a>=<i>uint</i>], [<a href="#flagproxyManager">proxyManager</a>=<i>string</i>], [<a href="#flagproxySetFiles">proxySetFiles</a>=<i>string</i>], [<a href="#flagproxySetTags">proxySetTags</a>=<i>string</i>], [<a href="#flagproxyTag">proxyTag</a>=<i>string</i>], [<a href="#flagreferenceNode">referenceNode</a>=<i>string</i>], [<a href="#flagshortName">shortName</a>=<i>boolean</i>], [<a href="#flagunresolvedName">unresolvedName</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>selLoadSettings is <b>NOT undoable</b>, queryable, and editable.</p>
+      This command is used to edit and query information about the implicit load
+settings. Currently this is primarily intended for internal use within the
+Preload Reference Editor.
+selLoadSettings acts on load setting IDs. When implict load settings are
+built for a target scene, there will be one load setting for each reference
+in the target scene. Each load setting has a numerical ID which is its index
+in a pre-order traversal of the target reference hierarchy (with the root
+scenefile being assigned an ID of 0). Although the IDs are numerical they must
+be passed to the command as string array.
+Example:
+Given the scene:
+<pre>
+        a
+       / \
+      b   c
+         / \
+        d   e
+</pre>
+where:
+a references b and c
+c references d and e
+the IDs will be as follows:
+a = 0
+b = 1
+c = 2
+d = 3
+e = 4
+selLoadSettings can be used to change the load state of a reference:
+whether it will be loaded or unloaded (deferred) when the target scene is
+opened.
+Note: selLoadSettings can accept multiple command parameters, but the order
+must be selected carefully such that no reference is set to the loaded state
+while its parent is in the unlaoded state.
+Given the scene:
+<pre>
+a
+|
+b [-]
+|
+c [-]
+</pre>
+where:
+a references b
+b references c
+a = 0
+b = 1
+c = 2
+and b and c are currently in the unloaded state.
+The following command will succeed and change both b and c to the loaded state:
+selLoadSettings -e -deferReference 0 &quot;1&quot; &quot;2&quot;;
+whereas the following command will fail and leave both b and c in the unloaded
+state:
+selLoadSettings -e -deferReference 0 &quot;2&quot; &quot;1&quot;;
+Bear in mind that the following command will also change both b and c to the
+loaded state:
+selLoadSettings -e -deferReference 0 &quot;1&quot;;
+This is because setting a reference to the loaded state automatically sets all
+child references to the loaded state as well. And vice versa, setting a reference
+the the unloaded state automatically sets all child reference to the unloaded state.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>For query execution.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>selective, load, setting, preload, reference
+      <h2><a name="hRelated">Related</a></h2><a href="file.html">file</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagactiveProxy">activeProxy</a>, <a href="#flagdeferReference">deferReference</a>, <a href="#flagfileName">fileName</a>, <a href="#flagnumSettings">numSettings</a>, <a href="#flagproxyManager">proxyManager</a>, <a href="#flagproxySetFiles">proxySetFiles</a>, <a href="#flagproxySetTags">proxySetTags</a>, <a href="#flagproxyTag">proxyTag</a>, <a href="#flagreferenceNode">referenceNode</a>, <a href="#flagshortName">shortName</a>, <a href="#flagunresolvedName">unresolvedName</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveProxy">
+          <code><b>activeProxy</b>(<b>ap</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Change or query the active proxy of a proxy set. In query mode, returns the
+proxyTag of the active proxy; in edit mode, finds the proxy in the proxySet
+with the given tag and makes it the active proxy.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeferReference">
+          <code><b>deferReference</b>(<b>dr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Change or query the load state of a reference.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfileName">
+          <code><b>fileName</b>(<b>fn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the file name reference file(s) associated with the indicated load setting(s).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnumSettings">
+          <code><b>numSettings</b>(<b>ns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the number of settings in the group of implicit load settings. This is
+equivalent to number of references in the scene plus 1.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagproxyManager">
+          <code><b>proxyManager</b>(<b>pm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the name(s) of the proxy manager(s) associated with the indicated load setting(s).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagproxySetFiles">
+          <code><b>proxySetFiles</b>(<b>psf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the name(s) of the proxy(ies) available in the proxy set associated with the indicated load setting(s).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagproxySetTags">
+          <code><b>proxySetTags</b>(<b>pst</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the name(s) of the proxy tag(s) available in the proxy set associated with the indicated load setting(s).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagproxyTag">
+          <code><b>proxyTag</b>(<b>pt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the name(s) of the proxy tag(s) associated with the indicated load setting(s).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreferenceNode">
+          <code><b>referenceNode</b>(<b>rfn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the name(s) of the reference node(s) associated with the indicated load setting(s).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshortName">
+          <code><b>shortName</b>(<b>shn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Formats the return value of the 'fileName' query flag to only return the short
+name(s) of the reference file(s).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunresolvedName">
+          <code><b>unresolvedName</b>(<b>un</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Formats the return value of the 'fileName' query flag to return the unresolved
+name(s) of the reference file(s). The unresolved file name is the file name
+used when the reference was created, whether or not that file actually exists
+on disk. When Maya encounters a file name which does not exist on disk it
+attempts to resolve the name by looking for the file in a number of other
+locations. By default the 'fileName' flag will return this resolved value.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Given the scene:
+#
+#
+#        a [+]
+#       /     \
+#      b [-]   c [+]
+#             /     \
+#            d [-]   e [+]
+#
+# With the IDs:
+#    a = 0
+#    b = 1
+#    c = 2
+#    d = 3
+#    e = 4
+
+# set c, d, and e to the unloaded state
+cmds.selLoadSettings( '2', '3', '4', e=True, deferReference=1 )
+
+# this will also set c, d, and e to the unloaded state
+cmds.selLoadSettings( '2', e=True, deferReference=1 )
+
+# set b to the loaded state
+cmds.selLoadSettings( '1', e=True, deferReference=0 )
+
+# set b and d to the loaded state
+cmds.selLoadSettings( '1', '3', e=True, deferReference=0 )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,634 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>showMetadata command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-showMetadata"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/showMetadata.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>showMetadata </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("showMetadata.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>showMetadata([<a href="#flagauto">auto</a>=<i>boolean</i>], [<a href="#flagdataType">dataType</a>=<i>string</i>], [<a href="#flaginterpolation">interpolation</a>=<i>boolean</i>], [<a href="#flagisActivated">isActivated</a>=<i>boolean</i>], [<a href="#flaglistAllStreams">listAllStreams</a>=<i>boolean</i>], [<a href="#flaglistMembers">listMembers</a>=<i>boolean</i>], [<a href="#flaglistValidMethods">listValidMethods</a>=<i>boolean</i>], [<a href="#flaglistVisibleStreams">listVisibleStreams</a>=<i>boolean</i>], [<a href="#flagmember">member</a>=<i>string</i>], [<a href="#flagmethod">method</a>=<i>string</i>], [<a href="#flagoff">off</a>=<i>boolean</i>], [<a href="#flagrange">range</a>=<i>[float, float]</i>], [<a href="#flagrayScale">rayScale</a>=<i>float</i>], [<a href="#flagstream">stream</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>showMetadata is undoable, queryable, and <b>NOT editable</b>.</p>
+      <p>
+This command is used to show metadata values which is in the
+specified channels &quot;vertex&quot;, &quot;edge&quot;, &quot;face&quot;, and &quot;vertexFace&quot; in
+the viewport. You can view the data by three ways:
+<ol>
+<li>&quot;color&quot;: draw color on the components. </li>
+<li>&quot;ray&quot;: draw a ray on the components. </li>
+<li>&quot;string&quot;: draw 2d strings on the components. </li>
+</ol>
+For example, if the metadata of &quot;shape.vtx[1]&quot; is (1, 0, 0), you can turn on
+the visualization with all three modes.
+On &quot;color&quot; mode, you can see a red vertex which is on the position of &quot;shape.vtx[1]&quot;.
+On &quot;ray&quot; mode, you can see a ray with the direction (1, 0, 0).
+On &quot;string&quot; mode, you can see strings &quot;1 0 0&quot; below the vertex in the viewport.
+
+<p>
+To use &quot;color&quot; or &quot;ray&quot; mode, you should make the member of the data structure
+with three or less items, such as float[3]. The three items are mapped to &quot;RGB&quot; as a color, or &quot;XYZ&quot;
+as a vector. The structure with two items works similarly. The only difference
+is that the third value will always be zero.
+However, if the structure has only one item, the value is mapped to all three variables.
+That means if the structure is &quot;int&quot; and its value is 1, the color will be white(1, 1, 1)
+and the vector will be (1, 1, 1).
+
+<p>
+You can get the current status of the flags on the query mode (using &quot;-query&quot;).
+But you can query only the status of one flag in a single command and
+you cannot set values on the query mode.
+
+<p>
+You can use the command on some specified objects, or run it with no arguments
+to make changes on all objects in the scene. The object must be a mesh shape.
+Components are not allowed as the command arguments.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>result of the operation or the queried status</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>metadata, component, stream, channel, association
+      <h2><a name="hRelated">Related</a></h2><a href="addMetadata.html">addMetadata</a>, <a href="applyMetadata.html">applyMetadata</a>, <a href="dataStructure.html">dataStructure</a>, <a href="editMetadata.html">editMetadata</a>, <a href="getMetadata.html">getMetadata</a>, <a href="hasMetadata.html">hasMetadata</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagauto">auto</a>, <a href="#flagdataType">dataType</a>, <a href="#flaginterpolation">interpolation</a>, <a href="#flagisActivated">isActivated</a>, <a href="#flaglistAllStreams">listAllStreams</a>, <a href="#flaglistMembers">listMembers</a>, <a href="#flaglistValidMethods">listValidMethods</a>, <a href="#flaglistVisibleStreams">listVisibleStreams</a>, <a href="#flagmember">member</a>, <a href="#flagmethod">method</a>, <a href="#flagoff">off</a>, <a href="#flagrange">range</a>, <a href="#flagrayScale">rayScale</a>, <a href="#flagstream">stream</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagauto">
+          <code><b>auto</b>(<b>a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Similar to the flag &quot;-range&quot;, but uses the min/max value from the metadata in the same stream
+and member instead of the specified input value.
+In query mode, you can use the flag to query if &quot;auto&quot; is on.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdataType">
+          <code><b>dataType</b>(<b>dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In create mode, when used with the flags &quot;stream&quot; and &quot;member&quot;,
+specify a member to show.
+If the flag &quot;off&quot; is used, specify the member to turn off.
+In query mode, when used with the flags &quot;stream&quot; and &quot;member&quot;, query
+the visualization state of the specified member.
+Only one member of each shape can be visualized at a time.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginterpolation">
+          <code><b>interpolation</b>(<b>i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In create mode, enable/disable interpolation for &quot;color&quot; method.
+When interpolation is on, the components will be displayed in the interpolated color,
+which is computed by averaging their metadata values.
+In query mode, query the current state of interpolation flag of
+the selected objects.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisActivated">
+          <code><b>isActivated</b>(<b>ia</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used to check if the given stream is activated.
+If some shapes are selected, query their states.
+If no shape is selected, query the states of all shapes
+in the scene.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistAllStreams">
+          <code><b>listAllStreams</b>(<b>las</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with object names to list all streams of the specified objects.
+no matter if they are visible in the viewport.
+Or you can use the flag individually to list all streams in the scene.
+Due to the fact that different objects may have the same stream name,
+the returned list will merge the duplicated stream names automatically.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistMembers">
+          <code><b>listMembers</b>(<b>lm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the flag 'stream' to get the
+member list in the specified stream.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistValidMethods">
+          <code><b>listValidMethods</b>(<b>lvm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List the valid visual methods that can be set for the current stream and member. Some data type cannot be displayed
+by some methods. For example, if the data type is &quot;string&quot;, it cannot be displayed by &quot;color&quot; or by &quot;ray&quot;.
+In other words, only the method &quot;string&quot; will be returned when you list the methods.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistVisibleStreams">
+          <code><b>listVisibleStreams</b>(<b>lvs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with object names to list the name of the current visible streams of
+the specified object. Or you can use the flag with no object name to list
+all visible streams in the scene.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmember">
+          <code><b>member</b>(<b>mb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In create mode, when used with the flags &quot;stream&quot; and &quot;dataType&quot;,
+specify a member to show.
+If the flag &quot;off&quot; is on, specify the member to turn off.
+In query mode, when used with the flags &quot;stream&quot; and &quot;dataType&quot;, query
+the visualization state of the specified member.
+Only one member of each shape can be visualized at a time.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmethod">
+          <code><b>method</b>(<b>m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Determine the method of visualization:
+&quot;color&quot;         convert metadata to a color value and draw the components with the color
+&quot;ray&quot;           convert metadata to a vector and draw this vector line which starts from the center of the component
+&quot;string&quot;        display the metadata through 2d string beside the component in the viewport
+The argument must be a string and must be one of the three words. The default method is &quot;color&quot;.
+If the data type is string, you can only show it with &quot;string&quot; method.
+In query mode, you can use the flag with no arguments to query the method of a specified stream and member.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoff">
+          <code><b>off</b>(<b></b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In create mode, turn off the member which is specified
+by the flags &quot;stream&quot;, &quot;member&quot; and &quot;dataType&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrange">
+          <code><b>range</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[float, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the range of data to use. The value which is out of the range will be clamped to
+the min/max value.
+If the method of visualization is &quot;color&quot;, the range will be mapped to the color. That means
+the min value will be displayed in black while the max value will be in white.
+In query mode, you can use the flag individually to query the current range.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrayScale">
+          <code><b>rayScale</b>(<b>rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the scale of the ray to display it with a proper length.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstream">
+          <code><b>stream</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+In create mode, when used with the flags &quot;member&quot; and &quot;dataType&quot;, specify a member to show.
+If the flag &quot;off&quot; is used, specify the member to turn off.
+In query mode, when used with the flags &quot;member&quot; and &quot;dataType&quot;, query
+the visualization state of the specified member.
+When used with the flag &quot;listMembers&quot;, query the members in the
+specified stream.
+Only one member of each shape can be visualized at a time.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+import maya.cmds as cmds
+
+#Create a scene
+cmds.file(force=True, new=True)
+cmds.dataStructure(format=&quot;raw&quot;, asString=&quot;name=StructOne:int32=MemberOne&quot;)
+cmds.polyPlane(constructionHistory=False, name=&quot;mesh&quot;)
+
+#Add Metadata
+cmds.addMetadata('meshShape', streamName=&quot;StreamOne&quot;, channelName=&quot;vertex&quot;, structure=&quot;StructOne&quot;)
+cmds.editMetadata('meshShape.vtx[1]', streamName=&quot;StreamOne&quot;, channelName=&quot;vertex&quot;, memberName=&quot;MemberOne&quot;, value=1)
+cmds.select(clear=True)
+
+cmds.showMetadata('meshShape', member=&quot;MemberOne&quot;, dataType=&quot;int32&quot;, stream=&quot;StreamOne&quot;)
+#Show metadata for which the member is &quot;MemberOne&quot; and the stream is &quot;StreamOne&quot;
+
+cmds.showMetadata('meshShape', stream=&quot;StreamOne&quot;, member=&quot;MemberOne&quot;, dataType=&quot;int32&quot;, method=&quot;color&quot;)
+#StreamOne will be visualized by Component Color method. The other two visualization methods are
+#&quot;string&quot; and &quot;ray&quot;. If &quot;-method&quot; flag is not defined, &quot;color&quot; will be used by default.
+
+cmds.showMetadata(off=True)
+#Deactivate all streams to turn off metadata visualization
+
+cmds.showMetadata(stream=&quot;StreamOne&quot;, member=&quot;MemberOne&quot;, dataType=&quot;int32&quot;, method=&quot;color&quot;, interpolation=True)
+#Enable interpolation on &quot;color&quot; mode. Interpolation must be used with &quot;color&quot; method
+
+cmds.showMetadata(range=[0, 10], stream=&quot;StreamOne&quot;, member=&quot;MemberOne&quot;, dataType=&quot;int32&quot;)
+#Show metadata between a specified range from 0 to 10. If the method is &quot;color&quot;,
+# the value 0 will be displayed in black, while the value 10 will be displayed
+# in white. The value beyond the range will be clamped to 0 or 10.
+
+cmds.showMetadata('meshShape', auto=True, stream=&quot;StreamOne&quot;, member=&quot;MemberOne&quot;, dataType=&quot;int32&quot;)
+#Show metadata between the dynamic range, which is computed by the current min/max value
+
+cmds.showMetadata(query=True, listAllStreams=True)
+#Return all streams in the scene, no matter if they are activated
+
+cmds.showMetadata('meshShape', query=True, listAllStreams=True)
+#Return all streams of meshShape, no matter if they are activated
+
+cmds.showMetadata(query=True, listVisibleStreams=True)
+#Return the stream name(s) being visualized in the scene
+
+cmds.showMetadata('meshShape', query=True, listVisibleStreams=True)
+#Return the stream name being visualized that is attached to meshShape
+
+cmds.showMetadata(query=True, stream=&quot;StreamOne&quot;, listMembers=True)
+#Return the member names and types in the specified stream
+#The names and types are returned in pair, such as &quot;MemberOne int32 MemberTwo float&quot;
+
+cmds.showMetadata(query=True, stream=&quot;StreamOne&quot;, member=&quot;MemberOne&quot;, dataType=&quot;int32&quot;, method=True)
+#Return the visualization method of the visualized StreamOne
+
+cmds.showMetadata(query=True, stream=&quot;StreamOne&quot;, member=&quot;MemberOne&quot;, dataType=&quot;int32&quot;, listValidMethods=True)
+#Return the valid visual methods of the activated stream that can be set
+
+cmds.showMetadata(query=True, stream=&quot;StreamOne&quot;, member=&quot;MemberOne&quot;, dataType=&quot;int32&quot;, range=True)
+#Return the current range of visible metadata
+
+cmds.showMetadata(query=True, stream=&quot;StreamOne&quot;, member=&quot;MemberOne&quot;, dataType=&quot;int32&quot;, auto=True)
+#Return the current state of the auto flag
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

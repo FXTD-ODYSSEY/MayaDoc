@@ -1,0 +1,402 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>isolateSelect command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-isolateSelect"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/isolateSelect.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>isolateSelect </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Selection" target="contentFrame">Selection</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("isolateSelect.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>isolateSelect(
+string
+    , [<a href="#flagaddDagObject">addDagObject</a>=<i>name</i>], [<a href="#flagaddSelected">addSelected</a>=<i>boolean</i>], [<a href="#flagaddSelectedObjects">addSelectedObjects</a>=<i>boolean</i>], [<a href="#flagloadSelected">loadSelected</a>=<i>boolean</i>], [<a href="#flagremoveDagObject">removeDagObject</a>=<i>name</i>], [<a href="#flagremoveSelected">removeSelected</a>=<i>boolean</i>], [<a href="#flagstate">state</a>=<i>boolean</i>], [<a href="#flagupdate">update</a>=<i>boolean</i>], [<a href="#flagviewObjects">viewObjects</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>isolateSelect is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command turns on/off isolate select mode in a specified modeling
+view, specified as the argument. Isolate select mode is a display mode
+where the currently selected objects are added to a list and only
+those objects are displayed in the view. It allows for selective
+viewing of specific objects and object components.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>When used with query</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaddDagObject">addDagObject</a>, <a href="#flagaddSelected">addSelected</a>, <a href="#flagaddSelectedObjects">addSelectedObjects</a>, <a href="#flagloadSelected">loadSelected</a>, <a href="#flagremoveDagObject">removeDagObject</a>, <a href="#flagremoveSelected">removeSelected</a>, <a href="#flagstate">state</a>, <a href="#flagupdate">update</a>, <a href="#flagviewObjects">viewObjects</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddDagObject">
+          <code><b>addDagObject</b>(<b>ado</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add the specified object to the set of objects to be
+displayed in the view.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddSelected">
+          <code><b>addSelected</b>(<b>addSelected</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add the currently active objects to the set of
+objects to be displayed in the view.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddSelectedObjects">
+          <code><b>addSelectedObjects</b>(<b>aso</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add selected objects to the set of objects to be displayed in the view.
+This flag differs from addSelected in that it will ignore selected components
+and add the entire object.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagloadSelected">
+          <code><b>loadSelected</b>(<b>ls</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Replace the objects being displayed with the currently
+active objects.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveDagObject">
+          <code><b>removeDagObject</b>(<b>rdo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the specified object from the set of objects to be
+displayed in the view.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveSelected">
+          <code><b>removeSelected</b>(<b>rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the currently active objects to the set of
+objects to be displayed in the view.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstate">
+          <code><b>state</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turns isolate select mode on/off.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupdate">
+          <code><b>update</b>(<b>u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Update the view's list of objects due to a change
+to the set of objects to be displayed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagviewObjects">
+          <code><b>viewObjects</b>(<b>vo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the name (if any) of the objectSet which contains
+the list of objects visible in the view if isolate select mode
+is on. If isolate select mode is off, an empty string is
+returned.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# create some primitives and go into component selection mode
+cmds.sphere( n='sphere1' )
+cmds.cone( n='cone1' )
+cmds.selectMode( component=True )
+
+# Use the current modelPanel for isolation
+isolated_panel = cmds.paneLayout('viewPanes', q=True, pane1=True)
+
+# turn on isolate select mode for a particular 3d view. Only
+# the sphere and the selected CVs will be displayed.
+cmds.select( 'sphere1.cv[0:2][*]' )
+# Connect the selected objects with editor and
+# locks the current list of objects within the mainConnection
+cmds.editor( isolated_panel, edit=True, lockMainConnection=True, mainListConnection='activeList' )
+cmds.isolateSelect( isolated_panel, state=1 )
+
+# add the cone to the list of objects to be viewed
+cmds.select( 'cone1' )
+cmds.isolateSelect( isolated_panel, addSelected=True )
+
+# make just the sphere the object to be viewed
+cmds.select( 'sphere1' )
+# Unlock the current list of objects within the editor
+cmds.editor( isolated_panel, edit=True, mainListConnection='activeList' )
+cmds.isolateSelect( isolated_panel, loadSelected=True )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

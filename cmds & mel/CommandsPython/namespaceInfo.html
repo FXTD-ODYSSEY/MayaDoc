@@ -1,0 +1,598 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>namespaceInfo command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-namespaceInfo"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/namespaceInfo.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>namespaceInfo </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("namespaceInfo.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>namespaceInfo(
+string
+    , [<a href="#flagabsoluteName">absoluteName</a>=<i>boolean</i>], [<a href="#flagbaseName">baseName</a>=<i>boolean</i>], [<a href="#flagcurrentNamespace">currentNamespace</a>=<i>boolean</i>], [<a href="#flagdagPath">dagPath</a>=<i>boolean</i>], [<a href="#flagfullName">fullName</a>=<i>boolean</i>], [<a href="#flaginternal">internal</a>=<i>boolean</i>], [<a href="#flagisRootNamespace">isRootNamespace</a>=<i>boolean</i>], [<a href="#flaglistNamespace">listNamespace</a>=<i>boolean</i>], [<a href="#flaglistOnlyDependencyNodes">listOnlyDependencyNodes</a>=<i>boolean</i>], [<a href="#flaglistOnlyNamespaces">listOnlyNamespaces</a>=<i>boolean</i>], [<a href="#flagparent">parent</a>=<i>boolean</i>], [<a href="#flagrecurse">recurse</a>=<i>boolean</i>], [<a href="#flagshortName">shortName</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>namespaceInfo is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command displays information about a namespace. The target namespace can optionally be specified on the command line.
+If no namespace is specified, the command will display information about the current namespace.
+<p>
+<p>
+A namespace is a simple grouping of objects under a given name.
+Each item in a namespace can then be identified by its own name, along
+with what namespace it belongs to.  Namespaces can contain other
+namespaces like sets, with the restriction that all namespaces
+are disjoint.
+<p>
+Namespaces are primarily used to resolve name-clash issues in Maya,
+where a new object has the same name as an existing object
+(from importing a file, for example).
+Using namespaces, you can have two objects with the same name, as long as
+they are contained in different namespaces.
+<p>
+Note that namespaces are a simple grouping of names, so
+they do not effect selection, the DAG, the Dependency Graph, or any other
+aspect of Maya.  All namespace names are colon-separated.
+<p>
+<p>
+The namespace format flags are: baseName(shortName), fullName and absoluteName.
+The flags are used in conjunction with the main query flags to specify the desired namespace format of the returned result. They can also be used to return the different formats of a specified namespace.
+By default, when no format is specified, the result will be returned as a full name.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Command result</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="namespace.html">namespace</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagabsoluteName">absoluteName</a>, <a href="#flagbaseName">baseName</a>, <a href="#flagcurrentNamespace">currentNamespace</a>, <a href="#flagdagPath">dagPath</a>, <a href="#flagfullName">fullName</a>, <a href="#flaginternal">internal</a>, <a href="#flagisRootNamespace">isRootNamespace</a>, <a href="#flaglistNamespace">listNamespace</a>, <a href="#flaglistOnlyDependencyNodes">listOnlyDependencyNodes</a>, <a href="#flaglistOnlyNamespaces">listOnlyNamespaces</a>, <a href="#flagparent">parent</a>, <a href="#flagrecurse">recurse</a>, <a href="#flagshortName">shortName</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagabsoluteName">
+          <code><b>absoluteName</b>(<b>an</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a general flag which can be used to specify the desired format for
+the namespace(s) returned by the command.
+The absolute name of the namespace is a full namespace path, starting from the root namespace &quot;:&quot;
+and including all parent namespaces.  For example &quot;:ns:ball&quot; is an absolute namespace
+name while &quot;ns:ball&quot; is not.
+The absolute namespace name is invariant and is not affected by the current namespace or
+relative namespace modes.
+See also other format modifiers 'baseName', 'fullName', etc
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbaseName">
+          <code><b>baseName</b>(<b>bn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a general flag which can be used to specify the desired format for
+the namespace(s) returned by the command. The base name of the namespace
+contains only the leaf level name and does not contain its parent namespace(s).
+For example the base name of an object named &quot;ns:ball&quot; is &quot;ball&quot;.
+This mode will always return the base name in the same manner, and is not affected by the
+current namespace or relative namespace mode.
+See also other format modifiers 'absoluteName', 'fullName', etc
+The flag 'shortName' is a synonym for 'baseName'.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentNamespace">
+          <code><b>currentNamespace</b>(<b>cur</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Display the name of the current namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdagPath">
+          <code><b>dagPath</b>(<b>dp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag modifies the 'listNamespace' and
+'listOnlyDependencyNodes' flags to indicate that the names
+of any dag objects returned will include as much of the dag path
+as is necessary to make the names unique. If this flag is not
+present, the names returned will not include any dag paths.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfullName">
+          <code><b>fullName</b>(<b>fn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a general flag which can be used to specify the desired format for
+the namespace(s) returned by the command. The full name of the namespace
+contains both the namespace path and the base name, but without the leading colon representing
+the root namespace.
+For example &quot;ns:ball&quot; is a full name, whereas &quot;:ns:ball&quot; is an absolute name.
+This mode is affected by the current namespace and relative namespace modes.
+See also other format modifiers 'baseName', 'absoluteName', etc.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginternal">
+          <code><b>internal</b>(<b>int</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used together with the 'listOnlyDependencyNodes' flag.
+When this flag is set, the returned list will
+include internal nodes (for example itemFilters) that are not listed by default.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisRootNamespace">
+          <code><b>isRootNamespace</b>(<b>ir</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if the namespace is root(&quot;:&quot;), false if not.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistNamespace">
+          <code><b>listNamespace</b>(<b>ls</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List the contents of the namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistOnlyDependencyNodes">
+          <code><b>listOnlyDependencyNodes</b>(<b>lod</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all dependency nodes in the namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistOnlyNamespaces">
+          <code><b>listOnlyNamespaces</b>(<b>lon</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all namespaces in the namespace.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparent">
+          <code><b>parent</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Display the parent of the namespace.
+By default, the list returned will not include internal nodes (such as itemFilters).
+To include the internal nodes, use the 'internal' flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrecurse">
+          <code><b>recurse</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Can be specified with 'listNamespace', 'listOnlyNamespaces'
+or 'listOnlyDependencyNode' to cause the listing to recursively
+include any child namespaces of the namespaces;
+
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshortName">
+          <code><b>shortName</b>(<b>sn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is deprecated and may be removed in future releases of Maya.
+It is a synonym for the baseName flag. Please use the baseName flag instead.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# List the contents of the current namespace
+#
+cmds.namespaceInfo( listNamespace=True )
+
+# List the parent of the current namespace
+#
+cmds.namespaceInfo( parent=True )
+
+# List the parent of the current namespace with short name
+#
+cmds.namespaceInfo( parent=True, shortName=True )
+
+# Determine if the current namespace is root
+#
+cmds.namespaceInfo( rootNamespace=True )
+
+# List the parent of the current namespace with absolute name
+#
+cmds.namespaceInfo( parent=True, absoluteName=True )
+
+# List dependency nodes including internal nodes
+#
+cmds.namespaceInfo(listOnlyDependencyNodes = True,  internal = True);
+
+# samples of query info of specified namespace
+cmds.namespace( set =&quot;:&quot; )
+cmds.namespace( add =&quot;sample&quot; )
+cmds.namespace( set =&quot;:sample&quot; )
+cmds.namespace( add =&quot;sun&quot; )
+
+# List the contents of the specified namespace
+#
+cmds.namespaceInfo( &quot;:sample&quot;, listNamespace=True )
+# Result: sample:sun
+
+# List the parent of the specified namespace
+#
+cmds.namespaceInfo( &quot;:sample:sun&quot;, parent=True )
+# result: sample
+
+# List the parent of the specified namespace with baseName name
+#
+cmds.namespaceInfo( &quot;:sample:sun&quot;, parent=True, baseName=True )
+# result: sample
+
+# Determine if the specified namespace is root
+#
+cmds.namespaceInfo( &quot;:&quot;, isRootNamespace=True )
+# result: True
+
+# List the parent of the specified namespace with absolute name
+#
+cmds.namespaceInfo( &quot;:sample:sun&quot;, parent=True, absoluteName=True )
+# result: :sample
+
+# List dependency nodes including internal nodes
+#
+cmds.namespaceInfo(  &quot;:sample&quot;, listOnlyNamespaces = True )
+# result: sample:sun
+
+# Query the namespace name and have it returned in different formats
+#
+cmds.namespaceInfo( &quot;:sample:sun&quot;, baseName = True )
+# result: &quot;sun&quot;
+
+cmds.namespaceInfo( &quot;:sample:sun&quot;, fullName = True )
+# result: &quot;sample:sun&quot;
+
+cmds.namespaceInfo( &quot;sample:sun&quot;, absoluteName = True )
+# result: &quot;:sample:sun&quot;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

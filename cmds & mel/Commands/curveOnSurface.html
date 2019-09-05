@@ -1,0 +1,439 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>curveOnSurface command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-curveOnSurface"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/curveOnSurface.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>curveOnSurface </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Curves" target="contentFrame">Curves</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("curveOnSurface.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>curveOnSurface [-<a href="#flagappend">append</a>] [-<a href="#flagdegree">degree</a> <i>float</i>] [-<a href="#flagknot">knot</a> <i>float</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagperiodic">periodic</a> <i>boolean</i>] [-<a href="#flagpositionUV">positionUV</a> <i>float float</i>] [-<a href="#flagreplace">replace</a>] 
+string
+string
+     </code> </p>
+      <p>curveOnSurface is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The curve command creates a new curve from a list of control vertices
+(CVs).  A string is returned containing the pathname to the newly
+created curve.  You can create a curve from points either in world
+space or object (local) space, either with weights or without.
+You can replace an existing curve by using the &quot;-r/replace&quot;
+flag.  You can append a point to an existing curve by using the
+&quot;-a/append&quot; flag.
+<p> To create a curve-on-surface, use the curveOnSurface command.
+<p> To change the degree of a curve, use the rebuildCurve command.
+<p> To change the of parameter range curve, use the rebuildCurve command.
+<p>
+The curve-on-surface command creates a new curve-on-surface from a
+list of control vertices (CVs).  A string is returned containing
+the pathname to the newly created curve-on-surface.
+You can replace an existing curve by using the &quot;-r/replace&quot;
+flag. You can append points to an existing curve-on-surface by
+using the &quot;-a/append&quot; flag.
+See also the curve command, which describes how to query curve
+attributes.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>- name of new curve-on-surface</td></tr><tr><td valign="top"><i>string</i></td><td>The path to the new curve or the replaced curve</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="curve.html">curve</a>, <a href="curveOnSurface.html">curveOnSurface</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagappend">append</a>, <a href="#flagdegree">degree</a>, <a href="#flagknot">knot</a>, <a href="#flagname">name</a>, <a href="#flagperiodic">periodic</a>, <a href="#flagpositionUV">positionUV</a>, <a href="#flagreplace">replace</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagappend">
+          <code><b>-append</b>(<b>-a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Appends point(s) to the end of an existing curve.
+If you use this flag, you must specify the name of the
+curve to append to, at the end of the command.  (See examples below.)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdegree">
+          <code><b>-degree</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The degree of the new curve.  Default is 3.  Note that you need
+(degree+1) curve points to create a visible curve span.  eg. you
+must place 4 points for a degree 3 curve.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagknot">
+          <code><b>-knot</b>(<b>-k</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A knot value in a knot vector.  One flag per knot value.
+There must be (numberOfPoints + degree - 1) knots and the knot
+vector must be non-decreasing.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the curve
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagperiodic">
+          <code><b>-periodic</b>(<b>-per</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If on, creates a curve that is periodic.  Default is off.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpositionUV">
+          <code><b>-positionUV</b>(<b>-uv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The uv position of a point.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplace">
+          <code><b>-replace</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Replaces an entire existing curve.
+If you use this flag, you must specify the name of the curve to
+replace, at the end of the command.  (See examples below.)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+curve -p 0 0 0 -p 3 5 6 -p 5 6 7 -p 9 9 9;
+curve -pw 0 0 0 1 -pw 3 5 6 1 -pw 5 6 7 1 -pw 9 9 9 1;
+curve -p 0cm 0cm 0cm -p 3in 5in 6in -p 5ft 6ft 7ft -p 9 9 9;
+// These commands create curves with four control vertices.
+// The first one is created without weights.  The third command
+// shows how you can use units to specify position.
+
+curve -r -p 0 0 0 -p 3 5 6 -p 10 12 14 -p 9 9 9 curve1;
+// This command replaces an existing curve, curve1, with the given points.
+// Do not use this flag on a curve that is a result of a construction
+// history operation.
+
+curve -a -p 13 13 13 -p 13 15 16 curve1;
+// This command adds two CVs to an existing curve, curve1.
+// The &quot;-ws&quot; flag can be used if the specified CVs are in world space.
+// Do not use this flag on a curve that is a result of a construction
+// history operation.
+
+curve -p 0 0 0 -p 3 5 6 -p 5 6 7 -p 9 9 9 -p 12 10 2 -k 0 -k 0 -k 0 -k 1 -k 2 -k 2 -k 2;
+// This command creates a curve with five control vertices,
+// with a knot vector. Notice that there must be
+// (number of CVs + degree - 1) knots and that the knot
+// vector must be non-decreasing.
+
+curve -per on -p 0 0 0 -p 3 5 6 -p 5 6 7 -p 9 9 9 -p 0 0 0 -p 3 5 6 -p 5 6 7 -k -2 -k -1 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6;
+// This command creates a closed (or &quot;periodic&quot;) curve with
+// four distinct CVs. You must specify a knot vector when the
+// &quot;-per&quot; flag is used. Notice that the first &quot;degree&quot; points
+// are the same as the last &quot;degree&quot; points (ie. the first three
+// points are the same as the last three points). Notice also
+// that the knot spacing between the first &quot;degree&quot; knots must
+// be the same as the spacing between the last &quot;degree&quot; knots
+// (ie. the space between the 1st and 2nd knots is the same as
+// the space between the 7th and 8th knots, and the space between
+// the 2nd and 3rd knots is the same as the space between the
+// 8th and 9th knots). There must be space between the first
+// &quot;degree&quot; knots, unlike the previous example, where the first
+// &quot;degree&quot; knots are the same.
+
+// How to query curve properties:
+
+getAttr &quot;curve1.degree&quot;;
+// This returns the degree of the curve.  Note that the
+// number of CVs = degree + spans.
+getAttr &quot;curve1.spans&quot;;
+// This returns the number of spans in the curve.  Note that the
+// number of CVs = degree + spans.
+getAttr &quot;curve1.form&quot;;
+// This returns the curve form.
+getAttr &quot;curve1.minValue&quot;;
+// This returns the minimum parameter value on the curve.
+getAttr &quot;curve1.maxValue&quot;;
+// This returns the maximum parameter value on the curve.
+getAttr &quot;curve1.cv[0]&quot;;
+// This returns the local x,y,z of the 1st CV.  Use a curve info node if
+// the curve is a result of a construction history operation.
+getAttr &quot;curve1.cv[0:2]&quot;;
+// This returns the local x,y,z of the 1st three CVs.  Use a curve info
+// node if the curve is a result of a construction history operation.
+getAttr &quot;curve1.cv[*]&quot;;
+// This returns the local x,y,z of all CVs.  Use a curve info node if
+// the curve is a result of a construction history operation.
+arclen curve1;
+// This returns the arc length of the curve.  Use &quot;-ch&quot; flag with
+// the arclen command to get a curve info node that constantly updates
+// to the current arc length.
+createNode curveInfo;
+connectAttr curveShape1.worldSpace curveInfo1.inputCurve;
+getAttr &quot;curveInfo1.knots[*]&quot;;
+// This sequence creates a curve info node, connects the info node to the
+// curve and queries the knot vector of the curve using the curve info node.
+// You can use the curve info node to query other attributes such as
+// world space CV values and arc length.
+
+curveOnSurface -d 3 -uv 0 0 -uv 0.3 0.5 -uv 0.5 0.6 -uv 0.9 1.0 surface1;
+// This command creates a curve-on-surface of degree three with
+// four control vertices on surface1.
+
+curveOnSurface -uv 0 0 -uv 0.3 0.5 -uv 0.5 0.6 -uv 0.7 0.8 -uv 1.0 1.0 -k 0 -k 0 -k 0 -k 1 -k 2 -k 2 -k 2 surface1;
+// This command creates a curve-on-surface with five CVs
+// and a knot vector, on surface1. Notice that there must be
+// (number of CVs + degree - 1) knots and that the knot
+// vector must be non-decreasing.
+
+curveOnSurface -degree 3 -per on -uv 0 0 -uv 0.2 0.6 -uv 0.4 0.7 -uv 0.9 0.9 -uv 0.0 0.0 -uv 0.2 0.6 -uv 0.4 0.7 -k -2 -k -1 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 surface1;
+// This command creates a closed (or &quot;periodic&quot;) curve-on-surface with
+// four distinct CVs. You must specify a knot vector when the
+// &quot;-per&quot; flag is on. Notice that the first &quot;degree&quot; points
+// are the same as the last &quot;degree&quot; points (ie. the first three
+// points are the same as the last three points). Notice also
+// that the knot spacing between the first &quot;degree&quot; knots must
+// be the same as the spacing between the last &quot;degree&quot; knots
+// (ie. the space between the 1st and 2nd knots is the same as
+// the space between the 7th and 8th knots, and the space between
+// the 2nd and 3rd knots is the same as the space between the
+// 8th and 9th knots). There must be space between the first
+// &quot;degree&quot; knots, unlike the previous example, where the first
+// &quot;degree&quot; knots are the same.
+
+curveOnSurface -append -uv 1.0 1.0 surface1-&gt;curve1;
+// This command appends a point to an existing curve-on-surface.
+// Notice that the curve-on-surface is specified, not just the surface.
+
+curveOnSurface -replace -d 1 -uv 1.0 1.0 -uv 2.0 2.0 surface1-&gt;curve1;
+// This command replaces an existing curve, surface1-&gt;curve1, with a
+// new curve of degree 1 having the given points. Do not use this
+// flag on a curve that is a result of a construction history operation.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

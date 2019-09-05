@@ -1,0 +1,1688 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>headsUpDisplay command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-headsUpDisplay"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/headsUpDisplay.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>headsUpDisplay </h1></td>
+			<td align="right">In categories: <a href="cat_Windows.html" target="contentFrame">Windows</a>, <a href="cat_Windows.html#MiscUI" target="contentFrame">Misc. UI</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("headsUpDisplay.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>headsUpDisplay([string], [<a href="#flagallDescendants">allDescendants</a>=<i>boolean</i>], [<a href="#flagallowOverlap">allowOverlap</a>=<i>boolean</i>], [<a href="#flagattachToRefresh">attachToRefresh</a>=<i>boolean</i>], [<a href="#flagattributeChange">attributeChange</a>=<i>string</i>], [<a href="#flagblock">block</a>=<i>int</i>], [<a href="#flagblockAlignment">blockAlignment</a>=<i>string</i>], [<a href="#flagblockSize">blockSize</a>=<i>string</i>], [<a href="#flagcommand">command</a>=<i>script</i>], [<a href="#flagconditionChange">conditionChange</a>=<i>string</i>], [<a href="#flagconditionFalse">conditionFalse</a>=<i>string</i>], [<a href="#flagconditionTrue">conditionTrue</a>=<i>string</i>], [<a href="#flagconnectionChange">connectionChange</a>=<i>string</i>], [<a href="#flagdataAlignment">dataAlignment</a>=<i>string</i>], [<a href="#flagdataFontSize">dataFontSize</a>=<i>string</i>], [<a href="#flagdataWidth">dataWidth</a>=<i>int</i>], [<a href="#flagdecimalPrecision">decimalPrecision</a>=<i>int</i>], [<a href="#flagdisregardIndex">disregardIndex</a>=<i>boolean</i>], [<a href="#flagevent">event</a>=<i>string</i>], [<a href="#flagexists">exists</a>=<i>boolean</i>], [<a href="#flaggetOption">getOption</a>=<i>string</i>], [<a href="#flaggridColor">gridColor</a>=<i>int</i>], [<a href="#flaglabel">label</a>=<i>string</i>], [<a href="#flaglabelFontSize">labelFontSize</a>=<i>string</i>], [<a href="#flaglabelWidth">labelWidth</a>=<i>int</i>], [<a href="#flaglastOccupiedBlock">lastOccupiedBlock</a>=<i>int</i>], [<a href="#flaglayoutVisibility">layoutVisibility</a>=<i>boolean</i>], [<a href="#flaglistConditions">listConditions</a>=<i>boolean</i>], [<a href="#flaglistEvents">listEvents</a>=<i>boolean</i>], [<a href="#flaglistHeadsUpDisplays">listHeadsUpDisplays</a>=<i>boolean</i>], [<a href="#flaglistNodeChanges">listNodeChanges</a>=<i>boolean</i>], [<a href="#flaglistPresets">listPresets</a>=<i>boolean</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagnextFreeBlock">nextFreeBlock</a>=<i>int</i>], [<a href="#flagnodeChanges">nodeChanges</a>=<i>string</i>], [<a href="#flagpadding">padding</a>=<i>int</i>], [<a href="#flagpreset">preset</a>=<i>string</i>], [<a href="#flagrefresh">refresh</a>=<i>boolean</i>], [<a href="#flagremove">remove</a>=<i>boolean</i>], [<a href="#flagremoveID">removeID</a>=<i>int</i>], [<a href="#flagremovePosition">removePosition</a>=<i>[int, int]</i>], [<a href="#flagresetNodeChanges">resetNodeChanges</a>=<i>string</i>], [<a href="#flagscriptResult">scriptResult</a>=<i>boolean</i>], [<a href="#flagsection">section</a>=<i>int</i>], [<a href="#flagsetOption">setOption</a>=<i>[string, string]</i>], [<a href="#flagshowGrid">showGrid</a>=<i>boolean</i>], [<a href="#flagvisible">visible</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>headsUpDisplay is <b>NOT undoable</b>, queryable, and editable.</p>
+      This command creates a Heads-up Display (HUD) object which is placed in a 2D
+inactive overlay plane on the 3D viewport. It is to be used to provide hands-on
+information designated by a user script. The text string displayed on the viewport
+is formatted using the various flags of this command.
+<p>
+The only mandatory flags, on creation are the section and block flags. Note if the preset
+OR command/trigger flags are not present, only a label will be drawn on the viewport.
+<p>
+Upon creation of a HUD object, an ID number will be assigned to it. This can be used to
+remove the HUD object (-rid/removeID [int IDNumber]), if desired. Alternatively, HUD
+objects may be removed via their position (section and block), or their unique name.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>ID number of the Heads-Up Display (HUD), for regular command execution.</td></tr><tr><td valign="top"><i>string|int|int[2]</i></td><td>HUD name, HUD ID or Section and block value, for respective remove commands.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>hud, headsupdisplay
+      <h2><a name="hRelated">Related</a></h2><a href="displayStats.html">displayStats</a>, <a href="polyEvaluate.html">polyEvaluate</a>, <a href="scriptJob.html">scriptJob</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallDescendants">allDescendants</a>, <a href="#flagallowOverlap">allowOverlap</a>, <a href="#flagattachToRefresh">attachToRefresh</a>, <a href="#flagattributeChange">attributeChange</a>, <a href="#flagblock">block</a>, <a href="#flagblockAlignment">blockAlignment</a>, <a href="#flagblockSize">blockSize</a>, <a href="#flagcommand">command</a>, <a href="#flagconditionChange">conditionChange</a>, <a href="#flagconditionFalse">conditionFalse</a>, <a href="#flagconditionTrue">conditionTrue</a>, <a href="#flagconnectionChange">connectionChange</a>, <a href="#flagdataAlignment">dataAlignment</a>, <a href="#flagdataFontSize">dataFontSize</a>, <a href="#flagdataWidth">dataWidth</a>, <a href="#flagdecimalPrecision">decimalPrecision</a>, <a href="#flagdisregardIndex">disregardIndex</a>, <a href="#flagevent">event</a>, <a href="#flagexists">exists</a>, <a href="#flaggetOption">getOption</a>, <a href="#flaggridColor">gridColor</a>, <a href="#flaglabel">label</a>, <a href="#flaglabelFontSize">labelFontSize</a>, <a href="#flaglabelWidth">labelWidth</a>, <a href="#flaglastOccupiedBlock">lastOccupiedBlock</a>, <a href="#flaglayoutVisibility">layoutVisibility</a>, <a href="#flaglistConditions">listConditions</a>, <a href="#flaglistEvents">listEvents</a>, <a href="#flaglistHeadsUpDisplays">listHeadsUpDisplays</a>, <a href="#flaglistNodeChanges">listNodeChanges</a>, <a href="#flaglistPresets">listPresets</a>, <a href="#flagname">name</a>, <a href="#flagnextFreeBlock">nextFreeBlock</a>, <a href="#flagnodeChanges">nodeChanges</a>, <a href="#flagpadding">padding</a>, <a href="#flagpreset">preset</a>, <a href="#flagrefresh">refresh</a>, <a href="#flagremove">remove</a>, <a href="#flagremoveID">removeID</a>, <a href="#flagremovePosition">removePosition</a>, <a href="#flagresetNodeChanges">resetNodeChanges</a>, <a href="#flagscriptResult">scriptResult</a>, <a href="#flagsection">section</a>, <a href="#flagsetOption">setOption</a>, <a href="#flagshowGrid">showGrid</a>, <a href="#flagvisible">visible</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallDescendants">
+          <code><b>allDescendants</b>(<b>ad</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used in conjunction with the -ac/attributeChange
+flag. If it is specified, and the HUD is attached to a compound or multi
+attribute, then the HUD command will run due to changes to the specified
+attribute as well as changes to its descendants.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallowOverlap">
+          <code><b>allowOverlap</b>(<b>ao</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the Heads-Up Display to be visible regardless of overlapping section
+widths/limitations (see -s/section flag description for more details).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattachToRefresh">
+          <code><b>attachToRefresh</b>(<b>atr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Attaches the command to the refresh process. The script is then run each time
+an idle refresh is run and updates directly following it.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattributeChange">
+          <code><b>attributeChange</b>(<b>ac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Runs the command when the named attribute changes value. The string must
+identify both the dependency node and the particular attribute. If the
+dependency node is deleted, this HUD is removed (even if the deletion is
+undoable).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagblock">
+          <code><b>block</b>(<b>b</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Denotes the individual block that the HUD will reside in, within a
+section. Each section is composed of a single column of blocks.
+The total number of blocks contained within each section is variable.
+<p>
+The number of blocks that will be visible within each section is
+dependent on the size of blocks contained in each section and the
+current size of the window. Blocks begin enumerating from 0 and
+flexibly increase based on need.
+<p>
+The resultant output string of each HUD is formatted within each block,
+using parameters defined by the formatting flags listed below (eg. justify,
+padding, labelWidth and dataWidth). The layout is shown in the following
+diagram:
+<pre>
+ __________________________________________
+|     |     |        |         |     |     |
+|  P  |  J  |   LW   |   DWX   |  J  |  P  |
+|_____|_____|________|_________|_____|_____|
+P = Sub-block of width, padding
+J = Justification of the entire block
+LW = Sub-block of width, labelWidth
+DWX = X number of sub-blocks of width, dataWidth, for X data elements.
+</pre>
+<p>
+<b>Block Layout</b>
+<p>
+The above diagram shows the layout of each block. The widths: padding,
+labelWidth and dataWidth are defined by their respective flags. To
+elaborate on the layout of the blocks, First the padding of the block is
+calculated. Then the two main sub-blocks (LW and DWX) in the above diagram,
+are justified and positioned together between the left and right margins
+of the block. The widths of the main sub-blocks are not variable based on
+it's contents. The only sub-block in the above diagram which is unique is the
+DWX sub-block which actually represents X number of sub-blocks, where X
+is the number of data elements returned by the command.
+<p>
+<b>Block Positioning</b>
+<p>
+Blocks on the top section begin from the top edge of the main
+viewport, while the bottom section begins from the bottom edge.
+Blocks are dynamically removed from visibility from the midpoint
+of the viewport. So, a relatively large block number will not
+draw to the viewport.
+<p>
+Lastly, there can be at most one HUD occupying a block at any time.
+Trying to position a HUD in an occupied block will result in an error.
+Keep this in mind when positioning the HUD.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagblockAlignment">
+          <code><b>blockAlignment</b>(<b>ba</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the alignment of the block within its respective column. Available
+alignments are: &quot;center&quot;, &quot;left&quot; and &quot;right&quot;. The default alignment is &quot;left&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagblockSize">
+          <code><b>blockSize</b>(<b>bs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the height of each block. Available heights are: small, medium and large.
+In pixel measurements, each corresponds to a 20, 35 or 50 pixel height, respectively.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcommand">
+          <code><b>command</b>(<b>c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the procedure or script to run, in order to obtain the
+desired information. This must return a value or an array of values.
+A warning will be displayed if the command does not return a value.
+This flag MUST always be accompanied by a trigger flag (eg. a condition flag,
+an event flag, an attachToRefresh flag, etc.).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconditionChange">
+          <code><b>conditionChange</b>(<b>cc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A trigger which runs the command (to sample the data), when the
+named condition changes. The named condition must be pre-defined or a
+user defined boolean. To get a list of what conditions exist, use
+the -lc/listConditions flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconditionFalse">
+          <code><b>conditionFalse</b>(<b>cf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A trigger which runs the command (to sample the data), when the
+named condition becomes false. The named condition must be pre-defined or
+a user defined boolean. To get a list of what conditions exist, use
+the -lc/listConditions flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconditionTrue">
+          <code><b>conditionTrue</b>(<b>ct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A trigger which runs the command (to sample the data), when the
+named condition becomes true. The named condition must be pre-defined or a
+user defined boolean. To get a list of what conditions exist, use
+the -lc/listConditions flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconnectionChange">
+          <code><b>connectionChange</b>(<b>con</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Runs the command when the named attribute changes its connectivity. The
+string must identify both the dependency node and the particular attribute.
+If the dependency node is deleted, this HUD is removed (even if the deletion
+is undoable).
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdataAlignment">
+          <code><b>dataAlignment</b>(<b>da</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the alignment of the data blocks and the data text, within a HUD block.
+Available alignments are: &quot;left&quot; and &quot;right&quot;. The default alignment is &quot;left&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdataFontSize">
+          <code><b>dataFontSize</b>(<b>dfs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the font size of the returned data. Available sizes are: small and large.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdataWidth">
+          <code><b>dataWidth</b>(<b>dw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the pixel width of the virtual &quot;textbox&quot; which will hold a data value.
+For commands which return more than one value (ie. arrays), one of these &quot;textboxes&quot;
+will be created for each data element, each with this specified width. If the width
+of the data value exceeds the width of the &quot;textbox&quot;, the data value will be
+truncated to fit within the dimensions of the &quot;textbox.&quot; (To see a layout of a
+block, see the description of the -block flag.)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdecimalPrecision">
+          <code><b>decimalPrecision</b>(<b>dp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the decimal precision of any floating point value returned by the command. The valid
+range of precision values are 1 to 8.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisregardIndex">
+          <code><b>disregardIndex</b>(<b>di</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used in conjunction with the -ac/attributeChange
+flag. If it is specified, and the HUD is attached to a multi (indexed)
+attribute, then the HUD command will run no matter which attribute in
+the multi changes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagevent">
+          <code><b>event</b>(<b>ev</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Runs the command when the named event occurs. The named event, must be a
+pre-defined Maya event. To get a list of what events exist, use the
+-le/listEvents flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>exists</b>(<b>ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag returns whether the given object exists in the Heads-Up Display layout.
+An object name must be supplied with this command. This flag cannot be combined
+with any other flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggetOption">
+          <code><b>getOption</b>(<b>op</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will return the value of the option specified by the string.
+See setOption for a list of options
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggridColor">
+          <code><b>gridColor</b>(<b>gco</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies a color for the grid lines using the inactive color palette. Specifying
+an index number between 1 to 23 will select the corresponding color in the palette.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglabel">
+          <code><b>label</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Text string that appears to the left of the desired information.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglabelFontSize">
+          <code><b>labelFontSize</b>(<b>lfs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the font size of the label. Available sizes are: small and large.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglabelWidth">
+          <code><b>labelWidth</b>(<b>lw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the pixel width of the virtual &quot;textbox&quot; which will hold the label. The
+contents of this &quot;textbox&quot; will be left justified. If the width of the actual label
+exceeds the width of the &quot;textbox,&quot; the label will be truncated to fit within the
+dimensions of the &quot;textbox.&quot; (To see a layout of a block, see the description
+of the -block flag.)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglastOccupiedBlock">
+          <code><b>lastOccupiedBlock</b>(<b>lob</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the block number of the last occupied block in a given section.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglayoutVisibility">
+          <code><b>layoutVisibility</b>(<b>lv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the visibility of Heads-Up Display layout on and off. This does not
+modify individual visibilities of heads-up displays, but turns off the layout
+so that no heads-up displays will draw to screen. Personalized settings for
+the visibilities of HUDs are kept safe. This flag can only be used by itself,
+excepting edit and query.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistConditions">
+          <code><b>listConditions</b>(<b>lc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will return a string array containing all names of the available
+conditions.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistEvents">
+          <code><b>listEvents</b>(<b>le</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will return a string array containing all names of the available
+events.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistHeadsUpDisplays">
+          <code><b>listHeadsUpDisplays</b>(<b>lh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will return a string array containing all names of existing HUDs.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistNodeChanges">
+          <code><b>listNodeChanges</b>(<b>lnc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will return a string array containing all names of the available
+node changes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistPresets">
+          <code><b>listPresets</b>(<b>lp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will return a string array containing all names of the available
+preset HUDs.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag only permits the EDITING of the name of the Heads-Up Display.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnextFreeBlock">
+          <code><b>nextFreeBlock</b>(<b>nfb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the block number of the next free block in a given section.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeChanges">
+          <code><b>nodeChanges</b>(<b>nc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Works only with selection based triggers (ie. &quot;SelectionChanged&quot; or &quot;SomethingSelected&quot;),
+otherwise this flag is ignored. This flag attaches the HUD script to execute on specific
+node changes of any selected node. This flag is used to set a nodeChange. In order to
+reset a nodeChange, use the -rnc/resetNodeChanges flag. To view a list of all available
+node changes, use the -lnc/listNodeChanges flag. The following is a list of available node
+changes and their function:
+<p><pre>
+attributeChange:  The script will be sensitive to any attribute changes in the currently
+                  selected nodes.
+<p>
+connectionChange: The script will be sensitive to any connection changes in the currently
+                  selected nodes.
+<p>
+instanceChange:   The script will be sensitive to any changes to an instance in the
+                  currently selected nodes.
+</pre>
+<p>
+On query mode, this flag will return the values of all nodeChanges in pairs of values
+(the name of the nodeChange followed by its value).
+<p><pre>
+WARNING: (Performance Warning)
+         Attaching a nodeChange trigger to a selection based trigger can cause a large
+         performance drop, if the node change that is being watched is caused by the
+         HUD script itself.
+<p>
+         With this said, an attempt should be made to keep the HUD command/script
+                 simple and limited to retrieving data. Changing an attribute, creating or
+                 modifying a connection or instance will all result in a performance drop.
+</pre>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpadding">
+          <code><b>padding</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the width of both the left and right margins of a block. Default
+value is 15 pixels.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreset">
+          <code><b>preset</b>(<b>pre</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This setting is used to select certain pre-defined HUDs, some of which retrieve
+specific data, that is unobtainable through normal MEL commands or scripts. This flag
+is mutually exclusive from the command and trigger flag combination. However, presets
+can work with all other headsUpDisplay attribute flags (ie. block alignment, label,
+dataFontSize, etc.), unless otherwise specified below. To obtain a list
+of available presets, use the -lp/listPresets flag on this command.
+<p>
+The following is a list of available presets and a description of each:
+<dl>
+<dt><i>cameraNames</i></dt>
+<dd>This will return the camera name that the view is looking through, in
+the data block, for each view that the HUD is drawing to.</dd>
+<dt><i>polyVerts</i></dt>
+<dd>This will return three values in the data block, regarding the number of
+vertices that are visible by the camera.
+<ul>
+<li>1st Value: Represents the number of camera visible vertices, both
+active and inactive.</li>
+<li>2nd Value: Represents the number of camera visible vertices, on
+active objects only.</li>
+<li>3rd Value: Represents the number of camera visible vertices, that
+are active.</li>
+</ul></dd>
+<dt><i>polyEdges</i></dt>
+<dd>This will return three values in the data block, regarding the number of
+edges that are visible by the camera. The order of these three values are
+similar to the polyVerts preset.</dd>
+<dt><i>polyFaces</i></dt>
+<dd>This will return three values in the data block, regarding the number of
+faces that are visible by the camera. The order of these three values are
+similar to the polyVerts preset.</dd>
+<dt><i>polyUVs</i></dt>
+<dd>This will return three values in the data block, regarding the number of
+UVs that are visible by the camera. The order of these three values are
+similar to the polyVerts preset.</dd>
+<dt><i>polyTriangles</i></dt>
+<dd>This will return three values in the data block, regarding the number of
+triangles that are visible by the camera. The order of these three values are
+similar to the polyVerts preset.</dd>
+<dt><i>materialLoadingCount</i></dt>
+<dd>This will return the material loading count.
+It updates on each refresh.</dd>
+<dt><i>textureLoadingCount</i></dt>
+<dd>This will return the texture loading count.
+It updates on each refresh.</dd>
+<dt><i>frameRate</i></dt>
+<dd>This will return a single string carrying both the frame rate and the &quot;fps&quot;
+string in the data block. It updates on each refresh.</dd>
+<dt><i>viewAxis</i></dt>
+<dd>This will draw the orientation of the grid axes within the HUD. It updates
+on each refresh. While this preset can take in all attribute flags, the
+only one which will have an effect are block attribute related flags
+(ie. block alignment and block size). The block dimensions of this preset
+are: blockSize - &quot;large&quot; and blockWidth - &quot;50&quot;, which results in a 50x50
+pixel region.</dd>
+<dt><i>distanceFromCamera</i></dt>
+<dd>This will return in the data block the distance from the view's camera
+to the centre of the bounding box containing the selected objects in the view.</dd>
+</dl>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrefresh">
+          <code><b>refresh</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag forces the given Heads-Up Display element to refresh, updating
+the value displayed.  This flag cannot be combined with any other flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>remove</b>(<b>rem</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This command will remove a given HUD object, given a specified HUD name. This flag will
+override all other flags and is mutually exclusive from the other remove flags.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveID">
+          <code><b>removeID</b>(<b>rid</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This command will remove a given HUD object, given a specified HUD ID number assigned
+to it at creation time. This flag will override all other flags and is mutually exclusive
+from the other remove flags.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremovePosition">
+          <code><b>removePosition</b>(<b>rp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[int, int]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This command will remove the contents of a specific block location in the HUD layout.
+This flag will override all other flags and is mutually exclusive from the other remove
+flags. Syntax for this flag is: -removePosition/rp [section] [block].
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresetNodeChanges">
+          <code><b>resetNodeChanges</b>(<b>rnc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will reset a specificied nodeChange back to false. This flag only operates under
+the edit flag. See the description for the -nc/nodeChanges flag for further details.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscriptResult">
+          <code><b>scriptResult</b>(<b>sr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is only used in conjunction with the query flag. Calling a query on this flag
+returns the most recent result of the HUD.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsection">
+          <code><b>section</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Defines the section the HUD will appear in. There are 10 sections
+divided across the screen. Five columns and two rows make up the
+ten element matrix which divide the main viewport. Here is a visual
+layout of the sections.
+<p><pre>
+ ________________________
+|    |    |    |    |    |
+|    |    |    |    |    |
+| 0  | 1  | 2  | 3  | 4  |
+|    |    |    |    |    |
+|____|____|____|____|____|
+|    |    |    |    |    |
+|    |    |    |    |    |
+| 5  | 6  | 7  | 8  | 9  |
+|    |    |    |    |    |
+|____|____|____|____|____|</pre><p>
+Each section is denoted by a number from 0 to 9 as illustrated above.
+For example, if the second column of the top row was desired, the
+section would be defined as: -sec 1
+<p>
+To prevent HUD objects from displaying over each other and causing a
+clutter of letters, each row has a defined visibility precedence,
+where each section would have a visibility priority level. Depending
+on each priority level, when the screen space begins to shrink to
+a point where the section widths of a given row begin to collide, the
+HUD automatically compensates for this by removing the sections of
+least priority. These sections are made invisible and a warning is
+issued to inform the user of the removal. This continues until only
+the section of highest priority remains.
+<p>
+For each row, the priorities are defined as follows. Using the top
+row as an example: Section 0, has the highest priority, followed
+by Section 4, making the outermost sections of highest priority.
+Next in the list is Section 2, and lastly Sections 1 and 3 are of
+the equal and least priority. This priority structure can be applied
+to the bottom row as well. The two outermost sections have the highest
+priority, followed by the middle section, and finally the remaining
+two sections are of lowest priority.
+<p>
+This means that as the viewport gradually decreases in width
+to the point where sections in the top row begin to overlap, sections
+1 and 3 will be removed from view first, followed by section 2, and
+finally section 4. A similar note is provided below for the block layout.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsetOption">
+          <code><b>setOption</b>(<b>so</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will edit the option specified by the first string. Current options are:
+smpPolyCount - &quot;cage&quot; or &quot;smp&quot; - in smooth mesh preview, determines the poly count display
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshowGrid">
+          <code><b>showGrid</b>(<b>sg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag will toggle the display of the grid lines of the HUD layout.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvisible">
+          <code><b>visible</b>(<b>vis</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the visibility of the Heads-Up Display on and off.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+#
+#Define a procedure that returns a value to be used by the Heads Up Display
+#
+def objectPosition(*args):
+	try:
+		selectedNodes = cmds.selectedNodes()
+		mainObj = selectedNodes[-1]
+		positionList = cmds.getAttr('%s.translate' % mainObj)
+		return positionList[0]
+	except:
+		return (0.0,0.0,0.0)
+
+#
+#Now, create a HUD object to display the return value of the above procedure
+#
+#Attributes:
+#
+#        - Section 1, block 0, represents the top second slot of the view.
+#        - Set the blockSize to &quot;medium&quot;, instead of the default &quot;small&quot;
+#        - Assigned the HUD the label: &quot;Position&quot;
+#        - Defined the label font size to be large
+#        - Assigned the HUD a command to run on a SelectionChanged trigger
+#        - Attached the attributeChange node change to the SelectionChanged trigger
+#          to allow the update of the data on attribute changes.
+#
+cmds.headsUpDisplay( 'HUDObjectPosition', section=1, block=0, blockSize='medium', label='Position', labelFontSize='large', command=objectPosition, event='SelectionChanged', nodeChanges='attributeChange' )
+
+#
+#Create a preset HUD object to display the camera names.
+#
+#Attributes:
+#
+#    - Section 2, block 0, represents the top middle slot of the view.
+#    - Using blockalign, the HUD object is centered in the middle of the block
+#    - Setting a dw of 50, allocates a space of 50 pixels for the data to reside in.
+#    - Finally setting the preset to &quot;cameraNames&quot;, selects a preset which will
+#      automatically insert the associated data into the data field.
+#
+cmds.headsUpDisplay( 'HUDCameraName', s=2, b=0, ba='center', dw=50, pre='cameraNames')
+
+#
+#Now, remove these two HUDs. Both can be removed in three ways: name, ID or position.
+#The following examples will demonstrate removal by name and position
+#
+cmds.headsUpDisplay( 'HUDObjectPosition', rem=True )
+
+cmds.headsUpDisplay( rp=(7, 0) )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

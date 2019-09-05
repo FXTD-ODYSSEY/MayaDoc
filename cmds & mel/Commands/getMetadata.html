@@ -1,0 +1,673 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>getMetadata command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-getMetadata"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/getMetadata.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>getMetadata </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("getMetadata.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>getMetadata [-<a href="#flagchannelName">channelName</a> <i>string</i>] [-<a href="#flagchannelType">channelType</a> <i>string</i>] [-<a href="#flagdataType">dataType</a>] [-<a href="#flagendIndex">endIndex</a> <i>string</i>] [-<a href="#flagindex">index</a> <i>string</i>] [-<a href="#flagindexType">indexType</a> <i>string</i>] [-<a href="#flaglistChannelNames">listChannelNames</a>] [-<a href="#flaglistMemberNames">listMemberNames</a>] [-<a href="#flaglistStreamNames">listStreamNames</a>] [-<a href="#flagmemberName">memberName</a> <i>string</i>] [-<a href="#flagscene">scene</a>] [-<a href="#flagstartIndex">startIndex</a> <i>string</i>] [-<a href="#flagstreamName">streamName</a> <i>string</i>]  </code> </p>
+      <p>getMetadata is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      <p>
+This command is used to retrieve the values of metadata elements from a node or scene.
+It is restricted to returning a single structure member at a time. For convenience
+the detail required is only enough to find a single Member of a single Structure
+on a single metadata Channel.
+
+<p>
+In the simplest case if there is a single Stream on one metadata Channel
+which uses a Structure with only one Member then all that is required is the
+name of the object containing the metadata. In the most complex case the
+'channelName', 'streamName', and 'memberName' are all required to narrow down
+the metadata to a single unique Member.
+
+<p>
+In general for scripting it's a good idea to use all flags anyway since there
+could be metadata added anywhere. The shortcuts are mainly for quick entry when
+entering commands directly in the script editor or command line.
+
+<p>
+When an Index is specified where data is not present the command fails with a
+message telling you which Index or Indices didn't have values. Use the
+<b>hasMetadata</b> command first to determine where metadata exists if you
+need to know in advance where to find valid metadata.
+
+<b>Filter Flags</b><ul>
+<li><i>channelName</i> - Only look for metadata on one particular Channel type</li>
+<li><i>streamName</i> - Only look for metadata on one particular named Stream. When
+used in conjunction with <i>channelName</i> then ignore Streams with a matching
+name but a different Channel type</li>
+<li><i>index</i> - Only look for metadata on one or more specific Index values of
+a Stream. Requires use of the <i>streamName</i> flag. Does not require the
+<i>indexType</i> flag as that will be inferred by the <i>streamName</i>.</li>
+<li><i>startIndex/endIndex</i> - Same as <i>index</i> but using an entire range of
+Index values rather than a single one. Not valid for index types not supporting
+ranges (e.g. strings)</li>
+<li><i>indexType</i> - Only look for metadata using a particular Index type. Can
+have its scope narrowed by other filter flags as well.</li>
+<li><i>memberName</i> - The particular Member in the metadata in a Structure to
+retrieve. If this is not specified the Structure can only have a single Member.</li>
+</ul>
+<p>
+Metadata on meshes is special in that the Channel types &quot;vertex&quot;,
+&quot;edge&quot;, &quot;face&quot;, and &quot;vertexFace&quot; are directly connected to the
+components of the same name. To make getting these metadata
+Channels easier you can simply select or specify on the command
+line the corresponding components rather than using the <i>channelName</i>
+and <i>index/startIndex/endIndex</i> flags. For
+example the selection &quot;myMesh.vtx[8:10]&quot; corresponds to
+<i>channelName = vertex</i> and either <i>index = 8, 9, 10</i>
+as a multi-use flag or <i>setIndex = 8, endIndex=10</i>.
+
+<p>
+Only a single node or scene and unique metadata Structure Member are
+allowed in a single command. This keeps the data simple at the possible
+cost of requiring multiple calls to the command to get more than one
+Structure Member's value.
+
+<p>
+When the data is returned it will be in Index order with an entire Member
+appearing together. For example if you were retrieving float[3] metadata on
+three components you would get the nine values back in the order:
+index[0]-float[0], index[0]-float[1], index[0]-float[2],
+index[1]-float[0], index[1]-float[1], index[1]-float[2],
+index[2]-float[0], index[2]-float[1], index[2]-float[2]. In the Python
+implementation the float[3] values will be an array each so you would
+get back three float[3] arrays.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int[]</i></td><td>List of integer values from the metadata member</td></tr><tr><td valign="top"><i>float[]</i></td><td>List of real values from the metadata member</td></tr><tr><td valign="top"><i>string[]</i></td><td>List of string values from the metadata member</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>metadata, component, stream, channel, association
+      <h2><a name="hRelated">Related</a></h2><a href="addMetadata.html">addMetadata</a>, <a href="applyMetadata.html">applyMetadata</a>, <a href="dataStructure.html">dataStructure</a>, <a href="editMetadata.html">editMetadata</a>, <a href="hasMetadata.html">hasMetadata</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagchannelName">channelName</a>, <a href="#flagchannelType">channelType</a>, <a href="#flagdataType">dataType</a>, <a href="#flagendIndex">endIndex</a>, <a href="#flagindex">index</a>, <a href="#flagindexType">indexType</a>, <a href="#flaglistChannelNames">listChannelNames</a>, <a href="#flaglistMemberNames">listMemberNames</a>, <a href="#flaglistStreamNames">listStreamNames</a>, <a href="#flagmemberName">memberName</a>, <a href="#flagscene">scene</a>, <a href="#flagstartIndex">startIndex</a>, <a href="#flagstreamName">streamName</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdataType">
+          <code><b>-dataType</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with the flag 'streamName' and 'memberName' to query the dataType
+of the specfied member.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistChannelNames">
+          <code><b>-listChannelNames</b>(<b>-lcn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the channel names on the shape.
+This flag can be used with some flags to filter the results.
+It can be used with the flag 'streamName' to get the channel
+with the specfied stream and the flag 'memberName' to get the channel
+in which the stream contains the specified member.
+It cannot be used with the flag 'channelName'.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistMemberNames">
+          <code><b>-listMemberNames</b>(<b>-lmn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the member names on the shape.
+This flag can be used with some flags to filter the results. It can be used with
+'streamName' to get the member which is in the specified stream and the flag
+'channelName' to get the member which is used in the specfied channel.
+It cannot be used with the flag 'memberName'.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistStreamNames">
+          <code><b>-listStreamNames</b>(<b>-lsn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the stream names on the shape.
+This flag can be used with some flags to filter the results. It can be
+used with the flag 'channelName' to get the stream names on the specified channel
+and the flag 'memberName' to get the stream names which has the specified member.
+It cannot be used with the flag 'streamName'.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmemberName">
+          <code><b>-memberName</b>(<b>-mn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the Structure member being retrieved. The names of the members are
+set up in the Structure definition, either through the description passed
+in through the &quot;dataStructure&quot; command or via the API used to create that
+Structure. This flag is only necessary when selected Structures have more
+than one member.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchannelName">
+          <code><b>-channelName</b>(<b>-cn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Filter the metadata selection to only recognize metadata belonging to
+the specified named Channel (e.g. &quot;vertex&quot;). This flag is ignored if the
+components on the selection list are being used to specify the metadata
+of interest.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchannelType">
+          <code><b>-channelType</b>(<b>-cht</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Obsolete - use the 'channelName' flag instead.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendIndex">
+          <code><b>-endIndex</b>(<b>-eix</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+<p>
+The metadata is stored in a Stream, which is an indexed list. If you have
+mesh components selected then the metadata indices are implicit in the list
+of selected components. If you select only the node or scene then this flag
+may be used in conjunction with the <i>startIndex</i> flag to specify a range
+of indices from which to retrieve the metadata. It is an error to have the
+value of <i>startIndex</i> be greater than that of <i>endIndex</i>.
+
+<p>
+See also the <i>index</i> flag for an alternate way to specify multiple
+indices. This flag can only be used on index types that support a range
+(e.g. integer values - it makes no sense to request a range between two
+strings)
+
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagindex">
+          <code><b>-index</b>(<b>-idx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+<p>
+In the typical case metadata is indexed using a simple integer value.
+Certain types of data may use other index types. e.g. a &quot;vertexFace&quot;
+component will use a &quot;pair&quot; index type, which is two integer values; one
+for the face ID of the component and the second for the vertex ID.
+
+<p>
+The <i>index</i> flag takes a string, formatted in the way the
+specified <i>indexType</i> requires. All uses of the
+<i>index</i> flag have the same <i>indexType</i>. If the type was
+not specified it is assumed to be a simple integer value.
+
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagindexType">
+          <code><b>-indexType</b>(<b>-idt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the index type the new Channel should be using. If not specified this
+defaults to a simple integer index. Of the native types only a mesh
+&quot;vertexFace&quot; channel is different, using a &quot;pair&quot; index type.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscene">
+          <code><b>-scene</b>(<b>-scn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use this flag when you want to add metadata to the scene as a whole rather than to
+any individual nodes. If you use this flag and have nodes selected the nodes will
+be ignored and a warning will be displayed.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstartIndex">
+          <code><b>-startIndex</b>(<b>-six</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+<p>
+The metadata is stored in a Stream, which is an indexed list. If you have
+mesh components selected then the metadata indices are implicit in the list
+of selected components. If you select only the node or scene then this flag
+may be used in conjunction with the <i>endIndex</i> flag to specify a range of
+indices from which to retrieve the metadata. It is an error to have the value
+of <i>startIndex</i> be greater than that of <i>endIndex</i>.
+
+<p>
+See also the <i>index</i> flag for an alternate way to specify multiple
+indices. This flag can only be used on index types that support a range
+(e.g. integer values - it makes no sense to request a range between two
+strings)
+
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstreamName">
+          <code><b>-streamName</b>(<b>-stn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the metadata Stream. Depending on context it could be the name of a
+Stream to be created, or the name of the Stream to pass through the filter.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+polyPlane -n smcPlane -ch off;
+// Result: smcPlane //
+pickWalk -d down;
+// Result: smcPlaneShape //
+
+// Create structures
+dataStructure -format &quot;raw&quot; -asString &quot;name=idStructure:int32=ID&quot;;
+dataStructure -format &quot;raw&quot; -asString &quot;name=keyValueStructure:string=value&quot;;
+// Result: idStructure //
+
+// Apply structures to plane
+addMetadata -structure &quot;idStructure&quot; -streamName &quot;idStream&quot; -channelName &quot;vertex&quot;;
+addMetadata -structure &quot;keyValueStructure&quot; -streamName &quot;keyValueStream&quot; -channelName &quot;key&quot; -indexType &quot;string&quot;;
+
+// Set the metadata values on three of the components by selection
+select -r smcPlaneShape.vtx[8:10];
+editMetadata -streamName &quot;idStream&quot; -memberName &quot;ID&quot; -value 7;
+// Result: 1 //
+
+// Retrieve the three newly set metadata values
+select -r smcPlaneShape;
+getMetadata -streamName &quot;idStream&quot; -memberName &quot;ID&quot; -channelName &quot;vertex&quot; -index &quot;8&quot; -index &quot;9&quot; -index &quot;10&quot;;
+// Result: 7 7 7 //
+
+// List stream names of the shape
+select -r smcPlaneShape;
+getMetadata -listStreamNames;
+// Result: keyValueStream idStream //
+
+// List stream names which is in the specified channel
+select -r smcPlaneShape;
+getMetadata -channelName &quot;vertex&quot; -listStreamNames;
+// Result: idStream //
+
+// List stream names of the shape which has the specified member
+select -r smcPlaneShape;
+getMetadata -memberName &quot;ID&quot; -listStreamNames;
+// Result: idStream //
+
+// List channel names which is used by the specified stream
+select -r smcPlaneShape;
+getMetadata -streamName &quot;idStream&quot; -listChannelNames;
+// Result: vertex //
+
+// List channel names which has the specified member
+select -r smcPlaneShape;
+getMetadata -memberName &quot;ID&quot; -listChannelNames;
+// Result: vertex //
+
+// List member names which is used by the specified stream
+select -r smcPlaneShape;
+getMetadata -streamName &quot;idStream&quot; -listMemberNames;
+// Result: ID //
+
+// Query data type of the listed member
+select -r smcPlaneShape;
+getMetadata -streamName &quot;idStream&quot; -listMemberNames -dataType;
+// Result: ID int32 //
+
+// Query data type of the specifiedmember
+select -r smcPlaneShape;
+getMetadata -streamName &quot;idStream&quot; -memberName &quot;ID&quot; -dataType;
+// Result: int32 //
+
+// Get metadata from a larger group of indices all at once.
+// Note that unassigned metadata values assume the default (0 for numbers).
+select -r smcPlaneShape.vtx[7:10];
+getMetadata -streamName &quot;idStream&quot; -memberName &quot;ID&quot;;
+// Result: 0 7 7 7 //
+
+// Set metadata values using the complex index type &quot;string&quot;
+editMetadata -streamName &quot;keyValueStream&quot; -memberName &quot;value&quot; -stringValue &quot;Starry Night&quot; -index &quot;Title&quot;;
+editMetadata -streamName &quot;keyValueStream&quot; -memberName &quot;value&quot; -stringValue &quot;Vincent Van Gogh&quot; -index &quot;Artist&quot;;
+
+// Retrieve the complex index data (note return is in alphabetical order of index)
+getMetadata -streamName &quot;keyValueStream&quot; -memberName &quot;value&quot; -channelName &quot;key&quot; -index &quot;Title&quot; -index &quot;Artist&quot; -indexType &quot;string&quot;;
+// Result: Vincent Van Gogh Starry Night //
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

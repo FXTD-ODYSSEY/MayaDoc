@@ -1,0 +1,880 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>hwRender command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-hwRender"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/hwRender.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>hwRender </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("hwRender.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>hwRender([<a href="#flagacceleratedMultiSampleSupport">acceleratedMultiSampleSupport</a>=<i>boolean</i>], [<a href="#flagactiveTextureCount">activeTextureCount</a>=<i>boolean</i>], [<a href="#flagcamera">camera</a>=<i>string</i>], [<a href="#flagcurrentFrame">currentFrame</a>=<i>boolean</i>], [<a href="#flagcurrentView">currentView</a>=<i>boolean</i>], [<a href="#flagedgeAntiAliasing">edgeAntiAliasing</a>=<i>[uint, uint]</i>], [<a href="#flagfixFileNameNumberPattern">fixFileNameNumberPattern</a>=<i>boolean</i>], [<a href="#flagframe">frame</a>=<i>float</i>], [<a href="#flagfullRenderSupport">fullRenderSupport</a>=<i>boolean</i>], [<a href="#flagheight">height</a>=<i>uint</i>], [<a href="#flagimageFileName">imageFileName</a>=<i>boolean</i>], [<a href="#flaglayer">layer</a>=<i>name</i>], [<a href="#flaglimitedRenderSupport">limitedRenderSupport</a>=<i>boolean</i>], [<a href="#flaglowQualityLighting">lowQualityLighting</a>=<i>boolean</i>], [<a href="#flagnoRenderView">noRenderView</a>=<i>boolean</i>], [<a href="#flagnotWriteToFile">notWriteToFile</a>=<i>boolean</i>], [<a href="#flagprintGeometry">printGeometry</a>=<i>boolean</i>], [<a href="#flagrenderHardwareName">renderHardwareName</a>=<i>boolean</i>], [<a href="#flagrenderRegion">renderRegion</a>=<i>[uint, uint, uint, uint]</i>], [<a href="#flagrenderSelected">renderSelected</a>=<i>boolean</i>], [<a href="#flagtextureResolution">textureResolution</a>=<i>uint</i>], [<a href="#flagwidth">width</a>=<i>uint</i>], [<a href="#flagwriteAlpha">writeAlpha</a>=<i>boolean</i>], [<a href="#flagwriteDepth">writeDepth</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>hwRender is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      Renders an image or a sequence using the hardware rendering engine
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>Command result</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>hardware, rendering
+      <h2><a name="hRelated">Related</a></h2><a href="hwRenderLoad.html">hwRenderLoad</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagacceleratedMultiSampleSupport">acceleratedMultiSampleSupport</a>, <a href="#flagactiveTextureCount">activeTextureCount</a>, <a href="#flagcamera">camera</a>, <a href="#flagcurrentFrame">currentFrame</a>, <a href="#flagcurrentView">currentView</a>, <a href="#flagedgeAntiAliasing">edgeAntiAliasing</a>, <a href="#flagfixFileNameNumberPattern">fixFileNameNumberPattern</a>, <a href="#flagframe">frame</a>, <a href="#flagfullRenderSupport">fullRenderSupport</a>, <a href="#flagheight">height</a>, <a href="#flagimageFileName">imageFileName</a>, <a href="#flaglayer">layer</a>, <a href="#flaglimitedRenderSupport">limitedRenderSupport</a>, <a href="#flaglowQualityLighting">lowQualityLighting</a>, <a href="#flagnoRenderView">noRenderView</a>, <a href="#flagnotWriteToFile">notWriteToFile</a>, <a href="#flagprintGeometry">printGeometry</a>, <a href="#flagrenderHardwareName">renderHardwareName</a>, <a href="#flagrenderRegion">renderRegion</a>, <a href="#flagrenderSelected">renderSelected</a>, <a href="#flagtextureResolution">textureResolution</a>, <a href="#flagwidth">width</a>, <a href="#flagwriteAlpha">writeAlpha</a>, <a href="#flagwriteDepth">writeDepth</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagacceleratedMultiSampleSupport">
+          <code><b>acceleratedMultiSampleSupport</b>(<b>ams</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        This flag when used with query will return whether the graphics supports
+    hardware accelerated multi-sampling.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveTextureCount">
+          <code><b>activeTextureCount</b>(<b>atc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        This flag when used with query will return the number of textures that
+    have been bound to the graphics by the hardware renderer.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcamera">
+          <code><b>camera</b>(<b>cam</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Specify the camera to use.  Use the first available camera if the camera
+        given is not found.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentFrame">
+          <code><b>currentFrame</b>(<b>cf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Render the current frame.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentView">
+          <code><b>currentView</b>(<b>cv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        When turned on, only the current view will be rendered.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagedgeAntiAliasing">
+          <code><b>edgeAntiAliasing</b>(<b>eaa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[uint, uint]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+ Enables multipass rendering. Controls for the number of exposures rendered
+per frame are provided in the form of two associated flag arguments. The first
+specifies the sampling algorithm:
+<ul>
+        <li>0 - Uniform Weighted Grid Sampling</li>
+        <li>1 - Rotated Grid Super Sampling (RGSS)</li>
+        <li>2 - Gaussian Weighted Sampling</li>
+</ul>
+ Use of a sampling method other than the others listed above, will result in
+use of the default sample method of Uniform Weighted Grid Sampling. The second
+argument specifies a number of samples to use. For each sampling algorithm
+there is a fixed set of sample counts available:
+<ul>
+        <li>0 - Uniform Weighted Grid Sampling</li>
+                <ul><li>1 Sample</li>
+                <li>3 Samples</li>
+                <li>4 Samples</li>
+                <li>5 Samples</li>
+                <li>7 Samples</li>
+                <li>9 Samples</li>
+                <li>16 Samples</li>
+                <li>25 Samples</li>
+                <li>36 Samples</li></ul>
+        <li>1 - Rotated Grid Super Sampling (RGSS)</li>
+                <ul><li>1 Sample</li>
+                <li>4 Samples</li>
+                <li>5 Samples</li></ul>
+        <li>2 - Gaussian Weighted Sampling</li>
+                <ul><li>1 Sample</li>
+                <li>3 Samples</li>
+                <li>4 Samples</li>
+                <li>5 Samples</li>
+                <li>7 Samples</li>
+                <li>9 Samples</li>
+                <li>16 Samples</li>
+                <li>25 Samples</li>
+                <li>36 Samples</li></ul>
+</ul>
+ Using a sampling count other than the allowable options for the given
+sampling method will result in using the default sample count of 5. The values
+passed via the command will override settings stored in the
+hardwareRenderGlobals node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfixFileNameNumberPattern">
+          <code><b>fixFileNameNumberPattern</b>(<b>fnp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+    This flag allows the user to take the hardwareRenderGlobals
+    filename as the initial filename pattern,
+    fix the frame number pattern in the filename in a unique way,
+    returns the new filename pattern.  This does not change the
+    hardwareRenderGlobals's filename.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagframe">
+          <code><b>frame</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Specify the frame to render.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfullRenderSupport">
+          <code><b>fullRenderSupport</b>(<b>frs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+    This flag may be used in the create or query context.
+    In the create context, it will force the renderer to abort and not
+    render any frames if the hardware is not fully supported.
+        In the query context, it will return whether full quality rendering
+    is supported on the current graphics system. Please see the graphics
+    card qualification charts for an explanation of limited support.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagheight">
+          <code><b>height</b>(<b>h</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+    Height. If not used, the height is taken from the render globals settings.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagimageFileName">
+          <code><b>imageFileName</b>(<b>ifn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+    This flag let people query the image name for a specified frame.
+    The frame can be specified using the &quot;-frame&quot; flag.
+    When no &quot;-frame&quot; is used, the
+    current frame number is used.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglayer">
+          <code><b>layer</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Render the specified render layer.
+        Only this render layer will be rendered,
+        regardless of the renderable attribute value of the render layer.
+        The layer name will be appended to the output image file name.
+        The specified render layer becomes the current render layer before rendering,
+        and remains as current render layer after the rendering.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglimitedRenderSupport">
+          <code><b>limitedRenderSupport</b>(<b>lrs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        This flag when used with query will return whether limited rendering is supported
+        on the current graphics system. Please see the graphics card qualification
+        charts for the current definition of limited support.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglowQualityLighting">
+          <code><b>lowQualityLighting</b>(<b>lql</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Disable lighting evaluation per pixel (fragment).
+        Note: The values passed via the command will override settings stored in
+    the hardware render globals node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoRenderView">
+          <code><b>noRenderView</b>(<b>nrv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        When turned on, the render view is not updated after image computation
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnotWriteToFile">
+          <code><b>notWriteToFile</b>(<b>nwf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+    This flag is set to true if the user does not want to write
+    the image to a file.  It is set to false, otherwise.
+    The default value of the flag is &quot;false&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprintGeometry">
+          <code><b>printGeometry</b>(<b>pg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+   Print the geomety objects as they get translated.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderHardwareName">
+          <code><b>renderHardwareName</b>(<b>rhw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        This flag will create a graphics context and return the name of the
+    graphics hardware being used. The graphics hardware is determined by
+    creating an off screen buffer and querying the GL_RENDERER string
+    from OpenGL. If the off screen buffer cannot be created an empty
+    string is returned.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderRegion">
+          <code><b>renderRegion</b>(<b>reg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[uint, uint, uint, uint]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+    Render region. The parameters are 4 integers, indicating
+            left right bottom top
+    of the region.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrenderSelected">
+          <code><b>renderSelected</b>(<b>rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Only renders the selected objects.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtextureResolution">
+          <code><b>textureResolution</b>(<b>res</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Specify the desired resolution of baked textures.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwidth">
+          <code><b>width</b>(<b>w</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+    Width. If not used, the width is taken from the render globals settings.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwriteAlpha">
+          <code><b>writeAlpha</b>(<b>a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Read the alpha channel of color buffer and return as tif file.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwriteDepth">
+          <code><b>writeDepth</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+        Read the depth buffer and return as tif file.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Create a poly sphere.
+cmds.polySphere()
+
+# Render it
+cmds.hwRender()
+
+# Render the region where left=20, right=50, bottom=30, top=60.
+# And do not write the output to a file.
+#
+cmds.hwRender( renderRegion=(20, 50, 30, 60), notWriteToFile=True )
+
+# Render with the specified width and height.
+#
+cmds.hwRender( width=100, height=200 )
+
+# Returns the imageFileName for image frame 11.
+#
+cmds.hwRender( imageFileName=True, frame=11 )
+
+# Returns the imageFileName for current frame.
+#
+cmds.hwRender( imageFileName=True )
+
+# Returns a version of the image file name after its number pattern
+# being represented in a unique way.
+#
+cmds.hwRender( query=True, fixFileNameNumberPattern=True )
+
+# Render the specified render layer.
+cmds.hwRender( layer='layer1' )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

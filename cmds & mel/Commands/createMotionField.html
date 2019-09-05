@@ -1,0 +1,114 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>createMotionField command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-createMotionField"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>createMotionField </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Fluids" target="contentFrame">Fluids</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("createMotionField.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+createMotionField
+<br>
+
+	 </code> </p>
+      
+      This command creates a force that pushes a fluid based on the motion
+of an object. One selects the objects that one wishes to push the fluid
+with and the fluids one wishes to affect. At least one fluid and one 
+non-fluid must be selected. One will not see an effect until the object
+is animated. CreateMotionField creates a drag field for each object
+and sizes the volume boundary of the force to be a bit larger than
+the object. The drag field has inheritVelocity enabled, which causes it
+to drag relative to the movement of the field.
+Adjusting the scale and volume shape of the drag field can help to achieve
+the best effect. If one collides the fluid with the object,then it may be good
+to increase the drag field size, as the colliding voxels have all velocity
+damped out.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name=""><b></b></a></td><td><i></i></td><td>None.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>	<i>// Create a fluid with emitter
+</i>
+  Create2DContainerEmitter;
+	<i>// Create an animated sphere 
+</i>
+	sphere;
+  move -r 3 3 0;
+	setKeyframe;
+  currentTime 100;
+  move -r -6 -6 0;
+	setKeyframe;
+  select -r fluidShape1 nurbsSphere1;
+  createMotionField;
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

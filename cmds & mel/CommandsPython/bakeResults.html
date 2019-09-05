@@ -1,0 +1,838 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>bakeResults command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-bakeResults"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/bakeResults.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>bakeResults </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("bakeResults.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>bakeResults(
+objects
+    , [<a href="#flaganimation">animation</a>=<i>string</i>], [<a href="#flagattribute">attribute</a>=<i>string</i>], [<a href="#flagbakeOnOverrideLayer">bakeOnOverrideLayer</a>=<i>boolean</i>], [<a href="#flagcontrolPoints">controlPoints</a>=<i>boolean</i>], [<a href="#flagdestinationLayer">destinationLayer</a>=<i>string</i>], [<a href="#flagdisableImplicitControl">disableImplicitControl</a>=<i>boolean</i>], [<a href="#flagfloat">float</a>=<i>floatrange</i>], [<a href="#flaghierarchy">hierarchy</a>=<i>string</i>], [<a href="#flagincludeUpperBound">includeUpperBound</a>=<i>boolean</i>], [<a href="#flagindex">index</a>=<i>uint</i>], [<a href="#flagminimizeRotation">minimizeRotation</a>=<i>boolean</i>], [<a href="#flagoversamplingRate">oversamplingRate</a>=<i>uint</i>], [<a href="#flagpreserveOutsideKeys">preserveOutsideKeys</a>=<i>boolean</i>], [<a href="#flagremoveBakedAnimFromLayer">removeBakedAnimFromLayer</a>=<i>boolean</i>], [<a href="#flagremoveBakedAttributeFromLayer">removeBakedAttributeFromLayer</a>=<i>boolean</i>], [<a href="#flagresolveWithoutLayer">resolveWithoutLayer</a>=<i>string</i>], [<a href="#flagsampleBy">sampleBy</a>=<i>time</i>], [<a href="#flagshape">shape</a>=<i>boolean</i>], [<a href="#flagsimulation">simulation</a>=<i>boolean</i>], [<a href="#flagsmart">smart</a>=<i>[[, boolean, float, ]]</i>], [<a href="#flagsparseAnimCurveBake">sparseAnimCurveBake</a>=<i>boolean</i>], [<a href="#flagtime">time</a>=<i>timerange</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>bakeResults is undoable, queryable, and editable.</p>
+      This command allows the user to replace a chain of dependency nodes
+which define the value for an attribute with a single animation curve.
+Command allows the user to specify the range and frequency of sampling.
+<p>
+This command operates on a keyset. A keyset is
+defined as a group of keys within a specified time range on one or
+more animation curves.
+<p>
+The animation curves comprising a keyset depend on the value
+of the &quot;-animation&quot; flag:
+<ul>
+<li>
+<b>keysOrObjects</b>:
+<ol>
+<li>Any active keys, when no target objects or -attribute
+flags appear on the command line, or</li>
+<p>
+<li>All animation curves connected to all keyframable
+attributes of objects specified as the command line's
+targetList, when there are no active keys.</li>
+</ol>
+</li>
+<p>
+<li>
+<b>keys</b>:
+Only act on active keys or tangents.
+If there are no active keys or tangents, do not do anything.
+</li>
+<p>
+<li>
+<b>objects</b>:
+Only act on specified objects. If there are no objects specified, do not
+do anything.
+</li>
+</ul>
+<p>
+Note that the &quot;-animation&quot; flag can be used to override
+the curves uniquely identified by the multi-use
+&quot;-attribute&quot; flag, which takes an argument of the form
+attributeName, such as &quot;translateX&quot;.
+<p>
+Keys on animation curves are identified by either
+their time values or their indices. Times and indices should
+be specified as a range, as shown below.
+<ul>
+<li><b>-time &quot;10:20&quot;</b> means all keys in the range from 10 to 20,
+inclusive, in the current time unit.</li>
+<li><b>-index &quot;1:5&quot;</b> means the 2nd, 3rd, 4th, 5th, and 6th keys of
+each animation curve.</li>
+</ul>
+<p>
+<p>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>- The number of channels baked</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="bakeClip.html">bakeClip</a>, <a href="bakeSimulation.html">bakeSimulation</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flaganimation">animation</a>, <a href="#flagattribute">attribute</a>, <a href="#flagbakeOnOverrideLayer">bakeOnOverrideLayer</a>, <a href="#flagcontrolPoints">controlPoints</a>, <a href="#flagdestinationLayer">destinationLayer</a>, <a href="#flagdisableImplicitControl">disableImplicitControl</a>, <a href="#flagfloat">float</a>, <a href="#flaghierarchy">hierarchy</a>, <a href="#flagincludeUpperBound">includeUpperBound</a>, <a href="#flagindex">index</a>, <a href="#flagminimizeRotation">minimizeRotation</a>, <a href="#flagoversamplingRate">oversamplingRate</a>, <a href="#flagpreserveOutsideKeys">preserveOutsideKeys</a>, <a href="#flagremoveBakedAnimFromLayer">removeBakedAnimFromLayer</a>, <a href="#flagremoveBakedAttributeFromLayer">removeBakedAttributeFromLayer</a>, <a href="#flagresolveWithoutLayer">resolveWithoutLayer</a>, <a href="#flagsampleBy">sampleBy</a>, <a href="#flagshape">shape</a>, <a href="#flagsimulation">simulation</a>, <a href="#flagsmart">smart</a>, <a href="#flagsparseAnimCurveBake">sparseAnimCurveBake</a>, <a href="#flagtime">time</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaganimation">
+          <code><b>animation</b>(<b>an</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Where this command should get the animation to act
+on. Valid values are &quot;objects,&quot; &quot;keys,&quot; and
+&quot;keysOrObjects&quot; Default: &quot;keysOrObjects.&quot; See
+command description for details.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattribute">
+          <code><b>attribute</b>(<b>at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List of attributes to select
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbakeOnOverrideLayer">
+          <code><b>bakeOnOverrideLayer</b>(<b>bol</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, all layered and baked attribute will be added as a top override layer.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcontrolPoints">
+          <code><b>controlPoints</b>(<b>cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag explicitly specifies whether or not to include the
+control points of a shape (see &quot;-s&quot; flag) in the list of attributes.
+Default: false.  <b>(Not valid for &quot;pasteKey&quot; cmd.)</b>
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdestinationLayer">
+          <code><b>destinationLayer</b>(<b>dl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used to specify an existing layer where the baked results
+should be stored. Use this flag with caution. If the destination layer already has animation on it
+that contributes to the final result, it will be replaced by the output of the bake. As a result,
+it is possible that the combined animation visible in the scene is different before / after the baking
+process.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisableImplicitControl">
+          <code><b>disableImplicitControl</b>(<b>dic</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Whether to disable implicit control after the anim curves
+are obtained as the result of this command. An implicit control
+to an attribute is some function that affects the attribute
+without using an explicit dependency graph connection. The
+control of IK, via ik handles, is an example.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfloat">
+          <code><b>float</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>floatrange</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+value uniquely representing a non-time-based
+key (or key range) on a time-based animCurve. Valid
+floatRange include single values (-f 10) or a
+string with a lower and upper bound, separated by a
+colon (-f &quot;10:20&quot;)
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghierarchy">
+          <code><b>hierarchy</b>(<b>hi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Hierarchy expansion options.  Valid values are &quot;above,&quot;
+&quot;below,&quot; &quot;both,&quot; and &quot;none.&quot; <b>(Not valid for &quot;pasteKey&quot; cmd.)</b>
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagincludeUpperBound">
+          <code><b>includeUpperBound</b>(<b>iub</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When the -t/time or -f/float flags represent a range
+of keys, this flag determines whether the keys at the
+upper bound of the range are included in the keyset.
+Default value: true. This flag is only valid when
+the argument to the -t/time flag is a time range with
+a lower and upper bound. Note: when used with the &quot;pasteKey&quot;
+command, this flag refers only to the time range of the
+target curve that is replaced, when using options such
+as &quot;replace,&quot; &quot;fitReplace,&quot; or &quot;scaleReplace.&quot; This
+flag has no effect on the curve pasted from the clipboard.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagindex">
+          <code><b>index</b>(<b>index</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+index of a key on an animCurve
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminimizeRotation">
+          <code><b>minimizeRotation</b>(<b>mr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify whether to minimize the local Euler component from key to key during baking of rotation channels.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoversamplingRate">
+          <code><b>oversamplingRate</b>(<b>osr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Amount of samples per sampleBy period. Default is 1.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreserveOutsideKeys">
+          <code><b>preserveOutsideKeys</b>(<b>pok</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Whether to preserve keys that are outside the bake range
+when there are directly connected animation curves or a pairBlend node
+which has an animation curve as its direct input. The default
+(false) is to remove frames outside the bake range. If the channel
+that you are baking is not controlled by a single animation curve,
+then a new animation curve will be created with keys only in the
+bake range. In the case of pairBlend-driven channels, setting pok to
+true will retain both the pairBlend and its input animCurve. The
+blended values will be baked onto the animCurve and the weight of the
+pairBlend weight will be keyed to the animCurve during the baked
+range.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveBakedAnimFromLayer">
+          <code><b>removeBakedAnimFromLayer</b>(<b>rba</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, all baked animation will be removed from the layer.
+Otherwise all layer associated with the baked animation will be muted.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveBakedAttributeFromLayer">
+          <code><b>removeBakedAttributeFromLayer</b>(<b>ral</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, all baked attribute will be removed from the layer.
+Otherwise all layer associated with the baked attribute will be muted.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresolveWithoutLayer">
+          <code><b>resolveWithoutLayer</b>(<b>rwl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used to specify a list of layers to be merged together during the bake process. This
+is a multi-use flag. Its name refers to the fact that when solving for the value to key, it determines
+the proper value to key on the destination layer to achieve the same result as the merged layers.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsampleBy">
+          <code><b>sampleBy</b>(<b>sb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Amount to sample by. Default is 1.0 in current timeUnit.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshape">
+          <code><b>shape</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Consider attributes of shapes below transforms as well,
+except &quot;controlPoints&quot;.  Default: true.  <b>(Not valid for &quot;pasteKey&quot; cmd.)</b>
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsimulation">
+          <code><b>simulation</b>(<b>sm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Using this flag instructs the command to preform a simulation instead
+of just evaluating each attribute separately over the range of time.
+The simulation flag is required to bake animation that that depends on
+the whole scene being evaluated at each time step such as dynamics. The
+default is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsmart">
+          <code><b>smart</b>(<b>sr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[[, boolean, float, ]]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify whether to enable smart bake and the optional smart bake tolerance.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsparseAnimCurveBake">
+          <code><b>sparseAnimCurveBake</b>(<b>sac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When this is true and anim curves are being baked, do not insert
+any keys into areas of the curve where animation is defined. And, use
+as few keys as possible to bake the pre and post infinity behavior.
+When this is false, one key will be inserted at each time step. The
+default is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtime">
+          <code><b>time</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>timerange</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+time uniquely representing a key (or key
+range) on a time-based animCurve. See the code
+examples below on how to format for a single
+frame or frame ranges.
+      <p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# To replace the set of nodes controlling the animation of
+# surface1.translateX with a single animation animCurve, between the
+# time interval 5-44, with a sampling frequency of 2 timeUnits, use the
+# following command:
+cmds.bakeResults( 'surface1.translateX', t=(5,44), sb=2 )
+
+# This bakes the joints on a skeleton over the time interval 1-40.
+cmds.bakeResults( 'joint*', t=(1,40), simulation=True )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

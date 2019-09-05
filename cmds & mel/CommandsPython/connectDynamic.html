@@ -1,0 +1,361 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>connectDynamic command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-connectDynamic"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/connectDynamic.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>connectDynamic </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Dynamics" target="contentFrame">Dynamics</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("connectDynamic.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>connectDynamic(
+[objects]
+    , [<a href="#flagaddScriptHandler">addScriptHandler</a>=<i>script</i>], [<a href="#flagcollisions">collisions</a>=<i>string</i>], [<a href="#flagdelete">delete</a>=<i>boolean</i>], [<a href="#flagemitters">emitters</a>=<i>string</i>], [<a href="#flagfields">fields</a>=<i>string</i>], [<a href="#flagremoveScriptHandler">removeScriptHandler</a>=<i>int</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>connectDynamic is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Dynamic connection specifies that the force fields, emitters, or collisions
+of an object affect another dynamic object. The dynamic object that is
+connected to a field, emitter, or collision object is influenced by those
+fields, emitters and collision objects.
+<p>
+Connections are made to individual fields, emitters, collisions.  So, if
+an object owns several fields, if the user wants some of the fields to
+affect an object, s/he can specify each field with a &quot;-f&quot; flag; but if
+the user wants to connect all the fields owned by an object, s/he can
+specify the object name with the &quot;-f&quot; flag. The same is true for
+emitters and collisions.
+Different connection types (i.e., for fields vs. emitters)
+between the same pair of objects are logically
+independent. In other words, an
+object can be influenced by another object's fields without being
+influenced by its emitters or collisions.
+<p>
+Each connected object must be a dynamic object. The object connected to
+can be any object that
+owns fields, emitters, etc.; it need not be dynamic. Objects that can
+own influences are particles, geometry objects (nurbs and polys) and
+lattices.  You can specify either the shape name or the transform name of
+the object to be influenced.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Command result</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="air.html">air</a>, <a href="drag.html">drag</a>, <a href="emitter.html">emitter</a>, <a href="gravity.html">gravity</a>, <a href="newton.html">newton</a>, <a href="particle.html">particle</a>, <a href="radial.html">radial</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaddScriptHandler">addScriptHandler</a>, <a href="#flagcollisions">collisions</a>, <a href="#flagdelete">delete</a>, <a href="#flagemitters">emitters</a>, <a href="#flagfields">fields</a>, <a href="#flagremoveScriptHandler">removeScriptHandler</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddScriptHandler">
+          <code><b>addScriptHandler</b>(<b>ash</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Registers a script that will be given a chance to handle calls to the
+dynamicConnect command. This flag allows other dynamics systems to
+override the behaviour of the connectDynamic command. You must pass a Python
+function as the argument for this flag, and that function must take the
+following keyword arguments: fields, emitters, collisionObjects and objects.
+The python function must return True if it has handled the call to
+connectDynamic. In the case that the script returns true, the connectDynamic
+command will not do anything as it assumes that the work was handled by the
+script. If all of the callbacks return false, the connectDynamic command will
+proceed as normal.
+
+The addScriptHandler flag may not be used with any other flags. When the
+flag is used, the command will return a numerical id that can be used to
+deregister the callback later (see the removeScriptHandler flag)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcollisions">
+          <code><b>collisions</b>(<b>c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Connects each object to the collision models of the given object.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdelete">
+          <code><b>delete</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Deletes existing connections.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagemitters">
+          <code><b>emitters</b>(<b>em</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Connects each object to the emitters of the given object.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfields">
+          <code><b>fields</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Connects each object to the fields of the given object.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveScriptHandler">
+          <code><b>removeScriptHandler</b>(<b>rsh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used to remove a callback that was previously registered
+with the addScriptHandler flag. The argument to this flag is the numerical
+id returned by dynamicConnect when the addScriptHandler flag was used.
+If this flag is called with an invalid id, then the command will do
+nothing.
+
+This flag may not be used with any other flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.connectDynamic( 'Book', c='Floor' )
+# Connects the dynamic object &quot;Book&quot; to the collision model of the
+# &quot;Floor&quot;. This means that the book will collide with and bounce off of
+# the floor.
+
+cmds.connectDynamic( 'Moon', 'Spaceship', f='Moon' )
+# Connects dynamic object &quot;Spaceship&quot; to the all fields and emitters
+# owned by &quot;Moon&quot;.
+
+cmds.connectDynamic( 'Spaceship', f='newtonField1' )
+# Connects dynamic object &quot;Spaceship&quot; to &quot;newtonField1&quot; owned by &quot;Moon&quot;.
+
+cmds.connectDynamic( 'Moon', f='newtonField1' )
+# If the selection list consists of &quot;Spaceship&quot;, connects dynamic object
+# &quot;Spaceship&quot; to &quot;newtonField1&quot; and all emitters owned by &quot;Moon&quot;.
+
+cmds.connectDynamic( 'Spaceship', d=True, f='Moon' )
+# Deletes the field connection between all the fields owned by &quot;Moon&quot; and
+# &quot;Spaceship&quot;. Note that the command establishing the connection need not
+# be in the undo queue.
+
+cmds.connectDynamic( 'Spaceship', d=True, f='newtonField1' )
+# Deletes the field connection between &quot;newtonField1&quot; owned by &quot;Moon&quot; and
+# &quot;Spaceship&quot;.
+
+def callback(fields, emitters, collisionObjects, objects):
+	'''
+	Test callback for intercepting calls to the connectDynamic command
+	'''
+    print 'Fields: %s' % str(fields)
+    print 'Emitters: %s' % str(emitters)
+    print 'Collision Objects: %s' % str(collisionObjects)
+    print 'Objects: %s' % str(objects)
+
+    # Let connectDynamic handle the connection
+    return False
+
+handler_id = cmds.connectDynamic(addScriptHandler=callback)
+# Installs the above handler to intercept calls to the connectDynamic command
+
+cmds.connectDynamic(removeScriptHandler=handler_id)
+# Remove the above script handler
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

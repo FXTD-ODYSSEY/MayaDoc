@@ -1,0 +1,237 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>clipMatching command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-clipMatching"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/clipMatching.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>clipMatching </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("clipMatching.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>clipMatching [-<a href="#flagclipDst">clipDst</a> <i>string float</i>] [-<a href="#flagclipSrc">clipSrc</a> <i>string float</i>] [-<a href="#flagmatchRotation">matchRotation</a> <i>uint</i>] [-<a href="#flagmatchTranslation">matchTranslation</a> <i>uint</i>]  </code> </p>
+      <p>clipMatching is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command is used to compute an offset to apply on a source clip in order to
+automatically align it to a destination clip at a specified match element.
+For this command to work, offset objects must be specified for the character.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      <h2><a name="hKeywords">Keywords</a></h2>character, clip, animation
+      <h2><a name="hRelated">Related</a></h2><a href="bakeClip.html">bakeClip</a>, <a href="character.html">character</a>, <a href="clip.html">clip</a>, <a href="clipEditor.html">clipEditor</a>, <a href="clipSchedule.html">clipSchedule</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagclipDst">clipDst</a>, <a href="#flagclipSrc">clipSrc</a>, <a href="#flagmatchRotation">matchRotation</a>, <a href="#flagmatchTranslation">matchTranslation</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipDst">
+          <code><b>-clipDst</b>(<b>-cd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The clip to match so that the source clip can be offsetted correctly.  This flag
+takes in a clip name and the percentage value ranging from 0.0 to 1.0 in order
+to have the source clip match at a certain time in the destination clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclipSrc">
+          <code><b>-clipSrc</b>(<b>-cs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The clip to offset so that it aligns with the destination clip.  This flag takes
+in a clip name and the percentage value ranging from 0.0 to 1.0 in order to
+have it match at a certain time in the clip.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmatchRotation">
+          <code><b>-matchRotation</b>(<b>-mr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag sets the rotation match type. By default, it is set to not match the
+rotation.
+0 - None
+1 - Match full rotation
+2 - Match projected rotation on ground plane
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmatchTranslation">
+          <code><b>-matchTranslation</b>(<b>-mt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag sets the translation match type. By default, it is set to not match
+the translation.
+0 - None
+1 - Match full translation
+2 - Match projected translation on ground plane
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// Compute and set the offset on the &quot;walk&quot; clip in order to have it's start
+// pose align to the end of the &quot;tornadoKick&quot; clip at the LeftAnkle match
+// element.  Note that here we are matching the translation by specifying
+// mt = 1.
+//
+clipMatching -mt 1 -cs &quot;walk&quot; 0.0 -cd &quot;tornadoKick&quot; 1.0 $character $LeftAnkle;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

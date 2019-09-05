@@ -1,0 +1,915 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>selectPref command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-selectPref"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/selectPref.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>selectPref </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Selection" target="contentFrame">Selection</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("selectPref.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>selectPref [-<a href="#flagaffectsActive">affectsActive</a> <i>boolean</i>] [-<a href="#flagallowHiliteSelection">allowHiliteSelection</a> <i>boolean</i>] [-<a href="#flagautoSelectContainer">autoSelectContainer</a> <i>boolean</i>] [-<a href="#flagautoUseDepth">autoUseDepth</a> <i>boolean</i>] [-<a href="#flagclickBoxSize">clickBoxSize</a> <i>uint</i>] [-<a href="#flagclickDrag">clickDrag</a> <i>boolean</i>] [-<a href="#flagcontainerCentricSelection">containerCentricSelection</a> <i>boolean</i>] [-<a href="#flagdisableComponentPopups">disableComponentPopups</a> <i>boolean</i>] [-<a href="#flagexpandPopupList">expandPopupList</a> <i>boolean</i>] [-<a href="#flagignoreSelectionPriority">ignoreSelectionPriority</a> <i>boolean</i>] [-<a href="#flagmanipClickBoxSize">manipClickBoxSize</a> <i>uint</i>] [-<a href="#flagpaintSelect">paintSelect</a> <i>boolean</i>] [-<a href="#flagpaintSelectWithDepth">paintSelectWithDepth</a> <i>boolean</i>] [-<a href="#flagpopupMenuSelection">popupMenuSelection</a> <i>boolean</i>] [-<a href="#flagpreSelectBackfacing">preSelectBackfacing</a> <i>boolean</i>] [-<a href="#flagpreSelectClosest">preSelectClosest</a> <i>boolean</i>] [-<a href="#flagpreSelectDeadSpace">preSelectDeadSpace</a> <i>uint</i>] [-<a href="#flagpreSelectHilite">preSelectHilite</a> <i>boolean</i>] [-<a href="#flagpreSelectHiliteSize">preSelectHiliteSize</a> <i>float</i>] [-<a href="#flagpreSelectTweakDeadSpace">preSelectTweakDeadSpace</a> <i>uint</i>] [-<a href="#flagselectTypeChangeAffectsActive">selectTypeChangeAffectsActive</a> <i>boolean</i>] [-<a href="#flagselectionChildHighlightMode">selectionChildHighlightMode</a> <i>int</i>] [-<a href="#flagsingleBoxSelection">singleBoxSelection</a> <i>boolean</i>] [-<a href="#flagstraightLineDistance">straightLineDistance</a> <i>boolean</i>] [-<a href="#flagtrackSelectionOrder">trackSelectionOrder</a> <i>boolean</i>] [-<a href="#flaguseDepth">useDepth</a> <i>boolean</i>] [-<a href="#flagxformNoSelect">xformNoSelect</a> <i>boolean</i>]  </code> </p>
+      <p>selectPref is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command controls state variables used to selection UI behavior.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>in the query mode.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="select.html">select</a>, <a href="selectKey.html">selectKey</a>, <a href="selectMode.html">selectMode</a>, <a href="selectPriority.html">selectPriority</a>, <a href="selectType.html">selectType</a>, <a href="selectedNodes.html">selectedNodes</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaffectsActive">affectsActive</a>, <a href="#flagallowHiliteSelection">allowHiliteSelection</a>, <a href="#flagautoSelectContainer">autoSelectContainer</a>, <a href="#flagautoUseDepth">autoUseDepth</a>, <a href="#flagclickBoxSize">clickBoxSize</a>, <a href="#flagclickDrag">clickDrag</a>, <a href="#flagcontainerCentricSelection">containerCentricSelection</a>, <a href="#flagdisableComponentPopups">disableComponentPopups</a>, <a href="#flagexpandPopupList">expandPopupList</a>, <a href="#flagignoreSelectionPriority">ignoreSelectionPriority</a>, <a href="#flagmanipClickBoxSize">manipClickBoxSize</a>, <a href="#flagpaintSelect">paintSelect</a>, <a href="#flagpaintSelectWithDepth">paintSelectWithDepth</a>, <a href="#flagpopupMenuSelection">popupMenuSelection</a>, <a href="#flagpreSelectBackfacing">preSelectBackfacing</a>, <a href="#flagpreSelectClosest">preSelectClosest</a>, <a href="#flagpreSelectDeadSpace">preSelectDeadSpace</a>, <a href="#flagpreSelectHilite">preSelectHilite</a>, <a href="#flagpreSelectHiliteSize">preSelectHiliteSize</a>, <a href="#flagpreSelectTweakDeadSpace">preSelectTweakDeadSpace</a>, <a href="#flagselectTypeChangeAffectsActive">selectTypeChangeAffectsActive</a>, <a href="#flagselectionChildHighlightMode">selectionChildHighlightMode</a>, <a href="#flagsingleBoxSelection">singleBoxSelection</a>, <a href="#flagstraightLineDistance">straightLineDistance</a>, <a href="#flagtrackSelectionOrder">trackSelectionOrder</a>, <a href="#flaguseDepth">useDepth</a>, <a href="#flagxformNoSelect">xformNoSelect</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaffectsActive">
+          <code><b>-affectsActive</b>(<b>-aa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set affects-active toggle which when on
+causes the active list to be affected when
+changing between object and component
+selection mode.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallowHiliteSelection">
+          <code><b>-allowHiliteSelection</b>(<b>-ahs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When in component selection mode, allow selection of
+objects for editing.  If an object is selected for
+editing, it appears in the hilite color and its
+selectable components are automatically displayed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagautoSelectContainer">
+          <code><b>-autoSelectContainer</b>(<b>-asc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled, with container centric selection also on, whenever the root transform is selected in the viewport, the container node will automatically be selected as well.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagautoUseDepth">
+          <code><b>-autoUseDepth</b>(<b>-aud</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled, useDepth and paintSelectWithDepth will be automatically enabled
+in shaded display mode and disabled in wireframe display mode.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclickBoxSize">
+          <code><b>-clickBoxSize</b>(<b>-cbs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When click selecting, this value defines the size of
+square picking region surrounding the cursor. The size of
+the square is twice the specified value. That is, the
+value defines the amount of space on all four sides of the
+cursor position. The size must be positive.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclickDrag">
+          <code><b>-clickDrag</b>(<b>-cld</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set click/drag selection interaction on/off
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcontainerCentricSelection">
+          <code><b>-containerCentricSelection</b>(<b>-ccs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled, selecting any DAG node in a container in the viewport will select the container's
+root transform if there is one.  If there is no root transform then the highest
+DAG node in the container will be selected.  There is no effect when selecting
+nodes which are not in a container.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisableComponentPopups">
+          <code><b>-disableComponentPopups</b>(<b>-dcp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A separate preference to allow users to disable popup
+menus when selecting components.  This pref is only meaningful
+if the popupMenuSelection pref is enabled.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexpandPopupList">
+          <code><b>-expandPopupList</b>(<b>-epl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When in popup selection mode, if this is set then
+all selection items that contain multiple objects or
+components will be be expanded such that each object or
+component will be a single new selection item.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreSelectionPriority">
+          <code><b>-ignoreSelectionPriority</b>(<b>-isp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this is set, selection priority will be ignored
+when performing selection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmanipClickBoxSize">
+          <code><b>-manipClickBoxSize</b>(<b>-mcb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When selecting a manipulator, this value defines the size of
+square picking region surrounding the cursor. The size of
+the square is twice the specified value. That is, the
+value defines the amount of space on all four sides of the
+cursor position. The size must be positive.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpaintSelect">
+          <code><b>-paintSelect</b>(<b>-ps</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled, the select tool will use drag selection instead of marquee selection.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpaintSelectWithDepth">
+          <code><b>-paintSelectWithDepth</b>(<b>-psd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled, paint selection will not select components that are behind the surface
+in the current camera view.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpopupMenuSelection">
+          <code><b>-popupMenuSelection</b>(<b>-pms</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this is set, a popup menu will be displayed
+and used to determine the object to select. The menu
+lists the current user box (marquee) of selected
+candidate objects.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreSelectBackfacing">
+          <code><b>-preSelectBackfacing</b>(<b>-psb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled preselection will highlight backfacing components whose normals face away from the camera.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreSelectClosest">
+          <code><b>-preSelectClosest</b>(<b>-psc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled and the cursor is over a surface, preselection highlighting will try
+to preselect the closest component to the cursor regardless of distance.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreSelectDeadSpace">
+          <code><b>-preSelectDeadSpace</b>(<b>-pds</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This value defines the size of the region around the cursor used for preselection highlighting
+when the cursor is outside the surface.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreSelectHilite">
+          <code><b>-preSelectHilite</b>(<b>-psh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled, the closest component under the cursor will be highlighted to indicate that
+clicking will select that component.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreSelectHiliteSize">
+          <code><b>-preSelectHiliteSize</b>(<b>-phs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This value defines the size of the region around the cursor used for preselection highlighting.
+Within this region the closest component to the cursor will be highlighted.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreSelectTweakDeadSpace">
+          <code><b>-preSelectTweakDeadSpace</b>(<b>-pdt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This value defines the size of the region around the cursor used for preselection highlighting
+when the cursor is outside the surface in tweak mode.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectTypeChangeAffectsActive">
+          <code><b>-selectTypeChangeAffectsActive</b>(<b>-stc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true then the active list will be updated according to the new selection preferences.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectionChildHighlightMode">
+          <code><b>-selectionChildHighlightMode</b>(<b>-sch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Controls the highlighting of the children of a selected object. Valid modes are:
+
+0: Always highlight children
+1: Never highlight children
+2: Use per-object &quot;Selection Child Highlight&quot; setting.
+
+Default mode is (0): Always highlight children.
+
+For (2), each DAG object has an individual &quot;Selection Child Highlight&quot; boolean flag.
+By default, this flag will be TRUE. When mode (2) is enabled, the control is deferred
+to the selected object's &quot;Selection Child Highlight&quot; flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsingleBoxSelection">
+          <code><b>-singleBoxSelection</b>(<b>-sbs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set single box selection on/off.
+This flag indicates whether just single object
+will be selected when the user box (marquee) selects
+several objects if flag set to true.  Otherwise, all
+those objects inside the box will be selected.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstraightLineDistance">
+          <code><b>-straightLineDistance</b>(<b>-sld</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true then use straight line distances for selection proximity.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrackSelectionOrder">
+          <code><b>-trackSelectionOrder</b>(<b>-tso</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled, the order of selected objects and components will be tracked.  The 'ls' command will be able
+to return the active list in the order of selection which will allow scripts to be written that depend
+on the order.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseDepth">
+          <code><b>-useDepth</b>(<b>-ud</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled, marquee selection will not select components that are behind the surface
+in the current camera view.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagxformNoSelect">
+          <code><b>-xformNoSelect</b>(<b>-xns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Disable selection in xform tools
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// enable popup menu selection except for components
+//
+selectPref -popupMenuSelection true -disableComponentPopups true;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

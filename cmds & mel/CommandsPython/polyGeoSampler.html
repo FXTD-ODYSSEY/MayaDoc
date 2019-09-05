@@ -1,0 +1,733 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyGeoSampler command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-polyGeoSampler"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/polyGeoSampler.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyGeoSampler </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyGeoSampler.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyGeoSampler([<a href="#flagalphaBlend">alphaBlend</a>=<i>string</i>], [<a href="#flagaverageColor">averageColor</a>=<i>boolean</i>], [<a href="#flagclampAlphaMax">clampAlphaMax</a>=<i>float</i>], [<a href="#flagclampAlphaMin">clampAlphaMin</a>=<i>float</i>], [<a href="#flagclampRGBMax">clampRGBMax</a>=<i>[float, float, float]</i>], [<a href="#flagclampRGBMin">clampRGBMin</a>=<i>[float, float, float]</i>], [<a href="#flagcolorBlend">colorBlend</a>=<i>string</i>], [<a href="#flagcolorDisplayOption">colorDisplayOption</a>=<i>boolean</i>], [<a href="#flagcomputeShadows">computeShadows</a>=<i>boolean</i>], [<a href="#flagdisplaceGeometry">displaceGeometry</a>=<i>boolean</i>], [<a href="#flagflatShading">flatShading</a>=<i>boolean</i>], [<a href="#flagignoreDoubleSided">ignoreDoubleSided</a>=<i>boolean</i>], [<a href="#flaglightingOnly">lightingOnly</a>=<i>boolean</i>], [<a href="#flagreuseShadows">reuseShadows</a>=<i>boolean</i>], [<a href="#flagsampleByFace">sampleByFace</a>=<i>boolean</i>], [<a href="#flagscaleFactor">scaleFactor</a>=<i>float</i>], [<a href="#flagshareUV">shareUV</a>=<i>boolean</i>], [<a href="#flaguseLightShadows">useLightShadows</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>polyGeoSampler is undoable, <b>NOT queryable</b>, and editable.</p>
+      This command performs a render sampling of surface color and transparency
+for each selected vertex or face and stores the sampled data
+as either the color value, or uses the sampled data to displace
+the affected vertices or faces by a sampled data value.
+Transparency is not used for displacement, and displacement
+is performed along vertex normals.
+The sampled data value used can be pre-scaled by a user defined
+amount.
+Additionally, the normals chosen for sampling can be overridden
+using a &quot;flat&quot; shading option. This option basically means
+to always use the normals of the faces when computing
+sampling values. This may be a desired if the user
+wishes to override an edge smoothness factor. Basically
+with the &quot;flat&quot; shading option on, edges are always
+considered to be hard.
+Note that displacement sampling will result
+in the -sampleByFace option to be turned
+off, since a displacement of a vertex
+always affects the faces the vertex
+is connected to.
+Finally, it is possible to force the storage of shared
+colors per vertex, and / or force the usage of unshared
+UV values.
+The computation of the resulting color is as follows:
+<pre>
+        resulting-RGB = (sampled-RGB * scale-factor);
+        if (color blend is none)
+                resulting-RGB = geometry-RGB
+        else if (color blend is add)
+                resulting-RGB = geometry-RGB + sampled-RGB;
+        else if (color blend is subtract)
+                resulting-RGB = geometry-RGB - sampled-RGB;
+        else if (color blend is multiply)
+                resulting-RGB = geometry-RGB * sampled-RGB;
+        else if (color blend is divide)
+                resulting-RGB = geometry-RGB / sampled-RGB;
+        else if (color blend is average)
+                resulting-RGB = (geometry-RGB * 1/2) + (sampled-RGB * 1/2);
+        if (clamp option set)
+                clamp resulting-RGB between minimum-RGB and maximum-RGB,
+</pre>
+The analogous computation is done for computing the resulting alpha
+value.
+The command requires that there be a camera selected in your scene in
+order to work properly in -batch or -prompt mode.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>Success or Failure</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>poly, sampling, GeoSampler
+      <h2><a name="hRelated">Related</a></h2><a href="polyColorPerVertex.html">polyColorPerVertex</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagalphaBlend">alphaBlend</a>, <a href="#flagaverageColor">averageColor</a>, <a href="#flagclampAlphaMax">clampAlphaMax</a>, <a href="#flagclampAlphaMin">clampAlphaMin</a>, <a href="#flagclampRGBMax">clampRGBMax</a>, <a href="#flagclampRGBMin">clampRGBMin</a>, <a href="#flagcolorBlend">colorBlend</a>, <a href="#flagcolorDisplayOption">colorDisplayOption</a>, <a href="#flagcomputeShadows">computeShadows</a>, <a href="#flagdisplaceGeometry">displaceGeometry</a>, <a href="#flagflatShading">flatShading</a>, <a href="#flagignoreDoubleSided">ignoreDoubleSided</a>, <a href="#flaglightingOnly">lightingOnly</a>, <a href="#flagreuseShadows">reuseShadows</a>, <a href="#flagsampleByFace">sampleByFace</a>, <a href="#flagscaleFactor">scaleFactor</a>, <a href="#flagshareUV">shareUV</a>, <a href="#flaguseLightShadows">useLightShadows</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagalphaBlend">
+          <code><b>alphaBlend</b>(<b>abl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When specified, indicates the type of alpha blend to
+be applied. Options are: &quot;none&quot;, &quot;overwrite&quot;, &quot;add&quot;,
+&quot;subtract&quot;, &quot;multiply&quot;, &quot;divide&quot;, &quot;average&quot;.
+This option only applies when colors are being
+set. The default if this argument is not
+specified is &quot;overwrite&quot;.
+The &quot;none&quot; options
+to not overwrite the existing value.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaverageColor">
+          <code><b>averageColor</b>(<b>ac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will mean to force the storage of shared colors
+for vertex level sampling. By default vertex level sampling
+stores unshared colors.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclampAlphaMax">
+          <code><b>clampAlphaMax</b>(<b>amx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will mean to clamp the storage of alpha
+to a maximum
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclampAlphaMin">
+          <code><b>clampAlphaMin</b>(<b>amn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will mean to clamp the storage of alpha
+to a minimum
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclampRGBMax">
+          <code><b>clampRGBMax</b>(<b>cmx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[float, float, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will mean to clamp the storage of RGB
+color to a maximum
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclampRGBMin">
+          <code><b>clampRGBMin</b>(<b>cmn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[float, float, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will mean to clamp the storage of RGB
+color to a minimum
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolorBlend">
+          <code><b>colorBlend</b>(<b>cbl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When specified, indicates the type of color blend to
+be applied. Options are: &quot;none&quot;, &quot;overwrite&quot;, &quot;add&quot;,
+&quot;subtract&quot;, &quot;multiply&quot;, &quot;divide&quot;, &quot;average&quot;.
+This option only applies when colors are being
+set. The default if this argument is not
+specified is &quot;overwrite&quot;.
+The &quot;none&quot; options
+to not overwrite the existing value.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolorDisplayOption">
+          <code><b>colorDisplayOption</b>(<b>cdo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Change the display options on the mesh to display the vertex colors.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcomputeShadows">
+          <code><b>computeShadows</b>(<b>cs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, shadow maps will be computed, saved, and reused during the sampling
+process.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisplaceGeometry">
+          <code><b>displaceGeometry</b>(<b>dg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, geometry will be displaced along the normals at
+the sampling positions, as opposed to storing color values. The
+default is to store colors.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflatShading">
+          <code><b>flatShading</b>(<b>fs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, flat shaded sampling will be computed. The default
+is smooth shading.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreDoubleSided">
+          <code><b>ignoreDoubleSided</b>(<b>ids</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When specified, the double sided flag will be ignored
+for prelighting.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglightingOnly">
+          <code><b>lightingOnly</b>(<b>lo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, incoming illumination will be computed as opposed to
+surface color an tranparency
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreuseShadows">
+          <code><b>reuseShadows</b>(<b>rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, if shadow maps were previosly computed and saved, then
+they will be reused during the sampling process. The computeShadows
+option must be enabled for this option to apply.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsampleByFace">
+          <code><b>sampleByFace</b>(<b>bf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, sample will occur at a per face level versus a per
+vertex level, which is the default behaviour
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscaleFactor">
+          <code><b>scaleFactor</b>(<b>sf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will scale the sampled value by the specified amount.
+The default scale factor is 1.0. Negative values are acceptable
+for displacement, but not for color values.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshareUV">
+          <code><b>shareUV</b>(<b>su</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, UVs are shared at a vertex when sampled.
+By default UVs are forced to be unshared.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseLightShadows">
+          <code><b>useLightShadows</b>(<b>ul</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used, will use each lights shadow map options. Otherwise
+these options will be overrridden when the computeShadows, and/or
+reusedShadows option is enabled.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Example 1. Sample for color values.
+
+#    a. No arguments. Will perform sampling of color + transparency at
+#     the vertex level, and store color values for affected vertices.
+#     No shadows will be computed.
+
+cmds.polyGeoSampler()
+
+# b. With shadows and illumination only
+
+cmds.polyGeoSampler( lightingOnly=True, computeShadows=True )
+
+# c. Sampling only complete selected faces
+
+cmds.polyGeoSampler( sampleByFace=True )
+
+# d. &quot;Flat shading&quot;.
+
+# Example 2. Sample for displacement values.
+
+# a. Using displace option
+
+cmds.polyGeoSampler( displaceGeometry=True )
+
+# Example 3. Scaling the sampled data.
+
+# a. Scaling option
+
+cmds.polyGeoSampler( scaleFactor=0.1 )
+
+# Example 4. Don't force unshared UV value usage, and force
+# the storage of shared colors for vertices.
+
+cmds.polyGeoSampler( shareUV=True, averageColor=True )
+
+# Example 5. Clamping colors. In this example the alpha and
+# RGB channels of the colors are clamped between a min of 0,0,0,1
+# and a max of 1,2,1,0.5 .
+
+cmds.polyGeoSampler( amn=0.0, amx=0.5, cmn=[0.0,0.0,0.0], cmx=[1.0,2.0,1.0] )
+
+# Example 6. Multiply the new sample color values    with the existing
+# colors stored on the geometry, but leave the alpha values
+# as they were on the geometry.
+
+cmds.polyGeoSampler( colorBlend='multiply', alphaBlend='none' )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

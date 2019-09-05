@@ -1,0 +1,234 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>applyMetadata command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-applyMetadata"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/applyMetadata.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>applyMetadata </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("applyMetadata.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>applyMetadata([<a href="#flagformat">format</a>=<i>string</i>], [<a href="#flagscene">scene</a>=<i>boolean</i>], [<a href="#flagvalue">value</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>applyMetadata is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      <p>
+Define the values of a particular set of metadata on selected objects.
+This command is used in preservation of metadata through Maya file formats
+(.ma/.mb). If any metadata already exists it will be kept and merged with
+the new metadata, overwriting duplicate entries. (i.e. if this command
+specifies data at index N and you already have a value at index N then
+the one this command specifies will be the new value and the old one
+will cease to exist.)
+
+<p>
+Unlike the <b>editMetadata</b> command it is not necessary to first use
+the <b>addMetadata</b> command or API equivalent to attach a metadata
+stream to the object, this command will do both assignment of structure
+and of metadata values. You do have to use the <b>dataStructure</b>
+command or API equivalent to create the structure being assigned first
+though.
+
+<p>
+The formatted input will be in a form expected by the data
+associations serializer (see adsk::Data::AssociationsSerializer for
+more information). The specific serialization type will be the default
+'raw' if the <i>format</i> flag is not used.
+
+<p>
+For example the &quot;raw&quot; format input string
+&quot;channel face\n[STREAMDATA]\nendChannels\nendAssociations&quot;
+with no flags is equivalent to the input &quot;[STREAMDATA]\nendChannels&quot; with
+the <i>channel</i> flag set to 'face'
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>Boolean</i></td><td>True if the application succeeded</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>metadata, component, stream, channel, association
+      <h2><a name="hRelated">Related</a></h2><a href="addMetadata.html">addMetadata</a>, <a href="dataStructure.html">dataStructure</a>, <a href="editMetadata.html">editMetadata</a>, <a href="getMetadata.html">getMetadata</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagformat">format</a>, <a href="#flagscene">scene</a>, <a href="#flagvalue">value</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagformat">
+          <code><b>format</b>(<b>fmt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Name of the data association format type to use in the value flag parsing.
+Default value is &quot;raw&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscene">
+          <code><b>scene</b>(<b>scn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use this flag when you want to apply metadata to the scene as a whole
+rather than to any individual nodes. If you use this flag and have
+nodes selected the nodes will be ignored and a warning will be displayed.
+Scene metadata is incompatible with referenced scenes. Node associated
+metadata from referenced files will still be readable from master scenes
+but scene specific metadata of referenced files will not be accessible
+from a any master scene. This will ensure that referenced files metadata
+will not end up corrupting the master file scene-metadata.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalue">
+          <code><b>value</b>(<b>v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+String containing all of the metadata to be assigned to the selected
+object.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+import maya.cmds as cmds
+pNode = cmds.polyPlane( name='p' )
+# Create a sample structure
+cmds.dataStructure( format='raw', asString='name=IdStruct:int32=ID' )
+# Apply some metadata based on the defined structure to the created mesh
+# Normally you'll only see these in Maya files but it can be used from the
+# command line.
+cmds.applyMetadata( pNode, value='channel\nname face\nstream\nname IdStream\nstructure IdStruct\n0\n99\n1\n999\n2\n9999\nendStream\nendChannel\nendAssociations' )
+# Return: 1 #
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

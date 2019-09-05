@@ -1,0 +1,327 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>dirmap command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-dirmap"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/dirmap.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>dirmap </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("dirmap.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>dirmap [-<a href="#flagconvertDirectory">convertDirectory</a> <i>string</i>] [-<a href="#flagenable">enable</a> <i>boolean</i>] [-<a href="#flaggetAllMappings">getAllMappings</a>] [-<a href="#flaggetMappedDirectory">getMappedDirectory</a> <i>string</i>] [-<a href="#flagmapDirectory">mapDirectory</a> <i>string string</i>] [-<a href="#flagunmapDirectory">unmapDirectory</a> <i>string</i>] 
+string string
+     </code> </p>
+      <p>dirmap is undoable, queryable, and <b>NOT editable</b>.</p>
+      Use this command to map a directory to another directory. The first
+argument is the directory to map, and the second is the destination
+directory to map to.
+<p>
+Directories
+must both be absolute paths, and should be separated with forward
+slashes ('/'). The mapping is case-sensitive on all platforms.
+This command can be useful when moving projects to
+another machine where some textures may not be contained in the Maya
+project, or when a texture archive moves to a new location. This
+command is not necessary when moving a (self-contained) project from
+one machine to another - instead copy the entire project over and set
+the Maya project to the new location. <p>
+For one-time directory moves, if the command is enabled and the mapping
+configured correctly, when a scene is opened and saved the mapped
+locations will be reflected in the filenames saved with the file.
+To set up a permanent mapping the command should
+be enabled and the mappings set up in a script which is executed every
+time you launch Maya (userSetup.mel is sourced on startup).
+The directory mappings and enabled state are not preserved between
+Maya sessions.
+This command requires one &quot;main&quot; flag that specifies the action to take.
+Flags are:<p><b>
+-[m|um|gmd|gam|cd|en]
+</b><p>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>when convertDirectory is used</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagconvertDirectory">convertDirectory</a>, <a href="#flagenable">enable</a>, <a href="#flaggetAllMappings">getAllMappings</a>, <a href="#flaggetMappedDirectory">getMappedDirectory</a>, <a href="#flagmapDirectory">mapDirectory</a>, <a href="#flagunmapDirectory">unmapDirectory</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconvertDirectory">
+          <code><b>-convertDirectory</b>(<b>-cd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Convert a file or directory.
+Returns the name of the mapped file or directory, if the command is
+enabled. If the given string
+contains one of the mapped directories, the return value will have that
+substring replaced with the mapped one. Otherwise the given argument
+string will be returned. If the command is disabled the given argument
+is always returned. Checks are not
+made for whether the file or directory exists. If the given string
+is a directory it should have a trailing '/'.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenable">
+          <code><b>-enable</b>(<b>-en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Enable directory mapping.
+Directory mapping is off when you start Maya. If enabled, when opening
+Maya scenes, file texture paths (and other file paths) will be converted
+when the scene is opened. The -cd flag only returns mapped directories
+when -enable is true.
+Query returns whether mapping has been enabled.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggetAllMappings">
+          <code><b>-getAllMappings</b>(<b>-gam</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get all current mappings.
+Returns string array of current mappings in format:
+[redirect1, replacement1, ... redirectN, replacementN]
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggetMappedDirectory">
+          <code><b>-getMappedDirectory</b>(<b>-gmd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get the mapped redirected directory. The given argument must
+exactly match the first string used with the -mapDirectory flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmapDirectory">
+          <code><b>-mapDirectory</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Map a directory - the first argument is mapped to the second.
+Neither directory needs to exist on the local machine at the time
+of invocation.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunmapDirectory">
+          <code><b>-unmapDirectory</b>(<b>-um</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Unmap a directory. The given argument must exactly match the
+argument used with the -mapDirectory flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+dirmap -en true;
+dirmap -m &quot;/usr/maya/textures&quot; &quot;/share/store/textures&quot;;
+dirmap -cd &quot;/usr/maya/textures/characters/skin1.iff&quot;;
+// Result: /share/store/textures/characters/skin1.iff&quot;
+dirmap -m &quot;D:/mySoundfiles&quot; &quot;/usr/me/sounds&quot;;
+dirmap -cd &quot;D:/mySoundfiles/&quot;;
+// Result: /usr/me/sounds/
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

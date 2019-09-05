@@ -1,0 +1,1096 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyColorBlindData command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-polyColorBlindData"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/polyColorBlindData.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyColorBlindData </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyColorBlindData.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyColorBlindData [-<a href="#flagaboveMaxColorBlue">aboveMaxColorBlue</a> <i>float</i>] [-<a href="#flagaboveMaxColorGreen">aboveMaxColorGreen</a> <i>float</i>] [-<a href="#flagaboveMaxColorRed">aboveMaxColorRed</a> <i>float</i>] [-<a href="#flagattrName">attrName</a> <i>string</i>] [-<a href="#flagbelowMinColorBlue">belowMinColorBlue</a> <i>float</i>] [-<a href="#flagbelowMinColorGreen">belowMinColorGreen</a> <i>float</i>] [-<a href="#flagbelowMinColorRed">belowMinColorRed</a> <i>float</i>] [-<a href="#flagclashColorBlue">clashColorBlue</a> <i>float</i>] [-<a href="#flagclashColorGreen">clashColorGreen</a> <i>float</i>] [-<a href="#flagclashColorRed">clashColorRed</a> <i>float</i>] [-<a href="#flagcolorBlue">colorBlue</a> <i>float</i>] [-<a href="#flagcolorGreen">colorGreen</a> <i>float</i>] [-<a href="#flagcolorRed">colorRed</a> <i>float</i>] [-<a href="#flagdataType">dataType</a> <i>string</i>] [-<a href="#flagenableFalseColor">enableFalseColor</a> <i>boolean</i>] [-<a href="#flagmaxColorBlue">maxColorBlue</a> <i>float</i>] [-<a href="#flagmaxColorGreen">maxColorGreen</a> <i>float</i>] [-<a href="#flagmaxColorRed">maxColorRed</a> <i>float</i>] [-<a href="#flagmaxValue">maxValue</a> <i>float</i>] [-<a href="#flagminColorBlue">minColorBlue</a> <i>float</i>] [-<a href="#flagminColorGreen">minColorGreen</a> <i>float</i>] [-<a href="#flagminColorRed">minColorRed</a> <i>float</i>] [-<a href="#flagminValue">minValue</a> <i>float</i>] [-<a href="#flagmode">mode</a> <i>int</i>] [-<a href="#flagnoColorBlue">noColorBlue</a> <i>float</i>] [-<a href="#flagnoColorGreen">noColorGreen</a> <i>float</i>] [-<a href="#flagnoColorRed">noColorRed</a> <i>float</i>] [-<a href="#flagnumIdTypes">numIdTypes</a> <i>int</i>] [-<a href="#flagqueryMode">queryMode</a>] [-<a href="#flagtypeId">typeId</a> <i>int</i>] [-<a href="#flaguseMax">useMax</a> <i>boolean</i>] [-<a href="#flaguseMin">useMin</a> <i>boolean</i>] [-<a href="#flagvalue">value</a> <i>string</i>]  </code> </p>
+      <p>polyColorBlindData is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command applies false color to the selected polygonal components
+and objects, depending on whether or not blind data exists for the
+selected components (or, in the case of poly objects, dynamic
+attributes), and, depending on the color mode indicated, what the
+values are. It is possible to color objects based on whether or not
+the data exists, if the data matches a specific value or range of
+values, or grayscale color the data according to what the actual value
+is in relation to the specified min and max. This command also has a
+query mode in which the components and/or objects are returned in a
+string array to allow for selection filtering.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>Command result</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>color, query, blind, data
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaboveMaxColorBlue">aboveMaxColorBlue</a>, <a href="#flagaboveMaxColorGreen">aboveMaxColorGreen</a>, <a href="#flagaboveMaxColorRed">aboveMaxColorRed</a>, <a href="#flagattrName">attrName</a>, <a href="#flagbelowMinColorBlue">belowMinColorBlue</a>, <a href="#flagbelowMinColorGreen">belowMinColorGreen</a>, <a href="#flagbelowMinColorRed">belowMinColorRed</a>, <a href="#flagclashColorBlue">clashColorBlue</a>, <a href="#flagclashColorGreen">clashColorGreen</a>, <a href="#flagclashColorRed">clashColorRed</a>, <a href="#flagcolorBlue">colorBlue</a>, <a href="#flagcolorGreen">colorGreen</a>, <a href="#flagcolorRed">colorRed</a>, <a href="#flagdataType">dataType</a>, <a href="#flagenableFalseColor">enableFalseColor</a>, <a href="#flagmaxColorBlue">maxColorBlue</a>, <a href="#flagmaxColorGreen">maxColorGreen</a>, <a href="#flagmaxColorRed">maxColorRed</a>, <a href="#flagmaxValue">maxValue</a>, <a href="#flagminColorBlue">minColorBlue</a>, <a href="#flagminColorGreen">minColorGreen</a>, <a href="#flagminColorRed">minColorRed</a>, <a href="#flagminValue">minValue</a>, <a href="#flagmode">mode</a>, <a href="#flagnoColorBlue">noColorBlue</a>, <a href="#flagnoColorGreen">noColorGreen</a>, <a href="#flagnoColorRed">noColorRed</a>, <a href="#flagnumIdTypes">numIdTypes</a>, <a href="#flagqueryMode">queryMode</a>, <a href="#flagtypeId">typeId</a>, <a href="#flaguseMax">useMax</a>, <a href="#flaguseMin">useMin</a>, <a href="#flagvalue">value</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaboveMaxColorBlue">
+          <code><b>-aboveMaxColorBlue</b>(<b>-amb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies blue component of color to use for data that is above max
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaboveMaxColorGreen">
+          <code><b>-aboveMaxColorGreen</b>(<b>-amg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies green component of color to use for data that is above max
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaboveMaxColorRed">
+          <code><b>-aboveMaxColorRed</b>(<b>-amr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies red component of color to use for data that is above max
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattrName">
+          <code><b>-attrName</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the data that is being examined by this command.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbelowMinColorBlue">
+          <code><b>-belowMinColorBlue</b>(<b>-bmb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies blue component of color to use for data that is below min
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbelowMinColorGreen">
+          <code><b>-belowMinColorGreen</b>(<b>-bmg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies green component of color to use for data that is below min
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbelowMinColorRed">
+          <code><b>-belowMinColorRed</b>(<b>-bmr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies red component of color to use for data that is below min
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclashColorBlue">
+          <code><b>-clashColorBlue</b>(<b>-ccb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies blue component color to use for data which clashes
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclashColorGreen">
+          <code><b>-clashColorGreen</b>(<b>-ccg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies green component color to use for data which clashes
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclashColorRed">
+          <code><b>-clashColorRed</b>(<b>-ccr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies red component color to use for data which clashes
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolorBlue">
+          <code><b>-colorBlue</b>(<b>-cb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies blue component of color to use for given data
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolorGreen">
+          <code><b>-colorGreen</b>(<b>-cg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies green component of color to use for given data
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolorRed">
+          <code><b>-colorRed</b>(<b>-cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies red component of color to use for given data
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdataType">
+          <code><b>-dataType</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the type for this id
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenableFalseColor">
+          <code><b>-enableFalseColor</b>(<b>-efc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turns false coloring on or off for all poly objects in the scene
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxColorBlue">
+          <code><b>-maxColorBlue</b>(<b>-mxb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies blue component of color to use for max value for grayscale
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxColorGreen">
+          <code><b>-maxColorGreen</b>(<b>-mxg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies green component of color to use for max value for grayscale
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxColorRed">
+          <code><b>-maxColorRed</b>(<b>-mxr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies red component of color to use for max value for grayscale
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmaxValue">
+          <code><b>-maxValue</b>(<b>-mxv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the max value for grayscale or discrete range data
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminColorBlue">
+          <code><b>-minColorBlue</b>(<b>-mnb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies blue component of color to use for min value for grayscale
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminColorGreen">
+          <code><b>-minColorGreen</b>(<b>-mng</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies green component of color to use for min value for grayscale
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminColorRed">
+          <code><b>-minColorRed</b>(<b>-mnr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies red component of color to use for min value for grayscale
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminValue">
+          <code><b>-minValue</b>(<b>-mnv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the min value for grayscale or discrete range data
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmode">
+          <code><b>-mode</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the mode:
+<ul>
+<li>0 : binary - only components and objects that have the data will be colored</li>
+<li>1 : discrete value - a value is specified. Data that matches this value will be colored</li>
+<li>2 : discrete range - values that fall within the given range will be colored</li>
+<li>3 : unsigned set mode - if ( givenValue &amp; actualValue ) then data will be colored</li>
+<li>4 : unsigned not set mode - if ( !(givenValue &amp; actualValue) ) then data will be colored</li>
+<li>5 : unsigned equal mode - if ( givenValue == actualValue ) then data will be colored</li>
+<li>6 : grayscale mode - a min value, max value, min color, max color, below min color, and
+    above max color are given. Data is colored according to how it relates to these values.</li>
+<li>7 : as color mode - if the blind data consists of 3 doubles, ranged 0-1, the components are colored as the data specifies</li>
+</ul>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoColorBlue">
+          <code><b>-noColorBlue</b>(<b>-ncb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies blue component of color to use for no data assigned
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoColorGreen">
+          <code><b>-noColorGreen</b>(<b>-ncg</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies green component of color to use for no data assigned
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoColorRed">
+          <code><b>-noColorRed</b>(<b>-ncr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies red component of color to use for no data assigned
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnumIdTypes">
+          <code><b>-numIdTypes</b>(<b>-num</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies how many attrs are in this id type
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagqueryMode">
+          <code><b>-queryMode</b>(<b>-q</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If on, do not color and return selection as string array instead.
+Any data that would be colored normally (except for 'no color' and
+out of range colors) is returned
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtypeId">
+          <code><b>-typeId</b>(<b>-id</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the typeId of the BlindData type being created
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseMax">
+          <code><b>-useMax</b>(<b>-umx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies whether the max should be used for discrete ranges
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseMin">
+          <code><b>-useMin</b>(<b>-umn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies whether the min should be used for discrete ranges
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalue">
+          <code><b>-value</b>(<b>-v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The value of the data
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// In these examples we have type 1000, with one double attribute
+// called &quot;fluffy&quot;, and type 1001 with attributes &quot;grimy&quot; and &quot;slimy&quot;.
+
+// Color all items of id 1000 red. Note that we must also specify
+// None color (black) and Clash color(cyan). Note that we must also
+// specify the names of the attributes, even if we don't care about
+// the attribute values:
+polyColorBlindData -ncr 0 -ncg 0 -ncb 0 -ccr 0 -ccg 1 -ccb 1 -id 1000
+    -num 1 -m 0 -n &quot;fluffy&quot; -cr 1 -cg 0 -cb 0;
+
+// Now color only those values of &quot;fluffy&quot; between 2 and 5:
+polyColorBlindData -ncr 0 -ncg 0 -ncb 0 -ccr 0 -ccg 1 -ccb 1 -id 1000
+    -num 1 -m 2 -dt &quot;double&quot; -n &quot;fluffy&quot; -umn 1 -mnv 2 -umx 1 -mxv 5 -cr 1
+    -cg 0 -cb 0;
+
+// Note for a continuous range query we must specify min, max and
+// out of range color instead of just color (here values between 2 and 5
+// are colored between white and gray, out of range values are yellow):
+polyColorBlindData -ncr 0 -ncg 0 -ncb 0 -ccr 0 -ccg 1 -ccb 1 -id 1000
+    -num 1 -m 6 -dt &quot;double&quot; -n &quot;fluffy&quot; -bmr 1 -bmg 1 -bmb 0 -amr 1 -amg 1
+    -amb 0 -mnr 0.250980407 -mng 0.250980407 -mnb 0.250980407
+    -mxr 1 -mxg 1 -mxb 1 -mnv 2 -mxv 5;
+
+// Now, for attribute &quot;fluffy&quot;, color values of 2 red and values of 2 green:
+polyColorBlindData -ncr 0 -ncg 0 -ncb 0 -ccr 0 -ccg 1 -ccb 1 -id 1000
+    -num 1 -m 1 -dt &quot;double&quot; -n &quot;fluffy&quot; -v &quot;2&quot; -cr 1 -cg 0 -cb 0 -id 1000
+    -num 1 -m 1 -dt &quot;double&quot; -n &quot;fluffy&quot; -v &quot;3&quot; -cr 0 -cg 1 -cb 0;
+
+// To just query and not color, filter the active selection list
+// and return the list of components that meet the criteria (in this
+// case having blind data of type 1000)
+polyColorBlindData -q -id 1000 -num 1 -m 0 -n &quot;fluffy&quot;;
+
+// Now if we have 2 attributes:
+polyColorBlindData -ncr 0 -ncg 0 -ncb 0 -ccr 0 -ccg 1 -ccb 1 -id 1001
+    -num 2 -m 0 -n &quot;grimy&quot; -n &quot;slimy&quot; -cr 1 -cg 0 -cb 0;
+
+// Note that when querying for value, values of all attrs must be specified
+// here we set (grimy = 22, slimy = 1) to be red, and (grimy = 55, slimy = 2)
+// to be green
+
+polyColorBlindData -ncr 0 -ncg 0 -ncb 0 -ccr 0 -ccg 1 -ccb 1 -id 1001
+    -num 2 -m 1 -dt &quot;double&quot; -n &quot;grimy&quot; -v &quot;22&quot; -cr 1 -cg 0 -cb 0 -dt &quot;int&quot;
+    -n &quot;slimy&quot; -v &quot;1&quot; -cr 1 -cg 0 -cb 0 -id 1001 -num 2 -m 1 -dt &quot;double&quot;
+    -n &quot;grimy&quot; -v &quot;55&quot; -cr 0 -cg 1 -cb 0 -dt &quot;int&quot; -n &quot;slimy&quot; -v &quot;2&quot;
+    -cr 0 -cg 1 -cb 0;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

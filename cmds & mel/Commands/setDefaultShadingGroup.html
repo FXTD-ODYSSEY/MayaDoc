@@ -1,0 +1,88 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>setDefaultShadingGroup command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-setDefaultShadingGroup"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/setDefaultShadingGroup.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>setDefaultShadingGroup </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("setDefaultShadingGroup.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>setDefaultShadingGroup 
+string
+     </code> </p>
+      <p>setDefaultShadingGroup is undoable, queryable, and <b>NOT editable</b>.</p>
+      The setDefaultShadingGroup command is used to change which shading
+group is considered the current default shading group. Subsequently
+created objects will be assigned to the new default group.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Create a new blue shader
+$blinn = `shadingNode -asShader blinn`;
+setAttr ($blinn+&quot;.color&quot;) -type double3 0.15 0.35 1.0 ;
+$blinnSG = `sets -renderable true -noSurfaceShader true -empty -name blinnSG`;
+connectAttr -force ($blinn+&quot;.outColor&quot;) ($blinnSG+&quot;.surfaceShader&quot;);
+
+// Make it the default
+setDefaultShadingGroup $blinnSG;
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

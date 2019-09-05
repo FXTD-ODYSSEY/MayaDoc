@@ -1,0 +1,1352 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>scriptJob command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-scriptJob"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/scriptJob.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>scriptJob </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("scriptJob.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>scriptJob([<a href="#flagallChildren">allChildren</a>=<i>boolean</i>], [<a href="#flagattributeAdded">attributeAdded</a>=<i>[string, script]</i>], [<a href="#flagattributeChange">attributeChange</a>=<i>[string, script]</i>], [<a href="#flagattributeDeleted">attributeDeleted</a>=<i>[string, script]</i>], [<a href="#flagcompressUndo">compressUndo</a>=<i>boolean</i>], [<a href="#flagconditionChange">conditionChange</a>=<i>[string, script]</i>], [<a href="#flagconditionFalse">conditionFalse</a>=<i>[string, script]</i>], [<a href="#flagconditionTrue">conditionTrue</a>=<i>[string, script]</i>], [<a href="#flagconnectionChange">connectionChange</a>=<i>[string, script]</i>], [<a href="#flagdisregardIndex">disregardIndex</a>=<i>boolean</i>], [<a href="#flagevent">event</a>=<i>[string, script]</i>], [<a href="#flagexists">exists</a>=<i>int</i>], [<a href="#flagforce">force</a>=<i>boolean</i>], [<a href="#flagidleEvent">idleEvent</a>=<i>script</i>], [<a href="#flagkill">kill</a>=<i>int</i>], [<a href="#flagkillAll">killAll</a>=<i>boolean</i>], [<a href="#flagkillWithScene">killWithScene</a>=<i>boolean</i>], [<a href="#flaglistConditions">listConditions</a>=<i>boolean</i>], [<a href="#flaglistEvents">listEvents</a>=<i>boolean</i>], [<a href="#flaglistJobs">listJobs</a>=<i>boolean</i>], [<a href="#flagnodeDeleted">nodeDeleted</a>=<i>[string, script]</i>], [<a href="#flagnodeNameChanged">nodeNameChanged</a>=<i>[string, script]</i>], [<a href="#flagoptionVarChanged">optionVarChanged</a>=<i>[string, script]</i>], [<a href="#flagparent">parent</a>=<i>string</i>], [<a href="#flagpermanent">permanent</a>=<i>boolean</i>], [<a href="#flagprotected">protected</a>=<i>boolean</i>], [<a href="#flagreplacePrevious">replacePrevious</a>=<i>boolean</i>], [<a href="#flagrunOnce">runOnce</a>=<i>boolean</i>], [<a href="#flagtimeChange">timeChange</a>=<i>script</i>], [<a href="#flaguiDeleted">uiDeleted</a>=<i>[string, script]</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>scriptJob is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command creates a &quot;script job&quot;, which is a MEL command
+or script.  This job is attached to
+the named condition, event, or attribute. Each time the condition
+switches to the desired state (or the trigger is triggered, etc),
+the script is run.
+<p>
+Script jobs are tied to the event loop in the interactive application.
+They are run during idle events.  This means that script jobs do not
+exist in the batch application.  The scriptJob command does nothing
+in batch mode.
+<p>
+This triggering happens very frequently so for speed considerations
+no events are forwarded during playback.  This means that you cannot
+use <i>scriptJob -tc tcCallback;</i> to alter animation behaviour.
+Use an expression instead, or the rendering callbacks &quot;preRenderMel&quot;
+and &quot;postRenderMel&quot;.
+<p>
+When setting up jobs for conditions, it is invalid to setup jobs for
+the true state, false state, and state change at the same time.  The
+behaviour is undefined.  The user can only setup jobs for the true
+and/or false state, or only for the state change, but not three at
+the same time. i.e. if you do: <p>
+<pre>
+<p>
+// Set up a job that runs for the life of the application.
+// This job cannot be deleted with the &quot;kill&quot; command no matter what.
+<i>scriptJob -e &quot;SelectionChanged&quot; &quot;print \&quot;Annoying Message!\\n\&quot;&quot; -permanent;</i>
+<p>
+// set up a job for the true state
+<i>scriptJob -ct &quot;playingBack&quot; playBackCallback;</i><p>
+<p>
+// set up a job for the false state
+<i>scriptJob -cf &quot;playingBack&quot; playBackCallback;</i><p>
+<p>
+then you should NOT do
+<i>scriptJob -cc &quot;playingBack&quot; playBackCallback;</i>
+otherwise it will lead to undefined behaviour.
+</pre>
+<p>
+<p>This command can also be used to list available conditions
+and events, and to kill running jobs.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>The <i>job number</i>, which can be used to kill the job. The job
+number will be a value greater than or equal to zero</td></tr><tr><td valign="top"><i>string[]</i></td><td>A string list when the <i>list</i> flag is used</td></tr><tr><td valign="top"><i>boolean</i></td><td>For the <i>exists</i> flag.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="eval.html">eval</a>, <a href="evalDeferred.html">evalDeferred</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallChildren">allChildren</a>, <a href="#flagattributeAdded">attributeAdded</a>, <a href="#flagattributeChange">attributeChange</a>, <a href="#flagattributeDeleted">attributeDeleted</a>, <a href="#flagcompressUndo">compressUndo</a>, <a href="#flagconditionChange">conditionChange</a>, <a href="#flagconditionFalse">conditionFalse</a>, <a href="#flagconditionTrue">conditionTrue</a>, <a href="#flagconnectionChange">connectionChange</a>, <a href="#flagdisregardIndex">disregardIndex</a>, <a href="#flagevent">event</a>, <a href="#flagexists">exists</a>, <a href="#flagforce">force</a>, <a href="#flagidleEvent">idleEvent</a>, <a href="#flagkill">kill</a>, <a href="#flagkillAll">killAll</a>, <a href="#flagkillWithScene">killWithScene</a>, <a href="#flaglistConditions">listConditions</a>, <a href="#flaglistEvents">listEvents</a>, <a href="#flaglistJobs">listJobs</a>, <a href="#flagnodeDeleted">nodeDeleted</a>, <a href="#flagnodeNameChanged">nodeNameChanged</a>, <a href="#flagoptionVarChanged">optionVarChanged</a>, <a href="#flagparent">parent</a>, <a href="#flagpermanent">permanent</a>, <a href="#flagprotected">protected</a>, <a href="#flagreplacePrevious">replacePrevious</a>, <a href="#flagrunOnce">runOnce</a>, <a href="#flagtimeChange">timeChange</a>, <a href="#flaguiDeleted">uiDeleted</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallChildren">
+          <code><b>allChildren</b>(<b>alc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used in conjunction with
+the -ac/attributeChange flag.  If it is specified, and the job
+is attached to a compound attribute, then the
+job will run due to changes to the specified attribute
+as well as changes to its children.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattributeAdded">
+          <code><b>attributeAdded</b>(<b>aa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named attribute is added.
+The string must identify both the dependency node and the
+particular attribute.  If the dependency node is deleted,
+this job is killed (even if the deletion is undoable).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattributeChange">
+          <code><b>attributeChange</b>(<b>ac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named attribute changes value.
+The string must identify both the dependency node and the
+particular attribute.  If the dependency node is deleted,
+this job is killed (even if the deletion is undoable).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattributeDeleted">
+          <code><b>attributeDeleted</b>(<b>ad</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named attribute is deleted.
+The string must identify both the dependency node and the
+particular attribute.  If the dependency node is deleted,
+this job is killed (even if the deletion is undoable).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcompressUndo">
+          <code><b>compressUndo</b>(<b>cu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this is set to true, and the scriptJob is undoable, then
+its action will be bundled with the last user action for undo
+purposes.  For example; if the scriptJob was triggered by a selection
+change, then pressing undo will undo both the scriptJob and the
+selection change at the same time.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconditionChange">
+          <code><b>conditionChange</b>(<b>cc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named condition changes state.
+The string must be the name of a pre-defined, or a
+user-defined boolean condition.  To get a list of what
+conditions exist, use the -listConditions flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconditionFalse">
+          <code><b>conditionFalse</b>(<b>cf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named condition becomes false.
+The string must be the name of a pre-defined, or a
+user-defined boolean condition.  To get a list of what
+conditions exist, use the -listConditions flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconditionTrue">
+          <code><b>conditionTrue</b>(<b>ct</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named condition becomes true.
+The string must be the name of a pre-defined, or a
+user-defined boolean condition.  To get a list of what
+conditions exist, use the -listConditions flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconnectionChange">
+          <code><b>connectionChange</b>(<b>con</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named attribute changes its
+connectivity.  The string must identify both the dependency
+node and the particular attribute.  If the dependency node
+is deleted, this job is killed (even if the deletion is undoable).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisregardIndex">
+          <code><b>disregardIndex</b>(<b>dri</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used in conjunction with
+the -ac/attributeChange flag.  If it is specified, and the job
+is attached to a multi (indexed) attribute, then the
+job will run no matter which attribute in the multi changes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagevent">
+          <code><b>event</b>(<b>e</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named event occurs.  This string
+must be the name of a pre-defined maya event.  To get a list
+of what events exist, use the -listEvents flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>exists</b>(<b>ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if a scriptJob with the specified &quot;job
+number&quot; exists, and false otherwise. The &quot;job number&quot;
+should be a value that was returned on creation of a new
+scriptJob.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforce">
+          <code><b>force</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used with -kill, -killAll,
+or -replacePrevious. It enables the deletion of protected jobs.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagidleEvent">
+          <code><b>idleEvent</b>(<b>ie</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script every time maya is idle.  WARNING,
+as long as an idle event is is registered, the application
+will keep calling it and will use up all available CPU time.
+Use idleEvents with caution.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkill">
+          <code><b>kill</b>(<b>k</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Kills the job with the specified job number. Permanent jobs
+cannot be killed, however, and protected jobs can only be killed
+if the -force flag is used in the command.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkillAll">
+          <code><b>killAll</b>(<b>ka</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Kills all jobs. Permanent jobs will not be deleted, and
+protected jobs will only be deleted if the -force flag is used.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagkillWithScene">
+          <code><b>killWithScene</b>(<b>kws</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Attaches the job to the current scene, and when the scene is
+emptied. The current scene is emptied by opening a new or
+existing scene.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistConditions">
+          <code><b>listConditions</b>(<b>lc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This causes the command to return a string array containing
+the names of all existing conditions.  Below is the descriptions
+for all the existing conditions:
+<h3>Events Based on Available Maya Features</h3>
+These events are true when the given feature is available.<p>
+<table>
+<tr><th>Event Name</th>
+<th> Maya Feature</th></tr>
+<tr><td>AnimationExists</td>
+<td> Animation </td></tr>
+<tr><td>AnimationUIExists</td>
+<td>User Interface for Animation</td></tr>
+<tr><td>BaseMayaExists</td>
+<td> Any Basic Maya </td></tr>
+<tr><td>BaseUIExists</td>
+<td> Any Interactive Maya</td></tr>
+<tr><td>DatabaseUIExists</td>
+<td></td></tr>
+<tr><td>DeformersExists</td>
+<td> Deformer Functions </td></tr>
+<tr><td>DeformersUIExists</td>
+<td>User Interface for Deformers</td></tr>
+<tr><td>DevicesExists</td>
+<td>Device Support</td></tr>
+<tr><td>DimensionsExists</td>
+<td>Dimensioning</td></tr>
+<tr><td>DynamicsExists</td>
+<td> Dynamics </td></tr>
+<tr><td>DynamicsUIExists</td>
+<td>User Interface for Dynamics</td></tr>
+<tr><td>ExplorerExists</td>
+<td> Explorer </td></tr>
+<tr><td>ImageUIExists</td>
+<td>User Interface for Imaging</td></tr>
+<tr><td>KinematicsExists</td>
+<td> Kinematics </td></tr>
+<tr><td>KinematicsUIExists</td>
+<td>User Interface for Kinematics</td></tr>
+<tr><td>ManipsExists</td>
+<td>Manipulators</td></tr>
+<tr><td>ModelExists</td>
+<td> Basic Modeling Tools</td></tr>
+<tr><td>ModelUIExists</td>
+<td>User Interface for Basic Modeling</td></tr>
+<tr><td>NurbsExists</td>
+<td> Nurbs Modeling Tools</td></tr>
+<tr><td>NurbsUIExists</td>
+<td>User Interface for Nurbs Modeling</td></tr>
+<tr><td>PolyCoreExists</td>
+<td>Basic Polygonal Support</td></tr>
+<tr><td>PolygonsExists</td>
+<td> Polygonal Modeling </td></tr>
+<tr><td>PolygonsUIExists</td>
+<td>User Interface for Polygonal Modeling</td></tr>
+<tr><td>PolyTextureExists</td>
+<td> Polygonal Texturing </td></tr>
+<tr><td>RenderingExists</td>
+<td> Built-in Rendering </td></tr>
+<tr><td>RenderingUIExists</td>
+<td>User Interface for Rendering</td></tr>
+</table>
+<p>
+<h3>Other Events</h3>
+<dl> <dt><i>autoKeyframeState:</i></dt>
+<dd>true when Maya has autoKeyframing enabled</dd>
+<dt><i>busy:</i></dt>
+<dd>true when Maya is busy.</dd>
+<dt><i>deleteAllCondition:</i></dt>
+<dd>true when in the middle of a delete-all operation</dd>
+<dt><i>flushingScene:</i></dt>
+<dd>true while the scene is being flushed out</dd>
+<dt><i>GoButtonEnabled:</i></dt>
+<dd>true when the Go button in the panel context is enabled. </dd>
+<dt><i>hotkeyListChange:</i></dt>
+<dd>true when the list of hotkey definitions has changed</dd>
+<dt><i>playingBack:</i></dt>
+<dd>true when Maya is playing back animation keyframes.</dd>
+<dt><i>playbackIconsCondition:</i></dt>
+<dd>instance of the <i>playingBack</i> condition used on the
+time slider</dd>
+<dt><i>readingFile:</i></dt>
+<dd>true when Maya is reading a file.</dd>
+<dt><i>RedoAvailable:</i></dt>
+<dd>true when there are commands available for redo. </dd>
+<dt><i>SomethingSelected:</i></dt>
+<dd>true when some object(s) is selected.</dd>
+<dt><i>UndoAvailable:</i></dt>
+<dd>true when there are commands available for undo.</dd>
+</dl>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistEvents">
+          <code><b>listEvents</b>(<b>le</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This causes the command to return a string array containing
+the names of all existing events.  Below is the descriptions
+for all the existing events:<p>
+<dl>
+<dt><i>angularToleranceChanged:</i></dt>
+<dd>when the tolerance on angular units is changed.
+This tolerance can be changed by:<ol>
+<li> using the MEL command, &quot;tolerance&quot; with the &quot;-angular&quot; flag</li>
+<li> changing the pref under Options-&gt;GeneralPreferences-&gt;
+Modeling tab-&gt;Tangential Tolerance</li>
+</ol></dd>
+<dt><i>angularUnitChanged:</i></dt>
+<dd>when the user changes the angular unit.</dd>
+<dt><i>axisAtOriginChanged:</i></dt>
+<dd>when the axis changes at the origin.</dd>
+</dl> <dl> <dt><i>axisInViewChanged:</i></dt>
+<dd>when the axis changes at a particular view.</dd>
+<dt><i>ColorIndexChanged:</i></dt>
+<dd>when the color index values change.</dd>
+<dt><i>constructionHistoryChanged: </i></dt>
+<dd>when construction history is turned on or off.</dd>
+<dt><i>currentContainerChanged: </i></dt>
+<dd>when the user set or unset the current container.</dd>
+<dt><i>currentSoundNodeChanged:</i></dt>
+<dd>whenever the sound displayed in the time slider changes
+due to:<ol>
+<li> the sound being removed (or no longer displayed)
+[RMB in the time slider]</li>
+<li>a new sound being displayed [RMB in the time slider]</li>
+<li>sound display being toggled [animation options]</li>
+<li>sound display mode being changed [animation options]</li>
+</ol></dd>
+<dt><i>DagObjectCreated:</i></dt>
+<dd>when a new DAG object is created.</dd>
+<dt><i>deleteAll:</i></dt>
+<dd>when a file new occurs</dd>
+<dt><i>DisplayColorChanged:</i></dt>
+<dd>when the display color changes.</dd>
+<dt><i>displayLayerChange:</i></dt>
+<dd>when a layer has been created or destroyed.</dd>
+<dt><i>displayLayerManagerChange:</i></dt>
+<dd>when the display layer manager has changed.</dd>
+<dt><i>DisplayRGBColorChanged:</i></dt>
+<dd>when the RGB display color changes.</dd>
+<dt><i>glFrameTrigger:</i></dt>
+<dd>for internal use only.</dd>
+<dt><i>ChannelBoxLabelSelected:</i></dt>
+<dd>when Channel Box label(first column) selection changes.</dd>
+<dt><i>gridDisplayChanged:</i></dt>
+<dd>for internal use only.</dd>
+<dt><i>idle: </i></dt>
+<dd>when Maya is idle and there are no high priority idle tasks</dd>
+<dt><i>idleHigh: </i></dt>
+<dd>when Maya is idle.  This is called before low priority idle
+tasks.  You should almost always use &quot;idle&quot; instead.</dd>
+<dt><i>lightLinkingChanged:</i></dt>
+<dd>when any change occurs which modifies light linking
+relationships.</dd>
+<dt><i>lightLinkingChangedNonSG:</i></dt>
+<dd>when any change occurs which modifies light linking
+relationships, except when the change is a change of shading
+assignment.</dd>
+<dt><i>linearToleranceChanged:</i></dt>
+<dd> when the linear tolerance has been changed.  This tolerance
+can be changed by:<ul>
+<li> using the MEL command, &quot;tolerance&quot; with the  &quot;-linear&quot; flag</li>
+<li> changing the pref under Options-&gt;GeneralPreferences-&gt;
+Modeling tab-&gt;Positional Tolerance</li>
+</ul></dd>
+<dt><i>linearUnitChanged: </i></dt>
+<dd>when the user changes the linear unit through the Options menu.</dd>
+<dt><i>MenuModeChanged: </i></dt>
+<dd>when the user changes the menu set for the menu bar in the main Maya window
+(for example, from &quot;Modeling&quot; to &quot;Animation&quot;).</dd>
+<dt><i>RecentCommandChanged: </i></dt>
+<dd>for internal use only.</dd>
+<dt><i>NewSceneOpened:</i></dt>
+<dd>when a new scene has been opened.</dd>
+<dt><i>PostSceneRead:</i></dt>
+<dd>after a scene has been read. Specifically after a file open, import or all child
+references have been read.</dd>
+<dt><i>nurbsToPolygonsPrefsChanged:</i></dt>
+<dd> when any of the nurbs-to-polygons prefs have changed.  These
+prefs can be changed by:<ul>
+<li> using the Mel command, &quot;nurbsToPolygonsPref&quot;</li>
+<li> changing the prefs under Polygons-&gt;Nurbs To
+Polygons-&gt;Option Box</li>
+</ul></dd>
+<dt><i>playbackRangeChanged:</i></dt>
+<dd>when the playback keyframe range changes.</dd>
+<dt><i>playbackRangeSliderChanged:</i></dt>
+<dd>when the animation start/end range (i.e. the leftmost
+or rightmost entry cells in the time slider range, the inner
+ones adjust the playback range) change</dd>
+<dt><i>preferredRendererChanged:</i></dt>
+<dd>when the preferred renderer changes.</dd>
+<dt><i>quitApplication:</i></dt>
+<dd>when the user has chosen to quit, either through the quit MEL
+command, or through the Exit menu item.</dd>
+<dt><i>Redo:</i></dt>
+<dd>when user has selected redo from the menu and there was something
+to redo.  This callback can be used for updating UI or local
+storage.  Do not change the state of the scene or DG during this
+callback.</dd>
+<dt><i>renderLayerChange:</i></dt>
+<dd>when creation or deletion of a render layer node has occured.</dd>
+<dt><i>renderLayerManagerChange:</i></dt>
+<dd>when the current render layer has changed.</dd>
+<dt><i>RebuildUIValues:</i></dt>
+<dd>for internal use only.</dd>
+<dt><i>SceneOpened:</i></dt>
+<dd>when a scene has been opened.</dd>
+<dt><i>SceneSaved:</i></dt>
+<dd>when a scene has been saved.</dd>
+<dt><i>SelectionChanged: </i></dt>
+<dd>when a new selection is made.</dd>
+<dt><i>SelectModeChanged: </i></dt>
+<dd>when the selection mode changes.</dd>
+<dt><i>SelectPreferenceChanged: </i></dt>
+<dd>for internal use only.</dd>
+<dt><i>SelectPriorityChanged:</i></dt>
+<dd>when the selection priority changes.</dd>
+<dt><i>SelectTypeChanged: </i></dt>
+<dd>when the selection type changes.</dd>
+<dt><i>setEditorChanged:</i></dt>
+<dd>obsolete.  No longer used.</dd>
+<dt><i>SetModified:</i></dt>
+<dd>when the set command is used to modify a set</dd>
+<dt><i>SequencerActiveShotChanged: </i></dt>
+<dd>when the active sequencer shot is changed.</dd>
+<dt><i>snapModeChanged:</i></dt>
+<dd>when the snap mode changes. E.g. changes to grid snapping. </dd>
+<dt><i>timeChanged:</i></dt>
+<dd>when the time changes.</dd>
+<dt><i>timeUnitChanged: </i></dt>
+<dd>when the user changes the time unit.</dd>
+<dt><i>ToolChanged: </i></dt>
+<dd>when the user changes the tool/context.</dd>
+<dt><i>PostToolChanged: </i></dt>
+<dd>after the user changes the tool/context.</dd>
+<dt><i>NameChanged: </i></dt>
+<dd>when the user changes the name of an object with the rename command.</dd>
+<dt><i>Undo:</i></dt>
+<dd>when user has selected undo from the menu and there was
+something to undo.  This callback can be used for updating UI or local
+storage.  Do not change the state of the scene or DG during this
+callback.</dd>
+<dt><i>modelEditorChanged: </i></dt>
+<dd>when the user changes the options of a model editor.</dd>
+<dt><i>colorMgtEnabledChanged: </i></dt>
+<dd>when the global per-scene color management enabled flag changes.</dd>
+<dt><i>colorMgtConfigFileEnableChanged: </i></dt>
+<dd>when the global per-scene color management OCIO configuration enabled
+flag changes.</dd>
+<dt><i>colorMgtPrefsViewTransformChanged: </i></dt>
+<dd>when the global per-scene color management view transform preferences
+transform changes.</dd>
+<dt><i>colorMgtWorkingSpaceChanged: </i></dt>
+<dd>when the global per-scene color management working space changes.</dd>
+<dt><i>colorMgtConfigFilePathChanged: </i></dt>
+<dd>when the global per-scene color management OCIO configuration file path
+changes.</dd>
+<dt><i>colorMgtConfigChanged: </i></dt>
+<dd>when the color management mode changes from native to OCIO, or when
+a different OCIO configuration is loaded.</dd>
+<dt><i>colorMgtPrefsReloaded: </i></dt>
+<dd>when all the global per-scene color management settings are reloaded.</dd>
+<dt><i>colorMgtUserPrefsChanged: </i></dt>
+<dd>when any user-level color management preference has changed.</dd>
+<dt><i>colorMgtOutputChanged: </i></dt>
+<dd>when the color management transform, or its enabled state, has changed.</dd>
+<dt><i>colorMgtOCIORulesChanged: </i></dt>
+<dd>when the type of rules in OCIO mode has changed.</dd>
+<dt><i>colorMgtRefreshed: </i></dt>
+<dd>when the color management is refreshed to trap environment variable changes.</dd>
+<dt><i>metadataVisualStatusChanged: </i></dt>
+<dd>for internal use only.</dd>
+<dt><i>shapeEditorTreeviewSelectionChanged: </i></dt>
+<dd>when a new selection in shape editor's treeview is made .</dd>
+<dt><i>RenderViewCameraChanged: </i></dt>
+<dd>when the Render View's current camera is changed.</dd>
+</dl>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistJobs">
+          <code><b>listJobs</b>(<b>lj</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This causes the command to return a string array containing
+a description of all existing jobs, along with their job
+numbers.  These numbers can be used to kill the jobs later.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeDeleted">
+          <code><b>nodeDeleted</b>(<b>nd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named node is deleted
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeNameChanged">
+          <code><b>nodeNameChanged</b>(<b>nnc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the name of the named node changes
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoptionVarChanged">
+          <code><b>optionVarChanged</b>(<b>ovc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named optionVar changes value.
+If the optioNVar is deleted, this job is killed (even if the deletion is undoable).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparent">
+          <code><b>parent</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Attaches this job to a piece of maya UI.  When the UI is
+destroyed, the job will be killed along with it.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpermanent">
+          <code><b>permanent</b>(<b>per</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Makes the job un-killable. Permanent jobs exist for the life
+of the application, or for the life of their parent object.
+The -killWithScene flag does apply to permanent jobs.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprotected">
+          <code><b>protected</b>(<b>pro</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Makes the job harder to kill. Protected jobs must be killed
+or replaced intentionally by using the -force flag.
+The -killWithScene flag does apply to protected jobs.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplacePrevious">
+          <code><b>replacePrevious</b>(<b>rp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can only be used with the -parent flag.  Before
+the new scriptJob is created, any existing scriptJobs that have
+the same parent are first deleted.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrunOnce">
+          <code><b>runOnce</b>(<b>ro</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this is set to true, the script will only be run a single
+time.  If false (the default) the script will run every time
+the triggering condition/event occurs.  If the -uid or -nd flags
+are used, runOnce is turned on automatically.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtimeChange">
+          <code><b>timeChange</b>(<b>tc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>script</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script whenever the current time changes. The
+script will not be executed if the time is changed by clicking on
+the time slider, whereas scripts triggered by the &quot;timeChanged&quot;
+condition will be executed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguiDeleted">
+          <code><b>uiDeleted</b>(<b>uid</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, script]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Run the script when the named piece of UI is deleted.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# create a job that deletes things when they are seleted
+jobNum = cmds.scriptJob( ct= [&quot;SomethingSelected&quot;,&quot;cmds.delete()&quot;], protected=True)
+
+# Now display the job
+jobs = cmds.scriptJob( listJobs=True )
+
+# Now kill it (need to use -force flag since it's protected)
+cmds.scriptJob( kill=jobNum, force=True)
+
+# create a sphere, but print a warning the next time it
+# is raised over 10 units high
+def warn():
+	height = cmds.getAttr( 'mySphere.ty' )
+	if height &gt; 10.0:
+		print 'Sphere is too high!'
+cmds.sphere( n='mySphere' )
+
+cmds.scriptJob( runOnce=True, attributeChange=['mySphere.ty', warn] )
+
+# create a job to detect a new attribute named &quot;tag&quot;
+#
+def detectNewTagAttr():
+	print &quot;New tag attribute was added&quot;
+
+cmds.scriptJob( runOnce=True, attributeAdded=['mySphere.tag',detectNewTagAttr] )
+cmds.addAttr( 'mySphere', ln='tag', sn='tg', dt='string')
+
+# list all the existing conditions and print them
+# nicely
+conds2 = cmds.scriptJob( listConditions=True )
+for cond in sorted(conds2):
+	print cond
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

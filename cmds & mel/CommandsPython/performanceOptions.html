@@ -1,0 +1,621 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>performanceOptions command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-performanceOptions"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/performanceOptions.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>performanceOptions </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("performanceOptions.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>performanceOptions([<a href="#flagclusterResolution">clusterResolution</a>=<i>float</i>], [<a href="#flagdisableStitch">disableStitch</a>=<i>string</i>], [<a href="#flagdisableTrimBoundaryDisplay">disableTrimBoundaryDisplay</a>=<i>string</i>], [<a href="#flagdisableTrimDisplay">disableTrimDisplay</a>=<i>string</i>], [<a href="#flaglatticeResolution">latticeResolution</a>=<i>float</i>], [<a href="#flagpassThroughBindSkinAndFlexors">passThroughBindSkinAndFlexors</a>=<i>string</i>], [<a href="#flagpassThroughBlendShape">passThroughBlendShape</a>=<i>string</i>], [<a href="#flagpassThroughCluster">passThroughCluster</a>=<i>string</i>], [<a href="#flagpassThroughDeltaMush">passThroughDeltaMush</a>=<i>string</i>], [<a href="#flagpassThroughFlexors">passThroughFlexors</a>=<i>string</i>], [<a href="#flagpassThroughLattice">passThroughLattice</a>=<i>string</i>], [<a href="#flagpassThroughPaintEffects">passThroughPaintEffects</a>=<i>string</i>], [<a href="#flagpassThroughSculpt">passThroughSculpt</a>=<i>string</i>], [<a href="#flagpassThroughWire">passThroughWire</a>=<i>string</i>], [<a href="#flagskipHierarchyTraversal">skipHierarchyTraversal</a>=<i>boolean</i>], [<a href="#flaguseClusterResolution">useClusterResolution</a>=<i>string</i>], [<a href="#flaguseLatticeResolution">useLatticeResolution</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>performanceOptions is undoable, queryable, and <b>NOT editable</b>.</p>
+      Sets the global performance options for the application.  The options allow
+the disabling of features such as stitch surfaces or deformers to
+cut down on computation time in the scene.
+<p>
+Performance options that are in effect may be on all the time, or they can be
+turned on only for interaction.  In the latter case, the options will only
+take effect during UI interaction or playback.
+<p>
+Note that none of these performance options will affect rendering.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>One of &quot;on&quot;, &quot;off&quot;, or &quot;interactive&quot; giving the state of the option</td></tr><tr><td valign="top"><i>float</i></td><td>Global resolution value</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagclusterResolution">clusterResolution</a>, <a href="#flagdisableStitch">disableStitch</a>, <a href="#flagdisableTrimBoundaryDisplay">disableTrimBoundaryDisplay</a>, <a href="#flagdisableTrimDisplay">disableTrimDisplay</a>, <a href="#flaglatticeResolution">latticeResolution</a>, <a href="#flagpassThroughBindSkinAndFlexors">passThroughBindSkinAndFlexors</a>, <a href="#flagpassThroughBlendShape">passThroughBlendShape</a>, <a href="#flagpassThroughCluster">passThroughCluster</a>, <a href="#flagpassThroughDeltaMush">passThroughDeltaMush</a>, <a href="#flagpassThroughFlexors">passThroughFlexors</a>, <a href="#flagpassThroughLattice">passThroughLattice</a>, <a href="#flagpassThroughPaintEffects">passThroughPaintEffects</a>, <a href="#flagpassThroughSculpt">passThroughSculpt</a>, <a href="#flagpassThroughWire">passThroughWire</a>, <a href="#flagskipHierarchyTraversal">skipHierarchyTraversal</a>, <a href="#flaguseClusterResolution">useClusterResolution</a>, <a href="#flaguseLatticeResolution">useLatticeResolution</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclusterResolution">
+          <code><b>clusterResolution</b>(<b>cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the global cluster resolution.  This value may range between
+0.0 (exact calculation) and 10.0 (rough approximation)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisableStitch">
+          <code><b>disableStitch</b>(<b>ds</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of stitch surface disablement.  Setting this
+to &quot;on&quot; suppresses the generation of stitch surfaces.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisableTrimBoundaryDisplay">
+          <code><b>disableTrimBoundaryDisplay</b>(<b>dtb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of trim boundary drawing disablement.  Setting this
+to &quot;on&quot; suppresses the drawing of surface trim boundaries.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisableTrimDisplay">
+          <code><b>disableTrimDisplay</b>(<b>dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of trim drawing disablement.  Setting this
+to &quot;on&quot; suppresses the drawing of surface trims.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglatticeResolution">
+          <code><b>latticeResolution</b>(<b>lr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the global lattice resolution.  This value may range between
+0.0 (exact calculation) and 1.0 (rough approximation)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpassThroughBindSkinAndFlexors">
+          <code><b>passThroughBindSkinAndFlexors</b>(<b>pbf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of bind skin and all flexors pass through.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpassThroughBlendShape">
+          <code><b>passThroughBlendShape</b>(<b>pbs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of blend shape deformer pass through.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpassThroughCluster">
+          <code><b>passThroughCluster</b>(<b>pc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of cluster deformer pass through.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpassThroughDeltaMush">
+          <code><b>passThroughDeltaMush</b>(<b>pdm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of delta mush deformer pass through.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpassThroughFlexors">
+          <code><b>passThroughFlexors</b>(<b>pf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of flexor pass through.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpassThroughLattice">
+          <code><b>passThroughLattice</b>(<b>pl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of lattice deformer pass through.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpassThroughPaintEffects">
+          <code><b>passThroughPaintEffects</b>(<b>pp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of paint effects pass through.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpassThroughSculpt">
+          <code><b>passThroughSculpt</b>(<b>ps</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of sculpt deformer pass through.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpassThroughWire">
+          <code><b>passThroughWire</b>(<b>pw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of wire deformer pass through.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagskipHierarchyTraversal">
+          <code><b>skipHierarchyTraversal</b>(<b>sht</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When enabled, hierarchy traversal of invisible objects in the scene will be
+disabled in order to increase performance however this has a side effect of
+performing redundant viewport refreshes on certain actions such as manipulations,
+start/end of playback, idle refresh calls, etc.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseClusterResolution">
+          <code><b>useClusterResolution</b>(<b>ucr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of cluster deformer global resolution.  This
+allows clusters to be calculated at a lower resolution.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseLatticeResolution">
+          <code><b>useLatticeResolution</b>(<b>ulr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the state of lattice deformer global resolution.  This
+allows lattices to be calculated at a lower resolution.
+Valid values are &quot;on&quot;, &quot;off&quot;, &quot;interactive&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# Disable the generation of stitch surfaces
+cmds.performanceOptions( ds=1 )
+
+# Put sculpt deformers into pass-through mode during interaction/playback
+cmds.performanceOptions( ps='interactive' )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

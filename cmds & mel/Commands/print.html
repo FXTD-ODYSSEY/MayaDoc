@@ -1,0 +1,136 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>print command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-print"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>print </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("print.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>print 
+int|float|string|vector|matrix|array
+     </code> </p>
+      <p>print is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The print command displays its argument in the Script Editor
+(or in standard output in batch mode). If the argument is not a
+string it is converted to one.
+<ul>
+<li>Float, vector, and matrix arguments are always printed with
+C format code %.10g.</li>
+<li>Vectors are formatted with spaces separating components.</li>
+<li>Matrices are formatted with commas separating elements of a
+row, and each row begins on a new line. They are surrounded by
+&lt;&lt; and &gt;&gt;.</li>
+<li>Arrays are formatted with each element on a new line.</li>
+</ul>
+New lines are not automatically appended to output.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="fprint.html">fprint</a>
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// To print a scalar (int, float, string):
+
+$i=42;
+print $i;
+// 42
+
+$f=3.14159;
+print $f;
+// 3.14159
+
+$s=&quot;Hello There&quot;;
+print $s;
+// Hello There
+
+// To print a vector:
+
+vector $v;
+$v=&lt;&lt;1.2, 2.3, 3.4&gt;&gt;;
+print $v;
+// 1.2 2.3 3.4
+
+// To print a matrix:
+
+matrix $m[2][3]=&lt;&lt;3.14159, 2.3456781232131, 1; 4.561234586903, 5.342143, 42&gt;&gt;;
+print $m;
+// &lt;&lt; 3.14159, 2.345678123, 1;
+//    4.561234587, 5.342143, 42 &gt;&gt;
+
+// To print an array:
+
+string $a[];
+$a=`ls -lights`;
+print $a;
+// ambientLightShape1
+// directionalLightShape1
+// pointLightShape1
+// pointLightShape2
+
+// To construct a string argument for the print command, use the
+// + operator to concatenate elements of that string.
+// Note that parentheses are required around expressions which
+// form a single command argument.
+
+print (&quot;$i=&quot;+ $i + &quot;, $f=&quot;+$f+&quot;\n&quot;);
+// $i=42, $f=3.14159
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

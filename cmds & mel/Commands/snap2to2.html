@@ -1,0 +1,119 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>snap2to2 command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-snap2to2"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>snap2to2 </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#NURBS" target="contentFrame">NURBS</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("snap2to2.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+snap2to2 ( string $objectList[] )
+<br>
+
+	 </code> </p>
+      
+      This is a manual version of snap align action available in Maya.
+Some of the component selection in Maya doesn't preserve ordering.
+For example, if you select curve edit point 5, followed by curve
+edit point 3, the list of selected items will be equivalent to that
+one if you selected the two points in the reverse order.  Polygon
+vertices and NURBS curve control points are another example of this.
+<p>
+In the event of needing to use snap align function with one of these
+point components, you will need to use this script as follows:
+<p>
+Select 4 points in turn (2 on the object to move and 2 on the target
+location).  Note the echoed &quot;select -r&quot; statement in the command
+editor.
+<p>
+Use snap2to2 with those for objects; for example, if your command
+window showed:
+<pre>
+select -r curve1.ep[3;
+select -r curve1.ep[1];
+select -r nurbsPlane1.ep[1][1];
+select -r nurbsPlane1.ep[2][2];
+</pre>
+you would type:
+<pre>
+snap2to2 { &quot;curve1.ep[3]&quot;, &quot;curve1.ep[1]&quot;,
+&quot;nurbsPlane1.ep[1][1]&quot;, &quot;nurbsPlane1.ep[2][2]&quot; };
+</pre>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$objectList"><b>$objectList</b></a></td><td><i>string</i></td><td>list of points on objects to use for snapping
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>      snap2to2 { &quot;curve1.ep[3]&quot;, &quot;curve1.ep[1]&quot;,
+                 &quot;nurbsPlane1.ep[1][1]&quot;, &quot;nurbsPlane1.ep[2][2]&quot; };
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

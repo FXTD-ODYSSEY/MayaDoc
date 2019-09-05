@@ -1,0 +1,319 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>collision command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-collision"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/collision.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>collision </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Dynamics" target="contentFrame">Dynamics</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("collision.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>collision(
+[objects]
+    , [<a href="#flagfriction">friction</a>=<i>float</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagoffset">offset</a>=<i>float</i>], [<a href="#flagresilience">resilience</a>=<i>float</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>collision is undoable, queryable, and editable.</p>
+      For each listed object, the command creates a new field.
+The field has a shape which lives in the DAG and it has an associated
+dependency node. The field is added to the list of fields owned
+by the object. Use connectDynamic to cause the field to affect a dynamic
+object. Note that if more than one object is listed, a separate field is
+created for each object.
+<p>
+If fields are created, this command returns the names of each
+owning shape and of the field shapes themselves. If a field was queried,
+the results of the query are returned. If a field was edited, the field
+name is returned.
+<p>
+If no object names are provided but the active selection list is non-empty,
+the command creates a field for every object in the list. If the
+list is empty, the command defaults to -pos 0 0 0.
+The collision command causes particles to collide with geometry.
+It also allows you to specify values for the surface properties
+(friction and resilience) of the collision.  These values are stored
+in the geoConnector node for the geometry object.  Unlike earlier versions
+of Maya, there is no separate &quot;collision node.&quot;
+<p>
+If a soft object is in the selection list, the collision command assumes
+that you want to make it a collider.  In order to make the soft object
+collide with something use, use connectDynamic -c.  The collision menu
+option sorts this out using the lead object rule and issues the necessary
+commands.
+On creation, this command returns a <b>string array</b> of the geometry names that were setup for particle collision.<p>
+When the command is used to query information, there are several possible return types.
+These include:
+<ul>
+<p>
+<li>If the -resilience or -friction flag is passed on the command line
+and a single collision geometry is either selected or on the command
+line, then resilience or friction value for that collision geometry is
+returned as a single <b>float</b> value.</li>
+<p>
+<li> If the -resilience or -friction flag is passed on the command
+line and a single collision geometry and a single particle object are
+either selected or on the command line, then two results might occur.
+If the particle object is not set up to collide with the geometry,
+then an error is displayed stating that.  If the objects are set up to
+collide with each other, then the resilience or friction value that
+the particle object is using for collisions with the geometry is
+returned as a single <b>float</b> value.  This can be different than
+the geometry's resilience and friction, because the user may break the
+connection from the geometry's geoConnector node's resilience or
+friction to the particle, and set a different value in the particle's
+collisionResilience, collisionFriction or collisionOffset attribute
+that is used for that geometry.  This allows the user to make each
+particle respond to the same surface differently. </li>
+<p>
+<li> If neither flag is pass on the command line and a single geometry
+and single particle object are either selected or on the command line,
+then a single <b>integer</b> value of 1 is returned if the objects are
+set up to collide with each other, and 0 is returned if they are
+not. </li>
+<p>
+<li>Lastly, if no flags are passed on the command line and a single
+particle object is either selected or on the command line, then a
+<b>string array</b> with the names of all geometries that the particle
+object will collide against and the multiIndex that the geometries are
+connected to is returned.  The array is formatted as follows:
+<p>
+<ul>
+pPlaneShape1:0 pPlaneShape2:2 nurbsSphereShape1:3
+</ul>
+<p>
+...where the number following the &quot;:&quot; is the multiIndex.</li>
+<p>
+</ul>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>Geometry names that were setup for particle collision.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="event.html">event</a>, <a href="particle.html">particle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagfriction">friction</a>, <a href="#flagname">name</a>, <a href="#flagoffset">offset</a>, <a href="#flagresilience">resilience</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfriction">
+          <code><b>friction</b>(<b>f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Friction of the surface.  This is the amount of the colliding particle's
+velocity parallel to the surface which is removed when the particle collides.
+A value of 0 will mean that no tangential velocity is lost, while a value
+of 1 will cause the particle to reflect straight along the normal of
+the surface.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+name of field
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoffset">
+          <code><b>offset</b>(<b>o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Offset value for the connector.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresilience">
+          <code><b>resilience</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Resilience of the surface.  This is the amount of the colliding particle's
+velocity reflected along the normal of the surface.  A value of 1 will
+give perfect reflection, while a value of 0 will have no reflection along
+the normal of the surface.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.collision( 'nurbsSphere1', 'particle1', r=.75, f=.1 )
+# Causes particles of particle1 to collide with nurbsSphere1,
+# and sets a resilience value of 0.75 and a friction value of 0.1
+# for the surface.
+
+cmds.collision( 'nurbsSphere1', q=True, f=1 )
+# Returns the friction value stored in the geoConnector for nurbsSphere1.
+
+cmds.collision( 'particleShape1', 'nurbsSphere1', q=True, f=1 )
+# Returns the friction value that particleShape1 is using for collisions
+# against nurbsSphere1.  This may be the same as the friction stored in
+# nurbsSphere1's geoConnector.  Or, if the user broke that connection,
+# then it is whatever value is in the particleShape1's collisionFriction
+# attribute that is used for collision with nurbsSphere1.
+
+cmds.collision( 'nurbsSphere1', 'particleShape1', q=True )
+# Returns whether or not particleShape1 is checking for collisions
+# against nurbsSphere1.
+
+cmds.collision( 'particleShape1', q=True )
+# Returns all of the geometries that particleShape1 is colliding with.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

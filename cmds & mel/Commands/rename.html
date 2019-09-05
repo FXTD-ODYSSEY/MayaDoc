@@ -1,0 +1,240 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>rename command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-rename"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/rename.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>rename </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("rename.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hNotes">Notes</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>rename [-<a href="#flagignoreShape">ignoreShape</a>] [-<a href="#flaguuid">uuid</a>] 
+[object] string
+     </code> </p>
+      <p>rename is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Renames the given object to have the new name. If only one
+argument is supplied the command will rename the (first) selected
+object. If the new name conflicts with an existing name, the
+object will be given a unique name based on the supplied name.
+It is not legal to rename an object to the empty string.
+<p>
+When a transform is renamed then any shape nodes beneath the
+transform that have the same prefix as the old transform name
+are renamed. For example, &quot;rename nurbsSphere1 ball&quot; would
+rename &quot;nurbsSphere1|nurbsSphereShape1&quot; to &quot;ball|ballShape&quot;.
+<p>
+If the new name ends in a single '#' then the rename command
+will replace the  trailing '#' with a number that ensures
+the new name is unique.
+<p>
+	  <h2><a name="hNotes">Notes</a></h2>
+If the name has an absolute namespace part, it will be considered.
+Namespaces that do not exist will be created automatically as needed.
+If the name has a relative namespace part, it will be ignored.
+In that case, the object will be put under the current namespace.
+(see example below).
+<p>
+  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The new name. When undone returns original name.</td></tr></table>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagignoreShape">ignoreShape</a>, <a href="#flaguuid">uuid</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreShape">
+          <code><b>-ignoreShape</b>(<b>-is</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that renaming of shape nodes below
+transform nodes should be prevented.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguuid">
+          <code><b>-uuid</b>(<b>-uid</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that the new name is actually a UUID,
+and that the command should change the node's UUID.
+(In which case its name remains unchanged.)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// create two namespaces under the root namespace and create
+// a sphere under the root namespace and a sphere under one
+// of the new namespaces.
+namespace -set &quot;:&quot;;
+sphere -n sphere1;
+namespace -add nsA;
+namespace -add nsB;
+namespace -set nsA;
+sphere -n sphere2;
+namespace -set &quot;:&quot;;
+
+// change name of sphere1
+rename sphere1 spinning_ball;
+// result: spinning_ball //
+
+// change name of spinning_ball back to sphere1
+select -r spinning_ball;
+rename sphere1;
+// Result: sphere1 //
+
+// move sphere2 to namespace nsB
+rename nsA:sphere2 nsB:sphere2;
+// Result: nsB:sphere2 //
+
+// move sphere2 back to namespace nsA when not in the root namespace
+// Note the &quot;:&quot; appearing in front of the new name to indicate
+// we want to move the object to namespace nsA under the root namespace.
+namespace -set nsB;
+rename nsB:sphere2 :nsA:sphere2;
+// Result: nsA:sphere2 //
+
+// Let's try this without the leading &quot;:&quot; in the new name.
+// Since we are namespace nsA, in affect, what we are trying to do
+// is rename :nsB:sphere2 to :nsA:nsB:sphere3. Since there isn't a
+// nsB namespace under the namespace nsA, the namespace specification
+// on new name is ignored and a warning is issued.
+namespace -set &quot;:nsA&quot;;
+rename nsA:sphere2 nsB:sphere3;
+// Warning: Removing invalid characters from name. //
+// Result: nsA:sphere3 //
+
+// rename an object when not in the root namespace
+// and move the object to current namespace
+namespace -set &quot;:nsB&quot;;
+rename nsA:sphere3 sphere4;
+// Result: nsB:sphere4 //
+
+// rename an object with an absolute name to move it into a new namespace.
+// The namespace does not exist so will be created.
+namespace -set &quot;:nsB&quot;;
+rename nsA:sphere3 :nsC:sphere4;
+// Result: nsC:sphere4 //
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

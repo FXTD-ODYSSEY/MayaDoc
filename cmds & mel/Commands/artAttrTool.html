@@ -1,0 +1,212 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>artAttrTool command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-artAttrTool"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/artAttrTool.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>artAttrTool </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Contexts" target="contentFrame">Contexts</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("artAttrTool.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>artAttrTool [-<a href="#flagadd">add</a> <i>string</i>] [-<a href="#flagexists">exists</a> <i>string</i>] [-<a href="#flagremove">remove</a> <i>string</i>]  </code> </p>
+      <p>artAttrTool is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      <p>     The artAttrTool command manages the list of tool types which are
+        used for attribute painting. This command supports querying the
+        list contents as well as adding new tools to the list. Note that
+        there is a set of built-in tools. The list of built-ins can
+        be queried by starting Maya and doing an &quot;artAttrTool -q&quot;.
+<p>
+        The tools which are managed by this command are all intended for
+        attribute painting via Artisan: when you create a new context via
+        artAttrCtx you specify the tool name via artAttrCtx's <i>-whichTool</i>
+        flag. Typically the user may wish to simply use one of the built-in
+        tools. However, if you need to have custom Properties and Values sheets
+        asscociated with your tool, you will need to define a custom tool
+        via <i>artAttrTool -add &quot;toolName&quot;</i>. For an example of a custom
+        attribute painting tool, see the devkit example customtoolPaint.mel.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>artisan, attribute, paint, context
+      <h2><a name="hRelated">Related</a></h2><a href="artAttrCtx.html">artAttrCtx</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagadd">add</a>, <a href="#flagexists">exists</a>, <a href="#flagremove">remove</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagadd">
+          <code><b>-add</b>(<b>-</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds the named tool to the internal list of tools.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>-exists</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Checks if the named tool exists, returning true if found, and false otherwise.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremove">
+          <code><b>-remove</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Removes the named tool from the internal list of tools.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// Add a tool named &quot;customtoolPaint&quot; to the list of
+// attribute painting tools, then creates a new context called
+// &quot;customtoolPaintContext&quot; which utilises the &quot;customtoolPaint&quot; tool.
+//
+artAttrTool -add &quot;customtoolPaint&quot;;
+artAttrCtx -whichTool &quot;customtoolPaint&quot; &quot;customtoolPaintContext&quot;;
+
+// List all tools currently defined.
+//
+artAttrTool -q;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

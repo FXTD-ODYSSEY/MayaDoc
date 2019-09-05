@@ -1,0 +1,113 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>renderLayerParent command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-renderLayerParent"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>renderLayerParent </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a>, <a href="cat_Rendering.html#Layers" target="contentFrame">Layers</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("renderLayerParent.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+int	 renderLayerParent( string $parent, string $child )
+<br>
+
+	 </code> </p>
+      
+      This procedure causes render layer node $child to become contained
+within render layer node $parent via a layer hierarcy relationship.
+Containment is implemented by connecting the render layer hierarchy
+attributes on the two nodes as appropriate. There are certain
+conditions which are not permitted, such as a cyclic relationship,
+instancing within a layer hierarchy, attempting to connect to the
+default layer, etc. Any invalid conitions will trigger an error
+message and 0 will be returned.
+See also renderLayerUnparent().
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$parent"><b>$parent</b></a></td><td><i>string</i></td><td>The render layer node we want to be the parent.
+</td></tr>
+<tr><td><a name="$child"><b>$child</b></a></td><td><i>string</i></td><td>The render layer node we want to be the child.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>      <i>// Create two render layer nodes.
+</i>
+      <i>//
+</i>
+		string $parent = `createRenderLayer -name &quot;parent&quot; -empty`;
+		string $child = `createRenderLayer -name &quot;child&quot; -empty`;
+
+		<i>// Make &quot;parent&quot; contain &quot;child&quot;.
+</i>
+		<i>//
+</i>
+		int $status = renderLayerParent( $parent, $child );
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

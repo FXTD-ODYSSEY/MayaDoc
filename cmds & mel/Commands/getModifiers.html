@@ -1,0 +1,97 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>getModifiers command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-getModifiers"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/getModifiers.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>getModifiers </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Devices" target="contentFrame">Devices</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("getModifiers.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>getModifiers  </code> </p>
+      <p>getModifiers is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command returns the current state of the modifier keys. The state
+of each modifier can be obtained by testing for the modifier's
+corresponding bit value in the return value. Shift is bit 1,
+Ctrl is bit 3, Alt is bit 4, and bit 5 is the 'Windows' key on Windows keyboards
+and the Command key on Mac keyboards.  See the provided
+example for more details on testing for each modifier's bit value.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>indicating which modifier keys are pressed.</td></tr></table>
+      
+      
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+window;
+columnLayout;
+button -label &quot;Press Me&quot; -command &quot;PrintModifiers&quot;;
+showWindow;
+
+global proc PrintModifiers()
+{
+    int $mods = `getModifiers`;
+    print (&quot;Modifiers are:&quot;);
+    if ($mods % 2) print (&quot; Shift&quot;);
+    if ($mods / 4 % 2) print (&quot; Ctrl&quot;);
+    if ($mods / 8 % 2) print (&quot; Alt&quot;);
+    if ($mods / 16 % 2) print (&quot; Command&quot;);
+    print (&quot;\n&quot;);
+}
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

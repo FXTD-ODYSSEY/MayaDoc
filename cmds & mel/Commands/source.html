@@ -1,0 +1,188 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>source command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-source"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>source </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("source.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>source 
+string
+     </code> </p>
+      <p>source is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The source directive causes MEL to compile and execute the contents of a
+script that is stored in a file.
+<p>
+The argument passed to the source directive can be a full path or just
+the name of a script.  If only the script name is provided, then MEL will
+attempt to locate it in the MEL search path.  If the name or path has
+no suffix, then MEL will add a &quot;.mel&quot; suffix before the search.  If a
+full path is provided, then it must be surrounded in quotes.
+<p>
+It is important for advanced MEL users to understand that &quot;source&quot; is
+not a MEL command.  It is a directive that tells the interpreter what to
+compile and execute.  If a script has &quot;source&quot; directives in it, then all
+sourced files will be compiled at the same time as the script.  This
+will happen regardless of where the source directive appears in the file.
+And, if the script with the &quot;source&quot; directives is re-run, the sourced files
+will not be recompiled.  It is possible to override this behavior by
+enclosing the source directive in an &quot;eval&quot; statement.
+<p>
+Note that the MEL scanner is not reentrant.  This means that a sourced script
+should not &quot;source&quot; any other scripts, otherwise errors may occur.  Python
+scripts have no such limitation.
+<p>
+The above only applies to the compilation of the scripts.  The actual
+execution of sourced scripts will occur at the point where the source
+directive is in the code.  Please see the examples below to see how
+this works.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// There is a script that is shipped with Maya called &quot;dirname.mel&quot;.  You
+// do not have to source it to use, as that will be done automatically the
+// first time you call it.  But, we will source it as an example of how to
+// use the source directive on a script that is in the search path.
+//
+
+// You can provide the &quot;.mel&quot; extension if you like
+//
+source &quot;dirname.mel&quot;;
+
+// Or, you can leave it out
+//
+source &quot;dirname&quot;;
+
+dirname( &quot;D:/Work/file.txt&quot; );
+// Result: D:/Work //
+
+// Here's a utility proc that we'll use for the next examples
+//
+global proc writeFile( string $filename, string $contents ) {
+    $fileId=`fopen $filename &quot;w&quot;`;
+    fprint $fileId ( $contents );
+    fclose $fileId;
+}
+
+// The following examples require you to have write access to the current
+// directory.
+
+// Create a file script file
+//
+writeFile( &quot;./sourceTest.mel&quot;, &quot;print \&quot;sourceTest.mel was executed\\n\&quot;;&quot;);
+
+
+// Now we can source the local script by giving a relative or full path.
+// This MUST be executed separately from the statement above (we will see
+// why a bit later).
+//
+source &quot;./sourceTest.mel&quot;;
+// sourceTest.mel was executed
+
+// Or, we can leave off the .mel
+//
+source &quot;./sourceTest&quot;;
+// sourceTest.mel was executed
+
+
+// As was explained above, the source statement is an interpreter directive
+// and not a command.  This example should illustrate that.
+//
+// Execute each block below separately in the script editor!
+//
+
+// Block 1.  Create a script to source.
+//
+writeFile( &quot;./sourceTest.mel&quot;, &quot;print \&quot;sourceTest.mel was executed\\n\&quot;;&quot;);
+
+// Block 2. Demonstrate that the script is only compiled once, but is executed
+// every time that the source &quot;directive&quot; is reached.  The script will be
+// changed between the source calls, but the changes will not be recognised.
+//
+print( &quot;Before first source\n&quot; );
+source &quot;./sourceTest&quot;;
+// sourceTest.mel was executed
+print( &quot;Between sources\n&quot; );
+writeFile( &quot;./sourceTest.mel&quot;, &quot;print \&quot;sourceTest.mel has been changed\\n\&quot;;&quot;);
+source &quot;./sourceTest.mel&quot;;
+// sourceTest.mel was executed
+print( &quot;After second source\n&quot; );
+
+// Block 3.  Put the first script back
+//
+writeFile( &quot;./sourceTest.mel&quot;, &quot;print \&quot;sourceTest.mel was executed\\n\&quot;;&quot;);
+
+// Block 4. Demonstrate how make source recompile each time using an &quot;eval&quot;
+// statement
+//
+print( &quot;Before first source\n&quot; );
+eval( &quot;source \&quot;./sourceTest\&quot;&quot; );
+// sourceTest.mel was executed
+print( &quot;Between sources\n&quot; );
+writeFile( &quot;./sourceTest.mel&quot;, &quot;print \&quot;sourceTest.mel has been changed\\n\&quot;;&quot;);
+eval( &quot;source \&quot;./sourceTest\&quot;&quot;);
+// sourceTest.mel has been changed
+print( &quot;After second source\n&quot; );
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

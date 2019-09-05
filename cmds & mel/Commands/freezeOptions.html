@@ -1,0 +1,334 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>freezeOptions command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-freezeOptions"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/freezeOptions.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>freezeOptions </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("freezeOptions.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>freezeOptions [-<a href="#flagdisplayLayers">displayLayers</a> <i>boolean</i>] [-<a href="#flagdownstream">downstream</a> <i>string</i>] [-<a href="#flagexplicitPropagation">explicitPropagation</a> <i>boolean</i>] [-<a href="#flaginvisible">invisible</a> <i>boolean</i>] [-<a href="#flagreferencedNodes">referencedNodes</a> <i>boolean</i>] [-<a href="#flagruntimePropagation">runtimePropagation</a> <i>boolean</i>] [-<a href="#flagupstream">upstream</a> <i>string</i>]  </code> </p>
+      <p>freezeOptions is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      This command provides access to the options used by the evaluation manager to
+handle propagation and recognition of when a node is in a frozen state.
+See the individual flags for the different options available.
+These values are all stored as user preferences and persist across sessions.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Current value of the option if querying the downstream or upstream flags</td></tr><tr><td valign="top"><i>boolean</i></td><td>Current value of the option if querying the displayLayers, invisible, referencedNodes, explicitPropagation, or runtimePropagaton flags</td></tr><tr><td valign="top"><i>boolean</i></td><td>In creation mode returns true if all options were successfully set</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>evaluation, manager, DG, runtime, freeze
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdisplayLayers">displayLayers</a>, <a href="#flagdownstream">downstream</a>, <a href="#flagexplicitPropagation">explicitPropagation</a>, <a href="#flaginvisible">invisible</a>, <a href="#flagreferencedNodes">referencedNodes</a>, <a href="#flagruntimePropagation">runtimePropagation</a>, <a href="#flagupstream">upstream</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisplayLayers">
+          <code><b>-displayLayers</b>(<b>-dl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this option is enabled then any nodes that are in an enabled, invisible display
+layer will be considered to be frozen, and the frozen state will propagate accordingly.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdownstream">
+          <code><b>-downstream</b>(<b>-dn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Controls how frozen state is propagated downstream from currently frozen nodes.
+Valid values are &quot;none&quot; for no propagation, &quot;safe&quot; for propagation downstream
+only when all upstream nodes are frozen, and &quot;force&quot; for propagation downstream
+when any upstream node is frozen.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexplicitPropagation">
+          <code><b>-explicitPropagation</b>(<b>-ep</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When turned on this will perform an extra pass when the evaluation graph is
+constructed to perform intelligent propagation of the frozen state to related
+nodes as specified by the currently enabled options of the evaluation graph.
+See also &quot;runtimePropagation&quot;.
+This option performs more thorough propagation of the frozen state, but requires
+extra time for recalculating the evaluation graph.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginvisible">
+          <code><b>-invisible</b>(<b>-inv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this option is enabled then any nodes that are invisible, either directly or
+via an invisible parent node, will be considered to be frozen, and the frozen state
+will propagate accordingly.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreferencedNodes">
+          <code><b>-referencedNodes</b>(<b>-rn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If this option is enabled then any nodes that are referenced in from a frozen referenced node
+will also be considered to be frozen, and the frozen state will propagate accordingly.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagruntimePropagation">
+          <code><b>-runtimePropagation</b>(<b>-rt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When turned on this will allow the frozen state to propagate during execution
+of the evaluation graph. See also &quot;explicitPropagation&quot;.
+This option allows frozen nodes to be scheduled for evaluation, but once it
+discovers a node that is frozen it will prune the evaluation based on the
+current set of enabled options. It only works in the downstream direction.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupstream">
+          <code><b>-upstream</b>(<b>-up</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Controls how frozen state is propagated upstream from currently frozen nodes.
+Valid values are &quot;none&quot; for no propagation, &quot;safe&quot; for propagation upstream
+only when all downstream nodes are frozen, and &quot;force&quot; for propagation upstream
+when any downstream node is frozen.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// Print the current display layer freeze option
+int $dlOption = `freezeOptions -q -displayLayers`;
+print &quot;Display layer freeze option is &quot; + $dlOption + &quot;\n&quot;;
+
+// Toggle the display layer freeze option on
+cmds.freezeOptions( displayLayers=True )
+// Return: 1 //
+
+# Set downstream propagation to safe mode
+cmds.freezeOptions( downstream='safe' )
+// Return: 1 //
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

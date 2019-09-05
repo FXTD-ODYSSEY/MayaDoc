@@ -1,0 +1,399 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>help command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-help"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/help.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>help </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Utilities" target="contentFrame">Utilities</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("help.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>help [-<a href="#flagdocumentation">documentation</a>] [-<a href="#flaglanguage">language</a> <i>string</i>] [-<a href="#flaglist">list</a>] [-<a href="#flagpopupDisplayTime">popupDisplayTime</a> <i>uint</i>] [-<a href="#flagpopupMode">popupMode</a> <i>boolean</i>] [-<a href="#flagpopupPauseTime">popupPauseTime</a> <i>uint</i>] [-<a href="#flagpopupSimpleMode">popupSimpleMode</a> <i>boolean</i>] [-<a href="#flagrolloverMode">rolloverMode</a> <i>boolean</i>] [-<a href="#flagsyntaxOnly">syntaxOnly</a>] 
+[string]
+     </code> </p>
+      <p>help is undoable, queryable, and <b>NOT editable</b>.</p>
+      With no arguments, help tells how to use help. If a command name is
+specified, help will return the quick help for that command. Other
+flags can be used to open the online documentation, or to list
+available commands based on a pattern.
+<p>
+Pattern follows the following syntax:
+<p>
+<pre>
+*            matches any string
+?            matches any character
+[agj]        matches a, g or j
+[^0-9]       matches anything but a digit
+x+           matches any number of subsequent x
+a{3}         matches aaa
+a{3,}        matches aaa, aaaa, ...
+a{3,5}       matches aaa, aaaa, or aaaaa
+(ab)(CD)\2\1 matches abCDCDab (\1 to \9 available)
+</pre>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdocumentation">documentation</a>, <a href="#flaglanguage">language</a>, <a href="#flaglist">list</a>, <a href="#flagpopupDisplayTime">popupDisplayTime</a>, <a href="#flagpopupMode">popupMode</a>, <a href="#flagpopupPauseTime">popupPauseTime</a>, <a href="#flagpopupSimpleMode">popupSimpleMode</a>, <a href="#flagrolloverMode">rolloverMode</a>, <a href="#flagsyntaxOnly">syntaxOnly</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdocumentation">
+          <code><b>-documentation</b>(<b>-doc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use a browser to show the documentation associated with the single
+command name given. A pattern cannot be used with this flag. If no
+command name is specified, then this flag will go to the main
+documentation index.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglanguage">
+          <code><b>-language</b>(<b>-lng</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the help for this command in the specified language.
+Valid values are &quot;mel&quot; and &quot;python&quot;.
+The default is Mel.
+Used with the <em>doc</em> flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglist">
+          <code><b>-list</b>(<b>-l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+List all the commands whose names match the regular expression. Pass the
+regular expression as the first argument to the command specified.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpopupDisplayTime">
+          <code><b>-popupDisplayTime</b>(<b>-pdt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the amount of time, in seconds, that the popup help
+will be displayed.  The default is 4 seconds.
+This flag is mutually exclusive of the <em>list</em> and <em>doc</em> flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpopupMode">
+          <code><b>-popupMode</b>(<b>-pm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn on or off popup help mode.  This flag is mutually exclusive
+of the <em>list</em> and <em>doc</em> flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpopupPauseTime">
+          <code><b>-popupPauseTime</b>(<b>-ppt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set the amount of time, in milliseconds, before the popup help
+will be displayed. The default is 800 milliseconds.
+This flag is mutually exclusive of the <em>list</em> and <em>doc</em> flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpopupSimpleMode">
+          <code><b>-popupSimpleMode</b>(<b>-psm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn on or off simple popup help mode. If set, ToolClips will display
+only name and keyboard shortcut.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrolloverMode">
+          <code><b>-rolloverMode</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn on or off rollover help mode.  This flag is mutually exclusive
+with the <em>list</em> and <em>doc</em> flags.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsyntaxOnly">
+          <code><b>-syntaxOnly</b>(<b>-so</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When no other flag is specified, return only the syntax part of the
+quick help.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+help -list &quot;[a-c]*&quot;;      // List all commands starting with a, b or c
+help -list &quot;[^aeiou]+&quot;;   // List all commands without vowels!
+help;                     // Print a message explaining how to use help
+help -doc;                // Bring up the main on-line help index
+help -language &quot;mel&quot; -doc polySphere;   // Bring up the Mel version of command documentation for the polySphere command
+help -doc disable;        // Bring up the on-line help for the disable command.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

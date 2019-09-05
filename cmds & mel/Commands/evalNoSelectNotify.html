@@ -1,0 +1,89 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>evalNoSelectNotify command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-evalNoSelectNotify"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>evalNoSelectNotify </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("evalNoSelectNotify.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>evalNoSelectNotify 
+string | [string any...]
+     </code> </p>
+      <p>evalNoSelectNotify is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command is the same as the <b>eval</b> command except that it blocks
+the selection notifications and then executes the command string.  This is
+useful for commands which create many nodes and change selection upon each
+node creation.  Having a command with many selection change notifs could
+greatly slow down the command as there may be a lot of work done for each
+of these selection changes.  And all these selection changes are usually
+pointless since at the end a final selection is done.  This command will
+block all those intermediate selection change notifs.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>Any</i></td><td>The return value of the statement or command/procedure call.</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="eval.html">eval</a>, <a href="evalDeferred.html">evalDeferred</a>, <a href="evalEcho.html">evalEcho</a>, <a href="scriptJob.html">scriptJob</a>
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// The &quot;evalNoSelectNotify&quot; command can be executed as a single string.
+polySphere -ch on -o on -r 5.0 ;
+evalNoSelectNotify &quot;createHair 8 8 10 1 0 0 0 5 0 2 1 1&quot;;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

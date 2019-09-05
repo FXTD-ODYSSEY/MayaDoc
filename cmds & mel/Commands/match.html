@@ -1,0 +1,167 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>match command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-match"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>match </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Strings" target="contentFrame">Strings</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("match.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>match 
+string string
+     </code> </p>
+      <p>match is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Returns the portion of the second string argument which matches
+the regular expression in the first string argument. The regular expression matches consecutive characters.
+If there is no match the empty string (&quot;&quot;) is returned.
+<p>
+Regular expressions are a standard syntax for specifying search patterns.
+This reference page acts as a brief overview of regular expressions.
+<p>
+Regular expressions are strings that contain special characters which
+define matching criteria.  The simplest expression is just a string
+(see example 1 below).
+<p>
+The basic building blocks of a regular expression are as follows:
+<p>
+<table>
+<tr><td valign="top">.</td> <td> Matches any single character</td></tr>
+<tr><td valign="top">*</td> <td> Match zero or more occurances of the preceeding expression</td></tr>
+<tr><td valign="top">+</td> <td> Match one or more occurances of the preceeding expression</td></tr>
+<tr><td valign="top">^</td> <td> Matches (anchors) the expression to the start of a line </td></tr>
+<tr><td valign="top">$</td> <td> Matches (anchors) the expression to the end of a line </td></tr>
+<tr><td valign="top">\</td>
+<td> Escape character.  Use this in front of a special character
+(e.g. '*') when you wish to match the actual character.  Note that MEL
+strings resolve control characters that use '\' when they are first
+parsed.  So, to use a '\' character in an expression, you must escape
+it (e.g. &quot;\\&quot;) so that it is passed through to match. </td></tr>
+<tr><td valign="top">[...]</td>
+<td> Matches any one of the enclosed characters. All of the special
+pattern matching characters except &quot;\&quot; and &quot;]&quot; lose their special meaning
+between the brackets and just match themselves. A pair of
+characters separated by &quot;-&quot; matches any character lexically
+between the pair, inclusive (e.g. &quot;[0-9]&quot; matches any digit).
+If the first character following the opening &quot;[&quot; is a &quot;^&quot; any character not
+enclosed is matched (e.g. &quot;[^ab]&quot; will match any character
+except &quot;a&quot; or &quot;b&quot;).  A &quot;-&quot; can be included in the character
+set by putting it as the first or last character.
+</td></tr>
+<tr><td valign="top">(...)</td>
+<td> Used to group part of an expression together </td></tr>
+</table>
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Matched string</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="gmatch.html">gmatch</a>, <a href="strcmp.html">strcmp</a>
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Example 1: a simple string match
+//
+match &quot;this&quot; &quot;this is a test&quot;;
+// Result: this //
+
+// Example 2: using '*' and '+'
+//
+match &quot;a*b*&quot; &quot;abbcc&quot;;
+// Result: abb //
+match &quot;a*b*&quot; &quot;bbccc&quot;;
+// Result: bb //
+
+match &quot;a+b+&quot; &quot;abbcc&quot;;
+// Result: abb //
+// The following will fail because there has to be at least one &quot;a&quot;
+match &quot;a+b+&quot; &quot;bbccc&quot;;
+
+// Example 3: anchoring to the start and end of the line
+//
+// This matches &quot;the&quot;, only if it is at the start of the line
+match &quot;^the&quot; &quot;the red fox&quot;;
+// Result: the //
+// The following fails
+match &quot;^the&quot; &quot;chase the red fox&quot;;
+// This matches &quot;fox&quot;, only if it is at the end of the line
+match &quot;fox$&quot; &quot;the red fox&quot;;
+// The following fails
+match &quot;fox$&quot; &quot;the red fox hides&quot;;
+
+// Example 4: matching ranges of characters
+//
+match &quot;[0-9]+&quot; &quot;sceneRender019.iff&quot;;
+// Result: 019 //
+
+// Example 5: using ()
+//
+match &quot;(abc)+&quot; &quot;123abcabc456&quot;;
+// Result: abcabc //
+
+// Example 6: the escape charater
+//
+// as mentioned above, MEL parses '\' escape characters in strings.  So,
+// to pass an actual '\' character through to match, you must escape it.
+//
+// The following regular expression is really &quot;\^.&quot;, but we have to escape
+// the '\'.
+//
+match(&quot;\\^.&quot;, &quot;ab^c&quot;);
+// Result: ^c
+//
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,319 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>setParent command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-setParent"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/setParent.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>setParent </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Scripting" target="contentFrame">Scripting</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("setParent.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>setParent [-<a href="#flagdefineTemplate">defineTemplate</a> <i>string</i>] [-<a href="#flagmenu">menu</a>] [-<a href="#flagtopLevel">topLevel</a>] [-<a href="#flagupLevel">upLevel</a>] [-<a href="#flaguseTemplate">useTemplate</a> <i>string</i>] 
+[string]
+     </code> </p>
+      <p>setParent is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command changes the default parent to be the specified parent.
+Two special parents are &quot;|&quot; which indicates the top level layout of the
+window hierarchy, or &quot;..&quot; which indicates one level up in the hierarchy.
+Trying to move above the top level has no effect.
+<p>
+<p> A control must be parented to a control layout.  A control layout may
+be parented to another control layout or a window.  A menu may be parented
+to a window or a menu bar layout.  For all of these cases
+the <i>setParent</i> command (with no flags) will indicate the current
+default parent.
+<p>
+<p> A menu item must be parented to a menu.  To specify the default menu
+parent use the command <i>setParent -m/menu</i>.  Note that all menu item
+objects created using the <i>-sm/subMenu</i> may also be treated as menu
+objects.
+<p>
+<p> The default parent is ignored by any object that explicitly sets the
+<i>-p/parent</i> flag when it is created.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Name of the parent if the parent changes. Empty string if the parent
+doesn't change.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdefineTemplate">defineTemplate</a>, <a href="#flagmenu">menu</a>, <a href="#flagtopLevel">topLevel</a>, <a href="#flagupLevel">upLevel</a>, <a href="#flaguseTemplate">useTemplate</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdefineTemplate">
+          <code><b>-defineTemplate</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Put a command in a mode where any other flags and args
+are parsed and added to the command template with the given name.
+They will be used as default arguments in any subsequent
+invocations of the command when templateName is set as the
+current template.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmenu">
+          <code><b>-menu</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Parent menu for menu items.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtopLevel">
+          <code><b>-topLevel</b>(<b>-top</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Move to the top level layout in the hierarchy. Equivalent to use &quot;|&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagupLevel">
+          <code><b>-upLevel</b>(<b>-u</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Move up one level in the hierarchy. Equivalent to use &quot;..&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseTemplate">
+          <code><b>-useTemplate</b>(<b>-ut</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Will force the command to use a command template given by the name other than
+the current one.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+//  Create a window with a menu bar and two menu bar layouts.
+//
+string $window = `window -menuBar true -widthHeight 300 200`;
+string $fileMenu = `menu -label &quot;File&quot;`;
+menuItem -label &quot;Open&quot;;
+
+paneLayout -configuration &quot;vertical2&quot;;
+
+string $leftMenuBarLayout = `menuBarLayout`;
+string $leftMenu = `menu -label &quot;Left&quot;`;
+menuItem -label &quot;One&quot;;
+setParent ..;
+
+menuBarLayout;
+menu -label &quot;Right&quot;;
+string $rightSubMenu = `menuItem -label &quot;Colors&quot; -subMenu true`;
+setParent ..;
+showWindow $window;
+
+//  Add item to the &quot;File&quot; menu.
+//
+setParent -menu $fileMenu;
+menuItem -label &quot;Save&quot;;
+
+//  Add item to the &quot;Left&quot; menu, explicitly ignore default parent
+//    by setting -p/parent flag.
+//
+menuItem -parent $leftMenu -label &quot;Two&quot;;
+
+//  Add more items to the &quot;File&quot; menu because it is still the
+//    default parent.
+//
+menuItem -divider true;
+menuItem -label &quot;Close&quot;;
+
+//  Add another menu to the left menu bar layout.
+//
+setParent $leftMenuBarLayout;
+menu -label &quot;Middle&quot;;
+menuItem -label &quot;Three&quot;;
+
+//  Add items to right sub menu.
+//
+setParent -menu $rightSubMenu;
+menuItem -label &quot;Red&quot;;
+menuItem -label &quot;Blue&quot;;
+menuItem -label &quot;Green&quot;;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

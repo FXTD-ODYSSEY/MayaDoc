@@ -1,0 +1,595 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyColorSet command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-polyColorSet"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/polyColorSet.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyColorSet </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyColorSet.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyColorSet [-<a href="#flagallColorSets">allColorSets</a>] [-<a href="#flagclamped">clamped</a> <i>boolean</i>] [-<a href="#flagcolorSet">colorSet</a> <i>string</i>] [-<a href="#flagcopy">copy</a>] [-<a href="#flagcreate">create</a>] [-<a href="#flagcurrentColorSet">currentColorSet</a>] [-<a href="#flagcurrentPerInstanceSet">currentPerInstanceSet</a>] [-<a href="#flagdelete">delete</a>] [-<a href="#flagnewColorSet">newColorSet</a> <i>string</i>] [-<a href="#flagperInstance">perInstance</a> <i>boolean</i>] [-<a href="#flagrename">rename</a>] [-<a href="#flagrepresentation">representation</a> <i>string</i>] [-<a href="#flagshareInstances">shareInstances</a>] [-<a href="#flagunshared">unshared</a>]  </code> </p>
+      <p>polyColorSet is undoable, queryable, and editable.</p>
+      Command to do the following to color sets:
+        - delete an existing color set.
+        - rename an existing color set.
+    - create a new empty color set.
+        - set the current color set to a pre-existing color set.
+    - modify sharing between instances of per-instance color sets
+    - query the current color set.
+    - query the names of all color sets.
+        - query the name(s) along with representation value(s)
+      or clamped value(s) of all color sets
+        - query the representation value or clamped value of the current color set
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>Success or Failure.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>poly, colorSet, currentColorSet, renameColorSet, deleteColorSet, copyColorSet, createColorSet
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallColorSets">allColorSets</a>, <a href="#flagclamped">clamped</a>, <a href="#flagcolorSet">colorSet</a>, <a href="#flagcopy">copy</a>, <a href="#flagcreate">create</a>, <a href="#flagcurrentColorSet">currentColorSet</a>, <a href="#flagcurrentPerInstanceSet">currentPerInstanceSet</a>, <a href="#flagdelete">delete</a>, <a href="#flagnewColorSet">newColorSet</a>, <a href="#flagperInstance">perInstance</a>, <a href="#flagrename">rename</a>, <a href="#flagrepresentation">representation</a>, <a href="#flagshareInstances">shareInstances</a>, <a href="#flagunshared">unshared</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallColorSets">
+          <code><b>-allColorSets</b>(<b>-acs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used in a query will return a list of all
+of the color set names
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclamped">
+          <code><b>-clamped</b>(<b>-cla</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies if the color set will truncate any value that is
+outside 0 to 1 range.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolorSet">
+          <code><b>-colorSet</b>(<b>-cs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the color set that this command needs to work on.
+This flag has to be specified for this command to do anything meaningful
+other than query the current color set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcopy">
+          <code><b>-copy</b>(<b>-cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will result in the copying of the color set corresponding
+to name specified with the colorSet flag to the colorSet corresponding
+to the name specified with the newcolorSet flag
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreate">
+          <code><b>-create</b>(<b>-cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will result in the creation of an empty color set
+corresponding to the name specified with the colorSet flag. If
+a color set with that name already exists, then no new color set will
+be created.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentColorSet">
+          <code><b>-currentColorSet</b>(<b>-ccs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will set the current color set that the object needs to
+work on, to be the color set corresponding to the name specified with the
+colorSet flag. This does require that a colorSet with the specified name exist.
+When queried, this returns the current color set.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurrentPerInstanceSet">
+          <code><b>-currentPerInstanceSet</b>(<b>-cpi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is a query-only flag for use when the current color set is a per-instance
+color set family. This returns the member of the set family that corresponds
+to the currently select instance.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdelete">
+          <code><b>-delete</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will result in the deletion of the color set corresponding
+to the name specified with the colorSet flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnewColorSet">
+          <code><b>-newColorSet</b>(<b>-nc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name that the color set corresponding to the name specified with
+the colorSet flag, needs to be renamed to.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagperInstance">
+          <code><b>-perInstance</b>(<b>-pi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used in conjunction with the create flag to indicate
+whether or not the color set is per-instance. When you create a per-instance
+color set, the set will be applied as shared between all selected instances
+of the shape unless the unshared flag is used. The perInstance flag can
+be used in query mode with the currentColorSet or allColorSets flag to indicate
+that the set family names (i.e. not containing instance identifiers) will
+be returned by the query.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrename">
+          <code><b>-rename</b>(<b>-rn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag when used will result in the renaming of the color set corresponding
+to the name specified with the colorSet flag to the name specified using the
+newColorSet flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrepresentation">
+          <code><b>-representation</b>(<b>-rpt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag corresponds to the color channels to used, for example
+A(alpha only), RGB, and RGBA.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshareInstances">
+          <code><b>-shareInstances</b>(<b>-si</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used to modify the sharing of per-instance color sets within
+a given color set family so that all selected instances share the specified
+set. In query mode, it returns a list of the instances that share the
+set specified by the colorSet flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagunshared">
+          <code><b>-unshared</b>(<b>-us</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used in conjunction with the create and perInstance flags
+to indicate that the newly created per-instance set should be created with
+a separate set per instance.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// To set the current color set to be &quot;color2&quot;.
+polyColorSet -currentColorSet -colorSet &quot;color2&quot;;
+
+// To query the current color set.
+polyColorSet -q -currentColorSet;
+
+// To create a per-instance color set family with one set member
+// per selected instance.
+polyColorSet -create -colorSet &quot;perInst&quot; -perInstance true -unshared;
+
+// To create a per-instance color set family with one set member
+// for all selected instances.
+polyColorSet -create -colorSet &quot;perInst&quot; -perInstance true;
+
+// To rename a currently existing color set from &quot;color3&quot; to &quot;color4&quot;.
+polyColorSet -rename -colorSet &quot;color3&quot; -newColorSet &quot;color4&quot;;
+
+// Rename the current color set (if any) to &quot;color3&quot;.
+polyColorSet -rename -newColorSet &quot;color3&quot;;
+
+// To delete a currently existing color set &quot;color3&quot;.
+polyColorSet -delete -colorSet &quot;color3&quot;;
+
+// To delete the current color set (if any)
+polyColorSet -delete;
+
+// Copy values of color set &quot;color1&quot; to &quot;color2&quot;
+// Note if the second color set exist it will be overwriten by
+// the copy. Leaving the destination color blank and the command
+// will generate a new unique name based on the source name.
+polyColorSet -copy -colorSet &quot;color1&quot; -newColorSet &quot;color2&quot;;
+
+// Copy values of the current color set to &quot;color2&quot;
+polyColorSet -copy -newColorSet &quot;color2&quot;;
+
+// Make a copy of &quot;color1&quot; to a new color set. The
+// name of which is automatically generated and returned.
+polyColorSet -copy -colorSet &quot;color1&quot;;
+
+// Create a new empty color set
+polyColorSet -create -colorSet &quot;newColor&quot;;
+
+// Create a new empty color set with a generate new name
+// The newly generated name is returned.
+polyColorSet -create;
+
+// Create a new empty color set that has the values in the
+// range from 0 to 1 and has 3 channels of R, G, and B.
+polyColorSet -create -clamped true -representation &quot;RGB&quot; -colorSet &quot;color5&quot;;
+
+// To query all of the color sets
+polyColorSet -q -allColorSets;
+
+// To query all of the color set names and their representation values
+polyColorSet -q -allColorSets -representation;
+
+// To query the clamped value of the current color set
+polyColorSet -q -currentColorSet -clamped;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

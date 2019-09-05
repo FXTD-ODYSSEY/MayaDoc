@@ -1,0 +1,1190 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>xform command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-xform"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/xform.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>xform </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("xform.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hNotes">Notes</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>xform(
+[objects...]
+    , [<a href="#flagabsolute">absolute</a>=<i>boolean</i>], [<a href="#flagboundingBox">boundingBox</a>=<i>boolean</i>], [<a href="#flagboundingBoxInvisible">boundingBoxInvisible</a>=<i>boolean</i>], [<a href="#flagcenterPivots">centerPivots</a>=<i>boolean</i>], [<a href="#flagcenterPivotsOnComponents">centerPivotsOnComponents</a>=<i>boolean</i>], [<a href="#flagdeletePriorHistory">deletePriorHistory</a>=<i>boolean</i>], [<a href="#flageuler">euler</a>=<i>boolean</i>], [<a href="#flagmatrix">matrix</a>=<i>[float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float]</i>], [<a href="#flagobjectSpace">objectSpace</a>=<i>boolean</i>], [<a href="#flagpivots">pivots</a>=<i>[linear, linear, linear]</i>], [<a href="#flagpreserve">preserve</a>=<i>boolean</i>], [<a href="#flagpreserveUV">preserveUV</a>=<i>boolean</i>], [<a href="#flagreflection">reflection</a>=<i>boolean</i>], [<a href="#flagreflectionAboutBBox">reflectionAboutBBox</a>=<i>boolean</i>], [<a href="#flagreflectionAboutOrigin">reflectionAboutOrigin</a>=<i>boolean</i>], [<a href="#flagreflectionAboutX">reflectionAboutX</a>=<i>boolean</i>], [<a href="#flagreflectionAboutY">reflectionAboutY</a>=<i>boolean</i>], [<a href="#flagreflectionAboutZ">reflectionAboutZ</a>=<i>boolean</i>], [<a href="#flagreflectionTolerance">reflectionTolerance</a>=<i>float</i>], [<a href="#flagrelative">relative</a>=<i>boolean</i>], [<a href="#flagrotateAxis">rotateAxis</a>=<i>[angle, angle, angle]</i>], [<a href="#flagrotateOrder">rotateOrder</a>=<i>string</i>], [<a href="#flagrotatePivot">rotatePivot</a>=<i>[linear, linear, linear]</i>], [<a href="#flagrotateTranslation">rotateTranslation</a>=<i>[linear, linear, linear]</i>], [<a href="#flagrotation">rotation</a>=<i>[angle, angle, angle]</i>], [<a href="#flagscale">scale</a>=<i>[float, float, float]</i>], [<a href="#flagscalePivot">scalePivot</a>=<i>[linear, linear, linear]</i>], [<a href="#flagscaleTranslation">scaleTranslation</a>=<i>[linear, linear, linear]</i>], [<a href="#flagshear">shear</a>=<i>[float, float, float]</i>], [<a href="#flagtranslation">translation</a>=<i>[linear, linear, linear]</i>], [<a href="#flagworldSpace">worldSpace</a>=<i>boolean</i>], [<a href="#flagworldSpaceDistance">worldSpaceDistance</a>=<i>boolean</i>], [<a href="#flagzeroTransformPivots">zeroTransformPivots</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>xform is undoable, queryable, and <b>NOT editable</b>.</p>
+      <p>
+This command can be used query/set any element in a
+transformation node. It can also be used to query some values
+that cannot be set directly such as the transformation matrix
+or the bounding box. It can also set both pivot points to
+convenient values.
+<p>
+All values are specified in transformation coordinates.
+(attribute-space)
+<p>
+In addition, the attributes are applied/returned in the order in
+which they appear in the flags section. (which corresponds to the
+order they appear in the transformation matrix as given below)
+<p>
+<b>See also:</b> move, rotate, scale
+<p>
+	  <h2><a name="hNotes">Notes</a></h2>
+The transformation matrix for a node is built by post-multiplying
+the following matrices in the given order (Note: rotations are
+applied according to the rotation order parameter and the 6
+different rotation possibilities are not shown below)
+<pre>
+-1                       -1
+[M]  = [sp]x[s]x[sh]x[sp]x[st]x[rp]x[ar]x[ro]x[rp]x[rt]x[t]
+<p>
+where:
+<p>
+[sp] = |  1      0        0       0 | = scale pivot matrix
+|  0      1        0       0 |
+|  0      0        1       0 |
+| -spx   -spy     -spz     1 |
+<p>
+<p>
+[s]  = |  sx     0        0       0 | = scale matrix
+|  0      sy       0       0 |
+|  0      0        sz      0 |
+|  0      0        0       1 |
+<p>
+<p>
+[sh] = |  1      0        0       0 | = shear matrix
+|  xy     1        0       0 |
+|  xz     yz       1       0 |
+|  0      0        0       1 |
+<p>
+-1
+[sp] = |  1       0       0       0 | = scale pivot inverse matrix
+|  0       1       0       0 |
+|  0       0       1       0 |
+|  spx     spy     spz     1 |
+<p>
+<p>
+[st] = |  1       0       0       0 | = scale translate matrix
+|  0       1       0       0 |
+|  0       0       1       0 |
+|  stx     sty     stz     1 |
+<p>
+<p>
+[rp] = |  1       0       0       0 | = rotate pivot matrix
+|  0       1       0       0 |
+|  0       0       1       0 |
+| -rpx    -rpy    -rpz     1 |
+<p>
+<p>
+[ar] = |  *       *       *       0 | = axis rotation matrix
+|  *       *       *       0 |   (composite rotation,
+|  *       *       *       0 |    see [rx], [ry], [rz]
+|  0       0       0       1 |    below for details)
+<p>
+<p>
+[rx] = |  1       0       0       0 | = rotate X matrix
+|  0       cos(x)  sin(x)  0 |
+|  0      -sin(x)  cos(x)  0 |
+|  0       0       0       1 |
+<p>
+<p>
+[ry] = |  cos(y)  0      -sin(y)  0 | = rotate Y matrix
+|  0       1       0       0 |
+|  sin(y)  0       cos(y)  0 |
+|  0       0       0       1 |
+<p>
+<p>
+[rz] = |  cos(z)  sin(z)  0       0 | = rotate Z matrix
+| -sin(z)  cos(z)  0       0 |
+|  0       0       1       0 |
+|  0       0       0       1 |
+<p>
+-1
+[rp] = |  1       0       0       0 | = rotate pivot matrix
+|  0       1       0       0 |
+|  0       0       1       0 |
+|  rpx     rpy     rpz     1 |
+<p>
+<p>
+[rt] = |  1       0       0       0 | = rotate translate matrix
+|  0       1       0       0 |
+|  0       0       1       0 |
+|  rtx     rty     rtz     1 |
+<p>
+<p>
+[t]  = |  1       0       0       0 | = translation matrix
+|  0       1       0       0 |
+|  0       0       1       0 |
+|  tx      ty      tz      1 |
+</pre>
+<p>
+  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="move.html">move</a>, <a href="rotate.html">rotate</a>, <a href="scale.html">scale</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagabsolute">absolute</a>, <a href="#flagboundingBox">boundingBox</a>, <a href="#flagboundingBoxInvisible">boundingBoxInvisible</a>, <a href="#flagcenterPivots">centerPivots</a>, <a href="#flagcenterPivotsOnComponents">centerPivotsOnComponents</a>, <a href="#flagdeletePriorHistory">deletePriorHistory</a>, <a href="#flageuler">euler</a>, <a href="#flagmatrix">matrix</a>, <a href="#flagobjectSpace">objectSpace</a>, <a href="#flagpivots">pivots</a>, <a href="#flagpreserve">preserve</a>, <a href="#flagpreserveUV">preserveUV</a>, <a href="#flagreflection">reflection</a>, <a href="#flagreflectionAboutBBox">reflectionAboutBBox</a>, <a href="#flagreflectionAboutOrigin">reflectionAboutOrigin</a>, <a href="#flagreflectionAboutX">reflectionAboutX</a>, <a href="#flagreflectionAboutY">reflectionAboutY</a>, <a href="#flagreflectionAboutZ">reflectionAboutZ</a>, <a href="#flagreflectionTolerance">reflectionTolerance</a>, <a href="#flagrelative">relative</a>, <a href="#flagrotateAxis">rotateAxis</a>, <a href="#flagrotateOrder">rotateOrder</a>, <a href="#flagrotatePivot">rotatePivot</a>, <a href="#flagrotateTranslation">rotateTranslation</a>, <a href="#flagrotation">rotation</a>, <a href="#flagscale">scale</a>, <a href="#flagscalePivot">scalePivot</a>, <a href="#flagscaleTranslation">scaleTranslation</a>, <a href="#flagshear">shear</a>, <a href="#flagtranslation">translation</a>, <a href="#flagworldSpace">worldSpace</a>, <a href="#flagworldSpaceDistance">worldSpaceDistance</a>, <a href="#flagzeroTransformPivots">zeroTransformPivots</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagabsolute">
+          <code><b>absolute</b>(<b>a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+perform absolute transformation (default)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagboundingBox">
+          <code><b>boundingBox</b>(<b>bb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the bounding box of an object. The values
+returned are in the following order:
+xmin ymin zmin xmax ymax zmax.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagboundingBoxInvisible">
+          <code><b>boundingBoxInvisible</b>(<b>bbi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the bounding box of an object.
+This includes the bounding boxes of all invisible
+children which are not included using the
+boundingBox flag. The values returned are in
+following order: xmin ymin zmin xmax ymax zmax.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcenterPivots">
+          <code><b>centerPivots</b>(<b>cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set pivot points to the center of the object's
+bounding box. (see -p flag)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcenterPivotsOnComponents">
+          <code><b>centerPivotsOnComponents</b>(<b>cpc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set pivot points to the center of the component's
+bounding box. (see -p flag)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeletePriorHistory">
+          <code><b>deletePriorHistory</b>(<b>dph</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true then delete the construction history before the operation is performed.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageuler">
+          <code><b>euler</b>(<b>eu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+modifer for -relative flag that specifies rotation
+values should be added to current XYZ rotation values.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmatrix">
+          <code><b>matrix</b>(<b>m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets/returns the composite transformation matrix.
+*Note* the matrix is represented by 16 double
+arguments that are specified in row order.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobjectSpace">
+          <code><b>objectSpace</b>(<b>os</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+treat values as object-space transformation values
+(only works for pivots, translations, rotation, rotation
+axis, matrix, and bounding box flags)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpivots">
+          <code><b>pivots</b>(<b>piv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[linear, linear, linear]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+convenience method that changes both the rotate and
+scale pivots simultaneously. (see -rp -sp flags for
+more info)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreserve">
+          <code><b>preserve</b>(<b>p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+preserve overall transformation. used to prevent object
+from &quot;jumping&quot; when changing pivots or rotation order. the
+default value is true. (used with -sp, -rp, -roo, -cp, -ra)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreserveUV">
+          <code><b>preserveUV</b>(<b>puv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When true, UV values on rotated components are projected across the rotation
+in 3d space. For small edits, this will freeze the world space texture mapping
+on the object.
+When false, the UV values will not change for a selected vertices.
+Default is false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreflection">
+          <code><b>reflection</b>(<b>rfl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+To move the corresponding symmetric components also.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreflectionAboutBBox">
+          <code><b>reflectionAboutBBox</b>(<b>rab</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the position of the reflection axis  at the geometry bounding box
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreflectionAboutOrigin">
+          <code><b>reflectionAboutOrigin</b>(<b>rao</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the position of the reflection axis  at the origin
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreflectionAboutX">
+          <code><b>reflectionAboutX</b>(<b>rax</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the X=0 as reflection plane
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreflectionAboutY">
+          <code><b>reflectionAboutY</b>(<b>ray</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the Y=0 as reflection plane
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreflectionAboutZ">
+          <code><b>reflectionAboutZ</b>(<b>raz</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the Z=0 as reflection plane
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreflectionTolerance">
+          <code><b>reflectionTolerance</b>(<b>rft</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the tolerance to findout the corresponding reflected components
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelative">
+          <code><b>relative</b>(<b>r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+perform relative transformation
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotateAxis">
+          <code><b>rotateAxis</b>(<b>ra</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[angle, angle, angle]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+rotation axis orientation (when used with
+the -p flag the overall rotation is preserved
+by modifying the rotation to compensate for
+the axis rotation)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotateOrder">
+          <code><b>rotateOrder</b>(<b>roo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+rotation order (when used with the -p flag the
+overall rotation is preserved by modifying the
+local rotation to be quivalent to the old one)
+Valid values for this flag are
+&lt;xyz | yzx | zxy | xzy | yxz | zyx&gt;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotatePivot">
+          <code><b>rotatePivot</b>(<b>rp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[linear, linear, linear]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+rotate pivot point transformation (when used with
+the -p flag the overall transformation is preserved
+by modifying the rotation translation)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotateTranslation">
+          <code><b>rotateTranslation</b>(<b>rt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[linear, linear, linear]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+rotation translation
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrotation">
+          <code><b>rotation</b>(<b>ro</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[angle, angle, angle]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+rotation transformation
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscale">
+          <code><b>scale</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[float, float, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+scale transformation
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscalePivot">
+          <code><b>scalePivot</b>(<b>sp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[linear, linear, linear]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+scale pivot point transformation (when used with
+the -p flag the overall transformation is preserved
+by modifying the scale translation)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscaleTranslation">
+          <code><b>scaleTranslation</b>(<b>st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[linear, linear, linear]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+scale translation
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshear">
+          <code><b>shear</b>(<b>sh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[float, float, float]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+shear transformation.
+The values represent the shear &lt;xy,xz,yz&gt;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtranslation">
+          <code><b>translation</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[linear, linear, linear]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+translation
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldSpace">
+          <code><b>worldSpace</b>(<b>ws</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+(works for pivots, translations, rotation, rotation
+axis, matrix, and bounding box flags). Note that, when
+querying the scale, that this calculation is cumulative
+and is only valid if there are all uniform scales and
+no rotation. In a hierarchy with non-uniform scale
+and rotation, this value may not correspond entirely with
+the perceived global scale.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworldSpaceDistance">
+          <code><b>worldSpaceDistance</b>(<b>wd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Values for -sp, -rp, -st, -rt, -t, -piv flags
+are treated as world space distances to move along the
+local axis. (where the local axis depends on whether
+the command is operating in local-space or object-space.
+This flag has no effect for world space.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagzeroTransformPivots">
+          <code><b>zeroTransformPivots</b>(<b>ztp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+reset pivot points and pivot translations without
+changing the overall matrix by applying these values
+into the translation channel.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# create object to manipulate
+cmds.sphere( n='sphere1' )
+
+# set rotation of sphere
+cmds.xform( r=True, ro=(0, 90, 0) )
+
+# change the rotate order but preserve the overall transformation
+cmds.xform( p=True, roo='yzx' )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

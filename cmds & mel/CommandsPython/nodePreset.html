@@ -1,0 +1,413 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>nodePreset command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-nodePreset"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/nodePreset.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>nodePreset </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("nodePreset.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>nodePreset([<a href="#flagattributes">attributes</a>=<i>string</i>], [<a href="#flagcustom">custom</a>=<i>string</i>], [<a href="#flagdelete">delete</a>=<i>[name, string]</i>], [<a href="#flagexists">exists</a>=<i>[name, string]</i>], [<a href="#flagisValidName">isValidName</a>=<i>string</i>], [<a href="#flaglist">list</a>=<i>name</i>], [<a href="#flagload">load</a>=<i>[name, string]</i>], [<a href="#flagsave">save</a>=<i>[name, string]</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>nodePreset is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      Command to save and load preset settings for a node.
+This command allows you to take a snapshot of the values of all attributes of a
+node and save it to disk as a preset with user specified name. Later the saved
+preset can be loaded and applied onto a different node of the same type. The
+end result is that the node to which the preset is applied takes on the same
+values as the node from which the preset was generated had at the time of the
+snapshot.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>boolean</i></td><td>if isValidName or exists is used.</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>preset, render, globals
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagattributes">attributes</a>, <a href="#flagcustom">custom</a>, <a href="#flagdelete">delete</a>, <a href="#flagexists">exists</a>, <a href="#flagisValidName">isValidName</a>, <a href="#flaglist">list</a>, <a href="#flagload">load</a>, <a href="#flagsave">save</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattributes">
+          <code><b>attributes</b>(<b>atr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+A white space separated string of the named attributes to save to the
+preset file. If not specified, all attributes will be stored.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcustom">
+          <code><b>custom</b>(<b>ctm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies a MEL script for custom handling of node attributes that are not
+handled by the general save preset mechanism (ie. multis, dynamic attributes,
+or connections). The identifiers #presetName and #nodeName will be expanded
+before the script is run. The script must return an array of strings which
+will be saved to the preset file and issued as commands when the preset is
+applied to another node.
+The custom script can query #nodeName in determining what should be saved
+to the preset, or issue commands to query the selected node in deciding how
+the preset should be applied.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdelete">
+          <code><b>delete</b>(<b>delete</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[name, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Deletes the existing preset for the node specified by the first argument with
+the name specified by the second argument.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>exists</b>(<b>ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[name, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if the node specified by the first argument already has a preset
+with a name specified by the second argument. This flag can be used to check if
+the user is about to overwrite an existing preset and thereby provide the user
+with an opportunity to choose a different name.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisValidName">
+          <code><b>isValidName</b>(<b>ivn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns true if the name consists entirely of valid characters for
+a preset name. Returns false if not. Because the preset name will
+become part of a file name and part of a MEL procedure name, some
+characters must be disallowed. Only alphanumeric characters and underscore
+are valid characters for the preset name.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglist">
+          <code><b>list</b>(<b>ls</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Lists the names of all presets which can be loaded onto the specified
+node.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagload">
+          <code><b>load</b>(<b>ld</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[name, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the settings of the node specified by the first argument according to the
+preset specified by the second argument. Any attributes on the node which are
+the destinations of connections or whose children (multi children or compound
+children) are destinations of connections will not be changed by the preset.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsave">
+          <code><b>save</b>(<b>sv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[name, string]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Saves the current settings of the node specified by the first argument to a
+preset of the name specified by the second argument. If a preset for that node
+with that name already exists, it will be overwritten with no warning. You can
+use the -exists flag to check if the preset already exists. If an attribute of
+the node is the destination of a connection, the value of the attribute will
+not be written as part of the preset.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# To determine if &quot;My Special Settings&quot; is a valid name for a preset (it
+# is not because it contains spaces):
+#
+cmds.nodePreset(isValidName=&quot;My Special Settings&quot; )
+# Result: 0 #
+
+# To save the settings of nurbsSphereShape1 as a preset called &quot;smithers&quot;:
+#
+cmds.nodePreset( save=(&quot;nurbsSphereShape1&quot;,&quot;smithers&quot;) )
+
+# To get a list of all presets available that could be applied to
+# nurbsSphereShape1:
+#
+cmds.nodePreset( list='nurbsSphereShape1' )
+# Result: [u'smithers', u'smoothSphere', u'roughSphere', u'atmoSphere'] #
+
+# To load the preset named &quot;smoothSphere&quot; onto nurbsSphereShape1:
+#
+cmds.nodePreset( load=('nurbsSphereShape1', 'smoothSphere') )
+
+# To delete the preset named &quot;smithers&quot; which was formerly available for the
+# node nurbsSphereShape1 (and other nodes of the same type):
+#
+cmds.nodePreset( delete=('nurbsSphereShape1', 'smithers') )
+
+# To determine if a preset named &quot;smithers&quot; exists for the node
+# nurbsSphereShape1 (it does not because it has been deleted):
+#
+cmds.nodePreset( exists=('nurbsSphereShape1', 'smithers') )
+# Result: 0 #
+
+# Create a preset containing only the color and diffuse attributes:
+#
+cmds.nodePreset( save=(&quot;lambert1&quot;,&quot;colorAndDiffuse&quot;), attributes='color diffuse' )
+
+# Create a preset to map a checker texture to the applied node.
+# Because the &quot;custom&quot; callback is required to return an array of MEL commands,
+# each line of python in the array must be wrapped by the MEL &quot;python&quot; command.
+#
+def customChecker():
+    doCheckerCmds = [
+		# Get the name of the node to apply the checker to.
+	 	&quot;python( \&quot;selection = cmds.ls( selection=True )\&quot; );&quot;,
+	    &quot;python( \&quot;nodeName = selection[0]\&quot; );&quot;,
+	    # Create a checker texture.
+	    &quot;python( \&quot;checkerName = cmds.shadingNode( 'checker', asTexture=True )\&quot; );&quot;,
+	    # Connect the checker to the node the preset is applied to.
+		&quot;python( \&quot;cmds.connectAttr( (checkerName+\\\&quot;.outColor\\\&quot;), (nodeName+\\\&quot;.color\\\&quot;) )\&quot; );&quot;
+		]
+    return doCheckerCmds
+
+	cmds.nodePreset(custom=&quot;python( \&quot;customChecker()\&quot; )&quot;, save=('lambert1', 'checkered') )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

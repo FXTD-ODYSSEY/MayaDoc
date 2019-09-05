@@ -1,0 +1,763 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>setKeyframe command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-setKeyframe"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/setKeyframe.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>setKeyframe </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("setKeyframe.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>setKeyframe [-<a href="#flaganimLayer">animLayer</a> <i>string</i>] [-<a href="#flaganimated">animated</a> <i>boolean</i>] [-<a href="#flagattribute">attribute</a> <i>string</i>] [-<a href="#flagbreakdown">breakdown</a> <i>boolean</i>] [-<a href="#flagclip">clip</a> <i>string</i>] [-<a href="#flagcontrolPoints">controlPoints</a> <i>boolean</i>] [-<a href="#flagdirtyDG">dirtyDG</a> <i>boolean</i>] [-<a href="#flagfloat">float</a> <i>float</i>] [-<a href="#flaghierarchy">hierarchy</a> <i>string</i>] [-<a href="#flagidentity">identity</a>] [-<a href="#flaginTangentType">inTangentType</a> <i>string</i>] [-<a href="#flaginsert">insert</a>] [-<a href="#flaginsertBlend">insertBlend</a> <i>boolean</i>] [-<a href="#flagminimizeRotation">minimizeRotation</a> <i>boolean</i>] [-<a href="#flagnoResolve">noResolve</a> <i>boolean</i>] [-<a href="#flagoutTangentType">outTangentType</a> <i>string</i>] [-<a href="#flagrespectKeyable">respectKeyable</a> <i>boolean</i>] [-<a href="#flagshape">shape</a> <i>boolean</i>] [-<a href="#flagtime">time</a> <i>time</i>] [-<a href="#flaguseCurrentLockedWeights">useCurrentLockedWeights</a> <i>boolean</i>] [-<a href="#flagvalue">value</a> <i>float</i>] 
+[objects]
+     </code> </p>
+      <p>setKeyframe is undoable, queryable, and editable.</p>
+      This command creates keyframes for the specified objects,
+or the active objects if none are specified on the command line.
+<p>
+The default time for the new keyframes is the current time.
+Override this behavior with the &quot;-t&quot; flag on the command line.
+<p>
+The default value for the keyframe is the current value
+of the attribute for which a keyframe is set.  Override
+this behavior with the &quot;-v&quot; flag on the command line.
+<p>
+When setting keyframes on animation curves that do not have
+&quot;time&quot; as an input attribute (ie, they are unitless animation curves),
+use &quot;-f/-float&quot; to specify the unitless value at which to set a
+keyframe.
+<p>
+The -time and -float flags may be combined in one command.
+<p>
+This command sets up Dependency Graph relationships for
+proper evaluation of a given attribute at a given time.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>int</i></td><td>Number of keyframes set by this command.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="autoKeyframe.html">autoKeyframe</a>, <a href="findKeyframe.html">findKeyframe</a>, <a href="setDrivenKeyframe.html">setDrivenKeyframe</a>, <a href="setKeyPath.html">setKeyPath</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flaganimLayer">animLayer</a>, <a href="#flaganimated">animated</a>, <a href="#flagattribute">attribute</a>, <a href="#flagbreakdown">breakdown</a>, <a href="#flagclip">clip</a>, <a href="#flagcontrolPoints">controlPoints</a>, <a href="#flagdirtyDG">dirtyDG</a>, <a href="#flagfloat">float</a>, <a href="#flaghierarchy">hierarchy</a>, <a href="#flagidentity">identity</a>, <a href="#flaginTangentType">inTangentType</a>, <a href="#flaginsert">insert</a>, <a href="#flaginsertBlend">insertBlend</a>, <a href="#flagminimizeRotation">minimizeRotation</a>, <a href="#flagnoResolve">noResolve</a>, <a href="#flagoutTangentType">outTangentType</a>, <a href="#flagrespectKeyable">respectKeyable</a>, <a href="#flagshape">shape</a>, <a href="#flagtime">time</a>, <a href="#flaguseCurrentLockedWeights">useCurrentLockedWeights</a>, <a href="#flagvalue">value</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaganimLayer">
+          <code><b>-animLayer</b>(<b>-al</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that the new key should be placed in the specified animation layer.
+Note that if the objects being keyframed are not already part of the
+layer, this flag will be ignored.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaganimated">
+          <code><b>-animated</b>(<b>-an</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add the keyframe only to the attribute(s) that have already a keyframe on. Default: false
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattribute">
+          <code><b>-attribute</b>(<b>-at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Attribute name to set keyframes on.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbreakdown">
+          <code><b>-breakdown</b>(<b>-bd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the breakdown state for the key.  Default is false
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclip">
+          <code><b>-clip</b>(<b>-c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that the new key should be placed in the specified clip.
+Note that if the objects being keyframed are not already part of the
+clip, this flag will be ignored.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcontrolPoints">
+          <code><b>-controlPoints</b>(<b>-cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Explicitly specify whether or not to include the
+control points of a shape (see &quot;-s&quot; flag) in the list of attributes.
+Default: false.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdirtyDG">
+          <code><b>-dirtyDG</b>(<b>-dd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Allow dirty messages to be sent out when a keyframe is set.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfloat">
+          <code><b>-float</b>(<b>-f</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Float time at which to set a keyframe on float-based
+animation curves.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghierarchy">
+          <code><b>-hierarchy</b>(<b>-hi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Controls the objects this command acts on, relative to the specified
+(or active) target objects.
+Valid values are &quot;above,&quot; &quot;below,&quot; &quot;both,&quot; and &quot;none.&quot;
+Default is &quot;hierarchy -query&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagidentity">
+          <code><b>-identity</b>(<b>-id</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets an identity key on an animation layer.  An identity key is one that
+nullifies the effect of the anim layer.  This flag has effect only when the
+attribute being keyed is being driven by animation layers.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginTangentType">
+          <code><b>-inTangentType</b>(<b>-itt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The in tangent type for keyframes set by this command.
+Valid values are: &quot;auto&quot;, clamped&quot;, &quot;fast&quot;, &quot;flat&quot;, &quot;linear&quot;, &quot;plateau&quot;, &quot;slow&quot;, &quot;spline&quot;, and &quot;stepnext&quot;
+Default is &quot;keyTangent -q -g -inTangentType&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginsert">
+          <code><b>-insert</b>(<b>-i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Insert keys at the given time(s) and preserve
+the shape of the animation curve(s). Note: the tangent
+type on inserted keys will be fixed so that the
+curve shape can be preserved.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginsertBlend">
+          <code><b>-insertBlend</b>(<b>-ib</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, a pairBlend node will be inserted for channels that have
+nodes other than animCurves driving them, so that such channels can
+have blended animation. If false, these channels will not have keys
+inserted. If the flag is not specified, the blend will be inserted based
+on the global preference for blending animation.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagminimizeRotation">
+          <code><b>-minimizeRotation</b>(<b>-mr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+For rotations, ensures that the key that is set is a minimum distance
+away from the previous key.  Default is false
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoResolve">
+          <code><b>-noResolve</b>(<b>-nr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with the -value flag, causes the specified value to be set
+directly onto the animation curve, without attempting to resolve the value
+across animation layers.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoutTangentType">
+          <code><b>-outTangentType</b>(<b>-ott</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The out tangent type for keyframes set by this command.
+Valid values are: &quot;auto&quot;, &quot;clamped&quot;, &quot;fast&quot;, &quot;flat&quot;, &quot;linear&quot;, &quot;plateau&quot;, &quot;slow&quot;, &quot;spline&quot;, &quot;step&quot;, and &quot;stepnext&quot;.
+Default is &quot;keyTangent -q -g -outTangentType&quot;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrespectKeyable">
+          <code><b>-respectKeyable</b>(<b>-rk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with the -attribute flag, prevents the keying of the non keyable attributes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshape">
+          <code><b>-shape</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Consider attributes of shapes below transforms as well,
+except &quot;controlPoints&quot;.  Default: true
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtime">
+          <code><b>-time</b>(<b>-t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Time at which to set a keyframe on time-based
+animation curves.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguseCurrentLockedWeights">
+          <code><b>-useCurrentLockedWeights</b>(<b>-lw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If we are setting a key over an existing key, use that key tangent's locked weight value for the new
+locked weight value.  Default is false
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalue">
+          <code><b>-value</b>(<b>-v</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Value at which to set the keyframe. Using the value flag will not
+cause the keyed attribute to change to the specified value until the
+scene re-evaluates. Therefore, if you want the attribute to update
+to the new value immediately, use the setAttr command
+in addition to setting the key.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Set a keyframe at the current time on all &quot;keyable&quot;
+// attributes of the selected objects.
+//
+setKeyframe;
+
+// Set a keyframe so that translateX has a value of 10
+// at the current time, regardless of its current position
+//
+setKeyframe -v 10 -at translateX;
+
+// Set keyframes for translateX on two objects at t=0 and
+// t=10 seconds.  (Note that if mysteryObject has no
+// attribute named translateX, no keyframe is set for mysteryObject.)
+//
+setKeyframe -attribute &quot;translateX&quot; -t 0sec -t 10sec nurbsSphere1 mysteryObject;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

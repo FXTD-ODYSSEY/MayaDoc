@@ -1,0 +1,1027 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>ikHandle command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-ikHandle"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/ikHandle.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>ikHandle </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#IK" target="contentFrame">IK</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("ikHandle.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>ikHandle [-<a href="#flagautoPriority">autoPriority</a>] [-<a href="#flagconnectEffector">connectEffector</a> <i>boolean</i>] [-<a href="#flagcreateCurve">createCurve</a> <i>boolean</i>] [-<a href="#flagcreateRootAxis">createRootAxis</a> <i>boolean</i>] [-<a href="#flagcurve">curve</a> <i>name</i>] [-<a href="#flagdisableHandles">disableHandles</a>] [-<a href="#flagenableHandles">enableHandles</a>] [-<a href="#flagendEffector">endEffector</a> <i>string</i>] [-<a href="#flagexists">exists</a> <i>string</i>] [-<a href="#flagforceSolver">forceSolver</a> <i>boolean</i>] [-<a href="#flagfreezeJoints">freezeJoints</a> <i>boolean</i>] [-<a href="#flagjointList">jointList</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagnumSpans">numSpans</a> <i>int</i>] [-<a href="#flagparentCurve">parentCurve</a> <i>boolean</i>] [-<a href="#flagpositionWeight">positionWeight</a> <i>float</i>] [-<a href="#flagpriority">priority</a> <i>int</i>] [-<a href="#flagrootOnCurve">rootOnCurve</a> <i>boolean</i>] [-<a href="#flagrootTwistMode">rootTwistMode</a> <i>boolean</i>] [-<a href="#flagsetupForRPsolver">setupForRPsolver</a> <i>boolean</i>] [-<a href="#flagsimplifyCurve">simplifyCurve</a> <i>boolean</i>] [-<a href="#flagsnapCurve">snapCurve</a> <i>boolean</i>] [-<a href="#flagsnapHandleFlagToggle">snapHandleFlagToggle</a> <i>boolean</i>] [-<a href="#flagsnapHandleToEffector">snapHandleToEffector</a>] [-<a href="#flagsolver">solver</a> <i>string</i>] [-<a href="#flagstartJoint">startJoint</a> <i>string</i>] [-<a href="#flagsticky">sticky</a> <i>string</i>] [-<a href="#flagtwistType">twistType</a> <i>string</i>] [-<a href="#flagweight">weight</a> <i>float</i>] 
+object
+     </code> </p>
+      <p>ikHandle is undoable, queryable, and editable.</p>
+      The handle command is used to create, edit, and query a handle
+within Maya.  The standard edit (-e) and query (-q) flags are
+used for edit and query functions.
+<p>
+If there are 2 joints selected and neither -startJoint nor
+-endEffector flags are not specified, then the handle will be
+created from the selected joints.
+<p>
+If a single joint is selected and neither -startJoint nor
+-endEffector flags are specified, then the handle will be
+created with the selected joint as the end-effector and the
+start joint will be the top of the joint chain containing the
+end effector.
+<p>
+The default values of the flags are:
+<ul>
+<li>-name &quot;ikHandle#&quot;</li>
+<li>-priority 1</li>
+<li>-weight 1.0</li>
+<li>-positionWeight 1.0</li>
+<li>-solver &quot;ikRPsolver&quot;</li>
+<li>-forceSolver on</li>
+<li>-snapHandleFlagToggle on</li>
+<li>-sticky off</li>
+<li>-createCurve true</li>
+<li>-simplifyCurve true</li>
+<li>-rootOnCurve true</li>
+<li>-twistType linear</li>
+<li>-createRootAxis false</li>
+<li>-parentCurve true</li>
+<li>-snapCurve false</li>
+<li>-numSpans 1</li>
+<li>-rootTwistMode false.</li>
+</ul>
+These attributes can be specified in creation mode, edited in
+edit mode (-e) or queried in query mode (-q).
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Command result</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="connectJoint.html">connectJoint</a>, <a href="ikHandleDisplayScale.html">ikHandleDisplayScale</a>, <a href="ikSolver.html">ikSolver</a>, <a href="ikSystem.html">ikSystem</a>, <a href="ikSystemInfo.html">ikSystemInfo</a>, <a href="insertJoint.html">insertJoint</a>, <a href="joint.html">joint</a>, <a href="jointCluster.html">jointCluster</a>, <a href="jointDisplayScale.html">jointDisplayScale</a>, <a href="jointLattice.html">jointLattice</a>, <a href="mirrorJoint.html">mirrorJoint</a>, <a href="removeJoint.html">removeJoint</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagautoPriority">autoPriority</a>, <a href="#flagconnectEffector">connectEffector</a>, <a href="#flagcreateCurve">createCurve</a>, <a href="#flagcreateRootAxis">createRootAxis</a>, <a href="#flagcurve">curve</a>, <a href="#flagdisableHandles">disableHandles</a>, <a href="#flagenableHandles">enableHandles</a>, <a href="#flagendEffector">endEffector</a>, <a href="#flagexists">exists</a>, <a href="#flagforceSolver">forceSolver</a>, <a href="#flagfreezeJoints">freezeJoints</a>, <a href="#flagjointList">jointList</a>, <a href="#flagname">name</a>, <a href="#flagnumSpans">numSpans</a>, <a href="#flagparentCurve">parentCurve</a>, <a href="#flagpositionWeight">positionWeight</a>, <a href="#flagpriority">priority</a>, <a href="#flagrootOnCurve">rootOnCurve</a>, <a href="#flagrootTwistMode">rootTwistMode</a>, <a href="#flagsetupForRPsolver">setupForRPsolver</a>, <a href="#flagsimplifyCurve">simplifyCurve</a>, <a href="#flagsnapCurve">snapCurve</a>, <a href="#flagsnapHandleFlagToggle">snapHandleFlagToggle</a>, <a href="#flagsnapHandleToEffector">snapHandleToEffector</a>, <a href="#flagsolver">solver</a>, <a href="#flagstartJoint">startJoint</a>, <a href="#flagsticky">sticky</a>, <a href="#flagtwistType">twistType</a>, <a href="#flagweight">weight</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagautoPriority">
+          <code><b>-autoPriority</b>(<b>-ap</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this handle's priority is assigned
+automatically.  The assigned priority will be based on
+the hierarchy distance from the root of the skeletal
+chain to the start joint of the handle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconnectEffector">
+          <code><b>-connectEffector</b>(<b>-ce</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This option is set to true as default, meaning that
+end-effector translate is connected with the endJoint translate.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreateCurve">
+          <code><b>-createCurve</b>(<b>-ccv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies if a curve should automatically be created for
+the ikSplineHandle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreateRootAxis">
+          <code><b>-createRootAxis</b>(<b>-cra</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies if a root transform should automatically
+be created above the joints affected by the ikSplineHandle.
+This option is used to prevent the root flipping singularity
+on a motion path.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcurve">
+          <code><b>-curve</b>(<b>-c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the curve to be used by the ikSplineHandle. Joints
+will be moved to align with this curve. This flag is mandatory if you use
+the -freezeJoints option.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdisableHandles">
+          <code><b>-disableHandles</b>(<b>-dh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+set given handles to full fk (ikBlend attribute = 0.0)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenableHandles">
+          <code><b>-enableHandles</b>(<b>-eh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+set given handles to full ik (ikBlend attribute = 1.0)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagendEffector">
+          <code><b>-endEffector</b>(<b>-ee</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the end-effector of the handle's joint chain.
+The end effector may be specified with a joint or an
+end-effector.  If a joint is specified, an end-effector will
+be created at the same position as the joint and this
+new end-effector will be used as the end-effector.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexists">
+          <code><b>-exists</b>(<b>-ex</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates if the specified handle exists or not.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagforceSolver">
+          <code><b>-forceSolver</b>(<b>-fs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Forces the solver to be used everytime.
+It could also be known as animSticky. So, after you set
+the first key the handle is sticky.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfreezeJoints">
+          <code><b>-freezeJoints</b>(<b>-fj</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Forces the curve, specfied by -curve option, to align itself along the existing joint chain.
+When false, or unspecified, the joints will be moved to positions along the specified curve.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagjointList">
+          <code><b>-jointList</b>(<b>-jl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the list of joints that the handle is manipulating.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the handle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnumSpans">
+          <code><b>-numSpans</b>(<b>-ns</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the number of spans in the
+automatically generated curve of the ikSplineHandle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagparentCurve">
+          <code><b>-parentCurve</b>(<b>-pcv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies if the curve should automatically
+be parented to the parent of the first joint affected
+by the ikSplineHandle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpositionWeight">
+          <code><b>-positionWeight</b>(<b>-pw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the position/orientation weight of a handle.
+This is used to compute the &quot;distance&quot; between the goal
+position and the end-effector position.  A positionWeight of
+1.0 computes the distance as the distance between
+positions only and ignores the orientations.  A positionWeight
+of 0.0 computes the distance as the distance between the
+orientations only and ignores the positions.  A positionWeight
+of 0.5 attempts to weight the distances equally but
+cannot actually compute this due to unit differences.
+Because there is no way to add linear units and angular units.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpriority">
+          <code><b>-priority</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the priority of the handle.  Logically, all handles
+with a lower number priority are solved before any
+handles with a higher numbered priority.  (All handles
+of priority 1 are solved before any handles of priority
+2 and so on.)  Handle priorities must be ] 0.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrootOnCurve">
+          <code><b>-rootOnCurve</b>(<b>-roc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies if the root is
+locked onto the curve of the ikSplineHandle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrootTwistMode">
+          <code><b>-rootTwistMode</b>(<b>-rtm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies whether the start joint is allowed to
+twist or not. If not, then the required twist is distributed over the
+remaining joints. This applies to all the twist types.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsetupForRPsolver">
+          <code><b>-setupForRPsolver</b>(<b>-srp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If the flag is set and ikSolver is ikRPsolver, call
+RPRotateSetup for the new ikHandle. It is for ikRPsolver only.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsimplifyCurve">
+          <code><b>-simplifyCurve</b>(<b>-scv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies if the ikSplineHandle curve should be simplified.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsnapCurve">
+          <code><b>-snapCurve</b>(<b>-snc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies if the curve should automatically
+snap to the first joint affected by the ikSplineHandle.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsnapHandleFlagToggle">
+          <code><b>-snapHandleFlagToggle</b>(<b>-shf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that the handle position should be snapped to
+the end-effector position if the end-effector is moved
+by the user.  Setting this flag on allows you to use
+forward kinematics to pose or adjust your skeleton and
+then to animate it with inverse kinematics.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsnapHandleToEffector">
+          <code><b>-snapHandleToEffector</b>(<b>-see</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+All handles are immediately moved so that the handle
+position and orientation matches the end-effector
+position and orientation.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsolver">
+          <code><b>-solver</b>(<b>-sol</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the solver.  The complete list of
+available solvers may not be known until run-time
+because some of the solvers may be implemented as
+plug-ins.  Currently the only valid solver are
+ikRPsolver, ikSCsolver and ikSplineSolver.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstartJoint">
+          <code><b>-startJoint</b>(<b>-sj</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the start joint of the handle's joint chain.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsticky">
+          <code><b>-sticky</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that this handle is &quot;sticky&quot;. Valid values are &quot;off&quot;,
+&quot;sticky&quot;, &quot;superSticky&quot;. Sticky handles
+are solved when the skeleton is being manipulated
+interactively.  If a character has sticky feet, the
+solver will attempt to keep them in the same position as
+the user moves the character's root.  If they were not
+sticky, they would move along with the root.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtwistType">
+          <code><b>-twistType</b>(<b>-tws</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the type of interpolation to
+be used by the ikSplineHandle.  The interpolation options are
+&quot;linear&quot;, &quot;easeIn&quot;, &quot;easeOut&quot;, and &quot;easeInOut&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagweight">
+          <code><b>-weight</b>(<b>-w</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the handles weight in error calculations.  The
+weight only applies when handle goals are in conflict
+and cannot be solved simultaneously.  When this happens,
+a solution is computed that weights the &quot;distance&quot; from
+each goal to the solution by the handle's weight and
+attempts to minimize this value.  The weight must be ]= 0.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Will create a handle from Joint-1 to an end-effector at
+// the location of Joint-5 with a priority of 2 and a
+// weight of 0.5
+//
+ikHandle -sj joint1 -ee joint5 -p 2 -w .5;
+
+// Create a handle called leg from the start joint
+// named hip to the end-effector named Ankle.
+//
+ikHandle -n &quot;Leg&quot; -sj Hip -ee Ankle;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

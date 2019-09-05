@@ -1,0 +1,297 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>pickWalk command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-pickWalk"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/pickWalk.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>pickWalk </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Selection" target="contentFrame">Selection</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("pickWalk.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>pickWalk [-<a href="#flagdirection">direction</a> <i>string</i>] [-<a href="#flagrecurse">recurse</a>] [-<a href="#flagtype">type</a> <i>string</i>] 
+[objects]
+     </code> </p>
+      <p>pickWalk is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      The pickWalk command allows you to quickly change the selection list
+relative to the nodes that are currently selected. It is called
+pickWalk, because it walks from one selection list to another
+by unselecting what's currently selected, and selecting nodes that
+are in the specified direction from the currently selected list.
+If you specify objects on the command line, the pickWalk command
+will walk from those objects instead of the selected list.
+<p>
+If the -type flag is instances, then the left and right direction will
+walk to the previous or next instance of the same selected dag node.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>A list of the newly selected items</td></tr></table>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdirection">direction</a>, <a href="#flagrecurse">recurse</a>, <a href="#flagtype">type</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdirection">
+          <code><b>-direction</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The direction to walk from the node. The choices are
+up | down | left | right | in | out. up walks to the parent node,
+down to the child node, and left and right to the sibling nodes.
+If a CV on a surface is selected, the left and right directions walk
+in the U parameter direction of the surface, and the up and down directions
+walk in the V parameter direction.
+In and out are only used if the type flag is 'latticepoints'.
+Default is right.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrecurse">
+          <code><b>-recurse</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If specified then recurse down when walking
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>-type</b>(<b>-typ</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The choices are nodes | instances | edgeloop | edgering | faceloop | keys | latticepoints | motiontrailpoints.
+If type is nodes, then the left and right direction walk to the next dag siblings.
+If type is instances, the left and right direction walk to the previous or next
+instance of the same dag node.
+If type is edgeloop, then the edge loop starting at the first selected edge will
+be selected.
+If type is edgering, then the edge ring starting at the first selected edge will
+be selected.
+If type is faceloop, and there are two connected quad faces selected which define
+a face loop, then that face loop will be selected.
+
+edgeloop, edgering and faceloop all remember which was the first edge or faces
+selected for as long as consecutive selections are made by this command.  They
+use this information to determine what the &quot;next&quot; loop or ring selection should
+be.  Users can make selections forwards and backwards by using the direction
+flag with &quot;left&quot; or &quot;right&quot;.
+
+If type is motiontrailpoints, then the left and right direction walk to the previous
+or next motion trail points respectively.
+
+Default is nodes.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Given the transforms A and B which are parented to a transform C,
+// and C is instanced with parents D and E.
+
+pickWalk -d right A
+// Result: B //
+
+select |E|C
+pickWalk -d up
+// Result: E //
+
+select |E|C
+pickWalk -typ instances -d left
+// Result: /E/D //
+
+// The pickWalk command also works on CVs and edit points
+select nurbPlaneShape1.cv[2][1];
+pickWalk -d right;
+// Result: nurbPlaneShape1.cv[3][1] //
+pickWalk -d up;
+// Result: nurbPlaneShape1.cv[3][2] //
+
+select curveShape2.ep[1];
+pickWalk -d left;
+// Result: curveShape2.ep[0] //
+
+// Create a poly plane to test loop and ring selections
+polyPlane -w 1 -h 1 -sx 10 -sy 10 -ax 0 1 0 -cuv 2 -ch 1;
+// ,Result:, pPlane1 polyPlane1 //
+
+select -r pPlane1.e[114] ;
+
+pickWalk -type &quot;edgeloop&quot;;
+// ,Result:, pPlane1.e[9] pPlane1.e[30] pPlane1.e[51] pPlane1.e[72] pPlane1.e[93] pPlane1.e[114] pPlane1.e[135] pPlane1.e[156] pPlane1.e[177] pPlane1.e[198] //
+
+pickWalk -type &quot;edgeloop&quot; -d left;
+// ,Result:, pPlane1.e[7] pPlane1.e[28] pPlane1.e[49] pPlane1.e[70] pPlane1.e[91] pPlane1.e[112] pPlane1.e[133] pPlane1.e[154] pPlane1.e[175] pPlane1.e[196] //
+
+pickWalk -type &quot;edgeloop&quot; -d left;
+// ,Result:, pPlane1.e[5] pPlane1.e[26] pPlane1.e[47] pPlane1.e[68] pPlane1.e[89] pPlane1.e[110] pPlane1.e[131] pPlane1.e[152] pPlane1.e[173] pPlane1.e[194] //
+
+pickWalk -type &quot;edgeloop&quot; -d right;
+// ,Result:, pPlane1.e[7] pPlane1.e[28] pPlane1.e[49] pPlane1.e[70] pPlane1.e[91] pPlane1.e[112] pPlane1.e[133] pPlane1.e[154] pPlane1.e[175] pPlane1.e[196] //
+
+pickWalk -type &quot;edgeloop&quot; -d right;
+// ,Result:, pPlane1.e[9] pPlane1.e[30] pPlane1.e[51] pPlane1.e[72] pPlane1.e[93] pPlane1.e[114] pPlane1.e[135] pPlane1.e[156] pPlane1.e[177] pPlane1.e[198] //
+
+// After going &quot;left&quot; twice and then &quot;right&quot; twice we are now back to the original edge loop selection.
+
+
+// select a couple of connected faces to walk.
+select -r pPlane1.f[44] pPlane1.f[54] ;
+
+pickWalk -type &quot;faceloop&quot;;
+// ,Result:, pPlane1.f[4] pPlane1.f[14] pPlane1.f[24] pPlane1.f[34] pPlane1.f[44] pPlane1.f[54] pPlane1.f[64] pPlane1.f[74] pPlane1.f[84] pPlane1.f[94] //
+
+pickWalk -type &quot;faceloop&quot; -d left;
+// ,Result:, pPlane1.f[5] pPlane1.f[15] pPlane1.f[25] pPlane1.f[35] pPlane1.f[45] pPlane1.f[55] pPlane1.f[65] pPlane1.f[75] pPlane1.f[85] pPlane1.f[95] //
+
+pickWalk -type &quot;faceloop&quot; -d left;
+// ,Result:, pPlane1.f[6] pPlane1.f[16] pPlane1.f[26] pPlane1.f[36] pPlane1.f[46] pPlane1.f[56] pPlane1.f[66] pPlane1.f[76] pPlane1.f[86] pPlane1.f[96] //
+
+pickWalk -type &quot;faceloop&quot; -d right;
+// ,Result:, pPlane1.f[5] pPlane1.f[15] pPlane1.f[25] pPlane1.f[35] pPlane1.f[45] pPlane1.f[55] pPlane1.f[65] pPlane1.f[75] pPlane1.f[85] pPlane1.f[95] //
+
+pickWalk -type &quot;faceloop&quot; -d right;
+// ,Result:, pPlane1.f[4] pPlane1.f[14] pPlane1.f[24] pPlane1.f[34] pPlane1.f[44] pPlane1.f[54] pPlane1.f[64] pPlane1.f[74] pPlane1.f[84] pPlane1.f[94] //
+
+
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

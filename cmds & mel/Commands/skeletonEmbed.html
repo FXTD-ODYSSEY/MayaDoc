@@ -1,0 +1,259 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>skeletonEmbed command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-skeletonEmbed"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/skeletonEmbed.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>skeletonEmbed </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#Skinning" target="contentFrame">Skinning</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("skeletonEmbed.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>skeletonEmbed [-<a href="#flagmergedMesh">mergedMesh</a>] [-<a href="#flagsegmentationMethod">segmentationMethod</a> <i>uint</i>] [-<a href="#flagsegmentationResolution">segmentationResolution</a> <i>uint</i>]  </code> </p>
+      <p>skeletonEmbed is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command is used to embed a skeleton inside meshes.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>geomBind
+      <h2><a name="hRelated">Related</a></h2><a href="geomBind.html">geomBind</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagmergedMesh">mergedMesh</a>, <a href="#flagsegmentationMethod">segmentationMethod</a>, <a href="#flagsegmentationResolution">segmentationResolution</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmergedMesh">
+          <code><b>-mergedMesh</b>(<b>-mm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When specified, the query command merges selected meshes together and returns a
+Python object representing the merged mesh.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsegmentationMethod">
+          <code><b>-segmentationMethod</b>(<b>-sm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies which segmentation algorithm to use to determine what is inside the mesh
+and what is outside the mesh.  By default, boundary-and-fill-and-grow voxelization
+will be used.
+<p>
+Available algorithms are:
+<ul>
+<li>
+0  : Perfect mesh (no voxelization).
+This method works for &quot;perfect meshes&quot;, i.e. meshes that are closed, watertight,
+2-manifold and without self-intersection or interior/hidden geometry.  It segments
+the interior region of the mesh from the exterior using a pseudo-normal test.
+It does not use voxelization.  If mesh conditions are not respected, the segmentation
+is likely to be wrong.  This can make the segmentation process significantly longer
+and prevent successful skeleton embedding.
+</li>
+<li>
+1 : Watertight mesh (flood fill).
+This method works for &quot;watertight meshes&quot;, i.e. meshes for which faces completely
+separate the interior region of the mesh from the exterior.  The mesh can have
+degenerated faces, wrong face orientation, self-intersection, etc.  The method
+uses surface voxelization to classify as part of the interior region all voxels
+intersecting with a mesh face.  It then performs flood-filling from the outside,
+marking all reached voxels as part of the exterior region of the model.  Finally,
+all unreached voxels are marked as part of the interior region.  This method works
+so long as the mesh is watertight, i.e. without holes up to the voxelization resolution.
+Otherwise, flood-filling reaches the interior region and creates inaccurate segmentation.
+</li>
+<li>
+2 : Imperfect mesh (flood fill + growing).
+This method works for meshes where holes could make the flood-filling step reach the
+interior region of the mesh, but that have face orientation consistent enough so filling
+them is possible.  First, it uses surface voxelization to classify as part of the interior
+region all voxels intersecting with a mesh face.  It then alternates flood-filling and
+growing steps.  The flood-filling tries to reach all voxels from the outside so that
+unreached voxels are marked as part of the interior region.  The growing step uses a
+relatively computation-intensive process to check for interior voxels in all neighbors
+to those already identified.  Any voxel identified as interior is likely to fill holes,
+allowing subsequent flood-filling steps to identify more interior voxels.
+</li>
+<li>
+3 : Polygon soup (repair).
+This method has no manifold or face orientation requirements.  It reconstructs a mesh
+that wraps the input mesh with a given offset (3 times the voxel size) and uses this
+perfect 2-manifold mesh to segment the interior region from the exterior region of the model.
+Because of the offset, it might lose some of the details and merge parts that are proximal.
+However, this usually is not an issue with common models where body parts are not too close
+to one another.
+</li>
+<li>
+99 : Direct skeleton (no embedding).
+This method does not try to perform embedding.  It simply returns the skeleton in its initial
+pose without any attempt at embedding inside the meshes, other than placing it in the meshes
+bounding box.
+</li>
+</ul>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsegmentationResolution">
+          <code><b>-segmentationResolution</b>(<b>-sr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>uint</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies which segmentation resolution to use for the voxel grid.  By default,
+256x256x256 voxels will be used.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+
+// First select the shape, not the transform.
+select -r characterShape ;
+
+// Embed skeleton using default parameter.
+skeletonEmbed ;
+// Result: { [...] (A JSON dictionary with the description of the embedding. }
+
+// For debugging: get the merged mesh that will be used
+skeletonEmbed -q -mergedMesh ;
+// Result: { [...] (A JSON dictionary with the description of the merged mesh. }
+
+// Embed skeleton using polygon soup and 512 resolution.
+skeletonEmbed -segmentationMethod 3 -segmentationResolution 512 ;
+// Result: { [...] (A JSON dictionary with the description of the embedding. }
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

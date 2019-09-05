@@ -1,0 +1,379 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>polyAppend command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-polyAppend"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/polyAppend.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>polyAppend </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#Polygons" target="contentFrame">Polygons</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("polyAppend.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>polyAppend [-<a href="#flagappend">append</a> <i>[ float float float ]</i>] [-<a href="#flagconstructionHistory">constructionHistory</a> <i>boolean</i>] [-<a href="#flagedge">edge</a> <i>int</i>] [-<a href="#flaghole">hole</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagpoint">point</a> <i>float float float</i>] [-<a href="#flagsubdivision">subdivision</a> <i>int</i>] [-<a href="#flagtexture">texture</a> <i>int</i>]  </code> </p>
+      <p>polyAppend is undoable, queryable, and editable.</p>
+      Appends a new face to the selected polygonal object.
+The first argument must be a border edge.
+The new face will be automatically closed.
+<br>Only works with one object selected.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The node name.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="polyAppendVertex.html">polyAppendVertex</a>, <a href="polyBevel.html">polyBevel</a>, <a href="polyChipOff.html">polyChipOff</a>, <a href="polyCreateFacet.html">polyCreateFacet</a>, <a href="polyExtrudeEdge.html">polyExtrudeEdge</a>, <a href="polyExtrudeFacet.html">polyExtrudeFacet</a>, <a href="polySmooth.html">polySmooth</a>, <a href="polySplit.html">polySplit</a>, <a href="polySplitVertex.html">polySplitVertex</a>, <a href="polySubdivideEdge.html">polySubdivideEdge</a>, <a href="polySubdivideFacet.html">polySubdivideFacet</a>, <a href="polyTriangulate.html">polyTriangulate</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagappend">append</a>, <a href="#flagconstructionHistory">constructionHistory</a>, <a href="#flagedge">edge</a>, <a href="#flaghole">hole</a>, <a href="#flagname">name</a>, <a href="#flagpoint">point</a>, <a href="#flagsubdivision">subdivision</a>, <a href="#flagtexture">texture</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Common poly modifier operation flags</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagappend">
+          <code><b>-append</b>(<b>-a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[ float float float ]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Appends to the given polygon object.  The append flag should be used
+multiple times to specify the edges, points, and holes that make up the new
+face that is being added.
+
+You may specify an edge by passing a single argument which will be the edges
+index.  A point is specified with three arguments which are the coordinates
+of the point in the objects local space.  Pass no arguments indicates that
+the values which follow shall specify a hole.  In Python, pass an empty
+tuple to specify no arguments.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconstructionHistory">
+          <code><b>-constructionHistory</b>(<b>-ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn the construction history on or off (where applicable). If
+construction history is on then the corresponding node will be
+inserted into the history chain for the mesh. If construction history
+is off then the operation will be performed directly on the object.
+<br>
+<b>Note:</b> If the object already has construction history then
+this flag is ignored and the node will always be inserted into
+the history chain.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagedge">
+          <code><b>-edge</b>(<b>-ed</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds the given edge of the selected object to the new face.
+This edge must be a border, which will be then shared by the
+new face and the neighboring one. The new face is oriented according
+to the orientation of the given edge(s).
+
+Note that this flag should be avoided in Python.  You may use the &quot;append&quot;
+flag instead and pass one argument.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghole">
+          <code><b>-hole</b>(<b>-hl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add a hole. The following points and edges will define a hole.
+
+Note that this flag should be avoided in Python.  You may use the &quot;append&quot;
+flag instead and pass an empty tuple ().
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Give a name to the resulting node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpoint">
+          <code><b>-point</b>(<b>-p</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float float float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds a new point to the new face.
+Coordinates of free points are given in the local object reference.
+
+Note that this flag should be avoided in Python.  You may use the &quot;append&quot;
+flag instead and pass three arguments.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsubdivision">
+          <code><b>-subdivision</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag specifies the level of subdivisions.
+Automatically subdivides new edges into the given number of edges.
+Existing edges cannot be subdivided.
+<br>C : Default is 1 (no subdivision).
+<br>Q: When queried, this flag returns an <i>int</i>.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtexture">
+          <code><b>-texture</b>(<b>-tx</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies how new faces are mapped.
+<br> 0 - None; 1 - Normalize; 2 - Unitize
+<br>C: Default is 0 (no mapping).
+<br>Q: When queried, this flag returns an <i>int</i>
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+polyCreateFacet -p 0 0 0 -p 10 0 0 -p 10 10 0 -p 0 10 0;
+
+//add a new triangular facet described by the edge #0, and a free point
+polyAppend -ed 0 -p 5 -5 0;
+
+//add a new quadrangular facet with 2 triangular holes.
+polyAppend -ed 1 -p 20 0 0 -p 20 10 0
+    -hl -p 12 6 0 -p 14 5 0 -p 12 4 0
+    -hl -p 16 5 0 -p 18 6 0 -p 18 4 0;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

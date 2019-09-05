@@ -1,0 +1,1338 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>cacheEvaluator command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-cacheEvaluator"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/cacheEvaluator.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>cacheEvaluator </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("cacheEvaluator.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>cacheEvaluator([<a href="#flagcacheFillMode">cacheFillMode</a>=<i>string</i>], [<a href="#flagcacheFillOrder">cacheFillOrder</a>=<i>string</i>], [<a href="#flagcacheInvalidate">cacheInvalidate</a>=<i>timerange</i>], [<a href="#flagcacheName">cacheName</a>=<i>string</i>], [<a href="#flagcachingPoints">cachingPoints</a>=<i>boolean</i>], [<a href="#flagcreationParameters">creationParameters</a>=<i>boolean</i>], [<a href="#flagflushCache">flushCache</a>=<i>string</i>], [<a href="#flagflushCacheRange">flushCacheRange</a>=<i>[timerange, boolean]</i>], [<a href="#flagflushCacheSync">flushCacheSync</a>=<i>boolean</i>], [<a href="#flagflushCacheWait">flushCacheWait</a>=<i>boolean</i>], [<a href="#flaglistCacheNames">listCacheNames</a>=<i>boolean</i>], [<a href="#flaglistCachedNodes">listCachedNodes</a>=<i>boolean</i>], [<a href="#flaglistValueNames">listValueNames</a>=<i>boolean</i>], [<a href="#flagnewAction">newAction</a>=<i>string</i>], [<a href="#flagnewActionParam">newActionParam</a>=<i>string</i>], [<a href="#flagnewFilter">newFilter</a>=<i>string</i>], [<a href="#flagnewFilterParam">newFilterParam</a>=<i>string</i>], [<a href="#flagnewRule">newRule</a>=<i>string</i>], [<a href="#flagnewRuleParam">newRuleParam</a>=<i>string</i>], [<a href="#flagpauseInvalidation">pauseInvalidation</a>=<i>boolean</i>], [<a href="#flagpreventFrameSkip">preventFrameSkip</a>=<i>boolean</i>], [<a href="#flagresetRules">resetRules</a>=<i>boolean</i>], [<a href="#flagresourceUsage">resourceUsage</a>=<i>boolean</i>], [<a href="#flagresumeInvalidation">resumeInvalidation</a>=<i>boolean</i>], [<a href="#flagsafeMode">safeMode</a>=<i>boolean</i>], [<a href="#flagsafeModeMessages">safeModeMessages</a>=<i>boolean</i>], [<a href="#flagsafeModeTriggered">safeModeTriggered</a>=<i>boolean</i>], [<a href="#flagvalueName">valueName</a>=<i>string</i>], [<a href="#flagwaitForCache">waitForCache</a>=<i>float</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>cacheEvaluator is <b>NOT undoable</b>, queryable, and editable.</p>
+      <p>
+This command controls caching configuration.  It allows interaction with the
+caching system.
+
+<p>
+Caching configuration is done through a set of rules.  Most rules are composed
+of a &quot;filter&quot;, which is the test to be perform in order to determine if the rule
+should be applied, and an &quot;action&quot;, which is the effect that the rule application
+should have on nodes that satisfy the criteria.
+
+<p>
+A caching mode is therefore a set of rules that determines which nodes are
+being cached.  This mode can be serialized to a JSON string using the
+&quot;creationParameters&quot; flag in query mode.
+
+<h2>Built-in Cache Configuration Modes</h2>
+A few cache configuration rules, filters and actions are provided in order to
+support the built-in default caching modes.
+<p><h3>Built-in Filters</h3>
+<ul>
+<li>
+<dt><i>evaluationCacheNodes</i></dt>
+<dd>This filter matches all nodes for which the node type is in the default supported
+list for evaluation cache.  See the code example below for the current list of
+supported types.
+</dd>
+</li>
+<li>
+<dt><i>nodeTypes</i></dt>
+<dd>This filter matches all nodes for which the node type is in the list provided with
+the <em>newFilterParam</em> flag.  The parameter string is a list of comma-separated
+node types, prefixed with either '-' or '+'.  The filter will go through the list
+in order and will stop if the node is of the given node type (or any derived node type).
+If the prefix is '-', the filter will return that the node did not match and stop
+processing.  If the prefix is '+', the filter will return a match and stop processing.
+</dd>
+</li>
+<li>
+<dt><i>downstreamNodeTypes</i></dt>
+<dd>This filter matches all nodes for which the node type is in the list provided with
+the <em>newFilterParam</em> flag if they also have immediate downstream nodes of the right node type(s).
+The parameter string is in the form &quot;type=+type1,+type2 downstreamTypes=+type3,+type3&quot;,
+where the list of node types uses the same semantic as the <i>nodeTypes</i> filter.
+</dd>
+</li>
+<li>
+<dt><i>vp2CacheNodes</i></dt>
+<dd>This filter matches all nodes for which the node type is in the list of node types
+supported by VP2 caching.  Enabling VP2 caching for other node types will have no effect.
+See the comments in the code example below for the current list of supported types.
+</dd>
+</li>
+<li>
+<dt><i>vp2FallbackNodes</i></dt>
+<dd>This filter matches all nodes for which VP2 caching should revert to evaluation
+caching because of unsupported features.  Namely, it matches nodes for which VP2
+caching is enabled but which have animated visibility or animated topology
+(potentially changing number of vertices, edges, faces, etc.).  It also matches nodes
+with static geometry, i.e. for which nothing needs to be cached in VP2 format for
+each frame.
+</dd>
+</li>
+</ul>
+<p><h3>Built-in Actions</h3>
+<ul>
+<li>
+<dt><i>enableEvaluationCache</i></dt>
+<dd>This action enables evaluation cache on the matched node.  If the evaluation cache
+is already enabled, it has no effect.
+</dd>
+</li>
+<li>
+<dt><i>disableEvaluationCache</i></dt>
+<dd>This action disables evaluation cache on the matched node.  If the evaluation cache
+is already disabled, it has no effect.
+</dd>
+</li>
+<li>
+<dt><i>disableAllCache</i></dt>
+<dd>This action disables all types of caching on the matched node.
+</dd>
+</li>
+<li>
+<dt><i>enableVP2Cache</i></dt>
+<dd>This action enables VP2 cache on the matched node.  &quot;useHardware=1&quot; can be
+passed to the <em>newActionParam</em> in order to enable the VP2 hardware cache,
+while &quot;useHardware=0&quot; will use the VP2 software cache.
+This action disables the evaluation cache (to only keep VP2 cache)
+on the matched node to save memory.  Specifying &quot;useEvaluation=1&quot;
+to turn on evaluation cache (along with VP2 cache). For example, NURBS surfaces
+keep the evaluation cache to make the selection highlighting more efficient.
+This action also automatically applies the fallback to evaluation cache rule for
+safety if required.  This fallback will be applied if the node matches the criteria
+from the &quot;vp2FallbackNodes&quot; filter and will then apply the action from the
+&quot;fallbackFromVP2CacheToEvaluationCache&quot; action.  &quot;fallback=0&quot; can be used to
+disable this fallback, but doing so can cause correctness issues,instabilities and
+even crashes.  &quot;useEvaluation=0&quot; does not affect the fallback behavior.
+To use multiple parameters, separate them with ' ' like
+&quot;useHardware=1 fallback=0 useEvaluation=1&quot;.
+</dd>
+</li>
+<li>
+<dt><i>disableVP2Cache</i></dt>
+<dd>This action disables the VP2 cache on the matched node.  If the VP2 cache
+is already disabled, it has no effect.
+</dd>
+</li>
+<li>
+<dt><i>fallbackFromVP2CacheToEvaluationCache</i></dt>
+<dd>This action disables the VP2 cache on the matched node and enables the evaluation
+cache instead.
+</dd>
+</li>
+</ul>
+<p><h3>Built-in Rules</h3>
+<ul>
+<li>
+<dt><i>evaluationCache</i></dt>
+<dd>This rule has the same effect as using the <i>evaluationCacheNodes</i> filter
+with the <i>enableEvaluationCache</i> action.
+</dd>
+</li>
+<li>
+<dt><i>customEvaluators</i></dt>
+<dd>This rule ensures proper behavior for nodes claimed by a custom evaluator of
+a higher priority than the cache evaluator.  First, it makes sure that caching is
+disabled for nodes claimed by a custom evaluator of a higher priority.  Secondly,
+it makes sure input nodes to clusters belonging to a custom evaluator of a higher
+priority are marked as evaluation caching points if the evaluator needs data.  This
+prevents pull evaluation from happening when the evaluator is evaluated.
+</dd>
+</li>
+</ul>
+<p>
+Note that any combination of cache configuration rules other than the default modes
+is considered unsupported and to be used at one's own risk.  The default modes
+are &quot;Evaluation cache&quot;, &quot;VP2 software cache&quot; and &quot;VP2 hardware cache&quot;.  The sets
+of rules used to enable each mode are listed in the code examples.
+
+<h2>Querying Cache Configuration Values</h2>
+<p>
+In order to get a cache configuration value for a given node or list of nodes,
+the <em>cacheName</em> flag can be used in query mode.  Without any additional
+parameters, this query is the same as if the <em>valueName</em> flag was set to
+&quot;active&quot;, i.e. it queries whether the given cache is active or not.
+
+<p>
+If the queried node is not a caching point, there will be no caching
+configuration information associated with it and the query will return an
+empty string (which is basically the same as all cache modes being inactive).
+If the queried node is a caching point, the returned string will be the
+requested information from the given cache.  For example, querying the
+&quot;active&quot; value can return &quot;0&quot; or &quot;1&quot;.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>The state of whether the memory limit has been reached or not ('out', 'okay', 'low', or 'unlimited' with the 'resourceUsage' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The state of whether the safe mode is enabled (with the 'safeMode' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The state of whether the safe mode was triggered (with the 'safeModeTriggered' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The state of whether prevent frame skipping is enabled (with the 'preventFrameSkip' flag)</td></tr><tr><td valign="top"><i>boolean</i></td><td>The state of whether cache in background was calculated (with the 'waitForCache' flag)</td></tr><tr><td valign="top"><i>string[]</i></td><td>The available cache names (with the 'listCacheNames' flag)</td></tr><tr><td valign="top"><i>string</i></td><td>The list of nodes currently cached by the cache evaluator (with the 'listCachedNodes' flag).</td></tr><tr><td valign="top"><i>string[]</i></td><td>The available value names (with the 'listValueNames' flag)</td></tr><tr><td valign="top"><i>string[]</i></td><td>The parameter value for the requested node(s) (with the 'cacheName' flag)</td></tr><tr><td valign="top"><i>string</i></td><td>The creation parameters for the current mode as a JSON array (with the 'creationParameters' flag)</td></tr><tr><td valign="top"><i>string[]</i></td><td>The list of nodes marked as caching point (with the 'cachingPoints' flag)</td></tr><tr><td valign="top"><i>string</i></td><td>The current cache fill mode (with the 'cacheFillMode' flag)</td></tr><tr><td valign="top"><i>string</i></td><td>The current cache fill order (with the 'cacheFillOrder' flag)</td></tr><tr><td valign="top"><i>string</i></td><td>The list of all the safe mode messages (with the 'safeModeMessages' flag)</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>Caching
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcacheFillMode">cacheFillMode</a>, <a href="#flagcacheFillOrder">cacheFillOrder</a>, <a href="#flagcacheInvalidate">cacheInvalidate</a>, <a href="#flagcacheName">cacheName</a>, <a href="#flagcachingPoints">cachingPoints</a>, <a href="#flagcreationParameters">creationParameters</a>, <a href="#flagflushCache">flushCache</a>, <a href="#flagflushCacheRange">flushCacheRange</a>, <a href="#flagflushCacheSync">flushCacheSync</a>, <a href="#flagflushCacheWait">flushCacheWait</a>, <a href="#flaglistCacheNames">listCacheNames</a>, <a href="#flaglistCachedNodes">listCachedNodes</a>, <a href="#flaglistValueNames">listValueNames</a>, <a href="#flagnewAction">newAction</a>, <a href="#flagnewActionParam">newActionParam</a>, <a href="#flagnewFilter">newFilter</a>, <a href="#flagnewFilterParam">newFilterParam</a>, <a href="#flagnewRule">newRule</a>, <a href="#flagnewRuleParam">newRuleParam</a>, <a href="#flagpauseInvalidation">pauseInvalidation</a>, <a href="#flagpreventFrameSkip">preventFrameSkip</a>, <a href="#flagresetRules">resetRules</a>, <a href="#flagresourceUsage">resourceUsage</a>, <a href="#flagresumeInvalidation">resumeInvalidation</a>, <a href="#flagsafeMode">safeMode</a>, <a href="#flagsafeModeMessages">safeModeMessages</a>, <a href="#flagsafeModeTriggered">safeModeTriggered</a>, <a href="#flagvalueName">valueName</a>, <a href="#flagwaitForCache">waitForCache</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcacheFillMode">
+          <code><b>cacheFillMode</b>(<b>cfm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the cache fill mode. Valid values are: &quot;syncOnly&quot; to fill cache
+during playback, &quot;syncAsync&quot; to cache during playback and in background,
+ and &quot;asyncOnly&quot; to fill cache only in background. Query returns current mode.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcacheFillOrder">
+          <code><b>cacheFillOrder</b>(<b>cfo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies in which order the cache fills the timeline. Valid values are:
+&quot;forward&quot; to fill cache in forward direction, &quot;backward&quot; to fill cache backwards,
+&quot;bidirectional&quot; to fill cache in forward and backward directions simultaneously,
+ and &quot;forwardFromBegin&quot; to fill cache in forward direction from animation start.
+ Query returns current cache fill mode.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcacheInvalidate">
+          <code><b>cacheInvalidate</b>(<b>ci</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>timerange</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the frame range in which cache should be invalidated. The range
+should be specified as a pair of positive integers.
+<p>
+    Usage examples:
+    <ul>
+        <li> -ci &quot;10:20&quot;{Python equivalent: ('10','20')} means all frames
+        in the range from 10 to 20, inclusive, in the current time unit. </li>
+    </ul>
+    <br>
+    Omitting one end of a range means using either end of the animation range
+     (or both), as in the following examples:
+    <ul>
+        <li> -ci &quot;10:&quot; means all frames from time 10 (in the current time unit)
+        onwards to the maximum time in the animation range (on the timeline). </li>
+        <li> -ci &quot;:10&quot; means all frames from the minimum time on the animation range
+        (on the timeline) up to (and including) time 10 (in the current time unit). </li>
+        <li> -ci &quot;:&quot; is a short form to specify all frames, from minimum to
+        maximum time on the current animation range. </li>
+    </ul>
+
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcacheName">
+          <code><b>cacheName</b>(<b>cn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the cache from which to query a value.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcachingPoints">
+          <code><b>cachingPoints</b>(<b>cps</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get list of nodes marked as caching points, i.e. nodes with at least one
+type of cache active.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcreationParameters">
+          <code><b>creationParameters</b>(<b>cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get the current mode creation parameters.  The result is a JSON string which
+represents an array with an element for each rule.  Each element is an
+association between the parameter name and its value when creating the rule.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflushCache">
+          <code><b>flushCache</b>(<b>fc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies to flush the current cache. Valid values are: &quot;keep&quot; to store the existing
+cache as backup, and &quot;destroy&quot; to delete the current cache.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflushCacheRange">
+          <code><b>flushCacheRange</b>(<b>fcr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[timerange, boolean]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the frame range in which cache should be flushed. By default it will
+destroy the cache - if the 'flushCache' is also set then it will define what
+to do with the cache range being flushed.
+The range should be specified as a pair of positive integers and a boolean.
+<p>
+    Usage examples:
+    <ul>
+        <li> -flushCacheRange &quot;10:20&quot; on {Python equivalent: ('10','20',True)}
+                means all frames in the range from 10 to 20, inclusive, in the current time unit. </li>
+        <li> -flushCacheRange &quot;12:18&quot; off {Python equivalent: ('12','18',False)}
+                means all frames before 12 and after 18, not inclusive, in the current time unit. </li>
+    </ul>
+    <br>
+    Omitting one end of a range means using either end of the animation range
+     (or both), as in the following examples:
+    <ul>
+        <li> -flushCacheRange &quot;10:&quot; on means all frames from time 10 (in the current time unit)
+        onwards to the maximum time in the animation range (on the timeline). </li>
+        <li> -flushCacheRange &quot;:10&quot; on means all frames from the minimum time on the animation range
+        (on the timeline) up to (and including) time 10 (in the current time unit). </li>
+        <li> -flushCacheRange &quot;:&quot; on is a short form to specify all frames, from minimum to
+        maximum time on the current animation range. </li>
+    </ul>
+
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflushCacheSync">
+          <code><b>flushCacheSync</b>(<b>fcs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies how to flush the cache: synchronously or asynchronously. True for synchronous, False for asynchronous.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagflushCacheWait">
+          <code><b>flushCacheWait</b>(<b>fcw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Wait for the cache destruction to be completed.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistCacheNames">
+          <code><b>listCacheNames</b>(<b>lcn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the list of existing cache names.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistCachedNodes">
+          <code><b>listCachedNodes</b>(<b>lcd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the list of cached nodes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglistValueNames">
+          <code><b>listValueNames</b>(<b>lvn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the list of value names that can be queried for the given cache.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnewAction">
+          <code><b>newAction</b>(<b>na</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the new action to create in the new filter/action rule.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnewActionParam">
+          <code><b>newActionParam</b>(<b>nap</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the parameter string to pass to the new action to create in the new filter/action rule.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnewFilter">
+          <code><b>newFilter</b>(<b>nf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the new filter to create in the new filter/action rule.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnewFilterParam">
+          <code><b>newFilterParam</b>(<b>nfp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the parameter string to pass to the new filter to create in the new filter/action rule.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnewRule">
+          <code><b>newRule</b>(<b>nr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the new rule to create.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnewRuleParam">
+          <code><b>newRuleParam</b>(<b>nrp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the parameter string to pass to the new rule to create.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpauseInvalidation">
+          <code><b>pauseInvalidation</b>(<b>pi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Pause all incoming invalidation of the cache. Work in symmetry with resumeInvalidation flag.
+PauseInvalidation can be called several time, useful in nesting situation. The same number of resume need to be called to resume the invalidation.
+If queried it will return how much time caching is paused, 0 means it is resumed.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpreventFrameSkip">
+          <code><b>preventFrameSkip</b>(<b>pfs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies if frame skipping is enabled. Following behavior is seen when frame
+skipping is enabled, and playback is set to play in real-time.
+<ul>
+    <li>If cache can't be filled at real-time frame rate, frames will <b>NOT</b> be skipped.</li>
+    <li>Once all frames have been looped over(and therefore all frames are cached), and if
+    playing back from cache still can't be done at real-time frame rate; frames <b>WILL</b> be skipped.</li>
+    <li>If memory limit is reached before all frames are cached, frames <b>WILL</b> be skipped.</li>
+    <li>If cache is invalidated will playing(like flushing it), frames will <b>NOT</b>
+    be skipped(until the cache is full again).</li>
+</ul>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresetRules">
+          <code><b>resetRules</b>(<b>rr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Reset the cache configuration rules to an empty set of rules.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresourceUsage">
+          <code><b>resourceUsage</b>(<b>ru</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the current state of the resource usage as a string. 'unlimited' = the resource limits
+are being ignored, 'out' = the memory limit has been reached, 'low' = the memory usage is at
+90% of the specified limit, 'okay' = memory usage is under 90% of the specified limit.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresumeInvalidation">
+          <code><b>resumeInvalidation</b>(<b>ri</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Resume all incoming invalidation of the cache. Work in symmetry with pauseInvalidation flag.
+PauseInvalidation can be called several time, useful in nesting situation. The same number of resume need to be called to resume the invalidation.
+If queried it will return true if cache is resumed, false otherwise.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsafeMode">
+          <code><b>safeMode</b>(<b>sf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turns safe mode on or off. In query mode, it returns the status of the safe mode for cache evaluator.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsafeModeMessages">
+          <code><b>safeModeMessages</b>(<b>sfm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Prints the safe mode messages to the console.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsafeModeTriggered">
+          <code><b>safeModeTriggered</b>(<b>sft</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns if the safe mode was triggered for cache evaluator.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvalueName">
+          <code><b>valueName</b>(<b>vn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the name of the parameter for which to query the value.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwaitForCache">
+          <code><b>waitForCache</b>(<b>wfc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies to wait for cache to fill in background, with [Time to wait in seconds] timeout.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+
+import maya.cmds as cmds
+
+# Enable evaluation cache.
+cmds.cacheEvaluator(resetRules=True)
+cmds.cacheEvaluator(newFilter=&quot;evaluationCacheNodes&quot;, newAction=&quot;enableEvaluationCache&quot;)
+cmds.cacheEvaluator(newRule=&quot;customEvaluators&quot;)
+
+# Enable VP2 software cache.
+cmds.cacheEvaluator(resetRules=True)
+# VP2 cache only works on a subset of types (mesh, nurbsCurve, nurbsSurface, bezierCurve),
+# so we still enable evaluation cache for other types.
+cmds.cacheEvaluator(newFilter=&quot;evaluationCacheNodes&quot;, newAction=&quot;enableEvaluationCache&quot;)
+# Enabling VP2 cache will disable evaluation cache on the supported types.
+cmds.cacheEvaluator(newFilter=&quot;vp2CacheNodes&quot;, newAction=&quot;enableVP2Cache&quot;, newActionParam=&quot;useHardware=0&quot;)
+# Custom evaluators of a higher priority than the caching evaluator
+# may need additional caching points around its boundary to evaluate properly.
+cmds.cacheEvaluator(newRule=&quot;customEvaluators&quot;)
+
+# Enable VP2 hardware cache.
+cmds.cacheEvaluator(resetRules=True)
+# VP2 cache only works on a subset of types (mesh, nurbsCurve, nurbsSurface, bezierCurve),
+# so we still enable evaluation cache for other types.
+cmds.cacheEvaluator(newFilter=&quot;evaluationCacheNodes&quot;, newAction=&quot;enableEvaluationCache&quot;)
+# Enabling VP2 cache will disable evaluation cache on the supported types.
+# Note that using the vp2CacheNodes filter is equivalent to using the
+# &quot;nodeTypes&quot; filter with the right types specified as the &quot;newFilterParam&quot;
+# string, i.e. &quot;types=+mesh,+nurbsCurve,+bezierCurve,+nurbsSurface&quot;.
+cmds.cacheEvaluator(newFilter=&quot;vp2CacheNodes&quot;, newAction=&quot;enableVP2Cache&quot;, newActionParam=&quot;useHardware=1&quot;)
+# Custom evaluators of a higher priority than the caching evaluator
+# may need additional caching points around its boundary to evaluate properly.
+cmds.cacheEvaluator(newRule=&quot;customEvaluators&quot;)
+
+# Enable evaluation cache using explicit node types.
+cmds.cacheEvaluator(resetRules=True)
+cmds.cacheEvaluator(newFilter='nodeTypes', newFilterParam='types=-constraint,+transform,+mesh,+nurbsCurve,+bezierCurve,+nurbsSurface,+subdiv,+lattice,+baseLattice,+cMuscleDebug,+cMuscleDirection,+cMuscleDisplace,+cMuscleDisplay,+cMuscleFalloff,+cMuscleKeepOut,+cMuscleObject,+cMuscleSmartCollide,+cMuscleSpline,+cMuscleSurfAttach,-THlocatorShape,+locator,+light,+camera,+imagePlane,+clusterHandle,+deformFunc,+hwShader,+pfxGeometry,+follicle', newAction='enableEvaluationCache')
+
+cmds.cacheEvaluator(resetRules=True)
+cmds.cacheEvaluator(newFilter=&quot;evaluationCacheNodes&quot;, newAction=&quot;enableEvaluationCache&quot;)
+cmds.cacheEvaluator(query=True, creationParameters=True)
+# Result: [
+    {
+        &quot;newAction&quot;: &quot;enableEvaluationCache&quot;,
+        &quot;newFilter&quot;: &quot;evaluationCacheNodes&quot;
+    }
+] #
+
+# Query current cache fill mode.
+cmds.cacheEvaluator(query=True, cacheFillMode=True)
+# Result: syncAsync #
+
+# Set new cache fill mode. Options are: 'asyncOnly', 'syncOnly', 'syncAsync'.
+cmds.cacheEvaluator(cacheFillMode = 'syncAsync')
+
+# Query current cache fill order.
+cmds.cacheEvaluator(query=True, cacheFillOrder=True)
+# Result: bidirectional #
+
+# Set new cache fill order. Options are: 'forward', 'backward', 'bidirectional', 'forwardFromBegin'.
+cmds.cacheEvaluator(cacheFillOrder='forward')
+
+# Invalidate cache for all the frames in range from 10 to 20, inclusive, in current time unit.
+cmds.cacheEvaluator(cacheInvalidate=('10','20'))
+cmds.cacheEvaluator(cacheInvalidate=('10:20',))
+
+# Invalidate cache for all the frames in range from 10 onwards to the maximum time in the animation range, in current time unit.
+cmds.cacheEvaluator(cacheInvalidate=('10:',))
+
+# Invalidate cache for all the frames in range from minimum time on the animation range up to (and including) to 10, in current time unit.
+cmds.cacheEvaluator(cacheInvalidate=(':10',))
+
+# Invalidate cache from minimum to maximum time on the current animation range.
+cmds.cacheEvaluator(cacheInvalidate=(':',))
+
+# Check whether or not evaluation cache is active on a given node.
+cmds.cacheEvaluator(&quot;myNode&quot;, query=True, cacheName=&quot;evaluation&quot;)
+# Result: [u'1'] #
+
+cmds.cacheEvaluator(&quot;myNode&quot;, query=True, cacheName=&quot;evaluation&quot;, valueName=&quot;active&quot;)
+# Result: [u'1'] #
+
+# Check whether or not VP2 cache is active, and using hardware cache.
+cmds.cacheEvaluator(&quot;myNode&quot;, query=True, cacheName=&quot;VP2&quot;)
+# Result: [u'1'] #
+
+cmds.cacheEvaluator(&quot;myNode&quot;, query=True, cacheName=&quot;VP2&quot;, valueName=&quot;active&quot;)
+# Result: [u'1'] #
+
+cmds.cacheEvaluator(&quot;myNode&quot;, query=True, cacheName=&quot;VP2&quot;, valueName=&quot;useHardware&quot;)
+# Result: [u'1'] #
+
+cmds.cacheEvaluator(query=True, cachingPoints=True)
+# Result: [u'nurbsCone1', u'nurbsConeShape1'] #
+
+# Flush current cache. &quot;keep&quot; and &quot;destroy&quot; flags can be used to store or destroy the existing cache.
+cmds.cacheEvaluator(flushCache='destroy')
+# Result: destroy #
+
+# Query the cache evaluator's flush synchronization mode.
+cmds.cacheEvaluator(query=True, flushCacheSync=True)
+# Result: 0 #
+
+# Set the cache evaluator's flush synchronization mode. Valid values are: True for synchronous, False for asynchronous.
+cmds.cacheEvaluator(flushCacheSync=True)
+
+# Wait for cache destruction.
+cmds.cacheEvaluator(flushCacheWait=True)
+
+# Check the available types of cache.
+cmds.cacheEvaluator(query=True, listCacheNames=True)
+# Result: [u'evaluation', u'VP2'] #
+
+# Query the list of cached nodes.
+cmds.cacheEvaluator(query=True, listCachedNodes=True)
+# Result: nurbsSphere1,nurbsSphereShape1 #
+
+# Check the available values that can be queried for available caches.
+cmds.cacheEvaluator(query=True, cacheName=&quot;evaluation&quot;, listValueNames=True)
+# Result: [u'active'] #
+
+cmds.cacheEvaluator(query=True, cacheName=&quot;VP2&quot;, listValueNames=True)
+# Result: [u'active', u'useHardware'] #
+
+# Query if prevent-frame-skipping is on.
+cmds.cacheEvaluator(query=True, preventFrameSkip=True)
+# Result: 1 #
+
+# Set prevent-frame-skipping to on.
+cmds.cacheEvaluator(preventFrameSkip=True)
+
+# Query if the cache invalidation is paused. Returns how many times invalidation is paused.
+cmds.cacheEvaluator(query=True, pauseInvalidation=True)
+# Result: 0 #
+
+# Pause cache invalidation.
+cmds.cacheEvaluator(pauseInvalidation=True)
+
+# Resume cache invalidation.
+cmds.cacheEvaluator(resumeInvalidation=True)
+
+# Query whether or not the resource limit has been reached.
+cmds.cacheEvaluator(query=True, resourceUsage=True)
+# Result: okay #
+
+# Turn safe mode state for evaluator on.
+cmds.cacheEvaluator(safeMode=True)
+
+# Query the safe mode state for evaluator.
+cmds.cacheEvaluator(query=True, safeMode=True)
+# Result: 1 #
+
+# If safe mode was triggered return the safe mode messages
+cmds.cacheEvaluator(query=True, safeModeMessages=True)
+# Result:  #
+
+# Check if safe mode was triggered
+cmds.cacheEvaluator(query=True, safeModeTriggered=True)
+# Result: 0 #
+
+# Wait for 10 seconds for cache to fill in background
+cmds.cacheEvaluator(waitForCache=10)
+# Result: True #
+
+# Save the current caching mode.
+cacheModeString = cmds.cacheEvaluator(query=True, creationParameters=True)
+useEval = True
+if useEval:
+    # The return string can be evaluated as regular Python code to get an array
+    # of dictionaries describing the rule.
+    cacheMode = eval(cacheModeString)
+else:
+    # json.loads can also be used to parse that string.  However, it creates
+    # unicode strings as keys which cannot be used as argument names when
+    # unpacking the dictionary.
+    import json
+    jsonCacheMode = json.loads(cacheModeString)
+    cacheMode = []
+    for rule in jsonCacheMode:
+        newRule = { key.encode('ascii'): value for key, value in rule.iteritems() }
+        cacheMode.append(newRule)
+
+# Restore previous cache mode.
+cmds.cacheEvaluator(resetRules=True)
+for rule in cacheMode:
+    cmds.cacheEvaluator(**rule)
+
+
+# Use the CacheEvaluatorManager to get/set modes.
+from maya.plugin.evaluator.CacheEvaluatorManager import CacheEvaluatorManager
+manager = CacheEvaluatorManager()
+currentMode = manager.cache_mode
+
+from maya.plugin.evaluator.CacheEvaluatorManager import CACHE_STANDARD_MODE_VP2_HW, CACHE_STANDARD_MODE_VP2_SW, CACHE_STANDARD_MODE_EVAL
+# Enable evaluation cache.
+manager.cache_mode = CACHE_STANDARD_MODE_EVAL
+# Enable VP2 software cache.
+manager.cache_mode = CACHE_STANDARD_MODE_VP2_SW
+# Enable VP2 hardware cache.
+manager.cache_mode = CACHE_STANDARD_MODE_VP2_HW
+
+# Restore the previous mode.
+manager.cache_mode = currentMode
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

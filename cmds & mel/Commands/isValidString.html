@@ -1,0 +1,146 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>isValidString command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-isValidString"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>isValidString </h1></td>
+			<td align="right">In categories: <a href="cat_Language.html" target="contentFrame">Language</a>, <a href="cat_Language.html#Strings" target="contentFrame">Strings</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("isValidString.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+int isValidString(string $string, string $regularExpression)
+<br>
+
+	 </code> </p>
+      
+      Return true if the string is valid according to the regular
+expression argument.
+Use &quot;[a-zA-Z][a-zA-Z0-9_]*&quot; as the regular expression
+for strings that must begin with a letter and is followed by 
+letters, digits, or underscores (no spaces allowed). Examples
+of valid strings are: &quot;Name&quot;, &quot;New_Name&quot;, and &quot;Name1&quot;.
+Use &quot;[a-zA-Z][a-zA-Z0-9_ ]*&quot; as the regular expression
+for strings that must begin with a letter and is followed by 
+letters, digits, underscores, or spaces. Examples of valid
+strings are: &quot;Name&quot;, &quot;New Name&quot;, and &quot;Name 1&quot;.
+Use &quot;[0-9][0-9][0-9]\\\.[0-9][0-9][0-9]\\\.[0-9][0-9][0-9][0-9]&quot;
+as the regular expression for strings that are 10 digit phone
+numbers. Periods must follow the area code and exchange, ie. the
+exact format must be ddd.ddd.dddd where 'd' is a single digit.
+The regular expression is implicitly bound to the start and end
+of the string, so a pattern of &quot;abcd&quot; will give the same result as
+a pattern of &quot;^abcd$&quot; although the latter may execute slightly
+faster in some cases.
+Note: isValidString is not reliable on strings containing
+multibyte data.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="isValidObjectName.html">isValidObjectName</a>, <a href="isValidUiName.html">isValidUiName</a>
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$string"><b>$string</b></a></td><td><i>string</i></td><td>The name string to test.
+</td></tr>
+<tr><td><a name="$regularExpression"><b>$regularExpression</b></a></td><td><i>string</i></td><td>The regular expression.
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>	<i>//	Regular expression does not allow spaces.
+</i>
+	<i>//
+</i>
+	isValidString(&quot;Name1&quot;, &quot;[a-zA-Z][a-zA-Z0-9_]*&quot;); <i>// Will succeed.
+</i>
+
+	<i>//	Regular expression does not allow spaces.
+</i>
+	<i>//
+</i>
+	isValidString(&quot;My Name&quot;, &quot;[a-zA-Z][a-zA-Z0-9_]*&quot;); <i>// Will fail.
+</i>
+
+	<i>//	Regular expression does allow spaces.
+</i>
+	<i>//
+</i>
+	isValidString(&quot;My Name&quot;, &quot;[a-zA-Z][a-zA-Z0-9_ ]*&quot;); <i>// Will succeed.
+</i>
+
+	<i>//	Regular expression must be a 10 digit phone number.
+</i>
+	<i>//
+</i>
+	isValidString(&quot;204.555.9663&quot;,
+		&quot;[0-9][0-9][0-9](\\\.)[0-9][0-9][0-9](\\\.)[0-9][0-9][0-9][0-9]&quot;); <i>// Will succeed.
+</i>
+	isValidString(&quot;(204)555-9663&quot;,
+		&quot;[0-9][0-9][0-9](\\\.)[0-9][0-9][0-9](\\\.)[0-9][0-9][0-9][0-9]&quot;); <i>// Will fail.
+</i>
+	isValidString(&quot;204-555-9663&quot;,
+		&quot;[0-9][0-9][0-9](\\\.)[0-9][0-9][0-9](\\\.)[0-9][0-9][0-9][0-9]&quot;); <i>// Will fail.
+</i>
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

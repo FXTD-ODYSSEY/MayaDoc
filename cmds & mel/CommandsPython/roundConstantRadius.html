@@ -1,0 +1,454 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>roundConstantRadius command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-roundConstantRadius"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/roundConstantRadius.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>roundConstantRadius </h1></td>
+			<td align="right">In categories: <a href="cat_Modeling.html" target="contentFrame">Modeling</a>, <a href="cat_Modeling.html#NURBS" target="contentFrame">NURBS</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("roundConstantRadius.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>roundConstantRadius(
+string string [string string]
+    , [<a href="#flagappend">append</a>=<i>boolean</i>], [<a href="#flagconstructionHistory">constructionHistory</a>=<i>boolean</i>], [<a href="#flagname">name</a>=<i>string</i>], [<a href="#flagobject">object</a>=<i>boolean</i>], [<a href="#flagradiuss">radiuss</a>=<i>linear</i>], [<a href="#flagside">side</a>=<i>[string, int]</i>], [<a href="#flagsidea">sidea</a>=<i>int</i>], [<a href="#flagsideb">sideb</a>=<i>int</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>roundConstantRadius is undoable, queryable, and editable.</p>
+      This command generates constant radius NURBS fillets and NURBS
+corner surfaces for matching edge pairs on NURBS surfaces.  An
+edge pair is a matching pair of surface isoparms or trim edges.
+This command
+can handle more than one edge pair at a time.
+This command can also handle <i>compound</i> edges, which is where an edge
+pair is composed of more than two surfaces.  Use the &quot;-sa&quot; and &quot;-sb&quot;
+flags in this case.
+<p>
+The results from this command are three surface var groups plus the
+name of the new roundConstantRadius dependency node, if history was on.
+The 1st var group contains trimmed copies of the original surfaces.  The 2nd
+var group contains the new NURBS fillet surfaces.  The 3rd var group
+contains the new NURBS corners (if any).
+<p>
+A simple example of an edge pair is an edge of a NURBS cube,
+where two faces of the cube meet.  This command generates a NURBS
+fillet at the edge and trims back the faces.
+<p>
+Another example is a NURBS cylinder with a planar trim surface cap.
+This command will create a NURBS fillet where the cap meets the
+the cylinder and will trim back the cap and the cylinder.
+<p>
+Another example involves all 12 edges of a NURBS cube.  NURBS fillets
+are created where any face meets another face.  NURBS corners are
+created whenever 3 edges meet at a corner.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>(resulting NURBS surfaces' names and node name)</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagappend">append</a>, <a href="#flagconstructionHistory">constructionHistory</a>, <a href="#flagname">name</a>, <a href="#flagobject">object</a>, <a href="#flagradiuss">radiuss</a>, <a href="#flagside">side</a>, <a href="#flagsidea">sidea</a>, <a href="#flagsideb">sideb</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+<tr bgcolor="#DDDDDD"><td colspan="3"><u>Common flags</u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagappend">
+          <code><b>append</b>(<b>a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+If true, then an edge pair is being added to an existing
+round dependency node.  Default is false.
+When this flag is true, an existing round dependency node
+must be specified. See example below.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconstructionHistory">
+          <code><b>constructionHistory</b>(<b>ch</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Turn the construction history on or off.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the name of the newly-created node. If it contains
+namespace path, the new node will be created under the
+specified namespace; if the namespace does not exist, it
+will be created.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagobject">
+          <code><b>object</b>(<b>o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Create the result, or just the dependency node.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagradiuss">
+          <code><b>radiuss</b>(<b>rad</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>linear</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use this flag to specify radius.  This overrides the
+&quot;r/radius&quot; flag.  If only one &quot;rad&quot; flag is used,
+then it is applied to all edge pairs.  If more than one &quot;rad&quot; flag is used,
+then the number of &quot;-rad&quot; flags must equal the number
+of edge pairs.  For example, for four edge pairs,
+zero, one or four &quot;rad&quot; flags must be specified.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagside">
+          <code><b>side</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[string, int]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use this flag for compound edges.  It replaces the sidea/sideb flags and is
+compatible with Python.
+
+The first argument must be either &quot;a&quot; or &quot;b&quot;.
+
+The same number of &quot;a&quot; values as &quot;b&quot; values must be specified.
+If no sides are specified with the &quot;side&quot; flag (or sidea/sideb flags), then
+the edges are assumed to be in pairs.
+See also examples below.
+For example, two faces of a cube meet at an edge pair.
+Suppose one of the faces is then split in two pieces
+at the middle of the edge, so that there is one
+face on side &quot;A&quot;, and two pieces on side &quot;B&quot;.  In this case
+the flag combination: -side &quot;a&quot; 1 -side &quot;b&quot; 2 would be used.
+The edges must be specified in the corresponding order:
+// MEL
+roundConstantRadius -side &quot;a&quot; 1 -side &quot;b&quot; 2 isoA isoB1 isoB2;
+# Python
+maya.cmds.roundConstantRadius( 'isoA', 'isoB1', 'isoB2', side=[(&quot;a&quot;,1), (&quot;b&quot;,2)] )
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsidea">
+          <code><b>sidea</b>(<b>sa</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use this flag for compound edges in conjunction with the
+following &quot;-sb&quot; flag.
+
+This flag is not intended for use from Python.  Please see &quot;side&quot; flag instead.
+
+The same number of &quot;-sa&quot; flags as &quot;-sb&quot; flags must be specified.
+If no &quot;-sa&quot; nor &quot;-sb&quot; flags are specified, then the edges
+are assumed to be in pairs.
+See also examples below.
+For example, two faces of a cube meet at an edge pair.
+Suppose one of the faces is then split in two pieces
+at the middle of the edge, so that there is one
+face on side &quot;A&quot;, and two pieces on side &quot;B&quot;.  In this case,
+the flag combination: -sidea 1 -sideb 2 would be used.
+The edges must be specified in the corresponding order:
+roundConstantRadius -sidea 1 -sideb 2 isoA isoB1 isoB2;
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsideb">
+          <code><b>sideb</b>(<b>sb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Use this flag for compound edges in conjunction with the
+&quot;-sa&quot; flag.  See description for the &quot;-sa&quot; flag.
+
+This flag is not intended for use from Python.  Please see &quot;side&quot; flag instead.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+# This rounds four edges of a cube with radius 0.9.  Because a single
+# radius is specified, it is used for all edges.  The edges must
+# be specified in matching pairs if no &quot;sidea&quot; or &quot;sideb&quot; flags
+# are used.
+#
+cube = cmds.nurbsCube(w=5, lr=1, hr=1, d=3, ch=0)
+sides = cmds.listRelatives( cube[0], c=True )
+rnd = cmds.roundConstantRadius(
+    (sides[0] + &quot;.v[0]&quot;), (sides[2] + &quot;.v[1]&quot;),
+    (sides[0] + &quot;.u[1]&quot;), (sides[4] + &quot;.v[1]&quot;),
+    (sides[0] + &quot;.v[1]&quot;), (sides[3] + &quot;.u[1]&quot;),
+    (sides[0] + &quot;.u[0]&quot;), (sides[5] + &quot;.u[1]&quot;),
+    rad=0.9 )
+
+# This adds a pair of isoparms to an existing round operation,
+# named $rnd[3] (from previous example)
+#
+cmds.roundConstantRadius( (sides[3] + '.v[0]'), (sides[5] + '.v[1]'),
+                          rnd[3], append=True, rad=0.8 )
+
+# This rounds 6 edges of a cube with different radius values.
+# The first four edges have radius 0.9 and the others have radius 1.1.
+# In this case the edges are specified in matching pairs
+# since no &quot;sidea&quot; or &quot;sideb&quot; flags are used.
+#
+cube = cmds.nurbsCube( w=5, lr=1, hr=1, d=3, ch=0 )
+sides = cmds.listRelatives( cube[0], c=True )
+cmds.roundConstantRadius( (sides[0]+&quot;.v[0]&quot;), (sides[2]+&quot;.v[1]&quot;),
+                          (sides[0]+&quot;.u[1]&quot;), (sides[4]+&quot;.v[1]&quot;),
+                          (sides[0]+&quot;.v[1]&quot;), (sides[3]+&quot;.u[1]&quot;),
+                          (sides[0]+&quot;.u[0]&quot;), (sides[5]+&quot;.u[1]&quot;),
+                          (sides[3]+&quot;.v[0]&quot;), (sides[5]+&quot;.v[1]&quot;),
+                          (sides[2]+&quot;.u[1]&quot;), (sides[4]+&quot;.u[0]&quot;),
+                          rad=[0.9, 0.9, 0.9, 0.9, 1.1, 1.1] )
+
+# This rounds a 2-to-1 compound edge.  The sidea flag indicates
+# that there two edges on side A, and one on side B.
+# The edges must be specified in the corresponding order.
+#
+pln1 = cmds.nurbsPlane(w=5, ch=0, ax=(0, 1, 0))
+pln2 = cmds.nurbsPlane( p=(2.5, 2.5, 1.25), ax=(1, 0, 0), w=2.5, lr=2, d=3, u=1, v=1, ch=0 )
+pln3 = cmds.nurbsPlane( p=(2.5, 2.5, -1.25), ax=(1, 0, 0), w=2.5, lr=2, d=3, u=1, v=1, ch=0 )
+pln4 = cmds.nurbsPlane( p=(0, 2.5, -2.5), ax=(0, 0, 1), w=5, lr=1, d=3, u=1, v=1, ch=0 )
+cmds.roundConstantRadius( (pln2[0]+'.v[0]'), (pln3[0]+'.v[0]'),
+                          (pln1[0]+'.u[1]'), (pln3[0]+'.u[1]'),
+                          (pln4[0]+'.u[1]'), rad=0.9,
+                          side=[('a',2), ('b', 1), ('a', 1), ('b', 1)] )
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

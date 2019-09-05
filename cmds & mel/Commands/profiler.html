@@ -1,0 +1,1131 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>profiler command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-profiler"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/profiler.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>profiler </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Utilities" target="contentFrame">Utilities</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("profiler.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>profiler [-<a href="#flagaddCategory">addCategory</a> <i>string</i>] [-<a href="#flagallCategories">allCategories</a>] [-<a href="#flagbufferSize">bufferSize</a> <i>int</i>] [-<a href="#flagcategoryIndex">categoryIndex</a> <i>int</i>] [-<a href="#flagcategoryIndexToName">categoryIndexToName</a> <i>int</i>] [-<a href="#flagcategoryInfo">categoryInfo</a> <i>string</i>] [-<a href="#flagcategoryName">categoryName</a> <i>string</i>] [-<a href="#flagcategoryNameToIndex">categoryNameToIndex</a> <i>string</i>] [-<a href="#flagcategoryRecording">categoryRecording</a> <i>boolean</i>] [-<a href="#flagclearAllMelInstrumentation">clearAllMelInstrumentation</a>] [-<a href="#flagcolorIndex">colorIndex</a> <i>int</i>] [-<a href="#flageventCPUId">eventCPUId</a>] [-<a href="#flageventCategory">eventCategory</a>] [-<a href="#flageventColor">eventColor</a>] [-<a href="#flageventCount">eventCount</a>] [-<a href="#flageventDescription">eventDescription</a>] [-<a href="#flageventDuration">eventDuration</a>] [-<a href="#flageventIndex">eventIndex</a> <i>int</i>] [-<a href="#flageventName">eventName</a>] [-<a href="#flageventStartTime">eventStartTime</a>] [-<a href="#flageventThreadId">eventThreadId</a>] [-<a href="#flaginstrumentMel">instrumentMel</a> <i>boolean</i>] [-<a href="#flagload">load</a> <i>string</i>] [-<a href="#flagoutput">output</a> <i>string</i>] [-<a href="#flagprocedureDescription">procedureDescription</a> <i>string</i>] [-<a href="#flagprocedureName">procedureName</a> <i>string</i>] [-<a href="#flagremoveCategory">removeCategory</a> <i>string</i>] [-<a href="#flagreset">reset</a>] [-<a href="#flagsampling">sampling</a> <i>boolean</i>] [-<a href="#flagsignalEvent">signalEvent</a>] [-<a href="#flagsignalMelEvent">signalMelEvent</a> <i>boolean</i>]  </code> </p>
+      <p>profiler is <b>NOT undoable</b>, queryable, and <b>NOT editable</b>.</p>
+      The profiler is used to record timing information from key events within Maya,
+as an aid in tuning the performance of scenes, scripts and plug-ins.
+User written plug-ins and Python scripts can also generate profiling information
+for their own code through the MProfilingScope (C++), MProfilingContextManager
+(Python) and MProfiler classes in the API.
+<p>
+This command provides the ability to control the collection of profiling data and
+to query information about the recorded events. The recorded information can also
+be viewed graphically in the Profiler window.
+<p>
+The buffer size cannot be changed while sampling is active, it will return an error
+The reset flag cannot be called while sampling is active, it will return an error.
+Any changes to the buffer size will only be applied on start of the next recording.
+You can't save and load in the same command, save has priority, load would be ignored.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>timing, performance, profiling, optimize
+      <h2><a name="hRelated">Related</a></h2><a href="dgtimer.html">dgtimer</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagaddCategory">addCategory</a>, <a href="#flagallCategories">allCategories</a>, <a href="#flagbufferSize">bufferSize</a>, <a href="#flagcategoryIndex">categoryIndex</a>, <a href="#flagcategoryIndexToName">categoryIndexToName</a>, <a href="#flagcategoryInfo">categoryInfo</a>, <a href="#flagcategoryName">categoryName</a>, <a href="#flagcategoryNameToIndex">categoryNameToIndex</a>, <a href="#flagcategoryRecording">categoryRecording</a>, <a href="#flagclearAllMelInstrumentation">clearAllMelInstrumentation</a>, <a href="#flagcolorIndex">colorIndex</a>, <a href="#flageventCPUId">eventCPUId</a>, <a href="#flageventCategory">eventCategory</a>, <a href="#flageventColor">eventColor</a>, <a href="#flageventCount">eventCount</a>, <a href="#flageventDescription">eventDescription</a>, <a href="#flageventDuration">eventDuration</a>, <a href="#flageventIndex">eventIndex</a>, <a href="#flageventName">eventName</a>, <a href="#flageventStartTime">eventStartTime</a>, <a href="#flageventThreadId">eventThreadId</a>, <a href="#flaginstrumentMel">instrumentMel</a>, <a href="#flagload">load</a>, <a href="#flagoutput">output</a>, <a href="#flagprocedureDescription">procedureDescription</a>, <a href="#flagprocedureName">procedureName</a>, <a href="#flagremoveCategory">removeCategory</a>, <a href="#flagreset">reset</a>, <a href="#flagsampling">sampling</a>, <a href="#flagsignalEvent">signalEvent</a>, <a href="#flagsignalMelEvent">signalMelEvent</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddCategory">
+          <code><b>-addCategory</b>(<b>-a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add a new category for the profiler.
+Returns the index of the new category.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallCategories">
+          <code><b>-allCategories</b>(<b>-ac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the names of all categories.
+If the <i>categoryInfo</i> flag is set then alternate the name of the category
+with the description of the category.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbufferSize">
+          <code><b>-bufferSize</b>(<b>-b</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Toggled : change the buffer size to fit the specified number of events (requires that sampling is off)
+Query : return the current buffer size
+The new buffer size will only take effect when next sampling starts.
+When the buffer is full, the recording stops.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcategoryIndex">
+          <code><b>-categoryIndex</b>(<b>-ci</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in conjunction with other flags, to indicate the index of the category.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcategoryIndexToName">
+          <code><b>-categoryIndexToName</b>(<b>-cin</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the name of the category with a given index.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcategoryInfo">
+          <code><b>-categoryInfo</b>(<b>-cf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When used with the <i>addCategory</i> flag set the description of the added profiler category.
+In query mode return the description of the category referenced by either
+the <i>categoryIndex</i> or <i>categoryName</i> flags.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcategoryName">
+          <code><b>-categoryName</b>(<b>-cn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used in conjunction with other flags, to indicate the name of the category.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcategoryNameToIndex">
+          <code><b>-categoryNameToIndex</b>(<b>-cni</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Returns the index of the category with a given name.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcategoryRecording">
+          <code><b>-categoryRecording</b>(<b>-cr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Toggled : Enable/disable the recording of the category.
+Query : return if the recording of the category is On.
+Requires the -categoryIndex or -categoryName flag to specify the category to be queried.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclearAllMelInstrumentation">
+          <code><b>-clearAllMelInstrumentation</b>(<b>-cam</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clear all MEL command or procedure instrumentation.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcolorIndex">
+          <code><b>-colorIndex</b>(<b>-coi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;-instrumentMel true&quot; to specify the color index to show the
+profiling result.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageventCPUId">
+          <code><b>-eventCPUId</b>(<b>-eci</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the CPU ID of the event at the given index.
+Requires the -eventIndex flag to specify the event to be queried.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageventCategory">
+          <code><b>-eventCategory</b>(<b>-eca</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the category index the event at the given index belongs to.
+Requires the -eventIndex flag to specify the event to be queried.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageventColor">
+          <code><b>-eventColor</b>(<b>-eco</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the color of the event at the given index.
+Requires the -eventIndex flag to specify the event to be queried.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageventCount">
+          <code><b>-eventCount</b>(<b>-ec</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the number of events in the buffer
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageventDescription">
+          <code><b>-eventDescription</b>(<b>-ed</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the description of the event at the given index.
+Requires the -eventIndex flag to specify the event to be queried.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageventDuration">
+          <code><b>-eventDuration</b>(<b>-edu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the duration of the event at the given index, the time unit is microsecond.
+Note that a signal event has a 0 duration.
+Requires the -eventIndex flag to specify the event to be queried.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageventIndex">
+          <code><b>-eventIndex</b>(<b>-ei</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used usually in conjunction with other flags, to indicate the index of the event.
+			<p><i>In query mode, this flag needs a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageventName">
+          <code><b>-eventName</b>(<b>-en</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the name of the event at the given index.
+Requires the -eventIndex flag to specify the event to be queried.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageventStartTime">
+          <code><b>-eventStartTime</b>(<b>-et</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the time of the event at the given index, the time unit is microsecond.
+Requires the -eventIndex flag to specify the event to be queried.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageventThreadId">
+          <code><b>-eventThreadId</b>(<b>-eti</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query the thread ID of the event at the given index.
+Requires the -eventIndex flag to specify the event to be queried.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginstrumentMel">
+          <code><b>-instrumentMel</b>(<b>-in</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Enable/Diable the instrumentation of a MEL command or procedure.
+When the instrumentation is enabled, the execution of MEL command
+or procedure can be profiled and shown in the Profiler window.
+To enable the instrumentation requires the -procedureName, -colorIndex
+and -categoryIndex flags.
+To disable the instrumentation requires the -procedureName flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagload">
+          <code><b>-load</b>(<b>-l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Read the recorded events from the specified file
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagoutput">
+          <code><b>-output</b>(<b>-o</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Output the recorded events to the specified file
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprocedureDescription">
+          <code><b>-procedureDescription</b>(<b>-pd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;-instrumentMel true&quot; to provide a description of the MEL
+command or procedure being instrumented.
+This description can be viewed in the Profiler Tool window.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagprocedureName">
+          <code><b>-procedureName</b>(<b>-pn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with -instrumentMel to specify the name of the procedure to be
+enabled/disabled the instrumentation.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveCategory">
+          <code><b>-removeCategory</b>(<b>-rc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove an existing category for the profiler.
+Returns the index of the removed category.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreset">
+          <code><b>-reset</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+reset the profiler's data (requires that sampling is off)
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsampling">
+          <code><b>-sampling</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Toggled : Enable/disable the recording of events
+Query : return if the recording of events is On.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsignalEvent">
+          <code><b>-signalEvent</b>(<b>-sig</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query if the event at the given index is a signal event.
+Requires the -eventIndex flag to specify the event to be queried.
+A Signal Event only remembers the start moment and has no knowledge about
+duration. It can be used in cases when the user does not care about the
+duration but only cares if this event does happen.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsignalMelEvent">
+          <code><b>-signalMelEvent</b>(<b>-sim</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Used with &quot;-instrumentMel true&quot;, inform profiler that this instrumented
+MEL command or procedure will be taken as a signal event during profiling.
+A Signal Event only remembers the start moment and has no knowledge about
+duration. It can be used in cases when the user does not care about the
+duration but only cares if this event does happen.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Start profiling
+profiler -sampling true;
+
+// Wait for events to be profiled
+// Stop profiling
+profiler -sampling false;
+
+// Output the result to a file
+profiler -output &quot;test.txt&quot;;
+
+// Load a recording from a file to the buffer
+profiler -load &quot;test.txt&quot;;
+
+// Reset the tool
+profiler -reset;
+
+// Set the profiler's buffer size to fit 5 megaBytes
+profiler -bufferSize 5;
+
+// Query the profiler's buffer size
+profiler -query -bufferSize;
+
+// Add a new category
+profiler -addCategory &quot;Test Category&quot; -categoryInfo &quot;Events related to my special test&quot;;
+
+// Remove an existing category
+profiler -removeCategory &quot;Test Category&quot;;
+
+// Query the index of the category with the given name
+profiler -query -categoryNameToIndex &quot;Maya Qt&quot; ;
+
+// Query the info of the category with the given name
+profiler -categoryNameToIndex &quot;Maya Qt&quot; -query -info;
+
+// Query the info of the category at the given index
+profiler -categoryIndexToName 5 -query -info;
+
+// Query if it is enabled for the recording of the category at the given index
+profiler -query -categoryRecording -categoryIndex 5;
+
+// Query if it is enabled for the recording of the category with the given name
+profiler -query -categoryRecording -categoryName &quot;Maya Qt&quot;;
+
+// Enable/Disable the recording of the category at the given index
+profiler -categoryIndex 5 -categoryRecording false;
+profiler -categoryIndex 5 -categoryRecording true;
+
+// Query the number of the events in the buffer
+profiler -query -eventCount;
+
+// Query the time at which the event at the given index start
+profiler -query -eventStartTime -eventIndex 100;
+
+// Query the duration of the event at the given index
+profiler -query -eventDuration -eventIndex 100;
+
+// Query the name of the event at the given index
+profiler -query -eventName -eventIndex 100;
+
+// Query the description of the event at the given index
+profiler -query -eventDescription -eventIndex 100;
+
+// Query the category the the event at the given index belongs to
+profiler -query -eventCategory -eventIndex 100;
+
+// Query the color of the event at the given index
+profiler -query -eventColor -eventIndex 100;
+
+// Query the thread ID of the event at the given index
+profiler -query -eventThreadId -eventIndex 100;
+//
+// Query the CPU ID of the event at the given index
+profiler -query -eventCPUId -eventIndex 100;
+//
+// Query if the event at the given index is a signal event
+profiler -query -signalEvent -eventIndex 100;
+
+// Instrument a MEL command or procedure
+// Given a MEL procedure which calculate factorial, it will be instrumented
+// and profiled
+proc int Factorial(int $limit)
+{
+    int $result = 1;
+    for( $i=1; $i&lt;=$limit; ++$i)
+    {
+        $result = $result * $i;
+    }
+    return $result;
+}
+
+// Add a new category for MEL Scripts
+int $melCategoryIndex = `profiler -addCategory &quot;MEL Scripts&quot; -categoryInfo &quot;Events triggered by MEL scripts&quot;`;
+
+// Instrument a MEL command
+profiler -instrumentMel true -procedureName &quot;deviceManager&quot; -categoryIndex $melCategoryIndex -colorIndex 2 -procedureDescription &quot;deviceManagerDesc&quot;;
+
+// Instrument a MEL procedure as a signal event
+profiler -instrumentMel true -procedureName &quot;Factorial&quot; -categoryIndex $melCategoryIndex -colorIndex 8 -procedureDescription &quot;FactorialDesc&quot; -signalMelEvent true;
+
+// Profiler the MEL procedure and command.
+profiler -s true;
+Factorial(5);
+deviceManager -query -numDevices;
+profiler -s false;
+
+// Remove the instrumentation of the MEL command and procedure
+profiler -instrumentMel false -procedureName &quot;deviceManager&quot;;
+profiler -instrumentMel false -procedureName &quot;Factorial&quot;;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

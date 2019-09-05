@@ -1,0 +1,134 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>loadPluginLanguageResources command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-loadPluginLanguageResources"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>loadPluginLanguageResources </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Localization" target="contentFrame">Localization</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("loadPluginLanguageResources.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hNotes">Notes</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+loadPluginLanguageResources(string $pluginName, string $pluginResourceFile)
+<br>
+
+	 </code> </p>
+      
+      Load localized values for string resources registered with a plugin. 
+This procedure takes the name of a script file that will be sourced 
+to override the default values for a plugin's resources with 
+language-appropriate values.  
+<p>
+This file will only be used if Maya is running in a localized mode
+and an appropriate file for the UI language can be found (see below).
+Otherwise the default values registered for the resources will
+be used. 
+<p>
+This call should be invoked from the UI string registration  
+procedures that are setup using MFnPlugin::registerUIStrings.
+When set up correctly it will be called during plugin load and will
+ensure that the strings are set correctly to their default or
+localized value for subsequent steps in the plugin's execution. 
+<p>
+When maya is running in a localized mode, a language-dependent
+resource file with the given name will be searched for
+along MAYA_PLUG_IN_RESOURCE_PATH, and sourced if it is found.
+<p>
+MAYA_PLUG_IN_RESOURCE_PATH is constructed to contain
+the following locations: Maya's default resource location for the 
+current localized language; language-subdirectories found
+in all module locations as MAYA_MODULE_PATH is processed. 
+<p>
+Call getenv(&quot;MAYA_PLUG_IN_RESOURCE_PATH&quot;) to see the current value of
+the search path.  It is only relevant in localized environments.
+	  <h2><a name="hNotes">Notes</a></h2>
+		Plugin resources are defined using the registerPluginResources
+and overriden (for localization) using the setPluginResource commands.  
+They are accessed using getPluginResource.  
+
+	
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="getPluginResource.html">getPluginResource</a>, <a href="registerPluginResource.html">registerPluginResource</a>, <a href="setPluginResource.html">setPluginResource</a>
+
+      
+    <a name="hArgs"><h2>Arguments</h2></a>
+    <table width="100%">
+    <tr>
+       <th bgcolor="#CCCCCC">Variable Name</th>
+       <th bgcolor="#CCCCCC"><i>Variable Type</i></th>
+       <th bgcolor="#CCCCCC">Description</th>
+    </tr>
+    <tr><td><a name="$pluginName"><b>$pluginName</b></a></td><td><i>string</i></td><td>Unique Plugin name 
+</td></tr>
+<tr><td><a name="$fileName"><b>$fileName</b></a></td><td><i>string</i></td><td>Name of string resource file to load 
+(filename only without path).
+</td></tr>
+    </table>
+    <hr>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>  <i>// Load localized resources for the plugin &quot;myPlugin&quot;  
+</i>
+  <i>// when required. 
+</i>
+  <i>// The resources are located in a file &quot;myPluginStrings.res.mel&quot;
+</i>
+  <i>// No action will be taken if the file is not found. 
+</i>
+  loadPluginLanguageResources(&quot;myPlugin&quot;, &quot;myPluginStrings.res.mel&quot;);
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

@@ -1,0 +1,397 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>scriptNode command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-scriptNode"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/scriptNode.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>scriptNode </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("scriptNode.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>scriptNode [-<a href="#flagafterScript">afterScript</a> <i>string</i>] [-<a href="#flagbeforeScript">beforeScript</a> <i>string</i>] [-<a href="#flagexecuteAfter">executeAfter</a>] [-<a href="#flagexecuteBefore">executeBefore</a>] [-<a href="#flagignoreReferenceEdits">ignoreReferenceEdits</a>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagscriptType">scriptType</a> <i>int</i>] [-<a href="#flagsourceType">sourceType</a> <i>string</i>] 
+[attributeList]
+     </code> </p>
+      <p>scriptNode is undoable, queryable, and editable.</p>
+      scriptNodes contain scripts that are executed when a file is loaded or
+when the script node is deleted. If a script modifies a referenced node,
+the changes will be tracked as reference edits unless the scriptNode was
+created with the ignoreReferenceEdits flag. The scriptNode command is used
+to create, edit, query, and test scriptNodes.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagafterScript">afterScript</a>, <a href="#flagbeforeScript">beforeScript</a>, <a href="#flagexecuteAfter">executeAfter</a>, <a href="#flagexecuteBefore">executeBefore</a>, <a href="#flagignoreReferenceEdits">ignoreReferenceEdits</a>, <a href="#flagname">name</a>, <a href="#flagscriptType">scriptType</a>, <a href="#flagsourceType">sourceType</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagafterScript">
+          <code><b>-afterScript</b>(<b>-as</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The script executed when the script node is deleted. <br>
+C: The default is an empty string. <br>
+Q: When queried, this flag returns a string.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbeforeScript">
+          <code><b>-beforeScript</b>(<b>-bs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The script executed during file load. <br>
+C: The default is an empty string. <br>
+Q: When queried, this flag returns a string.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexecuteAfter">
+          <code><b>-executeAfter</b>(<b>-ea</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Execute the script stored in the .after attribute of the
+scriptNode. This script is normally executed when the script node
+is deleted.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagexecuteBefore">
+          <code><b>-executeBefore</b>(<b>-eb</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Execute the script stored in the .before attribute of the
+scriptNode. This script is normally executed when the file
+is loaded.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagignoreReferenceEdits">
+          <code><b>-ignoreReferenceEdits</b>(<b>-ire</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets whether changes made to referenced nodes during the execution of the
+script should be recorded as reference edits. This flag must be set when
+the scriptNode is created. If this flag is not set, changes to referenced
+nodes will be recorded as edits by default.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When creating a new scriptNode, this flag specifies the name
+of the node. If a non-unique name is used, the name will be
+modified to ensure uniqueness.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagscriptType">
+          <code><b>-scriptType</b>(<b>-st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies when the script is executed. The following
+values may be used:
+<table cellpadding="0" cellspacing="5">
+<tr>
+<td>0</td> <td>Execute on demand.</td>
+</tr>
+<tr>
+<td>1</td> <td>Execute on file load or on node deletion.</td>
+</tr>
+<tr>
+<td>2</td> <td>Execute on file load or on node deletion
+when not in batch mode. </td>
+</tr>
+<tr>
+<td>3</td> <td>Internal</td>
+</tr>
+<tr>
+<td>4</td> <td>Execute on software render</td>
+</tr>
+<tr>
+<td>5</td> <td>Execute on software frame render</td>
+</tr>
+<tr>
+<td>6</td> <td>Execute on scene configuration</td>
+</tr>
+<tr>
+<td>7</td> <td>Execute on time changed</td>
+</tr>
+</table>
+C: The default value is 0. <br>
+Q: When queried, this flag returns an int.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsourceType">
+          <code><b>-sourceType</b>(<b>-stp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the language type for both the attached scripts.
+Valid values are &quot;mel&quot; (enabled by default), and &quot;python&quot;.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+//    Create a scriptNode named script that creates a sphere when a file
+//    containing this node is loaded.
+//
+string $nodeName = `scriptNode -st 2 -bs &quot;sphere&quot; -n &quot;script&quot;`;
+
+//    Test the before script.
+//
+scriptNode -executeBefore $nodeName;
+
+//    Add a script to create a cone when the script node is deleted.
+//
+scriptNode -e -as &quot;cone&quot; $nodeName;
+
+//    Test the after script
+//
+scriptNode -executeAfter $nodeName;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

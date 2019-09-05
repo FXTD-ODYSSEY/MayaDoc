@@ -1,0 +1,639 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>select command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-select"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/select.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>select </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Selection" target="contentFrame">Selection</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("select.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>select [-<a href="#flagadd">add</a>] [-<a href="#flagaddFirst">addFirst</a>] [-<a href="#flagall">all</a>] [-<a href="#flagallDagObjects">allDagObjects</a>] [-<a href="#flagallDependencyNodes">allDependencyNodes</a>] [-<a href="#flagclear">clear</a>] [-<a href="#flagcontainerCentric">containerCentric</a>] [-<a href="#flagdeselect">deselect</a>] [-<a href="#flaghierarchy">hierarchy</a>] [-<a href="#flagnoExpand">noExpand</a>] [-<a href="#flagreplace">replace</a>] [-<a href="#flagsymmetry">symmetry</a>] [-<a href="#flagsymmetrySide">symmetrySide</a> <i>int</i>] [-<a href="#flagtoggle">toggle</a>] [-<a href="#flagvisible">visible</a>] 
+[objects...]
+     </code> </p>
+      <p>select is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command is used to put objects onto or off of the active list.
+If none of the five flags [-add, -af, -r, -d, -tgl] are specified, the
+default is to replace the objects on the active list with the
+given list of objects.
+<p>
+When selecting a set as in &quot;select set1&quot;, the behaviour is for all
+the members of the set to become selected instead of the set itself.
+If you want to select a set, the &quot;-ne/noExpand&quot; flag must be used.
+<p>
+With the advent of namespaces, selection by name may be
+confusing.  To clarify, without a qualified namespace, name
+lookup is limited to objects in the root namespace &quot;:&quot;. There
+are really two parts of a name: the namespace and the name
+itself which is unique within the namespace. If you want to
+select objects in a specific namespace, you need to include
+the namespace separator &quot;:&quot;.
+<p>
+For example, 'select -r &quot;foo*&quot;' is trying to look for an
+object with the &quot;foo&quot; prefix in the root namespace. It is not
+trying to look for all objects in the namespace with the &quot;foo&quot;
+prefix. If you want to select all objects in a namespace
+(foo), use 'select &quot;foo:*&quot;'.
+<p>
+Note: When the application starts up, there are several dependency nodes
+created by the system which must exist. These objects are not deletable
+but are selectable.  All objects (dag and dependency nodes) in the scene
+can be obtained using the &quot;ls&quot; command without any arguments. When using
+the &quot;-all&quot;, &quot;adn/allDependencyNodes&quot; or &quot;-ado/allDagObjects&quot; flags, only
+the deletable objects are selected.  The non deletable object can still
+be selected by explicitly specifying their name as in &quot;select time1;&quot;.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="selectKey.html">selectKey</a>, <a href="selectMode.html">selectMode</a>, <a href="selectPref.html">selectPref</a>, <a href="selectPriority.html">selectPriority</a>, <a href="selectType.html">selectType</a>, <a href="selectedNodes.html">selectedNodes</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagadd">add</a>, <a href="#flagaddFirst">addFirst</a>, <a href="#flagall">all</a>, <a href="#flagallDagObjects">allDagObjects</a>, <a href="#flagallDependencyNodes">allDependencyNodes</a>, <a href="#flagclear">clear</a>, <a href="#flagcontainerCentric">containerCentric</a>, <a href="#flagdeselect">deselect</a>, <a href="#flaghierarchy">hierarchy</a>, <a href="#flagnoExpand">noExpand</a>, <a href="#flagreplace">replace</a>, <a href="#flagsymmetry">symmetry</a>, <a href="#flagsymmetrySide">symmetrySide</a>, <a href="#flagtoggle">toggle</a>, <a href="#flagvisible">visible</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagadd">
+          <code><b>-add</b>(<b>-add</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that the specified items should be
+added to the active list without removing existing
+items from the active list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddFirst">
+          <code><b>-addFirst</b>(<b>-af</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that the specified items should be
+added to the front of the active list without
+removing existing items from the active list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagall">
+          <code><b>-all</b>(<b>-all</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that all deletable root level dag objects
+and all deletable non-dag dependency nodes should be
+selected.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallDagObjects">
+          <code><b>-allDagObjects</b>(<b>-ado</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that all deletable root level dag objects
+should be selected.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallDependencyNodes">
+          <code><b>-allDependencyNodes</b>(<b>-adn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that all deletable dependency nodes
+including all deletable dag objects should be selected.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagclear">
+          <code><b>-clear</b>(<b>-cl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Clears the active list.  This is more efficient than
+&quot;select -d;&quot;.  Also &quot;select -d;&quot; will not remove sets
+from the active list unless the &quot;-ne&quot; flag is also
+specified.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcontainerCentric">
+          <code><b>-containerCentric</b>(<b>-cc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that the same selection rules as apply to selection in the main
+viewport will also be applied to the select command. In particular, if
+the specified objects are members of a black-boxed container and are not
+published as nodes, Maya will not select them. Instead, their first parent
+valid for selection will be selected.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdeselect">
+          <code><b>-deselect</b>(<b>-d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that the specified items should
+be removed from the active list if they are on the
+active list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghierarchy">
+          <code><b>-hierarchy</b>(<b>-hi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that all children, grandchildren, ...
+of the specified dag objects should also be selected.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoExpand">
+          <code><b>-noExpand</b>(<b>-ne</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that any set which is among the specified
+items should not be expanded to its list of members.
+This allows sets to be selected as opposed to
+the members of sets which is the default behaviour.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreplace">
+          <code><b>-replace</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that the specified items should
+replace the existing items on the active list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsymmetry">
+          <code><b>-symmetry</b>(<b>-sym</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies that components should be selected symmetrically using the
+current symmetricModelling command settings. If symmetric modeling
+is not enabled then this flag has no effect.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsymmetrySide">
+          <code><b>-symmetrySide</b>(<b>-sys</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that components involved in the current symmetry
+object should be selected, according to the supplied parameter.
+Valid values for the parameter are:
+<br>-1 : Select components in the unsymmetrical region.
+<br>0 : Select components on the symmetry seam.
+<br>1 : Select components on side 1.
+<br>2 : Select components on side 2.
+If symmetric modeling is not enabled then this flag has no effect.
+Note: currently only works for topological symmetry.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtoggle">
+          <code><b>-toggle</b>(<b>-tgl</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that those items on the given list which
+are on the active list should be removed from the active
+list and those items on the given list which are not on
+the active list should be added to the active list.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagvisible">
+          <code><b>-visible</b>(<b>-vis</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Indicates that of the specified items only those
+that are visible should be affected.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// create some objects and add them to a set
+sphere -n sphere1;
+sphere -n sphere2;
+sets -n set1 sphere1 sphere2;
+
+// select all dag objects and all dependency nodes
+select -all;
+
+// clear the active list
+select -clear;
+
+// select sphere2 only if it is visible
+select -visible sphere2;
+
+// select a couple of objects regardless of visibilty
+select -r sphere1;
+select -add sphere2;
+
+// remove one of the spheres from the active list (using toggle)
+select -tgl sphere1;
+
+// remove the other sphere from the active list
+select -d sphere2;
+
+// the following selects all the members of set1
+select set1;
+
+// this selects set1 itself
+select -ne set1;
+
+
+// Some examples selecting with namespaces:
+
+// create a namespace and an object in the namespace
+namespace -add foo;
+namespace -set foo;
+sphere -n bar;
+
+// 'select bar' will not select &quot;bar&quot; unless bar is in the
+// root namespace. You need to qualify the name with the
+// namespace (shown below).
+select foo:bar;
+
+// select all the objects in a namespace
+select &quot;foo:*&quot;;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

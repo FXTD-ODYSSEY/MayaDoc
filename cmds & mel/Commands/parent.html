@@ -1,0 +1,414 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>parent command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-parent"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/parent.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>parent </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("parent.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>parent [-<a href="#flagabsolute">absolute</a>] [-<a href="#flagaddObject">addObject</a>] [-<a href="#flagnoConnections">noConnections</a>] [-<a href="#flagnoInvScale">noInvScale</a>] [-<a href="#flagrelative">relative</a>] [-<a href="#flagremoveObject">removeObject</a>] [-<a href="#flagshape">shape</a>] [-<a href="#flagworld">world</a>] 
+[dagObject...] [dagObject]
+     </code> </p>
+      <p>parent is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command parents (moves) objects under a new group, removes
+objects from an existing group, or adds/removes parents.
+<p>
+If the -w flag is specified all the selected or specified objects
+are parented to the world (unparented first).
+<p>
+If the -rm flag is specified then all the selected or specified
+instances are removed.
+<p>
+If there are more than two objects specified all the objects are
+parented to the last object specified.
+<p>
+If the -add flag is specified, the objects are not reparented but
+also become children of the last object specified.
+<p>
+If there is only a single object specified then the selected objects
+are parented to that object.
+<p>
+If an object is parented under a different group and there is
+an object in that group with the same name then this command
+will rename the parented object.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>Names of the objects parented (possibly renamed)</td></tr></table>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="group.html">group</a>, <a href="listRelatives.html">listRelatives</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagabsolute">absolute</a>, <a href="#flagaddObject">addObject</a>, <a href="#flagnoConnections">noConnections</a>, <a href="#flagnoInvScale">noInvScale</a>, <a href="#flagrelative">relative</a>, <a href="#flagremoveObject">removeObject</a>, <a href="#flagshape">shape</a>, <a href="#flagworld">world</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagabsolute">
+          <code><b>-absolute</b>(<b>-a</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+preserve existing world object transformations
+(overall object transformation is preserved
+by modifying the objects local transformation)
+If the object to parent is a joint, it will
+alter the translation and joint orientation of
+the joint to preserve the world object
+transformation if this suffices. Otherwise, a
+transform will be inserted between the joint
+and the parent for this purpose. In this case,
+the transformation inside the joint is not
+altered.
+[default]
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddObject">
+          <code><b>-addObject</b>(<b>-add</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+preserve existing local object transformations
+but don't reparent, just add the object(s) under
+the parent. Use -world to add the world as
+a parent of the given objects.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoConnections">
+          <code><b>-noConnections</b>(<b>-nc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The parent command will normally generate
+new instanced set connections when adding instances.
+(ie. make a connection to the shading engine for
+new instances) This flag suppresses this behaviour
+and is primarily used by the file format.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnoInvScale">
+          <code><b>-noInvScale</b>(<b>-nis</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The parent command will normally connect
+inverseScale to its parent scale on joints.
+This is used to compensate scale on joint.
+The connection of inverseScale will occur if both child and parent are joints and no connection is present on child's inverseScale.
+In case of a reparenting, the old inverseScale will only get broken if the old parent is a joint. Otherwise connection will remain intact.
+This flag suppresses this behaviour.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagrelative">
+          <code><b>-relative</b>(<b>-r</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+preserve existing local object transformations
+(relative to the parent node)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveObject">
+          <code><b>-removeObject</b>(<b>-rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove the immediate parent of every object specified. To remove only
+a single instance of a shape from a parent, the path to the shape
+should be specified.
+Note: if there is a single parent then the object is effectively deleted from
+the scene. Use -world to remove the world as a parent of the given object.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshape">
+          <code><b>-shape</b>(<b>-s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The parent command usually only operates on
+transforms.  Using this flags allows a shape
+that is specified to be directly parented under
+the given transform.  This is used to instance
+a shape node. (ie. &quot;parent -add -shape&quot;    is
+equivalent to the &quot;instance&quot; command).
+This flag is primarily used by the file format.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagworld">
+          <code><b>-world</b>(<b>-w</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+unparent given object(s) (parent to world)
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Create some objects
+circle -name circle1; move 5 0 0;
+group -n group1; move -5 0 0;
+group -em -n group2;
+
+// Move the circle under group2.
+// Note that the circle remains where it is.
+parent circle1 group2;
+
+// Let's try that again with the -relative flag. This time
+// the circle will move.
+undo;
+parent -relative circle1 group2;
+
+// Create an instance of the circle using the parent command.
+// This makes circle1 a child of group1 and group2.
+undo;
+parent -add circle1 group2;
+
+// Remove group1 as a parent of the circle
+parent -removeObject group1|circle1;
+
+// Move the circle to the top of the hierarchy
+parent -world group2|circle1;
+
+// Remove an instance of a shape from a parent
+parent -shape -rm nurbsSphere3|nurbsSphereShape1;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

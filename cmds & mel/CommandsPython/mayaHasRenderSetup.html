@@ -1,0 +1,185 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>mayaHasRenderSetup command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-mayaHasRenderSetup"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/mayaHasRenderSetup.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>mayaHasRenderSetup </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("mayaHasRenderSetup.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>mayaHasRenderSetup([<a href="#flagenableCurrentSession">enableCurrentSession</a>=<i>boolean</i>], [<a href="#flagenableDuringTests">enableDuringTests</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>mayaHasRenderSetup is <b>NOT undoable</b>, queryable, and editable.</p>
+      <p>
+This command controls and queries render setup states.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>render, setup
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagenableCurrentSession">enableCurrentSession</a>, <a href="#flagenableDuringTests">enableDuringTests</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenableCurrentSession">
+          <code><b>enableCurrentSession</b>(<b>ecs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Enables or disables render setup for this Maya session only.
+This flag should only be called during Maya intialization. This flag is for internal use only, may change at any time and is unsupported.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenableDuringTests">
+          <code><b>enableDuringTests</b>(<b>edt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Switches render setup for this Maya session only, as legacy render layer mode is assumed during testing.
+This flag is for internal use only, may change at any time and is unsupported.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+
+#Returns whether render setup mode is enabled or disabled
+cmds.mayaHasRenderSetup()
+
+#Query the state renderSetupEnableDuringTests
+cmds.mayaHasRenderSetup(query = True, enableCurrentSession = True)
+
+#Query the state renderSetupEnableDuringTests
+cmds.mayaHasRenderSetup(query = True, enableDuringTests = True)
+
+#Enable renderSetupEnableCurrentSession
+cmds.mayaHasRenderSetup(edit = True, enableCurrentSession = True)
+
+#Disable renderSetupEnableCurrentSession
+cmds.mayaHasRenderSetup(edit = True, enableCurrentSession = False)
+
+#Enable enableDuringTests
+cmds.mayaHasRenderSetup(edit = True, enableDuringTests = True)
+
+#Disable enableDuringTests
+cmds.mayaHasRenderSetup(edit = True, enableDuringTests = False)
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

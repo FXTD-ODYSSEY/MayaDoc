@@ -1,0 +1,525 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>attributeInfo command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-attributeInfo"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/attributeInfo.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>attributeInfo </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Attributes" target="contentFrame">Attributes</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("attributeInfo.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>attributeInfo([<a href="#flagallAttributes">allAttributes</a>=<i>boolean</i>], [<a href="#flagbool">bool</a>=<i>boolean</i>], [<a href="#flagenumerated">enumerated</a>=<i>boolean</i>], [<a href="#flaghidden">hidden</a>=<i>boolean</i>], [<a href="#flaginherited">inherited</a>=<i>boolean</i>], [<a href="#flaginternal">internal</a>=<i>boolean</i>], [<a href="#flagleaf">leaf</a>=<i>boolean</i>], [<a href="#flaglogicalAnd">logicalAnd</a>=<i>boolean</i>], [<a href="#flagmulti">multi</a>=<i>boolean</i>], [<a href="#flagshort">short</a>=<i>boolean</i>], [<a href="#flagtype">type</a>=<i>string</i>], [<a href="#flaguserInterface">userInterface</a>=<i>boolean</i>], [<a href="#flagwritable">writable</a>=<i>boolean</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>attributeInfo is <b>NOT undoable</b>, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command lists all of the attributes that are marked with certain
+flags.  Combinations of flags may be specified and all will be considered.
+(The method of combination depends on the state of the &quot;logicalAnd/and&quot; flag.)
+When the &quot;allAttributes/all&quot; flag is specified, attributes of all
+types will be listed.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string[]</i></td><td>List of attributes matching criteria</td></tr></table>
+      <h2><a name="hKeywords">Keywords</a></h2>attribute
+      <h2><a name="hRelated">Related</a></h2><a href="addAttr.html">addAttr</a>, <a href="affectedNet.html">affectedNet</a>, <a href="affects.html">affects</a>, <a href="aliasAttr.html">aliasAttr</a>, <a href="deleteAttr.html">deleteAttr</a>, <a href="getClassification.html">getClassification</a>, <a href="nodeType.html">nodeType</a>, <a href="objExists.html">objExists</a>, <a href="objectType.html">objectType</a>, <a href="renameAttr.html">renameAttr</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagallAttributes">allAttributes</a>, <a href="#flagbool">bool</a>, <a href="#flagenumerated">enumerated</a>, <a href="#flaghidden">hidden</a>, <a href="#flaginherited">inherited</a>, <a href="#flaginternal">internal</a>, <a href="#flagleaf">leaf</a>, <a href="#flaglogicalAnd">logicalAnd</a>, <a href="#flagmulti">multi</a>, <a href="#flagshort">short</a>, <a href="#flagtype">type</a>, <a href="#flaguserInterface">userInterface</a>, <a href="#flagwritable">writable</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallAttributes">
+          <code><b>allAttributes</b>(<b>all</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show all attributes associated with the node regardless of type.
+Use of this flag overrides any other attribute type flags and logical operation
+that may be specified on the command.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbool">
+          <code><b>bool</b>(<b>b</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the attributes that are of type boolean.
+Use the 'on' state to get only boolean attributes; the 'off' state
+to ignore boolean attributes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenumerated">
+          <code><b>enumerated</b>(<b>e</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the attributes that are of type enumerated.
+Use the 'on' state to get only enumerated attributes; the 'off' state
+to ignore enumerated attributes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghidden">
+          <code><b>hidden</b>(<b>h</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the attributes that are marked as hidden.
+Use the 'on' state to get hidden attributes; the 'off' state
+to get non-hidden attributes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginherited">
+          <code><b>inherited</b>(<b>inherited</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Filter the attributes based on whether they belong to the node type directly
+or have been inherited from a root type (e.g. meshShape/direct or
+dagObject/inherited).
+Use the 'on' state to get only inherited attributes, the 'off' state
+to get only directly owned attributes, and leave the flag unspecified to
+get both.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaginternal">
+          <code><b>internal</b>(<b>i</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the attributes that are marked as internal to the node.
+Use the 'on' state to get internal attributes; the 'off' state
+to get non-internal attributes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagleaf">
+          <code><b>leaf</b>(<b>l</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the attributes that are complex leaves (ie. that have parent attributes
+and have no children themselves).
+Use the 'on' state to get leaf attributes; the 'off' state
+to get non-leaf attributes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaglogicalAnd">
+          <code><b>logicalAnd</b>(<b>logicalAnd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The default is to take the logical 'or' of the above conditions.
+Specifying this flag switches to the logical 'and' instead.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmulti">
+          <code><b>multi</b>(<b>m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the attributes that are multis.
+Use the 'on' state to get multi attributes; the 'off' state
+to get non-multi attributes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagshort">
+          <code><b>short</b>(<b>s</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the short attribute names instead of the long names.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguserInterface">
+          <code><b>userInterface</b>(<b>ui</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the UI-friendly attribute names instead of the Maya ASCII names.
+Takes precedence over the -s/-short flag if both are specified.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagwritable">
+          <code><b>writable</b>(<b>w</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Show the attributes that are writable (ie. can have input connections).
+Use the 'on' state to get writable attributes; the 'off' state
+to get non-writable attributes.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>type</b>(<b>t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+static node type from which to get 'affects' information
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.createNode( 'choice' )
+
+# Get the list of only hidden choice node attributes
+#
+cmds.attributeInfo( h=True, t='choice' )
+# Result: [u'message', u'isHistoricallyInteresting', u'binMembership'] #
+
+# Get the list of all attributes on choice nodes
+cmds.attributeInfo( all=True, t='choice' )
+# Result: [u'message', u'caching', u'isHistoricallyInteresting', u'nodeState', u'binMembership', u'selector', u'input', u'output'] #
+
+# Get the list of boolean or enumerated transform node attributes
+#
+cmds.attributeInfo( b=True, e=True, t='transform' )
+# Result: [u'caching', u'nodeState', u'visibility', u'intermediateObject', u'template', u'ghosting', u'useObjectColor', u'overrideDisplayType', u'overrideLevelOfDetail', u'overrideShading', u'overrideTexturing', u'overridePlayback', u'overrideEnabled', u'overrideVisibility', u'lodVisibility', u'layerRenderable', u'renderLayerRenderable', u'ghostingControl', u'rotateOrder', u'minTransXLimitEnable', u'minTransYLimitEnable', u'minTransZLimitEnable', u'maxTransXLimitEnable', u'maxTransYLimitEnable', u'maxTransZLimitEnable', u'minRotXLimitEnable', u'minRotYLimitEnable', u'minRotZLimitEnable', u'maxRotXLimitEnable', u'maxRotYLimitEnable', u'maxRotZLimitEnable', u'minScaleXLimitEnable', u'minScaleYLimitEnable', u'minScaleZLimitEnable', u'maxScaleXLimitEnable', u'maxScaleYLimitEnable', u'maxScaleZLimitEnable', u'inheritsTransform', u'displayHandle', u'displayScalePivot', u'displayRotatePivot', u'displayLocalAxis', u'dynamics', u'showManipDefault', u'rotationInterpolation', u'miDeriveFromMaya', u'miHide', u'miVisible', u'miTrace', u'miShadow', u'miCaustic', u'miGlobillum', u'miExportGeoShader'] #
+
+# Get the list of short names of enumerated attributes on a particular choice
+# node.
+#
+cmds.attributeInfo( 'choice1', s=True, e=True )
+# Result: message input output selector
+
+# Get the list of hidden or internal attributes on one particular choice node
+# using the UI name for the attributes (that is the one that will show up
+# in the attribute editor).
+#
+cmds.attributeInfo( 'choice1', ui=True, h=True, i=True )
+# Result: [u'Message', u'Caching', u'Is Historically Interesting', u'Node State', u'Bin Membership'] #
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

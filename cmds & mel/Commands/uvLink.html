@@ -1,0 +1,354 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>uvLink command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-uvLink"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/uvLink.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>uvLink </h1></td>
+			<td align="right">In categories: <a href="cat_Rendering.html" target="contentFrame">Rendering</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("uvLink.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>uvLink [-<a href="#flagbreak">break</a>] [-<a href="#flagisValid">isValid</a>] [-<a href="#flagmake">make</a>] [-<a href="#flagqueryObject">queryObject</a> <i>name</i>] [-<a href="#flagtexture">texture</a> <i>name</i>] [-<a href="#flaguvSet">uvSet</a> <i>name</i>] 
+[objects]
+     </code> </p>
+      <p>uvLink is undoable, queryable, and <b>NOT editable</b>.</p>
+      This command is used to make, break and query UV linking
+relationships between UV sets on objects and textures that use those
+UV sets.
+<p>
+If no make, break or query flag is specified and both uvSet and
+texture flags are present, the make flag is assumed to be specified.
+<p>
+If no make, break or query flag is specified and only one of the
+uvSet and texture flags is present, the query flag is assumed to be
+specified.
+<p>
+The term &quot;texture&quot; in the context of UV linking is a bit of an
+oversimplification. In fact, UV sets can be linked to any node which
+takes UV coordinates as input. However in most cases it will be a
+texture to which you wish to link a UV set.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>or array of strings for query
+boolean for isValid</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagbreak">break</a>, <a href="#flagisValid">isValid</a>, <a href="#flagmake">make</a>, <a href="#flagqueryObject">queryObject</a>, <a href="#flagtexture">texture</a>, <a href="#flaguvSet">uvSet</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagbreak">
+          <code><b>-break</b>(<b>-b</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The presence of this flag on the command indicates that the
+command is being invoked to break links between UV sets and
+textures.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagisValid">
+          <code><b>-isValid</b>(<b>-iv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used to verify whether or not a texture or UV set is
+valid for the purposes of UV linking. It should be used in
+conjunction with either the -texture flag or the -uvSet flag, but
+not both at the same time.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagmake">
+          <code><b>-make</b>(<b>-m</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The presence of this flag on the command indicates that the
+command is being invoked to make links between UV sets and
+textures.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagqueryObject">
+          <code><b>-queryObject</b>(<b>-qo</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag should only be used in conjunction with a query of a
+texture. This flag is used to indicate that the results of the
+query should be limited to UV sets of the object specified by this
+flag.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtexture">
+          <code><b>-texture</b>(<b>-t</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The argument to the texture flag specifies the texture to be used by
+the command in performing the action.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaguvSet">
+          <code><b>-uvSet</b>(<b>-uvs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>name</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+The argument to the uvSet flag specifies the UV set to be used by
+the command in performing the action.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+uvLink -uvSet pSphereShape1.uvSet[2].uvSetName -texture checker1;
+// causes a UV link to be created between uvSet[2] on pSphereShape1
+// and the checker1 texture.
+// Note that no make, break or query flag is specified so make is
+// assumed since both uvSet and texture are specified.
+
+uvLink -make -uvSet pCubeShape2.uvSet[0].uvSetName -texture file8;
+// causes a UV link to be created between uvSet[0] of pCubeShape2 and
+// the file8 file texture.
+
+uvLink -uvSet pCubeShape2.uvSet[0].uvSetName -texture file8;
+// causes a UV link to be created between uvSet[0] of pCubeShape2 and
+// the file8 file texture. Note: no make, break or query flag is
+// specified so the make flag is assumed since both uvSet
+// and texture are specified.
+
+uvLink -query -uvSet pCubeShape2.uvSet[0].uvSetName;
+// will return a string array of textures which use the UV set
+// pCubeShape2.uvSet[0].setName. For example, the return value might
+// be:
+// file8 file9 checker4 slimeMap
+
+uvLink -query -texture checker4;
+// will return a string array of the UV sets that are used by the
+// texture. For example, the return value might be
+// pCubeShape2.uvSet[0].setName pCylinderShape1.uvSet[4].setName
+// pCylinderShape2.uvSet[3].setName
+
+uvLink -texture checker4;
+// will return a string array of the UV sets that are used by the
+// texture. For example, the return value might be
+// pCubeShape2.uvSet[0].setName pCylinderShape1.uvSet[4].setName
+// pCylinderShape2.uvSet[3].setName
+// Note that no make, break or query flag is specified, so query is
+// assumed since no uvSet was specified.
+
+uvLink -break -uvSet pCylinderShape2.uvSet[3].uvSetName -texture checker4;
+// causes the checker4 texture to no longer use the UV set
+// pCylinderShape2.uvSet[3].setName.
+// The texture will use the default UV set on pCylinderShape2 instead.
+// If checker4 wasn't using pCylinderShape2.uvSet[3].setName,
+// nothing changes and a warning is produced.
+
+uvLink -isValid -texture myTexture;
+// Returns true if myTexture is a texture to which a UV set can be
+// linked, or false otherwise.
+
+string $myPlug = `getSomePlugFromSomewhere`;
+uvLink -isValid -uvSet $myPlug;
+// Returns true if $myPlug is a UV set, or false otherwise.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

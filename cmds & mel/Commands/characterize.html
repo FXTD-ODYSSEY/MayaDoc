@@ -1,0 +1,679 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>characterize command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-characterize"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/characterize.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>characterize </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a>, <a href="cat_Animation.html#IK" target="contentFrame">IK</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("characterize.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>characterize [-<a href="#flagactivatePivot">activatePivot</a>] [-<a href="#flagaddAuxEffector">addAuxEffector</a>] [-<a href="#flagaddFloorContactPlane">addFloorContactPlane</a>] [-<a href="#flagaddMissingEffectors">addMissingEffectors</a>] [-<a href="#flagattributeFromHIKProperty">attributeFromHIKProperty</a> <i>string</i>] [-<a href="#flagattributeFromHIKPropertyMode">attributeFromHIKPropertyMode</a> <i>string</i>] [-<a href="#flagautoActivateBodyPart">autoActivateBodyPart</a> <i>boolean</i>] [-<a href="#flagchangePivotPlacement">changePivotPlacement</a>] [-<a href="#flageffectors">effectors</a> <i>string</i>] [-<a href="#flagfkSkeleton">fkSkeleton</a> <i>string</i>] [-<a href="#flagname">name</a> <i>string</i>] [-<a href="#flagpinHandFeet">pinHandFeet</a>] [-<a href="#flagplaceNewPivot">placeNewPivot</a>] [-<a href="#flagposture">posture</a> <i>string</i>] [-<a href="#flagsourceSkeleton">sourceSkeleton</a> <i>string</i>] [-<a href="#flagstancePose">stancePose</a> <i>string</i>] [-<a href="#flagtype">type</a> <i>string</i>]  </code> </p>
+      <p>characterize is undoable, queryable, and editable.</p>
+      This command is used to scan a joint hierarchy for predefined joint names or
+labels. If the required joints are found, human IK effectors will be created
+to control the skeleton using full-body IK.
+Alternatively, you can manually create all of the components
+required for fullbody IK, and use this command to hook them up.
+Fullbody IK needs 3 major components: the
+user input skeleton (sk), the fk skeleton on which keys are set (fk) and the
+hik effectors (ik).  Together fk and ik provide parameters to the fullbody IK
+engine, which solves for the output and plots it onto sk. This command usage
+is used internally by Maya when importing data from fbx files, but is not generally recommended.
+<p>
+Note that a minimum set of required joint names or joint labels  must be
+found in order for the characterize command to succeed. Please refer to the
+Maya documentation for details on properly naming or labeling your skeleton.
+The skeleton should also be z-facing, with its y-axis up, its
+left hand parallel to positive x-axis and right hand parallel to
+negative x-axis.
+END_COMMENT
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>Names of full body IK effectors that were created.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>characterize, effectors, fullbody, IK
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagactivatePivot">activatePivot</a>, <a href="#flagaddAuxEffector">addAuxEffector</a>, <a href="#flagaddFloorContactPlane">addFloorContactPlane</a>, <a href="#flagaddMissingEffectors">addMissingEffectors</a>, <a href="#flagattributeFromHIKProperty">attributeFromHIKProperty</a>, <a href="#flagattributeFromHIKPropertyMode">attributeFromHIKPropertyMode</a>, <a href="#flagautoActivateBodyPart">autoActivateBodyPart</a>, <a href="#flagchangePivotPlacement">changePivotPlacement</a>, <a href="#flageffectors">effectors</a>, <a href="#flagfkSkeleton">fkSkeleton</a>, <a href="#flagname">name</a>, <a href="#flagpinHandFeet">pinHandFeet</a>, <a href="#flagplaceNewPivot">placeNewPivot</a>, <a href="#flagposture">posture</a>, <a href="#flagsourceSkeleton">sourceSkeleton</a>, <a href="#flagstancePose">stancePose</a>, <a href="#flagtype">type</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactivatePivot">
+          <code><b>-activatePivot</b>(<b>-apv</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Activates a pivot that has been properly placed.  After activating this new
+pivot, you will now be able to rotate and translate about this pivot.
+A pivot behaves in all ways the same as an effector (it IS an
+effector, except that it is offset from the normal position of the effector
+to allow one to rotate about a different point.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddAuxEffector">
+          <code><b>-addAuxEffector</b>(<b>-aae</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds an auxilliary (secondary) effector to an existing effector.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddFloorContactPlane">
+          <code><b>-addFloorContactPlane</b>(<b>-afp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Adds a floor contact plane to one of the hands or feet.  With this plane,
+you will be able to adjust the floor contact height.  Select a hand or foot
+effector and then issue the characterize command with this flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddMissingEffectors">
+          <code><b>-addMissingEffectors</b>(<b>-ame</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag tells the
+characterize command to look for any effectors that can be added to the
+skeleton. For example, if the user has deleted some effectors or added fingers
+to an existing skeleton, &quot;characterize -e -addMissingEffectors&quot; can be used to
+restore them.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattributeFromHIKProperty">
+          <code><b>-attributeFromHIKProperty</b>(<b>-ahk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query for the attribute name associated with a MotionBuilder property.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagattributeFromHIKPropertyMode">
+          <code><b>-attributeFromHIKPropertyMode</b>(<b>-mhk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query for the attribute name associated with a MotionBuilder property mode.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagautoActivateBodyPart">
+          <code><b>-autoActivateBodyPart</b>(<b>-aab</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Query or change whether auto activation of character nodes representing body parts
+should be enabled.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagchangePivotPlacement">
+          <code><b>-changePivotPlacement</b>(<b>-cpp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Reverts a pivot back into pivot placement mode.  A pivot that is in placement
+mode will not participate in full body manipulation until it has been activated
+with the -activatePivot flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flageffectors">
+          <code><b>-effectors</b>(<b>-ef</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the effectors to be used by human IK by providing
+2 pieces of information for each effector:  1) the partial path of the
+effector and 2) the name of the full body effector this represents.  1) and
+2) are to be separated by white space, and multiple entries separated by &quot;,&quot;.
+Normally, the effectors are automatically created.  This flag is
+for advanced users only.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagfkSkeleton">
+          <code><b>-fkSkeleton</b>(<b>-fk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the fk skeleton to be used by human IK by providing 2 pieces of
+information for each joint of the FK skeleton:  1) the partial path of the
+joint and 2) the name of the full body joint this represents.  1) and 2) are
+to be separated by white space, and multiple entries separated by &quot;,&quot;.
+Normally, the fk control skeleton is automatically created.  This
+flag is for advanced users only.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>-name</b>(<b>-nm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+At characterization (FBIK creation) time, use this flag to name your FBIK character.
+This will affect the name of the hikHandle node and the control rig will be put
+into a namespace that matches the name of your character.  If you do not specify
+the character name, a default one will be used.
+At the moment edit and query of the character name is not supported.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpinHandFeet">
+          <code><b>-pinHandFeet</b>(<b>-phf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+When the character is first being characterized, pin the hands and feet by default.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagplaceNewPivot">
+          <code><b>-placeNewPivot</b>(<b>-pnp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Creates a new pivot and puts it into placement mode.  Note that you will
+not be able to do full body manipulation about this pivot until you have
+activated it with the -activatePivot flag. A pivot behaves in all ways the
+same as an effector (it IS an effector, except that it is offset from the
+normal position of the effector to allow one to rotate about a different
+point). A new pivot created with this flag allow you to adjust the offset
+interactively before activating it.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagposture">
+          <code><b>-posture</b>(<b>-pos</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the posture of the character. Valid options are &quot;biped&quot; and
+&quot;quadruped&quot;. The default is &quot;biped&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsourceSkeleton">
+          <code><b>-sourceSkeleton</b>(<b>-sk</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag can be used to characterize a skeleton that has not been named or
+labelled according to the FBIK guidelines. It specifies the association
+between the actual joint names and the expected FBIK joint names. The format
+of the string is as follows: For each
+joint that the user wants to involve in the solve:  1) the partial path of
+the joint and 2) the name of the full body joint this represents.  1) and 2)
+are to be separated by white space, and multiple entries separated by &quot;,&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagstancePose">
+          <code><b>-stancePose</b>(<b>-sp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the default stance pose to be used by human IK.  The stance pose is
+specified by providing 2 pieces of information for each joint involved in
+the solve:
+1) the partial path to the joint and 2) 9 numbers representing translation
+rotation and scale.
+1) and 2) are to be separated by white space, and multiple entries separated
+by &quot;,&quot;.
+Normally, the stance pose is taken from the selected skeleton.  This flag is
+for advanced users only.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtype">
+          <code><b>-type</b>(<b>-typ</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specifies the technique used by the characterization to identify the joint
+type. Valid options are &quot;label&quot; and &quot;name&quot;. When &quot;label&quot; is used, the joints
+must be labelled using the guidelines described in the Maya documentation.
+When name is used, the joint names must follow the naming conventions
+described in the Maya documentation. The default is &quot;name&quot;. This flag
+cannot be used in conjunction with the sourceSkeleton flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Characterize a skeleton.  Select the root of the skeleton and enter
+// the following. The skeleton joints must be named according to the
+// FBIK naming conventions described in the main Maya documentation.
+//
+characterize -pinHandFeet;
+
+// Characterize a skeleton that has not been named according to the
+// FBIK naming conventions by using the -sk flag to define the
+// purpose of the joints. Select the skeleton and enter the following.
+//
+characterize  -sk &quot;pelvis Hips,hipL LeftUpLeg,kneeL LeftLeg,footL LeftFoot,toeL LeftToeBase,hipR RightUpLeg,kneeR RightLeg,footR RightFoot,toeR RightToeBase,spine Spine,spine1 Spine1,collarL LeftShoulder,shoulderL LeftArm,elbowL LeftForeArm,handL LeftHand,collarR RightShoulder,shoulderR RightArm,elbowR RightForeArm,handR RightHand,neck Neck,head Head,spine2 Spine2&quot;;
+
+// Add a floor contact plane. Select a foot or hand effector and enter
+// the following:
+//
+characterize -e -addFloorContactPlane;
+
+// Add a full body pivot to an effector. Select the effector and enter
+// the following:
+//
+characterize -e -placeNewPivot;
+
+// De-activate a pivot so that it can be moved to another location.
+//
+characterize -e -changePivotPlacement;
+
+// Activate a new pivot once it has been placed in the desired location.
+//
+characterize -e -activatePivot;
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

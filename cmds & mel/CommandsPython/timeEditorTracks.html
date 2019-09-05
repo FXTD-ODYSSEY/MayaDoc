@@ -1,0 +1,738 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>timeEditorTracks command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-timeEditorTracks"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/timeEditorTracks.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>timeEditorTracks </h1></td>
+			<td align="right">In categories: <a href="cat_Animation.html" target="contentFrame">Animation</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("timeEditorTracks.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hKeywords">Keywords</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>timeEditorTracks([<a href="#flagactiveClipWeight">activeClipWeight</a>=<i>time</i>], [<a href="#flagactiveClipWeightId">activeClipWeightId</a>=<i>time</i>], [<a href="#flagaddTrack">addTrack</a>=<i>int</i>], [<a href="#flagallClips">allClips</a>=<i>boolean</i>], [<a href="#flagallTracks">allTracks</a>=<i>boolean</i>], [<a href="#flagallTracksRecursive">allTracksRecursive</a>=<i>boolean</i>], [<a href="#flagcomposition">composition</a>=<i>boolean</i>], [<a href="#flagpath">path</a>=<i>string</i>], [<a href="#flagplugIndex">plugIndex</a>=<i>int</i>], [<a href="#flagremoveTrack">removeTrack</a>=<i>int</i>], [<a href="#flagremoveTrackByPath">removeTrackByPath</a>=<i>string</i>], [<a href="#flagreorderTrack">reorderTrack</a>=<i>[int, int]</i>], [<a href="#flagresetMute">resetMute</a>=<i>boolean</i>], [<a href="#flagresetSolo">resetSolo</a>=<i>boolean</i>], [<a href="#flagselectedTracks">selectedTracks</a>=<i>boolean</i>], [<a href="#flagtrackGhost">trackGhost</a>=<i>boolean</i>], [<a href="#flagtrackIndex">trackIndex</a>=<i>int</i>], [<a href="#flagtrackMuted">trackMuted</a>=<i>boolean</i>], [<a href="#flagtrackName">trackName</a>=<i>string</i>], [<a href="#flagtrackSolo">trackSolo</a>=<i>boolean</i>], [<a href="#flagtrackType">trackType</a>=<i>int</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>timeEditorTracks is undoable, queryable, and editable.</p>
+      Time Editor tracks commands
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>Int</i></td><td>In edit mode, return the newly created Track index.</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      <h2><a name="hKeywords">Keywords</a></h2>timeEditor, nle
+      <h2><a name="hRelated">Related</a></h2><a href="timeEditor.html">timeEditor</a>, <a href="timeEditorAnimSource.html">timeEditorAnimSource</a>, <a href="timeEditorClip.html">timeEditorClip</a>, <a href="timeEditorComposition.html">timeEditorComposition</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagactiveClipWeight">activeClipWeight</a>, <a href="#flagactiveClipWeightId">activeClipWeightId</a>, <a href="#flagaddTrack">addTrack</a>, <a href="#flagallClips">allClips</a>, <a href="#flagallTracks">allTracks</a>, <a href="#flagallTracksRecursive">allTracksRecursive</a>, <a href="#flagcomposition">composition</a>, <a href="#flagpath">path</a>, <a href="#flagplugIndex">plugIndex</a>, <a href="#flagremoveTrack">removeTrack</a>, <a href="#flagremoveTrackByPath">removeTrackByPath</a>, <a href="#flagreorderTrack">reorderTrack</a>, <a href="#flagresetMute">resetMute</a>, <a href="#flagresetSolo">resetSolo</a>, <a href="#flagselectedTracks">selectedTracks</a>, <a href="#flagtrackGhost">trackGhost</a>, <a href="#flagtrackIndex">trackIndex</a>, <a href="#flagtrackMuted">trackMuted</a>, <a href="#flagtrackName">trackName</a>, <a href="#flagtrackSolo">trackSolo</a>, <a href="#flagtrackType">trackType</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveClipWeight">
+          <code><b>activeClipWeight</b>(<b>acw</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get the clip weight at the specified time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagactiveClipWeightId">
+          <code><b>activeClipWeightId</b>(<b>aci</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>time</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get the clip ID carrying the active clip weight at the specified time.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagaddTrack">
+          <code><b>addTrack</b>(<b>at</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Add new track at the track index specified. Indices are 0-based.
+Specify -1 to add the track at the end.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallClips">
+          <code><b>allClips</b>(<b>ac</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return a list of clip IDs under the specified track.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallTracks">
+          <code><b>allTracks</b>(<b>atc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return a list of strings for all the immediate tracks for the given tracks node in the format &quot;tracksNode:trackIndex&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagallTracksRecursive">
+          <code><b>allTracksRecursive</b>(<b>atr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return a list of strings for all the tracks for the given tracks node, or
+return a list of strings for all tracks of all tracks nodes in the format &quot;tracksNode:trackIndex&quot;.
+If the given root tracks node is from a composition, this command returns the tracks under that composition, including the tracks within groups that is under the same composition.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcomposition">
+          <code><b>composition</b>(<b>cp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return the composition the specified track belongs to.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagpath">
+          <code><b>path</b>(<b>pt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Full path of a track node or a track on which to operate. For example: composition1|track1|group; composition1|track1.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagplugIndex">
+          <code><b>plugIndex</b>(<b>pi</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Get the plug index of the specified track.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveTrack">
+          <code><b>removeTrack</b>(<b>rt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove track at given index. It is a multi-use flag.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagremoveTrackByPath">
+          <code><b>removeTrackByPath</b>(<b>rtp</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Remove track at given path. It is a multi-use flag. For example: composition1|track1|group|track1;
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagreorderTrack">
+          <code><b>reorderTrack</b>(<b>rot</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>[int, int]</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Move the track relative to other tracks. The first argument is the track index (0-based). The second argument can be a positive or negative number
+to indicate the steps to move. Positive numbers move forward and negative numbers move backward.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresetMute">
+          <code><b>resetMute</b>(<b>rm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Reset all the muted tracks in the active composition.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagresetSolo">
+          <code><b>resetSolo</b>(<b>rs</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Reset the soloing of all tracks on the active composition.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagselectedTracks">
+          <code><b>selectedTracks</b>(<b>st</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return a list of the indices for all the selected tracks for the given tracks node, or
+return a list of strings for all selected tracks of all tracks nodes in the format &quot;tracksNode:trackIndex&quot;.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrackGhost">
+          <code><b>trackGhost</b>(<b>tgh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Ghost all clips under track.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrackIndex">
+          <code><b>trackIndex</b>(<b>ti</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the track index. This flag is used in conjunction with the other flags.
+			<p><i>In query mode, this flag can accept a value.</i></p>
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrackMuted">
+          <code><b>trackMuted</b>(<b>tm</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return whether the track is muted.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrackName">
+          <code><b>trackName</b>(<b>tn</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Display name of the track.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrackSolo">
+          <code><b>trackSolo</b>(<b>ts</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Return whether the track is soloed.
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagtrackType">
+          <code><b>trackType</b>(<b>tt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify the track type. Can only be used together with <i>-at/addTrack</i>. Does not work by itself.
+In query mode, return the integer corresponding to the track type.
+<ul>
+<li> 0: Animation Track (Default)</li>
+<li> 1: Audio Track </li>
+</ul>
+			
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+#  Insert a track at the end
+#
+cmds.timeEditorTracks( 'container1_tracks', e=1, addTrack=-1 )
+
+#  Insert a track at the end by path, inside a composition
+#
+cmds.timeEditorTracks( path='composition1', e=1, addTrack=-1 )
+
+#  Insert a track at the end by path, inside a group clip
+#
+cmds.timeEditorTracks( path='composition1|track1|groupClip', e=1, addTrack=-1 )
+
+# Remove the track from &quot;container1_tracks&quot;
+#
+cmds.timeEditorTracks( 'container1_tracks', e=1, removeTrack=1 )
+
+# Remove the track by paths
+#
+cmds.timeEditorTracks( e=1, removeTrackByPath=['composition1|track2', 'composition1|track1|group|track3'] )
+
+# Move track 0 forward 1 siblings
+#
+cmds.timeEditorTracks( 'container1_tracks', e=1, reorderTrack=(0, 1) )
+
+# Set the track name
+#
+cmds.timeEditorTracks( 'container1_tracks', e=1, trackName=&quot;Test&quot;, trackIndex=0 )
+
+# Set the track name by path
+#
+cmds.timeEditorTracks( e=1, trackName=&quot;Test&quot;, path='composition1|track2' )
+
+# Mute the track
+#
+cmds.timeEditorTracks( 'container1_tracks', e=1, trackMuted=True, trackIndex=0 )
+	</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

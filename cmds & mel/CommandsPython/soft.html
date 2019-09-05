@@ -1,0 +1,378 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>soft command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="CommandsPython-soft"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (Python)</font></td>
+			<td align="right"><font size="-1"><i><a href="../Commands/soft.html">MEL version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>soft </h1></td>
+			<td align="right">In categories: <a href="cat_Effects.html" target="contentFrame">Effects</a>, <a href="cat_Effects.html#Dynamics" target="contentFrame">Dynamics</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("soft.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">Python examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>soft(
+selectionList
+    , [<a href="#flagconvert">convert</a>=<i>boolean</i>], [<a href="#flagduplicate">duplicate</a>=<i>boolean</i>], [<a href="#flagduplicateHistory">duplicateHistory</a>=<i>boolean</i>], [<a href="#flaggoal">goal</a>=<i>float</i>], [<a href="#flaghideOriginal">hideOriginal</a>=<i>boolean</i>], [<a href="#flagname">name</a>=<i>string</i>]) </code> <br><br><font size="-1"><i>Note: Strings representing object names and arguments must be separated by commas. This is not depicted in the synopsis.</i></font></p>
+      <p>soft is undoable, queryable, and <b>NOT editable</b>.</p>
+      Makes a soft body from the object(s) passed on the command
+line or in the selection list.  The geometry can be a NURBS, polygonal,
+lattice object.  The resulting soft body is made up of a hierarchy
+with a particle shape and a geometry shape, thus:
+<p>
+<pre>                 </pre>
+<pre>            T    </pre>
+<pre>            / \  </pre>
+<pre>           T   G </pre>
+<pre>          /      </pre>
+<pre>        P        </pre>
+<pre>                 </pre>
+<p>
+Dynamics are applied to the particle shape and the resulting particle
+positions then drive the locations of the geometry's CVs, vertices, or
+lattice points.
+<p>
+With the convert option, the particle shape and its transform are simply
+inserted below the original shape's hierarchy.
+With the duplicate option, the original geometry's transform and shape are
+duplicated underneath its parent, and the particle shape is placed under
+the duplicate.  Note that any animation on
+the hierarchy will affect the particle shape as well.  If you do not want
+then, then reparent the structure outside the hierarchy.
+<p>
+When duplicating, the soft portion (the duplicate) is given the name
+&quot;copyOf&quot; + &quot;original object name&quot;.  The particle portion is always
+given the name &quot;original object name&quot; + &quot;Particles.&quot;
+<p>
+None of the flags of the soft command can be queried.  The soft -q
+command is used only to identify when an object is a soft body,
+or when two objects are part of the same soft body.
+See the examples.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <table><tr><td valign="top"><i>string</i></td><td>array</td></tr></table><p>In query mode, return type is based on queried flag.</p>
+      
+      
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagconvert">convert</a>, <a href="#flagduplicate">duplicate</a>, <a href="#flagduplicateHistory">duplicateHistory</a>, <a href="#flaggoal">goal</a>, <a href="#flaghideOriginal">hideOriginal</a>, <a href="#flagname">name</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagconvert">
+          <code><b>convert</b>(<b>c</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This tells the command that you want the original object
+to be the actual deformed object.  The particle shape portion of the
+soft body will be inserted in the same hierarchy as the original,
+under the same parent (with one additional intervening transform
+which is initially the identity).  If no flags are passed, then this
+is assumed.  The combination -c -h 1 is not valid; if you have
+this in your scripts, remove the -h 1.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagduplicate">
+          <code><b>duplicate</b>(<b>d</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This tells the command that you want to make a copy of
+the original object and use the copy as the deforming geometry.
+Input connections to the original object are duplicated.  You would
+do this if you wanted to keep the original object in your scene and
+also have a copy of it that was a soft body.
+This flag and -dh are mutually exclusive.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagduplicateHistory">
+          <code><b>duplicateHistory</b>(<b>dh</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is the same as -d, except that upstream history,
+is duplicated as well, instead of just input connections.
+This flag and -d are mutually exclusive.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaggoal">
+          <code><b>goal</b>(<b>g</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This is the same as -d, but in addition it tells the command that
+you want the resulting soft body to try to
+follow the original geometry, using the set goal weight as the value
+that controls how strongly it is to follow it.  A value of 1.0 will
+try to follow exactly, and a value of 0.0 will not follow at all.
+The default value is 0.5.  This value must be from 0.0 to 1.0.
+You could use -d with -g, but it is redundant.  If you want history to
+be duplicated, you can use -dh and -g together.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flaghideOriginal">
+          <code><b>hideOriginal</b>(<b>h</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>boolean</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is used only when duplicating (-d, -g, or -dh).  If set to true,
+whichever of the two objects is NOT the soft object will be hidden.
+In other words, with -d -h true, the original object will be hidden;
+with -d -c -h 1 the duplicate object will be hidden.
+You would typically do this if you want to use the non-dynamic object as
+a goal for the soft one (see -g) but you do not want it visible in the scene.
+The flags -h 1 and -c are mutually exclusive.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagname">
+          <code><b>name</b>(<b>n</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+This flag is obsolete.  If you wish to give your new soft object a name,
+use the rename command (or from the UI, use the outliner).
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can have multiple arguments, passed either as a tuple or a list.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">Python examples</a></h2><pre>import maya.cmds as cmds
+
+cmds.sphere()
+cmds.soft( 'nurbsSphere1', c=True )
+
+# Creates a sphere named nurbsSphere1 and converts nurbSphere1 into
+# a soft object.  The particle portion of the soft object will
+# be parented (with its own transform) under nurbsSphere1.
+
+cmds.sphere()
+cmds.soft( 'nurbsSphere1', d=True )
+
+# Same as the previous example, except that the soft command will make
+# a duplicate of nurbsSphereShape1.  The resulting soft body will be
+# completely independent of nurbSphere1 and its children.  Input connections
+# to nurbsSphereShape1 will be duplicated, but not any upstream history
+# (in other words, just plain &quot;duplicate&quot;).
+
+cmds.sphere()
+cmds.soft( 'nurbsSphere1', dh=True )
+
+# Same as the previous example, except that upstream history on
+# nurbsSphereShape1 will be duplicated as well (equivalent to
+# &quot;duplicate history&quot;).
+
+cmds.sphere()
+cmds.soft( 'nurbSphere1', g=0.3 )
+
+# This will make a duplicate of the shape under nurbSphere1 (as for -d),
+# and  use it as the shape for the newly created soft object.
+# The original nurbsSphereShape1 will be made a goal for the particles of
+# softy, with a goal weight of 0.3.  This will make those particles try to
+# follow nurbSphere1 loosely as it moves around.
+
+cmds.soft( 'foobar', q=True )
+# Returns true if foobar is a soft object.
+
+cmds.soft( 'foobar', 'foobarParticles', q=True )
+
+# Returns true if foobar and foobarParticles are parts of the same
+# soft object.  This is useful because when you select a soft body,
+# both the overall transform and the particle transform get put into
+# the selection list.
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

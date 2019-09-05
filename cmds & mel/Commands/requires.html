@@ -1,0 +1,194 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>requires command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-requires"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/requires.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>requires </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Files" target="contentFrame">Files</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("requires.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>requires [-<a href="#flagdataType">dataType</a> <i>string</i>] [-<a href="#flagnodeType">nodeType</a> <i>string</i>] 
+string string
+     </code> </p>
+      <p>requires is undoable, <b>NOT queryable</b>, and <b>NOT editable</b>.</p>
+      This command is used during file I/O to specify the requirements
+needed to load the given file.  It defines what file format
+version was used to write the file, or what plug-ins are required to
+load the scene.
+<p>
+The first string names a product (either &quot;maya&quot;, or a plug-in name)
+<p>
+The second string gives the version. This command is only useful during
+file I/O, so users should not have any need to use this command themselves.
+<p>
+The flags &quot;-nodeType&quot; and &quot;-dataType&quot; specify the node types
+and data types defined by the plug-in. When Maya open a scene file, it
+runs &quot;requires&quot; command in the file and load required plug-ins. But some
+plug-ins may be not loaded because they are missing. The flags &quot;-nodeType&quot;
+and &quot;-dataType&quot; are used by the missing plug-ins. If one plug-in is missing,
+nodes and data created by this plug-in are created as unknown nodes and
+unknown data. Maya records their original types for these unknown nodes
+and data. When these nodes and data are saved back to file, it will be
+possible to determine the associated missing plug-ins. And when export
+selected nodes, Maya can write out the exact required plug-ins.
+The flags &quot;-nodeType&quot; and &quot;-dataType&quot; is optional. In this command, if these
+flags are not given for one plug-in and the plug-in is missing, the &quot;requires&quot;
+command of this plug-in will always be saved back.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="unknownPlugin.html">unknownPlugin</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagdataType">dataType</a>, <a href="#flagnodeType">nodeType</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagdataType">
+          <code><b>-dataType</b>(<b>-dt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify a data type defined by this plug-in.
+The data type is specified by MFnPlugin::registerData() when register
+the plug-in.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagnodeType">
+          <code><b>-nodeType</b>(<b>-nt</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/multiuse.gif" alt="multiuse" title="multiuse" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Specify a node type defined by this plug-in.
+The node type is specified by MFnPlugin::registerNode() when register
+the plug-in.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+requires maya &quot;7.0&quot;;
+requires simpleLoftNode.so &quot;1.0&quot;;
+requires -nodeType &quot;gpuCache&quot; &quot;gpuCache&quot; &quot;1.0&quot;;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

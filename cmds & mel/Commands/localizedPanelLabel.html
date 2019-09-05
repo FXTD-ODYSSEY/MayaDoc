@@ -1,0 +1,116 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>localizedPanelLabel command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-localizedPanelLabel"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>script</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><i>Only available in MEL</i></i></font></td>
+		  </tr><tr>
+		  <td><h1>localizedPanelLabel </h1></td>
+			<td align="right">In categories: <a href="cat_System.html" target="contentFrame">System</a>, <a href="cat_System.html#Localization" target="contentFrame">Localization</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("localizedPanelLabel.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>
+localizedPanelLabel( string $englishPanelLabel )
+<br>
+
+	 </code> </p>
+      
+      When running Maya in a localized environment, panel 
+and layout names are also localized and could cause
+scripts relying on English names to behave differently.
+Use this procedure to obtain the localized versions of 
+panel labels like &quot;Top View&quot; and &quot;Persp View&quot;, window
+names like &quot;Outliner&quot; and &quot;Graph Editor&quot;, and configuration/layout
+names like &quot;Persp/Outliner&quot; and &quot;Three Panes Stacked&quot;.
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p>
+      
+      
+
+      
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>      <i>// This command returns a non-null result when running in English.
+</i>
+      <i>//
+</i>
+      $panel = `getPanel -withLabel &quot;Graph Editor&quot;`;
+      <i>// Result: graphEditor1 //
+</i>
+
+      <i>// But the same command returns a null result when running in another language.
+</i>
+      <i>//
+</i>
+      $panel = `getPanel -withLabel &quot;Graph Editor&quot;`;
+      <i>// Result: // 
+</i>
+
+      <i>// In order to find the graphEditor panel by its label, &quot;getPanel -withLabel&quot;
+</i>
+      <i>// must be passed the name of the Graph Editor in the localized language.  But
+</i>
+      <i>// hard-coding the localized name for one language means the script will fail 
+</i>
+      <i>// for other localizations, so one way to guarantee consistent script behaviour
+</i>
+      <i>// across languages is to use localizedPanelLabel().
+</i>
+      <i>// 
+</i>
+      $panel = `getPanel -withLabel (localizedPanelLabel(&quot;Graph Editor&quot;))`;
+      <i>// Result: graphEditor1 //
+</i>
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+

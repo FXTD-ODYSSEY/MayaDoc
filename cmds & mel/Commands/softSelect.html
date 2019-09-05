@@ -1,0 +1,397 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>softSelect command</title>
+      <meta name="section" content="Commands">
+      <meta name="module" content="MEL and expressions">
+      <script src="../style/tech.js">.</script>
+      <script src="../style/document.js">.</script>
+      <link rel="StyleSheet" href="../style/tech.css" type="text/css" media="all">
+    <meta name="contextid" content="Commands-softSelect"></head>
+    <body class="command" onload="highLightSearch();">
+      <div id="banner">
+		<table width="100%"><tr>
+			<td><font size="-1"><b>command</b> (MEL)</font></td>
+			<td align="right"><font size="-1"><i><a href="../CommandsPython/softSelect.html">Python version</a></i></font></td>
+		  </tr><tr>
+		  <td><h1>softSelect </h1></td>
+			<td align="right">In categories: <a href="cat_General.html" target="contentFrame">General</a>, <a href="cat_General.html#Selection" target="contentFrame">Selection</a></td>
+		  </tr></table>
+      </div>
+      <p class="toolbar" align="right">
+		<script>toolbar("softSelect.html");</script>
+      </p>
+      <p>Go to: <a href="#hSynopsis">Synopsis</a>. <a href="#hReturn">Return value</a>. <a href="#hRelated">Related</a>. <a href="#hFlags">Flags</a>. <a href="#hExamples">MEL examples</a>. </p>
+
+      <h2><a name="hSynopsis">Synopsis</a></h2>
+      <p id="synopsis"> <code>softSelect [-<a href="#flagcompressUndo">compressUndo</a> <i>int</i>] [-<a href="#flagenableFalseColor">enableFalseColor</a> <i>int</i>] [-<a href="#flagsoftSelectColorCurve">softSelectColorCurve</a> <i>string</i>] [-<a href="#flagsoftSelectCurve">softSelectCurve</a> <i>string</i>] [-<a href="#flagsoftSelectDistance">softSelectDistance</a> <i>float</i>] [-<a href="#flagsoftSelectEnabled">softSelectEnabled</a> <i>int</i>] [-<a href="#flagsoftSelectFalloff">softSelectFalloff</a> <i>int</i>] [-<a href="#flagsoftSelectReset">softSelectReset</a>] [-<a href="#flagsoftSelectUVDistance">softSelectUVDistance</a> <i>float</i>]  </code> </p>
+      <p>softSelect is undoable, queryable, and editable.</p>
+      This command allows you to change the soft modelling options.
+<p>
+Soft modelling is an option that allows for reflection of basic
+manipulator actions such as move, rotate, and scale.
+<p>
+	  
+      <h2><a name="hReturn">Return value</a></h2>
+      <p><i>None</i></p><p>In query mode, return type is based on queried flag.</p>
+      
+      <h2><a name="hRelated">Related</a></h2><a href="displayAffected.html">displayAffected</a>, <a href="displayColor.html">displayColor</a>, <a href="displayCull.html">displayCull</a>, <a href="displayLevelOfDetail.html">displayLevelOfDetail</a>, <a href="displayPref.html">displayPref</a>, <a href="displayRGBColor.html">displayRGBColor</a>, <a href="displaySmoothness.html">displaySmoothness</a>, <a href="displayStats.html">displayStats</a>, <a href="displaySurface.html">displaySurface</a>, <a href="hide.html">hide</a>, <a href="refresh.html">refresh</a>, <a href="showHidden.html">showHidden</a>, <a href="toggle.html">toggle</a>
+
+      
+    <h2><a name="hFlags">Flags</a></h2>
+      <a href="#flagcompressUndo">compressUndo</a>, <a href="#flagenableFalseColor">enableFalseColor</a>, <a href="#flagsoftSelectColorCurve">softSelectColorCurve</a>, <a href="#flagsoftSelectCurve">softSelectCurve</a>, <a href="#flagsoftSelectDistance">softSelectDistance</a>, <a href="#flagsoftSelectEnabled">softSelectEnabled</a>, <a href="#flagsoftSelectFalloff">softSelectFalloff</a>, <a href="#flagsoftSelectReset">softSelectReset</a>, <a href="#flagsoftSelectUVDistance">softSelectUVDistance</a>
+      <table width="100%">
+        <tr>
+          <th bgcolor="#CCCCCC">Long name (short name)</th>
+          <th bgcolor="#CCCCCC"><i>Argument types</i></th>
+          <th bgcolor="#CCCCCC">Properties</th>
+        </tr>
+        <tr bgcolor="#DDDDDD"><td colspan="3"><u></u></td></tr>
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagcompressUndo">
+          <code><b>-compressUndo</b>(<b>-cu</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Controls how soft selection settings behave in undo:
+<ul>
+<li>0 means all changes undo individually</li>
+<li>1 means all consecutive changes undo as a group</li>
+<li>2 means only interactive changes undo as a group</li>
+</ul>
+When queried, returns an int indicating the current undo behaviour.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagenableFalseColor">
+          <code><b>-enableFalseColor</b>(<b>-efc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Set soft select color feedback on or off.
+When queried, returns an int indicating whether color feedback
+is currently enabled.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsoftSelectColorCurve">
+          <code><b>-softSelectColorCurve</b>(<b>-scc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the color ramp used to display false color feedback for soft selected
+components in the viewport. The color curve is encoded as a string of comma
+separated floating point values representing the falloff curve CVs. Each
+CV is represented by 5 successive values: 3 RGB values (the color to use),
+an input value (the selection weight), and a curve interpolation type.
+When queried, returns a string containing the encoded CVs of the current
+color feedback curve.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsoftSelectCurve">
+          <code><b>-softSelectCurve</b>(<b>-ssc</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>string</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the falloff curve used to calculate selection weights for components
+within the falloff distance. The curve is encoded as a string of comma
+separated floating point values representing the falloff curve CVs. Each
+CV is represented by 3 successive values: an output value (the selection
+weight at this point), an input value (the normalised falloff distance)
+and a curve interpolation type.
+When queried, returns a string containing the encoded CVs of the current
+falloff curve.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsoftSelectDistance">
+          <code><b>-softSelectDistance</b>(<b>-ssd</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the falloff distance (radius) used for world and object space soft selection.
+When queried, returns a float indicating the current falloff distance.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsoftSelectEnabled">
+          <code><b>-softSelectEnabled</b>(<b>-sse</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets soft selection based modeling on or off.
+When queried, returns an int indicating the current state of the option.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsoftSelectFalloff">
+          <code><b>-softSelectFalloff</b>(<b>-ssf</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>int</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the falloff mode:
+<ul>
+<li>0 for volume based falloff</li>
+<li>1 for surface based falloff</li>
+<li>2 for global falloff</li>
+</ul>
+When queried, returns an int indicating the falloff mode.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsoftSelectReset">
+          <code><b>-softSelectReset</b>(<b>-ssr</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i></i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Resets soft selection to its default settings.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr bgcolor="#EEEEEE">
+      <td valign="top">
+        <a name="flagsoftSelectUVDistance">
+          <code><b>-softSelectUVDistance</b>(<b>-sud</b>)</code></a> 
+      </td>
+      <td valign="top">
+        <code><i>float</i></code>
+      </td>
+      <td valign="top">
+<img src="../gfx/create.gif" alt="create" title="create" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/query.gif" alt="query" title="query" width="13" height="16" hspace="2" vspace="2"><img src="../gfx/edit.gif" alt="edit" title="edit" width="13" height="16" hspace="2" vspace="2">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table width="100%">
+          <tr>
+        <td width="5%"></td>
+          <td>
+
+Sets the falloff distance (radius) used for UV space soft selection.
+When queried, returns a float indicating the current falloff distance.
+      
+          </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+      </table>
+      <hr>
+        <table border="0" cellspacing="1" cellpadding="4" bgcolor="#EEEEEE">
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/create.gif">
+                Flag can appear in Create mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/edit.gif">
+                Flag can appear in Edit mode of command
+            </td>
+          </tr>
+          <tr>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/query.gif">
+                Flag can appear in Query mode of command
+            </td>
+            <td valign="top"><img hspace="2" height="16" width="14" src="../gfx/multiuse.gif">
+                Flag can be used more than once in a command.
+            </td>
+          </tr>
+        </table>
+
+
+<h2><a name="hExamples">MEL examples</a></h2><pre>
+// Enable soft selection
+softSelect -sse 1;
+
+// Setup global soft select with radius and curve
+softSelect -sse 1 -ssd 2.0 -ssc &quot;0,1,2,1,0,2&quot; -ssf 2;
+
+  </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+  </html>
+  
+
