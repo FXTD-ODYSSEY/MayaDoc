@@ -1,14 +1,29 @@
+import re
+import json
 import os
 import importlib
-from urllib import request
+from collections import OrderedDict
+from html2text import HTML2Text
+from bs4 import BeautifulSoup, NavigableString
+
+parser = HTML2Text()
+# parser.wrap_links = False
+# parser.inline_links = True
+parser.skip_internal_links = True
+parser.ignore_anchors = True
+parser.ignore_images = True
+parser.ignore_emphasis = True
+parser.ignore_table = True
+parser.ignore_links = True
 
 DIR, FILE = os.path.split(__file__)
 
 MODULE = os.path.join(DIR, "PySide2")
-WEB = r"https://doc.qt.io/qtforpython/"
+HTML = os.path.join(DIR, "HTML")
 
+def main():
 
-def downloadHTML():
+    PySide_dict = {}
 
     unavailable_list = {
         "QtCore": [
@@ -400,7 +415,6 @@ def downloadHTML():
             "_Object"
         ]
     }
-
     for i, module in enumerate(os.listdir(MODULE)):
         if not module.startswith("Qt"):
             continue
@@ -408,31 +422,71 @@ def downloadHTML():
         module_name = os.path.splitext(module)[0]
         module = importlib.import_module(f"PySide2.{module_name}")
 
+        PySide_dict[module_name] = {}
         for j, class_name in enumerate(module.__dict__):
-            
             if class_name in unavailable_list[module_name]:
                 continue
+            # print (j,class_name)
 
-            target = f"{module_name}/{class_name}.html"
-            url = f"{WEB}PySide2/{target}"
+            html = f"{HTML}/{module_name}/{class_name}.html"
 
-            # NOTE 如果是404记录下来并跳过
-            try:
-                req = request.urlopen(url)
-            except:
-                unavailable_list[module_name].append(class_name)
-                continue
+            with open(html,'r',encoding="utf-8") as f:
+                content = f.read()
+            
+            # NOTE 提取类描述
+            soup = BeautifulSoup(content, 'html.parser')
+            
+            # TODO 测试
+            # if len(soup.findAll('dl', {"class": "class"})) > 1:
+            #     print ("class",html)
+            # elif len(soup.findAll('blockquote', id="more")) > 1:
+            #     print("blockquote", html)
 
-            print(i, j, class_name)
+            # NOTE 清除 seealso 关联
+            for seealso in soup.findAll('div', {"class": "admonition seealso"}):
+                seealso.extract()
 
-            content = req.read()
-            HTML = os.path.join(DIR, "HTML", target)
-            FOLDER = os.path.dirname(HTML)
-            if not os.path.exists(FOLDER):
-                os.makedirs(FOLDER)
+            description = soup.find('blockquote',id="more")
+            description = ''.join([str(text) for text in description.contents])
+            description = parser.handle(description)
 
-            with open(HTML, 'wb') as f:
-                f.write(content)
+            # NOTE 提取构造函数
+            constructor_dict = {}
+            constructor = soup.find('dl', {"class": "class"})
+            # NOTE 提取 头部 函数信息
+            header = constructor.findChild('dt', id=f"{module.__name__}.{class_name}").extract()
+            param = constructor.findChild('blockquote').extract()
 
+            func_list = [re.search('class (.*?)¶', header.text.strip()).group(1)]
+            for func in param.findChild('blockquote').extract().findAll('p'):
+                func_list.append(func.text)
+            
+            param_list = []
+            for dt,dd in zip(param.findAll('dt'),param.findAll('dd')):
+                dt = parser.handle(str(dt)).strip()
+                dd = parser.handle(str(dd)).strip()
+                param_list.append(f'{dt.split(" ")[-1]:<20}{dd}')
+
+            for note in constructor.findAll('div', {"class": "admonition note"}):
+                note.find('p', {"class": "admonition-title"}).decompose()
+                replace_text = "> %s" % parser.handle(str(note.p))
+                note.p.replaceWith(replace_text)
+                
+            instruction = parser.handle(str(constructor)).strip()
+
+            constructor_dict["func"] = func_list
+            constructor_dict["param_list"] = param_list
+            constructor_dict["instruction"] = instruction
+
+
+            PySide_dict[module_name][class_name] = {
+                "description": description,
+                "constructor": constructor_dict,
+            }
+
+            break
+        break
+    
+    print (json.dumps(PySide_dict))
 if __name__ == "__main__":
-    downloadHTML()
+    main()
