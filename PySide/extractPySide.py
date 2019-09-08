@@ -444,7 +444,7 @@ def main():
 
             # NOTE 清除 seealso 关联
             for seealso in soup.findAll('div', {"class": "admonition seealso"}):
-                seealso.extract()
+                seealso.decompose()
 
             description = soup.find('blockquote',id="more")
             description = ''.join([str(text) for text in description.contents])
@@ -457,7 +457,7 @@ def main():
             header = constructor.findChild('dt', id=f"{module.__name__}.{class_name}").extract()
             param = constructor.findChild('blockquote').extract()
 
-            func_list = [re.search('class (.*?)¶', header.text.strip()).group(1)]
+            func_list = [re.search('class (.*?¶)', header.text.strip()).group(1)]
             for func in param.findChild('blockquote').extract().findAll('p'):
                 func_list.append(func.text)
             
@@ -478,6 +478,27 @@ def main():
             constructor_dict["param_list"] = param_list
             constructor_dict["instruction"] = instruction
 
+            for attribute in soup.findAll('dl', {"class": "attribute"}):
+                attr_name = attribute.dt.text
+                description = attribute.dd.p.text
+                flag_list = []
+                for attr in attribute.table.tbody.findAll("tr"):
+                    for _i,data in enumerate(attr.findAll("td")):
+                        if _i % 2 :
+                            # NOTE 奇数
+                            instruction += "    %s" % data.text
+                            flag_list.append(instruction)
+                        else:
+                            # NOTE 偶数 
+                            instruction = "%-20s" % data.text
+
+                print(flag_list)
+                # print (parser.handle(str(attribute)))
+                
+
+            # method = soup.find('dl', {"class": "method"})
+
+
 
             PySide_dict[module_name][class_name] = {
                 "description": description,
@@ -487,6 +508,6 @@ def main():
             break
         break
     
-    print (json.dumps(PySide_dict))
+    # print (json.dumps(PySide_dict))
 if __name__ == "__main__":
     main()
