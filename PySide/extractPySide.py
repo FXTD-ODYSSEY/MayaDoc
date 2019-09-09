@@ -20,6 +20,7 @@ DIR, FILE = os.path.split(__file__)
 
 MODULE = os.path.join(DIR, "PySide2")
 HTML = os.path.join(DIR, "HTML")
+WEB = r"https://doc.qt.io/qtforpython/"
 
 def main():
 
@@ -426,9 +427,10 @@ def main():
         for j, class_name in enumerate(module.__dict__):
             if class_name in unavailable_list[module_name]:
                 continue
-            # print (j,class_name)
+            
+            target = f"{module_name}/{class_name}.html"
 
-            html = f"{HTML}/{module_name}/{class_name}.html"
+            html = f"{HTML}/{target}"
 
             with open(html,'r',encoding="utf-8") as f:
                 content = f.read()
@@ -442,17 +444,28 @@ def main():
             # elif len(soup.findAll('blockquote', id="more")) > 1:
             #     print("blockquote", html)
 
+            if j < 15:
+                continue
+            if j > 16:
+                break
+            print(j, class_name)
+
             # NOTE 清除 seealso 关联
             for seealso in soup.findAll('div', {"class": "admonition seealso"}):
                 seealso.decompose()
 
-            description = soup.find('blockquote',id="more")
-            description = ''.join([str(text) for text in description.contents])
-            description = parser.handle(description)
+            class_description = soup.find('blockquote')
+            class_description = parser.handle(str(class_description.div)).strip()
+            class_description,_ = class_description.replace("\n", " ").split("More")
+
+            # TODO
+            # class_detail_description 
 
             # NOTE 提取构造函数
             constructor_dict = {}
             constructor = soup.find('dl', {"class": "class"})
+            # print(str(constructor))
+
             # NOTE 提取 头部 函数信息
             header = constructor.findChild('dt', id=f"{module.__name__}.{class_name}").extract()
             param = constructor.findChild('blockquote').extract()
@@ -478,9 +491,10 @@ def main():
             constructor_dict["param_list"] = param_list
             constructor_dict["instruction"] = instruction
 
+            attribute_list = []
             for attribute in soup.findAll('dl', {"class": "attribute"}):
-                attr_name = attribute.dt.text
-                description = attribute.dd.p.text
+                attr_name = attribute.dt.text.strip()
+                description = parser.handle(str(attribute.dd.p))
                 flag_list = []
                 for attr in attribute.table.tbody.findAll("tr"):
                     for _i,data in enumerate(attr.findAll("td")):
@@ -492,22 +506,44 @@ def main():
                             # NOTE 偶数 
                             instruction = "%-20s" % data.text
 
-                print(flag_list)
-                # print (parser.handle(str(attribute)))
+                attribute_list.append({
+                    "attr_name": attr_name,
+                    "description": description,
+                    "flag_list": flag_list,
+                })
                 
 
-            # method = soup.find('dl', {"class": "method"})
+            method_list = []
+            for method in soup.findAll('dl', {"class": "method"}):
+                method_name = method.dt.text.strip()
+                returns = parser.handle(str(method.dd.dl.extract().dd)).strip()
+                description = parser.handle(str(method.dd)).strip()
 
+                method_list.append({
+                    "method_name": re.search(f'{class_name}\.(.*?)\(.*?¶', method_name).group(1),
+                    "method_long_name": method_name,
+                    "description": description,
+                    "returns": returns,
+                })
+                    
 
 
             PySide_dict[module_name][class_name] = {
-                "description": description,
+                "description": class_description,
+                "link":f"{WEB}PySide2/{target}",
                 "constructor": constructor_dict,
+                "attribute": attribute_list,
+                "method": method_list,
             }
 
-            break
+            
         break
     
     # print (json.dumps(PySide_dict))
+    JSON = os.path.join(DIR, "PySide2.json")
+    with open(JSON,'w') as f:
+        json.dump(PySide_dict, f, indent=4)
+
+
 if __name__ == "__main__":
     main()
