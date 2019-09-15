@@ -444,10 +444,10 @@ def main():
             # elif len(soup.findAll('blockquote', id="more")) > 1:
             #     print("blockquote", html)
 
-            if j < 15:
-                continue
-            if j > 16:
-                break
+            # if j < 40:
+            #     continue
+            # if j > 50:
+            #     break
             print(j, class_name)
 
             # NOTE 清除 seealso 关联
@@ -455,56 +455,64 @@ def main():
                 seealso.decompose()
 
             class_description = soup.find('blockquote')
-            class_description = parser.handle(str(class_description.div)).strip()
-            class_description,_ = class_description.replace("\n", " ").split("More")
+            if class_description:
+                class_description = parser.handle(str(class_description.div)).strip()
+                class_description = class_description.replace("\n", " ").split("More")[0]
 
-            # TODO
-            # class_detail_description 
+            # NOTE 提取详细描述
+            class_detail_description = soup.find("blockquote", id="more")
+            if class_detail_description:
+                class_detail_description = parser.handle(str(class_detail_description.div))
 
             # NOTE 提取构造函数
             constructor_dict = {}
             constructor = soup.find('dl', {"class": "class"})
-            # print(str(constructor))
 
-            # NOTE 提取 头部 函数信息
-            header = constructor.findChild('dt', id=f"{module.__name__}.{class_name}").extract()
-            param = constructor.findChild('blockquote').extract()
-
-            func_list = [re.search('class (.*?¶)', header.text.strip()).group(1)]
-            for func in param.findChild('blockquote').extract().findAll('p'):
-                func_list.append(func.text)
-            
-            param_list = []
-            for dt,dd in zip(param.findAll('dt'),param.findAll('dd')):
-                dt = parser.handle(str(dt)).strip()
-                dd = parser.handle(str(dd)).strip()
-                param_list.append(f'{dt.split(" ")[-1]:<20}{dd}')
-
-            for note in constructor.findAll('div', {"class": "admonition note"}):
-                note.find('p', {"class": "admonition-title"}).decompose()
-                replace_text = "> %s" % parser.handle(str(note.p))
-                note.p.replaceWith(replace_text)
+            if constructor:
+                # NOTE 提取 头部 函数信息
+                header = constructor.findChild('dt', id=f"{module.__name__}.{class_name}").extract()
+                param = constructor.findChild('blockquote')
                 
-            instruction = parser.handle(str(constructor)).strip()
+                func_list = [re.search('class (.*?¶)', header.text.strip()).group(1)]
+                param_list = []
+                if param:
+                    blockquote = param.findChild('blockquote')
+                    if blockquote:
+                        for func in blockquote.extract().findAll('p'):
+                            func_list.append(func.text)
+                    for dt,dd in zip(param.findAll('dt'),param.findAll('dd')):
+                        dt = parser.handle(str(dt)).strip()
+                        dd = parser.handle(str(dd)).strip()
+                        param_list.append(f'{dt.split(" ")[-1]:<20}{dd}')
 
-            constructor_dict["func"] = func_list
-            constructor_dict["param_list"] = param_list
-            constructor_dict["instruction"] = instruction
+                for note in constructor.findAll('div', {"class": "admonition note"}):
+                    note.find('p', {"class": "admonition-title"}).decompose()
+                    replace_text = "> %s" % parser.handle(str(note.p))
+                    note.p.replaceWith(replace_text)
+                    
+                instruction = parser.handle(str(constructor)).strip()
+
+                constructor_dict["func"] = func_list
+                constructor_dict["param_list"] = param_list
+                constructor_dict["instruction"] = instruction
 
             attribute_list = []
             for attribute in soup.findAll('dl', {"class": "attribute"}):
                 attr_name = attribute.dt.text.strip()
                 description = parser.handle(str(attribute.dd.p))
                 flag_list = []
-                for attr in attribute.table.tbody.findAll("tr"):
-                    for _i,data in enumerate(attr.findAll("td")):
-                        if _i % 2 :
-                            # NOTE 奇数
-                            instruction += "    %s" % data.text
-                            flag_list.append(instruction)
-                        else:
-                            # NOTE 偶数 
-                            instruction = "%-20s" % data.text
+                table = attribute.table
+                if table and table.tbody:
+                    
+                    for attr in table.tbody.findAll("tr"):
+                        for _i,data in enumerate(attr.findAll("td")):
+                            if _i % 2 :
+                                # NOTE 奇数
+                                instruction += "    %s" % data.text
+                                flag_list.append(instruction)
+                            else:
+                                # NOTE 偶数 
+                                instruction = "%-20s" % data.text
 
                 attribute_list.append({
                     "attr_name": attr_name,
@@ -516,19 +524,21 @@ def main():
             method_list = []
             for method in soup.findAll('dl', {"class": "method"}):
                 method_name = method.dt.text.strip()
-                returns = parser.handle(str(method.dd.dl.extract().dd)).strip()
-                description = parser.handle(str(method.dd)).strip()
+                returns = method.dd.dl
+                if returns:
+                    returns = parser.handle(str(returns.extract().dd)).strip()
 
+                description = parser.handle(str(method.dd)).strip()
+                regx = f'{class_name}\.(.*?)\(.*?'
                 method_list.append({
-                    "method_name": re.search(f'{class_name}\.(.*?)\(.*?¶', method_name).group(1),
+                    "method_name": re.search(regx, method_name).group(1),
                     "method_long_name": method_name,
                     "description": description,
                     "returns": returns,
                 })
-                    
-
 
             PySide_dict[module_name][class_name] = {
+                "class_detail_description": class_detail_description,
                 "description": class_description,
                 "link":f"{WEB}PySide2/{target}",
                 "constructor": constructor_dict,
@@ -537,7 +547,7 @@ def main():
             }
 
             
-        break
+        # break
     
     # print (json.dumps(PySide_dict))
     JSON = os.path.join(DIR, "PySide2.json")
