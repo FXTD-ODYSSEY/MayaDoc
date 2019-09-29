@@ -1,0 +1,993 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pymel.core.uitypes.AnimCurveEditor &mdash; PyMEL 1.0.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css">
+  
+
+  
+    <link rel="top" title="PyMEL 1.0.9 documentation" href="../../../index.html">
+        <link rel="up" title="pymel.core.uitypes" href="../../pymel.core.uitypes.html">
+        <link rel="next" title="pymel.core.uitypes.AnimDisplay" href="pymel.core.uitypes.AnimDisplay.html">
+        <link rel="prev" title="pymel.core.uitypes.AETemplate" href="pymel.core.uitypes.AETemplate.html"> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PyMEL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../whats_new.html">What&#8217;s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../why_pymel.html">Why PyMEL?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pynodes.html">PyNodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../attributes.html">Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../non_existent_objs.html">Non-Existent Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ui.html">Building User Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../standalone.html">Standalone Maya Python Interpreter</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../eclipse.html">Setting Up PyMEL Autocompletion in Eclipse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">For Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mel_to_python.html">MEL to Python Cheat Sheet</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../modules.html">Module Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core"><tt class="docutils literal"><span class="pre">pymel.core</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-datatypes"><tt class="docutils literal"><span class="pre">pymel.core.datatypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-nodetypes"><tt class="docutils literal"><span class="pre">pymel.core.nodetypes</span></tt></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../modules.html#pymel-core-uitypes"><tt class="docutils literal"><span class="pre">pymel.core.uitypes</span></tt></a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../pymel.core.uitypes.html">pymel.core.uitypes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.MenuItem.html">pymel.core.uitypes.MenuItem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.objectTypeUI.html">pymel.core.uitypes.objectTypeUI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.pysideWrapInstance.html">pymel.core.uitypes.pysideWrapInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toPyQtControl.html">pymel.core.uitypes.toPyQtControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toPyQtLayout.html">pymel.core.uitypes.toPyQtLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toPyQtMenuItem.html">pymel.core.uitypes.toPyQtMenuItem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toPyQtObject.html">pymel.core.uitypes.toPyQtObject</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toPyQtWindow.html">pymel.core.uitypes.toPyQtWindow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toPySideControl.html">pymel.core.uitypes.toPySideControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toPySideLayout.html">pymel.core.uitypes.toPySideLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toPySideMenuItem.html">pymel.core.uitypes.toPySideMenuItem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toPySideObject.html">pymel.core.uitypes.toPySideObject</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toPySideWindow.html">pymel.core.uitypes.toPySideWindow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toQtControl.html">pymel.core.uitypes.toQtControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toQtLayout.html">pymel.core.uitypes.toQtLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toQtMenuItem.html">pymel.core.uitypes.toQtMenuItem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toQtObject.html">pymel.core.uitypes.toQtObject</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../functions/pymel.core.uitypes/pymel.core.uitypes.toQtWindow.html">pymel.core.uitypes.toQtWindow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AELoader.html">pymel.core.uitypes.AELoader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AETemplate.html">pymel.core.uitypes.AETemplate</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">pymel.core.uitypes.AnimCurveEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AnimDisplay.html">pymel.core.uitypes.AnimDisplay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AttrColorSliderGrp.html">pymel.core.uitypes.AttrColorSliderGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AttrControlGrp.html">pymel.core.uitypes.AttrControlGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AttrEnumOptionMenu.html">pymel.core.uitypes.AttrEnumOptionMenu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AttrEnumOptionMenuGrp.html">pymel.core.uitypes.AttrEnumOptionMenuGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AttrFieldGrp.html">pymel.core.uitypes.AttrFieldGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AttrFieldSliderGrp.html">pymel.core.uitypes.AttrFieldSliderGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AttrNavigationControlGrp.html">pymel.core.uitypes.AttrNavigationControlGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AttributeMenu.html">pymel.core.uitypes.AttributeMenu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.AutoLayout.html">pymel.core.uitypes.AutoLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.BlendShapeEditor.html">pymel.core.uitypes.BlendShapeEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.BlendShapePanel.html">pymel.core.uitypes.BlendShapePanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.Button.html">pymel.core.uitypes.Button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.Canvas.html">pymel.core.uitypes.Canvas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ChannelBox.html">pymel.core.uitypes.ChannelBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.CheckBox.html">pymel.core.uitypes.CheckBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.CheckBoxGrp.html">pymel.core.uitypes.CheckBoxGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ClipEditor.html">pymel.core.uitypes.ClipEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ClipSchedulerOutliner.html">pymel.core.uitypes.ClipSchedulerOutliner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.CmdScrollFieldExecuter.html">pymel.core.uitypes.CmdScrollFieldExecuter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.CmdScrollFieldReporter.html">pymel.core.uitypes.CmdScrollFieldReporter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.CmdShell.html">pymel.core.uitypes.CmdShell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ColorEditor.html">pymel.core.uitypes.ColorEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ColorIndexSliderGrp.html">pymel.core.uitypes.ColorIndexSliderGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ColorSliderButtonGrp.html">pymel.core.uitypes.ColorSliderButtonGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ColorSliderGrp.html">pymel.core.uitypes.ColorSliderGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ColumnLayout.html">pymel.core.uitypes.ColumnLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.CommandLine.html">pymel.core.uitypes.CommandLine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.CommandMenuItem.html">pymel.core.uitypes.CommandMenuItem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ConfirmDialog.html">pymel.core.uitypes.ConfirmDialog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.DefaultLightListCheckBox.html">pymel.core.uitypes.DefaultLightListCheckBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.DeviceEditor.html">pymel.core.uitypes.DeviceEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.DevicePanel.html">pymel.core.uitypes.DevicePanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.DynPaintEditor.html">pymel.core.uitypes.DynPaintEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.DynRelEdPanel.html">pymel.core.uitypes.DynRelEdPanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.DynRelEditor.html">pymel.core.uitypes.DynRelEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ExclusiveLightCheckBox.html">pymel.core.uitypes.ExclusiveLightCheckBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FloatField.html">pymel.core.uitypes.FloatField</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FloatFieldGrp.html">pymel.core.uitypes.FloatFieldGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FloatScrollBar.html">pymel.core.uitypes.FloatScrollBar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FloatSlider.html">pymel.core.uitypes.FloatSlider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FloatSlider2.html">pymel.core.uitypes.FloatSlider2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FloatSliderButtonGrp.html">pymel.core.uitypes.FloatSliderButtonGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FloatSliderGrp.html">pymel.core.uitypes.FloatSliderGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FolderButtonGrp.html">pymel.core.uitypes.FolderButtonGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FontDialog.html">pymel.core.uitypes.FontDialog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FormLayout.html">pymel.core.uitypes.FormLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.FrameLayout.html">pymel.core.uitypes.FrameLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.GlRenderEditor.html">pymel.core.uitypes.GlRenderEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.GradientControl.html">pymel.core.uitypes.GradientControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.GradientControlNoAttr.html">pymel.core.uitypes.GradientControlNoAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.GridLayout.html">pymel.core.uitypes.GridLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.HardwareRenderPanel.html">pymel.core.uitypes.HardwareRenderPanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.HelpLine.html">pymel.core.uitypes.HelpLine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.HyperGraph.html">pymel.core.uitypes.HyperGraph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.HyperPanel.html">pymel.core.uitypes.HyperPanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.HyperShade.html">pymel.core.uitypes.HyperShade</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IconTextButton.html">pymel.core.uitypes.IconTextButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IconTextCheckBox.html">pymel.core.uitypes.IconTextCheckBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IconTextRadioButton.html">pymel.core.uitypes.IconTextRadioButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IconTextRadioCollection.html">pymel.core.uitypes.IconTextRadioCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IconTextScrollList.html">pymel.core.uitypes.IconTextScrollList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IconTextStaticLabel.html">pymel.core.uitypes.IconTextStaticLabel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.Image.html">pymel.core.uitypes.Image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IntField.html">pymel.core.uitypes.IntField</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IntFieldGrp.html">pymel.core.uitypes.IntFieldGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IntScrollBar.html">pymel.core.uitypes.IntScrollBar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IntSlider.html">pymel.core.uitypes.IntSlider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.IntSliderGrp.html">pymel.core.uitypes.IntSliderGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.KeyframeOutliner.html">pymel.core.uitypes.KeyframeOutliner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.KeyframeStats.html">pymel.core.uitypes.KeyframeStats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.LayerButton.html">pymel.core.uitypes.LayerButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.Layout.html">pymel.core.uitypes.Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.LayoutDialog.html">pymel.core.uitypes.LayoutDialog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.MainProgressBar.html">pymel.core.uitypes.MainProgressBar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.Menu.html">pymel.core.uitypes.Menu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.MenuBarLayout.html">pymel.core.uitypes.MenuBarLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.MenuEditor.html">pymel.core.uitypes.MenuEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.MenuSet.html">pymel.core.uitypes.MenuSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.MessageLine.html">pymel.core.uitypes.MessageLine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ModelEditor.html">pymel.core.uitypes.ModelEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ModelPanel.html">pymel.core.uitypes.ModelPanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.NameField.html">pymel.core.uitypes.NameField</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.NodeIconButton.html">pymel.core.uitypes.NodeIconButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.OptionMenu.html">pymel.core.uitypes.OptionMenu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.OptionMenuGrp.html">pymel.core.uitypes.OptionMenuGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.OutlinerEditor.html">pymel.core.uitypes.OutlinerEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.OutlinerPanel.html">pymel.core.uitypes.OutlinerPanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.PalettePort.html">pymel.core.uitypes.PalettePort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.PaneLayout.html">pymel.core.uitypes.PaneLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.Panel.html">pymel.core.uitypes.Panel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.PathButtonGrp.html">pymel.core.uitypes.PathButtonGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.PopupMenu.html">pymel.core.uitypes.PopupMenu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ProgressBar.html">pymel.core.uitypes.ProgressBar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.PromptDialog.html">pymel.core.uitypes.PromptDialog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.PyUI.html">pymel.core.uitypes.PyUI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.RadioButton.html">pymel.core.uitypes.RadioButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.RadioButtonGrp.html">pymel.core.uitypes.RadioButtonGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.RadioCollection.html">pymel.core.uitypes.RadioCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.RadioMenuItemCollection.html">pymel.core.uitypes.RadioMenuItemCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.RenderLayerButton.html">pymel.core.uitypes.RenderLayerButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.RenderWindowEditor.html">pymel.core.uitypes.RenderWindowEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.RowColumnLayout.html">pymel.core.uitypes.RowColumnLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.RowLayout.html">pymel.core.uitypes.RowLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ScriptTable.html">pymel.core.uitypes.ScriptTable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ScriptedPanel.html">pymel.core.uitypes.ScriptedPanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ScriptedPanelType.html">pymel.core.uitypes.ScriptedPanelType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ScrollField.html">pymel.core.uitypes.ScrollField</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ScrollLayout.html">pymel.core.uitypes.ScrollLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.Separator.html">pymel.core.uitypes.Separator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ShelfButton.html">pymel.core.uitypes.ShelfButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ShelfLayout.html">pymel.core.uitypes.ShelfLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ShelfTabLayout.html">pymel.core.uitypes.ShelfTabLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ShellField.html">pymel.core.uitypes.ShellField</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.SubMenuItem.html">pymel.core.uitypes.SubMenuItem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.SymbolButton.html">pymel.core.uitypes.SymbolButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.SymbolCheckBox.html">pymel.core.uitypes.SymbolCheckBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.TabLayout.html">pymel.core.uitypes.TabLayout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.Text.html">pymel.core.uitypes.Text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.TextCurves.html">pymel.core.uitypes.TextCurves</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.TextField.html">pymel.core.uitypes.TextField</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.TextFieldButtonGrp.html">pymel.core.uitypes.TextFieldButtonGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.TextFieldGrp.html">pymel.core.uitypes.TextFieldGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.TextScrollList.html">pymel.core.uitypes.TextScrollList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ToolButton.html">pymel.core.uitypes.ToolButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.ToolCollection.html">pymel.core.uitypes.ToolCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.UITemplate.html">pymel.core.uitypes.UITemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.VectorFieldGrp.html">pymel.core.uitypes.VectorFieldGrp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.Visor.html">pymel.core.uitypes.Visor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.uitypes.Window.html">pymel.core.uitypes.Window</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-runtime"><tt class="docutils literal"><span class="pre">pymel.core.runtime</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-util"><tt class="docutils literal"><span class="pre">pymel.util</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-versions"><tt class="docutils literal"><span class="pre">pymel.versions</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-mayautils"><tt class="docutils literal"><span class="pre">pymel.mayautils</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-tools"><tt class="docutils literal"><span class="pre">pymel.tools</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-api"><tt class="docutils literal"><span class="pre">pymel.api</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyMEL</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../modules.html">Module Documentation</a> &raquo;</li>
+        
+          <li><a href="../../pymel.core.uitypes.html">pymel.core.uitypes</a> &raquo;</li>
+        
+      <li>pymel.core.uitypes.AnimCurveEditor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/generated/classes/pymel.core.uitypes/pymel.core.uitypes.AnimCurveEditor.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pymel-core-uitypes-animcurveeditor">
+<h1>pymel.core.uitypes.AnimCurveEditor<a class="headerlink" href="#pymel-core-uitypes-animcurveeditor" title="Permalink to this headline">¶</a></h1>
+<p class="graphviz">
+digraph inheritance696bd8d0fa {
+rankdir=TB;
+ranksep=0.15;
+nodesep=0.15;
+size=&quot;8.0, 12.0&quot;;
+  &quot;AnimCurveEditor&quot; [fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,URL=&quot;#pymel.core.uitypes.AnimCurveEditor&quot;,style=&quot;setlinewidth(0.5)&quot;,tooltip=&quot;class counterpart of mel function `animCurveEditor`&quot;,height=0.25,shape=box,fontsize=8];
+  &quot;PyUI&quot; -&gt; &quot;AnimCurveEditor&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;PyUI&quot; [fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,URL=&quot;pymel.core.uitypes.PyUI.html#pymel.core.uitypes.PyUI&quot;,style=&quot;setlinewidth(0.5)&quot;,height=0.25,shape=box,fontsize=8];
+}
+</p>
+<dl class="class">
+<dt id="pymel.core.uitypes.AnimCurveEditor">
+<em class="property">class </em><tt class="descname">AnimCurveEditor</tt><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor" title="Permalink to this definition">¶</a></dt>
+<dd><p>class counterpart of mel function <tt class="xref py py-obj docutils literal"><span class="pre">animCurveEditor</span></tt></p>
+<p>Edit a characteristic of a graph editor</p>
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.denormalizeCurvesCommand">
+<tt class="descname">denormalizeCurvesCommand</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.denormalizeCurvesCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the script that is run to denormalize curves in the graph editor. This is intended for internal use only.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.displayActiveKeyTangents">
+<tt class="descname">displayActiveKeyTangents</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.displayActiveKeyTangents" title="Permalink to this definition">¶</a></dt>
+<dd><p>on | off | tgl Display active key tangents in the editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.displayActiveKeys">
+<tt class="descname">displayActiveKeys</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.displayActiveKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>on | off | tgl Display active keys in the editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.displayInfinities">
+<tt class="descname">displayInfinities</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.displayInfinities" title="Permalink to this definition">¶</a></dt>
+<dd><p>on | off | tgl Display infinities in the editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.displayKeys">
+<tt class="descname">displayKeys</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.displayKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>on | off | tgl Display keyframes in the editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.displayTangents">
+<tt class="descname">displayTangents</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.displayTangents" title="Permalink to this definition">¶</a></dt>
+<dd><p>on | off | tgl Display tangents in the editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.displayValues">
+<tt class="descname">displayValues</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.displayValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>on | off | tgl Display active keys and tangents values in the editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getAreCurvesSelected">
+<tt class="descname">getAreCurvesSelected</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getAreCurvesSelected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a boolean to know if at least one curve is selected in the graph editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getAutoFit">
+<tt class="descname">getAutoFit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getAutoFit" title="Permalink to this definition">¶</a></dt>
+<dd><p>on | off | tgl Auto fit-to-view.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getClassicMode">
+<tt class="descname">getClassicMode</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getClassicMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>When on, the graph editor is displayed in Classic Mode, otherwise Suites Modeis used.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getClipTime">
+<tt class="descname">getClipTime</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getClipTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values: onoffDisplay the clips with their offset and scale applied to the anim curves in the clip.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getConstrainDrag">
+<tt class="descname">getConstrainDrag</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getConstrainDrag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constrains all Graph Editor animation curve drag operations to either the X-axis, the Y-axis, or to neither of those axes. Values to supply are: 0 for not constraining any axis, 1 for constraing the X-axis, or 2 for constraining the Y-axis. When used in queries, this flag returns the latter values and these values have the same interpretation as above. Note: when the shift key is pressed before dragging the animation curve, the first mouse movement will instead determine (and override) any prior set constrained axis.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getControl">
+<tt class="descname">getControl</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getControl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query only. Returns the top level control for this editor. Usually used for getting a parent to attach popup menus. Caution: It is possible for an editor to exist without a control. The query will return NONEif no control is present.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getCurvesShown">
+<tt class="descname">getCurvesShown</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getCurvesShown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string array containing the names of the animCurve nodes currently displayed in the graph editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getCurvesShownForceUpdate">
+<tt class="descname">getCurvesShownForceUpdate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getCurvesShownForceUpdate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string array containing the names of the animCurve nodes currently displayed in the graph editor. Unlike the curvesShown flag, this will force an update of the graph editor for the case where the mainListConnection has been modified since the last refresh.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getDisplayNormalized">
+<tt class="descname">getDisplayNormalized</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getDisplayNormalized" title="Permalink to this definition">¶</a></dt>
+<dd><p>When on, display all curves normalized to the range -1 to +1.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getDocTag">
+<tt class="descname">getDocTag</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getDocTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attaches a tag to the editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getFilter">
+<tt class="descname">getFilter</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the name of an itemFilter object to be used with this editor. This filters the information coming onto the main list of the editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getForceMainConnection">
+<tt class="descname">getForceMainConnection</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getForceMainConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the name of a selectionConnection object that the editor will use as its source of content. The editor will only display items contained in the selectionConnection object. This is a variant of the -mainListConnection flag in that it will force a change even when the connection is locked. This flag is used to reduce the overhead when using the -unlockMainConnection , -mainListConnection, -lockMainConnection flags in immediate succession.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getHighlightConnection">
+<tt class="descname">getHighlightConnection</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getHighlightConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the name of a selectionConnection object that the editor will synchronize with its highlight list. Not all editors have a highlight list. For those that do, it is a secondary selection list.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getKeyingTime">
+<tt class="descname">getKeyingTime</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getKeyingTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current time in the given curve to be keyed in the graph editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getMainListConnection">
+<tt class="descname">getMainListConnection</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getMainListConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the name of a selectionConnection object that the editor will use as its source of content. The editor will only display items contained in the selectionConnection object.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getOutliner">
+<tt class="descname">getOutliner</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getOutliner" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the outliner that is associated with the graph editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getPanel">
+<tt class="descname">getPanel</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getPanel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the panel for this editor. By default if an editor is created in the create callback of a scripted panel it will belong to that panel. If an editor does not belong to a panel it will be deleted when the window that it is in is deleted.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getPreSelectionHighlight">
+<tt class="descname">getPreSelectionHighlight</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getPreSelectionHighlight" title="Permalink to this definition">¶</a></dt>
+<dd><p>When on, the curve/key/tangent under the mouse pointer is highlighted to ease selection.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getResultSamples">
+<tt class="descname">getResultSamples</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getResultSamples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify the sampling for result curves Note: the smaller this number is, the longer it will take to update the display.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getResultScreenSamples">
+<tt class="descname">getResultScreenSamples</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getResultScreenSamples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify the screen base result sampling for result curves. If 0, then results are sampled in time.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getResultUpdate">
+<tt class="descname">getResultUpdate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getResultUpdate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values: interactivedelayedControls how changes to animCurves are reflected in the result curves (if results are being shown).  If resultUpdate is interactive, then as interactive changes are being made to the animCurve, the result curves will be updated.  If modelUpdate is delayed (which is the default setting), then result curves are updated once the final change to an animCurve has been made.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getSelectionConnection">
+<tt class="descname">getSelectionConnection</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getSelectionConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the name of a selectionConnection object that the editor will synchronize with its own selection list. As the user selects things in this editor, they will be selected in the selectionConnection object. If the object undergoes changes, the editor updates to show the changes.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getShowActiveCurveNames">
+<tt class="descname">getShowActiveCurveNames</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getShowActiveCurveNames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the active curve(s)&#8217;s name.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getShowBufferCurves">
+<tt class="descname">getShowBufferCurves</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getShowBufferCurves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values: onofftglDisplay buffer curves.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getShowCurveNames">
+<tt class="descname">getShowCurveNames</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getShowCurveNames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the curves&#8217;s name.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getShowResults">
+<tt class="descname">getShowResults</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getShowResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values: onofftglDisplay result curves from expression or other non-keyed action.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getShowUpstreamCurves">
+<tt class="descname">getShowUpstreamCurves</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getShowUpstreamCurves" title="Permalink to this definition">¶</a></dt>
+<dd><p>If true, the dependency graph is searched upstream for all curves that drive the selected plugs (showing multiple curves for example in a typical driven key setup, where first the driven key curve is encountered, followed by the actual animation curve that drives the source object). If false, only the first curves encountered will be shown. Note that, even if false, multiple curves can be shown if e.g. a blendWeighted node is being used to combine multiple curves.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getSmoothness">
+<tt class="descname">getSmoothness</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getSmoothness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values: coarseroughmediumfineSpecify the display smoothness of animation curves.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getSnapTime">
+<tt class="descname">getSnapTime</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getSnapTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>none | integer | keyframe Keyframe move snap in time.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getSnapValue">
+<tt class="descname">getSnapValue</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getSnapValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>none | integer | keyframe Keyframe move snap in values.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getStackedCurves">
+<tt class="descname">getStackedCurves</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getStackedCurves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switches the display mode between normal (all curves sharing one set of axes) to stacked (each curve on its own value axis, stacked vertically).</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getStackedCurvesMax">
+<tt class="descname">getStackedCurvesMax</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getStackedCurvesMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the maximum value on the per-curve value axis when in stacked mode.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getStackedCurvesMin">
+<tt class="descname">getStackedCurvesMin</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getStackedCurvesMin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the minimum value on the per-curve value axis when in stacked mode.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getStackedCurvesSpace">
+<tt class="descname">getStackedCurvesSpace</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getStackedCurvesSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the spacing between curves when in stacked mode.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.getStateString">
+<tt class="descname">getStateString</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.getStateString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query only flag. Returns the MEL command that will create an editor to match the current editor state. The returned command string uses the string variable $editorName in place of a specific name.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.lockMainConnection">
+<tt class="descname">lockMainConnection</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.lockMainConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locks the current list of objects within the mainConnection, so that only those objects are displayed within the editor. Further changes to the original mainConnection are ignored.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.lookAt">
+<tt class="descname">lookAt</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.lookAt" title="Permalink to this definition">¶</a></dt>
+<dd><p>all | selected | currentTime FitView helpers.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.normalizeCurvesCommand">
+<tt class="descname">normalizeCurvesCommand</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.normalizeCurvesCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the script that is run to normalize curves in the graph editor. This is intended for internal use only.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.renormalizeCurves">
+<tt class="descname">renormalizeCurves</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.renormalizeCurves" title="Permalink to this definition">¶</a></dt>
+<dd><p>This flag causes the curve normalization factors to be recalculated.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setAutoFit">
+<tt class="descname">setAutoFit</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setAutoFit" title="Permalink to this definition">¶</a></dt>
+<dd><p>on | off | tgl Auto fit-to-view.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setClassicMode">
+<tt class="descname">setClassicMode</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setClassicMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>When on, the graph editor is displayed in Classic Mode, otherwise Suites Modeis used.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setClipTime">
+<tt class="descname">setClipTime</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setClipTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values: onoffDisplay the clips with their offset and scale applied to the anim curves in the clip.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setConstrainDrag">
+<tt class="descname">setConstrainDrag</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setConstrainDrag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constrains all Graph Editor animation curve drag operations to either the X-axis, the Y-axis, or to neither of those axes. Values to supply are: 0 for not constraining any axis, 1 for constraing the X-axis, or 2 for constraining the Y-axis. When used in queries, this flag returns the latter values and these values have the same interpretation as above. Note: when the shift key is pressed before dragging the animation curve, the first mouse movement will instead determine (and override) any prior set constrained axis.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setDisplayNormalized">
+<tt class="descname">setDisplayNormalized</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setDisplayNormalized" title="Permalink to this definition">¶</a></dt>
+<dd><p>When on, display all curves normalized to the range -1 to +1.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setDocTag">
+<tt class="descname">setDocTag</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setDocTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attaches a tag to the editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setFilter">
+<tt class="descname">setFilter</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the name of an itemFilter object to be used with this editor. This filters the information coming onto the main list of the editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setForceMainConnection">
+<tt class="descname">setForceMainConnection</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setForceMainConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the name of a selectionConnection object that the editor will use as its source of content. The editor will only display items contained in the selectionConnection object. This is a variant of the -mainListConnection flag in that it will force a change even when the connection is locked. This flag is used to reduce the overhead when using the -unlockMainConnection , -mainListConnection, -lockMainConnection flags in immediate succession.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setHighlightConnection">
+<tt class="descname">setHighlightConnection</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setHighlightConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the name of a selectionConnection object that the editor will synchronize with its highlight list. Not all editors have a highlight list. For those that do, it is a secondary selection list.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setMainListConnection">
+<tt class="descname">setMainListConnection</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setMainListConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the name of a selectionConnection object that the editor will use as its source of content. The editor will only display items contained in the selectionConnection object.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setOutliner">
+<tt class="descname">setOutliner</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setOutliner" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the outliner that is associated with the graph editor.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setParent">
+<tt class="descname">setParent</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setParent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the parent layout for this editor. This flag will only have an effect if the editor is currently un-parented.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setPreSelectionHighlight">
+<tt class="descname">setPreSelectionHighlight</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setPreSelectionHighlight" title="Permalink to this definition">¶</a></dt>
+<dd><p>When on, the curve/key/tangent under the mouse pointer is highlighted to ease selection.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setResultSamples">
+<tt class="descname">setResultSamples</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setResultSamples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify the sampling for result curves Note: the smaller this number is, the longer it will take to update the display.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setResultScreenSamples">
+<tt class="descname">setResultScreenSamples</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setResultScreenSamples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify the screen base result sampling for result curves. If 0, then results are sampled in time.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setResultUpdate">
+<tt class="descname">setResultUpdate</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setResultUpdate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values: interactivedelayedControls how changes to animCurves are reflected in the result curves (if results are being shown).  If resultUpdate is interactive, then as interactive changes are being made to the animCurve, the result curves will be updated.  If modelUpdate is delayed (which is the default setting), then result curves are updated once the final change to an animCurve has been made.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setSelectionConnection">
+<tt class="descname">setSelectionConnection</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setSelectionConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the name of a selectionConnection object that the editor will synchronize with its own selection list. As the user selects things in this editor, they will be selected in the selectionConnection object. If the object undergoes changes, the editor updates to show the changes.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setShowActiveCurveNames">
+<tt class="descname">setShowActiveCurveNames</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setShowActiveCurveNames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the active curve(s)&#8217;s name.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setShowBufferCurves">
+<tt class="descname">setShowBufferCurves</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setShowBufferCurves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values: onofftglDisplay buffer curves.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setShowCurveNames">
+<tt class="descname">setShowCurveNames</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setShowCurveNames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the curves&#8217;s name.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setShowResults">
+<tt class="descname">setShowResults</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setShowResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values: onofftglDisplay result curves from expression or other non-keyed action.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setShowUpstreamCurves">
+<tt class="descname">setShowUpstreamCurves</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setShowUpstreamCurves" title="Permalink to this definition">¶</a></dt>
+<dd><p>If true, the dependency graph is searched upstream for all curves that drive the selected plugs (showing multiple curves for example in a typical driven key setup, where first the driven key curve is encountered, followed by the actual animation curve that drives the source object). If false, only the first curves encountered will be shown. Note that, even if false, multiple curves can be shown if e.g. a blendWeighted node is being used to combine multiple curves.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setSmoothness">
+<tt class="descname">setSmoothness</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setSmoothness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values: coarseroughmediumfineSpecify the display smoothness of animation curves.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setSnapTime">
+<tt class="descname">setSnapTime</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setSnapTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>none | integer | keyframe Keyframe move snap in time.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setSnapValue">
+<tt class="descname">setSnapValue</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setSnapValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>none | integer | keyframe Keyframe move snap in values.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setStackedCurves">
+<tt class="descname">setStackedCurves</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setStackedCurves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switches the display mode between normal (all curves sharing one set of axes) to stacked (each curve on its own value axis, stacked vertically).</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setStackedCurvesMax">
+<tt class="descname">setStackedCurvesMax</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setStackedCurvesMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the maximum value on the per-curve value axis when in stacked mode.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setStackedCurvesMin">
+<tt class="descname">setStackedCurvesMin</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setStackedCurvesMin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the minimum value on the per-curve value axis when in stacked mode.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.setStackedCurvesSpace">
+<tt class="descname">setStackedCurvesSpace</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.setStackedCurvesSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the spacing between curves when in stacked mode.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.unParent">
+<tt class="descname">unParent</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.unParent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies that the editor should be removed from its layout. This cannot be used in query mode.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.unlockMainConnection">
+<tt class="descname">unlockMainConnection</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.unlockMainConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unlocks the mainConnection, effectively restoring the original mainConnection (if it is still available), and dynamic updates.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.updateMainConnection">
+<tt class="descname">updateMainConnection</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.updateMainConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Causes a locked mainConnection to be updated from the orginal mainConnection, but preserves the lock state.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.core.uitypes.AnimCurveEditor.valueLinesToggle">
+<tt class="descname">valueLinesToggle</tt><big>(</big><em>val=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.uitypes.AnimCurveEditor.valueLinesToggle" title="Permalink to this definition">¶</a></dt>
+<dd><p>on | off | tgl Display the value lines for high/low/zero of selected curves in the editor                  Flag can have multiple arguments, passed either as a tuple or a list.</p>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.animCurveEditor</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pymel.core.uitypes.AnimDisplay.html" class="btn btn-neutral float-right" title="pymel.core.uitypes.AnimDisplay" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pymel.core.uitypes.AETemplate.html" class="btn btn-neutral" title="pymel.core.uitypes.AETemplate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009, Chad Dombrova.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

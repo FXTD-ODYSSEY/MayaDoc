@@ -1,0 +1,1460 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pymel.core.animation.timeEditorClip &mdash; PyMEL 1.0.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css">
+  
+
+  
+    <link rel="top" title="PyMEL 1.0.9 documentation" href="../../../index.html">
+        <link rel="up" title="pymel.core.animation" href="../../pymel.core.animation.html">
+        <link rel="next" title="pymel.core.animation.timeEditorClipLayer" href="pymel.core.animation.timeEditorClipLayer.html">
+        <link rel="prev" title="pymel.core.animation.timeEditorBakeClips" href="pymel.core.animation.timeEditorBakeClips.html"> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PyMEL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../whats_new.html">What&#8217;s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../why_pymel.html">Why PyMEL?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pynodes.html">PyNodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../attributes.html">Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../non_existent_objs.html">Non-Existent Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ui.html">Building User Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../standalone.html">Standalone Maya Python Interpreter</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../eclipse.html">Setting Up PyMEL Autocompletion in Eclipse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">For Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mel_to_python.html">MEL to Python Cheat Sheet</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../modules.html">Module Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../modules.html#pymel-core"><tt class="docutils literal"><span class="pre">pymel.core</span></tt></a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../pymel.core.animation.html">pymel.core.animation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.aimConstraint.html">pymel.core.animation.aimConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.animCurveEditor.html">pymel.core.animation.animCurveEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.animDisplay.html">pymel.core.animation.animDisplay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.animLayer.html">pymel.core.animation.animLayer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.animView.html">pymel.core.animation.animView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.applyTake.html">pymel.core.animation.applyTake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.autoKeyframe.html">pymel.core.animation.autoKeyframe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.backgroundEvaluationManager.html">pymel.core.animation.backgroundEvaluationManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.bakeClip.html">pymel.core.animation.bakeClip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.bakeDeformer.html">pymel.core.animation.bakeDeformer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.bakeResults.html">pymel.core.animation.bakeResults</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.bakeSimulation.html">pymel.core.animation.bakeSimulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.bindSkin.html">pymel.core.animation.bindSkin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.blendShape.html">pymel.core.animation.blendShape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.blendShapeEditor.html">pymel.core.animation.blendShapeEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.blendShapePanel.html">pymel.core.animation.blendShapePanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.blendTwoAttr.html">pymel.core.animation.blendTwoAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.boneLattice.html">pymel.core.animation.boneLattice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.bufferCurve.html">pymel.core.animation.bufferCurve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.buildBookmarkMenu.html">pymel.core.animation.buildBookmarkMenu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.buildKeyframeMenu.html">pymel.core.animation.buildKeyframeMenu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.character.html">pymel.core.animation.character</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.characterMap.html">pymel.core.animation.characterMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.characterize.html">pymel.core.animation.characterize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.choice.html">pymel.core.animation.choice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.clip.html">pymel.core.animation.clip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.clipEditor.html">pymel.core.animation.clipEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.clipMatching.html">pymel.core.animation.clipMatching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.clipSchedule.html">pymel.core.animation.clipSchedule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.clipSchedulerOutliner.html">pymel.core.animation.clipSchedulerOutliner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.cluster.html">pymel.core.animation.cluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.cmd.html">pymel.core.animation.cmd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.combinationShape.html">pymel.core.animation.combinationShape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.connectJoint.html">pymel.core.animation.connectJoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.controller.html">pymel.core.animation.controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.copyDeformerWeights.html">pymel.core.animation.copyDeformerWeights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.copyFlexor.html">pymel.core.animation.copyFlexor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.copyKey.html">pymel.core.animation.copyKey</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.copySkinWeights.html">pymel.core.animation.copySkinWeights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.currentTime.html">pymel.core.animation.currentTime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.cutKey.html">pymel.core.animation.cutKey</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.dagPose.html">pymel.core.animation.dagPose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.defineDataServer.html">pymel.core.animation.defineDataServer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.defineVirtualDevice.html">pymel.core.animation.defineVirtualDevice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.deformer.html">pymel.core.animation.deformer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.deformerWeights.html">pymel.core.animation.deformerWeights</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.deltaMush.html">pymel.core.animation.deltaMush</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.deviceManager.html">pymel.core.animation.deviceManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.disconnectJoint.html">pymel.core.animation.disconnectJoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.dopeSheetEditor.html">pymel.core.animation.dopeSheetEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.dropoffLocator.html">pymel.core.animation.dropoffLocator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.effector.html">pymel.core.animation.effector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.enableDevice.html">pymel.core.animation.enableDevice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.evaluationManager.html">pymel.core.animation.evaluationManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.evaluator.html">pymel.core.animation.evaluator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.filterCurve.html">pymel.core.animation.filterCurve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.findDeformers.html">pymel.core.animation.findDeformers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.findKeyframe.html">pymel.core.animation.findKeyframe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.flexor.html">pymel.core.animation.flexor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.flow.html">pymel.core.animation.flow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.freezeOptions.html">pymel.core.animation.freezeOptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.geomBind.html">pymel.core.animation.geomBind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.geometryConstraint.html">pymel.core.animation.geometryConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.getCurrentTime.html">pymel.core.animation.getCurrentTime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.hikGlobals.html">pymel.core.animation.hikGlobals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.ikHandle.html">pymel.core.animation.ikHandle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.ikHandleDisplayScale.html">pymel.core.animation.ikHandleDisplayScale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.ikSolver.html">pymel.core.animation.ikSolver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.ikSystem.html">pymel.core.animation.ikSystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.ikSystemInfo.html">pymel.core.animation.ikSystemInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.ikfkDisplayMethod.html">pymel.core.animation.ikfkDisplayMethod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.insertJoint.html">pymel.core.animation.insertJoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.joint.html">pymel.core.animation.joint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.jointCluster.html">pymel.core.animation.jointCluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.jointDisplayScale.html">pymel.core.animation.jointDisplayScale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.jointLattice.html">pymel.core.animation.jointLattice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.keyTangent.html">pymel.core.animation.keyTangent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.keyframe.html">pymel.core.animation.keyframe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.keyframeOutliner.html">pymel.core.animation.keyframeOutliner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.keyframeStats.html">pymel.core.animation.keyframeStats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.keyingGroup.html">pymel.core.animation.keyingGroup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.lattice.html">pymel.core.animation.lattice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.listAnimatable.html">pymel.core.animation.listAnimatable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.marker.html">pymel.core.animation.marker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.mirrorJoint.html">pymel.core.animation.mirrorJoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.movIn.html">pymel.core.animation.movIn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.movOut.html">pymel.core.animation.movOut</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.movieInfo.html">pymel.core.animation.movieInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.mute.html">pymel.core.animation.mute</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.nonLinear.html">pymel.core.animation.nonLinear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.normalConstraint.html">pymel.core.animation.normalConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.orientConstraint.html">pymel.core.animation.orientConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.pairBlend.html">pymel.core.animation.pairBlend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.parentConstraint.html">pymel.core.animation.parentConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.pasteKey.html">pymel.core.animation.pasteKey</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.pathAnimation.html">pymel.core.animation.pathAnimation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.percent.html">pymel.core.animation.percent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.play.html">pymel.core.animation.play</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.playbackOptions.html">pymel.core.animation.playbackOptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.playblast.html">pymel.core.animation.playblast</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.pointConstraint.html">pymel.core.animation.pointConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.pointOnPolyConstraint.html">pymel.core.animation.pointOnPolyConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.poleVectorConstraint.html">pymel.core.animation.poleVectorConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.polyUniteSkinned.html">pymel.core.animation.polyUniteSkinned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.pose.html">pymel.core.animation.pose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.poseEditor.html">pymel.core.animation.poseEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.posePanel.html">pymel.core.animation.posePanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.proxWrap.html">pymel.core.animation.proxWrap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.readTake.html">pymel.core.animation.readTake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.recordDevice.html">pymel.core.animation.recordDevice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.removeJoint.html">pymel.core.animation.removeJoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.reorderDeformers.html">pymel.core.animation.reorderDeformers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.reroot.html">pymel.core.animation.reroot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.rotationInterpolation.html">pymel.core.animation.rotationInterpolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.scaleConstraint.html">pymel.core.animation.scaleConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.scaleKey.html">pymel.core.animation.scaleKey</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.sculpt.html">pymel.core.animation.sculpt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.sculptTarget.html">pymel.core.animation.sculptTarget</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.sequenceManager.html">pymel.core.animation.sequenceManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.setCurrentTime.html">pymel.core.animation.setCurrentTime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.setDrivenKeyframe.html">pymel.core.animation.setDrivenKeyframe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.setInfinity.html">pymel.core.animation.setInfinity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.setKeyPath.html">pymel.core.animation.setKeyPath</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.setKeyframe.html">pymel.core.animation.setKeyframe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.setKeyframeBlendshapeTargetWts.html">pymel.core.animation.setKeyframeBlendshapeTargetWts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.shapeEditor.html">pymel.core.animation.shapeEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.shapePanel.html">pymel.core.animation.shapePanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.shot.html">pymel.core.animation.shot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.shotRipple.html">pymel.core.animation.shotRipple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.simplify.html">pymel.core.animation.simplify</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.skeletonEmbed.html">pymel.core.animation.skeletonEmbed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.skinCluster.html">pymel.core.animation.skinCluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.skinPercent.html">pymel.core.animation.skinPercent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.snapKey.html">pymel.core.animation.snapKey</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.snapshot.html">pymel.core.animation.snapshot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.softMod.html">pymel.core.animation.softMod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.sound.html">pymel.core.animation.sound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.substituteGeometry.html">pymel.core.animation.substituteGeometry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.tangentConstraint.html">pymel.core.animation.tangentConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.tension.html">pymel.core.animation.tension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.textureDeformer.html">pymel.core.animation.textureDeformer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.timeEditor.html">pymel.core.animation.timeEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.timeEditorAnimSource.html">pymel.core.animation.timeEditorAnimSource</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.timeEditorBakeClips.html">pymel.core.animation.timeEditorBakeClips</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">pymel.core.animation.timeEditorClip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.timeEditorClipLayer.html">pymel.core.animation.timeEditorClipLayer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.timeEditorClipOffset.html">pymel.core.animation.timeEditorClipOffset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.timeEditorComposition.html">pymel.core.animation.timeEditorComposition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.timeEditorPanel.html">pymel.core.animation.timeEditorPanel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.timeEditorTracks.html">pymel.core.animation.timeEditorTracks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.timeWarp.html">pymel.core.animation.timeWarp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.ubercam.html">pymel.core.animation.ubercam</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.volumeBind.html">pymel.core.animation.volumeBind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.wire.html">pymel.core.animation.wire</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.wrinkle.html">pymel.core.animation.wrinkle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.animation.writeTake.html">pymel.core.animation.writeTake</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.effects.html">pymel.core.effects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.general.html">pymel.core.general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.language.html">pymel.core.language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.modeling.html">pymel.core.modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.other.html">pymel.core.other</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.rendering.html">pymel.core.rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.system.html">pymel.core.system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.windows.html">pymel.core.windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.context.html">pymel.core.context</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-datatypes"><tt class="docutils literal"><span class="pre">pymel.core.datatypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-nodetypes"><tt class="docutils literal"><span class="pre">pymel.core.nodetypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-uitypes"><tt class="docutils literal"><span class="pre">pymel.core.uitypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-runtime"><tt class="docutils literal"><span class="pre">pymel.core.runtime</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-util"><tt class="docutils literal"><span class="pre">pymel.util</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-versions"><tt class="docutils literal"><span class="pre">pymel.versions</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-mayautils"><tt class="docutils literal"><span class="pre">pymel.mayautils</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-tools"><tt class="docutils literal"><span class="pre">pymel.tools</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-api"><tt class="docutils literal"><span class="pre">pymel.api</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyMEL</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../modules.html">Module Documentation</a> &raquo;</li>
+        
+          <li><a href="../../pymel.core.animation.html">pymel.core.animation</a> &raquo;</li>
+        
+      <li>pymel.core.animation.timeEditorClip</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/generated/functions/pymel.core.animation/pymel.core.animation.timeEditorClip.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pymel-core-animation-timeeditorclip">
+<h1>pymel.core.animation.timeEditorClip<a class="headerlink" href="#pymel-core-animation-timeeditorclip" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pymel.core.animation.timeEditorClip">
+<tt class="descname">timeEditorClip</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.animation.timeEditorClip" title="Permalink to this definition">¶</a></dt>
+<dd><p>This command edits/queries Time Editor clips.</p>
+<p class="rubric">Flags:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="1%">
+<col width="61%">
+<col width="19%">
+<col width="19%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Long Name / Short Name</th>
+<th class="head">Argument Types</th>
+<th class="head">Properties</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">absolute</span></tt> / <tt class="docutils literal"><span class="pre">abs</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">This flag is used in conjunction with other timing flags like -s/start, -d/duration, -ed/end, etc. to query (global) absolute time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">addAttribute</span></tt> / <tt class="docutils literal"><span class="pre">aa</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Add new attribute to the clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">addObjects</span></tt> / <tt class="docutils literal"><span class="pre">ao</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Populate the given object(s) and their attributes to anim source to Time Editor. For multiple object, pass each name separated by semicolon. In query mode, return
+the number of attributes that will be populated given the flags, along with the animation&#8217;s first and last frames for the given object(s). Similar to
+-addSelectedObjectsflag but acts on given object(s) instead. This flag will override the flag -addSelectedObjects.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">addRelatedKG</span></tt> / <tt class="docutils literal"><span class="pre">akg</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">During population, determine if associated keying groups should be populated or not. Normally used for populating HIK. By default the value is false.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">addSelectedObjects</span></tt> / <tt class="docutils literal"><span class="pre">aso</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Populate the currently selected objects and their attributes to anim source or Time Editor. In query mode, return the number of attributes that will be populated
+given the flags, along with the animation&#8217;s first and last frames.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">allowShrinking</span></tt> / <tt class="docutils literal"><span class="pre">eas</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">When extending clip, allow shrinking.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">animSource</span></tt> / <tt class="docutils literal"><span class="pre">asr</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Populate based on animation source.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">attribute</span></tt> / <tt class="docutils literal"><span class="pre">at</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Populate a specific attribute on a object.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">audio</span></tt> / <tt class="docutils literal"><span class="pre">au</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Create a clip with audio inside.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">children</span></tt> / <tt class="docutils literal"><span class="pre">chl</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Get children clip IDs.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clipAfter</span></tt> / <tt class="docutils literal"><span class="pre">ca</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Get the clip ID of the next clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clipBefore</span></tt> / <tt class="docutils literal"><span class="pre">cb</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Get the clip ID of the previous clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clipDataType</span></tt> / <tt class="docutils literal"><span class="pre">cdt</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Query the type of data being driven by the given clip ID. Return values are: 0 : Animation       - Clip drives animation curves1 : Audio           - Clip drives
+audio3 : Group           - Clip is a group</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clipId</span></tt> / <tt class="docutils literal"><span class="pre">id</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">ID of the clip to be edited.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clipIdFromNodeName</span></tt> / <tt class="docutils literal"><span class="pre">idn</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Get clip ID from clip node name.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clipIdFromPath</span></tt> / <tt class="docutils literal"><span class="pre">idp</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Flag for querying the clip ID given the path. Clip path is a vertical-bar-delimited string to indicate a hierarchical structure of a clip. Please refer to the
+hierarchical path in outliner to see how it is represented. For example: composition1|track1|clip1 Note: To specify the path, this flag must appear before -query
+flag.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clipNode</span></tt> / <tt class="docutils literal"><span class="pre">cln</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Flag for querying the name of the clip node.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clipPath</span></tt> / <tt class="docutils literal"><span class="pre">clp</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Flag for querying the path given the clip ID. Clip path is a vertical bar delimited string to indicate a hierarchical structure of a clip. Please refer to the
+hierarchical path in outliner to see how it is represented. For example: composition1|track1|clip1. Note: If the clip is not connected to any track, it will
+return empty string.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">copyClip</span></tt> / <tt class="docutils literal"><span class="pre">ccl</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Get the selected clip IDs and store them in a list that could be used for pasting.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">crossfadeMode</span></tt> / <tt class="docutils literal"><span class="pre">cfm</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set the crossfading mode between two clips that lie on the same track, and that are specified with the -clipId flags: 0 : linear          - Two clips are blended
+with a constant ratio1 : step            - Left clip keeps its value until the middle of the crossfading region and then right clip&#8217;s value is used2 : hold left
+- Use only left clip&#8217;s value3 : hold right      - Use only right clip&#8217;s value4 : custom          - User defined crossfade curve5 : custom (spline) - User defined
+crossfade curve with spline preset</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">crossfadePlug</span></tt> / <tt class="docutils literal"><span class="pre">cfp</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Get plug path for a custom crossfade curve between 2 clips.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">curveTime</span></tt> / <tt class="docutils literal"><span class="pre">cvt</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Query the curve local time in relation to the given clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">defaultGhostRoot</span></tt> / <tt class="docutils literal"><span class="pre">dgr</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Edit or query default ghost root variable. Determine whether to use the default ghost root (object driven by clip).</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">drivenAttributes</span></tt> / <tt class="docutils literal"><span class="pre">dat</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Return a list of attributes driven by a clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">drivenClipsBySource</span></tt> / <tt class="docutils literal"><span class="pre">dcs</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Returns the clips driven by the given source. Can filter the return result by the specified type, like animCurve, expression, constraint, etc. This flag must come
+before the -query flag.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">drivenObjects</span></tt> / <tt class="docutils literal"><span class="pre">dos</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Return an array of strings consisting of the names of all objects driven by the current clip and its children clips.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">drivenRootObjects</span></tt> / <tt class="docutils literal"><span class="pre">dro</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Return an array of strings consisting of the names of all root objects driven by this clip and its children clips.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">drivingSources</span></tt> / <tt class="docutils literal"><span class="pre">dsc</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Return all sources driving the given clip. Can filter the return result by the specified type, like animCurve, expression, constraint, etc. If used after the
+-query flag (without an argument), the command returns all sources driving the given clip. To specify the type, this flag must appear before the -query flag. In
+query mode, this flag can accept a value.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">duplicateClip</span></tt> / <tt class="docutils literal"><span class="pre">dcl</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Duplicate clip into two clips with the same timing info.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">duration</span></tt> / <tt class="docutils literal"><span class="pre">d</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" class="last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Relative duration of the new clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">emptySource</span></tt> / <tt class="docutils literal"><span class="pre">ems</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Create a clip with an empty source.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">endTime</span></tt> / <tt class="docutils literal"><span class="pre">et</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Query the relative end time of the clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">exclusive</span></tt> / <tt class="docutils literal"><span class="pre">exc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Populate all types of animation sources which are not listed by typeFlag.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">existingOnly</span></tt> / <tt class="docutils literal"><span class="pre">exo</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">This flag can only be used in edit mode, in conjunction with the animSource flag. Retain the animSource flag functionality but only bind attributes that are
+already part of the clip. It does not attempt to populate unbound source attributes to their default destination.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">exists</span></tt> / <tt class="docutils literal"><span class="pre">exs</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Return true if the specified clip exists.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">explode</span></tt> / <tt class="docutils literal"><span class="pre">epl</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Reparent all tracks and their clips within a group out to its parent track node and remove the group.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">exportAllClips</span></tt> / <tt class="docutils literal"><span class="pre">eac</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">When used with the ef/exportFbxflag, export all clips.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">exportFbx</span></tt> / <tt class="docutils literal"><span class="pre">ef</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Export currently selected clips to FBX files.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">extend</span></tt> / <tt class="docutils literal"><span class="pre">ex</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Extend the clip to encompass all children.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">extendParent</span></tt> / <tt class="docutils literal"><span class="pre">exp</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Extend parent to fit this clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">ghost</span></tt> / <tt class="docutils literal"><span class="pre">gh</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Enable/disable ghosting for the specified clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">ghostRootAdd</span></tt> / <tt class="docutils literal"><span class="pre">gra</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Add path to specified node as a custom ghost root.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">ghostRootRemove</span></tt> / <tt class="docutils literal"><span class="pre">grr</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Remove path to specified node as a custom ghost root.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">group</span></tt> / <tt class="docutils literal"><span class="pre">grp</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Specify if the new container should be created as a group, containing other specified clips.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">holdEnd</span></tt> / <tt class="docutils literal"><span class="pre">he</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Hold clip&#8217;s end to time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">holdStart</span></tt> / <tt class="docutils literal"><span class="pre">hs</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Hold clip&#8217;s start to time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">importAllFbxTakes</span></tt> / <tt class="docutils literal"><span class="pre">aft</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Import all FBX takes into the new anim sources (for timeEditorAnimSource command) or new containers (for timeEditorClip command).</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">importFbx</span></tt> / <tt class="docutils literal"><span class="pre">fbx</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Import an animation from FBX file into the new anim source (for timeEditorAnimSource command) or new container (for timeEditorClip command).</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">importFbxTakes</span></tt> / <tt class="docutils literal"><span class="pre">ft</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Import multiple FBX takes (separated by semicolons) into the new anim sources (for timeEditorAnimSource command) or new containers (for timeEditorClip command).</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">importMayaFile</span></tt> / <tt class="docutils literal"><span class="pre">mf</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Import an animation from Maya file into the new anim sources (for timeEditorAnimSource command) or new containers (for timeEditorClip command).</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">importOption</span></tt> / <tt class="docutils literal"><span class="pre">io</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Option for importing animation source. Specify either &#8216;connect&#8217; or &#8216;generate&#8217;. connect:  Only connect with nodes already existing in the scene.
+Importing an animation source that does not match with any element                   of the current scene will not create any clip.                   (connect is
+the default mode). generate: Import everything and generate new nodes for items not existing in the scene.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">importPopulateOption</span></tt> / <tt class="docutils literal"><span class="pre">ipo</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Option for population when importing.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">importTakeDestination</span></tt> / <tt class="docutils literal"><span class="pre">itd</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Specify how to organize imported FBX takes: 0 - Import takes into a group (default) 1 - Import takes into multiple compositions 2 - Import takes as a sequence of
+clips</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">importedContainerNames</span></tt> / <tt class="docutils literal"><span class="pre">icn</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Internal use only. To be used along with populateImportedAnimSourcesto specify names for the created containers.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">includeRoot</span></tt> / <tt class="docutils literal"><span class="pre">irt</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Populate transform (Translate, Rotate, Scale) of hierarchy root nodes.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">isContainer</span></tt> / <tt class="docutils literal"><span class="pre">ict</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Indicate if given clip ID is a container.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">listUserGhostRoot</span></tt> / <tt class="docutils literal"><span class="pre">lug</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Get user defined ghost root object for indicated clips.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">loopEnd</span></tt> / <tt class="docutils literal"><span class="pre">le</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Loop clip&#8217;s end to time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">loopStart</span></tt> / <tt class="docutils literal"><span class="pre">ls</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Loop clip&#8217;s start to time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">minClipDuration</span></tt> / <tt class="docutils literal"><span class="pre">mcd</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Returns the minimum allowed clip duration.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">modifyAnimSource</span></tt> / <tt class="docutils literal"><span class="pre">mas</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">When populating, automatically modify Anim Source without asking the user.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">moveClip</span></tt> / <tt class="docutils literal"><span class="pre">mcl</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Move clip by adding delta to its start time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">mute</span></tt> / <tt class="docutils literal"><span class="pre">m</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Mute/Unmute the clip given a clip ID. In query mode, return the muted state of the clip. Clips muted by soloing are not affected by this flag.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">name</span></tt> / <tt class="docutils literal"><span class="pre">n</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Name of the clip. A clip will never have an empty name. If an empty string is provided, it will be replaced with _.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">parent</span></tt> / <tt class="docutils literal"><span class="pre">p</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Specify group/object parent ID.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">parentClipId</span></tt> / <tt class="docutils literal"><span class="pre">pid</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" class="last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Specify the parent clip ID of a clip to be created.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">parentGroupId</span></tt> / <tt class="docutils literal"><span class="pre">pgd</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Return the parent group ID of the given clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">pasteClip</span></tt> / <tt class="docutils literal"><span class="pre">pcl</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Paste clip to the given time and track. Destination track is required to be specified through the track flag in the format tracksNode:trackIndex. A trackIndex of
+-1 indicates that a new track will be created.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">path</span></tt> / <tt class="docutils literal"><span class="pre">pt</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Full path of the clip to be edited. For example: composition1|track1|clip1. In query mode, this flag can accept a value.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">populateImportedAnimSources</span></tt> / <tt class="docutils literal"><span class="pre">pia</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Internal use only. Populate the Time Editor with clips using the Animation Sources specified (use ; as a delimiter for multiple anim sources).</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">poseClip</span></tt> / <tt class="docutils literal"><span class="pre">poc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Populate as pose clip with current attribute values.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">preserveAnimationTiming</span></tt> / <tt class="docutils literal"><span class="pre">pat</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">When used with the population command, it ensures the animation is offset within a clip in such way that it matches its original scene timing, regardless of the
+new clip&#8217;s position.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">razorClip</span></tt> / <tt class="docutils literal"><span class="pre">rcl</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Razor clip into two clips at the specified time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">recursively</span></tt> / <tt class="docutils literal"><span class="pre">rec</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Populate selection recursively, adding all the children.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">remap</span></tt> / <tt class="docutils literal"><span class="pre">rmp</span></tt></td>
+<td><em>unicode, unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Change animation source for a given clip item to a new one, specified by the target path. This removes all clips for the roster item and creates new clips from
+the Anim Source for the new target path.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">remapSource</span></tt> / <tt class="docutils literal"><span class="pre">rs</span></tt></td>
+<td><em>unicode, unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set animation source to be remapped for a given clip item to new one, specified by the target path.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">remappedSourceAttrs</span></tt> / <tt class="docutils literal"><span class="pre">rms</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Return an array of attribute indices and names of the source attributes of a remapped clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">remappedTargetAttrs</span></tt> / <tt class="docutils literal"><span class="pre">rmt</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Return an array of attribute indices and names of the target attributes of a remapped clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">removeAttribute</span></tt> / <tt class="docutils literal"><span class="pre">ra</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Remove attribute from the clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">removeClip</span></tt> / <tt class="docutils literal"><span class="pre">rmc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Remove clip of specified ID.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">removeCrossfade</span></tt> / <tt class="docutils literal"><span class="pre">rcf</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Remove custom crossfade between two clips specified by -clipId flags.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">removeSceneAnimation</span></tt> / <tt class="docutils literal"><span class="pre">rsa</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">If true, remove animation from scene when creating clips or anim sources. Only Time Editor will drive the removed scene animation.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">removeWeightCurve</span></tt> / <tt class="docutils literal"><span class="pre">rwc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Remove the weight curve connected to the clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">resetTiming</span></tt> / <tt class="docutils literal"><span class="pre">rt</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Reset start and duration of a clip with the given clip ID to the values stored in its Anim Source.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">resetTransition</span></tt> / <tt class="docutils literal"><span class="pre">rtr</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Reset transition intervals between specified clips.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">ripple</span></tt> / <tt class="docutils literal"><span class="pre">rpl</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Apply rippling to a clip operation.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">rootClipId</span></tt> / <tt class="docutils literal"><span class="pre">rti</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">ID of the root clip. It is used together with various clip editing flags. When used, the effect of clip editing and its parameters will be affected by the given
+root clip. For example, moving a clip under the group root (usually in group tab view) will be performed in the local time space of the group root.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">rootPath</span></tt> / <tt class="docutils literal"><span class="pre">rpt</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Path of the root clip. It is used together with various clip editing flags. When used, the effect of clip editing and its parameters will be affected by the given
+root clip. For example, moving a clip under the group root (usually in group tab view) will be performed in the local time space of the group root.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">scaleEnd</span></tt> / <tt class="docutils literal"><span class="pre">sce</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Scale the end time of the clip to the given time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">scalePivot</span></tt> / <tt class="docutils literal"><span class="pre">scp</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Scale the time of the clip based on the pivot. This should be used together with -scs/scaleStartor -sce/scaleEnd.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">scaleStart</span></tt> / <tt class="docutils literal"><span class="pre">scs</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Scale the start time of the clip to the given time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">setKeyframe</span></tt> / <tt class="docutils literal"><span class="pre">k</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set keyframe on a specific clip for a specified attribute.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">showAnimSourceRemapping</span></tt> / <tt class="docutils literal"><span class="pre">sar</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Show a remapping dialog when the imported anim source attributes do not match the scene attributes.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">speedRamping</span></tt> / <tt class="docutils literal"><span class="pre">src</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">To control the playback speed of the clip by animation curve: 1 : create - Attach a speed curve and a time warp curve to the clip to control the playback speed2 :
+edit - Open the Graph editor to edit the speed curve3 : enable - Create a time warp curve from current speed curve and attach to clip4 : disable - Remove the time
+warp curve from clip5 : delete - Delete the attached speed curve and time warp curve6 : reset - Reset the speed curve back to the default7 : convert to speed
+curve from time warp8 : convert to time warp from speed curveIn query mode, return true if a speed curve is attached to the clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">startTime</span></tt> / <tt class="docutils literal"><span class="pre">s</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" class="last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Relative start time of the new clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">takeList</span></tt> / <tt class="docutils literal"><span class="pre">tl</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Internal use only. To be used along with populateImportedAnimSourcesto specify the imported take names.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">takesToImport</span></tt> / <tt class="docutils literal"><span class="pre">toi</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Internal use only. To be used along with populateImportedAnimSourcesto specify the imported take indices.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">timeWarp</span></tt> / <tt class="docutils literal"><span class="pre">tw</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Return true if the clip is being warped by the speed curve. If no speed curve is attached to the clip, it will always return false.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">timeWarpCurve</span></tt> / <tt class="docutils literal"><span class="pre">twc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Returns the name of the time warp curve connected to the clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">timeWarpType</span></tt> / <tt class="docutils literal"><span class="pre">twt</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Time warp mode: 0: remapping - Connected time warp curve performs frame by frame remapping1: speed curve - Connected time warp curve acts as a speed curveIn query
+mode, return time warp mode of a clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">track</span></tt> / <tt class="docutils literal"><span class="pre">trk</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">The new clip container will be created on the track in the format trackNode:trackNumber, or on a track path, for example composition1|track1. In query mode,
+return a string containing the track number and tracks node of the given clip ID. In create mode, if the track number is &#8216;-1&#8217; or not given at all, then a new
+track will be created. For example: trackNode:-1; composition1|.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">tracksNode</span></tt> / <tt class="docutils literal"><span class="pre">trn</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Get tracks node if specified clip is a group clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">transition</span></tt> / <tt class="docutils literal"><span class="pre">tra</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Create transition intervals between specified clips.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">trimEnd</span></tt> / <tt class="docutils literal"><span class="pre">tre</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Trim the end time of the clip to the given time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">trimStart</span></tt> / <tt class="docutils literal"><span class="pre">trs</span></tt></td>
+<td><em>time</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Trim the start time of the clip to the given time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">truncated</span></tt> / <tt class="docutils literal"><span class="pre">trc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first last" src="../../../_images/query.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">This flag is used in conjunction with other timing flags like -s/start, -d/duration, -ed/end, etc. to query (global) truncated time.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">type</span></tt> / <tt class="docutils literal"><span class="pre">typ</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Only populate the specified type of animation source.                              Flag can have multiple arguments, passed either as a tuple or a list.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">uniqueAnimSource</span></tt> / <tt class="docutils literal"><span class="pre">uas</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">If a given clip is sharing its Anim Source node with another clip, make the Anim Source of this clip unique.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">userGhostRoot</span></tt> / <tt class="docutils literal"><span class="pre">ugr</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Edit or query custom ghost root variable. Determine whether to use user defined ghost root.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">weightCurve</span></tt> / <tt class="docutils literal"><span class="pre">wc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">In edit mode, create a weight curve and connect it to the clip. In query mode, return the name of the weight curve connected to the clip.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">zeroKeying</span></tt> / <tt class="docutils literal"><span class="pre">zk</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/edit.gif" class="first last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">A toggle flag to use in conjunction with k/setKeyframe, set the value of the key frame(s) to be keyed to zero.</td>
+</tr>
+</tbody>
+</table>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.timeEditorClip</span></tt></p>
+<p class="rubric">Example:</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd><p class="first">import pymel.core as pm</p>
+<p># Move clips 1 and 2
+pm.timeEditorClip(edit=True, moveClip=20, clipId=[1,2])</p>
+<p># Create new container clip on track 4 of Container_A tracks
+pm.timeEditorClip(&#8220;ClipNodeName&#8221;, track=&#8221;Container_A_Tracks:4&#8221;)</p>
+<p># Create new container clip on track path
+pm.timeEditorClip(&#8220;ClipNodeName&#8221;, track=&#8221;composition1|track1&#8221;)</p>
+<p># Populate selected objects with attributes driven by specific types of animation sources
+pm.timeEditorClip(&#8220;teClip1&#8221;, addSelectedObjects=True, type=[&#8220;animCurveTL&#8221;,&#8221;animCurveTA&#8221;], track=&#8221;Composition1:1&#8221;)</p>
+<p># Populate selected objects and their associated keying groups (normally used for populating complete HIK rig)
+pm.timeEditorClip(&#8220;teClip1&#8221;, addSelectedObjects=True, addRelatedKG=True, track=&#8221;Composition1:1&#8221;)</p>
+<p># Populate selected objects into a newly created container
+pm.timeEditorClip(&#8220;ContainerName&#8221;, track=&#8221;Container_A_Tracks:0&#8221;, addSelectedObjects=True)</p>
+<p># Move a container(s) to a different track
+# The &#8220;New_Track:2&#8221; has the same format as when creating a new clip,
+# where &#8220;New_Track&#8221; is the TimeEditor &#8220;Tracks node&#8221; and &#8220;2&#8221; is the track index in that node.
+# A &#8220;Tracks&#8221; node maintains a list of tracks at a given level in the TimeEditor hierarchy
+# and is either a composition or a group clip.
+pm.timeEditorClip(edit=True, track=&#8221;New_Track:2&#8221;, clipId=[1,2,3])</p>
+<p># Move a container(s) to a different track by clip path
+pm.timeEditorClip(edit=True, track=&#8221;composition1|track1&#8221;, path=[&#8220;composition1|track2|clip1&#8221;,&#8221;composition1|track2|clip2&#8221;,&#8221;composition1|track2|clip3&#8221;])</p>
+<p># Create a group from specified containers
+pm.timeEditorClip(&#8220;GroupName&#8221;, track=&#8221;New_Track:1&#8221;, group=True, clipId=[1,2,3])</p>
+<p># Import animation from selected object into the TimeEditor.
+pm.timeEditorClip(&#8220;container_A&#8221;, aso=True, track=&#8221;composition1|track1&#8221;)</p>
+<p># Return the Anim Source for a given clip ID 1
+pm.timeEditorClip(1, query=True, animSource=True)</p>
+<p># Create a clip from an Anim Source starting at frame 30 into track2 of composition1
+pm.timeEditorClip(&#8220;Container_B&#8221;, track=&#8221;composition1|track2&#8221;, animSource=&#8221;someAnimSourceName&#8221;, startTime=30)</p>
+<p># Return the start time of the clip with clip ID 1
+pm.timeEditorClip(1, query=True, startTime=True, absolute=True)</p>
+<p># Return the duration of the clip with clip ID 1
+pm.timeEditorClip(1, query=True, duration=True, absolute=True)</p>
+<p># Remap cube 1 translate X attribute to cube 1 translate Y attribute
+pm.timeEditorClip(edit=True, remapSource=[&#8220;cube1.translateY&#8221;, &#8220;cube1.translateX&#8221;], clipId=1)
+pm.timeEditorClip(edit=True, animSource=&#8221;AnimSourceName&#8221;, clipId=1)</p>
+<p># Setup the crossfading mode between 2 clips to linear
+pm.timeEditorClip(edit=True, crossfadeMode=-1, clipId=[1,2])</p>
+<p class="last"># Remove clips with clip ID 1 and 2.
+pm.timeEditorClip(edit=True, removeClip=True, clipId=[1,2])</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pymel.core.animation.timeEditorClipLayer.html" class="btn btn-neutral float-right" title="pymel.core.animation.timeEditorClipLayer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pymel.core.animation.timeEditorBakeClips.html" class="btn btn-neutral" title="pymel.core.animation.timeEditorBakeClips" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009, Chad Dombrova.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

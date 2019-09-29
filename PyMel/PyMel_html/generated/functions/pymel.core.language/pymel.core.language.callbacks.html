@@ -1,0 +1,543 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pymel.core.language.callbacks &mdash; PyMEL 1.0.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css">
+  
+
+  
+    <link rel="top" title="PyMEL 1.0.9 documentation" href="../../../index.html">
+        <link rel="up" title="pymel.core.language" href="../../pymel.core.language.html">
+        <link rel="next" title="pymel.core.language.conditionExists" href="pymel.core.language.conditionExists.html">
+        <link rel="prev" title="pymel.core.language.OptionVarList" href="../../classes/pymel.core.language/pymel.core.language.OptionVarList.html"> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PyMEL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../whats_new.html">What&#8217;s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../why_pymel.html">Why PyMEL?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pynodes.html">PyNodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../attributes.html">Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../non_existent_objs.html">Non-Existent Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ui.html">Building User Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../standalone.html">Standalone Maya Python Interpreter</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../eclipse.html">Setting Up PyMEL Autocompletion in Eclipse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">For Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mel_to_python.html">MEL to Python Cheat Sheet</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../modules.html">Module Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../modules.html#pymel-core"><tt class="docutils literal"><span class="pre">pymel.core</span></tt></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.animation.html">pymel.core.animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.effects.html">pymel.core.effects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.general.html">pymel.core.general</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../pymel.core.language.html">pymel.core.language</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="">pymel.core.language.callbacks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.conditionExists.html">pymel.core.language.conditionExists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.evalEcho.html">pymel.core.language.evalEcho</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.evalNoSelectNotify.html">pymel.core.language.evalNoSelectNotify</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.getLastError.html">pymel.core.language.getLastError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.getMelGlobal.html">pymel.core.language.getMelGlobal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.getMelType.html">pymel.core.language.getMelType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.getProcArguments.html">pymel.core.language.getProcArguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.isValidMelType.html">pymel.core.language.isValidMelType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.melOptions.html">pymel.core.language.melOptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.python.html">pymel.core.language.python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.pythonToMel.html">pymel.core.language.pythonToMel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.pythonToMelCmd.html">pymel.core.language.pythonToMelCmd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.resourceManager.html">pymel.core.language.resourceManager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.scriptJob.html">pymel.core.language.scriptJob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.setMelGlobal.html">pymel.core.language.setMelGlobal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.sortCaseInsensitive.html">pymel.core.language.sortCaseInsensitive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.stackTrace.html">pymel.core.language.stackTrace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.language.waitCursor.html">pymel.core.language.waitCursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.language/pymel.core.language.Catch.html">pymel.core.language.Catch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.language/pymel.core.language.Env.html">pymel.core.language.Env</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.language/pymel.core.language.Mel.html">pymel.core.language.Mel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.language/pymel.core.language.MelCallable.html">pymel.core.language.MelCallable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.language/pymel.core.language.MelGlobals.html">pymel.core.language.MelGlobals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.language/pymel.core.language.OptionVarDict.html">pymel.core.language.OptionVarDict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.language/pymel.core.language.OptionVarList.html">pymel.core.language.OptionVarList</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.modeling.html">pymel.core.modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.other.html">pymel.core.other</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.rendering.html">pymel.core.rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.system.html">pymel.core.system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.windows.html">pymel.core.windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.context.html">pymel.core.context</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-datatypes"><tt class="docutils literal"><span class="pre">pymel.core.datatypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-nodetypes"><tt class="docutils literal"><span class="pre">pymel.core.nodetypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-uitypes"><tt class="docutils literal"><span class="pre">pymel.core.uitypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-runtime"><tt class="docutils literal"><span class="pre">pymel.core.runtime</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-util"><tt class="docutils literal"><span class="pre">pymel.util</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-versions"><tt class="docutils literal"><span class="pre">pymel.versions</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-mayautils"><tt class="docutils literal"><span class="pre">pymel.mayautils</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-tools"><tt class="docutils literal"><span class="pre">pymel.tools</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-api"><tt class="docutils literal"><span class="pre">pymel.api</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyMEL</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../modules.html">Module Documentation</a> &raquo;</li>
+        
+          <li><a href="../../pymel.core.language.html">pymel.core.language</a> &raquo;</li>
+        
+      <li>pymel.core.language.callbacks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/generated/functions/pymel.core.language/pymel.core.language.callbacks.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pymel-core-language-callbacks">
+<h1>pymel.core.language.callbacks<a class="headerlink" href="#pymel-core-language-callbacks" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pymel.core.language.callbacks">
+<tt class="descname">callbacks</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.language.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd><p>This command allows you to add callbacks at key times during UI creation so that the Maya UI can be extended. The list
+of standard Maya hooks, as well as the arguments which will be passed to the callback based on the context are
+enumerated in the describeHookssection below. Custom hooks can also be added if third parties want to add UI
+extensibility to their plugins.</p>
+<p class="rubric">Flags:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="1%">
+<col width="61%">
+<col width="19%">
+<col width="19%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Long Name / Short Name</th>
+<th class="head">Argument Types</th>
+<th class="head">Properties</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">addCallback</span></tt> / <tt class="docutils literal"><span class="pre">ac</span></tt></td>
+<td><em>script</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Add a callback for the specified hook. The owner must also be specified when adding callbacks.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clearAllCallbacks</span></tt> / <tt class="docutils literal"><span class="pre">cac</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Clear all the callbacks for all hooks and owners. This is generally only used during plugin development and testing as it affects all callbacks registered by Maya
+and other third parties.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clearCallbacks</span></tt> / <tt class="docutils literal"><span class="pre">cc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Clear all the callbacks for the specified owner. If a hook is specified, only the callbacks for that hook and owner will be cleared.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">describeHooks</span></tt> / <tt class="docutils literal"><span class="pre">dh</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">List the standard Maya hooks. Below is a list of the hooks and their associated arguments and return values. Custom hooks added by third parties are not listed.
+hyperShadePanelBuildCreateMenuThis hook is called to add content to the Hypershade panel create menu. It will be called after the standard Maya node entries have
+been created. This callback does not have any arguments or return values. In order to preserve the desired look in the Maya UI, these callbacks should add a menu
+item divider just before returning using: menuItem -divider true. hyperShadePanelBuildCreateSubMenuThis hook is called to get a classification string for the
+custom renderer shading nodes, to prevent them from being listed with the standard Maya nodes. This callback does not have any arguments. returns: a
+classification string, such as rendernode/myrendererhyperShadePanelPluginChangeThis hook is called when a plugin change event (loading / unloading) has occurred
+to inform Maya whether the Hypershade panel needs to be rebuilt. classification (string): classification string belonging to a plugin node,     possibly from
+another pluginchangeType (string): either loadPluginor unloadPluginreturns: (int) non-zero if your plugin is responsible for nodes of this classification,     and
+a Hypershade rebuild is requiredcreateRenderNodeSelectNodeCategoriesThis hook is called when the Create Render Node dialog is being constructed, and allows a
+third party to have their nodes selected by default. A flag of the form -allWithMyRendererUpis the standard form, and the selection can be set up in the tree
+lister in the callback. There is no return value for this callback. flag (string): flag passed to the Create Render Node dialog command with the leading minus (-)
+removedtreeLister (string): the tree lister widget which should be affectedFor example, your callback might look like: global proc
+myRendererCreateRenderNodeSelectNodeCategoriesCallback(string $flag, string $treeLister){     if($flag == allWithMyRendererUp) {         treeLister -e -selectPath
+myrenderer$treeLister;     } } createRenderNodePluginChangeThis hook is called when a plugin change event has occurred to decide if the Create Render Node dialog
+needs to be closed. classification (string): classification string belonging to a plugin node,     possibly from another pluginreturns: (int) non-zero if your
+plugin is responsible for nodes of this classification,     and the Create Render Node dialog needs to be closedrenderNodeClassificationThis hook is called to get
+a classification string for the custom renderer shading nodes.  This is used to determine if a given node type belongs to a plugin renderer. This callback does
+not have any arguments. returns: a classification string, such as rendernode/myrenderercreateRenderNodeCommandThis hook is called to give plugin renderers the
+chance to register their own command for creating their nodes from the render node treeLister and Node Editor. The callback should determine from the
+classification of the node type in question if it is theirs, and if so, return the appropriate command for creating new nodes of that type. postCommand (string):
+command to be run after the create commandtype (string): nodeTypereturns: (string) MEL create commandbuildRenderNodeTreeListerContentThis hook is called to give
+plugin renderers the chance to add their content to the render node tree lister. renderNodeTreeLister (string): the render node tree listerpostCommand (string):
+command to be run post-creationfilterString (string): a space delimited list of filtersAETemplateCustomContentThis hook is called to give plugins a chance to add
+content to the Attribute Editor for nodes which source AEdependNodeTemplate. nodeName (string): the name of the node for which the Attribute Editor is being
+constructedfirstConnectedShaderThis hook is called to determine the primary custom shader connected to the given Shading Engine. nodeName (string): the name of
+the Shading Enginereturns (string): the name of the custom shader if applicableallConnectedShadersThis hook is called to determine all the shaders connected to
+the given Shading Engine. nodeName (string): the name of the Shading Enginereturns (string): a colon separated list of the connected custom shaders
+(shader1:shader2:shader3)renderLayerPresetMenuThis hook is called to give plugins a chance to add presets to a renderLayer node. nodeName (string): the name of
+the renderLayer nodeaddBakingMenuItemsThis hook is called to give plugins a chance to add baking menu items to the global Render - Lighting/Shading menu.
+menuItemAnchor (string): the name of the menuItem which the new baking menu items should be inserted after. addVertexBakingMenuItemsThis hook is called to give
+plugins a chance to add baking menu items to the global Polygon - Color menu. addPrelightMenuItemsThis hook is called to give plugins a chance to add pre-lighting
+menu items to the global Polygon - Color Set Editor menu. addRMBBakingMenuItemsThis hook is called to give plugins a chance to add baking menu items to the RMB
+menu. objectName (string): the name of the object the right mouse button event occured on.addMayaRenderingPreferencesThis hook is called to give plugins a chance
+to add custom preferences to the Maya&#8217;s Rendering Preferences section. updateMayaRenderingPreferencesThis hook is called to give plugins a chance to update custom
+preferences of the Maya&#8217;s Rendering Preferences section. addMayaMuscleMenuItemsThis hook is called to give plugins a chance to add menu items to the Maya muscle
+Displace menu. menuItemAnchor (string): the name of the menuItem which the new Maya muscle menu items should be inserted after. addMayaMuscleShelfButtonsThis hook
+is called to give plugins a chance to add items to the Maya muscle shelves. addBackburnerRendererMenuItemsThis hook is called to give plugins a chance to add
+items to Maya&#8217;s Backburner list of available renderers. Note: The menuItem added must be named with the short name equivalent of the renderer. eg: The Maya
+software renderer adds a menuItem named &#8216;sw&#8217;. provideAETemplateForNodeTypeThis hook is called to give plugins a chance to provide a UI template for nodes which do
+not have a corresponding AE&#8217;nodeType&#8217;Template procedure. nodeType (string): the type of the node for which the AE is being constructed. returns (string): the name
+of a MEL command or procedure to use as the AETemplate for the requested node type. AEnewMultiHandlerThis hook is called to give plugins a chance to provide a UI
+creation handler for multi attributes. nodeName (string): the name of the node for which the AE is being constructed. atributeName (string): the name of the multi
+attribute.uiName (string): the UI name of the attribute.changedCommand (string): the MEL command or procedure to be executed when the value of the multi attribute
+is changed.elementIndexString (string): a colon separated list of indices at which the elements of the multi attribute live.returns (string): if the callback
+handled the attribute then it should return the full name of the topmost UI element that it created, otherwise it should return an empty
+string.AEreplaceMultiHandlerThis hook is called to give plugins a chance to provide an update handler for multi attributes. layoutName (string): the well defined
+name of the Maya UI component which represents the multi attribute (.nodeName (string): the name of the node for which the AE is being constructed. atributeName
+(string): the name of the multi attribute.changedCommand (string): the MEL command or procedure to be executed when the value of the multi attribute is
+changed.elementIndexString (string): a colon separated list of indices at which the elements of the multi attribute live.returns (int): Return 1 if the callback
+handled the multi attribute, Return 0 if Maya should provide its default handling.AEnewAttributeHandlerThis hook is called to give plugins a chance to provide a
+UI creation handler for attributes. nodeName (string): the name of the node for which the AE is being constructed. atributeName (string): the name of the
+attribute.uiName (string): the UI name of the attribute.changedCommand (string): the MEL command or procedure to be executed when the value of the attribute is
+changed.returns (string): if the callback handled the attribute then it should return the full name of the topmost UI element that it created, otherwise it should
+return an empty string.AEreplaceAttributeHandlerThis hook is called to give plugins a chance to provide an update handler for attributes. nodeName (string): the
+name of the node for which the AE is being constructed. atributeName (string): the name of the attribute.changedCommand (string): the MEL command or procedure to
+be executed when the value of the attribute is changed.returns (int): Return 1 if the callback handled the attribute, Return 0 if Maya should provide its default
+handling.provideClassificationStringsThis hook must be supplied by all third parties that add nodes to the &#8216;shader/surface&#8217; classification namespace. returns
+(string): a colon separated list representing the different plugin node classifications.provideClassificationExclusionStringsThis hook is called to give plugins a
+chance to provide a list of classifications which should be filtered out from a nodeTreeLister category. For example a plugin might want to filter out nodes
+classified as both &#8216;material&#8217; and &#8216;legacy&#8217; out of the &#8216;material&#8217; category. classification (string): the classification the nodeTreeBuilder is inquiring
+about.returns (string): a colon separated list representing the different classifications that should be excluded from the classification the nodeTreeBuilder is
+inquiring about.provideClassificationStringsForFilteredTreeListerThis hook is called by &#8216;createAssignNewMaterialTreeLister&#8217; and gives plugins a chance to append
+to the classification filter passed to the Tree Lister builder. It must return a string where each new classification is separated by a white space.
+currentFilterString (string): a white-space-separated string representing the current classifications.nodeCanBeUsedAsMaterialThe hook is used by the RMB &#8216;Assign
+Favorite Material&#8217; menu to determine which shading nodes can be used as materials. It must return 1 if the node can be used as a material node and 0 otherwise.
+nodeId (string): the node Id of the shading node being queried.nodeOwner (string): the name of the plugin the node belongs
+to.addHeaderContentToMayaLambertianShadersAEThis hook is called to give plugins a chance to add content to the header of the Attribute Editor of Maya&#8217;s
+Lambertian-derived shaders. nodeName (string): the name of the node for which the Attribute Editor is being constructed.provideNodeToAttrConnectionThis hook is
+called to give plugins a chance to provide which output attribute should be used when a node is connected to an input attribute. If an input attribute type is
+given an output attribute of matching type should be returned. If no attribute type is specified (empty string) a preferred output attribute of any type can be
+returned. If no output attribute of matching type is available an empty string should be returned. nodeType (string): the node type of the node
+queried.attributeType (string): the data type of the input attribute.returns (string): the name of the output attribute to use.provideNodeToNodeConnectionThis
+hook is called to give plugins a chance to provide which attributes should be connected when a node to node connection is made. Both the source and destination
+attributes should be returned in a colon separated list, e.g. src1:dst1:src2:dst2:src3:dst3srcType (string): the node type of the source node.dstType (string):
+the node type of the destination node.returns (string): A colon separated list of source and destination attribute
+names.provideOutputAttributeNameForTextureNodeThis hook is called to give plugins a chance to provide a different output attribute name for Texture nodes. If this
+hook isn&#8217;t provided &#8216;outColor&#8217; is used. nodeName (string): the name of the texture node queried.returns (string): the output attribute name of the Texture
+node.addItemsToHypergraphNodePopupMenuThis hook is called to give plugins a chance to add items to the Hypergraph node popup menu. nodeName (string): the name of
+the node for which the Hypergraph node menu is being constructed.addItemsToRenderLayerEditorPopupMenuThis hook is called to give plugins a chance to add items to
+the Render Layer Editor popup menu. layerName (string): the name of the render layer for which the popup menu is being
+constructed.preventMaterialDeletionFromCleanUpSceneCommandThis hook is called by the cleanUpScene command and gives the plugin a chance to communicate that a
+material node is still in use and shouldn&#8217;t be deleted. The hook is called once per plug/connection pair of each shader instance. shader (string): the name of the
+shader node being deleted.plug (string): the name of the plug queried.connection (string): the name of the connection
+queried.connectNodeToNodeOverrideCallbackThis hook is called to give plugins a chance to redefine the behavior of drag and drop. srcNode (string): the name of the
+source node (the dragged node).dstNode (string): the name of the destination node (the dropped-on node).returns (int): Return 1 if Maya should perform the
+operation that would normally result from this connection. Return 0 to override and provide custom behavior.prepareRenderChangedThis hook is called after an edit
+on a traversal set with the prepareRender command. enableRenderPassMenuOfRenderViewThis hook is called to give plugins a chance to tell Maya it should enable the
+render pass menu of the render view (under File-Load Render Pass). &#8216;addRenderPassMenuItemsToRenderView&#8217; can be used to add items to this menu. returns (int):
+Return 1 if the plugin wants the render pass menu of the render view to be enabled. Return 0 otherwise.addItemsToRenderPassMenuOfRenderViewThis hook is called to
+give plugins a chance to add menu items to the &#8216;render pass&#8217; menu of the render view (under File-Load Render Pass). &#8216;enableRenderPassMenuOfRenderView&#8217; can be used
+to enable the render pass menu of the render view. addItemsToRMBMenuOfTreeListerThis hook is called to give plugins a chance to populate the RMB menu of nodes
+listed in a tree lister. Plugins should add a menu item divider (using: menuItem -divider true) before adding any more items to the RMB menu. nodeType (string):
+The node type of the tree lister node for which the RMB menu is being built.scriptCommand (string): The script command associated with the tree lister node for
+which the RMB menu is being built.returns (int): Return 0 if Maya should append its own items to the menu of the current node type. This should be the return
+value for all node types a plugin isn&#8217;t explicitly interested in. Return 1 if Maya shouldn&#8217;t add any of its items to the menu of the current node type. Note: All
+menu items related to managing the &#8216;Favorites&#8217; section of the tree lister will always be added to the RMB menu regardless of the return value (those are treated
+as special cases).saveCustomNodePresetAttributesThis hook is called to give plugins a chance to store extra commands in the node preset file being saved.
+presetNodeToSave (string): The name of the preset node being saved.returns (string): The custom procedure to use to generate the mel script to be appended to the
+nodePreset -custom flag of the current presetNode save event (see the documentation of the nodePreset command for more information on the format of the -custom
+flag).addItemToFileMenuThis hook is called to give plugins a chance to add menu items to the main File menu. addItemToCreateLightMenuThis hook is called to give
+plugins a chance to add menu items to the create light menu. textureReloadThis hook is called to give plugins a chance to update all nodes that reference the
+texture file. file (string): the file path of the texture to reload.renderSettingsBuiltThis hook is called after the render settings window has been built.
+rendererAddOneTabToGlobalsWindowCreateProcThis hook is called to allow renderers the opportunity to add renderer specific tabs to the unified render globals
+window (render settings window). createProc (string): the name of the procedure used to create the content of the tab.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">dumpCallbacks</span></tt> / <tt class="docutils literal"><span class="pre">dc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Gives a list of all the registered callbacks for all hooks and owners. Can be useful for debugging.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">executeCallbacks</span></tt> / <tt class="docutils literal"><span class="pre">ec</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Execute the callbacks for the specified hook, passing the extra arguments to each callback when it is executed.  Returns an array (MEL) or list (Python)
+containing the return values from each callback that was executed. If a callback returns no value, the array will contain an empty string (MEL) or None (Python).</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">hook</span></tt> / <tt class="docutils literal"><span class="pre">h</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">The name of the hook for which the callback should be registered.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">listCallbacks</span></tt> / <tt class="docutils literal"><span class="pre">lc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Get the list of callbacks for the specified hook name. If the owner is specified, only callbacks for the specified hook and owner will be listed.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">owner</span></tt> / <tt class="docutils literal"><span class="pre">o</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">The name of the owner registering the callback. This is typically a plugin name.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">removeCallback</span></tt> / <tt class="docutils literal"><span class="pre">rc</span></tt></td>
+<td><em>script</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Remove an existing callback for the specified hook name. The owner must also be specified when removing a callback.                                Flag can have
+multiple arguments, passed either as a tuple or a list.</td>
+</tr>
+</tbody>
+</table>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.callbacks</span></tt></p>
+<p class="rubric">Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymel.core</span> <span class="kn">as</span> <span class="nn">pm</span>
+
+<span class="k">def</span> <span class="nf">myCallbackFunction</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>
+<span class="c1"># add a new callback for myPlugin to be called when creating the attribute editor UI</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">callbacks</span><span class="p">(</span><span class="n">addCallback</span><span class="o">=</span><span class="n">myCallbackFunction</span><span class="p">,</span> <span class="n">hook</span><span class="o">=</span><span class="s1">&#39;desiredHook&#39;</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="s1">&#39;myPlugin&#39;</span><span class="p">)</span>
+<span class="c1"># remove an individual callback</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">callbacks</span><span class="p">(</span><span class="n">removeCallback</span><span class="o">=</span><span class="n">myCallbackFunction</span><span class="p">,</span> <span class="n">hook</span><span class="o">=</span><span class="s1">&#39;desiredHook&#39;</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="s1">&#39;myPlugin&#39;</span><span class="p">)</span>
+<span class="c1"># remove all callbacks for myPlugin for a specified hook</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">callbacks</span><span class="p">(</span><span class="n">clearCallbacks</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">hook</span><span class="o">=</span><span class="s1">&#39;desiredHook&#39;</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="s1">&#39;myPlugin&#39;</span><span class="p">)</span>
+<span class="c1"># remove all callbacks for myPlugin for all hooks</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">callbacks</span><span class="p">(</span><span class="n">clearCallbacks</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="s1">&#39;myPlugin&#39;</span><span class="p">)</span>
+<span class="c1"># list callbacks for a specified hook</span>
+<span class="n">callbacks</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">callbacks</span><span class="p">(</span><span class="n">listCallbacks</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">hook</span><span class="o">=</span><span class="s1">&#39;desiredHook&#39;</span><span class="p">)</span>
+<span class="c1"># list callbacks for a specified hook and for a specified owner</span>
+<span class="n">callbacks</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">callbacks</span><span class="p">(</span><span class="n">listCallbacks</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">hook</span><span class="o">=</span><span class="s1">&#39;desiredHook&#39;</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="s1">&#39;myPlugin&#39;</span><span class="p">)</span>
+<span class="c1"># get a list of the standard Maya hooks</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">callbacks</span><span class="p">(</span><span class="n">describeHooks</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Result: [u&#39;hyperShadePanelBuildCreateMenu&#39;, u&#39;hyperShadePanelBuildCreateSubMenu&#39;, u&#39;hyperShadePanelPluginChange&#39;, u&#39;createRenderNodeSelectNodeCategories&#39;, u&#39;createRenderNodePluginChange&#39;, u&#39;renderNodeClassification&#39;, u&#39;createRenderNodeCommand&#39;, u&#39;buildRenderNodeTreeListerContent&#39;, u&#39;AETemplateCustomContent&#39;, u&#39;firstConnectedShader&#39;, u&#39;allConnectedShaders&#39;, u&#39;renderLayerPresetMenu&#39;, u&#39;addBakingMenuItems&#39;, u&#39;addVertexBakingMenuItems&#39;, u&#39;addPrelightMenuItems&#39;, u&#39;addRMBBakingMenuItems&#39;, u&#39;addMayaRenderingPreferences&#39;, u&#39;updateMayaRenderingPreferences&#39;, u&#39;addMayaMuscleShelfButtons&#39;, u&#39;addMayaMuscleMenuItems&#39;, u&#39;addBackburnerRendererMenuItems&#39;, u&#39;provideAETemplateForNodeType&#39;, u&#39;AEnewMultiHandler&#39;, u&#39;AEreplaceMultiHandler&#39;, u&#39;AEnewAttributeHandler&#39;, u&#39;AEreplaceAttributeHandler&#39;, u&#39;provideClassificationStrings&#39;, u&#39;provideClassificationStringsForFilteredTreeLister&#39;, u&#39;nodeCanBeUsedAsMaterial&#39;, u&#39;addHeaderContentToMayaLambertianShadersAE&#39;, u&#39;provideOutputAttributeNameForTextureNode&#39;, u&#39;addItemsToHypergraphNodePopupMenu&#39;, u&#39;addItemsToRenderLayerEditorPopupMenu&#39;, u&#39;preventMaterialDeletionFromCleanUpSceneCommand&#39;, u&#39;connectNodeToNodeOverrideCallback&#39;, u&#39;prepareRenderChanged&#39;, u&#39;enableRenderPassMenuOfRenderView&#39;, u&#39;addItemsToRenderPassMenuOfRenderView&#39;] #</span>
+<span class="c1"># execute the callbacks for the hook &#39;desiredHook&#39;</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">callbacks</span><span class="p">(</span><span class="s1">&#39;arg1&#39;</span><span class="p">,</span> <span class="s1">&#39;arg2&#39;</span><span class="p">,</span> <span class="n">executeCallbacks</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">hook</span><span class="o">=</span><span class="s1">&#39;desiredHook&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pymel.core.language.conditionExists.html" class="btn btn-neutral float-right" title="pymel.core.language.conditionExists" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../classes/pymel.core.language/pymel.core.language.OptionVarList.html" class="btn btn-neutral" title="pymel.core.language.OptionVarList" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009, Chad Dombrova.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

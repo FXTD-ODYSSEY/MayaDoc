@@ -1,0 +1,821 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pymel.core.general.setAttr &mdash; PyMEL 1.0.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css">
+  
+
+  
+    <link rel="top" title="PyMEL 1.0.9 documentation" href="../../../index.html">
+        <link rel="up" title="pymel.core.general" href="../../pymel.core.general.html">
+        <link rel="next" title="pymel.core.general.setEnums" href="pymel.core.general.setEnums.html">
+        <link rel="prev" title="pymel.core.general.selectionConnection" href="pymel.core.general.selectionConnection.html"> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PyMEL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../whats_new.html">What&#8217;s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../why_pymel.html">Why PyMEL?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pynodes.html">PyNodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../attributes.html">Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../non_existent_objs.html">Non-Existent Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ui.html">Building User Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../standalone.html">Standalone Maya Python Interpreter</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../eclipse.html">Setting Up PyMEL Autocompletion in Eclipse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">For Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mel_to_python.html">MEL to Python Cheat Sheet</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../modules.html">Module Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../modules.html#pymel-core"><tt class="docutils literal"><span class="pre">pymel.core</span></tt></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.animation.html">pymel.core.animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.effects.html">pymel.core.effects</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../pymel.core.general.html">pymel.core.general</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.about.html">pymel.core.general.about</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.addAttr.html">pymel.core.general.addAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.addExtension.html">pymel.core.general.addExtension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.affectedNet.html">pymel.core.general.affectedNet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.affects.html">pymel.core.general.affects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.aliasAttr.html">pymel.core.general.aliasAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.align.html">pymel.core.general.align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.applyAttrPattern.html">pymel.core.general.applyAttrPattern</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.artAttrTool.html">pymel.core.general.artAttrTool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.assembly.html">pymel.core.general.assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.assignCommand.html">pymel.core.general.assignCommand</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.attributeInfo.html">pymel.core.general.attributeInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.attributeName.html">pymel.core.general.attributeName</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.attributeQuery.html">pymel.core.general.attributeQuery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.bakePartialHistory.html">pymel.core.general.bakePartialHistory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.baseTemplate.html">pymel.core.general.baseTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.baseView.html">pymel.core.general.baseView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.color.html">pymel.core.general.color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.colorIndex.html">pymel.core.general.colorIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.colorManagementCatalog.html">pymel.core.general.colorManagementCatalog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.colorManagementConvert.html">pymel.core.general.colorManagementConvert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.colorManagementFileRules.html">pymel.core.general.colorManagementFileRules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.colorManagementPrefs.html">pymel.core.general.colorManagementPrefs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.commandEcho.html">pymel.core.general.commandEcho</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.commandLogging.html">pymel.core.general.commandLogging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.commandPort.html">pymel.core.general.commandPort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.condition.html">pymel.core.general.condition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.connectAttr.html">pymel.core.general.connectAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.connectionInfo.html">pymel.core.general.connectionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.container.html">pymel.core.general.container</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.containerBind.html">pymel.core.general.containerBind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.containerProxy.html">pymel.core.general.containerProxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.containerPublish.html">pymel.core.general.containerPublish</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.containerTemplate.html">pymel.core.general.containerTemplate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.containerView.html">pymel.core.general.containerView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.contextInfo.html">pymel.core.general.contextInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.copyAttr.html">pymel.core.general.copyAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.createAttrPatterns.html">pymel.core.general.createAttrPatterns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.createDisplayLayer.html">pymel.core.general.createDisplayLayer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.createNode.html">pymel.core.general.createNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.currentUnit.html">pymel.core.general.currentUnit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.curveRGBColor.html">pymel.core.general.curveRGBColor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.cycleCheck.html">pymel.core.general.cycleCheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.delete.html">pymel.core.general.delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.deleteAttr.html">pymel.core.general.deleteAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.deleteAttrPattern.html">pymel.core.general.deleteAttrPattern</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.deleteExtension.html">pymel.core.general.deleteExtension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.disconnectAttr.html">pymel.core.general.disconnectAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.displayAffected.html">pymel.core.general.displayAffected</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.displayColor.html">pymel.core.general.displayColor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.displayCull.html">pymel.core.general.displayCull</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.displayLevelOfDetail.html">pymel.core.general.displayLevelOfDetail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.displayPref.html">pymel.core.general.displayPref</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.displayRGBColor.html">pymel.core.general.displayRGBColor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.displaySmoothness.html">pymel.core.general.displaySmoothness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.displayStats.html">pymel.core.general.displayStats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.displaySurface.html">pymel.core.general.displaySurface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.distanceDimension.html">pymel.core.general.distanceDimension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.duplicate.html">pymel.core.general.duplicate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.editDisplayLayerGlobals.html">pymel.core.general.editDisplayLayerGlobals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.editDisplayLayerMembers.html">pymel.core.general.editDisplayLayerMembers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.encodeString.html">pymel.core.general.encodeString</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.evalDeferred.html">pymel.core.general.evalDeferred</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.exactWorldBoundingBox.html">pymel.core.general.exactWorldBoundingBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.format.html">pymel.core.general.format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.getAttr.html">pymel.core.general.getAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.getClassification.html">pymel.core.general.getClassification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.getEnums.html">pymel.core.general.getEnums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.group.html">pymel.core.general.group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.hasAttr.html">pymel.core.general.hasAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.hide.html">pymel.core.general.hide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.hilite.html">pymel.core.general.hilite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.inheritTransform.html">pymel.core.general.inheritTransform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.instance.html">pymel.core.general.instance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.instanceable.html">pymel.core.general.instanceable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.instancer.html">pymel.core.general.instancer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.isConnected.html">pymel.core.general.isConnected</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.isDirty.html">pymel.core.general.isDirty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.isTrue.html">pymel.core.general.isTrue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.isolateSelect.html">pymel.core.general.isolateSelect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.itemFilter.html">pymel.core.general.itemFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.itemFilterAttr.html">pymel.core.general.itemFilterAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.itemFilterRender.html">pymel.core.general.itemFilterRender</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.itemFilterType.html">pymel.core.general.itemFilterType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.license.html">pymel.core.general.license</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.listAttr.html">pymel.core.general.listAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.listAttrPatterns.html">pymel.core.general.listAttrPatterns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.listConnections.html">pymel.core.general.listConnections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.listFuture.html">pymel.core.general.listFuture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.listHistory.html">pymel.core.general.listHistory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.listNodeTypes.html">pymel.core.general.listNodeTypes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.listNodesWithIncorrectNames.html">pymel.core.general.listNodesWithIncorrectNames</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.listRelatives.html">pymel.core.general.listRelatives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.listSets.html">pymel.core.general.listSets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.listTransforms.html">pymel.core.general.listTransforms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.lockNode.html">pymel.core.general.lockNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.ls.html">pymel.core.general.ls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.makeIdentity.html">pymel.core.general.makeIdentity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.makeLive.html">pymel.core.general.makeLive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.makePaintable.html">pymel.core.general.makePaintable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.matchTransform.html">pymel.core.general.matchTransform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.move.html">pymel.core.general.move</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.nodeCast.html">pymel.core.general.nodeCast</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.nodeType.html">pymel.core.general.nodeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.objExists.html">pymel.core.general.objExists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.objectCenter.html">pymel.core.general.objectCenter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.objectType.html">pymel.core.general.objectType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.paramDimension.html">pymel.core.general.paramDimension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.paramLocator.html">pymel.core.general.paramLocator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.parent.html">pymel.core.general.parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.partition.html">pymel.core.general.partition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.pause.html">pymel.core.general.pause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.performanceOptions.html">pymel.core.general.performanceOptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.pickWalk.html">pymel.core.general.pickWalk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.pixelMove.html">pymel.core.general.pixelMove</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.polySplitCtx2.html">pymel.core.general.polySplitCtx2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.refresh.html">pymel.core.general.refresh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.relationship.html">pymel.core.general.relationship</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.removeMultiInstance.html">pymel.core.general.removeMultiInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.rename.html">pymel.core.general.rename</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.renameAttr.html">pymel.core.general.renameAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.reorder.html">pymel.core.general.reorder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.reorderContainer.html">pymel.core.general.reorderContainer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.resetTool.html">pymel.core.general.resetTool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.rotate.html">pymel.core.general.rotate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.saveToolSettings.html">pymel.core.general.saveToolSettings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.scale.html">pymel.core.general.scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.scaleComponents.html">pymel.core.general.scaleComponents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.sculptMeshCacheChangeCloneSource.html">pymel.core.general.sculptMeshCacheChangeCloneSource</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.select.html">pymel.core.general.select</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.selectKey.html">pymel.core.general.selectKey</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.selectMode.html">pymel.core.general.selectMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.selectPref.html">pymel.core.general.selectPref</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.selectPriority.html">pymel.core.general.selectPriority</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.selectType.html">pymel.core.general.selectType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.selected.html">pymel.core.general.selected</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.selectedNodes.html">pymel.core.general.selectedNodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.selectionConnection.html">pymel.core.general.selectionConnection</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">pymel.core.general.setAttr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.setEnums.html">pymel.core.general.setEnums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.setToolTo.html">pymel.core.general.setToolTo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.sets.html">pymel.core.general.sets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.shapeCompare.html">pymel.core.general.shapeCompare</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.showHidden.html">pymel.core.general.showHidden</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.snapMode.html">pymel.core.general.snapMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.softSelect.html">pymel.core.general.softSelect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.spaceLocator.html">pymel.core.general.spaceLocator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.strDeprecateDecorator.html">pymel.core.general.strDeprecateDecorator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.stringArrayIntersector.html">pymel.core.general.stringArrayIntersector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.suitePrefs.html">pymel.core.general.suitePrefs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.symmetricModelling.html">pymel.core.general.symmetricModelling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.threadCount.html">pymel.core.general.threadCount</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.timeCode.html">pymel.core.general.timeCode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.toggle.html">pymel.core.general.toggle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.toggleAxis.html">pymel.core.general.toggleAxis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.toggleDisplacement.html">pymel.core.general.toggleDisplacement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.toolDropped.html">pymel.core.general.toolDropped</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.toolHasOptions.html">pymel.core.general.toolHasOptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.toolPropertyWindow.html">pymel.core.general.toolPropertyWindow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.transformCompare.html">pymel.core.general.transformCompare</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.transformLimits.html">pymel.core.general.transformLimits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.ungroup.html">pymel.core.general.ungroup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.uniqueObjExists.html">pymel.core.general.uniqueObjExists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.upAxis.html">pymel.core.general.upAxis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.validComponentIndexType.html">pymel.core.general.validComponentIndexType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.vnn.html">pymel.core.general.vnn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.vnnChangeBracket.html">pymel.core.general.vnnChangeBracket</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.vnnCompound.html">pymel.core.general.vnnCompound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.vnnConnect.html">pymel.core.general.vnnConnect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.vnnCopy.html">pymel.core.general.vnnCopy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.vnnNode.html">pymel.core.general.vnnNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.vnnPaste.html">pymel.core.general.vnnPaste</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.webView.html">pymel.core.general.webView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.xform.html">pymel.core.general.xform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.general.xformConstraint.html">pymel.core.general.xformConstraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.Attribute.html">pymel.core.general.Attribute</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.AttributeDefaults.html">pymel.core.general.AttributeDefaults</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.Component.html">pymel.core.general.Component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.Component1D.html">pymel.core.general.Component1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.Component1D64.html">pymel.core.general.Component1D64</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.Component1DFloat.html">pymel.core.general.Component1DFloat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.Component2D.html">pymel.core.general.Component2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.Component2DFloat.html">pymel.core.general.Component2DFloat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.Component3D.html">pymel.core.general.Component3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.ComponentIndex.html">pymel.core.general.ComponentIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.ContinuousComponent.html">pymel.core.general.ContinuousComponent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.DimensionedComponent.html">pymel.core.general.DimensionedComponent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.DiscreteComponent.html">pymel.core.general.DiscreteComponent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.HashableSlice.html">pymel.core.general.HashableSlice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.LatticePoint.html">pymel.core.general.LatticePoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.MItComponent.html">pymel.core.general.MItComponent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.MItComponent1D.html">pymel.core.general.MItComponent1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.MeshEdge.html">pymel.core.general.MeshEdge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.MeshFace.html">pymel.core.general.MeshFace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.MeshUV.html">pymel.core.general.MeshUV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.MeshVertex.html">pymel.core.general.MeshVertex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.MeshVertexFace.html">pymel.core.general.MeshVertexFace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NodeTracker.html">pymel.core.general.NodeTracker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NurbsCurveCV.html">pymel.core.general.NurbsCurveCV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NurbsCurveEP.html">pymel.core.general.NurbsCurveEP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NurbsCurveKnot.html">pymel.core.general.NurbsCurveKnot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NurbsCurveParameter.html">pymel.core.general.NurbsCurveParameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NurbsSurfaceCV.html">pymel.core.general.NurbsSurfaceCV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NurbsSurfaceEP.html">pymel.core.general.NurbsSurfaceEP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NurbsSurfaceFace.html">pymel.core.general.NurbsSurfaceFace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NurbsSurfaceIsoparm.html">pymel.core.general.NurbsSurfaceIsoparm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NurbsSurfaceKnot.html">pymel.core.general.NurbsSurfaceKnot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.NurbsSurfaceRange.html">pymel.core.general.NurbsSurfaceRange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.ParticleComponent.html">pymel.core.general.ParticleComponent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.Pivot.html">pymel.core.general.Pivot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.ProxySlice.html">pymel.core.general.ProxySlice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.PyNode.html">pymel.core.general.PyNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.Scene.html">pymel.core.general.Scene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.SubdEdge.html">pymel.core.general.SubdEdge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.SubdFace.html">pymel.core.general.SubdFace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.SubdUV.html">pymel.core.general.SubdUV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../classes/pymel.core.general/pymel.core.general.SubdVertex.html">pymel.core.general.SubdVertex</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.language.html">pymel.core.language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.modeling.html">pymel.core.modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.other.html">pymel.core.other</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.rendering.html">pymel.core.rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.system.html">pymel.core.system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.windows.html">pymel.core.windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.context.html">pymel.core.context</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-datatypes"><tt class="docutils literal"><span class="pre">pymel.core.datatypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-nodetypes"><tt class="docutils literal"><span class="pre">pymel.core.nodetypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-uitypes"><tt class="docutils literal"><span class="pre">pymel.core.uitypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-runtime"><tt class="docutils literal"><span class="pre">pymel.core.runtime</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-util"><tt class="docutils literal"><span class="pre">pymel.util</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-versions"><tt class="docutils literal"><span class="pre">pymel.versions</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-mayautils"><tt class="docutils literal"><span class="pre">pymel.mayautils</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-tools"><tt class="docutils literal"><span class="pre">pymel.tools</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-api"><tt class="docutils literal"><span class="pre">pymel.api</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyMEL</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../modules.html">Module Documentation</a> &raquo;</li>
+        
+          <li><a href="../../pymel.core.general.html">pymel.core.general</a> &raquo;</li>
+        
+      <li>pymel.core.general.setAttr</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/generated/functions/pymel.core.general/pymel.core.general.setAttr.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pymel-core-general-setattr">
+<h1>pymel.core.general.setAttr<a class="headerlink" href="#pymel-core-general-setattr" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pymel.core.general.setAttr">
+<tt class="descname">setAttr</tt><big>(</big><em>attr</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.general.setAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the value of a dependency node attribute.  No value for the the attribute is needed when the -l/-k/-s flags are
+used. The -type flag is only required when setting a non-numeric attribute. The following chart outlines the syntax of
+setAttr for non-numeric data types: TYPEbelow means any number of values of type TYPE, separated by a space[TYPE]means
+that the value of type TYPEis optionalA|Bmeans that either of Aor Bmay appearIn order to run its examples, first execute
+these commands to create the sample attribute types:sphere -n node; addAttr -ln short2Attr -at short2; addAttr -ln
+short2a -p short2Attr -at short; addAttr -ln short2b -p short2Attr -at short; addAttr -ln short3Attr -at short3; addAttr
+-ln short3a -p short3Attr -at short; addAttr -ln short3b -p short3Attr -at short; addAttr -ln short3c -p short3Attr -at
+short; addAttr -ln long2Attr -at long2; addAttr -ln long2a -p long2Attr -at long; addAttr -ln long2b -p long2Attr -at
+long; addAttr -ln long3Attr -at long3; addAttr -ln long3a -p long3Attr -at long; addAttr -ln long3b -p long3Attr -at
+long; addAttr -ln long3c -p long3Attr -at long; addAttr -ln float2Attr -at float2; addAttr -ln float2a -p float2Attr -at
+float; addAttr -ln float2b -p float2Attr -at float; addAttr -ln float3Attr -at float3; addAttr -ln float3a -p float3Attr
+-at float; addAttr -ln float3b -p float3Attr -at float; addAttr -ln float3c -p float3Attr -at float; addAttr -ln
+double2Attr -at double2; addAttr -ln double2a -p double2Attr -at double; addAttr -ln double2b -p double2Attr -at double;
+addAttr -ln double3Attr -at double3; addAttr -ln double3a -p double3Attr -at double; addAttr -ln double3b -p double3Attr
+-at double; addAttr -ln double3c -p double3Attr -at double; addAttr -ln int32ArrayAttr -dt Int32Array; addAttr -ln
+doubleArrayAttr -dt doubleArray; addAttr -ln pointArrayAttr -dt pointArray; addAttr -ln vectorArrayAttr -dt vectorArray;
+addAttr -ln stringArrayAttr -dt stringArray; addAttr -ln stringAttr -dt string; addAttr -ln matrixAttr -dt matrix;
+addAttr -ln sphereAttr -dt sphere; addAttr -ln coneAttr -dt cone; addAttr -ln meshAttr -dt mesh; addAttr -ln latticeAttr
+-dt lattice; addAttr -ln spectrumRGBAttr -dt spectrumRGB; addAttr -ln reflectanceRGBAttr -dt reflectanceRGB; addAttr -ln
+componentListAttr -dt componentList; addAttr -ln attrAliasAttr -dt attributeAlias; addAttr -ln curveAttr -dt nurbsCurve;
+addAttr -ln surfaceAttr -dt nurbsSurface; addAttr -ln trimFaceAttr -dt nurbsTrimface; addAttr -ln polyFaceAttr -dt
+polyFaces; -type short2Array of two short integersValue Syntaxshort shortValue Meaningvalue1 value2Mel ExamplesetAttr
+node.short2Attr -type short2 1 2;Python Examplecmds.setAttr(&#8216;node.short2Attr&#8217;,1,2,type=&#8217;short2&#8217;)-type short3Array of
+three short integersValue Syntaxshort short shortValue Meaningvalue1 value2 value3Mel ExamplesetAttr node.short3Attr
+-type short3 1 2 3;Python Examplecmds.setAttr(&#8216;node.short3Attr&#8217;,1,2,3,type=&#8217;short3&#8217;)-type long2Array of two long
+integersValue Syntaxlong longValue Meaningvalue1 value2Mel ExamplesetAttr node.long2Attr -type long2 1000000
+2000000;Python Examplecmds.setAttr(&#8216;node.long2Attr&#8217;,1000000,2000000,type=&#8217;long2&#8217;)-type long3Array of three long
+integersValue Syntaxlong long longValue Meaningvalue1 value2 value3Mel ExamplesetAttr node.long3Attr -type long3 1000000
+2000000 3000000;Python Examplecmds.setAttr(&#8216;node.long3Attr&#8217;,1000000,2000000,3000000,type=&#8217;long3&#8217;)-type
+Int32ArrayVariable length array of long integersValue SyntaxValue MeaningMel ExamplesetAttr node.int32ArrayAttr -type
+Int32Array 2 12 75;Python Examplecmds.setAttr(&#8216;node.int32ArrayAttr&#8217;,[2,12,75],type=&#8217;Int32Array&#8217;)-type float2Array of two
+floatsValue Syntaxfloat floatValue Meaningvalue1 value2Mel ExamplesetAttr node.float2Attr -type float2 1.1 2.2;Python
+Examplecmds.setAttr(&#8216;node.float2Attr&#8217;,1.1,2.2,type=&#8217;float2&#8217;)-type float3Array of three floatsValue Syntaxfloat float
+floatValue Meaningvalue1 value2 value3Mel ExamplesetAttr node.float3Attr -type float3 1.1 2.2 3.3;Python
+Examplecmds.setAttr(&#8216;node.float3Attr&#8217;,1.1,2.2,3.3,type=&#8217;float3&#8217;)-type double2Array of two doublesValue Syntaxdouble
+doubleValue Meaningvalue1 value2Mel ExamplesetAttr node.double2Attr -type double2 1.1 2.2;Python
+Examplecmds.setAttr(&#8216;node.double2Attr&#8217;,1.1,2.2,type=&#8217;double2&#8217;)-type double3Array of three doublesValue Syntaxdouble
+double doubleValue Meaningvalue1 value2 value3Mel ExamplesetAttr node.double3Attr -type double3 1.1 2.2 3.3;Python
+Examplecmds.setAttr(&#8216;node.double3Attr&#8217;,1.1,2.2,3.3,type=&#8217;double3&#8217;)-type doubleArrayVariable length array of doublesValue
+SyntaxValue MeaningMel ExamplesetAttr node.doubleArrayAttr -type doubleArray 2 3.14159 2.782;Python Examplecmds.setAttr(
+node.doubleArrayAttr, (2, 3.14159, 2.782,), type=doubleArray)-type matrix4x4 matrix of doublesValue Syntaxdouble double
+double doubledouble double double doubledouble double double doubledouble double double doubleValue Meaningrow1col1
+row1col2 row1col3 row1col4row2col1 row2col2 row2col3 row2col4row3col1 row3col2 row3col3 row3col4row4col1 row4col2
+row4col3 row4col4Alternate Syntaxstring double double doubledouble double doubleintegerdouble double doubledouble double
+doubledouble double doubledouble double doubledouble double doubledouble double doubledouble double double doubledouble
+double double doubledouble double doublebooleanAlternate MeaningxformscaleX scaleY scaleZrotateX rotateY
+rotateZrotationOrder (0=XYZ, 1=YZX, 2=ZXY, 3=XZY, 4=YXZ, 5=ZYX)translateX translateY translateZshearXY shearXZ
+shearYZscalePivotX scalePivotY scalePivotZscaleTranslationX scaleTranslationY scaleTranslationZrotatePivotX rotatePivotY
+rotatePivotZrotateTranslationX rotateTranslationY rotateTranslationZrotateOrientW rotateOrientX rotateOrientY
+rotateOrientZjointOrientW jointOrientX jointOrientY jointOrientZinverseParentScaleX inverseParentScaleY
+inverseParentScaleZcompensateForParentScale Mel ExamplesetAttr node.matrixAttr -type matrix1 0 0 0 0 1 0 0 0 0 1 0 2 3 4
+1;setAttr node.matrixAttr -type matrixxform1 1 1 0 0 0 0 2 3 4 0 0 00 0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 0 1 0 1 1 1 0
+false;Python Examplecmds.setAttr(&#8216;node.matrixAttr&#8217;,(1,0,0,0,0,1,0,0,0,0,1,0,2,3,4,1),type=&#8217;matrix&#8217;)cmds.setAttr(&#8216;node.ma
+trixAttr&#8217;,&#8217;xform&#8217;,(1,1,1),(0,0,0),0,(2,3,4),(0,0,0),(0,0,0),(0,0,0),(0,0,0),(0,1,1),(0,0,1,0),(1,0,1,0),(1,2,3),False,ty
+pe=matrix)-type pointArrayVariable length array of pointsValue SyntaxValue MeaningMel ExamplesetAttr node.pointArrayAttr
+-type pointArray 2 1 1 1 1 2 2 2 1;Python
+Examplecmds.setAttr(&#8216;node.pointArrayAttr&#8217;,2,(1,1,1,1),(2,2,2,1),type=&#8217;pointArray&#8217;)-type vectorArrayVariable length array
+of vectorsValue SyntaxValue MeaningMel ExamplesetAttr node.vectorArrayAttr -type vectorArray 2 1 1 1 2 2 2;Python
+Examplecmds.setAttr(&#8216;node.vectorArrayAttr&#8217;,2,(1,1,1),(2,2,2),type=&#8217;vectorArray&#8217;)-type stringCharacter stringValue
+SyntaxstringValue MeaningcharacterStringValueMel ExamplesetAttr node.stringAttr -type stringblarg;Python
+Examplecmds.setAttr(&#8216;node.stringAttr&#8217;,blarg,type=string)-type stringArrayVariable length array of stringsValue
+SyntaxValue MeaningMel ExamplesetAttr node.stringArrayAttr -type stringArray 3 abc;Python
+Examplecmds.setAttr(&#8216;node.stringArrayAttr&#8217;,3,a,b,c,type=&#8217;stringArray&#8217;)-type sphereSphere dataValue SyntaxdoubleValue
+MeaningsphereRadiusExamplesetAttr node.sphereAttr -type sphere 5.0;-type coneCone dataValue Syntaxdouble doubleValue
+MeaningconeAngle coneCapMel ExamplesetAttr node.coneAttr -type cone 45.0 5.0;Python
+Examplecmds.setAttr(&#8216;node.coneAttr&#8217;,45.0,5.0,type=&#8217;cone&#8217;)-type reflectanceRGBReflectance dataValue Syntaxdouble double
+doubleValue MeaningredReflect greenReflect blueReflectMel ExamplesetAttr node.reflectanceRGBAttr -type reflectanceRGB
+0.5 0.5 0.1;Python Examplecmds.setAttr(&#8216;node.reflectanceRGBAttr&#8217;,0.5,0.5,0.1,type=&#8217;reflectanceRGB&#8217;)-type
+spectrumRGBSpectrum dataValue Syntaxdouble double doubleValue MeaningredSpectrum greenSpectrum blueSpectrumMel
+ExamplesetAttr node.spectrumRGBAttr -type spectrumRGB 0.5 0.5 0.1;Python
+Examplecmds.setAttr(&#8216;node.spectrumRGBAttr&#8217;,0.5,0.5,0.1,type=&#8217;spectrumRGB&#8217;)-type componentListVariable length array of
+componentsValue SyntaxValue MeaningMel ExamplesetAttr node.componentListAttr -type componentList 3 cv[1] cv[12]
+cv[3];Python Examplecmds.setAttr(&#8216;node.componentListAttr&#8217;,3,&#8217;cv[1]&#8217;,&#8217;cv[12]&#8217;,&#8217;cv[3]&#8217;,type=&#8217;componentList&#8217;)-type
+attributeAliasString alias dataValue Syntaxstring stringValue MeaningnewAlias currentNameMel ExamplesetAttr
+node.attrAliasAttr -type attributeAliasGoUp, translateY, GoLeft, translateX;Python
+Examplecmds.setAttr(&#8216;node.attrAliasAttr&#8217;,(GoUp, translateY,GoLeft, translateX),type=&#8217;attributeAlias&#8217;)-type
+nurbsCurveNURBS curve dataValue SyntaxValue MeaningMel Example// degree is the degree of the curve(range 1-7)// spans is
+the number of spans // form is open (0), closed (1), periodic (2)// dimension is 2 or 3, depending on the dimension of
+the curve// isRational is true if the curve CVs contain a rational component // knotCount is the size of the knot list//
+knotValue is a single entry in the knot list// cvCount is the number of CVs in the curve//  xCVValue,yCVValue,[zCVValue]
+[wCVValue] is a single CV.//  zCVValue is only present when dimension is 3.//  wCVValue is only present when isRational
+is true.//setAttr node.curveAttr -type nurbsCurve 3 1 0 no 36 0 0 0 1 1 14 -2 3 0 -2 1 0 -2 -1 0 -2 -3 0;-type
+nurbsSurfaceNURBS surface dataValue Syntaxint int int int bool Value MeaninguDegree vDegree uForm vForm
+isRationalTRIM|NOTRIMExample// uDegree is degree of the surface in U direction (range 1-7)// vDegree is degree of the
+surface in V direction (range 1-7)// uForm is open (0), closed (1), periodic (2) in U direction// vForm is open (0),
+closed (1), periodic (2) in V direction// isRational is true if the surface CVs contain a rational component//
+uKnotCount is the size of the U knot list//  uKnotValue is a single entry in the U knot list// vKnotCount is the size of
+the V knot list//  vKnotValue is a single entry in the V knot list// If TRIMis specified then additional trim
+information is expected// If NOTRIMis specified then the surface is not trimmed// cvCount is the number of CVs in the
+surface//  xCVValue,yCVValue,zCVValue [wCVValue]is a single CV.//  zCVValue is only present when dimension is 3.//
+wCVValue is only present when isRational is true//setAttr node.surfaceAttr -type nurbsSurface 3 3 0 0 no 6 0 0 0 1 1 16
+0 0 0 1 1 116 -2 3 0 -2 1 0 -2 -1 0 -2 -3 0-1 3 0 -1 1 0 -1 -1 0 -1 -3 01 3 0 1 1 0 1 -1 0 1 -3 03 3 0 3 1 0 3 -1 0 3 -3
+0;-type nurbsTrimfaceNURBS trim face dataValue SyntaxValue MeaningExample// flipNormal if true turns the surface inside
+out// boundaryCount: number of boundaries// boundaryType: // tedgeCountOnBoundary    : number of edges in a boundary//
+splineCountOnEdge    : number of splines in an edge in// edgeTolerance        : tolerance used to build the 3d edge//
+isEdgeReversed        : if true, the edge is backwards// geometricContinuity    : if true, the edge is tangent
+continuous// splineCountOnPedge    : number of splines in a 2d edge// isMonotone            : if true, curvature is
+monotone// pedgeTolerance        : tolerance for the 2d edge//-type polyFacePolygon face dataValue SyntaxfhmfmhmufcValue
+MeaningfhmfmhmufcExample// This data type (polyFace) is meant to be used in file I/O// after setAttrs have been written
+out for vertex position// arrays, edge connectivity arrays (with corresponding start// and end vertex descriptions),
+texture coordinate arrays and// color arrays.  The reason is that this data type references// all of its data through
+ids created by the former types.//// fspecifies the ids of the edges making up a face -//     negative value if the edge
+is reversed in the face// hspecifies the ids of the edges making up a hole -//     negative value if the edge is
+reversed in the face// mfspecifies the ids of texture coordinates (uvs) for a face.//     This data type is obsolete as
+of version 3.0. It is replaced by mu.// mhspecifies the ids of texture coordinates (uvs) for a hole//     This data type
+is obsolete as of version 3.0. It is replaced by mu.// muThe  first argument refers to the uv set. This is a zero-
+based//     integer number. The second argument refers to the number of vertices (n)//     on the face which have valid
+uv values. The last n values are the uv//     ids of the texture coordinates (uvs) for the face. These indices//     are
+what used to be represented by the mfand mhspecification.//     There may be more than one muspecification, one for each
+unique uv set.// fcspecifies the color index values for a face//setAttr node.polyFaceAttr -type polyFaces f3 1 2 3 fc3 4
+4 6;-type meshPolygonal meshValue SyntaxValue Meaningvvn[vtesmooth|hard]Example// vspecifies the vertices of the
+polygonal mesh// vnspecifies the normal of each vertex// vtis optional and specifies a U,V texture coordinate for each
+vertex// especifies the edge connectivity information between vertices//setAttr node.meshAttr -type mesh v3 0 0 0 0 1 0
+0 0 1vn3 1 0 0 1 0 0 1 0 0vt3 0 0 0 1 1 0e3 0 1 hard1 2 hard2 0 hard;-type latticeLattice dataValue SyntaxValue
+MeaningsDivisionCount tDivisionCount uDivisionCountExample// sDivisionCount is the horizontal lattice division count//
+tDivisionCount is the vertical lattice division count// uDivisionCount is the depth lattice division count// pointCount
+is the total number of lattice points// pointX,pointY,pointZ is one lattice point.  The list is//   specified varying
+first in S, then in T, last in U so the//   first two entries are (S=0,T=0,U=0) (s=1,T=0,U=0)//setAttr node.latticeAttr
+-type lattice 2 5 2 20-2 -2 -2 2 -2 -2 -2 -1 -2 2 -1 -2 -2 0 -22 0 -2 -2 1 -2 2 1 -2 -2 2 -2 2 2 -2-2 -2 2 2 -2 2 -2 -1
+2 2 -1 2 -2 0 22 0 2 -2 1 2 2 1 2 -2 2 2 2 2 2;In query mode, return type is based on queried flag.</p>
+<dl class="docutils">
+<dt>Maya Bug Fix:</dt>
+<dd><ul class="first last simple">
+<li>setAttr did not work with type matrix.</li>
+</ul>
+</dd>
+<dt>Modifications:</dt>
+<dd><ul class="first last">
+<li><p class="first">No need to set type, this will automatically be determined</p>
+</li>
+<li><p class="first">Adds support for passing a list or tuple as the second argument for datatypes such as double3.</p>
+</li>
+<li><p class="first">When setting stringArray datatype, you no longer need to prefix the list with the number of elements - just pass a list or tuple as with other arrays</p>
+</li>
+<li><dl class="first docutils">
+<dt>Added &#8216;force&#8217; kwarg, which causes the attribute to be added if it does not exist.</dt>
+<dd><ul class="first last">
+<li><p class="first">if no type flag is passed, the attribute type is based on type of value being set (if you want a float, be sure to format it as a float, e.g.  3.0 not 3)</p>
+</li>
+<li><p class="first">currently does not support compound attributes</p>
+</li>
+<li><p class="first">currently supported python-to-maya mappings:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="52%">
+<col width="48%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">python type</th>
+<th class="head">maya type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>float</td>
+<td>double</td>
+</tr>
+<tr class="row-odd"><td>int</td>
+<td>long</td>
+</tr>
+<tr class="row-even"><td>str</td>
+<td>string</td>
+</tr>
+<tr class="row-odd"><td>bool</td>
+<td>bool</td>
+</tr>
+<tr class="row-even"><td>Vector</td>
+<td>double3</td>
+</tr>
+<tr class="row-odd"><td>Matrix</td>
+<td>matrix</td>
+</tr>
+<tr class="row-even"><td>[str]</td>
+<td>stringArray</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">addAttr</span><span class="p">(</span> <span class="s1">&#39;persp&#39;</span><span class="p">,</span> <span class="n">longName</span><span class="o">=</span> <span class="s1">&#39;testDoubleArray&#39;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="s1">&#39;doubleArray&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">setAttr</span><span class="p">(</span> <span class="s1">&#39;persp.testDoubleArray&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">setAttr</span><span class="p">(</span> <span class="s1">&#39;defaultRenderGlobals.preMel&#39;</span><span class="p">,</span> <span class="s1">&#39;sfff&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Added ability to set enum attributes using the string values; this may be
+done either by setting the &#8216;asString&#8217; kwarg to True, or simply supplying
+a string value for an enum attribute.</p>
+</li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Flags:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="1%">
+<col width="61%">
+<col width="19%">
+<col width="19%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Long Name / Short Name</th>
+<th class="head">Argument Types</th>
+<th class="head">Properties</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">alteredValue</span></tt> / <tt class="docutils literal"><span class="pre">av</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">The value is only the current value, which may change in the next evalution (if the attribute has an incoming connection). This flag is only used during file I/O,
+so that attributes with incoming connections do not have their data overwritten during the first evaluation after a file is opened.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">caching</span></tt> / <tt class="docutils literal"><span class="pre">ca</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Sets the attribute&#8217;s internal caching on or off. Not all attributes can be defined as caching. Only those attributes that are not defined by default to be cached
+can be made caching.  As well, multi attribute elements cannot be made caching. Caching also affects child attributes for compound attributes.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">capacityHint</span></tt> / <tt class="docutils literal"><span class="pre">ch</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Used to provide a memory allocation hint to attributes where the -size flag cannot provide enough information. This flag is optional and is primarily intended to
+be used during file I/O. Only certain attributes make use of this flag, and the interpretation of the flag value varies per attribute. This flag is currently used
+by (node.attribute): mesh.face - hints the total number of elements in the face edge lists</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">channelBox</span></tt> / <tt class="docutils literal"><span class="pre">cb</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Sets the attribute&#8217;s display in the channelBox on or off. Keyable attributes are always display in the channelBox regardless of the channelBox settting.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">clamp</span></tt> / <tt class="docutils literal"><span class="pre">c</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">For numeric attributes, if the value is outside the range of the attribute, clamp it to the min or max instead of failing</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">keyable</span></tt> / <tt class="docutils literal"><span class="pre">k</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Sets the attribute&#8217;s keyable state on or off.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">lock</span></tt> / <tt class="docutils literal"><span class="pre">l</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Sets the attribute&#8217;s lock state on or off.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">size</span></tt> / <tt class="docutils literal"><span class="pre">s</span></tt></td>
+<td><em>int</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Defines the size of a multi-attribute array. This is only a hint, used to help allocate memory as efficiently as possible.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">type</span></tt> / <tt class="docutils literal"><span class="pre">typ</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first last" src="../../../_images/create.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Identifies the type of data.  If the -type flag is not present, a numeric type is assumed.                  Flag can have multiple arguments, passed either as a
+tuple or a list.</td>
+</tr>
+</tbody>
+</table>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.setAttr</span></tt></p>
+<p class="rubric">Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymel.core</span> <span class="kn">as</span> <span class="nn">pm</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span> <span class="n">n</span><span class="o">=</span><span class="s2">&quot;sphere&quot;</span> <span class="p">)</span>
+<span class="c1"># Result: [nt.Transform(u&#39;sphere&#39;), nt.MakeNurbSphere(u&#39;makeNurbSphere1&#39;)] #</span>
+
+<span class="c1"># Set a simple numeric value</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span> <span class="s1">&#39;sphere.translateX&#39;</span><span class="p">,</span> <span class="mi">5</span> <span class="p">)</span>
+
+<span class="c1"># Lock an attribute to prevent further modification</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span> <span class="s1">&#39;sphere.translateX&#39;</span><span class="p">,</span> <span class="n">lock</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+
+<span class="c1"># Make an attribute unkeyable</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span> <span class="s1">&#39;sphere.translateZ&#39;</span><span class="p">,</span> <span class="n">keyable</span><span class="o">=</span><span class="bp">False</span> <span class="p">)</span>
+
+<span class="c1"># Set an entire list of multi-attribute values in one command</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span> <span class="s1">&#39;sphereShape.weights[0:6]&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="c1"># Set an attribute with a compound numeric type</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span><span class="s1">&#39;sphere.rotate&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;double3&quot;</span><span class="p">)</span>
+
+<span class="c1"># Clamp the value of the attribute to the min/max</span>
+<span class="c1"># Useful floating point math leaves the value just</span>
+<span class="c1"># a little out of range - here the min is .01</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span> <span class="s1">&#39;anisotropic1.roughness&#39;</span><span class="p">,</span> <span class="mf">0.0099978</span><span class="p">,</span> <span class="n">clamp</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+
+<span class="c1"># Set a multi-attribute with a compound numeric type</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span> <span class="s1">&#39;sphereShape.controlPoints[0:2]&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;double3&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pymel.core.general.setEnums.html" class="btn btn-neutral float-right" title="pymel.core.general.setEnums" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pymel.core.general.selectionConnection.html" class="btn btn-neutral" title="pymel.core.general.selectionConnection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009, Chad Dombrova.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

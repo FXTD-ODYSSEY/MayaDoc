@@ -1,0 +1,421 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting Up PyMEL Autocompletion in Eclipse &mdash; PyMEL 1.0.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css">
+  
+
+  
+    <link rel="top" title="PyMEL 1.0.9 documentation" href="index.html">
+        <link rel="next" title="For Developers" href="dev.html">
+        <link rel="prev" title="Standalone Maya Python Interpreter" href="standalone.html"> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyMEL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="whats_new.html">What&#8217;s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="why_pymel.html">Why PyMEL?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pynodes.html">PyNodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attributes.html">Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="non_existent_objs.html">Non-Existent Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html">Building User Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standalone.html">Standalone Maya Python Interpreter</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Setting Up PyMEL Autocompletion in Eclipse</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#before-you-begin">Before You Begin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-the-maya-python-interpreter">Adding The Maya Python Interpreter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-that-it-worked">Testing That It Worked</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">For Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mel_to_python.html">MEL to Python Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Module Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyMEL</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Setting Up PyMEL Autocompletion in Eclipse</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/eclipse.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-pymel-autocompletion-in-eclipse">
+<h1>Setting Up PyMEL Autocompletion in Eclipse<a class="headerlink" href="#setting-up-pymel-autocompletion-in-eclipse" title="Permalink to this headline">¶</a></h1>
+<p>The methodology for setting up auto-completion has been dramatically simplified with this release.  We now include &#8220;stub&#8221; files which can be used with almost any IDE to provide code completion.  These stub files comprise &#8220;dummy&#8221; versions of the pymel and maya packages: they contain all the function and class definitions along with their documentation strings, but do not contain any functional code.  This method (first brought to my attention by Ron Bublitz) has many advantages over using the &#8220;real&#8221; pymel package for completion:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>easier to setup</li>
+<li>faster and more reliable</li>
+<li>completes ui commands</li>
+<li>completes maya.cmds and maya.OpenMaya</li>
+</ol>
+</div></blockquote>
+<p>The only disadvantage that has come to my attention is that IDE tools that reveal the source of a function will direct you to the stub packages, which contain no real code and therefore won&#8217;t be particularly helpful. However, this is really only a concern for those who are brave enough to delve into pymel code.</p>
+<div class="section" id="before-you-begin">
+<h2>Before You Begin<a class="headerlink" href="#before-you-begin" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/downloads/">Download</a> and install the Eclipse Classic SDK.</li>
+<li>Use Eclipse&#8217;s <strong>Software Update</strong> window (under help) to install <a class="reference external" href="http://pydev.org/download.html">PyDev</a></li>
+</ul>
+</div></blockquote>
+<p>These instructions are updated for Pydev 1.4.6, and should work on either Eclipse 3.4.x or 3.5.x</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you checked out PyMEL from our git repo then you will need to generate the stubs first.</p>
+<p>To generate stubs:</p>
+<blockquote class="last">
+<div><ol class="arabic">
+<li><p class="first">be sure that pymel is on the path by following the <a class="reference internal" href="install.html#install-manual"><em>Manual Install</em></a> method.</p>
+</li>
+<li><p class="first">open a Maya GUI and run the following in a python tab of the script editor:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">maintenance.stubs</span>
+<span class="n">maintenance</span><span class="o">.</span><span class="n">stubs</span><span class="o">.</span><span class="n">pymelstubs</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="adding-the-maya-python-interpreter">
+<h2>Adding The Maya Python Interpreter<a class="headerlink" href="#adding-the-maya-python-interpreter" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">with the introduction of the new completion stubs, it is no longer necessary to use mayapy as your interpreter &#8211; any python interpreter will do. However, it&#8217;s still a good idea to use Maya&#8217;s interpreter to ensure that the site-packages within it are the same as when you are using Maya.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Open the Eclipse preferences window.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Windows</th>
+<th class="head">OSX</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>under the <strong>Window</strong> menu:</td>
+<td>under the <strong>Eclipse</strong> menu:</td>
+</tr>
+<tr class="row-odd"><td><img alt="_images/pymel_eclipse_win_101.png" class="first last" src="_images/pymel_eclipse_win_101.png">
+</td>
+<td><img alt="_images/pymel_eclipse_osx_101.png" class="first last" src="_images/pymel_eclipse_osx_101.png">
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">In the left pane, drop down to <strong>Pydev &gt; Interpreter-Python</strong></p>
+</li>
+<li><p class="first">Click the <strong>New..</strong> button at the top right of the <strong>Python Interpreters</strong> preferences window</p>
+</li>
+<li><p class="first">In the window that comes up give your interpreter a name (such as maya2009-osx).</p>
+</li>
+<li><p class="first">Next, you can either copy and paste the path to your maya interpreter (aka <tt class="docutils literal"><span class="pre">mayapy</span></tt>) or you can click &#8216;Browse&#8217; and navigate to it.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">On OSX, browsing to <tt class="docutils literal"><span class="pre">mayapy</span></tt> is not as easy as it should be. The problem is that it&#8217;s buried within Maya.app, which you cannot access in a file browser (thanks Apple!).  To get to it, hold down <strong>Command+Shift+G</strong> to bring up a box to enter a path (that&#8217;s the Apple &#8220;Command&#8221; button, plus Shift, plus the letter G). You can&#8217;t use Command-V to <em>paste</em> a path in this browser, but you <em>can</em> right click in the path entry box and choose Paste.</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%">
+<col width="55%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Windows</th>
+<th class="head">OSX</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">C:\Program</span> <span class="pre">Files\Autodesk\Maya2009\bin\mayapy.exe</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/Applications/Autodesk/maya2009/Maya.app/Contents/bin/mayapy</span></tt></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="_images/pymel_eclipse_win_104.png"><img alt="win_104" src="_images/pymel_eclipse_win_104.png" style="width: 452px; height: 344px;"></a></td>
+<td><a class="reference internal" href="_images/pymel_eclipse_osx_104.png"><img alt="osx_104" src="_images/pymel_eclipse_osx_104.png" style="width: 481px; height: 361px;"></a></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<ol class="arabic" start="5">
+<li><p class="first">Once you choose the &#8220;mayapy&#8221; binary, you&#8217;ll get this window:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%">
+<col width="55%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Windows</th>
+<th class="head">OSX</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="_images/pymel_eclipse_win_105.png"><img alt="win_105" src="_images/pymel_eclipse_win_105.png" style="width: 466px; height: 432px;"></a></td>
+<td><a class="reference internal" href="_images/pymel_eclipse_osx_105.png"><img alt="osx_105" src="_images/pymel_eclipse_osx_105.png" style="width: 914px; height: 484px;"></a></td>
+</tr>
+</tbody>
+</table>
+<p>On windows: add a check beside <tt class="docutils literal"><span class="pre">python25.zip</span></tt></p>
+<p>then press &#8220;OK&#8221;</p>
+</li>
+</ol>
+<ol class="arabic simple" start="5">
+<li>From the list, select the one path that ends with <tt class="docutils literal"><span class="pre">site-packages</span></tt> and click the &#8220;remove&#8221; button. Remember this path because we are going to re-add it later.</li>
+<li>If you installed PyMEL using the <a class="reference internal" href="install.html#install-setuptools"><em>Easy Install</em></a> method: you&#8217;ll see the pymel &#8220;egg&#8221; in the list of automatically detected site packages. <strong>Remove the pymel egg</strong></li>
+<li>Click on the &#8220;New Folder&#8221; button.  In the browser that pops up, navigate to the directory where you extracted the pymel zip file.  Under it, there is a folder called <tt class="docutils literal"><span class="pre">extras</span></tt>, under that a folder called <tt class="docutils literal"><span class="pre">completion</span></tt>, and then finally one called <tt class="docutils literal"><span class="pre">py</span></tt>.  Choose the <tt class="docutils literal"><span class="pre">py</span></tt> folder and press &#8220;OK&#8221;.</li>
+<li>Click the &#8220;New Folder&#8221; button again, and add the <tt class="docutils literal"><span class="pre">site-packages</span></tt> directory you removed earlier. We did this in order to ensure that the stub maya package is found before the real maya package. When you&#8217;re done, the main <tt class="docutils literal"><span class="pre">site-packages</span></tt> directory should be somewhere <em>below</em> the <tt class="docutils literal"><span class="pre">extras/completion/py</span></tt> folder you just added.</li>
+</ol>
+</div>
+<div class="section" id="testing-that-it-worked">
+<h2>Testing That It Worked<a class="headerlink" href="#testing-that-it-worked" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Restart Eclipse</p>
+</li>
+<li><p class="first">Create a new file from within eclipse ( <strong>File / New / File</strong> ) named foo.py or whatever you want ( just make sure to include the .py )</p>
+</li>
+<li><p class="first">Add the following line:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymel.core</span> <span class="kn">as</span> <span class="nn">pm</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Save the file. Sometimes this helps force pydev to begin performing completion</p>
+</li>
+<li><p class="first">Now type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+<p>you should get <tt class="docutils literal"><span class="pre">bindSkin()</span></tt> as a completion.</p>
+<a class="reference internal image-reference" href="_images/pymel_eclipse_osx_404.png"><img alt="_images/pymel_eclipse_osx_404.png" src="_images/pymel_eclipse_osx_404.png" style="width: 816px; height: 493px;"></a>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you like to import everything from pymel, aka <tt class="docutils literal"><span class="pre">from</span> <span class="pre">pymel.core</span> <span class="pre">import</span> <span class="pre">*</span></tt>, then you should open the Eclipse preferences, go to <strong>Pydev &gt; Editor &gt; Code Completion</strong>, and enable <strong>Autocomplete on all letter chars and &#8216;_&#8217;</strong></p>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;re still not getting completion:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Go to Eclipse preferences under <strong>Pydev &gt; Editor &gt; Code Completion</strong> and increase <strong>Timeout to connect to shell</strong> to 30 seconds or more.</li>
+<li>Restart Eclipse and retry steps 3-5 above</li>
+<li>Open a log view (<strong>Window / Show View / Error Log</strong>) and if you see any suspicious errors, post for help at the <a class="reference external" href="https://sourceforge.net/forum/forum.php?forum_id=293649">Pydev suport forum</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dev.html" class="btn btn-neutral float-right" title="For Developers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="standalone.html" class="btn btn-neutral" title="Standalone Maya Python Interpreter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009, Chad Dombrova.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

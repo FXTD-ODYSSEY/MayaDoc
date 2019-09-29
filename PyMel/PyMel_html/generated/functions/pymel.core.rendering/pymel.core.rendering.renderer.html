@@ -1,0 +1,898 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pymel.core.rendering.renderer &mdash; PyMEL 1.0.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css">
+  
+
+  
+    <link rel="top" title="PyMEL 1.0.9 documentation" href="../../../index.html">
+        <link rel="up" title="pymel.core.rendering" href="../../pymel.core.rendering.html">
+        <link rel="next" title="pymel.core.rendering.resolutionNode" href="pymel.core.rendering.resolutionNode.html">
+        <link rel="prev" title="pymel.core.rendering.renderWindowEditor" href="pymel.core.rendering.renderWindowEditor.html"> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PyMEL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../whats_new.html">What&#8217;s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../why_pymel.html">Why PyMEL?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pynodes.html">PyNodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../attributes.html">Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../non_existent_objs.html">Non-Existent Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ui.html">Building User Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../standalone.html">Standalone Maya Python Interpreter</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../eclipse.html">Setting Up PyMEL Autocompletion in Eclipse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">For Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mel_to_python.html">MEL to Python Cheat Sheet</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../modules.html">Module Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../modules.html#pymel-core"><tt class="docutils literal"><span class="pre">pymel.core</span></tt></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.animation.html">pymel.core.animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.effects.html">pymel.core.effects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.general.html">pymel.core.general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.language.html">pymel.core.language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.modeling.html">pymel.core.modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.other.html">pymel.core.other</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../pymel.core.rendering.html">pymel.core.rendering</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.ambientLight.html">pymel.core.rendering.ambientLight</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.assignViewportFactories.html">pymel.core.rendering.assignViewportFactories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.batchRender.html">pymel.core.rendering.batchRender</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.binMembership.html">pymel.core.rendering.binMembership</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.camera.html">pymel.core.rendering.camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.cameraSet.html">pymel.core.rendering.cameraSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.cameraView.html">pymel.core.rendering.cameraView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.checkDefaultRenderGlobals.html">pymel.core.rendering.checkDefaultRenderGlobals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.convertIffToPsd.html">pymel.core.rendering.convertIffToPsd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.convertSolidTx.html">pymel.core.rendering.convertSolidTx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.convertTessellation.html">pymel.core.rendering.convertTessellation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.createLayeredPsdFile.html">pymel.core.rendering.createLayeredPsdFile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.createRenderLayer.html">pymel.core.rendering.createRenderLayer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.createSurfaceShader.html">pymel.core.rendering.createSurfaceShader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.defaultLightListCheckBox.html">pymel.core.rendering.defaultLightListCheckBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.directionalLight.html">pymel.core.rendering.directionalLight</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.displacementToPoly.html">pymel.core.rendering.displacementToPoly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.doBlur.html">pymel.core.rendering.doBlur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.dolly.html">pymel.core.rendering.dolly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.editRenderLayerAdjustment.html">pymel.core.rendering.editRenderLayerAdjustment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.editRenderLayerGlobals.html">pymel.core.rendering.editRenderLayerGlobals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.editRenderLayerMembers.html">pymel.core.rendering.editRenderLayerMembers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.exclusiveLightCheckBox.html">pymel.core.rendering.exclusiveLightCheckBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.frameBufferName.html">pymel.core.rendering.frameBufferName</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.getRenderDependencies.html">pymel.core.rendering.getRenderDependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.getRenderTasks.html">pymel.core.rendering.getRenderTasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.glRender.html">pymel.core.rendering.glRender</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.glRenderEditor.html">pymel.core.rendering.glRenderEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.hwReflectionMap.html">pymel.core.rendering.hwReflectionMap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.hwRender.html">pymel.core.rendering.hwRender</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.hwRenderLoad.html">pymel.core.rendering.hwRenderLoad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.imagePlane.html">pymel.core.rendering.imagePlane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.iprEngine.html">pymel.core.rendering.iprEngine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.layeredShaderPort.html">pymel.core.rendering.layeredShaderPort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.layeredTexturePort.html">pymel.core.rendering.layeredTexturePort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.lightList.html">pymel.core.rendering.lightList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.lightlink.html">pymel.core.rendering.lightlink</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.listCameras.html">pymel.core.rendering.listCameras</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.lookThru.html">pymel.core.rendering.lookThru</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.lsThroughFilter.html">pymel.core.rendering.lsThroughFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.makebot.html">pymel.core.rendering.makebot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.nodeIconButton.html">pymel.core.rendering.nodeIconButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.nodePreset.html">pymel.core.rendering.nodePreset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.ogsRender.html">pymel.core.rendering.ogsRender</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.orbit.html">pymel.core.rendering.orbit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.panZoom.html">pymel.core.rendering.panZoom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.perCameraVisibility.html">pymel.core.rendering.perCameraVisibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.pointLight.html">pymel.core.rendering.pointLight</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.preferredRenderer.html">pymel.core.rendering.preferredRenderer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.prepareRender.html">pymel.core.rendering.prepareRender</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.projectionManip.html">pymel.core.rendering.projectionManip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.psdChannelOutliner.html">pymel.core.rendering.psdChannelOutliner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.psdEditTextureFile.html">pymel.core.rendering.psdEditTextureFile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.psdExport.html">pymel.core.rendering.psdExport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.psdTextureFile.html">pymel.core.rendering.psdTextureFile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.rampColorPort.html">pymel.core.rendering.rampColorPort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.render.html">pymel.core.rendering.render</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.renderGlobalsNode.html">pymel.core.rendering.renderGlobalsNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.renderInfo.html">pymel.core.rendering.renderInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.renderLayerPostProcess.html">pymel.core.rendering.renderLayerPostProcess</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.renderManip.html">pymel.core.rendering.renderManip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.renderPartition.html">pymel.core.rendering.renderPartition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.renderPassRegistry.html">pymel.core.rendering.renderPassRegistry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.renderQualityNode.html">pymel.core.rendering.renderQualityNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.renderSettings.html">pymel.core.rendering.renderSettings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.renderThumbnailUpdate.html">pymel.core.rendering.renderThumbnailUpdate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.renderWindowEditor.html">pymel.core.rendering.renderWindowEditor</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">pymel.core.rendering.renderer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.resolutionNode.html">pymel.core.rendering.resolutionNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.roll.html">pymel.core.rendering.roll</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.sampleImage.html">pymel.core.rendering.sampleImage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.setDefaultShadingGroup.html">pymel.core.rendering.setDefaultShadingGroup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.setRenderPassType.html">pymel.core.rendering.setRenderPassType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.shadingConnection.html">pymel.core.rendering.shadingConnection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.shadingNetworkCompare.html">pymel.core.rendering.shadingNetworkCompare</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.shadingNode.html">pymel.core.rendering.shadingNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.showShadingGroupAttrEditor.html">pymel.core.rendering.showShadingGroupAttrEditor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.soloMaterial.html">pymel.core.rendering.soloMaterial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.spotLight.html">pymel.core.rendering.spotLight</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.spotLightPreviewPort.html">pymel.core.rendering.spotLightPreviewPort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.surfaceSampler.html">pymel.core.rendering.surfaceSampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.surfaceShaderList.html">pymel.core.rendering.surfaceShaderList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.swatchRefresh.html">pymel.core.rendering.swatchRefresh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.textureWindow.html">pymel.core.rendering.textureWindow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.track.html">pymel.core.rendering.track</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.tumble.html">pymel.core.rendering.tumble</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.uvLink.html">pymel.core.rendering.uvLink</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.viewCamera.html">pymel.core.rendering.viewCamera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.viewClipPlane.html">pymel.core.rendering.viewClipPlane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.viewFit.html">pymel.core.rendering.viewFit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.viewHeadOn.html">pymel.core.rendering.viewHeadOn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.viewLookAt.html">pymel.core.rendering.viewLookAt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.viewPlace.html">pymel.core.rendering.viewPlace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pymel.core.rendering.viewSet.html">pymel.core.rendering.viewSet</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.system.html">pymel.core.system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.windows.html">pymel.core.windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pymel.core.context.html">pymel.core.context</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-datatypes"><tt class="docutils literal"><span class="pre">pymel.core.datatypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-nodetypes"><tt class="docutils literal"><span class="pre">pymel.core.nodetypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-uitypes"><tt class="docutils literal"><span class="pre">pymel.core.uitypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-core-runtime"><tt class="docutils literal"><span class="pre">pymel.core.runtime</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-util"><tt class="docutils literal"><span class="pre">pymel.util</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-versions"><tt class="docutils literal"><span class="pre">pymel.versions</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-mayautils"><tt class="docutils literal"><span class="pre">pymel.mayautils</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-tools"><tt class="docutils literal"><span class="pre">pymel.tools</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#pymel-api"><tt class="docutils literal"><span class="pre">pymel.api</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyMEL</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../modules.html">Module Documentation</a> &raquo;</li>
+        
+          <li><a href="../../pymel.core.rendering.html">pymel.core.rendering</a> &raquo;</li>
+        
+      <li>pymel.core.rendering.renderer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/generated/functions/pymel.core.rendering/pymel.core.rendering.renderer.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pymel-core-rendering-renderer">
+<h1>pymel.core.rendering.renderer<a class="headerlink" href="#pymel-core-rendering-renderer" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pymel.core.rendering.renderer">
+<tt class="descname">renderer</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.core.rendering.renderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command to register renders.  This command allows you to specify the UI name and procedure names for renderers. The
+command also allow you to query the UI name and the procedure names for the registered renders.              In query
+mode, return type is based on queried flag.</p>
+<p class="rubric">Flags:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="1%">
+<col width="61%">
+<col width="19%">
+<col width="19%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Long Name / Short Name</th>
+<th class="head">Argument Types</th>
+<th class="head">Properties</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">addGlobalsNode</span></tt> / <tt class="docutils literal"><span class="pre">agn</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">This flag allows the user to add a globals node the specified renderer uses.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">addGlobalsTab</span></tt> / <tt class="docutils literal"><span class="pre">agt</span></tt></td>
+<td><em>unicode, unicode, unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Add a tab associated with the specified renderer for the unified render globals window.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">batchRenderOptionsProcedure</span></tt> / <tt class="docutils literal"><span class="pre">bro</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the batch render options procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">batchRenderOptionsStringProcedure</span></tt> / <tt class="docutils literal"><span class="pre">bso</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the argument string that will be used with the command line utility &#8216;Render&#8217; when doing a batch render</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">batchRenderProcedure</span></tt> / <tt class="docutils literal"><span class="pre">br</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the batch render procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">cancelBatchRenderProcedure</span></tt> / <tt class="docutils literal"><span class="pre">cbr</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query returns the cancel batch render procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">changeIprRegionProcedure</span></tt> / <tt class="docutils literal"><span class="pre">cir</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the change IPR region procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">commandRenderProcedure</span></tt> / <tt class="docutils literal"><span class="pre">cr</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the command line rendering procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">exists</span></tt> / <tt class="docutils literal"><span class="pre">ex</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">The flag returns true if the specified renderer is registered in the registry, and it returns false otherwise.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">globalsNodes</span></tt> / <tt class="docutils literal"><span class="pre">gn</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">This flag returns the list of render globals nodes the specified renderer uses.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">globalsTabCreateProcNames</span></tt> / <tt class="docutils literal"><span class="pre">gtc</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">This flag returns the names of procedures that are used to create the unified render globals window tabs that are associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">globalsTabLabels</span></tt> / <tt class="docutils literal"><span class="pre">gtl</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">This flag returns the labels of unified render globals window tabs that are associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">globalsTabUpdateProcNames</span></tt> / <tt class="docutils literal"><span class="pre">gtu</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">This flag returns the names of procedures that are used to update the unified render globals window tabs that are associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">iprOptionsMenuLabel</span></tt> / <tt class="docutils literal"><span class="pre">ipm</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the label for the IPR update options menu which is under the render view&#8217;s IPR menu.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">iprOptionsProcedure</span></tt> / <tt class="docutils literal"><span class="pre">io</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the IPR render options procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">iprOptionsSubMenuProcedure</span></tt> / <tt class="docutils literal"><span class="pre">ips</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the procedure for creating the sub menu for the IPR update options menu which is under the render view&#8217;s IPR menu.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">iprRenderProcedure</span></tt> / <tt class="docutils literal"><span class="pre">ipr</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the IPR render command associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">iprRenderSubMenuProcedure</span></tt> / <tt class="docutils literal"><span class="pre">irs</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the procedure for creating the sub menu for the IPR render menu which is under the render view&#8217;s IPR menu.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">isRunningIprProcedure</span></tt> / <tt class="docutils literal"><span class="pre">isr</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the isRunningIpr command associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">logoCallbackProcedure</span></tt> / <tt class="docutils literal"><span class="pre">lgc</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the procedure which is a callback associated to the logo for the specified renderer.   For example, the logo and the callback can be used in the
+unified render globals window beside the Render UsingoptionMenu.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">logoImageName</span></tt> / <tt class="docutils literal"><span class="pre">log</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the logo image name for the specified renderer. The logo is a image representing the renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">materialViewRendererList</span></tt> / <tt class="docutils literal"><span class="pre">mvl</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Returns the names of material view renderers that are currently registered.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">materialViewRendererPause</span></tt> / <tt class="docutils literal"><span class="pre">mvp</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Specifies whether to pause the material viewer. Useful for globally halting updates to the material viewer. The material view renderer will remain suspended while
+the viewer is paused.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">materialViewRendererSuspend</span></tt> / <tt class="docutils literal"><span class="pre">mvs</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Specifies whether to suspend or resume the material view renderer. Useful for temporarily stopping the material view renderer while another rendering task is
+running.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">namesOfAvailableRenderers</span></tt> / <tt class="docutils literal"><span class="pre">ava</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Returns the names of renderers that are currently registered.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">pauseIprRenderProcedure</span></tt> / <tt class="docutils literal"><span class="pre">psi</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the pause IPR render procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">polyPrelightProcedure</span></tt> / <tt class="docutils literal"><span class="pre">pp</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the polygon prelight procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">refreshIprRenderProcedure</span></tt> / <tt class="docutils literal"><span class="pre">rfi</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the refresh IPR render procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">renderDiagnosticsProcedure</span></tt> / <tt class="docutils literal"><span class="pre">rd</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the render diagnostics procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">renderGlobalsProcedure</span></tt> / <tt class="docutils literal"><span class="pre">rg</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">This flag is obsolete.  It will be removed in the next release.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">renderMenuProcedure</span></tt> / <tt class="docutils literal"><span class="pre">rm</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">This flag is obsolete. It will be removed in the next release.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">renderOptionsProcedure</span></tt> / <tt class="docutils literal"><span class="pre">ro</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the render options procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">renderProcedure</span></tt> / <tt class="docutils literal"><span class="pre">r</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the render command associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">renderRegionProcedure</span></tt> / <tt class="docutils literal"><span class="pre">rr</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the render region procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">renderSequenceProcedure</span></tt> / <tt class="docutils literal"><span class="pre">rs</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the sequence rendering procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">rendererUIName</span></tt> / <tt class="docutils literal"><span class="pre">ui</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the rendererUIName for the specified renderer. The rendererUIName is the name of the renderer as it would appear in menus.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">renderingEditorsSubMenuProcedure</span></tt> / <tt class="docutils literal"><span class="pre">res</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the procedure reponsible for creating renderer specific editors submenu under the Rendering Editorsmenu for the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">showBatchRenderLogProcedure</span></tt> / <tt class="docutils literal"><span class="pre">brl</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the log file batch procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">showBatchRenderProcedure</span></tt> / <tt class="docutils literal"><span class="pre">sbr</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the show batch render procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">showRenderLogProcedure</span></tt> / <tt class="docutils literal"><span class="pre">srl</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the log file render procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">startIprRenderProcedure</span></tt> / <tt class="docutils literal"><span class="pre">sti</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the start IPR render procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">stopIprRenderProcedure</span></tt> / <tt class="docutils literal"><span class="pre">spi</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the stop IPR render procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">textureBakingProcedure</span></tt> / <tt class="docutils literal"><span class="pre">tb</span></tt></td>
+<td><em>unicode</em></td>
+<td><img alt="../../../_images/create.gif" class="first" src="../../../_images/create.gif">
+<img alt="../../../_images/query.gif" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Set or query the texture baking procedure associated with the specified renderer.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><tt class="docutils literal"><span class="pre">unregisterRenderer</span></tt> / <tt class="docutils literal"><span class="pre">unr</span></tt></td>
+<td><em>bool</em></td>
+<td><img alt="../../../_images/query.gif" class="first" src="../../../_images/query.gif">
+<img alt="../../../_images/edit.gif" class="last" src="../../../_images/edit.gif">
+</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td colspan="3">Unregister the specified renderer.                                 Flag can have multiple arguments, passed either as a tuple or a list.</td>
+</tr>
+</tbody>
+</table>
+<p>Derived from mel command <tt class="xref py py-obj docutils literal"><span class="pre">maya.cmds.renderer</span></tt></p>
+<p class="rubric">Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymel.core</span> <span class="kn">as</span> <span class="nn">pm</span>
+
+<span class="c1"># To register a renderer called &quot;myRenderer&quot;:</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="s1">&#39;myRenderer&#39;</span> <span class="p">)</span>
+<span class="c1"># To edit a renderer called &quot;myRenderer&quot; with its rendererUIName</span>
+<span class="c1"># being &quot;My Renderer&quot;:</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="s1">&#39;myRenderer&#39;</span><span class="p">,</span> <span class="n">edit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">rendererUIName</span><span class="o">=</span><span class="s1">&#39;My Renderer&#39;</span> <span class="p">)</span>
+<span class="c1"># To register a renderer called &quot;anotherRenderer&quot; with all</span>
+<span class="c1"># its parameters specified.</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="s1">&#39;anotherRenderer&#39;</span><span class="p">,</span> <span class="n">rendererUIName</span><span class="o">=</span><span class="s1">&#39;Another Renderer&#39;</span><span class="p">,</span> <span class="n">iprRenderProcedure</span><span class="o">=</span><span class="s1">&#39;mayaSoftwareIprRender&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">iprOptionsProcedure</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">isRunningIprProcedure</span><span class="o">=</span><span class="s1">&#39;mayaSoftwareIsRunningIpr&#39;</span><span class="p">,</span> <span class="n">startIprRenderProcedure</span><span class="o">=</span><span class="s1">&#39;mayaSoftwareStartIprRender&#39;</span><span class="p">,</span> <span class="n">stopIprRenderProcedure</span><span class="o">=</span><span class="s1">&#39;mayaSoftwareStopIprRender&#39;</span><span class="p">,</span> <span class="n">refreshIprRenderProcedure</span><span class="o">=</span><span class="s1">&#39;mayaSoftwareRefreshIprImage&#39;</span><span class="p">,</span> <span class="n">pauseIprRenderProcedure</span><span class="o">=</span><span class="s1">&#39;mayaSoftwarePauseIprRender&#39;</span><span class="p">,</span> <span class="n">changeIprRegionProcedure</span><span class="o">=</span><span class="s1">&#39;mayaSoftwareChangeIprRegion&#39;</span><span class="p">,</span> <span class="n">iprOptionsMenuLabel</span><span class="o">=</span><span class="s1">&#39;IPR Tuning Options&#39;</span><span class="p">,</span> <span class="n">iprOptionsSubMenuProcedure</span><span class="o">=</span><span class="s1">&#39;mayaSoftwareIprUpdateOptionsSubMenu&#39;</span><span class="p">,</span> <span class="n">iprRenderSubMenuProcedure</span><span class="o">=</span><span class="s1">&#39;mayaSoftwareIprUpdateRenderSubMenu&#39;</span><span class="p">,</span> <span class="n">renderProcedure</span><span class="o">=</span><span class="s1">&#39;mayaSoftwareRender&#39;</span><span class="p">,</span> <span class="n">renderOptionsProcedure</span><span class="o">=</span><span class="s1">&#39;RenderOptions&#39;</span><span class="p">,</span> <span class="n">renderDiagnosticsProcedure</span><span class="o">=</span><span class="s1">&#39;RenderDiagnostics&#39;</span><span class="p">,</span> <span class="n">commandRenderProcedure</span><span class="o">=</span><span class="s1">&#39;render -batch&#39;</span><span class="p">,</span> <span class="n">batchRenderProcedure</span><span class="o">=</span><span class="s1">&#39;BatchRender&#39;</span><span class="p">,</span> <span class="n">batchRenderOptionsProcedure</span><span class="o">=</span><span class="s1">&#39;BatchRenderOptions&#39;</span><span class="p">,</span> <span class="n">batchRenderOptionsStringProcedure</span><span class="o">=</span><span class="s2">&quot;mayaSoftwareBatchRenderOptionsString&quot;</span><span class="p">,</span> <span class="n">cancelBatchRenderProcedure</span><span class="o">=</span><span class="s1">&#39;CancelBatchRender&#39;</span><span class="p">,</span> <span class="n">showBatchRenderProcedure</span><span class="o">=</span><span class="s1">&#39;ShowBatchRender&#39;</span><span class="p">,</span> <span class="n">showRenderLogProcedure</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">showBatchRenderLogProcedure</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">renderRegionProcedure</span><span class="o">=</span><span class="s1">&#39;mayaRenderRegion&#39;</span><span class="p">,</span> <span class="n">textureBakingProcedure</span><span class="o">=</span><span class="s1">&#39;performConvertSolidTx&#39;</span><span class="p">,</span> <span class="n">polyPrelightProcedure</span><span class="o">=</span><span class="s1">&#39;performPrelight&#39;</span><span class="p">,</span> <span class="n">renderingEditorsSubMenuProcedure</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">logoImageName</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">logoCallbackProcedure</span><span class="o">=</span><span class="s1">&#39;&#39;</span> <span class="p">)</span>
+<span class="c1"># To add a render globals node the renderer uses:</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="s1">&#39;anotherRenderer&#39;</span><span class="p">,</span> <span class="n">edit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">addGlobalsNode</span><span class="o">=</span><span class="s1">&#39;defaultRenderGlobals&#39;</span> <span class="p">)</span>
+<span class="c1"># To add the tabs associated with the specified renderer</span>
+<span class="c1"># for the unified render globals window, use the syntax</span>
+<span class="c1">#</span>
+<span class="c1">#      renderer -edit</span>
+<span class="c1">#               -addGlobalsTab globalsTabLabel</span>
+<span class="c1">#                              globalsTabCreateProcName</span>
+<span class="c1">#                              globalsTabUpdateProcName</span>
+<span class="c1">#               renderer;</span>
+<span class="c1">#</span>
+<span class="c1"># where &quot;globalsTabLabel&quot; is the label of the tab,</span>
+<span class="c1"># &quot;globalsTabCreatedProcName&quot; is the name of the mel procedure</span>
+<span class="c1"># which is used to create the content in the tab.</span>
+<span class="c1"># and &quot;globalsTabCreatedProcName&quot; is the name of the mel procedure</span>
+<span class="c1"># which is used to update the content in the tab.</span>
+<span class="c1">#</span>
+<span class="c1"># Note that if you want to add a number of tabs, you need to repeat</span>
+<span class="c1"># this renderer command for each tab you wish to add, as shown below.</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="s1">&#39;anotherRenderer&#39;</span><span class="p">,</span> <span class="n">edit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">addGlobalsTab</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Maya Software&#39;</span><span class="p">,</span> <span class="s1">&#39;createMayaSoftwareGlobalsTab&#39;</span><span class="p">,</span> <span class="s1">&#39;updateMayaSoftwareGlobalsTab&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="c1"># To get a list of unified render globals window tab labels associated</span>
+<span class="c1"># with the specified renderer.</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="s1">&#39;anotherRenderer&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">globalsTabLabels</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+<span class="c1"># To get a list of names of mel procedures which are used to</span>
+<span class="c1"># create the unified render globals window tabs associated with</span>
+<span class="c1"># the specified renderer.</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="s1">&#39;anotherRenderer&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">globalsTabCreateProcNames</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+<span class="c1"># To get a list of names of mel procedures which are used to</span>
+<span class="c1"># update the unified render globals window tabs associated with</span>
+<span class="c1"># the specified renderer.</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="s1">&#39;anotherRenderer&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">globalsTabUpdateProcNames</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+<span class="c1"># To view a list of registered renderers.</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="n">query</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">namesOfAvailableRenderers</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+<span class="c1"># To check if anotherRenderer exists.</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="s1">&#39;anotherRenderer&#39;</span><span class="p">,</span> <span class="n">exists</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+<span class="c1"># To view a list of render globals nodes used by the specified</span>
+<span class="c1"># renderer:</span>
+<span class="c1">#</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">renderer</span><span class="p">(</span> <span class="s1">&#39;anotherRenderer&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">globalsNodes</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pymel.core.rendering.resolutionNode.html" class="btn btn-neutral float-right" title="pymel.core.rendering.resolutionNode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pymel.core.rendering.renderWindowEditor.html" class="btn btn-neutral" title="pymel.core.rendering.renderWindowEditor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009, Chad Dombrova.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

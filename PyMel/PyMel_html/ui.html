@@ -1,0 +1,596 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building User Interfaces &mdash; PyMEL 1.0.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css">
+  
+
+  
+    <link rel="top" title="PyMEL 1.0.9 documentation" href="index.html">
+        <link rel="next" title="Standalone Maya Python Interpreter" href="standalone.html">
+        <link rel="prev" title="Non-Existent Objects" href="non_existent_objs.html"> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyMEL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="whats_new.html">What&#8217;s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="why_pymel.html">Why PyMEL?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pynodes.html">PyNodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attributes.html">Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="non_existent_objs.html">Non-Existent Objects</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Building User Interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#command-callbacks">Command Callbacks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#function-name-as-string">Function Name as String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#function-object">Function Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lambda-functions">Lambda Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#callback-objects">Callback Objects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#layouts">Layouts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="standalone.html">Standalone Maya Python Interpreter</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eclipse.html">Setting Up PyMEL Autocompletion in Eclipse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">For Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mel_to_python.html">MEL to Python Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Module Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyMEL</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Building User Interfaces</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/ui.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-user-interfaces">
+<h1>Building User Interfaces<a class="headerlink" href="#building-user-interfaces" title="Permalink to this headline">¶</a></h1>
+<p>As with Maya nodes, pymel adds the ability to use object-oriented code for building MEL GUIs. Like nodes and
+PyNodes, every UI command in maya.cmds has a class counterpart in pymel derived from the base class <a class="reference internal" href="generated/classes/pymel.core.uitypes/pymel.core.uitypes.PyUI.html#pymel.core.uitypes.PyUI" title="pymel.core.uitypes.PyUI"><tt class="xref py py-obj docutils literal"><span class="pre">PyUI</span></tt></a>.
+There is one class for every UI element type, each with necessary methods to get and set properties.  And as with nodes,
+the procedural commands you already know and love are retrofitted to return <a class="reference internal" href="generated/classes/pymel.core.uitypes/pymel.core.uitypes.PyUI.html#pymel.core.uitypes.PyUI" title="pymel.core.uitypes.PyUI"><tt class="xref py py-obj docutils literal"><span class="pre">PyUI</span></tt></a> classes, so you don&#8217;t have to completely change the way you code</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymel.core</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">win</span> <span class="o">=</span> <span class="n">window</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Window&quot;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">columnLayout</span><span class="p">()</span>
+<span class="n">chkBox</span> <span class="o">=</span> <span class="n">checkBox</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;My Checkbox&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+<span class="n">btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;My Button&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">buttonPressed</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">chkBox</span><span class="o">.</span><span class="n">getValue</span><span class="p">():</span>
+        <span class="k">print</span> <span class="s2">&quot;Check box is CHECKED!&quot;</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">setLabel</span><span class="p">(</span><span class="s2">&quot;Uncheck&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&quot;Check box is UNCHECKED!&quot;</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">setLabel</span><span class="p">(</span><span class="s2">&quot;Check&quot;</span><span class="p">)</span>
+<span class="n">btn</span><span class="o">.</span><span class="n">setCommand</span><span class="p">(</span><span class="n">buttonPressed</span><span class="p">)</span>
+<span class="n">win</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="command-callbacks">
+<h2>Command Callbacks<a class="headerlink" href="#command-callbacks" title="Permalink to this headline">¶</a></h2>
+<p>One common point of confusion when building UIs with python is command callbacks. There are several different ways to handle
+command callbacks on user interface widgets.</p>
+<div class="section" id="function-name-as-string">
+<h3>Function Name as String<a class="headerlink" href="#function-name-as-string" title="Permalink to this headline">¶</a></h3>
+<p>The simplest method of setting up a callback is to pass the name of the callback function as a string. Maya will try to execute this as python code. Here&#8217;s a simple example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymel.core</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">buttonPressed</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;pressed!&quot;</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">window</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Window&quot;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">columnLayout</span><span class="p">()</span>
+<span class="n">btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span> <span class="n">command</span><span class="o">=</span><span class="s1">&#39;buttonPressed()&#39;</span> <span class="p">)</span>
+
+<span class="n">showWindow</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This example works fine if you run it from the script editor, but if you save it into a module, say <tt class="docutils literal"><span class="pre">myModule</span></tt>, and then import that module as normal ( e.g. <tt class="docutils literal"><span class="pre">import</span> <span class="pre">myModule</span></tt> ), it will cease to work (assuming you haven&#8217;t already run it from the script edtior).  This is because the <em>namespace</em> of the <tt class="docutils literal"><span class="pre">buttonPressed</span></tt> function has changed. It can no longer be found as <tt class="docutils literal"><span class="pre">buttonPressed</span></tt>, because from Maya&#8217;s perspective, its new location is <tt class="docutils literal"><span class="pre">myModule.buttonPressed</span></tt>.</p>
+<p>There are several solutions to this.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">you can import the contents of <tt class="docutils literal"><span class="pre">myModule</span></tt> directly into the main namespace ( e.g. <tt class="docutils literal"><span class="pre">from</span> <span class="pre">myModule</span> <span class="pre">import</span> <span class="pre">*</span></tt> ). This will allow <tt class="docutils literal"><span class="pre">buttonPressed</span></tt> to be accessed without the namespace. This is not generally recommended as its clutters up your main namespace which could ultimately lead to name clashes.</p>
+</li>
+<li><p class="first">you can change your script and prefix the function with the module it will be imported from:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">button</span><span class="p">(</span> <span class="n">command</span><span class="o">=</span><span class="s2">&quot;myModule.buttonPressed()&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>The problem with both of these solutions is that you must ensure that the module is <em>always</em> imported the same way, and, if you plan to share your module with someone, it&#8217;s pretty impossible to do this.</p>
+<p>A more robust solution is to include an import command in the string to execute:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">button</span><span class="p">(</span> <span class="n">command</span><span class="o">=</span><span class="s2">&quot;import myModule; myModule.buttonPressed()&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>That gives us a fairly reliable solution, but it still has one major drawback: any parameters that we wish to pass to our function must also be converted to strings. This becomes impractical when the parameters are complex objects,
+such as dictionaries, lists, or other custom objects.</p>
+<p>So, while string callbacks may seem simple at first, they have limitations, and are generally not recommended.</p>
+</div>
+<div class="section" id="function-object">
+<h3>Function Object<a class="headerlink" href="#function-object" title="Permalink to this headline">¶</a></h3>
+<p>When using this technique, you pass an actual function object instead of a string.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymel.core</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">buttonPressed</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;pressed!&quot;</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">window</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Window&quot;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">columnLayout</span><span class="p">()</span>
+<span class="n">btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="n">buttonPressed</span><span class="p">)</span>
+
+<span class="n">showWindow</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The callback function has to be defined before it is passed to the command flag.</p>
+</div>
+<p>The difference from the previous example is subtle: <tt class="docutils literal"><span class="pre">command=&quot;buttonPressed()&quot;</span></tt> is now <tt class="docutils literal"><span class="pre">command=buttonPressed</span></tt>. The most important thing to realize here is that <tt class="docutils literal"><span class="pre">buttonPressed</span></tt> is not a string, it is a python function object. As such, if we had included <tt class="docutils literal"><span class="pre">()</span></tt> ( e.g. <tt class="docutils literal"><span class="pre">command=buttonPressed()</span></tt> ) we would have executed the <tt class="docutils literal"><span class="pre">buttonPressed</span></tt> function immediately, but we don&#8217;t want that to happen yet. By leaving the parentheses off, we hand the function over to the UI element to execute later.  For most commands that support callbacks, Maya recognizes when you are passing a string and when you are passing a function, and it treats each differently when the callback is triggered.</p>
+<p>This method is very robust, but there are a few caveats to be aware of.  To see what I mean, try executing the code above and pressing the button...</p>
+<p>...when we press it, we get this error:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># TypeError: buttonPressed() takes no arguments (1 given) #</span>
+</pre></div>
+</div>
+<p>Why?! The <a class="reference internal" href="generated/functions/pymel.core.windows/pymel.core.windows.button.html#pymel.core.windows.button" title="pymel.core.windows.button"><tt class="xref py py-obj docutils literal"><span class="pre">button</span></tt></a> UI widget, like many others, automatically passes arguments to your function, whether you want them or not. Sometimes these arguments contain the state of the UI element, such as whether a checkbox is on or off, but in our case they are pretty useless.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The automatic passing of arguments to python callbacks is an attempt to recreate a feature of MEL. When creating callbacks in MEL you can request that your callback procedure be passed an argument when the callback is triggered.  Take the example below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>radioButton -changeCommand &quot;myRadButtCB #1&quot;;
+</pre></div>
+</div>
+<p class="last">When the callback is executed, the <tt class="docutils literal"><span class="pre">#1</span></tt> gets replaced with the current state of the radioButton: <tt class="docutils literal"><span class="pre">0</span></tt> or <tt class="docutils literal"><span class="pre">1</span></tt>.  Unfortunately, when using python callbacks, you can&#8217;t request which arguments you want, you get them all.</p>
+</div>
+<p>So, to make our callback work, we need to modify the function to accept the argument that the button <tt class="docutils literal"><span class="pre">command</span></tt> callback is passing us:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">buttonPressed</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;pressed!&quot;</span>
+</pre></div>
+</div>
+<p>The tricky part is that different UI elements pass differing numbers of arguments to their callbacks, and some pass none at all.  This is why it is best for your command to use the <tt class="docutils literal"><span class="pre">*args</span></tt> syntax, like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">buttonPressed</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;pressed! here are my arguments </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">args</span><span class="p">,</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The asterisk in front of <tt class="docutils literal"><span class="pre">args</span></tt> allows the function to accept any quantity of passed arguments. All of the positional arguments to the function are stored in the variable <tt class="docutils literal"><span class="pre">args</span></tt> (without the <tt class="docutils literal"><span class="pre">*</span></tt>) as a read-only list, known as a tuple. Making it a habit to use this syntax for your callbacks can save you a lot of headache.</p>
+<p>Putting it all together:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymel.core</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">buttonPressed</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;pressed!&quot;</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">window</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Window&quot;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">columnLayout</span><span class="p">()</span>
+<span class="n">btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span> <span class="n">command</span><span class="o">=</span><span class="n">buttonPressed</span> <span class="p">)</span>
+
+<span class="n">showWindow</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lambda-functions">
+<h3>Lambda Functions<a class="headerlink" href="#lambda-functions" title="Permalink to this headline">¶</a></h3>
+<p>The next technique builds on the last by simplifying the following situations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>You want to pass arguments to your callback function other than those automatically sent by the UI element</li>
+<li>You&#8217;re using a function that someone else wrote and can&#8217;t add the <tt class="docutils literal"><span class="pre">*args</span></tt> to it</li>
+</ul>
+</div></blockquote>
+<p>For example, I want to pass our <tt class="docutils literal"><span class="pre">buttonPressed</span></tt> function a name argument.  Here&#8217;s how we do this using a lambda function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymel.core</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">buttonPressed</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;pressed </span><span class="si">%s</span><span class="s2">!&quot;</span> <span class="o">%</span> <span class="n">name</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">window</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Window&quot;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">columnLayout</span><span class="p">()</span>
+<span class="n">btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span> <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">buttonPressed</span><span class="p">(</span><span class="s1">&#39;chad&#39;</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">showWindow</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>So, what exactly is a <a class="reference external" href="http://docs.python.org/reference/expressions.html#lambda">lambda</a>?  It&#8217;s a shorthand way of creating a simple function on one line. It&#8217;s usually used when you need a function but you don&#8217;t need to refer to it later by name, which makes it well suited for callbacks. Combining lambda functions with the lessons we learned above adds more versatility to command callbacks.  You can choose exactly which args you want to pass along.</p>
+<p>Let&#8217;s clarify what a lambda is. In the above example, this portion of the code...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">buttonPressed</span><span class="p">(</span><span class="s1">&#39;chad&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>...could have been written as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tempFunc</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">buttonPressed</span><span class="p">(</span><span class="s1">&#39;chad&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We would have then passed <tt class="docutils literal"><span class="pre">tempFunc</span></tt> as the callback:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span> <span class="n">command</span> <span class="o">=</span> <span class="n">tempFunc</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Instead, we use the lambda to create the function on one line and pass it directly to the <tt class="docutils literal"><span class="pre">command</span></tt> flag.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span> <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">buttonPressed</span><span class="p">(</span><span class="s1">&#39;chad&#39;</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The lambda function serves as a mediator between the UI element and our real callback, <tt class="docutils literal"><span class="pre">buttonPressed</span></tt>, giving us control over what arguments will be passed to <tt class="docutils literal"><span class="pre">buttonPressed</span></tt>. In our example, we ignore all the arguments passed by the button and instead opt to pass the string <tt class="docutils literal"><span class="pre">'chad'</span></tt>, however, if the circumstances require it, you could use the arguments in <tt class="docutils literal"><span class="pre">args</span></tt> as well:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span> <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">buttonPressed</span><span class="p">(</span><span class="s1">&#39;chad&#39;</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>In the example above we&#8217;re using the first of the arguments passed by the button (remember, <tt class="docutils literal"><span class="pre">args</span></tt> is a tuple, which is like a list) and passing it on to our callback in addition to the name string.  Keep in mind that for this to work our <tt class="docutils literal"><span class="pre">buttonPressed</span></tt> callback would need to be modified to accept two arguments.</p>
+<p>Whew! That was a lot to learn, but unfortunately, this method has a drawback, too. It does not work properly when used in a &#8216;for&#8217; loop.</p>
+<p>In the following example, we&#8217;re going to make several buttons. Our intention is that each one will print a different name, but as you will soon see, we won&#8217;t succeed.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymel.core</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">buttonPressed</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;pressed </span><span class="si">%s</span><span class="s2">!&quot;</span> <span class="o">%</span> <span class="n">name</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">window</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Window&quot;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">columnLayout</span><span class="p">()</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chad&#39;</span><span class="p">,</span> <span class="s1">&#39;robert&#39;</span><span class="p">,</span> <span class="s1">&#39;james&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="n">button</span><span class="p">(</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">command</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">buttonPressed</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">showWindow</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>When pressed, all the buttons will print &#8216;james&#8217;. Why is this?   Think of a lambda as a &#8220;live&#8221; object.  It lives there waiting to execute the code it has been given, but the variables in that code are live too, so the value of the variable named <tt class="docutils literal"><span class="pre">character</span></tt> changes with each iteration through the loop, thereby changing the code that lambda is waiting to execute.  What is its value at the end of the loop?  It&#8217;s &#8216;james&#8217;. So all the lambda&#8217;s execute the equivalent of:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">buttonPressed</span><span class="p">(</span><span class="s1">&#39;james&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To solve this we need to &#8220;pin&#8221; down the value of our variable to keep it from changing.  To do this, pymel provides a <a class="reference internal" href="generated/classes/pymel.core.windows/pymel.core.windows.Callback.html#pymel.core.windows.Callback" title="pymel.core.windows.Callback"><tt class="xref py py-obj docutils literal"><span class="pre">Callback</span></tt></a> object...</p>
+</div>
+<div class="section" id="callback-objects">
+<h3>Callback Objects<a class="headerlink" href="#callback-objects" title="Permalink to this headline">¶</a></h3>
+<p>In my experience this method handles all cases reliably and predictably, and solves the &#8216;lambda&#8217; issue described above.
+A <a class="reference internal" href="generated/classes/pymel.core.windows/pymel.core.windows.Callback.html#pymel.core.windows.Callback" title="pymel.core.windows.Callback"><tt class="xref py py-obj docutils literal"><span class="pre">Callback</span></tt></a> object is an object that behaves like a function, meaning it can be &#8216;called&#8217; like a regular function.
+The Callback object &#8216;wraps&#8217; another function, and also stores the parameters to pass to that function. And, lucky for you, the Callback class is included with pymel.</p>
+<p>Here&#8217;s an example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymel.core</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">buttonPressed</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;pressed </span><span class="si">%s</span><span class="s2">!&quot;</span> <span class="o">%</span> <span class="n">name</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">window</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Window&quot;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">columnLayout</span><span class="p">()</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chad&#39;</span><span class="p">,</span> <span class="s1">&#39;robert&#39;</span><span class="p">,</span> <span class="s1">&#39;james&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="n">button</span><span class="p">(</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">command</span> <span class="o">=</span> <span class="n">Callback</span><span class="p">(</span> <span class="n">buttonPressed</span><span class="p">,</span> <span class="n">name</span> <span class="p">)</span> <span class="p">)</span>
+
+<span class="n">showWindow</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Our example now works as intended.  The <a class="reference internal" href="generated/classes/pymel.core.windows/pymel.core.windows.Callback.html#pymel.core.windows.Callback" title="pymel.core.windows.Callback"><tt class="xref py py-obj docutils literal"><span class="pre">Callback</span></tt></a> class provides the magic that makes it work.</p>
+<p>Pay close attention to how the Callback is created:  the first argument, <tt class="docutils literal"><span class="pre">buttonPressed</span></tt>, is the function to wrap, and the rest are arguments to that function. The Callback stores the function and its arguments separately and then combines them when it is called by the UI element.</p>
+<p>So, on assignment, something that looks like this...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Callback</span><span class="p">(</span> <span class="n">buttonPressed</span><span class="p">,</span> <span class="n">name</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>...on execution becomes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">buttonPressed</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, the variable <tt class="docutils literal"><span class="pre">name</span></tt> is the only additional argument, but the Callback class can accept any number of arguments or even keyword arguments, which it will dutifully pass along to your function when the callback is triggered.</p>
+<p>The <a class="reference internal" href="generated/classes/pymel.core.windows/pymel.core.windows.Callback.html#pymel.core.windows.Callback" title="pymel.core.windows.Callback"><tt class="xref py py-obj docutils literal"><span class="pre">Callback</span></tt></a> class ignores any arguments passed in from the UI element, so you don&#8217;t have to design your function to take these into account.  However, if you do want these, use the alternate callback object <a class="reference internal" href="generated/classes/pymel.core.windows/pymel.core.windows.CallbackWithArgs.html#pymel.core.windows.CallbackWithArgs" title="pymel.core.windows.CallbackWithArgs"><tt class="xref py py-obj docutils literal"><span class="pre">CallbackWithArgs</span></tt></a> which will pass the UI arguments after yours.</p>
+</div>
+</div>
+<div class="section" id="layouts">
+<h2>Layouts<a class="headerlink" href="#layouts" title="Permalink to this headline">¶</a></h2>
+<p>One major pain in designing GUIs is the placing of controls in layouts.
+Maya provides the formLayout command which lets controls resize and keep their relationship with other controls, however the use of this command is somewhat cumbersome and unintuitive.
+Pymel provides an extended FormLayout class, which handles the details of attaching controls to one another automatically:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">win</span> <span class="o">=</span> <span class="n">window</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Window&quot;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">horizontalLayout</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;button </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+<span class="n">layout</span><span class="o">.</span><span class="n">redistribute</span><span class="p">()</span>    <span class="c1"># now will redistribute horizontally</span>
+<span class="n">win</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The &#8216;redistribute&#8217; method redistributes the children (buttons in this case) evenly in their layout.
+A formLayout will align its controls vertically by default. By using the &#8216;verticalLayout&#8217; or &#8216;horizontalLayout&#8217; commands you can explicitly override this (note that both commands still return a FormLayout object):</p>
+<p>By default, the control are redistributed evenly but this can be overridden:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">layout</span><span class="o">.</span><span class="n">redistribute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>    <span class="c1"># (For 5 elements, the ratios will then be 1:3:2:1:1)</span>
+</pre></div>
+</div>
+<p>You can also specify the ratios at creation time, as well as the spacing between the controls. A ratio of 0 means that the control will not be resized, and will keep a fixed size:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">win</span> <span class="o">=</span> <span class="n">window</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Window&quot;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">horizontalLayout</span><span class="p">(</span><span class="n">ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;button </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+<span class="n">layout</span><span class="o">.</span><span class="n">redistribute</span><span class="p">()</span>    <span class="c1"># now will redistribute horizontally</span>
+<span class="n">win</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Finally, just for fun, you can also reset, flip and reverse the layout:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">layout</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>     <span class="c1"># flip the orientation</span>
+<span class="n">layout</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>  <span class="c1"># reverse the order of the controls</span>
+<span class="n">layout</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>    <span class="c1"># reset the ratios</span>
+</pre></div>
+</div>
+<p>Anyone who has coded GUIs in Maya using both MEL and python will tell you that if there is one thing they miss about MEL (and only one thing), it is the use of indentation to organize layout hierarchy. this is not possible in python because tabs are a syntactical element, indicating code blocks. In this release, PyMEL harnesses python&#8217;s <tt class="docutils literal"><span class="pre">with</span></tt> statement to use indentation to streamlines the process of GUI creation.</p>
+<p>Here is a comparison of the <a class="reference internal" href="generated/functions/pymel.core.windows/pymel.core.windows.uiTemplate.html#pymel.core.windows.uiTemplate" title="pymel.core.windows.uiTemplate"><tt class="xref py py-obj docutils literal"><span class="pre">uiTemplate</span></tt></a> example from the Maya docs.</p>
+<p>First, using <tt class="docutils literal"><span class="pre">maya.cmds</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">maya.cmds</span> <span class="kn">as</span> <span class="nn">cmds</span>
+
+<span class="k">if</span> <span class="n">cmds</span><span class="o">.</span><span class="n">uiTemplate</span><span class="p">(</span><span class="s1">&#39;ExampleTemplate&#39;</span><span class="p">,</span> <span class="n">exists</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="n">cmds</span><span class="o">.</span><span class="n">deleteUI</span><span class="p">(</span><span class="s1">&#39;ExampleTemplate&#39;</span><span class="p">,</span> <span class="n">uiTemplate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">uiTemplate</span><span class="p">(</span><span class="s1">&#39;ExampleTemplate&#39;</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">defineTemplate</span><span class="o">=</span><span class="s1">&#39;ExampleTemplate&#39;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">frameLayout</span><span class="p">(</span><span class="n">defineTemplate</span><span class="o">=</span><span class="s1">&#39;ExampleTemplate&#39;</span><span class="p">,</span> <span class="n">borderVisible</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                 <span class="n">labelVisible</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">window</span> <span class="o">=</span> <span class="n">cmds</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="n">menuBar</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">menuBarVisible</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">cmds</span><span class="o">.</span><span class="n">setUITemplate</span><span class="p">(</span><span class="s1">&#39;ExampleTemplate&#39;</span><span class="p">,</span> <span class="n">pushTemplate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">columnLayout</span><span class="p">(</span><span class="n">rowSpacing</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">cmds</span><span class="o">.</span><span class="n">frameLayout</span><span class="p">()</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">columnLayout</span><span class="p">()</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;One&#39;</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Two&#39;</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Three&#39;</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+
+<span class="n">cmds</span><span class="o">.</span><span class="n">frameLayout</span><span class="p">()</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">optionMenu</span><span class="p">()</span>
+<span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Red&#39;</span><span class="p">)</span>
+<span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Green&#39;</span><span class="p">)</span>
+<span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+
+<span class="n">cmds</span><span class="o">.</span><span class="n">setUITemplate</span><span class="p">(</span><span class="n">popTemplate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">cmds</span><span class="o">.</span><span class="n">showWindow</span><span class="p">(</span> <span class="n">window</span> <span class="p">)</span>
+
+<span class="n">menu</span><span class="p">()</span>
+<span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;One&#39;</span><span class="p">)</span>
+<span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Two&#39;</span><span class="p">)</span>
+<span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sub&#39;</span><span class="p">,</span> <span class="n">subMenu</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+<span class="n">setParent</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="n">menu</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Three&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, with PyMEL:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymel.core</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="n">uiTemplate</span><span class="p">(</span><span class="s1">&#39;ExampleTemplate&#39;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">template</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">template</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="n">frameLayout</span><span class="p">,</span> <span class="n">borderVisible</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">labelVisible</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">window</span><span class="p">(</span><span class="n">menuBar</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">menuBarVisible</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">win</span><span class="p">:</span>
+    <span class="c1"># start the template block</span>
+    <span class="k">with</span> <span class="n">template</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">columnLayout</span><span class="p">(</span> <span class="n">rowSpacing</span><span class="o">=</span><span class="mi">5</span> <span class="p">):</span>
+            <span class="k">with</span> <span class="n">frameLayout</span><span class="p">():</span>
+                <span class="k">with</span> <span class="n">columnLayout</span><span class="p">():</span>
+                    <span class="n">button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;One&#39;</span><span class="p">)</span>
+                    <span class="n">button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Two&#39;</span><span class="p">)</span>
+                    <span class="n">button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Three&#39;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">frameLayout</span><span class="p">():</span>
+                <span class="k">with</span> <span class="n">optionMenu</span><span class="p">():</span>
+                    <span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Red&#39;</span><span class="p">)</span>
+                    <span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Green&#39;</span><span class="p">)</span>
+                    <span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">)</span>
+<span class="c1"># add a menu to an existing window</span>
+<span class="k">with</span> <span class="n">win</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">menu</span><span class="p">():</span>
+        <span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;One&#39;</span><span class="p">)</span>
+        <span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Two&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">subMenuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sub&#39;</span><span class="p">):</span>
+            <span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+            <span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+        <span class="n">menuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Three&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Python&#8217;s <tt class="docutils literal"><span class="pre">with</span></tt> statement was added in version 2.5 (Maya 2008 and 2009).  Its purpose is to provide automatic &#8220;enter&#8221; and &#8220;exit&#8221; functions for class instances that are designed to support it.  This is perfect for MEL GUI creation: for example, when we enter the <tt class="docutils literal"><span class="pre">with</span></tt> block using a PyMEL <tt class="xref py py-obj docutils literal"><span class="pre">ui.Layout</span></tt> class or a command that creates one, the layout object sets itself to the active default parent, and when the code block ends, it restores the default parent to it&#8217;s own parent. There is now little need to ever call <a class="reference internal" href="generated/functions/pymel.core.windows/pymel.core.windows.setParent.html#pymel.core.windows.setParent" title="pymel.core.windows.setParent"><tt class="xref py py-obj docutils literal"><span class="pre">setParent</span></tt></a>.  As you can see in the example, the <tt class="docutils literal"><span class="pre">with</span></tt> statement also works with windows, menus, and templates:  windows call <a class="reference internal" href="generated/functions/pymel.core.windows/pymel.core.windows.setParent.html#pymel.core.windows.setParent" title="pymel.core.windows.setParent"><tt class="xref py py-obj docutils literal"><span class="pre">setParent</span></tt></a> and <a class="reference internal" href="generated/functions/pymel.core.windows/pymel.core.windows.showWindow.html#pymel.core.windows.showWindow" title="pymel.core.windows.showWindow"><tt class="xref py py-obj docutils literal"><span class="pre">showWindow</span></tt></a>, and templates are automatically &#8220;pushed&#8221; and &#8220;popped&#8221;.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="standalone.html" class="btn btn-neutral float-right" title="Standalone Maya Python Interpreter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="non_existent_objs.html" class="btn btn-neutral" title="Non-Existent Objects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009, Chad Dombrova.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

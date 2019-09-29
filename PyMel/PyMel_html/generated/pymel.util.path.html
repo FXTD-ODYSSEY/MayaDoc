@@ -1,0 +1,1397 @@
+<!-- saved from url=(0024)http://docs.autodesk.com -->
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pymel.util.path &mdash; PyMEL 1.0.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css">
+  
+
+  
+    <link rel="top" title="PyMEL 1.0.9 documentation" href="../index.html">
+        <link rel="up" title="Module Documentation" href="../modules.html">
+        <link rel="next" title="pymel.util.utilitytypes" href="pymel.util.utilitytypes.html">
+        <link rel="prev" title="pymel.util.namedtuple" href="pymel.util.namedtuple.html"> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyMEL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../whats_new.html">What&#8217;s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../why_pymel.html">Why PyMEL?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynodes.html">PyNodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../attributes.html">Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../non_existent_objs.html">Non-Existent Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ui.html">Building User Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standalone.html">Standalone Maya Python Interpreter</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../eclipse.html">Setting Up PyMEL Autocompletion in Eclipse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">For Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design.html">Design Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mel_to_python.html">MEL to Python Cheat Sheet</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Module Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../modules.html#pymel-core"><tt class="docutils literal"><span class="pre">pymel.core</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules.html#pymel-core-datatypes"><tt class="docutils literal"><span class="pre">pymel.core.datatypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules.html#pymel-core-nodetypes"><tt class="docutils literal"><span class="pre">pymel.core.nodetypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules.html#pymel-core-uitypes"><tt class="docutils literal"><span class="pre">pymel.core.uitypes</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules.html#pymel-core-runtime"><tt class="docutils literal"><span class="pre">pymel.core.runtime</span></tt></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html#pymel-util"><tt class="docutils literal"><span class="pre">pymel.util</span></tt></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pymel.util.arguments.html">pymel.util.arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymel.util.arrays.html">pymel.util.arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymel.util.common.html">pymel.util.common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymel.util.decoration.html">pymel.util.decoration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymel.util.enum.html">pymel.util.enum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymel.util.mathutils.html">pymel.util.mathutils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymel.util.namedtuple.html">pymel.util.namedtuple</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">pymel.util.path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pymel.util.utilitytypes.html">pymel.util.utilitytypes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules.html#pymel-versions"><tt class="docutils literal"><span class="pre">pymel.versions</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules.html#pymel-mayautils"><tt class="docutils literal"><span class="pre">pymel.mayautils</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules.html#pymel-tools"><tt class="docutils literal"><span class="pre">pymel.tools</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules.html#pymel-api"><tt class="docutils literal"><span class="pre">pymel.api</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyMEL</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Module Documentation</a> &raquo;</li>
+        
+      <li>pymel.util.path</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated/pymel.util.path.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pymel-util-path">
+<h1>pymel.util.path<a class="headerlink" href="#pymel-util-path" title="Permalink to this headline">¶</a></h1>
+<p class="graphviz">
+digraph inheritancea12a28fac9 {
+rankdir=TB;
+ranksep=0.15;
+nodesep=0.15;
+size=&quot;8.0, 12.0&quot;;
+  &quot;path&quot; [fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,style=&quot;setlinewidth(0.5)&quot;,tooltip=&quot;Represents a filesystem path.&quot;,height=0.25,shape=box,fontsize=8];
+}
+</p>
+<dl class="class">
+<dt id="pymel.util.path">
+<em class="property">class </em><tt class="descname">path</tt><big>(</big><em>other=''</em><big>)</big><a class="headerlink" href="#pymel.util.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a filesystem path.</p>
+<p>For documentation on individual methods, consult their
+counterparts in os.path.</p>
+<dl class="method">
+<dt id="pymel.util.path.__div__">
+<tt class="descname">__div__</tt><big>(</big><em>rel) == fp / rel == fp.joinpath(rel</em><big>)</big><a class="headerlink" href="#pymel.util.path.__div__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join two path components, adding a separator character if
+needed.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.join()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.__truediv__">
+<tt class="descname">__truediv__</tt><big>(</big><em>rel</em><big>)</big><a class="headerlink" href="#pymel.util.path.__truediv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>fp.__div__(rel) == fp / rel == fp.joinpath(rel)</p>
+<p>Join two path components, adding a separator character if
+needed.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.join()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.abspath">
+<tt class="descname">abspath</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.abspath" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.abspath()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.access">
+<tt class="descname">access</tt><big>(</big><em>mode</em><big>)</big><a class="headerlink" href="#pymel.util.path.access" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if current user has access to this path.</p>
+<p>mode - One of the constants <tt class="xref py py-data docutils literal"><span class="pre">os.F_OK</span></tt>, <tt class="xref py py-data docutils literal"><span class="pre">os.R_OK</span></tt>,
+<tt class="xref py py-data docutils literal"><span class="pre">os.W_OK</span></tt>, <tt class="xref py py-data docutils literal"><span class="pre">os.X_OK</span></tt></p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.access()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.atime">
+<tt class="descname">atime</tt><a class="headerlink" href="#pymel.util.path.atime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Last access time of the file.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.getatime" title="pymel.util.path.getatime"><tt class="xref py py-meth docutils literal"><span class="pre">getatime()</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.getatime()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.basename">
+<tt class="descname">basename</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.basename" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.name" title="pymel.util.path.name"><tt class="xref py py-attr docutils literal"><span class="pre">name</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.basename()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.bytes">
+<tt class="descname">bytes</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open this file, read all bytes, return them as a string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.canonicalpath">
+<tt class="descname">canonicalpath</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.canonicalpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to return a &#8216;canonical&#8217; version of the path</p>
+<p>This will standardize for symbolic links, absolute/relative paths,
+case differences (if on a case-insensitive file system), and &#8216;..&#8217;
+usage (so paths such as A//B, A/./B and A/foo/../B will all compare equal).</p>
+<p>The intention is that string comparison of canonical paths will yield
+a reasonable guess as to whether two paths represent the same file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.cd">
+<tt class="descname">cd</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.cd" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.chdir()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.chdir">
+<tt class="descname">chdir</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.chdir" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.chdir()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.chmod">
+<tt class="descname">chmod</tt><big>(</big><em>mode</em><big>)</big><a class="headerlink" href="#pymel.util.path.chmod" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.chmod()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.chunks">
+<tt class="descname">chunks</tt><big>(</big><em>size</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.util.path.chunks" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns a generator yielding chunks of the file, so it can</dt>
+<dd>be read piece by piece with a simple for loop.</dd>
+</dl>
+<p>Any argument you pass after <a class="reference internal" href="#pymel.util.path.size" title="pymel.util.path.size"><tt class="xref py py-obj docutils literal"><span class="pre">size</span></tt></a> will be passed to <a class="reference internal" href="#pymel.util.path.open" title="pymel.util.path.open"><tt class="xref py py-obj docutils literal"><span class="pre">open()</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"><blockquote class="first">
+<div><p>&gt;&gt; for chunk in path(&#8220;file.txt&#8221;).chunks(8192):
+..    print(chunk)</p>
+</div></blockquote>
+<p class="last">This will read the file by chunks of 8192 bytes.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.copy">
+<tt class="descname">copy</tt><big>(</big><em>src</em>, <em>dst</em><big>)</big><a class="headerlink" href="#pymel.util.path.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy data and mode bits (&#8220;cp src dst&#8221;).</p>
+<p>The destination may be a directory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.copy2">
+<tt class="descname">copy2</tt><big>(</big><em>src</em>, <em>dst</em><big>)</big><a class="headerlink" href="#pymel.util.path.copy2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy data and all stat info (&#8220;cp -p src dst&#8221;).</p>
+<p>The destination may be a directory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.copyfile">
+<tt class="descname">copyfile</tt><big>(</big><em>src</em>, <em>dst</em><big>)</big><a class="headerlink" href="#pymel.util.path.copyfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy data from src to dst</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.copymode">
+<tt class="descname">copymode</tt><big>(</big><em>src</em>, <em>dst</em><big>)</big><a class="headerlink" href="#pymel.util.path.copymode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy mode bits from src to dst</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.copystat">
+<tt class="descname">copystat</tt><big>(</big><em>src</em>, <em>dst</em><big>)</big><a class="headerlink" href="#pymel.util.path.copystat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy all stat info (mode bits, atime, mtime, flags) from src to dst</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.copytree">
+<tt class="descname">copytree</tt><big>(</big><em>src</em>, <em>dst</em>, <em>symlinks=False</em>, <em>ignore=None</em><big>)</big><a class="headerlink" href="#pymel.util.path.copytree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively copy a directory tree using copy2().</p>
+<p>The destination directory must not already exist.
+If exception(s) occur, an Error is raised with a list of reasons.</p>
+<p>If the optional symlinks flag is true, symbolic links in the
+source tree result in symbolic links in the destination tree; if
+it is false, the contents of the files pointed to by symbolic
+links are copied.</p>
+<p>The optional ignore argument is a callable. If given, it
+is called with the <tt class="xref py py-obj docutils literal"><span class="pre">src</span></tt> parameter, which is the directory
+being visited by copytree(), and <tt class="xref py py-obj docutils literal"><span class="pre">names</span></tt> which is the list of
+<tt class="xref py py-obj docutils literal"><span class="pre">src</span></tt> contents, as returned by os.listdir():</p>
+<blockquote>
+<div>callable(src, names) -&gt; ignored_names</div></blockquote>
+<p>Since copytree() is called recursively, the callable will be
+called once for each directory that is copied. It returns a
+list of names relative to the <tt class="xref py py-obj docutils literal"><span class="pre">src</span></tt> directory that should
+not be copied.</p>
+<p>XXX Consider this example code rather than the ultimate tool.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.ctime">
+<tt class="descname">ctime</tt><a class="headerlink" href="#pymel.util.path.ctime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creation time of the file.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.getctime" title="pymel.util.path.getctime"><tt class="xref py py-meth docutils literal"><span class="pre">getctime()</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.getctime()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.dirname">
+<tt class="descname">dirname</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.dirname" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.parent" title="pymel.util.path.parent"><tt class="xref py py-attr docutils literal"><span class="pre">parent</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.dirname()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.dirs">
+<tt class="descname">dirs</tt><big>(</big><big>)</big> &rarr; List of this directory's subdirectories.<a class="headerlink" href="#pymel.util.path.dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>The elements of the list are path objects.
+This does not walk recursively into subdirectories
+(but see <a class="reference internal" href="#pymel.util.path.walkdirs" title="pymel.util.path.walkdirs"><tt class="xref py py-meth docutils literal"><span class="pre">walkdirs()</span></tt></a>).</p>
+<p>With the optional <tt class="xref py py-obj docutils literal"><span class="pre">pattern</span></tt> argument, this only lists
+directories whose names match the given pattern.  For
+example, <tt class="docutils literal"><span class="pre">d.dirs('build-*')</span></tt>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.drive">
+<tt class="descname">drive</tt><a class="headerlink" href="#pymel.util.path.drive" title="Permalink to this definition">¶</a></dt>
+<dd><p>The drive specifier, for example <tt class="docutils literal"><span class="pre">'C</span> <span class="pre">--</span> <span class="pre">'</span></tt>.</p>
+<p>This is always empty on systems that don&#8217;t use drive specifiers.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.exists">
+<tt class="descname">exists</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.exists" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.exists()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.expand">
+<tt class="descname">expand</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.expand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean up a filename by calling <a class="reference internal" href="#pymel.util.path.expandvars" title="pymel.util.path.expandvars"><tt class="xref py py-meth docutils literal"><span class="pre">expandvars()</span></tt></a>,
+<a class="reference internal" href="#pymel.util.path.expanduser" title="pymel.util.path.expanduser"><tt class="xref py py-meth docutils literal"><span class="pre">expanduser()</span></tt></a>, and <a class="reference internal" href="#pymel.util.path.normpath" title="pymel.util.path.normpath"><tt class="xref py py-meth docutils literal"><span class="pre">normpath()</span></tt></a> on it.</p>
+<p>This is commonly everything needed to clean up a filename
+read from a configuration file, for example.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.expanduser">
+<tt class="descname">expanduser</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.expanduser" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.expanduser()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.expandvars">
+<tt class="descname">expandvars</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.expandvars" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.expandvars()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.ext">
+<tt class="descname">ext</tt><a class="headerlink" href="#pymel.util.path.ext" title="Permalink to this definition">¶</a></dt>
+<dd><p>The file extension, for example <tt class="docutils literal"><span class="pre">'.py'</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.files">
+<tt class="descname">files</tt><big>(</big><big>)</big> &rarr; List of the files in this directory.<a class="headerlink" href="#pymel.util.path.files" title="Permalink to this definition">¶</a></dt>
+<dd><p>The elements of the list are path objects.
+This does not walk into subdirectories (see <a class="reference internal" href="#pymel.util.path.walkfiles" title="pymel.util.path.walkfiles"><tt class="xref py py-meth docutils literal"><span class="pre">walkfiles()</span></tt></a>).</p>
+<p>With the optional <tt class="xref py py-obj docutils literal"><span class="pre">pattern</span></tt> argument, this only lists files
+whose names match the given pattern.  For example,
+<tt class="docutils literal"><span class="pre">d.files('*.pyc')</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.fnmatch">
+<tt class="descname">fnmatch</tt><big>(</big><em>pattern</em>, <em>normcase=None</em><big>)</big><a class="headerlink" href="#pymel.util.path.fnmatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <tt class="docutils literal"><span class="pre">True</span></tt> if <tt class="xref py py-obj docutils literal"><span class="pre">self.name</span></tt> matches the given pattern.</p>
+<dl class="docutils">
+<dt>pattern - A filename pattern with wildcards,</dt>
+<dd>for example <tt class="docutils literal"><span class="pre">'*.py'</span></tt>. If the pattern contains a <a class="reference internal" href="#pymel.util.path.normcase" title="pymel.util.path.normcase"><tt class="xref py py-obj docutils literal"><span class="pre">normcase</span></tt></a>
+attribute, it is applied to the name and path prior to comparison.</dd>
+<dt>normcase - (optional) A function used to normalize the pattern and</dt>
+<dd>filename before matching. Defaults to self.module which defaults
+to os.path.normcase.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">fnmatch.fnmatch()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.get_owner">
+<tt class="descname">get_owner</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.get_owner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.getatime">
+<tt class="descname">getatime</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.getatime" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.atime" title="pymel.util.path.atime"><tt class="xref py py-attr docutils literal"><span class="pre">atime</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.getatime()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.getctime">
+<tt class="descname">getctime</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.getctime" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.ctime" title="pymel.util.path.ctime"><tt class="xref py py-attr docutils literal"><span class="pre">ctime</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.getctime()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pymel.util.path.getcwd">
+<em class="property">classmethod </em><tt class="descname">getcwd</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.getcwd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current working directory as a path object.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.getcwdu()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.getmtime">
+<tt class="descname">getmtime</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.getmtime" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.mtime" title="pymel.util.path.mtime"><tt class="xref py py-attr docutils literal"><span class="pre">mtime</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.getmtime()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.getsize">
+<tt class="descname">getsize</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.getsize" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.size" title="pymel.util.path.size"><tt class="xref py py-attr docutils literal"><span class="pre">size</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.getsize()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.glob">
+<tt class="descname">glob</tt><big>(</big><em>pattern</em><big>)</big><a class="headerlink" href="#pymel.util.path.glob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of path objects that match the pattern.</p>
+<p><tt class="xref py py-obj docutils literal"><span class="pre">pattern</span></tt> - a path relative to this directory, with wildcards.</p>
+<p>For example, <tt class="docutils literal"><span class="pre">path('/users').glob('*/bin/*')</span></tt> returns a list
+of all the files users have in their bin directories.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">glob.glob()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.isabs">
+<tt class="descname">isabs</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.isabs" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.isabs()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.isdir">
+<tt class="descname">isdir</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.isdir" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.isdir()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.isfile">
+<tt class="descname">isfile</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.isfile" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.isfile()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.islink">
+<tt class="descname">islink</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.islink" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.islink()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.ismount">
+<tt class="descname">ismount</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.ismount" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.ismount()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.joinpath">
+<tt class="descname">joinpath</tt><em class="property"> = &lt;functools.partial object at 0x000002756F071EA8&gt;</em><a class="headerlink" href="#pymel.util.path.joinpath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.lines">
+<tt class="descname">lines</tt><big>(</big><em>encoding=None</em>, <em>errors='strict'</em>, <em>retain=True</em><big>)</big><a class="headerlink" href="#pymel.util.path.lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open this file, read all lines, return them in a list.</p>
+<dl class="docutils">
+<dt>Optional arguments:</dt>
+<dd><dl class="first last docutils">
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">encoding</span></tt> - The Unicode encoding (or character set) of</dt>
+<dd>the file.  The default is None, meaning the content
+of the file is read as 8-bit characters and returned
+as a list of (non-Unicode) str objects.</dd>
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">errors</span></tt> - How to handle Unicode errors; see help(str.decode)</dt>
+<dd>for the options.  Default is &#8216;strict&#8217;</dd>
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">retain</span></tt> - If true, retain newline characters; but all newline</dt>
+<dd>character combinations (<tt class="docutils literal"><span class="pre">'\r'</span></tt>, <tt class="docutils literal"><span class="pre">'\n'</span></tt>, <tt class="docutils literal"><span class="pre">'\r\n'</span></tt>) are
+translated to <tt class="docutils literal"><span class="pre">'\n'</span></tt>.  If false, newline characters are
+stripped off.  Default is True.</dd>
+</dl>
+</dd>
+</dl>
+<p>This uses <tt class="docutils literal"><span class="pre">'U'</span></tt> mode.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.text" title="pymel.util.path.text"><tt class="xref py py-meth docutils literal"><span class="pre">text()</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.listdir">
+<tt class="descname">listdir</tt><big>(</big><big>)</big> &rarr; List of items in this directory.<a class="headerlink" href="#pymel.util.path.listdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use <a class="reference internal" href="#pymel.util.path.files" title="pymel.util.path.files"><tt class="xref py py-meth docutils literal"><span class="pre">files()</span></tt></a> or <a class="reference internal" href="#pymel.util.path.dirs" title="pymel.util.path.dirs"><tt class="xref py py-meth docutils literal"><span class="pre">dirs()</span></tt></a> instead if you want a listing
+of just files or just subdirectories.</p>
+<p>The elements of the list are path objects.</p>
+<p>With the optional <tt class="xref py py-obj docutils literal"><span class="pre">pattern</span></tt> argument, this only lists
+items whose names match the given pattern. Pattern may be a glob-style
+string or a compiled regular expression pattern.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.files" title="pymel.util.path.files"><tt class="xref py py-meth docutils literal"><span class="pre">files()</span></tt></a>, <a class="reference internal" href="#pymel.util.path.dirs" title="pymel.util.path.dirs"><tt class="xref py py-meth docutils literal"><span class="pre">dirs()</span></tt></a>, <a class="reference internal" href="#pymel.util.path.match" title="pymel.util.path.match"><tt class="xref py py-meth docutils literal"><span class="pre">match()</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.lstat">
+<tt class="descname">lstat</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.lstat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#pymel.util.path.stat" title="pymel.util.path.stat"><tt class="xref py py-meth docutils literal"><span class="pre">stat()</span></tt></a>, but do not follow symbolic links.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.stat" title="pymel.util.path.stat"><tt class="xref py py-meth docutils literal"><span class="pre">stat()</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.lstat()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.makedirs">
+<tt class="descname">makedirs</tt><big>(</big><em>mode=511</em><big>)</big><a class="headerlink" href="#pymel.util.path.makedirs" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.makedirs()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.makedirs_p">
+<tt class="descname">makedirs_p</tt><big>(</big><em>mode=511</em><big>)</big><a class="headerlink" href="#pymel.util.path.makedirs_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#pymel.util.path.makedirs" title="pymel.util.path.makedirs"><tt class="xref py py-meth docutils literal"><span class="pre">makedirs()</span></tt></a>, but does not raise an exception if the
+directory already exists.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.match">
+<tt class="descname">match</tt><big>(</big><em>pattern</em>, <em>normcase=None</em><big>)</big><a class="headerlink" href="#pymel.util.path.match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <tt class="docutils literal"><span class="pre">True</span></tt> if <tt class="xref py py-obj docutils literal"><span class="pre">self.name</span></tt> matches the given pattern. Supports
+both glob strings and compiled regular expressions.</p>
+<dl class="docutils">
+<dt>pattern - A glob-style filename pattern with wildcards, or regex pattern</dt>
+<dd>compiled with <tt class="xref py py-func docutils literal"><span class="pre">re.compile()</span></tt>.
+If the pattern contains a <a class="reference internal" href="#pymel.util.path.normcase" title="pymel.util.path.normcase"><tt class="xref py py-obj docutils literal"><span class="pre">normcase</span></tt></a>  attribute, it is applied to
+the name and path prior to comparison.</dd>
+<dt>normcase - (optional) A function used to normalize the pattern and</dt>
+<dd>filename before matching. Defaults to self.module which defaults
+to os.path.normcase.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.fnmatch" title="pymel.util.path.fnmatch"><tt class="xref py py-meth docutils literal"><span class="pre">fnmatch()</span></tt></a> and <a class="reference internal" href="#pymel.util.path.regmatch" title="pymel.util.path.regmatch"><tt class="xref py py-meth docutils literal"><span class="pre">regmatch()</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.mkdir">
+<tt class="descname">mkdir</tt><big>(</big><em>mode=511</em><big>)</big><a class="headerlink" href="#pymel.util.path.mkdir" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.mkdir()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.mkdir_p">
+<tt class="descname">mkdir_p</tt><big>(</big><em>mode=511</em><big>)</big><a class="headerlink" href="#pymel.util.path.mkdir_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#pymel.util.path.mkdir" title="pymel.util.path.mkdir"><tt class="xref py py-meth docutils literal"><span class="pre">mkdir()</span></tt></a>, but does not raise an exception if the
+directory already exists.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.module">
+<tt class="descname">module</tt><em class="property"> = &lt;module 'ntpath' from 'C:\Apps\3D\Autodesk\Maya2018\bin\python27.zip\ntpath.py'&gt;</em><a class="headerlink" href="#pymel.util.path.module" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path module to use for path operations.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-mod docutils literal"><span class="pre">os.path</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.move">
+<tt class="descname">move</tt><big>(</big><em>src</em>, <em>dst</em><big>)</big><a class="headerlink" href="#pymel.util.path.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively move a file or directory to another location. This is
+similar to the Unix &#8220;mv&#8221; command.</p>
+<p>If the destination is a directory or a symlink to a directory, the source
+is moved inside the directory. The destination path must not already
+exist.</p>
+<p>If the destination already exists but is not a directory, it may be
+overwritten depending on os.rename() semantics.</p>
+<p>If the destination is on our current filesystem, then rename() is used.
+Otherwise, src is copied to the destination and then removed.
+A lot more could be done here...  A look at a mv.c shows a lot of
+the issues this implementation glosses over.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.mtime">
+<tt class="descname">mtime</tt><a class="headerlink" href="#pymel.util.path.mtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Last-modified time of the file.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.getmtime" title="pymel.util.path.getmtime"><tt class="xref py py-meth docutils literal"><span class="pre">getmtime()</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.getmtime()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.name">
+<tt class="descname">name</tt><a class="headerlink" href="#pymel.util.path.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of this file or directory without the full path.</p>
+<p>For example,
+<tt class="docutils literal"><span class="pre">path('/usr/local/lib/libpython.so').name</span> <span class="pre">==</span> <span class="pre">'libpython.so'</span></tt></p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.basename" title="pymel.util.path.basename"><tt class="xref py py-meth docutils literal"><span class="pre">basename()</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.basename()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.namebase">
+<tt class="descname">namebase</tt><a class="headerlink" href="#pymel.util.path.namebase" title="Permalink to this definition">¶</a></dt>
+<dd><p>The same as <a class="reference internal" href="#pymel.util.path.name" title="pymel.util.path.name"><tt class="xref py py-meth docutils literal"><span class="pre">name()</span></tt></a>, but with one file extension stripped off.</p>
+<p>For example,
+<tt class="docutils literal"><span class="pre">path('/home/guido/python.tar.gz').name</span> <span class="pre">==</span> <span class="pre">'python.tar.gz'</span></tt>,
+but
+<tt class="docutils literal"><span class="pre">path('/home/guido/python.tar.gz').namebase</span> <span class="pre">==</span> <span class="pre">'python.tar'</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.normcase">
+<tt class="descname">normcase</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.normcase" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.normcase()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.normpath">
+<tt class="descname">normpath</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.normpath" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.normpath()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.open">
+<tt class="descname">open</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pymel.util.path.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open this file.  Return a file object.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">python:open()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.owner">
+<tt class="descname">owner</tt><a class="headerlink" href="#pymel.util.path.owner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the owner of this file or directory.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.get_owner" title="pymel.util.path.get_owner"><tt class="xref py py-meth docutils literal"><span class="pre">get_owner()</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.parent">
+<tt class="descname">parent</tt><a class="headerlink" href="#pymel.util.path.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>This path&#8217;s parent directory, as a new path object.</p>
+<p>For example,
+<tt class="docutils literal"><span class="pre">path('/usr/local/lib/libpython.so').parent</span> <span class="pre">==</span>
+<span class="pre">path('/usr/local/lib')</span></tt></p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.dirname" title="pymel.util.path.dirname"><tt class="xref py py-meth docutils literal"><span class="pre">dirname()</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.dirname()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.read_hash">
+<tt class="descname">read_hash</tt><big>(</big><em>hash_name</em><big>)</big><a class="headerlink" href="#pymel.util.path.read_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate given hash for this file.</p>
+<p>List of supported hashes can be obtained from <tt class="xref py py-mod docutils literal"><span class="pre">hashlib</span></tt> package.
+This reads the entire file.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-meth docutils literal"><span class="pre">hashlib.hash.digest()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.read_hexhash">
+<tt class="descname">read_hexhash</tt><big>(</big><em>hash_name</em><big>)</big><a class="headerlink" href="#pymel.util.path.read_hexhash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate given hash for this file, returning hexdigest.</p>
+<p>List of supported hashes can be obtained from <tt class="xref py py-mod docutils literal"><span class="pre">hashlib</span></tt> package.
+This reads the entire file.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-meth docutils literal"><span class="pre">hashlib.hash.hexdigest()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.read_md5">
+<tt class="descname">read_md5</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.read_md5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the md5 hash for this file.</p>
+<p>This reads through the entire file.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.read_hash" title="pymel.util.path.read_hash"><tt class="xref py py-meth docutils literal"><span class="pre">read_hash()</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.realpath">
+<tt class="descname">realpath</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.realpath" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.realpath()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.regmatch">
+<tt class="descname">regmatch</tt><big>(</big><em>pattern</em>, <em>normcase=None</em><big>)</big><a class="headerlink" href="#pymel.util.path.regmatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <tt class="docutils literal"><span class="pre">True</span></tt> if <tt class="xref py py-obj docutils literal"><span class="pre">self.name</span></tt> matches the given pattern.</p>
+<dl class="docutils">
+<dt>pattern - A regex pattern compiled with <tt class="xref py py-func docutils literal"><span class="pre">re.compile()</span></tt>.</dt>
+<dd>If the pattern contains a <a class="reference internal" href="#pymel.util.path.normcase" title="pymel.util.path.normcase"><tt class="xref py py-obj docutils literal"><span class="pre">normcase</span></tt></a>  attribute, it is applied to
+the name and path prior to comparison.</dd>
+<dt>normcase - (optional) A function used to normalize the</dt>
+<dd>filename before matching. Defaults to self.module which defaults
+to os.path.normcase.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a href="#id1"><span class="problematic" id="id2">:module:`re`</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.relpath">
+<tt class="descname">relpath</tt><big>(</big><em>start='.'</em><big>)</big><a class="headerlink" href="#pymel.util.path.relpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return this path as a relative path,
+based from <tt class="xref py py-obj docutils literal"><span class="pre">start</span></tt>, which defaults to the current working directory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.relpathto">
+<tt class="descname">relpathto</tt><big>(</big><em>dest</em><big>)</big><a class="headerlink" href="#pymel.util.path.relpathto" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a relative path from <tt class="xref py py-obj docutils literal"><span class="pre">self</span></tt> to <tt class="xref py py-obj docutils literal"><span class="pre">dest</span></tt>.</p>
+<p>If there is no relative path from <tt class="xref py py-obj docutils literal"><span class="pre">self</span></tt> to <tt class="xref py py-obj docutils literal"><span class="pre">dest</span></tt>, for example if
+they reside on different drives in Windows, then this returns
+<tt class="docutils literal"><span class="pre">dest.abspath()</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.remove">
+<tt class="descname">remove</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.remove" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.remove()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.remove_p">
+<tt class="descname">remove_p</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.remove_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#pymel.util.path.remove" title="pymel.util.path.remove"><tt class="xref py py-meth docutils literal"><span class="pre">remove()</span></tt></a>, but does not raise an exception if the
+file does not exist.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.removedirs">
+<tt class="descname">removedirs</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.removedirs" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.removedirs()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.removedirs_p">
+<tt class="descname">removedirs_p</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.removedirs_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#pymel.util.path.removedirs" title="pymel.util.path.removedirs"><tt class="xref py py-meth docutils literal"><span class="pre">removedirs()</span></tt></a>, but does not raise an exception if the
+directory is not empty or does not exist.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.rename">
+<tt class="descname">rename</tt><big>(</big><em>new</em><big>)</big><a class="headerlink" href="#pymel.util.path.rename" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.rename()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.renames">
+<tt class="descname">renames</tt><big>(</big><em>new</em><big>)</big><a class="headerlink" href="#pymel.util.path.renames" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.renames()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.rmdir">
+<tt class="descname">rmdir</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.rmdir" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.rmdir()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.rmdir_p">
+<tt class="descname">rmdir_p</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.rmdir_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#pymel.util.path.rmdir" title="pymel.util.path.rmdir"><tt class="xref py py-meth docutils literal"><span class="pre">rmdir()</span></tt></a>, but does not raise an exception if the
+directory is not empty or does not exist.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.rmtree">
+<tt class="descname">rmtree</tt><big>(</big><em>path</em>, <em>ignore_errors=False</em>, <em>onerror=None</em><big>)</big><a class="headerlink" href="#pymel.util.path.rmtree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively delete a directory tree.</p>
+<p>If ignore_errors is set, errors are ignored; otherwise, if onerror
+is set, it is called to handle the error with arguments (func,
+path, exc_info) where func is os.listdir, os.remove, or os.rmdir;
+path is the argument to that function that caused it to fail; and
+exc_info is a tuple returned by sys.exc_info().  If ignore_errors
+is false and onerror is None, an exception is raised.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.rmtree_p">
+<tt class="descname">rmtree_p</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.rmtree_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#pymel.util.path.rmtree" title="pymel.util.path.rmtree"><tt class="xref py py-meth docutils literal"><span class="pre">rmtree()</span></tt></a>, but does not raise an exception if the
+directory does not exist.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.samefile">
+<tt class="descname">samefile</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pymel.util.path.samefile" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.samefile()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.samepath">
+<tt class="descname">samepath</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pymel.util.path.samepath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the other path represents the same path as this one.</p>
+<p>This will account for symbolic links, absolute/relative paths,
+case differences (if on a case-insensitive file system), and &#8216;..&#8217;
+usage (so paths such as A//B, A/./B and A/foo/../B will all compare equal).</p>
+<p>This will NOT account for hard links - use <a class="reference internal" href="#pymel.util.path.samefile" title="pymel.util.path.samefile"><tt class="xref py py-meth docutils literal"><span class="pre">samefile()</span></tt></a> for this, if
+available on your os.</p>
+<p>Essentially just compares the <tt class="xref py py-obj docutils literal"><span class="pre">self.canonicalpath()</span></tt> to <tt class="xref py py-obj docutils literal"><span class="pre">other.canonicalpath()</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.size">
+<tt class="descname">size</tt><a class="headerlink" href="#pymel.util.path.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Size of the file, in bytes.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.getsize" title="pymel.util.path.getsize"><tt class="xref py py-meth docutils literal"><span class="pre">getsize()</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.getsize()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.splitall">
+<tt class="descname">splitall</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.splitall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of the path components in this path.</p>
+<p>The first item in the list will be a path.  Its value will be
+either <tt class="xref py py-data docutils literal"><span class="pre">os.curdir</span></tt>, <tt class="xref py py-data docutils literal"><span class="pre">os.pardir</span></tt>, empty, or the root
+directory of this path (for example, <tt class="docutils literal"><span class="pre">'/'</span></tt> or <tt class="docutils literal"><span class="pre">'C:\\'</span></tt>).  The
+other items in the list will be strings.</p>
+<p><tt class="docutils literal"><span class="pre">path.path.joinpath(*result)</span></tt> will yield the original path.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.splitdrive">
+<tt class="descname">splitdrive</tt><big>(</big><big>)</big> &rarr; Return ``(p.drive, &lt;the rest of p&gt;)``.<a class="headerlink" href="#pymel.util.path.splitdrive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split the drive specifier from this path.  If there is
+no drive specifier, p.drive is empty, so the return value
+is simply <tt class="docutils literal"><span class="pre">(path(''),</span> <span class="pre">p)</span></tt>.  This is always the case on Unix.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.splitdrive()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.splitext">
+<tt class="descname">splitext</tt><big>(</big><big>)</big> &rarr; Return ``(p.stripext(), p.ext)``.<a class="headerlink" href="#pymel.util.path.splitext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split the filename extension from this path and return
+the two parts.  Either part may be empty.</p>
+<p>The extension is everything from <tt class="docutils literal"><span class="pre">'.'</span></tt> to the end of the
+last path segment.  This has the property that if
+<tt class="docutils literal"><span class="pre">(a,</span> <span class="pre">b)</span> <span class="pre">==</span> <span class="pre">p.splitext()</span></tt>, then <tt class="docutils literal"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">p</span></tt>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.splitext()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.splitpath">
+<tt class="descname">splitpath</tt><big>(</big><big>)</big> &rarr; Return ``(p.parent, p.name)``.<a class="headerlink" href="#pymel.util.path.splitpath" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.parent" title="pymel.util.path.parent"><tt class="xref py py-attr docutils literal"><span class="pre">parent</span></tt></a>, <a class="reference internal" href="#pymel.util.path.name" title="pymel.util.path.name"><tt class="xref py py-attr docutils literal"><span class="pre">name</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.path.split()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.splitunc">
+<tt class="descname">splitunc</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.splitunc" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.path.splitunc()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.startfile">
+<tt class="descname">startfile</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.startfile" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.startfile()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.stat">
+<tt class="descname">stat</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a <tt class="docutils literal"><span class="pre">stat()</span></tt> system call on this path.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.lstat" title="pymel.util.path.lstat"><tt class="xref py py-meth docutils literal"><span class="pre">lstat()</span></tt></a>, <tt class="xref py py-func docutils literal"><span class="pre">os.stat()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.stripext">
+<tt class="descname">stripext</tt><big>(</big><big>)</big> &rarr; Remove one file extension from the path.<a class="headerlink" href="#pymel.util.path.stripext" title="Permalink to this definition">¶</a></dt>
+<dd><p>For example, <tt class="docutils literal"><span class="pre">path('/home/guido/python.tar.gz').stripext()</span></tt>
+returns <tt class="docutils literal"><span class="pre">path('/home/guido/python.tar')</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.text">
+<tt class="descname">text</tt><big>(</big><em>encoding=None</em>, <em>errors='strict'</em><big>)</big><a class="headerlink" href="#pymel.util.path.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open this file, read it in, return the content as a string.</p>
+<p>This method uses <tt class="docutils literal"><span class="pre">'U'</span></tt> mode, so <tt class="docutils literal"><span class="pre">'\r\n'</span></tt> and <tt class="docutils literal"><span class="pre">'\r'</span></tt> are
+automatically translated to <tt class="docutils literal"><span class="pre">'\n'</span></tt>.</p>
+<dl class="docutils">
+<dt>Optional arguments:</dt>
+<dd><dl class="first last docutils">
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">encoding</span></tt> - The Unicode encoding (or character set) of</dt>
+<dd>the file.  If present, the content of the file is
+decoded and returned as a unicode object; otherwise
+it is returned as an 8-bit str.</dd>
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">errors</span></tt> - How to handle Unicode errors; see <tt class="xref py py-meth docutils literal"><span class="pre">str.decode()</span></tt></dt>
+<dd>for the options.  Default is &#8216;strict&#8217;.</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pymel.util.path.lines" title="pymel.util.path.lines"><tt class="xref py py-meth docutils literal"><span class="pre">lines()</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.touch">
+<tt class="descname">touch</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.touch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the access/modified times of this file to the current time.
+Create the file if it does not exist.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.truepath">
+<tt class="descname">truepath</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.truepath" title="Permalink to this definition">¶</a></dt>
+<dd><p>The absolute, real, normalized path.</p>
+<p>Shortcut for <tt class="xref py py-obj docutils literal"><span class="pre">abspath().realpath().normpath()</span></tt></p>
+<p>Unlike canonicalpath, on case-sensitive filesystems, two different paths
+may refer the same file, and so should only be used in cases where a
+&#8220;normal&#8221; path from root is desired, but we wish to preserve case; in
+situations where comparison is desired, <a class="reference internal" href="#pymel.util.path.canonicalpath" title="pymel.util.path.canonicalpath"><tt class="xref py py-meth docutils literal"><span class="pre">canonicalpath()</span></tt></a> (or
+<a class="reference internal" href="#pymel.util.path.samepath" title="pymel.util.path.samepath"><tt class="xref py py-meth docutils literal"><span class="pre">samepath()</span></tt></a>) should be used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymel.util.path.uncshare">
+<tt class="descname">uncshare</tt><a class="headerlink" href="#pymel.util.path.uncshare" title="Permalink to this definition">¶</a></dt>
+<dd><p>The UNC mount point for this path.
+This is empty for paths on local drives.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.unlink">
+<tt class="descname">unlink</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.unlink" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.unlink()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.unlink_p">
+<tt class="descname">unlink_p</tt><big>(</big><big>)</big><a class="headerlink" href="#pymel.util.path.unlink_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#pymel.util.path.unlink" title="pymel.util.path.unlink"><tt class="xref py py-meth docutils literal"><span class="pre">unlink()</span></tt></a>, but does not raise an exception if the
+file does not exist.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pymel.util.path.using_module">
+<em class="property">classmethod </em><tt class="descname">using_module</tt><big>(</big><em>module</em><big>)</big><a class="headerlink" href="#pymel.util.path.using_module" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.utime">
+<tt class="descname">utime</tt><big>(</big><em>times</em><big>)</big><a class="headerlink" href="#pymel.util.path.utime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the access and modified times of this file.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">os.utime()</span></tt></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.walk">
+<tt class="descname">walk</tt><big>(</big><big>)</big> &rarr; iterator over files and subdirs, recursively.<a class="headerlink" href="#pymel.util.path.walk" title="Permalink to this definition">¶</a></dt>
+<dd><p>The iterator yields path objects naming each child item of
+this directory and its descendants.  This requires that
+D.isdir().</p>
+<p>This performs a depth-first traversal of the directory tree.
+Each directory is returned just before all its children.</p>
+<p>The <tt class="xref py py-obj docutils literal"><span class="pre">errors=</span></tt> keyword argument controls behavior when an
+error occurs.  The default is &#8216;strict&#8217;, which causes an
+exception.  The other allowed values are &#8216;warn&#8217;, which
+reports the error via <tt class="docutils literal"><span class="pre">warnings.warn()</span></tt>, and &#8216;ignore&#8217;.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.walkdirs">
+<tt class="descname">walkdirs</tt><big>(</big><big>)</big> &rarr; iterator over subdirs, recursively.<a class="headerlink" href="#pymel.util.path.walkdirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>With the optional <tt class="xref py py-obj docutils literal"><span class="pre">pattern</span></tt> argument, this yields only
+directories whose names match the given pattern.  For
+example, <tt class="docutils literal"><span class="pre">mydir.walkdirs('*test')</span></tt> yields only directories
+with names ending in &#8216;test&#8217;.</p>
+<p>The <tt class="xref py py-obj docutils literal"><span class="pre">errors=</span></tt> keyword argument controls behavior when an
+error occurs.  The default is &#8216;strict&#8217;, which causes an
+exception.  The other allowed values are &#8216;warn&#8217;, which
+reports the error via <tt class="docutils literal"><span class="pre">warnings.warn()</span></tt>, and &#8216;ignore&#8217;.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.walkfiles">
+<tt class="descname">walkfiles</tt><big>(</big><big>)</big> &rarr; iterator over files in D, recursively.<a class="headerlink" href="#pymel.util.path.walkfiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>The optional argument, <tt class="xref py py-obj docutils literal"><span class="pre">pattern</span></tt>, limits the results to files
+with names that match the pattern.  For example,
+<tt class="docutils literal"><span class="pre">mydir.walkfiles('*.tmp')</span></tt> yields only files with the .tmp
+extension.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.write_bytes">
+<tt class="descname">write_bytes</tt><big>(</big><em>bytes</em>, <em>append=False</em><big>)</big><a class="headerlink" href="#pymel.util.path.write_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open this file and write the given bytes to it.</p>
+<p>Default behavior is to overwrite any existing file.
+Call <tt class="docutils literal"><span class="pre">p.write_bytes(bytes,</span> <span class="pre">append=True)</span></tt> to append instead.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.write_lines">
+<tt class="descname">write_lines</tt><big>(</big><em>lines</em>, <em>encoding=None</em>, <em>errors='strict'</em>, <em>linesep='\r\n'</em>, <em>append=False</em><big>)</big><a class="headerlink" href="#pymel.util.path.write_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the given lines of text to this file.</p>
+<p>By default this overwrites any existing file at this path.</p>
+<p>This puts a platform-specific newline sequence on every line.
+See <tt class="xref py py-obj docutils literal"><span class="pre">linesep</span></tt> below.</p>
+<blockquote>
+<div><p><a class="reference internal" href="#pymel.util.path.lines" title="pymel.util.path.lines"><tt class="xref py py-obj docutils literal"><span class="pre">lines</span></tt></a> - A list of strings.</p>
+<dl class="docutils">
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">encoding</span></tt> - A Unicode encoding to use.  This applies only if</dt>
+<dd><a class="reference internal" href="#pymel.util.path.lines" title="pymel.util.path.lines"><tt class="xref py py-obj docutils literal"><span class="pre">lines</span></tt></a> contains any Unicode strings.</dd>
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">errors</span></tt> - How to handle errors in Unicode encoding.  This</dt>
+<dd>also applies only to Unicode strings.</dd>
+<dt>linesep - The desired line-ending.  This line-ending is</dt>
+<dd>applied to every line.  If a line already has any
+standard line ending (<tt class="docutils literal"><span class="pre">'\r'</span></tt>, <tt class="docutils literal"><span class="pre">'\n'</span></tt>, <tt class="docutils literal"><span class="pre">'\r\n'</span></tt>,
+<tt class="docutils literal"><span class="pre">u'\x85'</span></tt>, <tt class="docutils literal"><span class="pre">u'\r\x85'</span></tt>, <tt class="docutils literal"><span class="pre">u'\u2028'</span></tt>), that will
+be stripped off and this will be used instead.  The
+default is os.linesep, which is platform-dependent
+(<tt class="docutils literal"><span class="pre">'\r\n'</span></tt> on Windows, <tt class="docutils literal"><span class="pre">'\n'</span></tt> on Unix, etc.).
+Specify <tt class="docutils literal"><span class="pre">None</span></tt> to write the lines as-is, like
+<tt class="xref py py-meth docutils literal"><span class="pre">file.writelines()</span></tt>.</dd>
+</dl>
+</div></blockquote>
+<p>Use the keyword argument append=True to append lines to the
+file.  The default is to overwrite the file.  Warning:
+When you use this with Unicode data, if the encoding of the
+existing data in the file is different from the encoding
+you specify with the encoding= parameter, the result is
+mixed-encoding data, which can really confuse someone trying
+to read the file later.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymel.util.path.write_text">
+<tt class="descname">write_text</tt><big>(</big><em>text</em>, <em>encoding=None</em>, <em>errors='strict'</em>, <em>linesep='\r\n'</em>, <em>append=False</em><big>)</big><a class="headerlink" href="#pymel.util.path.write_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the given text to this file.</p>
+<p>The default behavior is to overwrite any existing file;
+to append instead, use the <tt class="xref py py-obj docutils literal"><span class="pre">append=True</span></tt> keyword argument.</p>
+<p>There are two differences between <a class="reference internal" href="#pymel.util.path.write_text" title="pymel.util.path.write_text"><tt class="xref py py-meth docutils literal"><span class="pre">write_text()</span></tt></a> and
+<a class="reference internal" href="#pymel.util.path.write_bytes" title="pymel.util.path.write_bytes"><tt class="xref py py-meth docutils literal"><span class="pre">write_bytes()</span></tt></a>: newline handling and Unicode handling.
+See below.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><p><a class="reference internal" href="#pymel.util.path.text" title="pymel.util.path.text"><tt class="xref py py-obj docutils literal"><span class="pre">text</span></tt></a> - str/unicode - The text to be written.</p>
+<dl class="docutils">
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">encoding</span></tt> - str - The Unicode encoding that will be used.</dt>
+<dd>This is ignored if &#8216;text&#8217; isn&#8217;t a Unicode string.</dd>
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">errors</span></tt> - str - How to handle Unicode encoding errors.</dt>
+<dd>Default is &#8216;strict&#8217;.  See help(unicode.encode) for the
+options.  This is ignored if &#8216;text&#8217; isn&#8217;t a Unicode
+string.</dd>
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">linesep</span></tt> - keyword argument - str/unicode - The sequence of</dt>
+<dd>characters to be used to mark end-of-line.  The default is
+<tt class="xref py py-data docutils literal"><span class="pre">os.linesep</span></tt>.  You can also specify <tt class="docutils literal"><span class="pre">None</span></tt>; this means to
+leave all newlines as they are in <a class="reference internal" href="#pymel.util.path.text" title="pymel.util.path.text"><tt class="xref py py-obj docutils literal"><span class="pre">text</span></tt></a>.</dd>
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">append</span></tt> - keyword argument - bool - Specifies what to do if</dt>
+<dd>the file already exists (<tt class="docutils literal"><span class="pre">True</span></tt>: append to the end of it;
+<tt class="docutils literal"><span class="pre">False</span></tt>: overwrite it.)  The default is <tt class="docutils literal"><span class="pre">False</span></tt>.</dd>
+</dl>
+</div></blockquote>
+<p>&#8212; Newline handling.</p>
+<p>write_text() converts all standard end-of-line sequences
+(<tt class="docutils literal"><span class="pre">'\n'</span></tt>, <tt class="docutils literal"><span class="pre">'\r'</span></tt>, and <tt class="docutils literal"><span class="pre">'\r\n'</span></tt>) to your platform&#8217;s default
+end-of-line sequence (see <tt class="xref py py-data docutils literal"><span class="pre">os.linesep</span></tt>; on Windows, for example,
+the end-of-line marker is <tt class="docutils literal"><span class="pre">'\r\n'</span></tt>).</p>
+<p>If you don&#8217;t like your platform&#8217;s default, you can override it
+using the <tt class="xref py py-obj docutils literal"><span class="pre">linesep=</span></tt> keyword argument.  If you specifically want
+write_text() to preserve the newlines as-is, use <tt class="docutils literal"><span class="pre">linesep=None</span></tt>.</p>
+<p>This applies to Unicode text the same as to 8-bit text, except
+there are three additional standard Unicode end-of-line sequences:
+<tt class="docutils literal"><span class="pre">u'\x85'</span></tt>, <tt class="docutils literal"><span class="pre">u'\r\x85'</span></tt>, and <tt class="docutils literal"><span class="pre">u'\u2028'</span></tt>.</p>
+<p>(This is slightly different from when you open a file for
+writing with <tt class="docutils literal"><span class="pre">fopen(filename,</span> <span class="pre">&quot;w&quot;)</span></tt> in C or <tt class="docutils literal"><span class="pre">open(filename,</span> <span class="pre">'w')</span></tt>
+in Python.)</p>
+<p>&#8212; Unicode</p>
+<p>If <a class="reference internal" href="#pymel.util.path.text" title="pymel.util.path.text"><tt class="xref py py-obj docutils literal"><span class="pre">text</span></tt></a> isn&#8217;t Unicode, then apart from newline handling, the
+bytes are written verbatim to the file.  The <tt class="xref py py-obj docutils literal"><span class="pre">encoding</span></tt> and
+<tt class="xref py py-obj docutils literal"><span class="pre">errors</span></tt> arguments are not used and must be omitted.</p>
+<p>If <a class="reference internal" href="#pymel.util.path.text" title="pymel.util.path.text"><tt class="xref py py-obj docutils literal"><span class="pre">text</span></tt></a> is Unicode, it is first converted to bytes using the
+specified &#8216;encoding&#8217; (or the default encoding if <tt class="xref py py-obj docutils literal"><span class="pre">encoding</span></tt>
+isn&#8217;t specified).  The <tt class="xref py py-obj docutils literal"><span class="pre">errors</span></tt> argument applies only to this
+conversion.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pymel.util.utilitytypes.html" class="btn btn-neutral float-right" title="pymel.util.utilitytypes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pymel.util.namedtuple.html" class="btn btn-neutral" title="pymel.util.namedtuple" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009, Chad Dombrova.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
