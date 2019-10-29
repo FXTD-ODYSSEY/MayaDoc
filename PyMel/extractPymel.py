@@ -35,6 +35,7 @@ def readFile(path):
     # print(html_dict[module])
     if html_dict.has_key(module):
         func_list = html_dict[module]
+        print(module,func_list)
     else:
         if module == "pymel.util.namedtuple":
             pass
